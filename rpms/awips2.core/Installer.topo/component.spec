@@ -11,7 +11,11 @@ BuildArch: noarch
 URL: N/A
 License: N/A
 Distribution: N/A
+<<<<<<< HEAD
 Vendor: %{_build_vendor}
+=======
+Vendor: Raytheon
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 Packager: %{_build_site}
 
 AutoReq: no
@@ -77,6 +81,12 @@ rm -rf ${RPM_BUILD_ROOT}
 
 %files
 %defattr(644,awips,fxalpha,755)
+<<<<<<< HEAD
+=======
+%dir /awips2
+%dir /awips2/edex
+%dir /awips2/edex/data
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 %dir /awips2/edex/data/hdf5
 %dir /awips2/edex/data/hdf5/topo
 /awips2/edex/data/hdf5/topo/*

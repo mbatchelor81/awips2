@@ -17,6 +17,7 @@ Packager: %{_build_site}
 AutoReq: no
 BuildRequires: systemd
 Requires: awips2-java
+Requires: awips2-java-security
 Requires: sed
 Requires: awips2-watchdog
 
@@ -202,7 +203,6 @@ if [[ -f "${SETUP_ENV_NEW}" ]]; then
 
    # setup.env variables to only attempt to reuse previous values for.
    # Update when a variable is added to or removed from setup.env.
-   updateSetupEnv "IGNITE_SSL_CERT_DB" '"${IGNITE_HOME}/tls"'
    updateSetupEnv "BROKER_HOST" "localhost"
    updateSetupEnv "BROKER_PORT" "5672"
    updateSetupEnv "BROKER_HTTP" "8180"
@@ -266,7 +266,6 @@ rm -rf ${RPM_BUILD_ROOT}
 %dir /awips2/ignite/tls
 %config(noreplace) /awips2/ignite/tls/*.crt
 %config(noreplace) /awips2/ignite/tls/*.key
-%config(noreplace) /awips2/ignite/tls/passwords.properties
 %attr(644,awips,fxalpha) /awips2/ignite/tls/README
 
 %attr(644,root,root) %{_unitdir}/*

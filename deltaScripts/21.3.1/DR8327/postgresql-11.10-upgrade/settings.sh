@@ -39,7 +39,11 @@ fi
 old_ver="9.6.20"
 
 # New PostgreSQL version
+<<<<<<< HEAD
 new_ver="11.10"
+=======
+new_ver="11.12"
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 # PostgreSQL install prefix
 postgres_dir=$awips2/postgresql

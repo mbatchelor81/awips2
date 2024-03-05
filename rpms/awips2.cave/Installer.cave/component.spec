@@ -2,6 +2,9 @@
 %define _component_project_dir    awips2.cave/Installer.cave
 %define _component_zip_file_name  CAVE-linux.gtk.%{_build_arch}.zip
 %define _component_desc           "awips2-cave"
+# Disabling build ID links prevents conflicts with other packages that include
+# Eclipse binaries.
+%define _build_id_links none
 
 %define _swt_version 3.104.1.v20150825-0743
 %define _ui_version 3.107.0.v20150507-1945
@@ -15,10 +18,10 @@
 # all of CAVE is required whenever an updated version of this RPM is released.
 #
 %define __prelink_undo_cmd %{nil}
-# Turn off the brp-python-bytecompile script
-%global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-python-bytecompile[[:space:]].*$!!g')
+%global _python_bytecompile_extra 0
+#%global __strip /bin/true
 # disable jar repacking
-%global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-java-repack-jars[[:space:]].*$!!g')
+%global __jar_repack 0
 
 Name: %{_component_name}
 Summary: awips2-cave Installation
@@ -38,6 +41,7 @@ Requires: awips2
 Requires: awips2-java
 Requires: awips2-python
 Requires: openmotif
+requires: awips2-java-security
 Requires: libMrm.so.4()(64bit)
 Requires: libXp.so.6()(64bit)
 Requires: libg2c.so.0()(64bit)
@@ -146,7 +150,7 @@ rm --recursive --force ${RPM_BUILD_ROOT}/awips2/cave/configuration/org.eclipse.o
 # Refer to SS DR 22945 / RODO DR 8722 for more information
 # Fixes eclipse bug: https://bugs.eclipse.org/bugs/show_bug.cgi?id=578305
 # TODO: Remove when we upgrade to Eclipse 4.23
-cp "%{_baseline_workspace}/rpms/awips2.cave/Installer.cave/org.eclipse.compare_3.7.1100.v20200611-0145.jar" "${RPM_BUILD_ROOT}/awips2/cave/plugins"
+cp "%{_baseline_workspace}/rpms/awips2.cave/Installer.cave/org.eclipse.compare_3.8.100.v20210805-1512.jar" "${RPM_BUILD_ROOT}/awips2/cave/plugins"
 
 popd > /dev/null 2>&1
 
@@ -164,22 +168,6 @@ if [ -d /awips2/cave ]; then
    echo -e "\e[1;31m       must be REMOVED before the installation will proceed.\e[m"
    exit 1
 fi
-
-%post
-# We need to create a link to the python shared library if it does not exist.
-pushd . > /dev/null 2>&1
-if [ -d /awips2/python/lib ]; then
-   cd /awips2/python/lib
-   if [ -L libpython.so ]; then
-      # Ensure that we are pointing to the correct shared library.
-      rm --force libpython.so
-   fi
-      
-   if [ -f libpython3.6m.so ]; then
-      ln --symbolic libpython3.6m.so libpython.so
-   fi
-fi
-popd > /dev/null 2>&1
 
 %preun
 if [ "${1}" = "1" ]; then
@@ -210,9 +198,6 @@ rm --recursive --force ${RPM_BUILD_ROOT}
 /awips2/cave/p2/*
 %dir /awips2/cave/plugins
 /awips2/cave/plugins/*
-%docdir /awips2/cave/readme
-%dir /awips2/cave/readme
-/awips2/cave/readme/*
 /awips2/cave/.eclipseproduct
  
 %defattr(755,awips,fxalpha,755)

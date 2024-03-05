@@ -9,9 +9,10 @@
 # awips2 Spec File
 #
 %define __prelink_undo_cmd %{nil}
-# Turn off the brp-python-bytecompile script
-%global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-python-bytecompile[[:space:]].*$!!g')
-%global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-java-repack-jars[[:space:]].*$!!g')
+# Disable python byte-compile
+%global _python_bytecompile_extra 0
+# Disable jar repacking
+%global __jar_repack 0
 
 Name: %{_component_name}
 Summary: %{_component_name} Installation
@@ -31,6 +32,12 @@ provides: %{_component_name}
 
 %description
 %{_component_desc}
+
+# Intentionally empty awip2-version-foss RPM
+%package foss
+Summary: %{_component_name}-foss
+%description foss
+%{_component_name}-foss
 
 %prep
 # Verify That The User Has Specified A BuildRoot.
@@ -158,3 +165,5 @@ rm -rf ${RPM_BUILD_ROOT}
 %files
 %defattr(644,awips,fxalpha,755)
 %dir /awips2/etc
+# Intentionally empty awip2-version-foss RPM
+%files foss

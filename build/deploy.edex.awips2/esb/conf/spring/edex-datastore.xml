@@ -21,11 +21,7 @@
 
     <bean id="igniteKeyStorePath" factory-bean="sslConfig" factory-method="getJavaKeyStorePath" />
     <bean id="igniteTrustStorePath" factory-bean="sslConfig" factory-method="getJavaTrustStorePath" />
-
-    <bean id="igniteKeyStorePassword" class="com.raytheon.uf.common.datastore.ignite.IgnitePasswordUtils"
-        factory-method="getIgniteKeyStorePassword" />
-    <bean id="igniteTrustStorePassword" class="com.raytheon.uf.common.datastore.ignite.IgnitePasswordUtils"
-        factory-method="getIgniteTrustStorePassword" />
+    <bean id="igniteStorePassword" factory-bean="sslConfig" factory-method="getStorePassword" />
 
     <bean id="igniteCommSpiTemplate" class="org.apache.ignite.spi.communication.tcp.TcpCommunicationSpi"
         abstract="true" lazy-init="true">
@@ -59,9 +55,9 @@
         <property name="sslContextFactory">
             <bean class="org.apache.ignite.ssl.SslContextFactory">
                 <property name="keyStoreFilePath" ref="igniteKeyStorePath"/>
-                <property name="keyStorePassword" ref="igniteKeyStorePassword" />
+                <property name="keyStorePassword" ref="igniteStorePassword" />
                 <property name="trustStoreFilePath" ref="igniteTrustStorePath"/>
-                <property name="trustStorePassword" ref="igniteTrustStorePassword"/>
+                <property name="trustStorePassword" ref="igniteStorePassword"/>
                 <property name="protocol" value="TLSv1.3"/>
             </bean>
         </property>
@@ -144,8 +140,8 @@
         <property name="writeBehindEnabled" value="true" />
         <property name="writeBehindFlushFrequency" value="5000" />
         <property name="writeBehindFlushThreadCount" value="4" />
-        <property name="writeBehindBatchSize" value="20" />
-        <property name="writeBehindFlushSize" value="100" />
+        <property name="writeBehindBatchSize" value="10" />
+        <property name="writeBehindFlushSize" value="40" />
         <property name="sqlIndexMaxInlineSize" value="350" />
         <property name="cacheStoreFactory">
             <bean
@@ -169,9 +165,9 @@
         <constructor-arg ref="defaultCacheConfig" />
         <property name="name" value="gridDataStore" />
         <property name="writeBehindFlushFrequency" value="1000" />
-        <property name="writeBehindFlushThreadCount" value="12" />
+        <property name="writeBehindFlushThreadCount" value="6" />
         <property name="writeBehindBatchSize" value="5" />
-        <property name="writeBehindFlushSize" value="60" />
+        <property name="writeBehindFlushSize" value="30" />
     </bean>
     <bean id="satelliteCacheConfig" class="org.apache.ignite.configuration.CacheConfiguration" lazy-init="true">
         <constructor-arg ref="defaultCacheConfig" />
@@ -186,8 +182,8 @@
         <property name="name" value="radarDataStore" />
         <property name="writeBehindFlushFrequency" value="5000" />
         <property name="writeBehindFlushThreadCount" value="4" />
-        <property name="writeBehindBatchSize" value="10" />
-        <property name="writeBehindFlushSize" value="40" />
+        <property name="writeBehindBatchSize" value="5" />
+        <property name="writeBehindFlushSize" value="20" />
     </bean>
     <bean id="pointCacheConfig" class="org.apache.ignite.configuration.CacheConfiguration" lazy-init="true">
         <constructor-arg ref="defaultCacheConfig" />
@@ -196,6 +192,14 @@
             disabled, or else the postgres metadata and hdf5 data can get out
             of sync and cause significant issues. -->
         <property name="writeBehindEnabled" value="false" />
+    </bean>
+    <bean id="gfeCacheConfig" class="org.apache.ignite.configuration.CacheConfiguration" lazy-init="true">
+        <constructor-arg ref="defaultCacheConfig" />
+        <property name="name" value="gfeDataStore" />
+        <property name="writeBehindFlushFrequency" value="5000" />
+        <property name="writeBehindFlushThreadCount" value="4" />
+        <property name="writeBehindBatchSize" value="5" />
+        <property name="writeBehindFlushSize" value="20" />
     </bean>
 
     <bean id="defaultCacheRegistered" factory-bean="igniteClusterManager" factory-method="addCache" lazy-init="true">
@@ -218,6 +222,10 @@
         <constructor-arg ref="pointCacheConfig" />
         <constructor-arg value="1" />
     </bean>
+    <bean id="gfeCacheRegistered" factory-bean="igniteClusterManager" factory-method="addCache" lazy-init="true">
+        <constructor-arg ref="gfeCacheConfig" />
+        <constructor-arg value="1" />
+    </bean>
     <bean id="pluginMapCacheRegistered" factory-bean="igniteClusterManager" factory-method="setPluginMapCacheCluster" lazy-init="true">
         <!-- This needs to match the cluster that the cache config is set on in awips2-config.xml -->
         <constructor-arg value="1" />
@@ -234,7 +242,7 @@
     </bean>
 
     <bean id="igniteDataStoreFactory" class="com.raytheon.uf.common.datastore.ignite.IgniteDataStoreFactory" lazy-init="true"
-        depends-on="defaultCacheRegistered,gridCacheRegistered,satelliteCacheRegistered,radarCacheRegistered,pointCacheRegistered,pluginMapCacheRegistered">
+        depends-on="defaultCacheRegistered,gridCacheRegistered,satelliteCacheRegistered,radarCacheRegistered,pointCacheRegistered,gfeCacheRegistered,pluginMapCacheRegistered">
         <constructor-arg ref="igniteClusterManager" />
         <constructor-arg ref="ignitePluginRegistry" />
     </bean>
@@ -244,12 +252,16 @@
         <property name="underlyingFactory" ref="${DATASTORE_PROVIDER}DataStoreFactory" />
     </bean>
 
+    <bean id="edexAuditerProxy" class="com.raytheon.uf.edex.audit.EdexDataStorageAuditerProxy">
+        <constructor-arg ref="messageProducer"/>
+    </bean>
+
     <bean id="dataStorageAuditerContainer" class="com.raytheon.uf.common.datastorage.audit.DataStorageAuditerContainer" factory-method="getInstance">
-        <property name="auditer">
-            <bean class="com.raytheon.uf.edex.database.health.EdexDataStorageAuditerProxy">
-                <constructor-arg ref="messageProducer"/>
-            </bean>
-        </property>
+        <property name="auditer" ref="edexAuditerProxy"/>
+    </bean>
+
+    <bean id="batchSender" class="com.raytheon.uf.common.datastorage.audit.AuditorBatchSender">
+        <constructor-arg ref="edexAuditerProxy"/>
     </bean>
 
 </beans>

@@ -36,8 +36,8 @@ and configure additional instances of the AWIPS II processing triad {postgresql,
 qpid, edex}.
 
 # Disable byte-compiling of python and repacking of jar files.
-%global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-python-bytecompile[[:space:]].*$!!g')
-%global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-java-repack-jars[[:space:]].*$!!g')
+%global _python_bytecompile_extra 0
+%global __jar_repack 0
 
 %prep
 # Verify that a build root has been specified.
@@ -81,7 +81,7 @@ mkdir -p %{_build_root}/usr/local/edex-environment
 cd %{_baseline_workspace}/com.raytheon.wes2bridge.common
 /awips2/ant/bin/ant -f build.xml \
    -Ddestination.directory=%{_build_root}%{_installation_directory}/edex-environment/macro/utilities \
-   -Declipse.directory=%{_uframe_eclipse} \
+   -Declipse.directory=%{_uframe_target} \
    -Dbaseline.dir=%{_baseline_workspace}
 if [ $? -ne 0 ]; then
    exit 1
@@ -89,7 +89,7 @@ fi
 cd %{_baseline_workspace}/com.raytheon.wes2bridge.configuration
 /awips2/ant/bin/ant -f build.xml \
    -Ddestination.directory=%{_build_root}%{_installation_directory}/edex-environment/macro/utilities \
-   -Declipse.directory=%{_uframe_eclipse} \
+   -Declipse.directory=%{_uframe_target} \
    -Dbaseline.dir=%{_baseline_workspace}
 if [ $? -ne 0 ]; then
    exit 1
@@ -97,7 +97,7 @@ fi
 cd %{_baseline_workspace}/com.raytheon.wes2bridge.datalink
 /awips2/ant/bin/ant -f build.xml \
    -Ddestination.directory=%{_build_root}%{_installation_directory}/edex-environment/macro/utilities \
-   -Declipse.directory=%{_uframe_eclipse} \
+   -Declipse.directory=%{_uframe_target} \
    -Dbaseline.dir=%{_baseline_workspace}
 if [ $? -ne 0 ]; then
    exit 1
@@ -105,35 +105,26 @@ fi
 cd %{_baseline_workspace}/com.raytheon.wes2bridge.manager
 /awips2/ant/bin/ant -f build.xml \
    -Ddestination.directory=%{_build_root}%{_installation_directory}/edex-environment/macro/utilities \
-   -Declipse.directory=%{_uframe_eclipse} \
+   -Declipse.directory=%{_uframe_target} \
    -Dbaseline.dir=%{_baseline_workspace}
 if [ $? -ne 0 ]; then
    exit 1
 fi
 
 RPM_PROJECT="%{_baseline_workspace}/rpms"
-POSTGRES_INITD="%{_baseline_workspace}/installers/RPMs/postgresql/scripts/init.d/edex_postgres"
 QPID_INITD="%{_baseline_workspace}/installers/RPMs/qpid-broker-j/scripts/init.d/qpidd"
 EDEX_INITD="${RPM_PROJECT}/awips2.edex/Installer.edex/scripts/edex_camel"
-HTTPD_PYPIES_INITD="%{_baseline_workspace}/installers/RPMs/httpd-pypies/configuration/etc/init.d/httpd-pypies"
+# TODO: httpd-pypies and PostgreSQL are now managed by systemd; the old init.d
+# scripts are gone. Update WES2Bridge to start/stop these services using
+# systemctl. See Omaha #8595
 
 # Copy the startup scripts.
-cp ${POSTGRES_INITD} \
-   %{_build_root}%{_installation_directory}/edex-environment/scripts
-if [ $? -ne 0 ]; then
-   exit 1
-fi
 cp ${QPID_INITD} \
    %{_build_root}%{_installation_directory}/edex-environment/scripts
 if [ $? -ne 0 ]; then
    exit 1
 fi
 cp ${EDEX_INITD} \
-   %{_build_root}%{_installation_directory}/edex-environment/scripts
-if [ $? -ne 0 ]; then
-   exit 1
-fi
-cp ${HTTPD_PYPIES_INITD} \
    %{_build_root}%{_installation_directory}/edex-environment/scripts
 if [ $? -ne 0 ]; then
    exit 1
@@ -160,11 +151,6 @@ cp ${DELIVERABLES}/profile.d/* \
 if [ $? -ne 0 ]; then
    exit 1
 fi
-
-%pre
-%post
-%preun
-%postun
 
 %files
 %defattr(644,awips,fxalpha,755)

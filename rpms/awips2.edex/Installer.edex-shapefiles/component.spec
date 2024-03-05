@@ -20,10 +20,10 @@ Requires: awips2
 Requires: awips2-edex
 Requires: awips2-edex-base
 
-# Turn off the brp-python-bytecompile script
-%global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-python-bytecompile[[:space:]].*$!!g')
+# disable python byte-compile
+%global _python_bytecompile_extra 0
 # disable jar repacking
-%global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-java-repack-jars[[:space:]].*$!!g')
+%global __jar_repack 0 
 
 %description
 AWIPS II Edex Shapefiles - includes the shapefiles required by AWIPS II.

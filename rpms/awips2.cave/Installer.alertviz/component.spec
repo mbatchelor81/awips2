@@ -1,8 +1,10 @@
 %define __prelink_undo_cmd %{nil}
+# alertviz build id links conflict with cave build id links so we disable build_id_links
+%define _build_id_links none
 # disable jar repacking
-%global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-java-repack-jars[[:space:]].*$!!g')
-# Turn off the brp-python-bytecompile script
-%global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-python-bytecompile[[:space:]].*$!!g')
+%global __jar_repack 0
+# disable python byte-compile
+%global _python_bytecompile_extra 0
 
 %define _swt_version 3.104.1.v20150825-0743
 
@@ -55,6 +57,7 @@ fi
 
 /awips2/ant/bin/ant -f build.xml \
    -Declipse.dir=%{_uframe_eclipse} \
+   -Dtarget.dir=%{_uframe_target} \
    alertviz
 if [ $? -ne 0 ]; then
    exit 1

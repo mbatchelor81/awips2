@@ -48,6 +48,10 @@ function prepareBuildEnvironment()
       export UFRAME_ECLIPSE="${VAR_UFRAME_ECLIPSE}"
    fi
 
+   if [ "${UFRAME_TARGET}" = "" ]; then
+      export UFRAME_TARGET="${VAR_UFRAME_ECLIPSE}"
+   fi
+
    if [ "${REPO_DEST}" = "" ]; then
       export REPO_DEST="${VAR_REPO_DEST}"
    fi
@@ -80,7 +84,7 @@ function buildCAVEProduct()
 
      # Complete the CAVE RCP build.
      /awips2/java/bin/java -jar ${_pde_launcher_jar} -application org.eclipse.ant.core.antRunner \
-        -buildfile ${_pde_product_xml} -DbaseLocation=${UFRAME_ECLIPSE} \
+        -buildfile ${_pde_product_xml} -DbaseLocation=${UFRAME_TARGET} \
         -Dbuilder=${pde_base_dir} -DbuildDirectory=${pde_build_dir} \
         -DforceContextQualifier=${_context_qualifier} \
         -Dbase=${pde_base_dir} -Dproduct=${WORKSPACE}/${product_file}
@@ -192,7 +196,7 @@ cd ${prepare_dir}
 # properties file so that it can be used for both product and feature builds.
 pde2_build_dir=${pde_base_dir}/p2
 pde2_base_dir=${pde_base_dir}/p2
-/awips2/java/bin/java -jar -DbaseLocation=${UFRAME_ECLIPSE} \
+/awips2/java/bin/java -jar -DbaseLocation=${UFRAME_TARGET} \
     -DbuildDirectory=${pde2_build_dir} -DstagingDirectory=${WORKSPACE} -DbuildFeatures=* \
     -DexcludeFeatures=com.raytheon.viz.feature.awips.developer,com.raytheon.uf.viz.feature.alertviz \
     AwipsDependencyEvaluator.jar
@@ -214,7 +218,7 @@ mkdir -p ${REPO_DEST}
 cp -v ${build_project_dir}/build.properties.p2 ${pde2_base_dir}/build.properties
 for feature in `cat ${build_project_dir}/features.txt`; do
 /awips2/java/bin/java -jar ${_pde_launcher_jar} -application org.eclipse.ant.core.antRunner \
-    -buildfile ${_pde_build_xml} -DbaseLocation=${UFRAME_ECLIPSE} \
+    -buildfile ${_pde_build_xml} -DbaseLocation=${UFRAME_TARGET} \
     -Dbuilder=${pde2_base_dir} -DbuildDirectory=${pde2_build_dir} \
     -DtopLevelElementType=feature -DforceContextQualifier=${_context_qualifier} \
     -Dbase=${pde2_base_dir} -DtopLevelElementId=${feature} \

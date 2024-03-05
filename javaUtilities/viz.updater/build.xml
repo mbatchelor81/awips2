@@ -5,6 +5,7 @@
 	<property name="baseline.dir" value="/common/bkowal/git/Baseline-4759/AWIPS2_baseline/javaUtilities" />
 	
 	<path id="ECLIPSE.classpath">
+<<<<<<< HEAD
                 <pathelement path="${eclipse.dir}/plugins/org.eclipse.osgi_3.16.0.v20200828-0759.jar" />
                 <pathelement path="${eclipse.dir}/plugins/org.eclipse.pde.core_3.14.0.v20200817-1143.jar" />
                 <pathelement path="${eclipse.dir}/plugins/org.eclipse.core.resources_3.13.800.v20200706-2152.jar" />
@@ -20,6 +21,23 @@
                 <pathelement path="${eclipse.dir}/plugins/org.eclipse.jdt.core_3.23.0.v20200828-0941.jar" />
                 <pathelement path="${eclipse.dir}/plugins/org.eclipse.jdt.compiler.apt_1.3.1100.v20200828-0941.jar" />
                 <pathelement path="${eclipse.dir}/plugins/org.eclipse.jdt.compiler.tool_1.2.1000.v20200828-0941.jar" />
+=======
+                <pathelement path="${eclipse.dir}/plugins/org.eclipse.osgi_3.17.0.v20210823-1805.jar" />
+                <pathelement path="${eclipse.dir}/plugins/org.eclipse.pde.core_3.14.400.v20210812-0807.jar" />
+                <pathelement path="${eclipse.dir}/plugins/org.eclipse.core.resources_3.15.100.v20210818-1523.jar" />
+                <pathelement path="${eclipse.dir}/plugins/org.eclipse.debug.core_3.18.200.v20210721-1355.jar" />
+                <pathelement path="${eclipse.dir}/plugins/org.eclipse.equinox.common_3.15.0.v20210518-0604.jar" />
+                <pathelement path="${eclipse.dir}/plugins/org.eclipse.core.runtime_3.23.0.v20210730-2035.jar" />
+                <pathelement path="${eclipse.dir}/plugins/org.eclipse.core.jobs_3.12.0.v20210723-1034.jar" />
+                <pathelement path="${eclipse.dir}/plugins/org.eclipse.equinox.registry_3.11.0.v20210723-1953.jar" />
+                <pathelement path="${eclipse.dir}/plugins/org.eclipse.equinox.preferences_3.9.0.v20210726-0943.jar" />
+                <pathelement path="${eclipse.dir}/plugins/org.eclipse.core.contenttype_3.8.0.v20210621-0954.jar" />
+                <pathelement path="${eclipse.dir}/plugins/org.eclipse.equinox.app_1.6.0.v20210723-1130.jar" />
+                <pathelement path="${eclipse.dir}/plugins/org.eclipse.jdt.launching_3.19.300.v20210815-1119.jar" />
+                <pathelement path="${eclipse.dir}/plugins/org.eclipse.jdt.core_3.27.0.v20210823-1758.jar" />
+                <pathelement path="${eclipse.dir}/plugins/org.eclipse.jdt.compiler.apt_1.4.0.v20210708-0430.jar" />
+                <pathelement path="${eclipse.dir}/plugins/org.eclipse.jdt.compiler.tool_1.3.0.v20210726-1148.jar" />
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 	</path>
 	
 	<target name="compile">
@@ -35,7 +53,11 @@
 	
 	<target name="retrieve-jar-zip">
 		<mkdir dir="${baseline.dir}/viz.updater/lib" />
+<<<<<<< HEAD
 		<unzip src="${eclipse.dir}/plugins/org.eclipse.jdt.ui_3.21.200.v20200828-0853.jar"
+=======
+		<unzip src="${eclipse.dir}/plugins/org.eclipse.jdt.ui_3.24.0.v20210823-0647.jar"
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 			dest="${baseline.dir}/viz.updater/lib" 
 			overwrite="true">
 			
@@ -54,6 +76,7 @@
                 <attribute name="Main-Class" value="org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader"/>
                 <attribute name="Rsrc-Main-Class" value="viz.updater.Main"/>
                 <attribute name="Class-Path" value="."/>
+<<<<<<< HEAD
                 <attribute name="Rsrc-Class-Path" value="./ org.eclipse.osgi_3.16.0.v20200828-0759.jar org.eclipse.pde.core_3.14.0.v20200817-1143.jar org.eclipse.core.resources_3.13.800.v20200706-2152.jar org.eclipse.debug.core_3.16.0.v20200828-0817.jar org.eclipse.equinox.common_3.13.0.v20200828-1034.jar org.eclipse.core.runtime_3.19.0.v20200724-1004.jar org.eclipse.core.jobs_3.10.800.v20200421-0950.jar runtime_registry_compatibility.jar org.eclipse.equinox.registry_3.9.0.v20200625-1425.jar org.eclipse.equinox.preferences_3.8.0.v20200422-1833.jar org.eclipse.core.contenttype_3.7.800.v20200724-0804.jar org.eclipse.equinox.app_1.5.0.v20200717-0620.jar org.eclipse.jdt.launching_3.18.0.v20200824-1854.jar org.eclipse.jdt.core_3.23.0.v20200828-0941.jar org.eclipse.jdt.compiler.apt_1.3.1100.v20200828-0941.jar org.eclipse.jdt.compiler.tool_1.2.1000.v20200828-0941.jar"/>
             </manifest>
             <zipfileset src="${baseline.dir}/viz.updater/lib/jar-in-jar-loader.zip"/>
@@ -72,6 +95,26 @@
             <zipfileset dir="${eclipse.dir}/plugins" includes="org.eclipse.jdt.core_3.23.0.v20200828-0941.jar"/>
             <zipfileset dir="${eclipse.dir}/plugins" includes="org.eclipse.jdt.compiler.apt_1.3.1100.v20200828-0941.jar"/>
             <zipfileset dir="${eclipse.dir}/plugins" includes="org.eclipse.jdt.compiler.tool_1.2.1000.v20200828-0941.jar"/>
+=======
+                <attribute name="Rsrc-Class-Path" value="./ org.eclipse.osgi_3.17.0.v20210823-1805.jar org.eclipse.pde.core_3.14.400.v20210812-0807.jar org.eclipse.core.resources_3.15.100.v20210818-1523.jar org.eclipse.debug.core_3.18.200.v20210721-1355.jar org.eclipse.equinox.common_3.15.0.v20210518-0604.jar org.eclipse.core.runtime_3.23.0.v20210730-2035.jar org.eclipse.core.jobs_3.12.0.v20210723-1034.jar runtime_registry_compatibility.jar org.eclipse.equinox.registry_3.11.0.v20210723-1953.jar org.eclipse.equinox.preferences_3.9.0.v20210726-0943.jar org.eclipse.core.contenttype_3.8.0.v20210621-0954.jar org.eclipse.equinox.app_1.6.0.v20210723-1130.jar org.eclipse.jdt.launching_3.19.300.v20210815-1119.jar org.eclipse.jdt.core_3.27.0.v20210823-1758.jar org.eclipse.jdt.compiler.apt_1.4.0.v20210708-0430.jar org.eclipse.jdt.compiler.tool_1.3.0.v20210726-1148.jar"/>
+            </manifest>
+            <zipfileset src="${baseline.dir}/viz.updater/lib/jar-in-jar-loader.zip"/>
+            <zipfileset dir="${eclipse.dir}/plugins" includes="org.eclipse.osgi_3.17.0.v20210823-1805.jar"/>
+            <zipfileset dir="${eclipse.dir}/plugins" includes="org.eclipse.pde.core_3.14.400.v20210812-0807.jar"/>
+            <zipfileset dir="${eclipse.dir}/plugins" includes="org.eclipse.core.resources_3.15.100.v20210818-1523.jar"/>
+            <zipfileset dir="${eclipse.dir}/plugins" includes="org.eclipse.debug.core_3.18.200.v20210721-1355.jar"/>
+            <zipfileset dir="${eclipse.dir}/plugins" includes="org.eclipse.equinox.common_3.15.0.v20210518-0604.jar"/>
+            <zipfileset dir="${eclipse.dir}/plugins" includes="org.eclipse.core.runtime_3.23.0.v20210730-2035.jar"/>
+            <zipfileset dir="${eclipse.dir}/plugins" includes="org.eclipse.core.jobs_3.12.0.v20210723-1034.jar"/>
+            <zipfileset dir="${eclipse.dir}/plugins" includes="org.eclipse.equinox.registry_3.11.0.v20210723-1953.jar"/>
+            <zipfileset dir="${eclipse.dir}/plugins" includes="org.eclipse.equinox.preferences_3.9.0.v20210726-0943.jar"/>
+            <zipfileset dir="${eclipse.dir}/plugins" includes="org.eclipse.core.contenttype_3.8.0.v20210621-0954.jar"/>
+            <zipfileset dir="${eclipse.dir}/plugins" includes="org.eclipse.equinox.app_1.6.0.v20210723-1130.jar"/>
+            <zipfileset dir="${eclipse.dir}/plugins" includes="org.eclipse.jdt.launching_3.19.300.v20210815-1119.jar"/>
+            <zipfileset dir="${eclipse.dir}/plugins" includes="org.eclipse.jdt.core_3.27.0.v20210823-1758.jar"/>
+            <zipfileset dir="${eclipse.dir}/plugins" includes="org.eclipse.jdt.compiler.apt_1.4.0.v20210708-0430.jar"/>
+            <zipfileset dir="${eclipse.dir}/plugins" includes="org.eclipse.jdt.compiler.tool_1.3.0.v20210726-1148.jar"/>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <fileset dir="${baseline.dir}/viz.updater/bin"/>
         </jar>
     </target>

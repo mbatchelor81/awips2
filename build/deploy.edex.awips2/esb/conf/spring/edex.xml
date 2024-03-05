@@ -137,7 +137,7 @@
     <bean id="fileToString" class="com.raytheon.uf.edex.esb.camel.FileToString"/>
     <bean id="processUtil" class="com.raytheon.uf.edex.esb.camel.ProcessUtil"/>
     <bean id="setIngestHeaderFields" class="com.raytheon.uf.edex.esb.camel.SetIngestHeaderFields"/>
-    <bean id="messageProducer" class="com.raytheon.uf.edex.esb.camel.MessageProducer" />
+    <bean id="messageProducer" class="com.raytheon.uf.edex.esb.camel.MessageProducer"/>
     <bean id="camelContextAdmin" class="com.raytheon.uf.edex.esb.camel.CamelContextAdmin" />
 
     <!-- ContextManager to manage dependencies so routes startup in right order.
@@ -151,7 +151,6 @@
 
     <bean id="util" class="com.raytheon.uf.edex.core.EDEXUtil">
         <property name="messageProducer" ref="messageProducer" />
-        <property name="contextAdmin" ref="camelContextAdmin" />
     </bean>
 
     <bean id="defaultPathProvider" class="com.raytheon.uf.common.dataplugin.persist.DefaultPathProvider"/>

@@ -40,7 +40,11 @@
 import collections
 
 
+<<<<<<< HEAD
 class EnumSet(collections.MutableSet):
+=======
+class EnumSet(collections.abc.MutableSet):
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     
     def __init__(self, enumClassName, iterable=[]):
         self.__enumClassName = enumClassName

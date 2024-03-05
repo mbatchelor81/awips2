@@ -1,9 +1,9 @@
 %define _build_arch %(uname -i)
 %define _zip_file common-base.zip
-# Turn off the brp-python-bytecompile script
-%global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-python-bytecompile[[:space:]].*$!!g')
+# disable python byte-compiling
+%global _python_bytecompile_extra 0
 # disable jar repacking
-%global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-java-repack-jars[[:space:]].*$!!g')
+%global __jar_repack 0
 
 #
 # AWIPS II CAVE/EDEX common base Spec File
@@ -58,6 +58,7 @@ cd ${BUILD_EDEX}
 # Build the java.extensions feature first so common.base can include it.
 /awips2/ant/bin/ant -f ${_build_xml} \
    -Dfeature=com.raytheon.uf.common.java.extensions.feature \
+   -Duframe.target=%{_uframe_target} \
    -Duframe.eclipse=%{_uframe_eclipse} \
    clean \
    build 
@@ -67,6 +68,7 @@ fi
 
 /awips2/ant/bin/ant -f ${_build_xml} \
    -Dfeature=com.raytheon.uf.common.base.feature \
+   -Duframe.target=%{_uframe_target} \
    -Duframe.eclipse=%{_uframe_eclipse} \
    build \
    clean

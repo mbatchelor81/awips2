@@ -30,16 +30,12 @@ import groovy.util.logging.*
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
  * Dec 4, 2014  3836       bkowal      Initial Commit
-<<<<<<< HEAD
  * Dec 9, 2015  4216       dhladky     Fix multi WA deploys
-=======
- * Dec 9, 2015  5388       dhladky     Fix multi WA deploys
->>>>>>> omaha_16.2.1-pda
+ * Sep 10, 2020 8218       tgurney     Remove lib_illusion (not needed anymore)
  *
  * </pre>
  *
  * @author bkowal
- * @version 1.0
  */
 @Log
 class DeployESB
@@ -74,23 +70,6 @@ class DeployESB
 
       // remove setup.env
       new File(edexRootDirectory + File.separator + "bin" + File.separator + SETUP_ENV).delete()
-      // remove lib_illusion
-      new File(edexRootDirectory + File.separator + "lib" + File.separator + "lib_illusion").deleteDir()
-
-      // copy the correct lib_illusion based on architecture
-      // determine architecture?
-
-      // since this is only a temporary consideration since we will eventually be switching to a 64-bit
-      // EDEX, we will just look at the OS architecture since the JDK does not provide a simple way
-      // to retrieve the required information about the JVM process, itself. The -Darchitecture argument
-      // can be used to override the dynamically determined architecture
-      String architecture = overrideArchitecture
-      if (architecture == "")
-      {
-         architecture = 
-            (System.getProperty("os.arch") == "amd64") ? "x86_64" : "x86"
-      }
-      
    }
 
    public static void deployEdexConfiguration(String edexRootDirectory, String esbDirectory)

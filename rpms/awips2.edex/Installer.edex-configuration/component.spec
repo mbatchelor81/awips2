@@ -93,8 +93,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # remove the test logback configuration used for development
-# We don't want to remove the test logback, because it's used for the new modes we create
-#rm -f ${RPM_BUILD_ROOT}/awips2/edex/conf/logback-test.xml
+rm -f ${RPM_BUILD_ROOT}/awips2/edex/conf/logback-test.xml
 if [ $? -ne 0 ]; then
    exit 1
 fi
@@ -204,7 +203,6 @@ if [[ -f "${SETUP_ENV_NEW}" ]]; then
 
    updateSetupEnv "DC_DB_NAME" "dc_ob7oax"
    updateSetupEnv "FXA_DB_NAME" "fxatext"
-   updateSetupEnv "HM_DB_NAME" "hmdb"
    updateSetupEnv "IH_DB_NAME" "hd_ob92oax"
    updateSetupEnv "CLIMATE_DB_NAME" "climate"
 
@@ -300,4 +298,3 @@ rm -rf ${RPM_BUILD_ROOT}
 %config(noreplace) /awips2/edex/conf/jms/auth/*.key
 %config(noreplace) /awips2/edex/conf/ignite/auth/*.crt
 %config(noreplace) /awips2/edex/conf/ignite/auth/*.key
-%config(noreplace) /awips2/edex/conf/ignite/auth/passwords.properties

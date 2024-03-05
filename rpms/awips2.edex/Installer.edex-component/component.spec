@@ -2,10 +2,10 @@
 # AWIPS II Edex "component" spec file
 #
 %define __prelink_undo_cmd %{nil}
-# Turn off the brp-python-bytecompile script
-%global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-python-bytecompile[[:space:]].*$!!g')
+# disable Python byte-compile
+%global _python_bytecompile_extra 0
 # disable jar repacking
-%global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-java-repack-jars[[:space:]].*$!!g')
+%global __jar_repack 0
 
 Name: awips2-%{_component_name}
 Summary: awips2-%{_component_name} Installation

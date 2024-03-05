@@ -31,7 +31,7 @@ BuildRequires: awips2-java
 AWIPS II gfesuite Installation - Contains The AWIPS II gfesuite Component.
 
 # Turn off the brp-python-bytecompile script
-%global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-python-bytecompile[[:space:]].*$!!g')
+%global _python_bytecompile_extra 0
 
 %prep
 # Verify That The User Has Specified A BuildRoot.

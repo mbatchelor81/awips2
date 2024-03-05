@@ -7,9 +7,21 @@
 #
 # Author: dtomalak
 # Optimized by njensen
+<<<<<<< HEAD
 # ----------------------------------------------------------------------------
 
 
+=======
+#
+# SOFTWARE HISTORY
+#
+# Date          Ticket#  Engineer  Description
+# ------------- -------- --------- -------------------------------------------
+# Dec 17, 2021  8342     sharbison Changes for Performance Logging.
+#
+# ----------------------------------------------------------------------------
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ToolType = "numeric"
 WeatherElementEdited = "RFD"
 from numpy import *
@@ -19,15 +31,24 @@ HideTool = 0
 # Set up Class
 import SmartScript
 # For available commands, see SmartScript
+<<<<<<< HEAD
 
+=======
+from PerformanceStatusHandler import PerformanceStatusHandler
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 class Tool (SmartScript.SmartScript):
     def __init__(self, dbss):
         SmartScript.SmartScript.__init__(self, dbss)
 
     def execute(self, T, RH, Wind, Sky, PoP, RFD, PERCENTGREEN, GridTimeRange):
+<<<<<<< HEAD
         "Put your tool description here"
         t0 = time.time()
+=======
+        perfLog = PerformanceStatusHandler("GFE")
+        t0 = time.perf_counter()
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         self._determinemaxmin(T, RH, Wind, PERCENTGREEN) #find absolute max/MIN values
         self._popthresh = self._preciptthresh()
         #st = time.time()
@@ -70,8 +91,13 @@ class Tool (SmartScript.SmartScript):
         #self.createGrid("EXP","RFD","SCALAR",RFD,GridTimeRange)
         #self.createGrid("EXP","SunT","SCALAR",sun,GridTimeRange)
         #self.createGrid("EXP","FuelT","SCALAR",fuel,GridTimeRange)
+<<<<<<< HEAD
         t1 = time.time()
         print("inside CalculateRFD_NDJ took:", (t1-t0))
+=======
+        perfLog.logDuration("Calculating RFD", time.perf_counter() - t0)
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return RFDcat
 
     #EACH STEP IN THE PROCESS WILL GET ITS OWN MODULE
@@ -203,7 +229,11 @@ class Tool (SmartScript.SmartScript):
         #self.createGrid("EXP","Sunmoist","SCALAR",hrtimelag,timer)
         #self.createGrid("EXP","RHCAT","SCALAR",RHcat,timer)
         #self.createGrid("EXP","SKYCAT","SCALAR",SKYcat,timer)
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return  hrtimelag
     def _calcfinefuelmoisture(self, timelagfuel, greeness, timer):
         tabledat = self._finefuelmoisturetable()
@@ -223,7 +253,10 @@ class Tool (SmartScript.SmartScript):
         stepper = 1
         count = 0
         laglist = []
+<<<<<<< HEAD
         flcatlngth = len(tabledat)
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if lagmin <= 6:
             while stepper <= 6:
                 if stepper >= lagmin and stepper <= lagmax:
@@ -343,9 +376,13 @@ class Tool (SmartScript.SmartScript):
         #ignitioncld = where(Sky,0,0)
         Fuelcat = zeros(Sky.shape, int32)
         SunnyTcat = zeros(Sky.shape, int32)
+<<<<<<< HEAD
         CloudyTcat = zeros(Sky.shape, int32)
         ignitionsun = zeros(Sky.shape, int32)
         ignitioncld = zeros(Sky.shape, int32)
+=======
+        ignitionsun = zeros(Sky.shape, int32)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         Skycat = where(greater_equal(Sky,80),1,0)
         temp = where(logical_and(equal(Skycat,1), greater_equal(temp, 20)),temp-20,temp)
         #njensen temp = where(less(temp,10),10,temp)
@@ -575,6 +612,7 @@ class Tool (SmartScript.SmartScript):
             tempo = zeros(RFD.shape, int32)
             for config in datalist:
                 cat = config[0]
+<<<<<<< HEAD
                 min = config[1]
                 max = config[2]
                 #njensen tempo = where(logical_and(greater_equal(RFD,min), less_equal(RFD,max)),cat,tempo)
@@ -583,6 +621,16 @@ class Tool (SmartScript.SmartScript):
                 continue
             
         return newRfd       
+=======
+                minRFD = config[1]
+                maxRFD = config[2]
+                #njensen tempo = where(logical_and(greater_equal(RFD,min), less_equal(RFD,max)),cat,tempo)
+                tempo[logical_and(greater_equal(RFD,minRFD), less_equal(RFD,maxRFD))] = cat
+                newRfd = where(greater_equal(areamask,1),tempo,newRfd)
+                continue
+
+        return newRfd
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def _determinemaxmin(self, T, RH,Wind, PERCENTGREEN):
         #in order to save time this script will try to determine the maxium
         #and minimum range to look for each variable

@@ -1,4 +1,5 @@
-bin/
+cave/*/bin
+edexOsgi/*/bin
 .metadata/
 ldm/Debug
 test-bin/

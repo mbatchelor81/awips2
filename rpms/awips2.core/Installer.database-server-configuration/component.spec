@@ -39,14 +39,8 @@ fi
 %install
 
 # Create data directory and other required directories
-mkdir -p ${RPM_BUILD_ROOT}/awips2/database/{data,tablespaces,pg_log,ssl}
-if [ $? -ne 0 ]; then
-   exit 1
-fi
-mkdir -p ${RPM_BUILD_ROOT}/etc/watchdog.d
-if [ $? -ne 0 ]; then
-   exit 1
-fi
+mkdir -p ${RPM_BUILD_ROOT}/awips2/database/{data,tablespaces,pg_log,ssl} || exit 1
+mkdir -p ${RPM_BUILD_ROOT}/etc/watchdog.d || exit 1
 
 PROJECT_DIR="Installer.database-server-configuration"
 CONFIGURATION_DIR="rpms/awips2.core/${PROJECT_DIR}/configuration"
@@ -55,9 +49,9 @@ CONF_FILE="postgresql.conf"
 
 cp %{_baseline_workspace}/${CONFIGURATION_DIR}/${CONF_FILE} \
    ${RPM_BUILD_ROOT}/awips2/database/data
-cp %{_baseline_workspace}/${CONFIGURATION_DIR}/${CONF_FILE}.centralRegistry \
+cp %{_baseline_workspace}/${CONFIGURATION_DIR}/${CONF_FILE}.ax \
    ${RPM_BUILD_ROOT}/awips2/database/data
-cp %{_baseline_workspace}/installers/Linux/.global \
+cp %{_baseline_workspace}/${CONFIGURATION_DIR}/${CONF_FILE}.chps \
    ${RPM_BUILD_ROOT}/awips2/database/data
 cp -p %{_baseline_workspace}/${CONFIGURATION_DIR}/*.{key,crt} \
    ${RPM_BUILD_ROOT}/awips2/database/ssl
@@ -66,27 +60,28 @@ cp %{_baseline_workspace}/${WATCHDOG_DIR}/postgres_watchdog.sh \
    ${RPM_BUILD_ROOT}/etc/watchdog.d
 
 %pre
-# Remove any existing postgresql.conf files
-if [ -f /awips2/database/data/postgresql.conf ]; then
-   rm -f /awips2/database/data/postgresql.conf
-fi
+rm -f /awips2/database/data/postgresql.conf
 
-%post
-source /awips2/database/data/.global 2>/dev/null
-if [ -e /data/fxa/INSTALL/awips2/scripts/.global ]; then
-    source /data/fxa/INSTALL/awips2/scripts/.global
-fi
-case $SITE_IDENTIFIER in
-    ${centralCaseArray} ) 
+
+case ${hostName} in
+    ax* ) 
         rm -f /awips2/database/data/postgresql.conf
-        cp /awips2/database/data/postgresql.conf.centralRegistry /awips2/database/data/postgresql.conf
+        install --owner=awips --group=fxalpha --mode=0644 --no-target-dir \
+          /awips2/database/data/postgresql.conf.ax \
+          /awips2/database/data/postgresql.conf
         ;;
+    chps* )
+        rm -f /awips2/database/data/postgresql.conf
+        install --owner=awips --group=fxalpha --mode=0644 --no-target-dir \
+          /awips2/database/data/postgresql.conf.chps \
+          /awips2/database/data/postgresql.conf
+        ;;    
     *)  ;;
 esac
 
-rm -f /awips2/database/data/postgresql.conf.centralRegistry
-rm -f /awips2/database/data/.global
 
+rm -f /awips2/database/data/postgresql.conf.ax
+rm -f /awips2/database/data/postgresql.conf.chps
 %clean
 rm -rf ${RPM_BUILD_ROOT}
 
@@ -97,8 +92,8 @@ rm -rf ${RPM_BUILD_ROOT}
 %attr(700,awips,fxalpha) /awips2/database/tablespaces
 %attr(750,awips,fxalpha) /awips2/database/pg_log
 /awips2/database/data/postgresql.conf
-/awips2/database/data/postgresql.conf.centralRegistry
-/awips2/database/data/.global
+/awips2/database/data/postgresql.conf.ax
+/awips2/database/data/postgresql.conf.chps
 
 %attr(744,root,root) /etc/watchdog.d/postgres_watchdog.sh
 
@@ -109,7 +104,11 @@ rm -rf ${RPM_BUILD_ROOT}
 %config(noreplace) /awips2/database/ssl/server.key
 
 %changelog
-* Thu Aug 27 2021 Matt Richardson <matthew.richardson@raytheon.com>
+* Thu Aug 31 2023 Mark Peters <mark.a.peters@rtx.com>
+- Remove central registry configuration
+* Fri May 05 2023 Tom Gurney <thomas.gurney@rtx.com>
+- Install postgresql.conf with awips:fxalpha ownership, not root:root
+* Thu Aug 26 2021 Matt Richardson <matthew.richardson@raytheon.com>
 - Added postgres watchdog script to installation
 * Thu Sep 10 2020 Ron Anderson <ron.anderson@raytheon.com> 
 - Remove /awips2/data symlink

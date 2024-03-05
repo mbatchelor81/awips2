@@ -58,11 +58,11 @@ RC=$?
 if [ ${RC} -ne 0 ]; then
    exit 1
 fi
-   
+
 SQL_LOG="${RPM_BUILD_ROOT}/awips2/database/sqlScripts/share/sql/maps/maps.log"
 # So that it will automatically be removed when the rpm is removed.
 touch ${SQL_LOG}
-   
+
 %pre
 # Verify that one of the official AWIPS II PostgreSQL configuration files exist.
 if [ ! -f /awips2/database/data/postgresql.conf ]; then
@@ -92,11 +92,12 @@ function printFailureMessage()
    exit 1
 }
 
-POSTGRESQL_INSTALL="/awips2/postgresql"
-PSQL_INSTALL="/awips2/psql"
+A2LIBS=true source /etc/profile.d/awips2PSQL.sh
+
+POSTGRESQL_INSTALL="/usr"
+PSQL_INSTALL="/usr"
 
 POSTMASTER="${POSTGRESQL_INSTALL}/bin/postmaster"
-PG_CTL="${POSTGRESQL_INSTALL}/bin/pg_ctl"
 DROPDB="${POSTGRESQL_INSTALL}/bin/dropdb"
 PG_RESTORE="${POSTGRESQL_INSTALL}/bin/pg_restore"
 PSQL="${PSQL_INSTALL}/bin/psql"
@@ -106,27 +107,11 @@ DB_OWNER=$(stat -c %U /awips2/database/data)
 # Our log file
 SQL_LOG="/awips2/database/sqlScripts/share/sql/maps/maps.log"
 
-# Determine if PostgreSQL is running.
-I_STARTED_POSTGRESQL="NO"
-su ${DB_OWNER} -c \
-   "${PG_CTL} status -D /awips2/database/data > /dev/null 2>&1"
-RC="$?"
-
-# Start PostgreSQL if it is not running.
-if [ ! "${RC}" = "0" ]; then
-   su ${DB_OWNER} -c \
-      "${POSTMASTER} -D /awips2/database/data > /dev/null 2>&1 &"
-   RC="$?"
-   if [ ! "${RC}" = "0" ]; then
-      printFailureMessage
-   fi
-   # Give PostgreSQL Time To Start.
-   sleep 10
-   I_STARTED_POSTGRESQL="YES"
+if ! systemctl status postgresql@awips; then
+    i_started_postgresql=1
+    systemctl start postgresql@awips
 else
-   # Show The User.
-   su ${DB_OWNER} -c \
-      "${PG_CTL} status -D /awips2/database/data"
+    i_started_postgresql=
 fi
 
 # Is there a maps database?
@@ -145,7 +130,7 @@ if [ "${MAPS_DB_EXISTS}" = "false" ]; then
    su ${DB_OWNER} -c "mkdir -p /awips2/database/tablespaces/maps"
 
    # Update the sql script that creates the maps database / tables.
-   perl -p -i -e "s/%{tablespace_dir}%/\/awips2\/database\/tablespaces/g" \
+   sed --in-place "s/%{tablespace_dir}%/\/awips2\/database\/tablespaces/g" \
       /awips2/database/sqlScripts/share/sql/maps/createMapsDb.sql
 
    # Run the setup sql for the maps database.
@@ -158,62 +143,52 @@ if [ "${MAPS_DB_EXISTS}" = "false" ]; then
    fi
 
    su ${DB_OWNER} -c \
-      "${PSQL} -d maps -U awipsadmin -q -p 5432 -c \"CREATE EXTENSION postgis;\"" >> ${SQL_LOG} 2>&1
-   if [ $? -ne 0 ]; then
-      printFailureMessage
-   fi
-   
-   su ${DB_OWNER} -c \
-      "${PSQL} -d maps -U awipsadmin -q -p 5432 -c \"CREATE EXTENSION postgis_topology;\"" >> ${SQL_LOG} 2>&1
+      "${PSQL} -d maps -U awipsadmin -q -p 5432 -c \"CREATE EXTENSION if not exists postgis;\"" >> ${SQL_LOG} 2>&1
    if [ $? -ne 0 ]; then
       printFailureMessage
    fi
 
-   SQL_FILE="/awips2/postgresql/share/contrib/postgis-2.4/legacy.sql"
-   su ${DB_OWNER} -c "${PSQL} -d maps -U awipsadmin -q -p 5432 -f ${SQL_FILE}" >>${SQL_LOG} 2>&1
+   su ${DB_OWNER} -c \
+      "${PSQL} -d maps -U awipsadmin -q -p 5432 -c \"CREATE EXTENSION if not exists postgis_raster;\"" >> ${SQL_LOG} 2>&1
    if [ $? -ne 0 ]; then
-       printFailureMessage
+      printFailureMessage
    fi
+
+   su ${DB_OWNER} -c \
+      "${PSQL} -d maps -U awipsadmin -q -p 5432 -c \"CREATE EXTENSION if not exists postgis_topology;\"" >> ${SQL_LOG} 2>&1
+   if [ $? -ne 0 ]; then
+      printFailureMessage
+   fi
+
 
    # Import the data into the maps database.
    DB_ARCHIVE="/awips2/database/sqlScripts/share/sql/maps/maps.db"
    su ${DB_OWNER} -c \
       "${PG_RESTORE} -d maps -U awipsadmin -p 5432 -n mapdata ${DB_ARCHIVE}" >> ${SQL_LOG} 2>&1
-   
    su ${DB_OWNER} -c \
       "${PG_RESTORE} -d maps -U awipsadmin -p 5432 -n public -t geometry_columns -a ${DB_ARCHIVE}" \
       >> ${SQL_LOG} 2>&1
 fi
 
-# stop PostgreSQL if we started it.
-if [ "${I_STARTED_POSTGRESQL}" = "YES" ]; then
-   su ${DB_OWNER} -c \
-      "${PG_CTL} stop -D /awips2/database/data"
-   RC="$?"
-   if [ ! "${RC}" = "0" ]; then
-      echo "Warning: Failed to shutdown PostgreSQL."
-   fi
-   sleep 10
+
+if [[ "$i_started_postgresql" != "" ]]; then
+    systemctl stop postgresql@awips
 fi
-   
+
 %preun
 if [ "${1}" = "1" ]; then
    exit 0
 fi
 
-POSTGRESQL_INSTALL="/awips2/postgresql"
-PSQL_INSTALL="/awips2/psql"
+POSTGRESQL_INSTALL="/usr"
+PSQL_INSTALL="/usr"
 
 POSTMASTER="${POSTGRESQL_INSTALL}/bin/postmaster"
-PG_CTL="${POSTGRESQL_INSTALL}/bin/pg_ctl"
 DROPDB="${POSTGRESQL_INSTALL}/bin/dropdb"
 PG_RESTORE="${POSTGRESQL_INSTALL}/bin/pg_restore"
 PSQL="${PSQL_INSTALL}/bin/psql"
 
 if [ ! -f ${POSTMASTER} ]; then
-   exit 0
-fi
-if [ ! -f ${PG_CTL} ]; then
    exit 0
 fi
 if [ ! -f ${DROPDB} ]; then
@@ -231,28 +206,11 @@ DB_OWNER=$(stat -c %U /awips2/database/data)
 # Our log file
 SQL_LOG="/awips2/database/sqlScripts/share/sql/maps/maps.log"
 
-# start PostgreSQL if it is not running
-I_STARTED_POSTGRESQL="NO"
-su ${DB_OWNER} -c \
-   "${PG_CTL} status -D /awips2/database/data > /dev/null 2>&1"
-RC="$?"
-
-# Start PostgreSQL if it is not running.
-if [ ! "${RC}" = "0" ]; then
-   su ${DB_OWNER} -c \
-      "${POSTMASTER} -D /awips2/database/data > /dev/null 2>&1 &"
-   RC="$?"
-   if [ ! "${RC}" = "0" ]; then
-      echo "Failed To Start The PostgreSQL Server."
-      exit 1
-   fi
-   # Give PostgreSQL Time To Start.
-   sleep 10
-   I_STARTED_POSTGRESQL="YES"
+if ! systemctl status postgresql@awips; then
+    i_started_postgresql=1
+    systemctl start postgresql@awips
 else
-   # Show The User.
-   su ${DB_OWNER} -c \
-      "${PG_CTL} status -D /awips2/database/data"
+    i_started_postgresql=
 fi
 
 # Is there a maps database?
@@ -272,7 +230,6 @@ if [ ! "${MAPS_DIR}" = "" ]; then
    # drop the maps tablespace
    su ${DB_OWNER} -c \
       "${PSQL} -U awipsadmin -d postgres -c \"DROP TABLESPACE maps\"" >> ${SQL_LOG}
-   
    # remove the maps data directory that we created
    echo "Attempting To Removing Directory: ${MAPS_DIR}"
    if [ -d "${MAPS_DIR}" ]; then
@@ -280,11 +237,8 @@ if [ ! "${MAPS_DIR}" = "" ]; then
    fi
 fi
 
-# stop PostgreSQL if we started it
-if [ "${I_STARTED_POSTGRESQL}" = "YES" ]; then
-   su ${DB_OWNER} -c \
-      "${PG_CTL} stop -D /awips2/database/data"
-   sleep 2
+if [[ "$i_started_postgresql" != "" ]]; then
+    systemctl stop postgresql@awips
 fi
 
 %postun
@@ -294,7 +248,6 @@ fi
 
 %clean
 rm -rf ${RPM_BUILD_ROOT}
-   
 %files
 %defattr(666,awips,fxalpha,775)
 %dir /awips2/database/sqlScripts/share/sql/maps

@@ -9,6 +9,11 @@
       <appender-ref ref="PerformanceLogAsync" />
    </logger>
 
+   <logger name="PyPiesRequestLogger" additivity="false">
+      <level value="DEBUG"/>
+      <appender-ref ref="PyPiesRequestLogAsync" />
+   </logger>
+
    <logger name="org.apache.ignite" additivity="false">
       <level value="INFO"/>
       <appender-ref ref="IgniteLogAsync" />

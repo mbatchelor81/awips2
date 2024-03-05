@@ -11,7 +11,11 @@ BuildArch: noarch
 URL: N/A
 License: N/A
 Distribution: N/A
+<<<<<<< HEAD
 Vendor: %{_build_vendor}
+=======
+Vendor: Raytheon
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 Packager: %{_build_site}
 
 AutoReq: no

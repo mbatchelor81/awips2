@@ -77,11 +77,5 @@
         <property name="hibernate.query.plan_cache_max_strong_references">8</property>
         <property name="hibernate.query.plan_cache_max_soft_references">16</property>
 
-        <!-- TODO: This is a band-aid that is necessary to start edex in
-             registry mode as of Hibernate 5.2. JPA spec does not allow flushing
-             updates outside of a transaction boundary. Figure out why we need
-             this -->
-        <property name="hibernate.allow_update_outside_transaction">true</property>
-
     </session-factory>
 </hibernate-configuration>

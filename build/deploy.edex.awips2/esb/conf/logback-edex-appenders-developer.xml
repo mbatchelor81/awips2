@@ -21,6 +21,19 @@
       <appender-ref ref="PerformanceLog" />
    </appender> 
    
+   <!-- PyPiesRequest log --> 
+   <appender name="PyPiesRequestLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+      <rollingPolicy class="com.raytheon.uf.common.logback.policy.StdTimeBasedRollingPolicy">
+         <name>pypies</name>
+      </rollingPolicy>
+      <encoder class="com.raytheon.uf.common.logback.encoder.UFStdEncoder"/> 
+   </appender>
+
+   <appender name="PyPiesRequestLogAsync" class="ch.qos.logback.classic.AsyncAppender">
+      <appender-ref ref="PyPiesRequestLog" />
+   </appender> 
+   
+   <!-- Ignite log -->
    <appender name="IgniteLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
       <rollingPolicy class="com.raytheon.uf.common.logback.policy.StdTimeBasedRollingPolicy">
          <name>ignite</name>

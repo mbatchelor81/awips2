@@ -1,4 +1,5 @@
 # RPM Metadata
+%define _build_id_links none
 %define _component_name           awips2-cave-wrapper
 %define _component_project_dir    awips2.cave/Installer.cave-wrapper
 %define _component_zip_file_name  CAVE-linux.gtk.x86_64.zip
@@ -6,10 +7,10 @@
 # awips2-cave-wrapper Spec File
 #
 %define __prelink_undo_cmd %{nil}
-# Disable the brp-python-bytecompile script
-%global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-python-bytecompile[[:space:]].*$!!g')
-# Disable the rpm jar repack script
-%global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-java-repack-jars[[:space:]].*$!!g')
+# disable python byte-compile
+%global _python_bytecompile_extra 0
+# disable jar repacking
+%global __jar_repack 0
 
 Name: %{_component_name}
 Summary: awips2-cave-wrapper Installation
@@ -24,7 +25,7 @@ Vendor: %{_build_vendor}
 Packager: %{_build_site}
 
 AutoReq: no
-Provides: %{_component_name}
+AutoProv: no
 Requires: awips2
 Requires: awips2-cave
 
@@ -115,17 +116,12 @@ _build_cave_static="%{_baseline_workspace}/build/static"
 # we want the common directory, the common linux directory, and the architecture-specific Linux directory.
 _common_dir="${_build_cave_static}/common/cave"
 _linux_dir="${_build_cave_static}/linux/cave"
-_linux_arch_dir="${_build_cave_static}/linux.x86_64/cave"
 
 cp -rv ${_common_dir}/* ${RPM_BUILD_ROOT}/awips2/cave
 if [ $? -ne 0 ]; then
    exit 1
 fi
 cp -rv ${_linux_dir}/* ${RPM_BUILD_ROOT}/awips2/cave
-if [ $? -ne 0 ]; then
-   exit 1
-fi
-cp -rv ${_linux_arch_dir}/* ${RPM_BUILD_ROOT}/awips2/cave
 if [ $? -ne 0 ]; then
    exit 1
 fi
@@ -182,7 +178,3 @@ rm -rf ${RPM_BUILD_ROOT}
 /awips2/cave/*.sh
 /awips2/cave/cave.png
 /awips2/cave/VizUpdater.jar
-
-# not a noarch RPM due to the presence of the architecture-specific libraries.
-%dir /awips2/cave/lib64
-/awips2/cave/lib64/*

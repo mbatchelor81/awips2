@@ -25,6 +25,8 @@
 # ------------- -------- --------- --------------------------------------------
 # Jul 03, 2019  7875     randerso  Changed to get EDEX version from 
 #                                  awips2-version.rpm
+# Jul 30, 2021  8511     njensen   Change path to jep library to python 3.8
+# Mar 21, 2023  2032169  tjensen   Change path to jep library to python 3.9
 ##
 # edex startup script
 
@@ -108,7 +110,7 @@ export PATH=$PATH:$awips_home/GFESuite/bin:$awips_home/GFESuite/ServiceBackup/sc
 export PATH=$PATH:$PROJECT/bin
 
 export JAVA_HOME="${JAVA_INSTALL}"
-export LD_LIBRARY_PATH=$EDEX_HOME/lib/native/linux32/awips1:${JAVA_INSTALL}/lib:${PYTHON_INSTALL}/lib:${PYTHON_INSTALL}/lib/python3.6/site-packages/jep:${PSQL_INSTALL}/lib:$PROJECT/sharedLib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$EDEX_HOME/lib/native/linux32/awips1:${JAVA_INSTALL}/lib:${PYTHON_INSTALL}/lib:${PYTHON_INSTALL}/lib/python3.11/site-packages/jep:${PSQL_INSTALL}/lib:$PROJECT/sharedLib:$LD_LIBRARY_PATH
 
 export FXA_DATA=$EDEX_HOME/data/fxa
 export ALLOW_ARCHIVE_DATA="false"

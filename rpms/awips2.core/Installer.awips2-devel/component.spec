@@ -48,13 +48,15 @@ mkdir -p ${RPM_BUILD_ROOT}
 
 %post
 # disable starting edex services at start up
-/sbin/chkconfig edex_rcm off
-/sbin/chkconfig edex_camel off
-/sbin/chkconfig edex_postgres off
-/sbin/chkconfig qpidd off
-/sbin/chkconfig httpd-pypies off
-/sbin/chkconfig htcacheclean-pypies off
-/sbin/chkconfig comms_manager off
+/bin/systemctl disable --now --quiet edex_rcm
+/bin/systemctl disable --now --quiet edex_camel@request
+/bin/systemctl disable --now --quiet edex_camel@ingest
+/bin/systemctl disable --now --quiet edex_camel@ingestGrib
+/bin/systemctl disable --now --quiet edex_camel@ingestDat
+/bin/systemctl disable --now --quiet postgresql@awips
+/bin/systemctl disable --now --quiet qpidd
+/bin/systemctl disable --now --quiet httpd-pypies
+/bin/systemctl disable --now --quiet comms_manager
 /bin/systemctl disable --now --quiet ignite@production
 
 %clean
