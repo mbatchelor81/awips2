@@ -34,7 +34,11 @@ import com.raytheon.uf.viz.core.rsc.interrogation.InterrogateMap;
 import com.raytheon.uf.viz.core.rsc.interrogation.Interrogator;
 import com.raytheon.viz.grid.rsc.general.D2DGridResource;
 
+<<<<<<< HEAD
 import tec.uom.se.format.SimpleUnitFormat;
+=======
+import tech.units.indriya.format.SimpleUnitFormat;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * This is used for 10km Radar Coded Message.
@@ -54,6 +58,11 @@ import tec.uom.se.format.SimpleUnitFormat;
  * Feb 28, 2791  2211     bsteffen  Move data conversion to DataSource
  * Aug 30, 2016  3240     bsteffen  Use Interrogatable for inspect
  * Aug 29, 2019  67962    tjensen   Update for GeneralGridData refactor
+<<<<<<< HEAD
+=======
+ * Dec 20, 2023  2036519  mapeters  Records are now passed into resource constructor
+ *                                  instead of being stored in resource data
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -67,11 +76,20 @@ public class RcmResource extends D2DGridResource {
      * @param data
      * @param props
      */
+<<<<<<< HEAD
     public RcmResource(RcmResourceData data, LoadProperties props) {
         super(data, props);
         if (DBZ == null) {
             DBZ = SimpleUnitFormat.getInstance(SimpleUnitFormat.Flavor.ASCII).parseObject("dBZ",
                     new ParsePosition(0));
+=======
+    public RcmResource(RcmResourceData data, LoadProperties props,
+            GridRecord[] records) {
+        super(data, props, records);
+        if (DBZ == null) {
+            DBZ = SimpleUnitFormat.getInstance(SimpleUnitFormat.Flavor.ASCII)
+                    .parseObject("dBZ", new ParsePosition(0));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 
@@ -113,7 +131,11 @@ public class RcmResource extends D2DGridResource {
                 data.getDataUnit());
     }
 
+<<<<<<< HEAD
     private final class RcmDataSource implements DataSource {
+=======
+    private static final class RcmDataSource implements DataSource {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         private final DataSource wrappedSource;
 

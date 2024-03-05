@@ -1,22 +1,22 @@
 /**
- * This software was developed and / or modified by Raytheon Company,
- * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
- *
- * U.S. EXPORT CONTROLLED TECHNICAL DATA
- * This software product contains export-restricted data whose
- * export/transfer/disclosure is restricted by U.S. law. Dissemination
- * to non-U.S. persons whether in the United States or abroad requires
- * an export license or other authorization.
- *
- * Contractor Name:        Raytheon Company
- * Contractor Address:     6825 Pine Street, Suite 340
- *                         Mail Stop B8
- *                         Omaha, NE 68106
- *                         402.291.0100
- *
- * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
- * further licensing information.
- **/
+* This software was developed and / or modified by Raytheon Company,
+* pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+*
+* U.S. EXPORT CONTROLLED TECHNICAL DATA
+* This software product contains export-restricted data whose
+* export/transfer/disclosure is restricted by U.S. law. Dissemination
+* to non-U.S. persons whether in the United States or abroad requires
+* an export license or other authorization.
+*
+* Contractor Name:        Raytheon Company
+* Contractor Address:     6825 Pine Street, Suite 340
+*                         Mail Stop B8
+*                         Omaha, NE 68106
+*                         402.291.0100
+*
+* See the AWIPS II Master Rights File ("Master Rights File.pdf") for
+* further licensing information.
+**/
 package com.raytheon.uf.viz.d2d.core.legend;
 
 import java.util.ArrayList;
@@ -42,6 +42,7 @@ import com.raytheon.uf.viz.core.rsc.IInputHandler.InputPriority;
 import com.raytheon.uf.viz.core.rsc.IResourceGroup;
 import com.raytheon.uf.viz.core.rsc.LoadProperties;
 import com.raytheon.uf.viz.core.rsc.ResourceList;
+import com.raytheon.uf.viz.core.rsc.ResourceType;
 import com.raytheon.uf.viz.core.rsc.capabilities.BlendableCapability;
 import com.raytheon.uf.viz.core.rsc.capabilities.ColorableCapability;
 import com.raytheon.uf.viz.core.rsc.capabilities.EditableCapability;
@@ -80,8 +81,17 @@ import com.raytheon.viz.ui.actions.DummyAction;
  * Mar 05, 2018 6900       bsteffen     Hide Inventory loaded products.
  * Apr 30, 2018 7088       njensen      Rework NONE mode in getLegendData(IDescriptor)
  * Jul 11, 2018 6644       bsteffen     Fix group naming when a grouped resource is not loaded.
- * May 16, 2019	DR 20843   anilsonm		Radar - combo display time matching incorrect
+ * May 16, 2019 DR 20843   anilsonm     Radar - combo display time matching incorrect
  * Jul 11, 2018 6644       bsteffen     Fix group naming with GroupNamingCapability
+ * Mar 24, 2021 89211      srussell     Updated getResourceGroupLegendString()
+ *                                      with null handling for currTime
+ * Ju 07, 2021 93869       srussell     Added the new legend mode LEGEND_OVERRIDE.
+ *                                      Updated getLegendData() to process the
+ *                                      legend mode LEGEND_OVERRIDE.
+ * Dec 08, 2021 22867      jkelmer      Made changeModeHandler than legendHandler
+ * Mar 29, 2022 102227     achalla      Modified getLegendData() to enable Map Resources when
+ *                                      in Ensemble Mode Case(LEGEND_OVERRIDE)
+ * Feb 09, 2023 9011       mapeters     Remove ratio param from checkYLabelSpace
  *
  * </pre>
  *
@@ -115,12 +125,13 @@ public class D2DLegendResource
     private IInputHandler changeModeHandler = new D2DChangeLegendModeHandler(
             this);
 
-    public static enum LegendMode {
+    public enum LegendMode {
         PRODUCT("Show Product Legends"),
         MAP("Show Map Legends"),
         NONE("Show All Legends"),
         HIDE("Hide Legends"),
-        SHORT_PRODUCT("");
+        SHORT_PRODUCT(""),
+        LEGEND_OVERRIDE("Override Legend");
 
         private String str;
 
@@ -179,61 +190,75 @@ public class D2DLegendResource
                     }
                     break;
                 }
+                case LEGEND_OVERRIDE: {
+                    // If a CAVE "Tool", that is a resource, and of type
+                    // LEGEND_OVERRIDE, then only allow the resource name of
+                    // that "Tool" to be displayed in the CAVE/map.editor legend
+                    // Example: The Ensemble Tool hiding all legend entries/
+                    // labels except for "Ensemble Map (Editable)"
+                    ResourceType rt;
+                    rt = resourcePair.getLoadProperties().getResourceType();
+                    if (rt != null && (resourcePair.getProperties().isMapLayer()
+                            || rt.equals(ResourceType.LEGEND_OVERRIDE))) {
+                        entry.legendParts = getLegendData(info, resourcePair,
+                                null);
+                        labels.add(entry);
+                    }
+                    break;
+                }
                 case NONE: {
+                    // This is also where legend mode HIDE gets processed
                     int idx = info.getFrameIndex();
                     boolean hasTime = idx > -1 && idx < info.getFrameCount();
                     if (!hasTime) {
                         entry.legendParts = getLegendData(info, resourcePair,
                                 null);
                         labels.add(entry);
-                    } else {
-                        if (!resourcePair.getProperties().isMapLayer()) {
-                            LegendData ld = new LegendData();
-                            ld.color = WHITE;
+                    } else if (!resourcePair.getProperties().isMapLayer()) {
+                        LegendData ld = new LegendData();
+                        ld.color = WHITE;
 
-                            if (resourcePair.getResource() != null) {
-                                /*
-                                 * try to get the time for the resource
-                                 */
-                                DataTime time = info.getTimeForResource(
-                                        resourcePair.getResource());
-                                if (time != null) {
-                                    ld.label = time.getLegendString();
-                                } else {
-                                    ld.label = NO_DATA;
-                                }
-                            } else {
-                                /*
-                                 * if there's no non-map layer resources, try to
-                                 * get the time from the FramesInfo
-                                 */
-                                DataTime[] timeFrames = info.getFrameTimes();
-                                if (timeFrames != null) {
-                                    ld.label = timeFrames[idx]
-                                            .getLegendString();
-                                } else {
-                                    ld.label = "";
-                                }
-                            }
-
-                            entry.legendParts = new LegendData[] { ld };
-                            if (NO_DATA.equals(ld.label)) {
-                                /*
-                                 * keep looking for a resource with a time
-                                 */
-                                done = false;
-                            } else {
-                                done = true;
-                            }
-
+                        if (resourcePair.getResource() != null) {
                             /*
-                             * only ever allow one label when in NONE mode
+                             * try to get the time for the resource
                              */
-                            if (labels.isEmpty()) {
-                                labels.add(entry);
+                            DataTime time = info.getTimeForResource(
+                                    resourcePair.getResource());
+                            if (time != null) {
+                                ld.label = time.getLegendString();
                             } else {
-                                labels.set(0, entry);
+                                ld.label = NO_DATA;
                             }
+                        } else {
+                            /*
+                             * if there's no non-map layer resources, try to get
+                             * the time from the FramesInfo
+                             */
+                            DataTime[] timeFrames = info.getFrameTimes();
+                            if (timeFrames != null) {
+                                ld.label = timeFrames[idx].getLegendString();
+                            } else {
+                                ld.label = "";
+                            }
+                        }
+
+                        entry.legendParts = new LegendData[] { ld };
+                        if (NO_DATA.equals(ld.label)) {
+                            /*
+                             * keep looking for a resource with a time
+                             */
+                            done = false;
+                        } else {
+                            done = true;
+                        }
+
+                        /*
+                         * only ever allow one label when in NONE mode
+                         */
+                        if (labels.isEmpty()) {
+                            labels.add(entry);
+                        } else {
+                            labels.set(0, entry);
                         }
                     }
                     break;
@@ -259,8 +284,10 @@ public class D2DLegendResource
             LegendData ld = new LegendData();
             ld.resource = rp;
             ld.label = resource.getName();
-            ld.color = rp.getProperties().isVisible() ? resource
-                    .getCapability(ColorableCapability.class).getColor() : GRAY;
+            ld.color = rp.getProperties().isVisible()
+                    ? resource.getCapability(ColorableCapability.class)
+                            .getColor()
+                    : GRAY;
             legendData.add(ld);
         } else if (resource.hasCapability(BlendableCapability.class)) {
             ResourceList list = resource
@@ -280,8 +307,9 @@ public class D2DLegendResource
                 if (!first) {
                     LegendData main = new LegendData();
                     main.resource = rp;
-                    main.color = visible ? resource
-                            .getCapability(ColorableCapability.class).getColor()
+                    main.color = visible
+                            ? resource.getCapability(ColorableCapability.class)
+                                    .getColor()
                             : GRAY;
                     main.label = " + ";
                     legendData.add(main);
@@ -298,8 +326,9 @@ public class D2DLegendResource
         } else {
             LegendData ld = new LegendData();
             ld.resource = rp;
-            RGB toUse = color == null ? resource
-                    .getCapability(ColorableCapability.class).getColor()
+            RGB toUse = color == null
+                    ? resource.getCapability(ColorableCapability.class)
+                            .getColor()
                     : color;
             ld.color = rp.getProperties().isVisible() ? toUse : GRAY;
             ld.label = getLegendString(rp, descriptor, frameInfo);
@@ -404,7 +433,7 @@ public class D2DLegendResource
         if (this.mode == LegendMode.SHORT_PRODUCT && !fromResourceGroup
                 && name.length() > 20) {
             int beginIndex = name.length() - 20;
-            name = name.substring(beginIndex, name.length());
+            name = name.substring(beginIndex);
         }
 
         return name;
@@ -426,7 +455,14 @@ public class D2DLegendResource
         }
         boolean timeAgnostic = false;
         DataTime timeToUse = null;
-        DataTime currTime = info.getFrameTimes()[info.getFrameIndex()];
+        DataTime currTime = null;
+        DataTime[] frameTimes = info.getFrameTimes();
+        int frameIndex = info.getFrameIndex();
+
+        if (frameIndex >= 0 && frameTimes != null) {
+            currTime = frameTimes[frameIndex];
+        }
+
         if (!rscGroup.hasCapability(GroupNamingCapability.class)
                 || groupName == null) {
             for (ResourcePair rp : list) {
@@ -473,18 +509,20 @@ public class D2DLegendResource
                  * and we are NOT time agnostic look at each resource and see if
                  * their time is that of the descriptor's frame
                  */
-                for (ResourcePair rp : list) {
-                    DataTime rscTime = descriptor
-                            .getTimeForResource(rp.getResource());
-                    if (currTime.equals(rscTime)) {
-                        s = new StringBuilder(groupName);
-                        timeToUse = currTime;
+                if (currTime != null) {
+                    for (ResourcePair rp : list) {
+                        DataTime rscTime = descriptor
+                                .getTimeForResource(rp.getResource());
+                        if (currTime.equals(rscTime)) {
+                            s = new StringBuilder(groupName);
+                            timeToUse = currTime;
 
-                        break;
+                            break;
+                        }
                     }
                 }
 
-                if ("".equals(s)) {
+                if ("".equals(s) || s.length() == 0) {
                     /*
                      * None of our grouped resources have time as time match
                      * basis, grab first time that is not null in resource list
@@ -505,11 +543,12 @@ public class D2DLegendResource
         if (s.length() == 0) {
             s.append(NO_DATA);
         } else if (timeToUse != null) {
-        	if (!currTime.getLegendString().equals(timeToUse.getLegendString())) {
-        		s.append(NO_DATA);
-        	} else {
-        		s.append(" ").append(timeToUse.getLegendString());
-        	}
+            if (!currTime.getLegendString()
+                    .equals(timeToUse.getLegendString())) {
+                s.append(NO_DATA);
+            } else {
+                s.append(" ").append(timeToUse.getLegendString());
+            }
         } else if (!timeAgnostic) {
             s.append(" ").append(NOT_LOADED);
         }
@@ -546,8 +585,7 @@ public class D2DLegendResource
              * by being added later, runs before the changeModelHandler. See
              * InputManager.handleMouseXxx.
              */
-            rc.registerMouseHandler(changeModeHandler,
-                    InputPriority.SYSTEM_RESOURCE);
+            rc.registerMouseHandler(changeModeHandler, InputPriority.RESOURCE);
             rc.registerMouseHandler(legendHandler,
                     InputPriority.SYSTEM_RESOURCE);
         }
@@ -652,9 +690,9 @@ public class D2DLegendResource
 
     @Override
     protected ResourcePair[] checkYLabelSpace(IDescriptor descriptor,
-            IGraphicsTarget target, double y, double ratio) {
+            IGraphicsTarget target, double y) {
         // NOTE: Overridden so legend handlers can call
-        return super.checkYLabelSpace(descriptor, target, y, ratio);
+        return super.checkYLabelSpace(descriptor, target, y);
     }
 
 }

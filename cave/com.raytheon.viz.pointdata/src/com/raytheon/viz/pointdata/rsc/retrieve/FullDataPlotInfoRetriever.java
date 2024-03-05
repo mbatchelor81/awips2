@@ -3,8 +3,13 @@ package com.raytheon.viz.pointdata.rsc.retrieve;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.List;
+=======
+import java.util.List;
+import java.util.Map;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -19,8 +24,11 @@ import com.raytheon.uf.common.dataquery.requests.RequestConstraint;
 import com.raytheon.uf.common.inventory.exception.DataCubeException;
 import com.raytheon.uf.common.pointdata.PointDataContainer;
 import com.raytheon.uf.common.pointdata.PointDataView;
+<<<<<<< HEAD
 import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.status.UFStatus.Priority;
 import com.raytheon.uf.common.time.DataTime;
 import com.raytheon.uf.viz.core.exception.VizException;
@@ -30,6 +38,7 @@ import com.raytheon.uf.viz.datacube.DataCubeContainer;
 import com.raytheon.viz.pointdata.PlotInfo;
 
 /**
+<<<<<<< HEAD
  * 
  * TODO Add Description
  * 
@@ -51,6 +60,27 @@ import com.raytheon.viz.pointdata.PlotInfo;
 public class FullDataPlotInfoRetriever extends AbstractPlotInfoRetriever {
     private static final transient IUFStatusHandler statusHandler = UFStatus
             .getHandler(FullDataPlotInfoRetriever.class);
+=======
+ *
+ * Full data plot info retriever
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+ * Date          Ticket#  Engineer  Description
+ * ------------- -------- --------- --------------------------------------
+ * Jan 12, 2011           bsteffen  Initial creation
+ * Aug 08, 2014  3477     bclement  changed plot info locations to floats
+ * Dec 07, 2021  8341     randerso  Code cleanup
+ *
+ * </pre>
+ *
+ * @author bsteffen
+ */
+@XmlAccessorType(XmlAccessType.NONE)
+public class FullDataPlotInfoRetriever extends AbstractPlotInfoRetriever {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     @XmlAttribute
     private String levelKey;
@@ -74,8 +104,13 @@ public class FullDataPlotInfoRetriever extends AbstractPlotInfoRetriever {
     private String fcstTime = null;
 
     private String[] getParameters() {
+<<<<<<< HEAD
         List<String> parameters = new ArrayList<String>();
         parameters.addAll(Arrays.asList(this.parameters.split(",")));
+=======
+        List<String> parameters = new ArrayList<>(
+                Arrays.asList(this.parameters.split(",")));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if (stationId != null) {
             parameters.add(stationId);
         }
@@ -91,7 +126,11 @@ public class FullDataPlotInfoRetriever extends AbstractPlotInfoRetriever {
 
     @Override
     public void getStations(final IResourceDataChanged listener, DataTime time,
+<<<<<<< HEAD
             final HashMap<String, RequestConstraint> metadataMap)
+=======
+            final Map<String, RequestConstraint> metadataMap)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             throws VizException {
         new Job("Retrieving Data") {
 
@@ -112,10 +151,17 @@ public class FullDataPlotInfoRetriever extends AbstractPlotInfoRetriever {
                     return Status.OK_STATUS;
                 }
 
+<<<<<<< HEAD
                 List<PlotInfo> result = new ArrayList<PlotInfo>(
                         pdc.getCurrentSz());
 
                 for (int uriCounter = 0; uriCounter < pdc.getAllocatedSz(); uriCounter++) {
+=======
+                List<PlotInfo> result = new ArrayList<>(pdc.getCurrentSz());
+
+                for (int uriCounter = 0; uriCounter < pdc
+                        .getAllocatedSz(); uriCounter++) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     PointDataView pdv = pdc.readRandom(uriCounter);
                     PlotInfo info = new PlotInfo();
                     info.pdv.addData(pdv);

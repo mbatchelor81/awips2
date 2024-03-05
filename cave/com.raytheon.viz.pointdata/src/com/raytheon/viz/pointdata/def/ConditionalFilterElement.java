@@ -15,6 +15,10 @@ import javax.xml.bind.annotation.XmlRootElement;
  * ------------ ---------- ----------- --------------------------
  * 04/2012      #615       S. Gurung   Initial creation
  * 12/10/2019   72280      K Sunil     Moved from NCP's gov.noaa.nws.ncep.viz.rsc.plotdata to D2D
+<<<<<<< HEAD
+=======
+ * 09/15/2021   95459      smanoj      Conditional Filter AND/OR update
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  *
@@ -32,16 +36,34 @@ public class ConditionalFilterElement {
     @XmlAttribute(name = "value")
     private String value;
 
+<<<<<<< HEAD
+=======
+    @XmlAttribute(name = "connectVal")
+    private String connectVal;
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public ConditionalFilterElement() {
         paramName = "";
         constraintType = "";
         value = "";
+<<<<<<< HEAD
     }
 
     public ConditionalFilterElement(String pName, String cType, String val) {
         paramName = pName;
         constraintType = cType;
         value = val;
+=======
+        connectVal = "";
+    }
+
+    public ConditionalFilterElement(String pName, String cType, String val,
+            String conVal) {
+        paramName = pName;
+        constraintType = cType;
+        value = val;
+        connectVal = conVal;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     public String getParamName() {
@@ -56,6 +78,13 @@ public class ConditionalFilterElement {
         return value;
     }
 
+<<<<<<< HEAD
+=======
+    public String getConnectValue() {
+        return connectVal;
+    }
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public void setParamName(String pName) {
         paramName = pName;
     }
@@ -68,8 +97,19 @@ public class ConditionalFilterElement {
         value = val;
     }
 
+<<<<<<< HEAD
     @Override
     public String toString() {
         return paramName + " " + constraintType + " " + value;
+=======
+    public void setConnectValue(String conVal) {
+        connectVal = conVal;
+    }
+
+    @Override
+    public String toString() {
+        return paramName + " " + constraintType + " " + value + " "
+                + connectVal;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 }

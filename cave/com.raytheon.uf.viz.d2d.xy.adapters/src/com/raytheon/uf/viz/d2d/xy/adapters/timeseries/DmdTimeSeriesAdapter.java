@@ -37,7 +37,11 @@ import com.raytheon.uf.viz.xy.timeseries.adapter.AbstractTimeSeriesAdapter;
 import com.raytheon.viz.core.graphing.xy.XYData;
 import com.raytheon.viz.core.graphing.xy.XYDataList;
 
+<<<<<<< HEAD
 import tec.uom.se.AbstractUnit;
+=======
+import tech.units.indriya.AbstractUnit;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Radar DMD data on a Time Series display.

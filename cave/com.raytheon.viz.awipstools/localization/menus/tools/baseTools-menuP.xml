@@ -25,7 +25,11 @@
     -->
 <menuTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <contribute xsi:type="command"
+<<<<<<< HEAD
         commandId="com.raytheon.viz.awipstools.puthomecursor" menuText="Put Home Cursor..." />
+=======
+        commandId="com.raytheon.viz.awipstools.puthomecursor" menuText="Put home cursor..." />
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <!-- example arbitrary command below, commandAction parameter is required, _
     the others default to false if undefined.  If captureOutput is true then after 
     the launched command closes a dialog box will show the contents printed to 

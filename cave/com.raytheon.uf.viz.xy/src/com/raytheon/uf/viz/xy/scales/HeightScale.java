@@ -32,7 +32,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import com.raytheon.uf.common.style.level.Level.LevelType;
 import com.raytheon.uf.common.units.UnitAdapter;
 
+<<<<<<< HEAD
 import tec.uom.se.AbstractUnit;
+=======
+import tech.units.indriya.AbstractUnit;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Height scale used by volume browser

@@ -76,6 +76,12 @@ import com.raytheon.uf.viz.core.DrawableImage;
 import com.raytheon.uf.viz.core.IExtent;
 import com.raytheon.uf.viz.core.IGraphicsTarget;
 import com.raytheon.uf.viz.core.PixelExtent;
+<<<<<<< HEAD
+=======
+import com.raytheon.uf.viz.core.drawables.IDescriptor;
+import com.raytheon.uf.viz.core.drawables.IDescriptor.IFrameChangedListener;
+import com.raytheon.uf.viz.core.drawables.IFrameCoordinator.AnimationMode;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.drawables.IRenderable;
 import com.raytheon.uf.viz.core.drawables.IRenderableDisplay;
 import com.raytheon.uf.viz.core.drawables.PaintProperties;
@@ -101,9 +107,15 @@ import com.raytheon.viz.satellite.tileset.SatRenderable;
 import com.raytheon.viz.satellite.tileset.SatRenderable.InterrogationResult;
 
 import si.uom.SI;
+<<<<<<< HEAD
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.format.SimpleUnitFormat;
 import tec.uom.se.quantity.Quantities;
+=======
+import tech.units.indriya.AbstractUnit;
+import tech.units.indriya.format.SimpleUnitFormat;
+import tech.units.indriya.quantity.Quantities;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Provides satellite raster rendering support
@@ -161,6 +173,11 @@ import tec.uom.se.quantity.Quantities;
  *                                  Handled unit conversion
  * Apr 20, 2020  8145     randerso  Replace SamplePreferences with SampleFormat
  * May 06, 2020  8083     tgurney   Fix interrogate for units upgrade
+<<<<<<< HEAD
+=======
+ * Feb 10, 2021 20421 mgamazaychikov Add support for centalWaveLength handling
+ * Mar 07, 2023 23414     dfriedman Update DR 21057 logic to support derived products
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -168,7 +185,11 @@ import tec.uom.se.quantity.Quantities;
  */
 public class SatResource extends
         AbstractPluginDataObjectResource<SatResourceData, IMapDescriptor>
+<<<<<<< HEAD
         implements ImageProvider, Interrogatable, IToolChangedListener {
+=======
+        implements ImageProvider, Interrogatable, IToolChangedListener, IFrameChangedListener {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * String id to look for satellite-provided data values
@@ -209,12 +230,21 @@ public class SatResource extends
     /** Flag to avoid reinitializing ColorMapParameters from style rules */
     private boolean initialized = false;
 
+<<<<<<< HEAD
+=======
+    private int lastFrame = -1;
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /**
      * Constructor
      */
     public SatResource(SatResourceData data, LoadProperties props) {
         super(data, props);
         addDataObject(data.getRecords());
+<<<<<<< HEAD
+=======
+        data.addSatResource(this);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override
@@ -243,6 +273,17 @@ public class SatResource extends
                         extent, canvasBounds);
             }
         }
+<<<<<<< HEAD
+=======
+
+        descriptor.addFrameChangedListener(this);
+    }
+
+    @Override
+    protected void disposeResource() {
+        super.disposeResource();
+        resourceData.removeSatResource(this);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override
@@ -694,6 +735,93 @@ public class SatResource extends
         issueRefresh();
     }
 
+<<<<<<< HEAD
+=======
+    @Override
+    public void frameChanged(IDescriptor descriptor, DataTime oldTime,
+            DataTime newTime) {
+        if (isVerticallyBrowsable()) {
+            int index = descriptor.getFramesInfo().getFrameIndex();
+            if (index != lastFrame && index >= 0) {
+                List<PluginDataObject> dataObjects = this.getPluginDataObjects(newTime);
+                this.getProperties().setVisible(true);
+                if (!dataObjects.isEmpty()) {
+                    SatelliteRecord sr = (SatelliteRecord) dataObjects.get(0);
+                    ColorMapParameters colorMapParameters = getCapability(ColorMapCapability.class)
+                            .getColorMapParameters();
+                    String cmName = getColorMapName(sr);
+                    if (!cmName.equals(colorMapParameters.getColorMapName())) {
+                        setFrameColorMap(cmName);
+                    }
+                    this.legend = getLegend((SatelliteRecord) dataObjects.get(0));
+                    issueRefresh();
+                }
+            }
+            lastFrame = index;
+        }
+    }
+
+    private void setFrameColorMap(String cmName) {
+        ColorMapParameters colorMapParameters = getCapability(ColorMapCapability.class)
+                .getColorMapParameters();
+        IColorMap colorMap = null;
+        try {
+            colorMap = ColorMapLoader.loadColorMap(cmName);
+        } catch (ColorMapException e) {
+            statusHandler.error("Problem loading colormap: " + e.toString());
+        }
+        if (colorMap != null) {
+            colorMapParameters.setColorMap(colorMap);
+        }
+        getCapability(ColorMapCapability.class)
+                .setColorMapParameters(colorMapParameters);
+    }
+
+    private String getColorMapName(SatelliteRecord record) {
+        Unit<?> unit = SatelliteUnitsUtil.getRecordUnit(record);
+        SingleLevel level = new SingleLevel(Level.LevelType.SURFACE);
+        String physicalElement = record.getPhysicalElement();
+
+        // Grab the sampleRange from the preferences
+        ParamLevelMatchCriteria match = new ParamLevelMatchCriteria();
+        match.setParameterName(Arrays.asList(physicalElement));
+        match.setLevels(Arrays.asList((Level) level));
+        match.setCreatingEntityNames(Arrays.asList(record.getCreatingEntity()));
+        StyleRule sr = null;
+        try {
+            sr = StyleManager.getInstance().getStyleRule(StyleManager.StyleType.IMAGERY, match);
+        } catch (StyleException e) {
+            statusHandler.error("Problem loading style rule: " + e.toString());
+        }
+
+        ImagePreferences preferences = null;
+        if (sr == null || !(sr.getPreferences() instanceof ImagePreferences)) {
+            // No style rule, this is a best guess at what might look good.
+            preferences = new ImagePreferences();
+        } else {
+            preferences = (ImagePreferences) sr.getPreferences();
+        }
+        ColorMapParameters colorMapParameters = null;
+        try {
+            colorMapParameters = ColorMapParameterFactory.build(preferences,
+                    unit);
+        } catch (StyleException e) {
+            statusHandler.error("Problem loading colormap parameters: " + e.toString());
+        }
+        return colorMapParameters.getColorMapName();
+    }
+
+    private boolean isVerticallyBrowsable() {
+        int numberOfFrames = descriptor.getFramesInfo().getFrameCount();
+        if (descriptor.getFrameCoordinator().getAnimationMode().equals(AnimationMode.Vertical)) {
+            if (numberOfFrames > 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public void redoMainTimeMatch() {
         try {
             descriptor.getTimeMatcher().redoTimeMatching(this);
@@ -703,4 +831,17 @@ public class SatResource extends
                     "Unable to redo the time matching " + getSafeName(), e);
         }
     }
+<<<<<<< HEAD
+=======
+
+    public void dataTimeInvalidated(DataTime time) {
+        /*
+         * Remove time from dataTimes when raw data notifications arrive so that derived
+         * data will be correctly queried in ResourceData.getLatestPluginDataObjects.
+         *
+         */
+        removeDataTime(time, false);
+    }
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

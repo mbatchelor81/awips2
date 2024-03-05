@@ -37,7 +37,10 @@ import org.eclipse.swt.widgets.Shell;
 import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
 import com.raytheon.uf.common.status.UFStatus.Priority;
+<<<<<<< HEAD
 import com.raytheon.uf.viz.core.DescriptorMap;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.IDisplayPane;
 import com.raytheon.uf.viz.core.VizApp;
 import com.raytheon.uf.viz.core.exception.VizException;
@@ -48,7 +51,10 @@ import com.raytheon.viz.ui.HistoryList.IHistoryListener;
 import com.raytheon.viz.ui.UiPlugin;
 import com.raytheon.viz.ui.UiUtil;
 import com.raytheon.viz.ui.dialogs.CaveSWTDialog;
+<<<<<<< HEAD
 import com.raytheon.viz.ui.dialogs.ICloseCallback;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.viz.ui.editor.AbstractEditor;
 
 /**
@@ -65,13 +71,24 @@ import com.raytheon.viz.ui.editor.AbstractEditor;
  * Oct 16, 2012 1229       rferrel     Make dialog non-blocking.
  * Jan 06, 2015 3879       nabowle     Handle load clicked with nothing selected.
  * Feb 12, 2018 6580       tgurney     Do not minimize when CAVE is minimized
+<<<<<<< HEAD
+=======
+ * Apr 22, 2022 8791       mapeters    Update determination of editor type to load to
+ * Oct 19, 2022 8956       mapeters    Handle UiUtil.createOrOpenEditorForBundle
+ *                                     signature change
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
  * @author rferrel
  */
 public class HistoryListDlg extends CaveSWTDialog {
+<<<<<<< HEAD
     private final transient IUFStatusHandler statusHandler = UFStatus
+=======
+
+    private static final IUFStatusHandler statusHandler = UFStatus
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             .getHandler(HistoryListDlg.class);
 
     private List dataList;
@@ -92,7 +109,12 @@ public class HistoryListDlg extends CaveSWTDialog {
                 HistoryList.getInstance().addBundle();
             }
         } catch (VizException e) {
+<<<<<<< HEAD
             // ignore
+=======
+            statusHandler.error(
+                    "Error adding current display to bundle history list", e);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 
@@ -120,6 +142,7 @@ public class HistoryListDlg extends CaveSWTDialog {
         /*
          * Listener for updating the history list.
          */
+<<<<<<< HEAD
         final IHistoryListener historyListener = new IHistoryListener() {
 
             @Override
@@ -141,12 +164,21 @@ public class HistoryListDlg extends CaveSWTDialog {
                 });
             }
         };
+=======
+        final IHistoryListener historyListener = () -> VizApp.runAsync(() -> {
+            String[] labels = HistoryList.getInstance().getLabels();
+            if (!dataList.isDisposed()) {
+                dataList.setItems(labels);
+            }
+        });
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         HistoryList.getInstance().addHistoryListener(historyListener);
 
         /*
          * Add Copy Out change listener
          */
+<<<<<<< HEAD
         final ProcedureComm.ICopyOutStateChangeListener changeListener = new ProcedureComm.ICopyOutStateChangeListener() {
 
             @Override
@@ -163,6 +195,15 @@ public class HistoryListDlg extends CaveSWTDialog {
                 });
             }
         };
+=======
+        final ProcedureComm.ICopyOutStateChangeListener changeListener = () -> VizApp
+                .runAsync(() -> {
+                    if (!copyOutBtn.isDisposed()) {
+                        copyOutBtn.setEnabled(ProcedureComm.getInstance()
+                                .getCopyListenerCount() > 0);
+                    }
+                });
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         ProcedureComm.getInstance().addCopyOutStateListener(changeListener);
 
@@ -299,6 +340,7 @@ public class HistoryListDlg extends CaveSWTDialog {
                 Bundle b = HistoryList.getInstance()
                         .getBundle(dataList.getSelectionIndex(), false);
                 alterDlg = new AlterBundleDlg(b, getShell());
+<<<<<<< HEAD
                 alterDlg.addCloseCallback(new ICloseCallback() {
 
                     @Override
@@ -308,6 +350,13 @@ public class HistoryListDlg extends CaveSWTDialog {
                             Bundle b = (Bundle) returnValue;
                             loadAlterBundle(b);
                         }
+=======
+                alterDlg.addCloseCallback(returnValue -> {
+                    if (returnValue instanceof Bundle) {
+                        // Load was issued in alterBundleDlg
+                        Bundle b1 = (Bundle) returnValue;
+                        loadAlterBundle(b1);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     }
                 });
                 alterDlg.open();
@@ -321,6 +370,7 @@ public class HistoryListDlg extends CaveSWTDialog {
     }
 
     private void loadAlterBundle(Bundle b) {
+<<<<<<< HEAD
         String editorName = null;
 
         if (b.getDisplays().length > 0) {
@@ -330,6 +380,9 @@ public class HistoryListDlg extends CaveSWTDialog {
 
         AbstractEditor editor = UiUtil.createOrOpenEditor(editorName,
                 b.getDisplays());
+=======
+        AbstractEditor editor = UiUtil.createOrOpenEditorForBundle(b, false);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         for (IDisplayPane pane : editor.getDisplayPanes()) {
             pane.getRenderableDisplay().getDescriptor().getResourceList()
@@ -344,6 +397,7 @@ public class HistoryListDlg extends CaveSWTDialog {
      * loaded into CAVE.
      */
     private void loadAction() {
+<<<<<<< HEAD
         if (this.dataList.getSelectionIndex() < 0) {
             return;
         }
@@ -360,6 +414,17 @@ public class HistoryListDlg extends CaveSWTDialog {
 
             AbstractEditor editor = UiUtil.createOrOpenEditor(editorName,
                     b.getDisplays());
+=======
+        if (dataList.getSelectionIndex() < 0) {
+            return;
+        }
+
+        try {
+            Bundle b = HistoryList.getInstance()
+                    .getBundle(dataList.getSelectionIndex(), true);
+            AbstractEditor editor = UiUtil.createOrOpenEditorForBundle(b,
+                    false);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             if (dataList.getSelectionIndex() < 0) {
                 return;

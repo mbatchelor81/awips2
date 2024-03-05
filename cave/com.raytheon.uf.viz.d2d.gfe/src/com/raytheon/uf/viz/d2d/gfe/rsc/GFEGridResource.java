@@ -19,8 +19,11 @@
  **/
 package com.raytheon.uf.viz.d2d.gfe.rsc;
 
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.geotools.coverage.grid.GridGeometry2D;
@@ -95,6 +98,9 @@ import com.raytheon.viz.ui.EditorUtil;
  *                                  refactor discreteColorbar
  * Feb 18, 2020  74905    tjensen   Updated to support loading data from
  *                                  different sites
+ * Apr 20, 2020  77616    tjensen   Added ModelDate info to getName()
+ * Dec 06, 2021  8341     randerso  Added DataTime parameter to
+ *                                  createRenderable()
  *
  * </pre>
  *
@@ -227,17 +233,35 @@ public class GFEGridResource extends AbstractGridResource<GFEGridResourceData> {
         String modelName = "";
         String parmName = "";
         String unitLabel = "?";
+        String modelDateStr = "";
         if (parmId != null) {
             siteId = parmId.getDbId().getSiteId();
             modelName = parmId.getDbId().getModelName();
             parmName = parmId.getParmName();
+
+            /*
+             * Display modelDate information if available. Formatted to
+             * conditionally show minutes if non-zero to match that output from
+             * DataTime.getLegendString()'s modelTime for forecast products.
+             */
+            Date modelDate = parmId.getDbId().getModelDate();
+            if (modelDate != null) {
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.HHmm")
+                        .withZone(ZoneId.of("Z"));
+                modelDateStr = " " + dtf.format(modelDate.toInstant());
+                // remove 00 minutes
+                if (modelDateStr.endsWith("00")) {
+                    modelDateStr = modelDateStr.substring(0,
+                            modelDateStr.length() - 2);
+                }
+            }
         }
         if (stylePreferences != null) {
             unitLabel = stylePreferences.getDisplayUnitLabel();
         }
 
-        return String.format("GFE(%s %s) %s %s (%s)  ", siteId, modelName,
-                parmName, displayTypeString, unitLabel);
+        return String.format("GFE(%s %s%s) %s %s (%s)  ", siteId, modelName,
+                modelDateStr, parmName, displayTypeString, unitLabel);
     }
 
     public static ParamLevelMatchCriteria getMatchCriteria(ParmID parmId) {
@@ -262,7 +286,7 @@ public class GFEGridResource extends AbstractGridResource<GFEGridResourceData> {
 
     @Override
     public IRenderable createRenderable(IGraphicsTarget target,
-            GeneralGridData data) throws VizException {
+            GeneralGridData data, DataTime time) throws VizException {
         IRenderable renderable = null;
 
         if (data instanceof DiscreteGridData) {
@@ -295,7 +319,7 @@ public class GFEGridResource extends AbstractGridResource<GFEGridResourceData> {
         } else {
             // Make sure this is set to false
             setDiscreteColorbarUser(false);
-            renderable = super.createRenderable(target, data);
+            renderable = super.createRenderable(target, data, time);
         }
 
         return renderable;
@@ -337,18 +361,14 @@ public class GFEGridResource extends AbstractGridResource<GFEGridResourceData> {
     protected void disposeRenderable(final IRenderable renderable) {
         if (renderable instanceof DiscreteRenderable
                 || renderable instanceof WeatherRenderable) {
-            VizApp.runAsync(new Runnable() {
-
-                @Override
-                public void run() {
-                    if (renderable instanceof DiscreteRenderable) {
-                        ((DiscreteRenderable) renderable).dispose();
-                    } else if (renderable instanceof WeatherRenderable) {
-                        ((WeatherRenderable) renderable).dispose();
-                    } else {
-                        statusHandler.warn("Undisposed renderable of type: "
-                                + renderable.getClass().getSimpleName());
-                    }
+            VizApp.runAsync(() -> {
+                if (renderable instanceof DiscreteRenderable) {
+                    ((DiscreteRenderable) renderable).dispose();
+                } else if (renderable instanceof WeatherRenderable) {
+                    ((WeatherRenderable) renderable).dispose();
+                } else {
+                    statusHandler.warn("Undisposed renderable of type: "
+                            + renderable.getClass().getSimpleName());
                 }
             });
         } else {

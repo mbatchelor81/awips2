@@ -46,7 +46,11 @@ import com.raytheon.uf.common.geospatial.interpolation.GridDownscaler;
 import com.raytheon.uf.common.inventory.data.AbstractRequestableData;
 import com.raytheon.uf.common.inventory.exception.DataCubeException;
 
+<<<<<<< HEAD
 import tec.uom.se.format.SimpleUnitFormat;
+=======
+import tech.units.indriya.format.SimpleUnitFormat;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Satellite record which performs derived parameter calculations to get data

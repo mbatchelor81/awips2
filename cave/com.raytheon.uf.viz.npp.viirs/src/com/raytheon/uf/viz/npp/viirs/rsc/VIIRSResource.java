@@ -90,8 +90,13 @@ import com.raytheon.uf.viz.datacube.DataCubeContainer;
 import com.raytheon.uf.viz.npp.viirs.Activator;
 import com.raytheon.uf.viz.npp.viirs.style.VIIRSDataRecordCriteria;
 
+<<<<<<< HEAD
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.quantity.Quantities;
+=======
+import tech.units.indriya.AbstractUnit;
+import tech.units.indriya.quantity.Quantities;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * NPP VIIRS resource. Responsible for drawing a single color band.

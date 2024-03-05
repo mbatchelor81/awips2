@@ -16,6 +16,10 @@
 # Jul 14, 2016           mbelk     Changes for 2017 season
 # Sep 19, 2016  19293    randerso  Initial baseline check in
 # May 22, 2019  21290    mbelk/ryu Fix error with importing TCVNHC formatters
+<<<<<<< HEAD
+=======
+# May 24, 2023  2029646  swhite   Eastern Pacific National TCV Update
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 ########################################################################
 
@@ -274,6 +278,10 @@ class TropicalHazards:
                 "VTZ",  #  Vermont
                 "PRZ",  #  Puerto Rico
                 "VIZ",  #  U.S. Virgin Islands
+<<<<<<< HEAD
+=======
+                "CAZ",  #  California
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 "RE",  #  General edit area collection
             ]
 
@@ -1207,8 +1215,22 @@ class TropicalHazards:
         advisoryDirectoryPath = self._getLocalAdvisoryDirectoryPath()
         filenames = os.listdir(advisoryDirectoryPath)
         allAdvisories = [filename for filename in filenames if filename[-5:] == ".json"]
+<<<<<<< HEAD
 
         stormAdvisories = [filename for filename in allAdvisories if filename[:2] == "AT"]
+=======
+        
+        if self._site == "NHA":
+            stormAdvisories = [filename for filename in allAdvisories if filename[:2] == "AT"]
+            
+        elif self._site == "NHP":
+            stormAdvisories = [filename for filename in allAdvisories if filename[:2] == "EP"]
+            
+        else:
+            LogStream.logProblem(\
+                  "TCV not supported for site " + self._site + ".")
+            return
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         return stormAdvisories
 

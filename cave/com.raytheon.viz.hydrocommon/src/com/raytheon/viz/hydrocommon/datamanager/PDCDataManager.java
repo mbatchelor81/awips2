@@ -72,6 +72,10 @@ import com.raytheon.viz.hydrocommon.whfslib.PrecipUtil;
  * Jun 29, 2018 6839       tgurney     Clean up method signatures
  * Sep 07, 2018 6979       mduff       Clean up SonarQube comments.
  * Sep 21, 2018 7379       mduff       Support PDC Refactor.
+<<<<<<< HEAD
+=======
+ * Feb 04, 2021 21871   mgamazaychikov Added queries for height min/max values
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  *
  * @author mpduff
@@ -88,6 +92,20 @@ public class PDCDataManager extends HydroDataManager {
     private static final String obsQueryHead = "select lid, pe, dur, ts, extremum, obstime, "
             + "value, shef_qual_code, quality_code, revision, product_id, producttime, postingtime from ";
 
+<<<<<<< HEAD
+=======
+    // constants for min/max height query
+    private static final String HEIGHT_MAX_QUERY_HEAD = "WITH grp as (SELECT lid, pe, dur, ts, extremum, "
+            + "obstime, value, shef_qual_code, quality_code, revision, product_id, producttime, postingtime, "
+            + "rank() over (PARTITION BY lid ORDER BY value DESC) rn FROM height ";
+    private static final String HEIGHT_MIN_QUERY_HEAD = "WITH grp as (SELECT lid, pe, dur, ts, extremum, "
+            + "obstime, value, shef_qual_code, quality_code, revision, product_id, producttime, postingtime, "
+            + "rank() over (PARTITION BY lid ORDER BY value ASC) rn FROM height ";
+    private static final String HEIGHT_MAXMIN_QUERY_TAIL = " ) SELECT DISTINCT ON (lid) lid, pe, dur, ts, extremum, "
+            + "obstime, value, shef_qual_code, quality_code, revision, product_id, producttime, postingtime "
+            + "FROM grp WHERE rn = 1 ORDER BY lid ASC";
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private static Map<String, List<IngestFilter>> ingestFilterMap = null;
 
     private static Map<String, RiverStat> riverStatMap = null;
@@ -441,16 +459,47 @@ public class PDCDataManager extends HydroDataManager {
                 riverData.setObsDischargeList(qList);
             } else if (pcOptions.getSelectedAdHocElementString()
                     .startsWith("H")) {
+<<<<<<< HEAD
                 where = PDCDBUtils.buildRiverWhere("");
 
                 StringBuilder qBuffer = new StringBuilder();
                 qBuffer.append(obsQueryHead);
                 qBuffer.append(" height ");
                 qBuffer.append(where);
+=======
+                StringBuilder qBuffer = new StringBuilder();
+                where = PDCDBUtils.buildRiverWhere("");
+                String extremum = null;
+                if (pcOptions.getTimeMode() == PDCConstants.TimeModeType.MINSELECT
+                        .getTimeMode()) {
+                    // build query for min value
+                    qBuffer.append(HEIGHT_MIN_QUERY_HEAD);
+                    qBuffer.append(where);
+                    qBuffer.append(HEIGHT_MAXMIN_QUERY_TAIL);
+                    extremum="N";
+                } else if (pcOptions.getTimeMode() == PDCConstants.TimeModeType.MAXSELECT
+                        .getTimeMode()) {
+                    // build query for max value
+                    qBuffer.append(HEIGHT_MAX_QUERY_HEAD);
+                    qBuffer.append(where);
+                    qBuffer.append(HEIGHT_MAXMIN_QUERY_TAIL);
+                    extremum="X";
+                } else {
+                    qBuffer.append(obsQueryHead);
+                    qBuffer.append(" height ");
+                    qBuffer.append(where);
+                }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 List<Object[]> qResults = runQuery(qBuffer.toString());
                 List<Observation> heightList = new ArrayList<>();
                 for (Object[] oa : qResults) {
                     Observation obs = new Observation(oa);
+<<<<<<< HEAD
+=======
+                    if (extremum != null) {
+                        obs.setExtremum(extremum);
+                    }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     heightList.add(obs);
                 }
                 riverData.setObsHeightList(heightList);

@@ -1,19 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
- * 
+ *
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
- * 
+ *
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
- * 
+ *
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -29,6 +29,7 @@ import com.raytheon.uf.viz.core.IDisplayPaneContainer;
 import com.raytheon.uf.viz.core.IExtent;
 import com.raytheon.uf.viz.core.IGraphicsTarget;
 import com.raytheon.uf.viz.core.IGraphicsTarget.TextStyle;
+import com.raytheon.uf.viz.core.IPane;
 import com.raytheon.uf.viz.core.drawables.IDescriptor;
 import com.raytheon.uf.viz.core.drawables.IFont;
 import com.raytheon.uf.viz.core.drawables.IFont.Style;
@@ -43,25 +44,25 @@ import com.raytheon.viz.ui.editor.IMultiPaneEditor;
 /**
  * Resource for drawing tags on the panes to show selectedness to the user (load
  * to, control image of, etc)
- * 
+ *
  * <pre>
- * 
+ *
  * SOFTWARE HISTORY
- * 
+ *
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
  * Dec 20, 2010            mschenke     Initial creation
  * Aug 04, 2014 3489       mapeters     Updated deprecated getStringBounds() calls.
  * Nov 05, 2015 5070       randerso     Adjust font sizes for dpi scaling
- * 
+ * Sep 12, 2022 8792       mapeters     Update to still paint when an inset
+ *                                      pane is active
+ *
  * </pre>
- * 
+ *
  * @author mschenke
- * @version 1.0
  */
-
-public class D2DSelectedPaneResource extends
-        AbstractVizResource<GenericResourceData, IDescriptor> {
+public class D2DSelectedPaneResource
+        extends AbstractVizResource<GenericResourceData, IDescriptor> {
 
     protected static final int LEFT_OFFSET = 6;
 
@@ -90,11 +91,6 @@ public class D2DSelectedPaneResource extends
         super(resourceData, loadProperties);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.raytheon.uf.viz.core.rsc.AbstractVizResource#disposeInternal()
-     */
     @Override
     protected void disposeInternal() {
         if (font != null) {
@@ -102,23 +98,16 @@ public class D2DSelectedPaneResource extends
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.raytheon.uf.viz.core.rsc.AbstractVizResource#paintInternal(com.raytheon
-     * .uf.viz.core.IGraphicsTarget,
-     * com.raytheon.uf.viz.core.drawables.PaintProperties)
-     */
     @Override
     protected void paintInternal(IGraphicsTarget target,
             PaintProperties paintProps) throws VizException {
         IDisplayPaneContainer container = getResourceContainer();
-        if (container != null && container instanceof IMultiPaneEditor) {
+        if (container instanceof IMultiPaneEditor) {
             IDisplayPane myPane = null;
-            for (IDisplayPane pane : container.getDisplayPanes()) {
-                if (pane.getDescriptor() == descriptor) {
-                    myPane = pane;
+            for (IPane pane : container.getPanes()) {
+                IDisplayPane mainCanvas = pane.getMainCanvas();
+                if (mainCanvas.getDescriptor() == descriptor) {
+                    myPane = mainCanvas;
                     break;
                 }
             }
@@ -138,9 +127,8 @@ public class D2DSelectedPaneResource extends
                         .getView().getExtent().getMaxY()
                         - (BOTTOM_OFFSET * ratioY);
 
-                if (editor.getNumberofPanes() > 1
-                        && editor.isSelectedPane(IMultiPaneEditor.LOAD_ACTION,
-                                myPane)) {
+                if (editor.getNumberofPanes() > 1 && editor
+                        .isSelectedPane(IMultiPaneEditor.LOAD_ACTION, myPane)) {
                     target.clearClippingPlane();
                     target.drawStrings(stringL);
                     if (editor.isSelectedPane(IMultiPaneEditor.IMAGE_ACTION,
@@ -168,13 +156,6 @@ public class D2DSelectedPaneResource extends
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.raytheon.uf.viz.core.rsc.AbstractVizResource#initInternal(com.raytheon
-     * .uf.viz.core.IGraphicsTarget)
-     */
     @Override
     protected void initInternal(IGraphicsTarget target) throws VizException {
         font = target.initializeFont(Font.MONOSPACED, 20,

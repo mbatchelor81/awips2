@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -38,6 +50,10 @@ import org.eclipse.swt.widgets.Layout;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
+<<<<<<< HEAD
+=======
+import org.locationtech.jts.geom.Coordinate;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.opengis.metadata.spatial.PixelOrientation;
 
 import com.raytheon.uf.common.dataplugin.shef.tables.Colorvalue;
@@ -51,8 +67,16 @@ import com.raytheon.uf.common.status.UFStatus.Priority;
 import com.raytheon.uf.common.xmrg.hrap.HRAP;
 import com.raytheon.uf.viz.core.IDisplayPane;
 import com.raytheon.uf.viz.core.IExtent;
+<<<<<<< HEAD
 import com.raytheon.uf.viz.core.IRenderableDisplayChangedListener;
 import com.raytheon.uf.viz.core.IRenderableDisplayChangedListener.DisplayChangeType;
+=======
+import com.raytheon.uf.viz.core.IPane;
+import com.raytheon.uf.viz.core.IPane.CanvasType;
+import com.raytheon.uf.viz.core.IRenderableDisplayChangedListener;
+import com.raytheon.uf.viz.core.IRenderableDisplayChangedListener.DisplayChangeType;
+import com.raytheon.uf.viz.core.InputManager;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.datastructure.LoopProperties;
 import com.raytheon.uf.viz.core.drawables.IRenderableDisplay;
 import com.raytheon.uf.viz.core.drawables.ResourcePair;
@@ -74,12 +98,18 @@ import com.raytheon.viz.mpe.ui.rsc.DPAResource.SingleSiteRadarType;
 import com.raytheon.viz.mpe.ui.rsc.RadarCoverageResource;
 import com.raytheon.viz.mpe.ui.rsc.RadarGageOverlayRsc;
 import com.raytheon.viz.mpe.ui.rsc.RadarGageOverlayRscData;
+<<<<<<< HEAD
 import com.raytheon.viz.ui.EditorUtil;
 import com.raytheon.viz.ui.actions.LoadPerspectiveHandler;
+=======
+import com.raytheon.viz.ui.BundleLoader;
+import com.raytheon.viz.ui.EditorUtil;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.viz.ui.dialogs.CaveSWTDialog;
 import com.raytheon.viz.ui.editor.IMultiPaneEditor;
 import com.raytheon.viz.ui.editor.ISelectedPanesChangedListener;
 import com.raytheon.viz.ui.input.InputAdapter;
+<<<<<<< HEAD
 import com.raytheon.viz.ui.input.InputManager;
 import com.raytheon.viz.ui.panes.PaneManager;
 import org.locationtech.jts.geom.Coordinate;
@@ -89,6 +119,15 @@ import org.locationtech.jts.geom.Coordinate;
  * 
  * <pre>
  * 
+=======
+import com.raytheon.viz.ui.panes.PaneManager;
+
+/**
+ * Review Hourly Radar Dialog.
+ *
+ * <pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * SOFTWARE HISTORY
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
@@ -98,6 +137,7 @@ import org.locationtech.jts.geom.Coordinate;
  * Jun 18, 2013 16053      snaples    Removed reference to setRadarEditFlag
  * Jun 05, 2015 4401       bkowal     Renamed LoadSerializedXml to
  *                                    LoadPerspectiveHandler.
+<<<<<<< HEAD
  * 
  * </pre>
  * 
@@ -108,6 +148,20 @@ import org.locationtech.jts.geom.Coordinate;
 public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
         IMultiPaneEditor {
     private static final transient IUFStatusHandler statusHandler = UFStatus
+=======
+ * Sep 13, 2022 8792       mapeters   Added new methods to support combo editor
+ * Oct 12, 2022 8946       mapeters   Added getCanvases(CanvasType)
+ * May 11, 2023 2029803    mapeters   Add horizontal layout methods
+ *
+ * </pre>
+ *
+ * @author mpduff
+ */
+public class ReviewHourlyRadarDlg extends CaveSWTDialog
+        implements IMultiPaneEditor {
+
+    private static final IUFStatusHandler statusHandler = UFStatus
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             .getHandler(ReviewHourlyRadarDlg.class);
 
     /** Apps Default DPA Grid Directory token. */
@@ -139,8 +193,11 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
 
     private MenuItem citiesMI;
 
+<<<<<<< HEAD
     private MenuItem basinBoundariesMI;
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private MenuItem riversMI;
 
     private MenuItem gagesMI;
@@ -164,6 +221,7 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
     /** Bias Radar resource */
     private DPAResource biasRadarRsc = null;
 
+<<<<<<< HEAD
     /** Radar Misbin resource */
     private RadarCoverageResource misbinRadarRsc = null;
 
@@ -176,6 +234,23 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
 
     private Date daaProductDateTime = null; // used for the query in the
                                             // DAARadar table
+=======
+    /** DPA top-of-hour datetime */
+    private Date dpaDate = null;
+
+    /** DAA top-of-hour datetime */
+    private Date daaDate = null;
+
+    /**
+     * Time used for the queries in the DPARadar and DPAAdapt tables
+     */
+    private Date dpaProductDateTime = null;
+
+    /**
+     * Time used for the query in the DAARadar table
+     */
+    private Date daaProductDateTime = null;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /** Popup displayed flag */
     private boolean popupOpen = false;
@@ -184,7 +259,11 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
 
     /**
      * Constructor.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param parentShell
      *            The parent shell
      * @param radId
@@ -261,7 +340,11 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
 
     /**
      * Create the control menu
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param menuBar
      *            The menubar
      */
@@ -311,7 +394,12 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
         try {
             ignoreRadarSP = radarDataManager.getIgnoreRadarSP(radId, dpaDate);
         } catch (VizException e) {
+<<<<<<< HEAD
             System.err.println("Error getting Ignore SP Radar Flag from IHFS");
+=======
+            statusHandler.error("Error getting Ignore SP Radar Flag from IHFS",
+                    e);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         MenuItem ignoreRadarSPMI = new MenuItem(optionsMenu, SWT.CHECK);
         ignoreRadarSPMI.setText("Ignore Single Pol Radar Product");
@@ -326,12 +414,21 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
                     int status = RadarDataManager.getInstance()
                             .updateIgnoreRadarSP(radId, dpaDate, ignoreRadarSP);
                     if (status == 0) {
+<<<<<<< HEAD
                         System.err
                                 .println("Update of Ignore SP field not successful");
                     }
                 } catch (VizException e) {
                     System.err
                             .println("Error updating ignore SP radar flag in IHFS");
+=======
+                        statusHandler.error(
+                                "Update of Ignore SP field not successful");
+                    }
+                } catch (VizException e) {
+                    statusHandler.error(
+                            "Error updating ignore SP radar flag in IHFS", e);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
 
                 for (IDisplayPane pane : getDisplayPanes()) {
@@ -350,7 +447,12 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
         try {
             ignoreRadarDP = radarDataManager.getIgnoreRadarDP(radId, daaDate);
         } catch (VizException e) {
+<<<<<<< HEAD
             System.err.println("Error getting Ignore DP Radar Flag from IHFS");
+=======
+            statusHandler.error("Error getting Ignore DP Radar Flag from IHFS",
+                    e);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         MenuItem ignoreRadarDPMI = new MenuItem(optionsMenu, SWT.CHECK);
         ignoreRadarDPMI.setText("Ignore Dual Pol Radar Product");
@@ -365,12 +467,21 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
                     int status = RadarDataManager.getInstance()
                             .updateIgnoreRadarDP(radId, daaDate, ignoreRadarDP);
                     if (status == 0) {
+<<<<<<< HEAD
                         System.err
                                 .println("Update of Ignore DP field not successful");
                     }
                 } catch (VizException e) {
                     System.err
                             .println("Error updating ignore DP radar flag in IHFS");
+=======
+                        statusHandler.error(
+                                "Update of Ignore DP field not successful");
+                    }
+                } catch (VizException e) {
+                    statusHandler.error(
+                            "Error updating ignore DP radar flag in IHFS", e);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
 
                 for (IDisplayPane pane : getDisplayPanes()) {
@@ -391,8 +502,13 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
             @Override
             public void widgetSelected(SelectionEvent event) {
                 DisplayDlg dlg = new DisplayDlg(shell, radId,
+<<<<<<< HEAD
                         dpaProductDateTime, ((MenuItem) event.getSource())
                                 .getText());
+=======
+                        dpaProductDateTime,
+                        ((MenuItem) event.getSource()).getText());
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 dlg.open();
             }
         });
@@ -412,7 +528,11 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
 
     /**
      * Create the overlays menu
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param menuBar
      *            The MenuBar
      */
@@ -465,7 +585,11 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
         });
 
         // Basin Boundaries menu item
+<<<<<<< HEAD
         basinBoundariesMI = new MenuItem(overlayMenu, SWT.CHECK);
+=======
+        MenuItem basinBoundariesMI = new MenuItem(overlayMenu, SWT.CHECK);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         basinBoundariesMI.setText("Basin Boundaries");
         basinBoundariesMI.addSelectionListener(new SelectionAdapter() {
             @Override
@@ -507,7 +631,11 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
 
     /**
      * Create the 4 panel display
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param mainComp
      *            The main composite of the dialog
      */
@@ -524,7 +652,11 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
 
     /**
      * Create the labels along the bottom
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param mainComp
      *            The main composite
      */
@@ -537,13 +669,19 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
 
         Label radarLbl = new Label(labelComp, SWT.LEAD | SWT.BORDER);
         radarLbl.setText("  Radar: " + radId + "  ");
+<<<<<<< HEAD
         radarLbl.setBackground(Display.getDefault().getSystemColor(
                 SWT.COLOR_WIDGET_BACKGROUND));
+=======
+        radarLbl.setBackground(Display.getDefault()
+                .getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         Date currentDate = MPEDisplayManager.getCurrent().getCurrentEditDate();
         Label dateLbl = new Label(labelComp, SWT.LEAD | SWT.BORDER);
         dateLbl.setText("  "
                 + MPEDateFormatter.format_MMM_dd_yyyy_HH(currentDate) + "z  ");
+<<<<<<< HEAD
         dateLbl.setBackground(Display.getDefault().getSystemColor(
                 SWT.COLOR_WIDGET_BACKGROUND));
 
@@ -551,22 +689,44 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
         biasLbl.setText("  Bias Value: " + biasValue + "  ");
         biasLbl.setBackground(Display.getDefault().getSystemColor(
                 SWT.COLOR_WIDGET_BACKGROUND));
+=======
+        dateLbl.setBackground(Display.getDefault()
+                .getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
+
+        biasLbl = new Label(labelComp, SWT.LEAD | SWT.BORDER);
+        biasLbl.setText("  Bias Value: " + biasValue + "  ");
+        biasLbl.setBackground(Display.getDefault()
+                .getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
      * Initialize the maps.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param comp
      *            The composite to hold the 4 panels
      */
     private void initializeMaps() {
         AppsDefaults appsDefaults = AppsDefaults.getInstance();
         RadarDataManager radarManager = RadarDataManager.getInstance();
+<<<<<<< HEAD
         File defaultBundle = PathManagerFactory.getPathManager().getStaticFile(
                 BUNDLE_LOC);
         try {
             LoadPerspectiveHandler.loadTo(this,
                     Bundle.unmarshalBundle(defaultBundle, getSubstitutions()));
+=======
+        File defaultBundle = PathManagerFactory.getPathManager()
+                .getStaticFile(BUNDLE_LOC);
+        try {
+            new BundleLoader(this,
+                    Bundle.unmarshalBundle(defaultBundle, getSubstitutions()))
+                            .run();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             IDisplayPane[] panes = getDisplayPanes();
 
@@ -603,14 +763,25 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
             String daaDirname = appsDefaults.getToken(DAA_GRID_DIR_TOKEN);
 
             DPAFile daaFile = new DPAFile(daaDirname + "/" + daaFilename);
+<<<<<<< HEAD
             daaFile.setBiasValue(1.00); // probably not needed
+=======
+
+            // probably not needed
+            daaFile.setBiasValue(1.00);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             // Get the Radar Coverage Data
             String radCovFilename = "misbin." + radId;
             String radCovDirname = appsDefaults
                     .getToken(RADAR_COVERAGE_DIR_TOKEN);
+<<<<<<< HEAD
             RadarCoverageFile radCovFile = new RadarCoverageFile(radCovDirname
                     + "/" + radCovFilename);
+=======
+            RadarCoverageFile radCovFile = new RadarCoverageFile(
+                    radCovDirname + "/" + radCovFilename);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             // Pane 0 (SP radar display)
             //
@@ -638,8 +809,13 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
             gageResourceProperties.setSystemResource(false);
             gageResourceProperties.setVisible(false);
             gageResourceProperties.setResource(gageRsc);
+<<<<<<< HEAD
             panes[0].getDescriptor().getResourceList()
                     .add(gageRsc, gageResourceProperties);
+=======
+            panes[0].getDescriptor().getResourceList().add(gageRsc,
+                    gageResourceProperties);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             // Pane 1 (DP radar display)
 
@@ -647,8 +823,13 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
                     SingleSiteRadarType.RAW_DP_RADAR, ngrd);
 
             panes[1].getDescriptor().getResourceList().add(rawDPRadarRsc);
+<<<<<<< HEAD
             panes[1].getDescriptor().getResourceList()
                     .add(gageRsc, gageResourceProperties);
+=======
+            panes[1].getDescriptor().getResourceList().add(gageRsc,
+                    gageResourceProperties);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             // Pane 2 (MFB corrected SP radar display)
 
@@ -657,6 +838,7 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
                     ngrd);
 
             panes[2].getDescriptor().getResourceList().add(biasRadarRsc);
+<<<<<<< HEAD
             panes[2].getDescriptor().getResourceList()
                     .add(gageRsc, gageResourceProperties);
 
@@ -668,6 +850,19 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
             panes[3].getDescriptor().getResourceList().add(misbinRadarRsc);
             panes[3].getDescriptor().getResourceList()
                     .add(gageRsc, gageResourceProperties);
+=======
+            panes[2].getDescriptor().getResourceList().add(gageRsc,
+                    gageResourceProperties);
+
+            // Pane 3 (radar coverage map display)
+
+            RadarCoverageResource misbinRadarRsc = new RadarCoverageResource(
+                    radCovFile, radCovColorSet, radId, ngrd);
+
+            panes[3].getDescriptor().getResourceList().add(misbinRadarRsc);
+            panes[3].getDescriptor().getResourceList().add(gageRsc,
+                    gageResourceProperties);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             initOverlays();
 
@@ -702,7 +897,11 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
      * @return
      */
     private Map<String, String> getSubstitutions() {
+<<<<<<< HEAD
         Map<String, String> subs = new HashMap<String, String>();
+=======
+        Map<String, String> subs = new HashMap<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         RadarDataManager rdm = RadarDataManager.getInstance();
         double[] latlon = rdm.getLatLon(radId);
         subs.put("mapCenter", latlon[0] + " " + latlon[1] + " 0.0");
@@ -712,7 +911,11 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
     /**
      * Toggle the overlays off/on. The mapName in the bundle (resource name)
      * must be equal to the text of the menu.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param mi
      *            The menuItem selected
      */
@@ -748,7 +951,11 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
 
     /**
      * Sets the initial state of the overlay menus.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param rsc
      */
     private void setOverlayMenu(AbstractVizResource<?, ?> rsc) {
@@ -771,7 +978,11 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
 
     /**
      * Create the Location Data popup.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param e
      *            The MouseEvent for the click
      */
@@ -871,7 +1082,11 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
 
     /**
      * Show the popup dialog.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param text
      *            The text to display
      */
@@ -917,13 +1132,21 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
 
     /**
      * Get the bias value used.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param radId
      *            The Radar Id
      */
     private String getBiasValue(String radId) {
+<<<<<<< HEAD
         MPERadarData radarData = MPEDataManager
                 .getInstance()
+=======
+        MPERadarData radarData = MPEDataManager.getInstance()
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 .readSPRadarData(
                         MPEDisplayManager.getCurrent().getCurrentEditDate())
                 .get(radId);
@@ -934,6 +1157,7 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
         return paneManager.getMouseManager();
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -942,12 +1166,15 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
      * .raytheon.uf.viz.core.rsc.IInputHandler,
      * com.raytheon.uf.viz.core.rsc.IInputHandler.InputPriority)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void registerMouseHandler(IInputHandler handler,
             InputPriority priority) {
         paneManager.registerMouseHandler(handler, priority);
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -955,11 +1182,14 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
      * com.raytheon.uf.viz.core.IDisplayPaneContainer#registerMouseHandler(com
      * .raytheon.uf.viz.core.rsc.IInputHandler)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void registerMouseHandler(IInputHandler handler) {
         paneManager.registerMouseHandler(handler);
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -967,21 +1197,27 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
      * com.raytheon.uf.viz.core.IDisplayPaneContainer#unregisterMouseHandler
      * (com.raytheon.uf.viz.core.rsc.IInputHandler)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void unregisterMouseHandler(IInputHandler handler) {
         paneManager.unregisterMouseHandler(handler);
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
      * @see com.raytheon.uf.viz.core.IDisplayPaneContainer#getLoopProperties()
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public LoopProperties getLoopProperties() {
         return loopProps;
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -989,6 +1225,8 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
      * com.raytheon.uf.viz.core.IDisplayPaneContainer#setLoopProperties(com.
      * raytheon.uf.viz.core.datastructure.LoopProperties)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void setLoopProperties(LoopProperties loopProperties) {
         loopProps = loopProperties;
@@ -999,6 +1237,7 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
         return paneManager.addPane(renderableDisplay);
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -1006,6 +1245,8 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
      * com.raytheon.uf.viz.core.IDisplayPaneContainer#translateClick(double,
      * double)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public Coordinate translateClick(double x, double y) {
         IDisplayPane pane = getActiveDisplayPane();
@@ -1013,7 +1254,11 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
         double[] world = pane.screenToGrid(x, y, 0);
         IExtent extent = pane.getRenderableDisplay().getExtent();
         // Verify grid space is within the extent, otherwiser return null
+<<<<<<< HEAD
         if (world == null || extent.contains(world) == false) {
+=======
+        if (world == null || !extent.contains(world)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return null;
         }
         // use descriptor to convert pixel world to CRS world space
@@ -1025,6 +1270,7 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
         return new Coordinate(world[0], world[1], world[2]);
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -1032,61 +1278,81 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
      * com.raytheon.uf.viz.core.IDisplayPaneContainer#translateInverseClick(
      * org.locationtech.jts.geom.Coordinate)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public double[] translateInverseClick(Coordinate c) {
         if (c == null) {
             return null;
         }
         IDisplayPane pane = getActiveDisplayPane();
+<<<<<<< HEAD
         double[] grid = pane.getDescriptor().worldToPixel(
                 new double[] { c.x, c.y, c.z });
+=======
+        double[] grid = pane.getDescriptor()
+                .worldToPixel(new double[] { c.x, c.y, c.z });
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if (grid == null) {
             return null;
         }
         return pane.gridToScreen(grid);
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
      * @see com.raytheon.uf.viz.core.IDisplayPaneContainer#getDisplayPanes()
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public IDisplayPane[] getDisplayPanes() {
         return paneManager.getDisplayPanes();
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
      * @see com.raytheon.uf.viz.core.IDisplayPaneContainer#refresh()
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void refresh() {
         paneManager.refresh();
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
      * @see
      * com.raytheon.uf.viz.core.IDisplayPaneContainer#getActiveDisplayPane()
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public IDisplayPane getActiveDisplayPane() {
         return paneManager.getActiveDisplayPane();
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
      * @see com.raytheon.viz.ui.editor.IMultiPaneEditor#getNumberofPanes()
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public int getNumberofPanes() {
         return paneManager.getNumberofPanes();
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -1094,11 +1360,14 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
      * com.raytheon.viz.ui.editor.IMultiPaneEditor#setSelectedPane(java.lang
      * .String, com.raytheon.uf.viz.core.IDisplayPane)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void setSelectedPane(String action, IDisplayPane pane) {
         paneManager.setSelectedPane(action, pane);
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -1106,11 +1375,14 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
      * com.raytheon.viz.ui.editor.IMultiPaneEditor#getSelectedPane(java.lang
      * .String)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public IDisplayPane getSelectedPane(String action) {
         return paneManager.getSelectedPane(action);
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -1118,11 +1390,14 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
      * com.raytheon.viz.ui.editor.IMultiPaneEditor#getSelectedPanes(java.lang
      * .String)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public IDisplayPane[] getSelectedPanes(String action) {
         return paneManager.getSelectedPanes(action);
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -1130,11 +1405,14 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
      * com.raytheon.viz.ui.editor.IMultiPaneEditor#isSelectedPane(java.lang.
      * String, com.raytheon.uf.viz.core.IDisplayPane)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public boolean isSelectedPane(String action, IDisplayPane pane) {
         return paneManager.isSelectedPane(action, pane);
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -1142,12 +1420,15 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
      * com.raytheon.viz.ui.editor.IMultiPaneEditor#addSelectedPaneChangedListener
      * (com.raytheon.viz.ui.editor.ISelectedPanesChangedListener)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void addSelectedPaneChangedListener(
             ISelectedPanesChangedListener listener) {
         paneManager.addSelectedPaneChangedListener(listener);
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -1155,12 +1436,15 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
      * com.raytheon.viz.ui.editor.IMultiPaneEditor#removeSelectedPaneChangedListener
      * (com.raytheon.viz.ui.editor.ISelectedPanesChangedListener)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void removeSelectedPaneChangedListener(
             ISelectedPanesChangedListener listener) {
         paneManager.removeSelectedPaneChangedListener(listener);
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -1168,11 +1452,14 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
      * com.raytheon.viz.ui.editor.IMultiPaneEditor#removePane(com.raytheon.uf
      * .viz.core.IDisplayPane)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void removePane(IDisplayPane pane) {
         paneManager.removePane(pane);
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -1180,11 +1467,14 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
      * com.raytheon.viz.ui.editor.IMultiPaneEditor#hidePane(com.raytheon.uf.
      * viz.core.IDisplayPane)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void hidePane(IDisplayPane pane) {
         paneManager.hidePane(pane);
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -1192,31 +1482,40 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
      * com.raytheon.viz.ui.editor.IMultiPaneEditor#showPane(com.raytheon.uf.
      * viz.core.IDisplayPane)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void showPane(IDisplayPane pane) {
         paneManager.showPane(pane);
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
      * @see com.raytheon.viz.ui.editor.IMultiPaneEditor#displayedPaneCount()
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public int displayedPaneCount() {
         return paneManager.displayedPaneCount();
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
      * @see com.raytheon.viz.ui.editor.IMultiPaneEditor#clear()
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void clear() {
         paneManager.clear();
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -1224,12 +1523,15 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
      * addRenderableDisplayChangedListener
      * (com.raytheon.uf.viz.core.IRenderableDisplayChangedListener)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void addRenderableDisplayChangedListener(
             IRenderableDisplayChangedListener displayChangedListener) {
 
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -1237,12 +1539,15 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
      * removeRenderableDisplayChangedListener
      * (com.raytheon.uf.viz.core.IRenderableDisplayChangedListener)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void removeRenderableDisplayChangedListener(
             IRenderableDisplayChangedListener displayChangedListener) {
 
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -1253,9 +1558,44 @@ public class ReviewHourlyRadarDlg extends CaveSWTDialog implements
      * com.raytheon.uf.viz
      * .core.IRenderableDisplayChangedListener.DisplayChangeType)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void notifyRenderableDisplayChangedListeners(IDisplayPane pane,
             IRenderableDisplay display, DisplayChangeType type) {
 
     }
+<<<<<<< HEAD
+=======
+
+    @Override
+    public List<IPane> getPanes() {
+        return paneManager.getPanes();
+    }
+
+    @Override
+    public IPane getActivePane() {
+        return paneManager.getActivePane();
+    }
+
+    @Override
+    public List<IDisplayPane> getCanvasesCompatibleWithActive() {
+        return paneManager.getCanvasesCompatibleWithActive();
+    }
+
+    @Override
+    public IDisplayPane[] getCanvases(CanvasType type) {
+        return paneManager.getCanvases(type);
+    }
+
+    @Override
+    public boolean isHorizontalLayout() {
+        return paneManager.isHorizontalLayout();
+    }
+
+    @Override
+    public void setHorizontalLayout(boolean horizontalLayout) {
+        paneManager.setHorizontalLayout(horizontalLayout);
+    }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

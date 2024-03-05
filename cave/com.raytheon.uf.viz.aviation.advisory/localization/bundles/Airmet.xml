@@ -41,7 +41,7 @@
                         <dataAdapter xsi:type="airmetDataAdapter"
                             hazardType="${hazardType}" />
                         <binOffset posOffset="20400"
-                            negOffset="1200" virtualOffset="-7200" />
+                            negOffset="1200" virtualOffset="-10800" />
                         <metadataMap>
                             <mapping key="pluginName">
                                 <constraint constraintValue="airmet"

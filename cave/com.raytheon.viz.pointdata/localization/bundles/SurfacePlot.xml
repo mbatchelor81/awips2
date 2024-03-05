@@ -43,7 +43,11 @@
                                 isBlinking="false" isMapLayer="false"
                                 isHoverOn="false" isVisible="true" />
                             <resourceData xsi:type="plotResourceData"
+<<<<<<< HEAD
                                 plotSource="METAR/Maritime"
+=======
+                                plotSource="METAR/Maritime/LDAD"
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                 plotModelFile="stdObsDesign.svg"
                                 spiFile="basemaps/MTR.spi"
                                 isUpdatingOnMetadataOnly="true"
@@ -68,7 +72,11 @@
                                 isBlinking="false" isMapLayer="false"
                                 isHoverOn="false" isVisible="true" />
                             <resourceData xsi:type="plotResourceData"
+<<<<<<< HEAD
                                 plotSource="METAR/Maritime"
+=======
+                                plotSource="METAR/Maritime/LDAD"
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                 plotModelFile="maritimeDesign.svg"
                                 isUpdatingOnMetadataOnly="true"
                                 retrieveData="false"
@@ -89,9 +97,39 @@
                                 </metadataMap>
                             </resourceData>
                         </resource>
+<<<<<<< HEAD
+=======
+                        <resource>
+                            <loadProperties
+                                loadWithoutData="true" />
+                            <properties isSystemResource="false"
+                                isBlinking="false" isMapLayer="false"
+                                isHoverOn="false" isVisible="true" />
+                            <resourceData xsi:type="plotResourceData"
+                                plotSource="METAR/Maritime/LDAD"
+                                plotModelFile="ldadMesoDesign.svg"
+                                isUpdatingOnMetadataOnly="true"
+                                retrieveData="false"
+                                isRequeryNecessaryOnTimeMatch="true">
+                                <binOffset posOffset="1800"
+                                    negOffset="1800" virtualOffset="0" />
+                                <metadataMap>
+                                    <mapping key="pluginName">
+                                        <constraint
+                                            constraintValue="ldadmesonet"
+                                            constraintType="EQUALS" />
+                                    </mapping>
+                                </metadataMap>
+                            </resourceData>
+                        </resource>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     </resourceData>
                 </resource>
             </descriptor>
         </displays>
     </displayList>
+<<<<<<< HEAD
 </bundle>
+=======
+</bundle>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

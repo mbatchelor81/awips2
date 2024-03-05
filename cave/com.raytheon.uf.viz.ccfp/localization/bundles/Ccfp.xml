@@ -88,26 +88,6 @@
                         </metadataMap>
                     </resourceData>
                 </resource>
-                <resource>
-                    <loadProperties loadWithoutData="false">
-                        <capabilities>
-                            <capability xsi:type="colorableCapability"
-                                colorAsString="#ff0000" />
-                        </capabilities>
-                    </loadProperties>
-                    <resourceData xsi:type="ccfpResourceData"
-                        isUpdatingOnMetadataOnly="false"
-                        isRequeryNecessaryOnTimeMatch="true"
-                        retrieveData="true" coverageFilter="1"
-                        validDuration="${validDuration}" displayText="false">
-                        <metadataMap>
-                            <mapping key="pluginName">
-                                <constraint constraintValue="ccfp"
-                                    constraintType="EQUALS" />
-                            </mapping>
-                        </metadataMap>
-                    </resourceData>
-                </resource>
             </descriptor>
         </displays>
     </displayList>

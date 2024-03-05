@@ -31,7 +31,12 @@ import com.raytheon.viz.pointdata.IPlotModelFactory;
  *  04/2012      #615        S. Gurung   Initial Creation.
  *  04/2012      #606        Greg Hull
  *  12/10/2019   72280       K Sunil     Moved from NCP's gov.noaa.nws.ncep.viz.rsc.plotdata to D2D
+<<<<<<< HEAD
  *
+=======
+ *  09/15/2021   95459       smanoj      Conditional Filter AND/OR update
+ *  
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  *
  * @author sgurung
@@ -78,6 +83,10 @@ public class ConditionalFilter extends AbstractConditionalFilter
             newCfe.setParamName(cfe.getParamName());
             newCfe.setConstraintType(cfe.getConstraintType());
             newCfe.setValue(cfe.getValue());
+<<<<<<< HEAD
+=======
+            newCfe.setConnectValue(cfe.getConnectValue());
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             conditionalFilterElements.add(newCfe);
         }
 
@@ -167,9 +176,14 @@ public class ConditionalFilter extends AbstractConditionalFilter
 
     public String getFilterAsString() {
         StringBuffer cfstr = new StringBuffer();
+<<<<<<< HEAD
 
         for (ConditionalFilterElement cfe : getConditionalFilterElements()) {
             cfstr.append((cfstr.length() != 0 ? " AND " : "") + cfe.toString());
+=======
+        for (ConditionalFilterElement cfe : getConditionalFilterElements()) {
+            cfstr.append(" " + cfe.toString());
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         return cfstr.toString().trim();
     }

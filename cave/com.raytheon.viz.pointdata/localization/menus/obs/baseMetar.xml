@@ -63,6 +63,7 @@
             id="PrecipLine" />
         <contribute xsi:type="bundleItem" file="bundles/MetarPrecipPlot.xml"
             menuText="24hr Precip" id="24HrPrecip">
+<<<<<<< HEAD
             <substitute key="duration" value="24" />
             <substitute key="ptype" value="precip" />
             <substitute key="legend" value="METAR 24hr Precip Accum (in)" />
@@ -92,12 +93,40 @@
             <substitute key="legend" value="METAR 1hr Precip Accum (in)" />
             <substitute key="posOffset" value="1800" />
             <substitute key="negOffset" value="1800" />
+=======
+            <substitute key="legend" value="METAR 24hr Precip Accum (in)" />
+            <substitute key="posOffset" value="0" />
+            <substitute key="negOffset" value="21600" />
+            <substitute key="svg" value="metarPrcp24HrDesign.svg" />
+        </contribute>
+        <contribute xsi:type="bundleItem" file="bundles/MetarPrecipPlot.xml"
+            menuText="6hr Precip" id="6HrPrecip">
+            <substitute key="legend" value="METAR 6hr Precip Accum (in)" />
+            <substitute key="posOffset" value="10800" />
+            <substitute key="negOffset" value="10800" />
+            <substitute key="svg" value="metarPrcp6HrDesign.svg" />
+        </contribute>
+        <contribute xsi:type="bundleItem" file="bundles/MetarPrecipPlot.xml"
+            menuText="3hr Precip" id="3HrPrecip">
+            <substitute key="legend" value="METAR 3hr Precip Accum (in)" />
+            <substitute key="posOffset" value="1800" />
+            <substitute key="negOffset" value="9000" />
+            <substitute key="svg" value="metarPrcp3HrDesign.svg" />
+        </contribute>
+        <contribute xsi:type="bundleItem" file="bundles/MetarPrecipPlot.xml"
+            menuText="1hr Precip" id="1HrPrecip">
+            <substitute key="legend" value="METAR 1hr Precip Accum (in)" />
+            <substitute key="posOffset" value="1800" />
+            <substitute key="negOffset" value="1800" />
+            <substitute key="svg" value="metarPrcp1HrDesign.svg" />
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         </contribute>
         <contribute xsi:type="separator" id="IceAccumSeparator" />
         <contribute xsi:type="titleItem" titleText="------ Ice Accum ------"
             id="IceAccumLine" />
         <contribute xsi:type="bundleItem" file="bundles/MetarPrecipPlot.xml"
             menuText="6hr Ice Accum" id="6HrIceAccum">
+<<<<<<< HEAD
             <substitute key="duration" value="6" />
             <substitute key="ptype" value="iceAccum" />
             <substitute key="legend" value="METAR 6hr Ice Accum (in)" />
@@ -119,6 +148,26 @@
             <substitute key="legend" value="METAR 1hr Ice Accum (in)" />
             <substitute key="posOffset" value="1800" />
             <substitute key="negOffset" value="1800" />
+=======
+            <substitute key="legend" value="METAR 6hr Ice Accum (in)" />
+            <substitute key="posOffset" value="10800" />
+            <substitute key="negOffset" value="10800" />
+            <substitute key="svg" value="metarIce6HrDesign.svg" />
+        </contribute>
+        <contribute xsi:type="bundleItem" file="bundles/MetarPrecipPlot.xml"
+            menuText="3hr Ice Accum" id="3HrIceAccum">
+            <substitute key="legend" value="METAR 3hr Ice Accum (in)" />
+            <substitute key="posOffset" value="1800" />
+            <substitute key="negOffset" value="9000" />
+            <substitute key="svg" value="metarIce3HrDesign.svg" />
+        </contribute>
+        <contribute xsi:type="bundleItem" file="bundles/MetarPrecipPlot.xml"
+            menuText="1hr Ice Accum" id="1HrIceAccum">
+            <substitute key="legend" value="METAR 1hr Ice Accum (in)" />
+            <substitute key="posOffset" value="1800" />
+            <substitute key="negOffset" value="1800" />
+            <substitute key="svg" value="metarIce1HrDesign.svg" />
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         </contribute>
         <contribute xsi:type="separator" id="msasSeparator" />
         <contribute xsi:type="titleItem" titleText="------ MSAS Obs------"

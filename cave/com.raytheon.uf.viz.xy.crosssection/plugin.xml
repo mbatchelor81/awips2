@@ -15,9 +15,16 @@
    <extension
          point="com.raytheon.uf.viz.core.descriptor">
       <descriptor
+<<<<<<< HEAD
       		name="CrossSectionDescriptor"
             class="com.raytheon.uf.viz.xy.crosssection.display.CrossSectionDescriptor"
             editor="com.raytheon.uf.viz.xy.crosssection.CrossSectionEditor">
+=======
+            class="com.raytheon.uf.viz.xy.crosssection.display.CrossSectionDescriptor"
+            editor="com.raytheon.uf.viz.xy.crosssection.CrossSectionEditor"
+            name="CrossSectionDescriptor"
+            paneCreator="com.raytheon.uf.viz.xy.XyPaneCreator">
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
       </descriptor>
    </extension>
    <extension

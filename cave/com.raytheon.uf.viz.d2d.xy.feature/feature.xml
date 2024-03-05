@@ -61,4 +61,13 @@
          install-size="0"
          version="0.0.0"/>
 
+<<<<<<< HEAD
+=======
+   <plugin
+         id="com.raytheon.uf.viz.profiler"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 </feature>

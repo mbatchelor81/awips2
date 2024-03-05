@@ -92,6 +92,10 @@ import com.raytheon.viz.gfe.core.griddata.IGridData;
  *                                  INFO to ERROR
  * Dec 14, 2017  7178     randerso  Code formatting and cleanup
  * Jan 04, 2018  7178     randerso  Changes to support IDataObject. Code cleanup
+<<<<<<< HEAD
+=======
+ * Mar 29, 2021  8380     mapeters  Added {@link #disposeWithoutUnlocking()}
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -103,7 +107,11 @@ public class DbParm extends Parm {
             .getHandler(DbParm.class);
 
     private final IPerformanceStatusHandler perfLog = PerformanceStatus
+<<<<<<< HEAD
             .getHandler("GFE:");
+=======
+            .getHandler("GFE");
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Constructor
@@ -144,7 +152,22 @@ public class DbParm extends Parm {
 
     @Override
     public void dispose() {
+<<<<<<< HEAD
         looseLocks();
+=======
+        disposeInternal(true);
+    }
+
+    @Override
+    public void disposeWithoutUnlocking() {
+        disposeInternal(false);
+    }
+
+    private void disposeInternal(boolean unlock) {
+        if (unlock) {
+            looseLocks();
+        }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         super.dispose();
     }
 
@@ -569,9 +592,15 @@ public class DbParm extends Parm {
         for (int i = 0; i < trs.size(); i++) {
             // ensure we have a lock for the time period
             TimeRange lockTime = new TimeRange();
+<<<<<<< HEAD
             for (int j = 0; j < myLocks.size(); j++) {
                 if (myLocks.get(j).overlaps(trs.get(i))) {
                     lockTime = trs.get(i).intersection(myLocks.get(j));
+=======
+            for (TimeRange myLock : myLocks) {
+                if (myLock.overlaps(trs.get(i))) {
+                    lockTime = trs.get(i).intersection(myLock);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     break;
                 }
             }
@@ -806,21 +835,36 @@ public class DbParm extends Parm {
         }
 
         // Now replace the existing grids with the new ones
+<<<<<<< HEAD
         for (int i = 0; i < notMyLocks.size(); i++) {
             // just get the ones that are covered by "notmylock"
             List<IGridData> tGrids = new ArrayList<>();
             for (int j = 0; j < grids.length; j++) {
                 if (grids[j].getGridTime().overlaps(notMyLocks.get(i))) {
+=======
+        for (TimeRange notMyLock : notMyLocks) {
+            // just get the ones that are covered by "notmylock"
+            List<IGridData> tGrids = new ArrayList<>();
+            for (int j = 0; j < grids.length; j++) {
+                if (grids[j].getGridTime().overlaps(notMyLock)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     tGrids.add(grids[j]);
                     grids[j] = null;
                 }
             }
 
             // insert the grids into the parm's inventory
+<<<<<<< HEAD
             replaceGrids(notMyLocks.get(i), tGrids.toArray(new IGridData[] {}));
 
             // notify parmClients of new grid inventory
             this.sendInvChangedNotification(notMyLocks.get(i));
+=======
+            replaceGrids(notMyLock, tGrids.toArray(new IGridData[] {}));
+
+            // notify parmClients of new grid inventory
+            this.sendInvChangedNotification(notMyLock);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         return true;
@@ -872,9 +916,14 @@ public class DbParm extends Parm {
         }
 
         List<LockRequest> lreq = new ArrayList<>();
+<<<<<<< HEAD
         for (int i = 0; i < timesToUnlock.size(); i++) {
             lreq.add(new LockRequest(getParmID(), timesToUnlock.get(i),
                     LockMode.UNLOCK));
+=======
+        for (TimeRange element : timesToUnlock) {
+            lreq.add(new LockRequest(getParmID(), element, LockMode.UNLOCK));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             requestLock(lreq);
         }
 

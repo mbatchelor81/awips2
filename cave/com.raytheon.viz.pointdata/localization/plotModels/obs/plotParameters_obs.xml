@@ -30,12 +30,27 @@
    <plotParameterDefinition displayName="rawMETAR" displayType="TEXT" param="rawMETAR" sampleValue="R" />
 
    <plotParameterDefinition displayName="windSpeed,windDir,windGust (kts)" displayType="BARB" param="windSpeed,windDir,windGust" sampleValue="6,7,8" unit="kts" />
+<<<<<<< HEAD
 
    <plotParameterDefinition displayName="windBarb" displayType="BARB" param="windSpeed,windDir" sampleValue="16,17" unit="kts" />
 
    <plotParameterDefinition displayName="windDir" displayType="ARROWUV" param="windSpeed,windDir" sampleValue="16,17"  />
 
    <plotParameterDefinition displayName="windGust (kts)" displayType="TEXT" param="windGust" sampleValue="8" unit="kts" />
+=======
+   <plotParameterDefinition displayName="windSpeed,windDir,windGust (mph)" displayType="BARB" param="windSpeed,windDir,windGust" sampleValue="6,7,8" unit="mph" />
+   <plotParameterDefinition displayName="windSpeed,windDir,windGust (m/s)" displayType="BARB" param="windSpeed,windDir,windGust" sampleValue="6,7,8" unit="m/s" />
+
+   <plotParameterDefinition displayName="windBarb (kts)" displayType="BARB" param="windSpeed,windDir" sampleValue="16,17" unit="kts" />
+   <plotParameterDefinition displayName="windBarb (mph)" displayType="BARB" param="windSpeed,windDir" sampleValue="16,17" unit="mph" />
+   <plotParameterDefinition displayName="windBarb (m/s)" displayType="BARB" param="windSpeed,windDir" sampleValue="16,17" unit="m/s" />
+
+   <plotParameterDefinition displayName="windDir" displayType="ARROWUV" param="windSpeed,windDir" sampleValue="16,17"  />
+
+   <plotParameterDefinition displayName="windGust (kts)" displayType="TEXT" param="windGust" format="%02.0f" sampleValue="8" unit="kts" />
+   <plotParameterDefinition displayName="windGust (mph)" displayType="TEXT" param="windGust" format="%02.0f" sampleValue="8" unit="mph" />
+   <plotParameterDefinition displayName="windGust (m/s)" displayType="TEXT" param="windGust" format="%02.0f" sampleValue="8" unit="m/s" />
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
    <plotParameterDefinition displayName="pressChangeChar" displayType="TABLE" lookupTable="press_change_char_lookup.txt" param="pressChangeChar" sampleValue="5" svgClass="weather" />
 
@@ -47,6 +62,11 @@
 
    <plotParameterDefinition displayName="T (°F)" displayType="TEXT" format="%3.0f" param="T" sampleValue="76" unit="°F" />
 
+<<<<<<< HEAD
+=======
+   <plotParameterDefinition displayName="T (°C)" displayType="TEXT" format="%3.0f" param="T" sampleValue="24" unit="°C" />
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    <plotParameterDefinition displayName="seaLevelPress (daPa)" displayType="TEXT" format="%5.0f" param="seaLevelPress" sampleValue="13" trim="2" unit="daPa" />
 
    <plotParameterDefinition displayName="skyCover" displayType="TABLE" functionTable="cloud_select.txt" lookupTable="cloud_chars.txt" param="skyCover" sampleValue="SCT" svgClass="special" />
@@ -61,9 +81,17 @@
 
    <plotParameterDefinition displayName="skyCover-4" index="4" displayType="TABLE" functionTable="cloud_select.txt" lookupTable="cloud_chars2.txt" param="skyCover" sampleValue="SCT" svgClass="special" />
 
+<<<<<<< HEAD
    <plotParameterDefinition displayName="presWeather" displayType="TABLE" lookupTable="wx_symbol_trans.txt" param="presWeather" recursiveLookup="true" sampleValue="0" svgClass="weather" />
 
    <plotParameterDefinition displayName="pkwndSpeed (kts)" displayType="TEXT" format="PK%.0f" param="pkwndSpeed" sampleValue="17" unit="kts" />
+=======
+   <plotParameterDefinition displayName="presWeather" displayType="TABLE" lookupTable="wx_symbol_trans.txt" param="presWeather" recursiveLookup="true" sampleValue="UP" svgClass="weather" />
+
+   <plotParameterDefinition displayName="pkwndSpeed (kts)" displayType="TEXT" format="PK%.0f" param="pkwndSpeed" sampleValue="17" unit="kts" />
+   <plotParameterDefinition displayName="pkwndSpeed (mph)" displayType="TEXT" format="PK%.0f" param="pkwndSpeed" sampleValue="17" unit="mph" />
+   <plotParameterDefinition displayName="pkwndSpeed (m/s)" displayType="TEXT" format="PK%.0f" param="pkwndSpeed" sampleValue="17" unit="m/s" />
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
    <plotParameterDefinition displayName="Marker" displayType="MARKER" param="Marker" sampleValue=" " svgClass="marker" />
 
@@ -71,8 +99,17 @@
 
    <plotParameterDefinition displayName="T24Chg (°F)" displayType="TEXT" format="%3.0f" param="T24Chg" sampleValue="75" unit="°F" />
 
+<<<<<<< HEAD
    <plotParameterDefinition displayName="Dp24Chg (°F)" displayType="TEXT" format="%3.0f" param="Dp24Chg" sampleValue="59" unit="°F" />
 
+=======
+   <plotParameterDefinition displayName="T24Chg (°C)" displayType="TEXT" format="%3.0f" param="T24Chg" sampleValue="24" unit="°C" />
+
+   <plotParameterDefinition displayName="Dp24Chg (°F)" displayType="TEXT" format="%3.0f" param="Dp24Chg" sampleValue="59" unit="°F" />
+
+   <plotParameterDefinition displayName="Dp24Chg (°C)" displayType="TEXT" format="%3.0f" param="Dp24Chg" sampleValue="15" unit="°C" />
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    <plotParameterDefinition displayName="Alt24Chg (daPa)" displayType="TEXT" format="%3.0f" param="Alt24Chg" sampleValue="018" unit="daPa" />
 
    <plotParameterDefinition displayName="Spd24Chg,Dir24Chg (kts)" displayType="ARROWUV" param="Spd24Chg,Dir24Chg" sampleValue="0,1" unit="kts" />
@@ -100,4 +137,22 @@
    <plotParameterDefinition displayName="stationName" displayType="TEXT" param="stationName" sampleValue="0" svgClass="text" />
 
    <plotParameterDefinition displayName="HIWC (°F)" displayType="TEXT" format="%3.0f" param="HIWC" sampleValue="75" unit="°F" />
+<<<<<<< HEAD
+=======
+
+   <plotParameterDefinition displayName="precip1Hour" displayType="RANGE" ptype="precip" duration="1" format="%6.2f" lookupTable="prcp_formats.txt" param="Precip1Hr" sampleValue="0" svgClass="text" unit="in"/>
+   
+   <plotParameterDefinition displayName="Precip3Hr" displayType="RANGE" ptype="precip" duration="3" format="%3.2f" lookupTable="prcp_formats.txt" param="Precip3Hr" sampleValue="0" svgClass="text" isMetarPrcp="true"/>
+	
+   <plotParameterDefinition displayName="Precip6Hr" displayType="RANGE" ptype="precip" duration="6" format="%3.2f" lookupTable="prcp_formats.txt" param="Precip6Hr" sampleValue="0" svgClass="text" />
+	
+   <plotParameterDefinition displayName="Precip24Hr" displayType="RANGE" ptype="precip" duration="24" format="%3.2f" lookupTable="prcp_formats.txt" param="Precip24Hr" sampleValue="0" svgClass="text" unit="in"/>
+
+   <plotParameterDefinition displayName="iceAccum1Hour" displayType="RANGE" ptype="iceAccum" duration="1" format="%6.2f" lookupTable="prcp_formats.txt" param="IceAccum1Hr" sampleValue="0" svgClass="text" unit="in"/>
+   
+   <plotParameterDefinition displayName="iceAccum3Hr" displayType="RANGE" ptype="iceAccum" duration="3" format="%3.2f" lookupTable="prcp_formats.txt" param="IceAccum3Hr" sampleValue="0" svgClass="text" isMetarPrcp="true"/>
+	
+   <plotParameterDefinition displayName="iceAccum6Hr" displayType="RANGE" ptype="iceAccum" duration="6" format="%3.2f" lookupTable="prcp_formats.txt" param="IceAccum6Hr" sampleValue="0" svgClass="text" />
+      
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 </plotParameterDefinitions>

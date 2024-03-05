@@ -118,6 +118,11 @@
       <feature id="com.raytheon.uf.viz.ffmp.feature" version="1.0.0.qualifier"/>
       <feature id="com.raytheon.uf.viz.scan.feature" version="1.0.0.qualifier"/>
       <feature id="com.raytheon.uf.viz.dataplugin.nswrc.feature" version="1.0.0.qualifier"/>
+<<<<<<< HEAD
+=======
+      <feature id="com.raytheon.uf.viz.grid.radar.rsc.feature" version="1.0.0.qualifier"/>
+      <feature id="gov.noaa.nws.ocp.viz.odim.feature" version="1.0.0.qualifier"/>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    </features>
 
    <configurations>

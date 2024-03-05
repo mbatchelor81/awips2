@@ -474,8 +474,13 @@ def validateArgs(args=None, parents=[]):
     # imports required for this method must be here so it can be invoked
     # from gfeClient.py
     ############################################################################
+<<<<<<< HEAD
     from awips import UsageArgumentParser
     from awips.UsageArgumentParser import StoreTimeAction
+=======
+    from ufpy import UsageArgumentParser
+    from ufpy.UsageArgumentParser import StoreTimeAction
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     global DEFAULT_OUTPUT_DIR
     DEFAULT_OUTPUT_DIR = '../products/IMAGE'

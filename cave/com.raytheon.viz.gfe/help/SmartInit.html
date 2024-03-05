@@ -38,7 +38,11 @@ data</a>
 <a href="#CommandLine">Running Smart Initialization from the Command
 Line</a>
 <br>
+<<<<<<< HEAD
 <a href="#Examples">Examples of Complete Smart Initalization Files</a>
+=======
+<a href="#Examples">Examples of Complete Smart Initialization Files</a>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 <br>
 <a href="#Exercises">Exercises</a>
 <p></p>
@@ -118,7 +122,11 @@ that is simliar to:
 <tt>&nbsp;&nbsp;&nbsp; def __init__(self):</tt>
 <br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>derivedFrom</i>Forecaster.__init__(self,
+<<<<<<< HEAD
 "<i>sourceDb</i>", "<i>destDb</i>")</tt>
+=======
+"<i>sourceDb</i>", "<i>destDb</i>"[, forceRecalc=True])</tt>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 </p>
 <p>This is basically defining a new class called "<i>model</i>Forecaster",
 which is derived from "<i>derivedFrom</i>Forecaster". The
@@ -131,7 +139,13 @@ as NAM80, NAM40, NAM12, RUC80, GFS40, gfsLR. The
 destination database is the name of the output
 database, such as NAM12, GFS40, NAM_V. If there is an underscore
 in the destination database, then the format is the
+<<<<<<< HEAD
 modelname_optionaltype.
+=======
+modelname_optionaltype. The forceRecalc flag, if set to True, will overwrite existing previously calculated grids. 
+Normally by default, only those grids that haven't yet been created will be attempted to be calculated. 
+forceRecalc=True is similar to using the -a parameter with <a href="#CommandLine">ifpInit</a>. 
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 </p>
 <p>A complete example of the header is shown below:
 </p>

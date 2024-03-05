@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -74,7 +86,11 @@ import systems.uom.common.USCustomary;
 
 /**
  * Layer for displaying a radar's range rings.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * <pre>
  * SOFTWARE HISTORY
  * Date         Ticket#    Engineer    Description
@@ -86,12 +102,22 @@ import systems.uom.common.USCustomary;
  *  08-13-14    #3467       mapeters    ringDialog notifies this of changes.
  *  05-11-2015  #5070       randerso    Adjust font sizes for dpi scaling
  *  09-08-16    #5871       njensen     Don't recreate unchanged IWireframeShapes
+<<<<<<< HEAD
  * 
  * </pre>
  * 
  * @author ebabin
  */
 
+=======
+ *  Sep 13, 2022 8792       mapeters    Only handle input events in the pane this
+ *                                      layer is in
+ *
+ * </pre>
+ *
+ * @author ebabin
+ */
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 public class RangeRingsLayer extends AbstractMovableToolLayer<RangeRing>
         implements IContextMenuContributor {
 
@@ -163,9 +189,14 @@ public class RangeRingsLayer extends AbstractMovableToolLayer<RangeRing>
         resetRings();
         displayDialog();
         // initialize font for magnification capability
+<<<<<<< HEAD
         labelFont = target.initializeFont(
                 target.getDefaultFont().getFontName(), 10,
                 new Style[] { Style.BOLD });
+=======
+        labelFont = target.initializeFont(target.getDefaultFont().getFontName(),
+                10, new Style[] { Style.BOLD });
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     private void resetRings() {
@@ -173,6 +204,7 @@ public class RangeRingsLayer extends AbstractMovableToolLayer<RangeRing>
     }
 
     public void displayDialog() {
+<<<<<<< HEAD
         VizApp.runAsync(new Runnable() {
 
             @Override
@@ -194,6 +226,24 @@ public class RangeRingsLayer extends AbstractMovableToolLayer<RangeRing>
                 }
             }
 
+=======
+        VizApp.runAsync(() -> {
+            try {
+                Shell shell = PlatformUI.getWorkbench()
+                        .getActiveWorkbenchWindow().getShell();
+                if (ringDialog == null || ringDialog.getReturnCode() != 0) {
+                    ringDialog = new RangeRingDialog(shell, resourceData);
+                    ringDialog.setBlockOnOpen(false);
+                    ringDialog.open();
+                } else {
+                    resourceData.addChangeListener(ringDialog);
+                    ringDialog.open();
+                }
+            } catch (VizException e) {
+                statusHandler.handle(Priority.PROBLEM, e.getLocalizedMessage(),
+                        e);
+            }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         });
     }
 
@@ -253,12 +303,20 @@ public class RangeRingsLayer extends AbstractMovableToolLayer<RangeRing>
                         shape.addLineSegment(coords);
                     }
                     if (label.contains(String.valueOf(i + 1))) {
+<<<<<<< HEAD
                         double[] labelLoc = descriptor
                                 .worldToPixel(new double[] {
                                         coords[LABEL_INDEX].x,
                                         coords[LABEL_INDEX].y });
                         DrawableString string = new DrawableString(radius
                                 + " nm", color);
+=======
+                        double[] labelLoc = descriptor.worldToPixel(
+                                new double[] { coords[LABEL_INDEX].x,
+                                        coords[LABEL_INDEX].y });
+                        DrawableString string = new DrawableString(
+                                radius + " nm", color);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         string.font = labelFont;
                         string.setCoordinates(labelLoc[0], labelLoc[1]);
                         string.horizontalAlignment = HorizontalAlignment.CENTER;
@@ -270,8 +328,13 @@ public class RangeRingsLayer extends AbstractMovableToolLayer<RangeRing>
             target.drawStrings(strings);
             target.drawWireframeShape(shape, color, lineWidth, lineStyle);
             double radius = (MAGIC_CIRCLE_RADIUS * paintProps.getZoomLevel());
+<<<<<<< HEAD
             double[] centerPixel = descriptor.worldToPixel(new double[] {
                     center.x, center.y });
+=======
+            double[] centerPixel = descriptor
+                    .worldToPixel(new double[] { center.x, center.y });
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             DrawableCircle circle = new DrawableCircle();
             circle.setCoordinates(centerPixel[0], centerPixel[1]);
             circle.radius = radius;
@@ -310,7 +373,11 @@ public class RangeRingsLayer extends AbstractMovableToolLayer<RangeRing>
 
     @Override
     public void addContextMenuItems(IMenuManager menuManager, int x, int y) {
+<<<<<<< HEAD
         if (isEditable() && selectedObject != null) {
+=======
+        if (isInteractive() && selectedObject != null) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             menuManager.add(moveElementAction);
         }
     }
@@ -339,10 +406,17 @@ public class RangeRingsLayer extends AbstractMovableToolLayer<RangeRing>
         if (ring.getType() == RangeRingType.FIXED) {
             return false;
         }
+<<<<<<< HEAD
         double[] pixelLoc = container.translateInverseClick(ring
                 .getCenterCoordinate());
         Point pixelPoint = gf.createPoint(new Coordinate(pixelLoc[0],
                 pixelLoc[1]));
+=======
+        double[] pixelLoc = container
+                .translateInverseClick(ring.getCenterCoordinate());
+        Point pixelPoint = gf
+                .createPoint(new Coordinate(pixelLoc[0], pixelLoc[1]));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         Point clickPoint = gf.createPoint(mouseLoc);
         if (pixelPoint.isWithinDistance(clickPoint, MAGIC_CLICK_DISTANCE)) {
             return true;

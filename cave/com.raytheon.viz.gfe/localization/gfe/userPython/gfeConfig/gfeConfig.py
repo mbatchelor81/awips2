@@ -1,26 +1,42 @@
 ##
 # This software was developed and / or modified by Raytheon Company,
 # pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
 # 
+=======
+#
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # U.S. EXPORT CONTROLLED TECHNICAL DATA
 # This software product contains export-restricted data whose
 # export/transfer/disclosure is restricted by U.S. law. Dissemination
 # to non-U.S. persons whether in the United States or abroad requires
 # an export license or other authorization.
+<<<<<<< HEAD
 # 
+=======
+#
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # Contractor Name:        Raytheon Company
 # Contractor Address:     6825 Pine Street, Suite 340
 #                         Mail Stop B8
 #                         Omaha, NE 68106
 #                         402.291.0100
+<<<<<<< HEAD
 # 
+=======
+#
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # See the AWIPS II Master Rights File ("Master Rights File.pdf") for
 # further licensing information.
 ##
 
 #------*-python-*-------------------------------------------------------------
 # Config file for the GFE (Graphical Forecast Editor).
+<<<<<<< HEAD
 #    
+=======
+#
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # SOFTWARE HISTORY
 #
 # Date          Ticket#  Engineer  Description
@@ -39,6 +55,15 @@
 # Aug 22, 2019  21020    tlefebvre Tropical Wind W/W Recommender Software
 # Oct 24, 2019  DCS21768 psantos   NWPS v1.3: add default color tables for six
 #                                  water level parameters
+<<<<<<< HEAD
+=======
+# Jan 14, 2021  DCS22296 dkingfiel Remove FF.A and FA.A
+# Apr 9,  2021  21079    kmckellery Added missing png images script
+# May 10, 2021  DCS22297 dkingfiel Remove RB.Y, SI.Y, and SW.Y
+# May 18, 2021  DCS22297 dkingfiel Remove unused/non-working configuration entries
+# Apr 26, 2023  2033896  jkelmer   Replaced xterm call for IdM phase II compatability
+#
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ##
 
 ##
@@ -234,6 +259,7 @@ PublishTimes = ['Today', 'Tonight', 'Tomorrow', 'Tomorrow Night', 'Day 3',
 # Map Background Configuration
 #------------------------------------------------------------------------
 # Defines the initial loaded set of map backgrounds.  The name of each
+<<<<<<< HEAD
 # background should match the name (without ".xml") of a map file in the 
 # CAVE/Bundles/maps directory under the Localization perspective.
 MapBackgrounds_default = ['States','CWA']
@@ -265,6 +291,12 @@ MapBackgrounds_default = ['States','CWA']
 #States_fontOffset = 0
 
 
+=======
+# background should match the name (without ".xml") of a map file in the
+# CAVE/Bundles/maps directory under the Localization perspective.
+MapBackgrounds_default = ['States','CWA']
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #------------------------------------------------------------------------
 # Graphics Hardware Configurations
 #------------------------------------------------------------------------
@@ -276,11 +308,19 @@ MapBackgrounds_default = ['States','CWA']
 # changed to increase/decrease the size of the text on the GFE.  The
 # fonts are in ascending sizes.  A better way to override the fonts
 # is to use the config items under UI Configuration.
+<<<<<<< HEAD
 # A valid font data representation is a string of the form fontname-style-height 
 # where fontname is the name of a font, 
 #       style is a font style (one of "regular", "bold", "italic", or "bold italic") 
 #       height is an integer representing the font height. 
 # Example: Times New Roman-bold-36. 
+=======
+# A valid font data representation is a string of the form fontname-style-height
+# where fontname is the name of a font,
+#       style is a font style (one of "regular", "bold", "italic", or "bold italic")
+#       height is an integer representing the font height.
+# Example: Times New Roman-bold-36.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 TextFont0 =  "DejaVu Sans Mono-regular-9"
 TextFont1 =  "DejaVu Sans Mono-regular-9"
 TextFont2 =  "DejaVu Sans Mono-bold-12"
@@ -942,8 +982,13 @@ WindFormat = "ddff"
 # Format of the entry is parmName_defaultValue, or parmName_level_defaultValue
 # for non-surface based SCALAR, WEATHER, or DISCRETE elements. For VECTOR,
 # the format is slightly different: parmName_magDefaultValue has the
+<<<<<<< HEAD
 # magnitude, and parmName_dirDefaultValue has the direction in degrees. 
 # A decimal point is required for SCALAR and VECTOR, strings are required for 
+=======
+# magnitude, and parmName_dirDefaultValue has the direction in degrees.
+# A decimal point is required for SCALAR and VECTOR, strings are required for
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # WEATHER and DISCRETE.
 #
 #T_defaultValue = 32.0
@@ -977,15 +1022,22 @@ Wx_commonValues = [ \
 
 Hazards_commonValues = [ \
     "Watches|Fire Weather|FW.A",
+<<<<<<< HEAD
     "Watches|Hydrology|FF.A",
     "Watches|Hydrology|FA.A",
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "Watches|Coastal Flooding|CF.A",
     "Watches|Coastal Flooding|LS.A",
     "Watches|Marine|GL.A",
     "Watches|Marine|HF.A",
     "Watches|Marine|SE.A",
     "Watches|Marine|SR.A",
+<<<<<<< HEAD
     "Watches|Marine|UP.A", 
+=======
+    "Watches|Marine|UP.A",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "Watches|Non-Precipitation|EH.A",
     "Watches|Non-Precipitation|FZ.A",
     "Watches|Non-Precipitation|HW.A",
@@ -1018,10 +1070,14 @@ Hazards_commonValues = [ \
     "Advisories|Marine|UP.Y",
     "Advisories|Marine|LO.Y",
     "Advisories|Marine|SC.Y",
+<<<<<<< HEAD
     "Advisories|Marine|SW.Y",
     "Advisories|Marine|BW.Y",
     "Advisories|Marine|RB.Y",
     "Advisories|Marine|SI.Y",
+=======
+    "Advisories|Marine|BW.Y",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "Advisories|Marine|MF.Y",
     "Advisories|Marine|MS.Y",
     "Advisories|Marine|MH.Y",
@@ -1612,11 +1668,19 @@ TemporalEditorOverlay = yes
 # or relative mode which is defined by "yes" or "no".
 TemporalEditorAbsoluteEditMode = no
 
+<<<<<<< HEAD
 # Initial statistics mode for temporal editor range statistics dialog. 
 # Choices are "ABSOLUTE", # "MODERATED", or "STANDARD_DEVIATION".
 TemporalEditorStatisticsMode = "ABSOLUTE"
 # Initial minimum and maximum values for scales on temporal editor range
 # statistics dialog in moderated and standard deviation operation modes 
+=======
+# Initial statistics mode for temporal editor range statistics dialog.
+# Choices are "ABSOLUTE", # "MODERATED", or "STANDARD_DEVIATION".
+TemporalEditorStatisticsMode = "ABSOLUTE"
+# Initial minimum and maximum values for scales on temporal editor range
+# statistics dialog in moderated and standard deviation operation modes
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # (dialog is not shown in absolute mode). Do NOT include a decimal point
 # for moderated mode values, you MUST include a decimal point for standard
 # deviation values.
@@ -1882,6 +1946,7 @@ Scripts = [
       "-d {productDB} ",
 
     "Make and Send HTI:" +
+<<<<<<< HEAD
      "xterm -e ssh pv2 /awips2/GFESuite/hti/bin/make_hti.sh {site}",
      
     "Official Grids to LDAD: " +
@@ -1889,6 +1954,15 @@ Scripts = [
     " /data/fxa/LDAD/ifp/Official/.incoming; " +
     "mv /data/fxa/LDAD/ifp/Official/.incoming /data/fxa/LDAD/ifp/Official/{ztime} &"
     
+=======
+     "nohup ssh pv2 /awips2/GFESuite/hti/bin/make_hti.sh {site}",
+
+    "Official Grids to LDAD: " +
+    "ifpAG -h {host} -r {port} -o - -d {productDB} | gzip -9 > " +
+    " /data/fxa/LDAD/ifp/Official/.incoming; " +
+    "mv /data/fxa/LDAD/ifp/Official/.incoming /data/fxa/LDAD/ifp/Official/{ztime} &",
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "Png Images...:" +
     "ifpIMAGE " +\
     "-h {host} -c {entry:ConfigFile:imageTest1} -o {prddir}/IMAGE",
@@ -1898,7 +1972,11 @@ Scripts = [
 
     "Send Point and Click Grids to Consolidated Web Farm..:" +
     "/awips2/GFESuite/bin/rsyncGridsToCWF_client.sh {site} &",
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     ]
 
 ##   Note: Please define TextProducts through
@@ -1906,7 +1984,11 @@ Scripts = [
 ##   within the GFE.
 
 # Ordering Product Generation
+<<<<<<< HEAD
 # NOTE: 'ProductList' is not supported in AWIPS 2. 
+=======
+# NOTE: 'ProductList' is not supported in AWIPS 2.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # Products will be listed in the order they appear in the list of Scripts above.
 
 #------------------------------------------------------------------------

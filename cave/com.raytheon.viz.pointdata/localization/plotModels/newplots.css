@@ -28,4 +28,44 @@ text.marker
     {
         font-family: MarkerSymbolFont;
     }
+<<<<<<< HEAD
 
+=======
+text.large
+    {
+       fill: none;
+       stroke-width: 1px;
+       font-size: 1.5em;
+       font-family: LargeSpecialSymbolFont;
+    }
+text.arrow
+    {
+        fill: none;
+        font-size: 1em;
+        font-family: WindSymbolFont;
+    }
+text.arrow1
+    {
+       fill: none;
+       font-size: 1em;
+       font-family: WindSymbolFont;
+    }
+text.arrow2
+    {
+       fill: none;
+       font-size: 1em;
+       font-family: WindSymbolFont;
+    }
+
+@font-face { font-family: "WindSymbolFont";
+              src: url(WindSymbols.svg#WindSymbols); }
+@font-face { font-family: "StandardFont";
+              src: url(Standard.svg#Standard); }
+@font-face { font-family: "SpecialSymbolFont";
+              src: url(SpecialSymbols.svg#SpecialSymbols); }
+@font-face { font-family: "MarkerSymbolFont";
+              src: url(MarkerSymbols.svg#MarkerSymbols); }
+@font-face { font-family: "LargeSpecialSymbolFont";
+              src: url(LargeSpecialSymbols.svg#LrgSpecialSymbols); }
+              
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

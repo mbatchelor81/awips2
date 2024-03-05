@@ -37,6 +37,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TimeZone;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.ListenerList;
 
@@ -77,6 +78,7 @@ import com.raytheon.viz.gfe.GFEPreference;
 import com.raytheon.viz.gfe.GFEServerException;
 import com.raytheon.viz.gfe.core.DataManager;
 import com.raytheon.viz.gfe.core.IParmManager;
+import com.raytheon.viz.gfe.core.griddata.IGridData;
 import com.raytheon.viz.gfe.core.internal.NotificationRouter.AbstractGFENotificationObserver;
 import com.raytheon.viz.gfe.core.msgs.EnableDisableTopoMsg;
 import com.raytheon.viz.gfe.core.msgs.EnableDisableTopoMsg.Action;
@@ -178,23 +180,24 @@ import com.raytheon.viz.gfe.types.MutableInteger;
  *                                  issues.
  * Feb 13, 2020  8035     randerso  Prevent topo parm from being unloaded in
  *                                  deleteTemporaryParms
- *
+ * Mar 25, 2021  8380     mapeters  Update caches on QPID reconnects and site
+ *                                  activation changes
+ * Aug 23, 2021  21543    jrohwein  add synchronized blocks around remaining updatedDatabaseList calls
  * </pre>
  *
  * @author chammack
  */
-public class ParmManager
-        implements IParmManager, IMessageClient, ISimulatedTimeChangeListener {
-    private static final IUFStatusHandler statusHandler = UFStatus
-            .getHandler(ParmManager.class);
+public class ParmManager implements IParmManager, IMessageClient, ISimulatedTimeChangeListener {
+    private static final IUFStatusHandler statusHandler = UFStatus.getHandler(ParmManager.class);
 
     private static final int NOTIFICATION_THREADS = 4;
+
+    private static final String EDEX_REQUEST_MODE = "request";
 
     private static final ThreadLocal<SimpleDateFormat> dateFormat = new ThreadLocal<SimpleDateFormat>() {
         @Override
         protected SimpleDateFormat initialValue() {
-            SimpleDateFormat df = new SimpleDateFormat(
-                    DatabaseID.MODEL_TIME_FORMAT);
+            SimpleDateFormat df = new SimpleDateFormat(DatabaseID.MODEL_TIME_FORMAT);
             df.setTimeZone(TimeZone.getTimeZone("GMT"));
             return df;
         }
@@ -276,7 +279,7 @@ public class ParmManager
     private RWLArrayList<Parm> parms;
 
     // virtual parm definitions (modulename = key)
-    private List<VCModule> vcModules;
+    private final List<VCModule> vcModules;
 
     private ListenerList<IAvailableSourcesChangedListener> availableSourcesListeners;
 
@@ -296,21 +299,21 @@ public class ParmManager
 
     private Set<DatabaseID> availableDatabases;
 
-    private DatabaseID mutableDb;
+    private final Object availableDatabasesLock = new Object();
 
-    private DatabaseID origMutableDb;
+    private final DatabaseID mutableDb;
 
-    private List<String> dbCategories;
+    private final DatabaseID origMutableDb;
 
-    private AbstractGFENotificationObserver<DBInvChangeNotification> dbInvChangeListener;
+    private final List<String> dbCategories;
 
-    private AbstractGFENotificationObserver<GridUpdateNotification> gridUpdateListener;
+    private final AbstractGFENotificationObserver<DBInvChangeNotification> dbInvChangeListener;
 
-    private AbstractGFENotificationObserver<GridHistoryUpdateNotification> gridHistoryUpdateListener;
+    private final AbstractGFENotificationObserver<GridUpdateNotification> gridUpdateListener;
 
-    private AbstractGFENotificationObserver<LockNotification> lockNotificationListener;
+    private final AbstractGFENotificationObserver<GridHistoryUpdateNotification> gridHistoryUpdateListener;
 
-    private AbstractGFENotificationObserver<SiteActivationNotification> siteActivationListener;
+    private final AbstractGFENotificationObserver<LockNotification> lockNotificationListener;
 
     private JobPool notificationPool;
 
@@ -335,28 +338,23 @@ public class ParmManager
     /**
      * Constructor
      *
-     * @param dmgr
-     *            the DataManager
+     * @param dmgr the DataManager
      * @throws GFEServerException
      */
     public ParmManager(DataManager dmgr) throws GFEServerException {
         this.dataManager = dmgr;
         this.parms = new RWLArrayList<>();
-        this.displayedParmListListeners = new ListenerList<>(
-                ListenerList.IDENTITY);
-        this.parmListChangedListeners = new ListenerList<>(
-                ListenerList.IDENTITY);
-        this.systemTimeRangeChangedListeners = new ListenerList<>(
-                ListenerList.IDENTITY);
-        this.availableSourcesListeners = new ListenerList<>(
-                ListenerList.IDENTITY);
+        this.displayedParmListListeners = new ListenerList<>(ListenerList.IDENTITY);
+        this.parmListChangedListeners = new ListenerList<>(ListenerList.IDENTITY);
+        this.systemTimeRangeChangedListeners = new ListenerList<>(ListenerList.IDENTITY);
+        this.availableSourcesListeners = new ListenerList<>(ListenerList.IDENTITY);
         this.newModelListeners = new ListenerList<>(ListenerList.IDENTITY);
         this.parmIdChangedListeners = new ListenerList<>(ListenerList.IDENTITY);
 
         // Get virtual parm definitions
         vcModules = initVirtualCalcParmDefinitions();
-        vcModulePool = new VCModuleJobPool("GFE Virtual ISC Python executor",
-                this.dataManager, vcModules.size() + 2, Boolean.TRUE);
+        vcModulePool = new VCModuleJobPool("GFE Virtual ISC Python executor", this.dataManager, vcModules.size() + 2,
+                Boolean.TRUE);
 
         String mutableModel = GFEPreference.getString("mutableModel");
         String oldMutableModel = null;
@@ -377,16 +375,14 @@ public class ParmManager
         this.mutableDb = decodeDbString(mutableModel);
         if (this.mutableDb == null) {
             statusHandler.handle(Priority.PROBLEM,
-                    "Unable to decode mutable database string [" + mutableModel
-                            + "]. No mutable model.");
+                    "Unable to decode mutable database string [" + mutableModel + "]. No mutable model.");
         }
 
         if (oldMutableModel != null) {
             this.origMutableDb = decodeDbString(oldMutableModel);
             if (this.origMutableDb == null) {
                 statusHandler.handle(Priority.PROBLEM,
-                        "Unable to decode mutable database string ["
-                                + mutableModel + "]. No mutable model.");
+                        "Unable to decode mutable database string [" + mutableModel + "]. No mutable model.");
             }
         } else {
             this.origMutableDb = mutableDb;
@@ -399,8 +395,9 @@ public class ParmManager
 
             @Override
             public void notify(DBInvChangeNotification notificationMessage) {
-                updatedDatabaseList(notificationMessage.getDeletions(),
-                        notificationMessage.getAdditions());
+                synchronized (availableDatabasesLock) {
+                    updatedDatabaseList(notificationMessage.getDeletions(), notificationMessage.getAdditions());
+                }
             }
 
         };
@@ -413,8 +410,7 @@ public class ParmManager
                 ParmID parmID = notificationMessage.getParmId();
                 Parm parm = getParm(parmID);
                 if (parm != null) {
-                    parm.inventoryArrived(
-                            notificationMessage.getReplacementTimeRange(),
+                    parm.inventoryArrived(notificationMessage.getReplacementTimeRange(),
                             notificationMessage.getHistories());
                 }
             }
@@ -425,20 +421,17 @@ public class ParmManager
                 GridHistoryUpdateNotification.class) {
 
             @Override
-            public void notify(
-                    GridHistoryUpdateNotification notificationMessage) {
+            public void notify(GridHistoryUpdateNotification notificationMessage) {
                 ParmID parmID = notificationMessage.getParmId();
                 Parm parm = getParm(parmID);
                 if (parm != null) {
-                    parm.historyUpdateArrived(
-                            notificationMessage.getHistories());
+                    parm.historyUpdateArrived(notificationMessage.getHistories());
                 }
             }
 
         };
 
-        this.lockNotificationListener = new AbstractGFENotificationObserver<LockNotification>(
-                LockNotification.class) {
+        this.lockNotificationListener = new AbstractGFENotificationObserver<LockNotification>(LockNotification.class) {
 
             @Override
             public void notify(LockNotification notificationMessage) {
@@ -451,53 +444,25 @@ public class ParmManager
             }
         };
 
-        this.siteActivationListener = new AbstractGFENotificationObserver<SiteActivationNotification>(
-                SiteActivationNotification.class) {
+        dataManager.getNotificationRouter().addObserver(this.dbInvChangeListener);
 
-            @Override
-            public void notify(SiteActivationNotification notificationMessage) {
-                if (notificationMessage.isActivation()) {
-                    statusHandler.info(notificationMessage.toString());
-                } else {
-                    statusHandler.info(notificationMessage.toString());
-                    if (notificationMessage.isSuccess()) {
-                        purgeDbCacheForSite(
-                                notificationMessage.getModifiedSite());
-                    }
-                }
-            }
-        };
+        dataManager.getNotificationRouter().addObserver(this.lockNotificationListener);
 
-        dataManager.getNotificationRouter()
-                .addObserver(this.dbInvChangeListener);
+        dataManager.getNotificationRouter().addObserver(this.gridUpdateListener);
 
-        dataManager.getNotificationRouter()
-                .addObserver(this.lockNotificationListener);
+        dataManager.getNotificationRouter().addObserver(this.gridHistoryUpdateListener);
 
-        dataManager.getNotificationRouter()
-                .addObserver(this.gridUpdateListener);
-
-        dataManager.getNotificationRouter()
-                .addObserver(this.gridHistoryUpdateListener);
-
-        dataManager.getNotificationRouter()
-                .addObserver(this.siteActivationListener);
-
-        notificationPool = new JobPool("Parm Manager notification job",
-                NOTIFICATION_THREADS, true);
+        notificationPool = new JobPool("Parm Manager notification job", NOTIFICATION_THREADS, true);
 
         Message.registerInterest(this, EnableDisableTopoMsg.class);
 
         SimulatedTime.getSystemTime().addSimulatedTimeChangeListener(this);
 
         // Get the composite grid location
-        ServerResponse<GridLocation> sr = dataManager.getClient()
-                .getDBGridLocation();
+        ServerResponse<GridLocation> sr = dataManager.getClient().getDBGridLocation();
         this.gloc = sr.getPayload();
         if (!sr.isOkay()) {
-            statusHandler.error(String.format(
-                    "Unable to get DBGridLocation from ifpServer: %s",
-                    sr.message()));
+            statusHandler.error(String.format("Unable to get DBGridLocation from ifpServer: %s", sr.message()));
         }
 
         this.systemTimeRange = recalcSystemTimeRange();
@@ -505,8 +470,9 @@ public class ParmManager
         this.parmIDCacheVParm = new HashMap<>();
         this.parmIDCacheVCParm = new HashMap<>();
 
-        updateDatabaseLists();
-
+        synchronized (availableDatabasesLock) {
+            updateDatabaseLists();
+        }
         statusHandler.debug("updateDatabaseLists has completed initial run...");
 
         this.productDB = determineProductDatabase();
@@ -514,20 +480,13 @@ public class ParmManager
 
     @Override
     public void dispose() {
-        dataManager.getNotificationRouter()
-                .removeObserver(this.dbInvChangeListener);
+        dataManager.getNotificationRouter().removeObserver(this.dbInvChangeListener);
 
-        dataManager.getNotificationRouter()
-                .removeObserver(this.lockNotificationListener);
+        dataManager.getNotificationRouter().removeObserver(this.lockNotificationListener);
 
-        dataManager.getNotificationRouter()
-                .removeObserver(this.gridUpdateListener);
+        dataManager.getNotificationRouter().removeObserver(this.gridUpdateListener);
 
-        dataManager.getNotificationRouter()
-                .removeObserver(this.gridHistoryUpdateListener);
-
-        dataManager.getNotificationRouter()
-                .removeObserver(this.siteActivationListener);
+        dataManager.getNotificationRouter().removeObserver(this.gridHistoryUpdateListener);
 
         Message.unregisterInterest(this, EnableDisableTopoMsg.class);
 
@@ -553,8 +512,7 @@ public class ParmManager
     /**
      * Decodes a mutable model specifier string into a full DatabaseID
      *
-     * @param string
-     *            mutable model specifier
+     * @param string mutable model specifier
      * @return the full DatabaseID
      */
     public DatabaseID decodeDbString(final String string) {
@@ -602,11 +560,9 @@ public class ParmManager
             return mutableDb;
         }
 
-        ServerResponse<List<DatabaseID>> sr = dataManager.getClient()
-                .getOfficialDBName();
+        ServerResponse<List<DatabaseID>> sr = dataManager.getClient().getOfficialDBName();
         if (!sr.isOkay()) {
-            statusHandler.error(String.format(
-                    "Unable to get official DB names: %s", sr.message()));
+            statusHandler.error(String.format("Unable to get official DB names: %s", sr.message()));
             return new DatabaseID();
         }
 
@@ -618,20 +574,18 @@ public class ParmManager
         }
 
         /*
-         * the official database names from the server don't include the model
-         * time, so see if we can add a model time in if appropriate.
+         * the official database names from the server don't include the model time, so
+         * see if we can add a model time in if appropriate.
          */
         for (DatabaseID db : databases) {
             // find a match for siteid, type and format with the mutable
-            if ((mutableDb.getSiteId().equals(db.getSiteId()))
-                    && (mutableDb.getDbType().equals(db.getDbType()))
+            if ((mutableDb.getSiteId().equals(db.getSiteId())) && (mutableDb.getDbType().equals(db.getDbType()))
                     && (mutableDb.getFormat().equals(db.getFormat()))) {
                 /*
-                 * found a match -- now put the model time from the mutable
-                 * database onto this database
+                 * found a match -- now put the model time from the mutable database onto this
+                 * database
                  */
-                return new DatabaseID(db.getSiteId(), db.getFormat(),
-                        db.getDbType(), db.getModelName(),
+                return new DatabaseID(db.getSiteId(), db.getFormat(), db.getDbType(), db.getModelName(),
                         mutableDb.getModelTime());
 
             }
@@ -644,8 +598,7 @@ public class ParmManager
     @Override
     public Parm addParm(ParmID pid, boolean mutableParm, boolean displayable) {
         if (!isParmInDatabase(pid)) {
-            statusHandler.handle(Priority.PROBLEM,
-                    "Attempt to load a nonexistent parm: " + pid);
+            statusHandler.handle(Priority.PROBLEM, "Attempt to load a nonexistent parm: " + pid);
             return null;
         }
 
@@ -666,8 +619,8 @@ public class ParmManager
     }
 
     @Override
-    public Parm createVirtualParm(ParmID pid, GridParmInfo gpi,
-            IGridSlice[] data, boolean mutableParm, boolean displayable) {
+    public Parm createVirtualParm(ParmID pid, GridParmInfo gpi, IGridSlice[] data, boolean mutableParm,
+            boolean displayable) {
         // already exists?
         if (getParm(pid) != null) {
             // already exists
@@ -681,10 +634,8 @@ public class ParmManager
         }
 
         // Make the parm
-        Parm parm = new VParm(pid, gpi, mutableParm, displayable,
-                this.dataManager, data);
-        statusHandler.handle(Priority.VERBOSE,
-                "Created Parm: " + parm.getParmID().toString());
+        Parm parm = new VParm(pid, gpi, mutableParm, displayable, this.dataManager, data);
+        statusHandler.handle(Priority.VERBOSE, "Created Parm: " + parm.getParmID().toString());
 
         List<Parm> additions = new ArrayList<>(1);
         additions.add(parm);
@@ -703,20 +654,17 @@ public class ParmManager
         this.parms.acquireReadLock();
         List<Parm> toBeDeleted = new ArrayList<>();
         try {
-            for (int i = 0; i < parms.length; i++) {
-                if (!this.parms.contains(parms[i])) {
-                    statusHandler.handle(Priority.DEBUG,
-                            "Attempt to delete unknown parm:"
-                                    + parms[i].getParmID());
+            for (Parm parm : parms) {
+                if (!this.parms.contains(parm)) {
+                    statusHandler.handle(Priority.DEBUG, "Attempt to delete unknown parm:" + parm.getParmID());
                     continue;
                 }
 
                 // skip modified parms
-                if (!parms[i].isModified()) {
-                    toBeDeleted.add(parms[i]);
+                if (!parm.isModified()) {
+                    toBeDeleted.add(parm);
                 } else {
-                    statusHandler.debug("Skipping parm: " + parms[i].getParmID()
-                            + " due to modified state.");
+                    statusHandler.debug("Skipping parm: " + parm.getParmID() + " due to modified state.");
                 }
             }
         } finally {
@@ -724,8 +672,8 @@ public class ParmManager
         }
 
         List<ParmID> ids = new ArrayList<>();
-        for (int i = 0; i < toBeDeleted.size(); i++) {
-            ids.add(toBeDeleted.get(i).getParmID());
+        for (Parm element : toBeDeleted) {
+            ids.add(element.getParmID());
         }
         // logDebug << "DeleteParm start: " << ids << std::endl;
 
@@ -799,8 +747,7 @@ public class ParmManager
             if ((cacheParmIDs == null) && ("V".equals(dbID.getDbType()))) {
                 ParmID[] vcParms = getAvailableParms(dbID);
                 parmIDs.addAll(Arrays.asList(vcParms));
-            } else if ((cacheParmIDs == null)
-                    && (!"V".equals(dbID.getDbType()))) {
+            } else if ((cacheParmIDs == null) && (!"V".equals(dbID.getDbType()))) {
                 if (this.availableServerDatabases.contains(dbID)) {
                     uncachedDbs.add(dbID);
                 }
@@ -819,56 +766,47 @@ public class ParmManager
         }
 
         if (!uncachedDbs.isEmpty()) {
-            ServerResponse<List<ParmID>> sr = dataManager.getClient()
-                    .getParmList(uncachedDbs);
+            ServerResponse<List<ParmID>> sr = dataManager.getClient().getParmList(uncachedDbs);
             if (sr.isOkay()) {
                 List<ParmID> results = sr.getPayload();
                 parmIDs.addAll(results);
 
                 // add results to parmIDCache
                 // use two scans to initialize lists to correct size
-                Map<DatabaseID, MutableInteger> listSizes = new HashMap<>(
-                        uncachedDbs.size());
+                Map<DatabaseID, MutableInteger> listSizes = new HashMap<>(uncachedDbs.size());
                 for (DatabaseID dbID : uncachedDbs) {
                     listSizes.put(dbID, new MutableInteger(0));
                 }
                 for (ParmID parm : results) {
                     listSizes.get(parm.getDbId()).add(1);
                 }
-                Map<DatabaseID, Set<ParmID>> dupRemovalMap = new HashMap<>(
-                        (int) (uncachedDbs.size() * 1.3) + 1);
+                Map<DatabaseID, Set<ParmID>> dupRemovalMap = new HashMap<>((int) (uncachedDbs.size() * 1.3) + 1);
                 for (ParmID parm : results) {
                     DatabaseID dbID = parm.getDbId();
                     Set<ParmID> parmSet = dupRemovalMap.get(dbID);
                     if (!dbID.getDbType().endsWith("TMP")) {
                         if (parmSet == null) {
-                            parmSet = new HashSet<>(
-                                    (int) (listSizes.get(dbID).getValue() * 1.3)
-                                            + 1);
+                            parmSet = new HashSet<>((int) (listSizes.get(dbID).getValue() * 1.3) + 1);
                             dupRemovalMap.put(dbID, parmSet);
                         }
                         parmSet.add(parm);
                     }
                 }
                 synchronized (this.parmIDCacheServer) {
-                    for (Entry<DatabaseID, Set<ParmID>> entry : dupRemovalMap
-                            .entrySet()) {
+                    for (Entry<DatabaseID, Set<ParmID>> entry : dupRemovalMap.entrySet()) {
                         DatabaseID dbId = entry.getKey();
                         List<ParmID> parms = this.parmIDCacheServer.get(dbId);
                         if (parms == null) {
-                            this.parmIDCacheServer.put(dbId,
-                                    new ArrayList<>(entry.getValue()));
+                            this.parmIDCacheServer.put(dbId, new ArrayList<>(entry.getValue()));
                         } else {
                             Set<ParmID> parmSet = entry.getValue();
                             parmSet.addAll(parms);
-                            this.parmIDCacheServer.put(dbId,
-                                    new ArrayList<>(parmSet));
+                            this.parmIDCacheServer.put(dbId, new ArrayList<>(parmSet));
                         }
                     }
                 }
             } else {
-                statusHandler.error(String.format(
-                        "Error retrieving all parm IDs: %s", sr.message()));
+                statusHandler.error(String.format("Error retrieving all parm IDs: %s", sr.message()));
             }
         }
 
@@ -879,8 +817,8 @@ public class ParmManager
     @Override
     public ParmID[] getAvailableParms(DatabaseID dbID) {
         /*
-         * a derivation from AWIPS1: short-circuit the checks and just return an
-         * empty array back if we have an invalid DatabaseID
+         * a derivation from AWIPS1: short-circuit the checks and just return an empty
+         * array back if we have an invalid DatabaseID
          */
         if ((dbID == null) || (!dbID.isValid())) {
             return new ParmID[0];
@@ -897,11 +835,9 @@ public class ParmManager
             parmIds = new ArrayList<>(cacheParmIDs);
         } else {
             if (availableServerDatabases.contains(dbID)) {
-                ServerResponse<List<ParmID>> sr = dataManager.getClient()
-                        .getParmList(dbID);
+                ServerResponse<List<ParmID>> sr = dataManager.getClient().getParmList(dbID);
                 if (!sr.isOkay()) {
-                    statusHandler.error(String.format(
-                            "Unable to access parm list: %s", sr.message()));
+                    statusHandler.error(String.format("Unable to access parm list: %s", sr.message()));
                     return new ParmID[0];
                 } else {
                     parmIds = sr.getPayload();
@@ -957,8 +893,7 @@ public class ParmManager
             parms.acquireReadLock();
             try {
                 for (Parm p : parms) {
-                    if ((p instanceof VParm)
-                            && (p.getParmID().getDbId().equals(dbID))) {
+                    if ((p instanceof VParm) && (p.getParmID().getDbId().equals(dbID))) {
                         pids.add(p.getParmID());
                     }
                 }
@@ -990,13 +925,11 @@ public class ParmManager
     }
 
     @Override
-    public ParmID getUniqueParmID(ParmID pid, String nameHint,
-            String categoryHint) {
+    public ParmID getUniqueParmID(ParmID pid, String nameHint, String categoryHint) {
         // modify the database id to include the type "TMP"
         final DatabaseID inDB = pid.getDbId();
-        DatabaseID dbid = new DatabaseID(inDB.getSiteId(), inDB.getFormat(),
-                inDB.getDbType() + categoryHint, inDB.getModelName(),
-                inDB.getModelTime());
+        DatabaseID dbid = new DatabaseID(inDB.getSiteId(), inDB.getFormat(), inDB.getDbType() + categoryHint,
+                inDB.getModelName(), inDB.getModelTime());
 
         // modify the parmname
         String pn = pid.getParmName() + nameHint;
@@ -1055,19 +988,37 @@ public class ParmManager
     }
 
     /**
-     * ParmMgr::setParms() Adds/removes/displaystatechanges the set of given
-     * parms. Handles the bookkeeping and sends out notifications.
+     * ParmMgr::setParms() Adds/removes/displaystatechanges the set of given parms.
+     * Handles the bookkeeping and sends out notifications.
      *
-     * This is the complicated routine which handles all of the bookkeeping and
-     * the notifications. Should never see a NULL parm* given to this routine.
+     * This is the complicated routine which handles all of the bookkeeping and the
+     * notifications. Should never see a NULL parm* given to this routine.
      *
      * @param addParms
      * @param removeParms
      * @param displayedStateModParms
      */
-    private void setParms(final Collection<Parm> addParms,
-            final Collection<Parm> removeParms,
+    private void setParms(final Collection<Parm> addParms, final Collection<Parm> removeParms,
             final Collection<Parm> displayedStateModParms) {
+        setParms(addParms, removeParms, displayedStateModParms, false);
+    }
+
+    /**
+     * ParmMgr::setParms() Adds/removes/displaystatechanges the set of given parms.
+     * Handles the bookkeeping and sends out notifications.
+     *
+     * This is the complicated routine which handles all of the bookkeeping and the
+     * notifications. Should never see a NULL parm* given to this routine.
+     *
+     * @param addParms
+     * @param removeParms
+     * @param displayedStateModParms
+     * @param isRefreshing           true if this is being called as a part of just
+     *                               refreshing all data for a server reconnect,
+     *                               only affects parms being removed
+     */
+    private void setParms(final Collection<Parm> addParms, final Collection<Parm> removeParms,
+            final Collection<Parm> displayedStateModParms, final boolean isRefreshing) {
 
         // update list of parms
         this.parms.acquireWriteLock();
@@ -1100,10 +1051,8 @@ public class ParmManager
         if ((!addParms.isEmpty()) || (!removeParms.isEmpty())) {
             this.parms.acquireReadLock();
             try {
-                fireParmListChanged(
-                        this.parms.toArray(new Parm[this.parms.size()]),
-                        addParms.toArray(new Parm[addParms.size()]),
-                        removeParms.toArray(new Parm[removeParms.size()]));
+                fireParmListChanged(this.parms.toArray(new Parm[this.parms.size()]),
+                        addParms.toArray(new Parm[addParms.size()]), removeParms.toArray(new Parm[removeParms.size()]));
             } finally {
                 this.parms.releaseReadLock();
             }
@@ -1150,48 +1099,51 @@ public class ParmManager
                 // System.out.println("Removed from display: "
                 // + removedDisplayed.toString());
 
-                fireDisplayedParmListChanged(
-                        this.parms.toArray(new Parm[this.parms.size()]),
+                fireDisplayedParmListChanged(this.parms.toArray(new Parm[this.parms.size()]),
                         addedDisplayed.toArray(new Parm[addedDisplayed.size()]),
-                        removedDisplayed
-                                .toArray(new Parm[removedDisplayed.size()]));
+                        removedDisplayed.toArray(new Parm[removedDisplayed.size()]));
             } finally {
                 this.parms.releaseReadLock();
             }
         }
 
         // send AvailableSourcesChanged notification
-        try {
-            List<DatabaseID> prevAvailDbs = getAvailableDbs();
+        synchronized (availableDatabasesLock) {
+            try {
+                List<DatabaseID> prevAvailDbs = getAvailableDbs();
 
-            updateDatabaseLists();
+                updateDatabaseLists();
 
-            List<DatabaseID> nowDbs = getAvailableDbs();
+                List<DatabaseID> nowDbs = getAvailableDbs();
 
-            List<DatabaseID> addedDbs = new ArrayList<>();
-            addedDbs.addAll(nowDbs);
-            addedDbs.removeAll(prevAvailDbs);
+                List<DatabaseID> addedDbs = new ArrayList<>();
+                addedDbs.addAll(nowDbs);
+                addedDbs.removeAll(prevAvailDbs);
 
-            List<DatabaseID> removedDbs = new ArrayList<>();
-            removedDbs.addAll(prevAvailDbs);
-            removedDbs.removeAll(nowDbs);
+                List<DatabaseID> removedDbs = new ArrayList<>();
+                removedDbs.addAll(prevAvailDbs);
+                removedDbs.removeAll(nowDbs);
 
-            updateParmIdCache(removedDbs, addParms, removeParms);
-            if ((!addedDbs.isEmpty()) || (!removedDbs.isEmpty())) {
-                fireAvailableSourcesChanged(nowDbs, removedDbs, addedDbs);
+                updateParmIdCache(removedDbs, addParms, removeParms);
+                if ((!addedDbs.isEmpty()) || (!removedDbs.isEmpty())) {
+                    fireAvailableSourcesChanged(nowDbs, removedDbs, addedDbs);
+                }
+            } catch (GFEServerException e) {
+                statusHandler.handle(Priority.PROBLEM, e.getLocalizedMessage(), e);
             }
-        } catch (GFEServerException e) {
-            statusHandler.handle(Priority.PROBLEM, e.getLocalizedMessage(), e);
         }
 
         // dispose the old parms
         for (Parm p : removeParms) {
-            p.dispose();
+            if (isRefreshing) {
+                p.disposeWithoutUnlocking();
+            } else {
+                p.dispose();
+            }
         }
     }
 
-    private void updateParmIdCache(final Collection<DatabaseID> removedDbs,
-            final Collection<Parm> addedParms,
+    private void updateParmIdCache(final Collection<DatabaseID> removedDbs, final Collection<Parm> addedParms,
             final Collection<Parm> removedParms) {
         // remove databases
         synchronized (this.parmIDCacheServer) {
@@ -1218,11 +1170,9 @@ public class ParmManager
                     parmSet.add(pId);
                 }
             }
-            for (Entry<DatabaseID, Set<ParmID>> entry : dupRemovalMap
-                    .entrySet()) {
+            for (Entry<DatabaseID, Set<ParmID>> entry : dupRemovalMap.entrySet()) {
                 DatabaseID dbID = entry.getKey();
-                this.parmIDCacheServer.put(dbID,
-                        new ArrayList<>(entry.getValue()));
+                this.parmIDCacheServer.put(dbID, new ArrayList<>(entry.getValue()));
             }
         }
 
@@ -1258,13 +1208,10 @@ public class ParmManager
     /**
      * Updates the parmID cache. Given a list of parms to remove and the cache.
      *
-     * @param parms
-     *            List of Parms to remove from the cache.
-     * @param cache
-     *            Cache to be updated.
+     * @param parms List of Parms to remove from the cache.
+     * @param cache Cache to be updated.
      */
-    private void removeFromCache(Collection<Parm> parms,
-            Map<DatabaseID, List<ParmID>> cache) {
+    private void removeFromCache(Collection<Parm> parms, Map<DatabaseID, List<ParmID>> cache) {
         for (Parm p : parms) {
             if (p != null) {
                 DatabaseID dbId = p.getParmID().getDbId();
@@ -1297,8 +1244,7 @@ public class ParmManager
         DatabaseID mutableDbId = getMutableDatabase();
         if (mutableDbId.isValid()) {
             // createMutableDb is it doesn't already exist
-            ServerResponse<?> sr = this.dataManager.getClient()
-                    .createNewDb(mutableDbId);
+            ServerResponse<?> sr = this.dataManager.getClient().createNewDb(mutableDbId);
             containsMutable = sr.isOkay();
         }
 
@@ -1312,8 +1258,7 @@ public class ParmManager
         parms.acquireReadLock();
         try {
             for (Parm p : parms) {
-                if ((p instanceof VParm) && (!availableVParmDatabases
-                        .contains(p.getParmID().getDbId()))) {
+                if ((p instanceof VParm) && (!availableVParmDatabases.contains(p.getParmID().getDbId()))) {
                     availableVParmDatabases.add(p.getParmID().getDbId());
                 }
             }
@@ -1335,20 +1280,17 @@ public class ParmManager
             // availableDbs()
             // and simplify the three loops into one.
             for (DatabaseID dbid : availableVCParmDatabases) {
-                if ("ISC".equals(dbid.getModelName())
-                        && !iscDbs.contains(dbid)) {
+                if ("ISC".equals(dbid.getModelName()) && !iscDbs.contains(dbid)) {
                     iscDbs.add(dbid);
                 }
             }
             for (DatabaseID dbid : availableVParmDatabases) {
-                if ("ISC".equals(dbid.getModelName())
-                        && !iscDbs.contains(dbid)) {
+                if ("ISC".equals(dbid.getModelName()) && !iscDbs.contains(dbid)) {
                     iscDbs.add(dbid);
                 }
             }
             for (DatabaseID dbid : availableServerDatabases) {
-                if ("ISC".equals(dbid.getModelName())
-                        && !iscDbs.contains(dbid)) {
+                if ("ISC".equals(dbid.getModelName()) && !iscDbs.contains(dbid)) {
                     iscDbs.add(dbid);
                 }
             }
@@ -1358,12 +1300,10 @@ public class ParmManager
     /**
      * Determines the set of virtual calculated databases, from the definitions.
      *
-     * @param definitions
-     *            The list of VCParm definitions as VCModules.
+     * @param definitions The list of VCParm definitions as VCModules.
      * @return The unique list of DatabaseIDs defined.
      */
-    private List<DatabaseID> determineVCParmDatabases(
-            List<VCModule> definitions) {
+    private List<DatabaseID> determineVCParmDatabases(List<VCModule> definitions) {
         List<DatabaseID> dbs = new ArrayList<>();
         for (VCModule mod : definitions) {
             DatabaseID id = null;
@@ -1379,12 +1319,11 @@ public class ParmManager
     }
 
     /**
-     * This function creates a new parm - of type database or virtual
-     * calculated.
+     * This function creates a new parm - of type database or virtual calculated.
      *
-     * Determines whether this is a database or virtual calculated parm, and
-     * calls the appropriate create routine. Does not do bookkeeping; only
-     * creates the parm and returns the pointer to the caller.
+     * Determines whether this is a database or virtual calculated parm, and calls
+     * the appropriate create routine. Does not do bookkeeping; only creates the
+     * parm and returns the pointer to the caller.
      *
      * @param pid
      * @param mutableParm
@@ -1392,8 +1331,8 @@ public class ParmManager
      * @return
      * @throws GFEServerException
      */
-    private Parm createParmInternal(final ParmID pid, boolean mutableParm,
-            boolean displayable) throws GFEServerException {
+    private Parm createParmInternal(final ParmID pid, boolean mutableParm, boolean displayable)
+            throws GFEServerException {
         if (!isParmInDatabase(pid)) {
             // unknown
             return null;
@@ -1408,8 +1347,7 @@ public class ParmManager
         // check first if parm is a virtual calculated?
         int index = vcIndex(pid);
         if (index != -1) {
-            return createVirtualCalculatedParm(vcModules.get(index),
-                    displayable);
+            return createVirtualCalculatedParm(vcModules.get(index), displayable);
         }
 
         // database parm?
@@ -1426,8 +1364,7 @@ public class ParmManager
     // from the ifpServer. Creates the parm and
     // returns the pointer.
     // ---------------------------------------------------------------------------
-    private Parm createDbParmInternal(final ParmID pid, boolean mutableParm,
-            boolean displayable) {
+    private Parm createDbParmInternal(final ParmID pid, boolean mutableParm, boolean displayable) {
 
         if (getParm(pid) != null) {
             return null;
@@ -1437,32 +1374,24 @@ public class ParmManager
             return null;
         }
 
-        ServerResponse<GridParmInfo> sr1 = dataManager.getClient()
-                .getGridParmInfo(pid);
+        ServerResponse<GridParmInfo> sr1 = dataManager.getClient().getGridParmInfo(pid);
         if (!sr1.isOkay()) {
-            statusHandler.error(
-                    String.format("Couldn't get GridParmInfo for parm %s: %s",
-                            pid, sr1.message()));
+            statusHandler.error(String.format("Couldn't get GridParmInfo for parm %s: %s", pid, sr1.message()));
             return null;
         }
         GridParmInfo gpi = sr1.getPayload();
 
-        ServerResponse<List<LockTable>> sr2 = dataManager.getClient()
-                .getLockTable(new LockTableRequest(pid));
+        ServerResponse<List<LockTable>> sr2 = dataManager.getClient().getLockTable(new LockTableRequest(pid));
         List<LockTable> lt = sr2.getPayload();
         if ((!sr2.isOkay()) || (lt.size() != 1)) {
-            statusHandler.error(
-                    String.format("Couldn't get lockTable for parm %s: %s", pid,
-                            sr2.message()));
+            statusHandler.error(String.format("Couldn't get lockTable for parm %s: %s", pid, sr2.message()));
             return null;
         }
 
-        return new DbParm(pid, gpi, mutableParm, displayable, dataManager,
-                lt.get(0));
+        return new DbParm(pid, gpi, mutableParm, displayable, dataManager, lt.get(0));
     }
 
-    private Parm createVirtualCalculatedParm(final VCModule module,
-            boolean displayable) {
+    private Parm createVirtualCalculatedParm(final VCModule module, boolean displayable) {
         // already exists?
         if (getParm(module.getGpi().getParmID()) != null) {
             // already exists
@@ -1489,16 +1418,14 @@ public class ParmManager
 
     @Override
     public Parm getParmInExpr(String exprName, boolean enableTopo) {
-        return getParmInExpr(exprName, enableTopo,
-                dataManager.getSpatialDisplayManager().getActivatedParm());
+        return getParmInExpr(exprName, enableTopo, dataManager.getSpatialDisplayManager().getActivatedParm());
     }
 
     @Override
     public void enableDisableTopoParm(boolean wanted, boolean forceVisibility) {
         // find out if the topo parm already exists
         boolean exists = false;
-        Parm topoParm = getParm(
-                this.dataManager.getTopoManager().getCompositeParmID());
+        Parm topoParm = getParm(this.dataManager.getTopoManager().getCompositeParmID());
         if (topoParm != null) {
             exists = true;
         }
@@ -1511,16 +1438,13 @@ public class ParmManager
         // if needed
         if (wanted) {
             // get the data from the topography manager
-            IGridSlice gridSlice = this.dataManager.getTopoManager()
-                    .getCompositeTopo();
+            IGridSlice gridSlice = this.dataManager.getTopoManager().getCompositeTopo();
 
             // ensure validity
             if ((gridSlice != null) && (gridSlice.isValid() == null)) {
                 // create the parm
-                topoParm = createVirtualParm(
-                        gridSlice.getGridInfo().getParmID(),
-                        gridSlice.getGridInfo(), new IGridSlice[] { gridSlice },
-                        false, false);
+                topoParm = createVirtualParm(gridSlice.getGridInfo().getParmID(), gridSlice.getGridInfo(),
+                        new IGridSlice[] { gridSlice }, false, false);
 
                 // If forceVisibility, force the visibility to on,
                 // and force the display to IMAGE
@@ -1531,20 +1455,17 @@ public class ParmManager
                     // before the topo resource was added to the resource list
                     topoParm.getDisplayAttributes().setVisMode(VisMode.IMAGE);
                     this.setParmDisplayable(topoParm, true);
-                    this.dataManager.getSpatialDisplayManager()
-                            .setDisplayMode(topoParm, VisMode.IMAGE);
-                    this.dataManager.getSpatialDisplayManager()
-                            .makeVisible(topoParm, true, false);
+                    this.dataManager.getSpatialDisplayManager().setDisplayMode(topoParm, VisMode.IMAGE);
+                    this.dataManager.getSpatialDisplayManager().makeVisible(topoParm, true, false);
                 }
             } else {
-                statusHandler.handle(Priority.PROBLEM,
-                        "Topography Not Available");
+                statusHandler.handle(Priority.PROBLEM, "Topography Not Available");
             }
         }
 
         // not wanted
         else {
-            deleteParm(new Parm[] { topoParm });
+            deleteParm(topoParm);
         }
     }
 
@@ -1558,8 +1479,7 @@ public class ParmManager
         List<DatabaseID> iscDbs = getIscDatabases();
 
         for (DatabaseID iscDb : iscDbs) {
-            ParmID iscid = new ParmID(pid.getParmName(), iscDb,
-                    pid.getParmLevel());
+            ParmID iscid = new ParmID(pid.getParmName(), iscDb, pid.getParmLevel());
             if (this.isParmInDatabase(iscid)) {
                 return iscid;
             }
@@ -1571,35 +1491,93 @@ public class ParmManager
     }
 
     @Override
-    public void purgeDbCacheForSite(String site) {
-        synchronized (this.parmIDCacheServer) {
-            Iterator<DatabaseID> iter = this.parmIDCacheServer.keySet()
-                    .iterator();
-            while (iter.hasNext()) {
-                DatabaseID db = iter.next();
-                if (db.getSiteId().equalsIgnoreCase(site)) {
-                    iter.remove();
+    public void refreshCaches() {
+        statusHandler.info("Refreshing GFE parm caches");
+        synchronized (availableDatabasesLock) {
+            List<DatabaseID> prevDbs = getAvailableDbs();
+
+            synchronized (parmIDCacheServer) {
+                parmIDCacheServer.clear();
+            }
+            synchronized (parmIDCacheVParm) {
+                parmIDCacheVParm.clear();
+            }
+            synchronized (parmIDCacheVCParm) {
+                parmIDCacheVCParm.clear();
+            }
+
+            // Set to null so updateDatabaseLists knows to re-query DB
+            availableDatabases = null;
+            try {
+                updateDatabaseLists();
+            } catch (GFEServerException e) {
+                statusHandler.handle(Priority.PROBLEM, e.getLocalizedMessage(), e);
+                return;
+            }
+
+            List<DatabaseID> currDbs = getAvailableDbs();
+
+            List<DatabaseID> addedDbs = new ArrayList<>();
+            addedDbs.addAll(currDbs);
+            addedDbs.removeAll(prevDbs);
+
+            List<DatabaseID> removedDbs = new ArrayList<>();
+            removedDbs.addAll(prevDbs);
+            removedDbs.removeAll(currDbs);
+
+            if (!addedDbs.isEmpty() || !removedDbs.isEmpty()) {
+                updatedDatabaseList(removedDbs, addedDbs);
+                fireAvailableSourcesChanged(currDbs, removedDbs, addedDbs);
+            }
+
+            // Save all modified grids
+            Parm[] modifiedParms = getModifiedParms();
+            Map<ParmID, Map<TimeRange, List<IGridData>>> modifiedGrids = new HashMap<>();
+            for (Parm parm : modifiedParms) {
+                Map<TimeRange, List<IGridData>> modifiedParmGrids = modifiedGrids.computeIfAbsent(parm.getParmID(),
+                        x -> new HashMap<>());
+                for (TimeRange tr : parm.getLockTable().lockedByMe()) {
+                    modifiedParmGrids.computeIfAbsent(tr, x -> new ArrayList<>())
+                            .addAll(Arrays.asList(parm.getGridInventory(tr)));
+                }
+            }
+
+            // Reload parms from DB
+            ParmID[] parmIds = getParmIDs(getDisplayedParms());
+            setParms(List.of(), new ArrayList<>(Arrays.asList(parmIds)), true);
+            List<ParmIDVis> parmIdVisList = Arrays.stream(parmIds).map(parmId -> new ParmIDVis(parmId, true))
+                    .collect(Collectors.toCollection(ArrayList::new));
+            setParms(parmIdVisList, List.of());
+
+            // Re-apply modified grids
+            for (Entry<ParmID, Map<TimeRange, List<IGridData>>> modifiedGridsEntry : modifiedGrids.entrySet()) {
+                ParmID parmId = modifiedGridsEntry.getKey();
+                Parm parm = getParm(parmId);
+                if (parm != null) {
+                    for (Entry<TimeRange, List<IGridData>> modifiedParmGridsEntry : modifiedGridsEntry.getValue()
+                            .entrySet()) {
+                        TimeRange tr = modifiedParmGridsEntry.getKey();
+                        IGridData[] grids = modifiedParmGridsEntry.getValue().toArray(new IGridData[0]);
+                        parm.replaceGriddedData(tr, grids);
+                    }
                 }
             }
         }
     }
 
     @Override
-    public Parm createParm(ParmID pid, boolean mutableParm,
-            boolean displayable) {
+    public Parm createParm(ParmID pid, boolean mutableParm, boolean displayable) {
         try {
             return createParmInternal(pid, mutableParm, displayable);
         } catch (GFEServerException e) {
-            statusHandler.handle(Priority.PROBLEM,
-                    "Failure to instantiate parm in createParmInternal: " + pid,
-                    e);
+            statusHandler.handle(Priority.PROBLEM, "Failure to instantiate parm in createParmInternal: " + pid, e);
             return null;
         }
     }
 
     /**
-     * Recalculate the system time range using the total time span of all
-     * displayed parms and their locks
+     * Recalculate the system time range using the total time span of all displayed
+     * parms and their locks
      *
      * @return the system time range
      */
@@ -1623,29 +1601,23 @@ public class ParmManager
 
         Date baseTime = SimulatedTime.getSystemTime().getTime();
 
-        int hoursPast = GFEPreference.getInt(
-                "SystemTimeRange_beforeCurrentTime",
-                1 * TimeUtil.HOURS_PER_DAY);
-        int hoursFuture = GFEPreference.getInt(
-                "SystemTimeRange_afterCurrentTime", 6 * TimeUtil.HOURS_PER_DAY);
+        int hoursPast = GFEPreference.getInt("SystemTimeRange_beforeCurrentTime", 1 * TimeUtil.HOURS_PER_DAY);
+        int hoursFuture = GFEPreference.getInt("SystemTimeRange_afterCurrentTime", 6 * TimeUtil.HOURS_PER_DAY);
 
         if (hoursFuture == hoursPast) {
             hoursFuture++;
         }
-        TimeRange cTR = new TimeRange(
-                baseTime.getTime() - (hoursPast * TimeUtil.MILLIS_PER_HOUR),
+        TimeRange cTR = new TimeRange(baseTime.getTime() - (hoursPast * TimeUtil.MILLIS_PER_HOUR),
                 baseTime.getTime() + (hoursFuture * TimeUtil.MILLIS_PER_HOUR));
 
         newSystemTR = newSystemTR.combineWith(cTR);
 
         // now expand to the next hour boundary
         long newStartT = newSystemTR.getStart().getTime();
-        newStartT -= newSystemTR.getStart().getTime()
-                % TimeUtil.MILLIS_PER_HOUR;
+        newStartT -= newSystemTR.getStart().getTime() % TimeUtil.MILLIS_PER_HOUR;
         long newStopT = newSystemTR.getEnd().getTime();
         if ((newStopT % TimeUtil.MILLIS_PER_HOUR) != 0) {
-            newStopT += TimeUtil.MILLIS_PER_HOUR
-                    - (newStopT % TimeUtil.MILLIS_PER_HOUR);
+            newStopT += TimeUtil.MILLIS_PER_HOUR - (newStopT % TimeUtil.MILLIS_PER_HOUR);
         }
         // Add two hours on either side to work around a display/UI
         // related problem...
@@ -1733,25 +1705,21 @@ public class ParmManager
     }
 
     /**
-     * Returns a matching parm * (creates if necessary) for the given expression
-     * and database id.
+     * Returns a matching parm * (creates if necessary) for the given expression and
+     * database id.
      *
-     * @param dbid
-     *            the database
-     * @param exprName
-     *            the expression name
+     * @param dbid     the database
+     * @param exprName the expression name
      * @return the parm
      */
-    private Parm parmInExprDatabase(final DatabaseID dbid,
-            final String exprName) {
+    private Parm parmInExprDatabase(final DatabaseID dbid, final String exprName) {
         DatabaseID mutableDb = getMutableDatabase();
 
         ParmID topoID = this.dataManager.getTopoManager().getCompositeParmID();
         ParmID[] parmIDs = getAvailableParms(dbid);
         for (ParmID parmID : parmIDs) {
             if (parmID.expressionName(topoID, mutableDb, false).equals(exprName)
-                    || parmID.expressionName(topoID, mutableDb, true)
-                            .equals(exprName)) {
+                    || parmID.expressionName(topoID, mutableDb, true).equals(exprName)) {
                 // match found -- parm already exists? or do we need to create
                 // it?
                 Parm p = getParm(parmID);
@@ -1767,9 +1735,9 @@ public class ParmManager
     }
 
     /**
-     * ParmMgr::setParmsRemoveModParms() Helper function for setParms(). Removes
-     * any modified parms from the "remove" list. Returns the modified list
-     * through the calling argument.
+     * ParmMgr::setParmsRemoveModParms() Helper function for setParms(). Removes any
+     * modified parms from the "remove" list. Returns the modified list through the
+     * calling argument.
      *
      * @param removeParms
      */
@@ -1780,8 +1748,8 @@ public class ParmManager
 
         while (pidIterator.hasNext()) {
             ParmID parm = pidIterator.next();
-            for (int i = 0; i < isModified.length; i++) {
-                if (isModified[i].getParmID().equals(parm)) {
+            for (Parm element : isModified) {
+                if (element.getParmID().equals(parm)) {
                     pidIterator.remove();
                     break;
                 }
@@ -1790,23 +1758,21 @@ public class ParmManager
     }
 
     /**
-     * ParmMgr::setParmsDetermineModParms() Helper function for setParms().
-     * Separate out the parms that are simply switching display states from the
-     * addParms. Return these. Modifies the addParms list.
+     * ParmMgr::setParmsDetermineModParms() Helper function for setParms(). Separate
+     * out the parms that are simply switching display states from the addParms.
+     * Return these. Modifies the addParms list.
      *
      * @param addParms
      * @return
      */
-    private Collection<Parm> setParmsDetermineModParms(
-            List<ParmIDVis> addParms) {
+    private Collection<Parm> setParmsDetermineModParms(List<ParmIDVis> addParms) {
         List<Parm> modParms = new ArrayList<>();
 
         for (int i = addParms.size() - 1; i >= 0; i--) {
             // already exist?
             Parm p = getParm(addParms.get(i).getParmID());
             if (p != null) {
-                p.getDisplayAttributes()
-                        .setDisplayable(addParms.get(i).isVisible());
+                p.getDisplayAttributes().setDisplayable(addParms.get(i).isVisible());
                 if (!modParms.contains(p)) {
                     modParms.add(p);
                 }
@@ -1819,10 +1785,9 @@ public class ParmManager
     }
 
     /**
-     * ParmMgr::dependentParms() Given a ParmID, returns list of dependent
-     * parms. Dependent parms are those due to VCparms, or ISC parms. The
-     * considerISC says to consider ISC dependencies based on showISC and the
-     * Fcst->ISC relationship
+     * ParmMgr::dependentParms() Given a ParmID, returns list of dependent parms.
+     * Dependent parms are those due to VCparms, or ISC parms. The considerISC says
+     * to consider ISC dependencies based on showISC and the Fcst->ISC relationship
      *
      * @param pid
      * @param considerISC
@@ -1866,14 +1831,13 @@ public class ParmManager
 
     /**
      * Helper function for <code>setParms</code>. Takes the toBeLoaded and
-     * removeParms lists, calculates non-visible ISC dependencies, and then
-     * returns the updated lists through the calling arguments.
+     * removeParms lists, calculates non-visible ISC dependencies, and then returns
+     * the updated lists through the calling arguments.
      *
      * @param toBeLoaded
      * @param removeParms
      */
-    private void setParmsRemoveISCDeps(List<ParmIDVisDep> toBeLoaded,
-            Collection<ParmID> removeParms) {
+    private void setParmsRemoveISCDeps(List<ParmIDVisDep> toBeLoaded, Collection<ParmID> removeParms) {
         List<ParmID> removeList = new ArrayList<>(removeParms);
 
         for (int i = 0; i < removeList.size(); i++) {
@@ -1881,8 +1845,7 @@ public class ParmManager
             for (ParmID pid : depParms) {
                 int index = pivdIndex(toBeLoaded, pid);
                 if ((index != -1) && (!toBeLoaded.get(index).isVisible())
-                        && (!getParm(toBeLoaded.get(index).getParmID())
-                                .isModified())) {
+                        && (!getParm(toBeLoaded.get(index).getParmID()).isModified())) {
                     removeList.add(toBeLoaded.get(index).getParmID());
                     toBeLoaded.remove(index);
                 }
@@ -1897,18 +1860,17 @@ public class ParmManager
     }
 
     /**
-     * Helper function for <code>setParms</code>. Takes the toBeLoaded,
-     * addedParms, removeParms, and modParms lists, calculates dependencies, and
-     * then returns the updated lists through the calling arguments.
+     * Helper function for <code>setParms</code>. Takes the toBeLoaded, addedParms,
+     * removeParms, and modParms lists, calculates dependencies, and then returns
+     * the updated lists through the calling arguments.
      *
      * @param toBeLoaded
      * @param addParms
      * @param removeParms
      * @param modParms
      */
-    private void setParmsDependencies(List<ParmIDVisDep> toBeLoaded,
-            Collection<ParmIDVis> addParms, Collection<ParmID> removeParms,
-            Collection<Parm> modParms) {
+    private void setParmsDependencies(List<ParmIDVisDep> toBeLoaded, Collection<ParmIDVis> addParms,
+            Collection<ParmID> removeParms, Collection<Parm> modParms) {
         // determine the list of dependent parms that will be required. If
         // any are on the remove list, move them to modParms and make them
         // non-displayed. If any are missing from the "tobeloaded", then
@@ -1919,8 +1881,7 @@ public class ParmManager
             // to true so that the ISC parms that correspond to the visible
             // mutable parms are always loaded in the ParmManager. This was
             // found to significantly improve performance when loading ISC data.
-            List<ParmID> depParms = dependentParms(
-                    toBeLoaded.get(i).getParmID(), true);
+            List<ParmID> depParms = dependentParms(toBeLoaded.get(i).getParmID(), true);
 
             for (ParmID depParm : depParms) {
                 // if not present, then add it to "tobeloaded" list
@@ -1937,8 +1898,7 @@ public class ParmManager
                 }
 
                 /*
-                 * if on remove list, then remove it, add as modified
-                 * undisplayed
+                 * if on remove list, then remove it, add as modified undisplayed
                  */
                 if (removeParms.contains(depParm)) {
                     removeParms.remove(depParm);
@@ -1953,31 +1913,28 @@ public class ParmManager
     }
 
     /**
-     * ParmMgr::setParmsMakeParmIDVisDep() Helper function for setParms(). Makes
-     * the initial ParmIDVisDep "tobeloaded" list.
+     * ParmMgr::setParmsMakeParmIDVisDep() Helper function for setParms(). Makes the
+     * initial ParmIDVisDep "tobeloaded" list.
      *
      * @param addParms
      * @param modParms
      * @param removeParms
      * @return
      */
-    private List<ParmIDVisDep> setParmsMakeParmIDVisDep(
-            Collection<ParmIDVis> addParms, Collection<Parm> modParms,
+    private List<ParmIDVisDep> setParmsMakeParmIDVisDep(Collection<ParmIDVis> addParms, Collection<Parm> modParms,
             Collection<ParmID> removeParms) {
         // make a list of the expected situation, use ParmIDVisDep to hold the
         // displayed/undisplayed flags.
         List<ParmIDVisDep> toBeLoaded = new ArrayList<>();
         // new ones
         for (ParmIDVis addParm : addParms) {
-            toBeLoaded.add(new ParmIDVisDep(addParm.getParmID(),
-                    addParm.isVisible(), false));
+            toBeLoaded.add(new ParmIDVisDep(addParm.getParmID(), addParm.isVisible(), false));
         }
 
         // mod display state
         for (Parm parm : modParms) {
             if (pivdIndex(toBeLoaded, parm.getParmID()) == -1) {
-                toBeLoaded.add(new ParmIDVisDep(parm.getParmID(),
-                        parm.getDisplayAttributes().isDisplayable(), false));
+                toBeLoaded.add(new ParmIDVisDep(parm.getParmID(), parm.getDisplayAttributes().isDisplayable(), false));
             }
         }
 
@@ -1985,10 +1942,8 @@ public class ParmManager
         parms.acquireReadLock();
         try {
             for (Parm p : parms) {
-                if ((pivdIndex(toBeLoaded, p.getParmID()) == -1)
-                        && (!removeParms.contains(p.getParmID()))) {
-                    toBeLoaded.add(new ParmIDVisDep(p.getParmID(),
-                            p.getDisplayAttributes().isDisplayable(), false));
+                if ((pivdIndex(toBeLoaded, p.getParmID()) == -1) && (!removeParms.contains(p.getParmID()))) {
+                    toBeLoaded.add(new ParmIDVisDep(p.getParmID(), p.getDisplayAttributes().isDisplayable(), false));
                 }
 
             }
@@ -2005,20 +1960,43 @@ public class ParmManager
      * contains the ParmID and visibility.
      *
      * implementation ---------------------------------------------------------
-     * Note: addParms, removeParms is modified within this routine, thus they
-     * are not passed in as const references.
+     * Note: addParms, removeParms is modified within this routine, thus they are
+     * not passed in as const references.
      *
-     * Routine converts the ParmIDs into Parms*. Special cases for VCParms,
-     * since they need to load other parms possibly. Thus the input add and
-     * remove may not result in the same parms being created and destroyed.
-     * ------
+     * Routine converts the ParmIDs into Parms*. Special cases for VCParms, since
+     * they need to load other parms possibly. Thus the input add and remove may not
+     * result in the same parms being created and destroyed. ------
      * ---------------------------------------------------------------------
      *
      * @param addParms
      * @param removeParms
      */
-    private void setParms(List<ParmIDVis> addParms,
-            Collection<ParmID> removeParms) {
+    private void setParms(List<ParmIDVis> addParms, Collection<ParmID> removeParms) {
+        setParms(addParms, removeParms, false);
+
+    }
+
+    /**
+     *
+     * Command to create/remove parms based on ParmID. For additions, the Map
+     * contains the ParmID and visibility.
+     *
+     * implementation ---------------------------------------------------------
+     * Note: addParms, removeParms is modified within this routine, thus they are
+     * not passed in as const references.
+     *
+     * Routine converts the ParmIDs into Parms*. Special cases for VCParms, since
+     * they need to load other parms possibly. Thus the input add and remove may not
+     * result in the same parms being created and destroyed. ------
+     * ---------------------------------------------------------------------
+     *
+     * @param addParms
+     * @param removeParms
+     * @param isRefreshing true if this is being called as a part of just refreshing
+     *                     all data for a server reconnect, only affects parms being
+     *                     removed
+     */
+    private void setParms(List<ParmIDVis> addParms, Collection<ParmID> removeParms, boolean isRefreshing) {
         // setCursor(0); // turn ON wait cursor
 
         // statusHandler.debug("********* setParms() begin *****************");
@@ -2030,7 +2008,9 @@ public class ParmManager
         // + addParms.toString() + ", remove: " + removeParms.toString());
 
         // Ensure that no modified parms are being removed.
-        setParmsRemoveModParms(removeParms);
+        if (!isRefreshing) {
+            setParmsRemoveModParms(removeParms);
+        }
 
         // Some parms in the addparms may only be switching display states,
         // separate these out. After this section, addParms will only be
@@ -2049,8 +2029,7 @@ public class ParmManager
         for (int i = 0; i < 2; i++) {
             // make a list of the expected situation, use ParmIDVisDep to hold
             // the displayed/undisplayed flags.
-            toBeLoaded = setParmsMakeParmIDVisDep(addParms, modParms,
-                    removeParms);
+            toBeLoaded = setParmsMakeParmIDVisDep(addParms, modParms, removeParms);
 
             // Here's a derivation from AWIPS1...
             // We've modified setParmsDependencies to always ensure that the ISC
@@ -2102,12 +2081,10 @@ public class ParmManager
         // create the desired parms
         List<Parm> parmsToAdd = new ArrayList<>();
         for (ParmIDVis addParm : addParms) {
-            boolean mutableFlag = addParm.getParmID().getDbId()
-                    .equals(getMutableDatabase());
+            boolean mutableFlag = addParm.getParmID().getDbId().equals(getMutableDatabase());
 
             try {
-                Parm p = createParmInternal(addParm.getParmID(), mutableFlag,
-                        addParm.isVisible());
+                Parm p = createParmInternal(addParm.getParmID(), mutableFlag, addParm.isVisible());
 
                 // In AWIPS1 this would've triggered an error alert, however, in
                 // AWIPS2 since we're preloading ISC parms in another thread,
@@ -2120,9 +2097,7 @@ public class ParmManager
                 }
             } catch (GFEServerException e) {
                 statusHandler.handle(Priority.PROBLEM,
-                        "Failure to instantiate parm in createParmInternal: "
-                                + addParm.getParmID().toString(),
-                        e);
+                        "Failure to instantiate parm in createParmInternal: " + addParm.getParmID().toString(), e);
             }
         }
 
@@ -2130,14 +2105,13 @@ public class ParmManager
         Collection<Parm> parmsToRemove = getParms(removeParms);
 
         // now handle the bookkeeping and notifications
-        setParms(parmsToAdd, parmsToRemove, modParms);
+        setParms(parmsToAdd, parmsToRemove, modParms, isRefreshing);
 
         // setCursor(1); // turn OFF wait cursor
     }
 
     @Override
-    public Parm getParmInExpr(final String exprName, boolean enableTopo,
-            Parm variableParm) {
+    public Parm getParmInExpr(final String exprName, boolean enableTopo, Parm variableParm) {
         // ---------------------------------------------------------
         // Loop through all displayed and perhaps available parms,
         // get their expressionNames and compare to that specified.
@@ -2227,10 +2201,8 @@ public class ParmManager
                 // non-existant parm
                 deletions.remove(deletionsList.get(i));
             } else if (p.isModified()) {
-                statusHandler.handle(Priority.PROBLEM,
-                        "Attempt to unload a parm that is modified through"
-                                + " setDisplayedParms(). Parm="
-                                + deletionsList.get(i));
+                statusHandler.handle(Priority.PROBLEM, "Attempt to unload a parm that is modified through"
+                        + " setDisplayedParms(). Parm=" + deletionsList.get(i));
                 deletions.remove(deletionsList.get(i));
             }
         }
@@ -2238,9 +2210,7 @@ public class ParmManager
         // process additions, simply to validate them
         for (int i = additionsList.size() - 1; i >= 0; i--) {
             if (!isParmInDatabase(additionsList.get(i))) {
-                statusHandler.handle(Priority.DEBUG,
-                        "Attempt to load a non-existent parm"
-                                + additionsList.get(i));
+                statusHandler.handle(Priority.DEBUG, "Attempt to load a non-existent parm" + additionsList.get(i));
                 additions.remove(additionsList.get(i));
             }
         }
@@ -2256,8 +2226,8 @@ public class ParmManager
     }
 
     /**
-     * Helper function for setParms(). Unloads old parms that are undisplayed
-     * and not dependent. Calling arguments are modified.
+     * Helper function for setParms(). Unloads old parms that are undisplayed and
+     * not dependent. Calling arguments are modified.
      *
      * Ensure parm is already in existance, and isn't on the modParms list, and
      * isn't in the cachedParmList.
@@ -2266,8 +2236,8 @@ public class ParmManager
      * @param modParms
      * @param removeParms
      */
-    private void setParmsUnloadOld(List<ParmIDVisDep> toBeLoaded,
-            Collection<Parm> modParms, Collection<ParmID> removeParms) {
+    private void setParmsUnloadOld(List<ParmIDVisDep> toBeLoaded, Collection<Parm> modParms,
+            Collection<ParmID> removeParms) {
         // only try to unload old undisplayed, if there are already parms
         // being removed.
         if (removeParms.isEmpty()) {
@@ -2277,8 +2247,7 @@ public class ParmManager
         // process backwards, since we might delete records...
         for (int i = toBeLoaded.size() - 1; i >= 0; i--) {
             // interested in not displayed, and not dependent parms
-            if ((!toBeLoaded.get(i).isDependent())
-                    && (!toBeLoaded.get(i).isVisible())) {
+            if ((!toBeLoaded.get(i).isDependent()) && (!toBeLoaded.get(i).isVisible())) {
                 // the entries must be existing parms, and thus on the
                 // _parmList. Can't be modified.
                 Parm p = getParm(toBeLoaded.get(i).getParmID());
@@ -2303,11 +2272,8 @@ public class ParmManager
 
     @Override
     public void parmInventoryChanged(Parm parm, TimeRange timeRange) {
-        if (!systemTimeRange.isValid()
-                || (timeRange.getStart().getTime() < systemTimeRange.getStart()
-                        .getTime())
-                || (timeRange.getEnd().getTime() > systemTimeRange.getEnd()
-                        .getTime())) {
+        if (!systemTimeRange.isValid() || (timeRange.getStart().getTime() < systemTimeRange.getStart().getTime())
+                || (timeRange.getEnd().getTime() > systemTimeRange.getEnd().getTime())) {
             TimeRange newTR = recalcSystemTimeRange();
 
             if (!newTR.equals(systemTimeRange)) {
@@ -2329,14 +2295,12 @@ public class ParmManager
     }
 
     @Override
-    public void addDisplayedParmListChangedListener(
-            IDisplayedParmListChangedListener listener) {
+    public void addDisplayedParmListChangedListener(IDisplayedParmListChangedListener listener) {
         this.displayedParmListListeners.add(listener);
     }
 
     @Override
-    public void removeDisplayedParmListChangedListener(
-            IDisplayedParmListChangedListener listener) {
+    public void removeDisplayedParmListChangedListener(IDisplayedParmListChangedListener listener) {
         this.displayedParmListListeners.remove(listener);
     }
 
@@ -2347,8 +2311,7 @@ public class ParmManager
     }
 
     @Override
-    public void removeParmListChangedListener(
-            IParmListChangedListener listener) {
+    public void removeParmListChangedListener(IParmListChangedListener listener) {
         this.parmListChangedListeners.remove(listener);
     }
 
@@ -2363,53 +2326,40 @@ public class ParmManager
     }
 
     @Override
-    public void addSystemTimeRangeChangedListener(
-            ISystemTimeRangeChangedListener listener) {
+    public void addSystemTimeRangeChangedListener(ISystemTimeRangeChangedListener listener) {
         this.systemTimeRangeChangedListeners.add(listener);
     }
 
     @Override
-    public void removeSystemTimeRangeChangedListener(
-            ISystemTimeRangeChangedListener listener) {
-        this.systemTimeRangeChangedListeners.remove(listener);
-    }
-
+    public void removeSystemTimeRangeChangedListener(ISystemTimeRangeChangedListener listener) {
     @Override
-    public void addAvailableSourcesChangedListener(
-            IAvailableSourcesChangedListener listener) {
+    public void addAvailableSourcesChangedListener(IAvailableSourcesChangedListener listener) {
         this.availableSourcesListeners.add(listener);
     }
 
     @Override
-    public void addNewModelAvailableListener(
-            INewModelAvailableListener listener) {
+    public void addNewModelAvailableListener(INewModelAvailableListener listener) {
         this.newModelListeners.add(listener);
     }
 
     @Override
-    public void removeAvailableSourcesChangedListener(
-            IAvailableSourcesChangedListener listener) {
+    public void removeAvailableSourcesChangedListener(IAvailableSourcesChangedListener listener) {
         this.availableSourcesListeners.remove(listener);
     }
 
     @Override
-    public void removeNewModelAvailableListener(
-            INewModelAvailableListener listener) {
+    public void removeNewModelAvailableListener(INewModelAvailableListener listener) {
         this.newModelListeners.remove(listener);
     }
 
     /**
      * Fire the displayed parm list changed listener
      *
-     * @param parms
-     *            complete list of parms
-     * @param adds
-     *            parms that were added
-     * @param deletes
-     *            parms that were deleted
+     * @param parms   complete list of parms
+     * @param adds    parms that were added
+     * @param deletes parms that were deleted
      */
-    private void fireDisplayedParmListChanged(final Parm[] parms,
-            final Parm[] adds, final Parm[] deletes) {
+    private void fireDisplayedParmListChanged(final Parm[] parms, final Parm[] adds, final Parm[] deletes) {
         for (Object listener : this.displayedParmListListeners.getListeners()) {
             final IDisplayedParmListChangedListener casted = (IDisplayedParmListChangedListener) listener;
 
@@ -2428,10 +2378,8 @@ public class ParmManager
     /**
      * Fire the ParmID changed event.
      *
-     * @param parm
-     *            The parm which had its ParmID change
-     * @param newParmId
-     *            The new ParmID associated with parm.
+     * @param parm      The parm which had its ParmID change
+     * @param newParmId The new ParmID associated with parm.
      */
     private void fireParmIDChanged(final Parm parm, final ParmID newParmId) {
         for (Object listener : this.parmIdChangedListeners.getListeners()) {
@@ -2451,15 +2399,11 @@ public class ParmManager
     /**
      * Fire the parm list changed listener
      *
-     * @param parms
-     *            complete list of parms
-     * @param adds
-     *            parms that were added
-     * @param deletes
-     *            parms that were deleted
+     * @param parms   complete list of parms
+     * @param adds    parms that were added
+     * @param deletes parms that were deleted
      */
-    private void fireParmListChanged(final Parm[] parms, final Parm[] adds,
-            final Parm[] deletes) {
+    private void fireParmListChanged(final Parm[] parms, final Parm[] adds, final Parm[] deletes) {
         for (Object listener : this.parmListChangedListeners.getListeners()) {
             final IParmListChangedListener casted = (IParmListChangedListener) listener;
 
@@ -2477,12 +2421,10 @@ public class ParmManager
     /**
      * Fire the system time range changed listener
      *
-     * @param systemTimeRange
-     *            new system time range
+     * @param systemTimeRange new system time range
      */
     private void fireSystemTimeRangeChanged(final TimeRange systemTimeRange) {
-        for (Object listener : this.systemTimeRangeChangedListeners
-                .getListeners()) {
+        for (Object listener : this.systemTimeRangeChangedListeners.getListeners()) {
             final ISystemTimeRangeChangedListener casted = (ISystemTimeRangeChangedListener) listener;
 
             Runnable notTask = new Runnable() {
@@ -2499,15 +2441,11 @@ public class ParmManager
     /**
      * Fire the available sources changed event.
      *
-     * @param inventory
-     *            The complete inventory
-     * @param deletions
-     *            The items removed from the inventory
-     * @param additions
-     *            The items added to the inventory
+     * @param inventory The complete inventory
+     * @param deletions The items removed from the inventory
+     * @param additions The items added to the inventory
      */
-    private void fireAvailableSourcesChanged(final List<DatabaseID> inventory,
-            final List<DatabaseID> deletions,
+    private void fireAvailableSourcesChanged(final List<DatabaseID> inventory, final List<DatabaseID> deletions,
             final List<DatabaseID> additions) {
         for (Object listener : this.availableSourcesListeners.getListeners()) {
             final IAvailableSourcesChangedListener casted = (IAvailableSourcesChangedListener) listener;
@@ -2516,8 +2454,7 @@ public class ParmManager
 
                 @Override
                 public void run() {
-                    casted.availableSourcesChanged(inventory, deletions,
-                            additions);
+                    casted.availableSourcesChanged(inventory, deletions, additions);
                 }
             };
 
@@ -2529,8 +2466,7 @@ public class ParmManager
      * Fire the new model available event.
      *
      * @param newModel
-     * @param additions
-     *            The DatabaseID of the newly-available model
+     * @param additions The DatabaseID of the newly-available model
      */
     private void fireNewModelAvailable(final DatabaseID newModel) {
         for (Object listener : this.newModelListeners.getListeners()) {
@@ -2550,8 +2486,7 @@ public class ParmManager
     /**
      * Return a list of ParmIDs for a list of Parms
      *
-     * @param parms
-     *            the parms
+     * @param parms the parms
      * @return the parm IDs
      */
     @Override
@@ -2598,8 +2533,7 @@ public class ParmManager
 
         if (displayable && !parm.getDisplayAttributes().isDisplayable()) {
             parm.getDisplayAttributes().setDisplayable(true);
-        } else if (!displayable && parm.getDisplayAttributes().isDisplayable()
-                && !parm.isModified()) {
+        } else if (!displayable && parm.getDisplayAttributes().isDisplayable() && !parm.isModified()) {
             parm.getDisplayAttributes().setDisplayable(false);
         } else {
             // modified displayable, can't change to non-displayable
@@ -2628,8 +2562,7 @@ public class ParmManager
             modelName = databaseName;
         }
 
-        DatabaseID stripped = new DatabaseID(this.dataManager.getSiteID(),
-                DataType.GRID, optType, modelName);
+        DatabaseID stripped = new DatabaseID(this.dataManager.getSiteID(), DataType.GRID, optType, modelName);
 
         // attempt a match in the available database list. Note that the
         // list is always sorted in model time order within each modelName.
@@ -2674,10 +2607,9 @@ public class ParmManager
      * Filters out a complete list of databaseIDs to those only allowed by the
      * dbCatagories in the gfeConfig. Sorts the final list.
      *
-     * @param dbIds
-     *            The list of DatabaseIDs to filter
-     * @return A sorted list of DatabseIDs that are GRID types and match the
-     *         list of allowed model types in the gfeConfig.
+     * @param dbIds The list of DatabaseIDs to filter
+     * @return A sorted list of DatabseIDs that are GRID types and match the list of
+     *         allowed model types in the gfeConfig.
      */
     private List<DatabaseID> filterDbIds(List<DatabaseID> dbIds) {
         List<DatabaseID> filteredIds = new ArrayList<>();
@@ -2697,18 +2629,16 @@ public class ParmManager
 
     /**
      * Returns a filtered list of the available databases. The list includes the
-     * mutable model, plus all other databases identified by the database
-     * categories specified in the gfeConfig. The databases are filtered by
-     * projection also, since the GFE can only handle one projection.
+     * mutable model, plus all other databases identified by the database categories
+     * specified in the gfeConfig. The databases are filtered by projection also,
+     * since the GFE can only handle one projection.
      *
      * @return A filtered list of available databases.
      */
     private List<DatabaseID> getDatabaseInventory() {
-        ServerResponse<List<DatabaseID>> sr = dataManager.getClient()
-                .getDbInventory();
+        ServerResponse<List<DatabaseID>> sr = dataManager.getClient().getDbInventory();
         if (!sr.isOkay()) {
-            statusHandler.error(
-                    String.format("GetDbInventory fail: %s", sr.message()));
+            statusHandler.error(String.format("GetDbInventory fail: %s", sr.message()));
             return Collections.emptyList();
         }
 
@@ -2717,18 +2647,14 @@ public class ParmManager
     }
 
     /**
-     * This function is called when the list of available database has changed.
-     * The list of available parms is updated based on the list of additions and
+     * This function is called when the list of available database has changed. The
+     * list of available parms is updated based on the list of additions and
      * deletions.
      *
-     * @param deletions
-     *            The items being removed from the inventory
-     * @param additions
-     *            The items being added from the inventory
+     * @param deletions The items being removed from the inventory
+     * @param additions The items being added from the inventory
      */
-    public void updatedDatabaseList(List<DatabaseID> deletions,
-            List<DatabaseID> additions) {
-
+    public void updatedDatabaseList(List<DatabaseID> deletions, List<DatabaseID> additions) {
         // create list of additions we didn't already have
         List<DatabaseID> newAdditions = new ArrayList<>(additions);
         newAdditions.removeAll(availableDatabases);
@@ -2774,22 +2700,18 @@ public class ParmManager
         // model source, although the valid model times may be different.
         // We only to want to swap with one copy of this model.
         List<ParmID> forceUnloadParms = new ArrayList<>();
-        ParmID[] lprId = getParmIDs(
-                parmsToReplace.toArray(new Parm[parmsToReplace.size()]));
+        ParmID[] lprId = getParmIDs(parmsToReplace.toArray(new Parm[parmsToReplace.size()]));
         List<ParmID> lprIdList = new ArrayList<>();
         for (ParmID parmId : lprId) {
             lprIdList.add(parmId);
         }
         Collections.sort(lprIdList, Collections.reverseOrder());
 
-        for (ListIterator<ParmID> iterator = lprIdList.listIterator(
-                lprIdList.size()); iterator.previousIndex() > 0;) {
+        for (ListIterator<ParmID> iterator = lprIdList.listIterator(lprIdList.size()); iterator.previousIndex() > 0;) {
             ParmID parmId = iterator.previous();
 
-            if (parmId.getParmName().equals(
-                    lprIdList.get(iterator.previousIndex()).getParmName())
-                    && parmId.getParmLevel().equals(lprIdList
-                            .get(iterator.previousIndex()).getParmLevel())) {
+            if (parmId.getParmName().equals(lprIdList.get(iterator.previousIndex()).getParmName())
+                    && parmId.getParmLevel().equals(lprIdList.get(iterator.previousIndex()).getParmLevel())) {
                 Parm parmToRemove = getParm(parmId);
                 if (parmsToReplace.contains(parmToRemove)) {
                     parmsToReplace.remove(parmToRemove);
@@ -2806,8 +2728,8 @@ public class ParmManager
 
         // perform the swap
         for (Parm parm : parmsToReplace) {
-            ParmID newParmId = new ParmID(parm.getParmID().getParmName(),
-                    modelIdentifier, parm.getParmID().getParmLevel());
+            ParmID newParmId = new ParmID(parm.getParmID().getParmName(), modelIdentifier,
+                    parm.getParmID().getParmLevel());
 
             if (!newParmId.equals(parm.getParmID())) {
                 // create the parm
@@ -2819,10 +2741,7 @@ public class ParmManager
                     newParm = createParmInternal(newParmId, false, false);
                 } catch (GFEServerException e) {
                     statusHandler.handle(Priority.PROBLEM,
-                            "Problem with creating model-swap parm: "
-                                    + newParmId.toString()
-                                    + " in updateModel()",
-                            e);
+                            "Problem with creating model-swap parm: " + newParmId.toString() + " in updateModel()", e);
                     continue;
                 }
 
@@ -2833,8 +2752,7 @@ public class ParmManager
         }
 
         if (anyChanges) {
-            statusHandler.handle(Priority.EVENTA,
-                    "Model Updated: " + modelIdentifier.toString());
+            statusHandler.handle(Priority.EVENTA, "Model Updated: " + modelIdentifier.toString());
         }
     }
 
@@ -2868,9 +2786,8 @@ public class ParmManager
                     tempParms.add(parm);
                 }
 
-                if ("Topo".equals(parm.getParmID().getParmName()) && Message
-                        .inquireLastMessage(EnableDisableTopoMsg.class)
-                        .getAction() == Action.ENABLE) {
+                if ("Topo".equals(parm.getParmID().getParmName())
+                        && Message.inquireLastMessage(EnableDisableTopoMsg.class).getAction() == Action.ENABLE) {
                     continue;
                 }
 
@@ -2878,8 +2795,7 @@ public class ParmManager
                 // not on the cache list. Attempt to delete these -- they will
                 // come back if they are dependent or cached. Be sure they
                 // aren't already on the tempParms list.
-                if (!parm.getDisplayAttributes().isDisplayable()
-                        && !tempParms.contains(parm)) {
+                if (!parm.getDisplayAttributes().isDisplayable() && !tempParms.contains(parm)) {
                     tempParms.add(parm);
                 }
             }
@@ -2957,14 +2873,12 @@ public class ParmManager
                 statusHandler.debug("Loading VCModule: " + modFile);
                 VCModule m = new VCModule(dataManager, this, modName);
                 if (!m.isValid()) {
-                    statusHandler.error("Error creating VCModule " + modFile,
-                            m.getErrorString());
+                    statusHandler.error("Error creating VCModule " + modFile, m.getErrorString());
                     continue;
                 }
                 definitions.add(m);
             } catch (LocalizationException e) {
-                statusHandler.handle(Priority.PROBLEM,
-                        "Unable to retrieve VCMODULE " + modFile.toString(), e);
+                statusHandler.handle(Priority.PROBLEM, "Unable to retrieve VCMODULE " + modFile.toString(), e);
                 continue;
             }
 
@@ -2976,8 +2890,7 @@ public class ParmManager
     /**
      * Returns the Virtual Parm index into vcModules for the given ParmID.
      *
-     * @param pid
-     *            ParmID to search for.
+     * @param pid ParmID to search for.
      * @return The index of the ParmID if it is in vcModules. Else, -1.
      */
     private int vcIndex(ParmID pid) {
@@ -3007,9 +2920,8 @@ public class ParmManager
             boolean wanted = msg.getAction().equals(Action.ENABLE);
             enableDisableTopoParm(wanted, msg.isForceVisibility());
         } else {
-            statusHandler.error(
-                    "ParmManager.receiveMessage() received unexpected message: "
-                            + message.getClass().getName());
+            statusHandler
+                    .error("ParmManager.receiveMessage() received unexpected message: " + message.getClass().getName());
         }
     }
 
@@ -3021,6 +2933,14 @@ public class ParmManager
             systemTimeRange = newSysTR;
 
             fireSystemTimeRangeChanged(systemTimeRange);
+        }
+    }
+
+    @Override
+    public void handleSiteActivationNotification(SiteActivationNotification notification) {
+        if (EDEX_REQUEST_MODE.equalsIgnoreCase(notification.getRunMode()) && notification.isActivation()
+                && notification.isSuccess() && notification.getModifiedSite().equals(dataManager.getSiteID())) {
+            refreshCaches();
         }
     }
 }

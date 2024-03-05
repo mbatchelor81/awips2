@@ -70,7 +70,7 @@ import com.raytheon.viz.core.map.GeoUtil;
 
 import si.uom.SI;
 import systems.uom.common.USCustomary;
-import tec.uom.se.quantity.Quantities;
+import tech.units.indriya.quantity.Quantities;
 
 /**
  * Cloud height resource, uses an {@link IVerticalSoundingProvider} to obtain a

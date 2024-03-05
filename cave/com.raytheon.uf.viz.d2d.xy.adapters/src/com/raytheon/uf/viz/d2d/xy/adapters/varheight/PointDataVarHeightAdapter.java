@@ -45,7 +45,11 @@ import com.raytheon.uf.viz.xy.varheight.adapter.AbstractVarHeightAdapter;
 import com.raytheon.viz.core.graphing.xy.XYData;
 import com.raytheon.viz.core.graphing.xy.XYWindImageData;
 
+<<<<<<< HEAD
 import tec.uom.se.AbstractUnit;
+=======
+import tech.units.indriya.AbstractUnit;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Adapter for converting pdos that are compatible with the point data api into

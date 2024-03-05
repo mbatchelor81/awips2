@@ -26,8 +26,15 @@
 <menuTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <contribute xsi:type="menuItem" menuText="0 ft AGL" key="0FHAG" indentText="false" />
     <contribute xsi:type="menuItem" menuText="54 ft AGL" key="54ftAgl" indentText="false" />
+<<<<<<< HEAD
     <contribute xsi:type="menuItem" menuText="2 kft AGL" key="2kftAgl" indentText="false" />
     <contribute xsi:type="menuItem" menuText="0-2 kft AGL" key="0-2kftAgl" indentText="true" />
+=======
+    <contribute xsi:type="menuItem" menuText="1.5 kft AGL" key="1.5kftAgl" indentText="false" />
+    <contribute xsi:type="menuItem" menuText="2 kft AGL" key="2kftAgl" indentText="false" />
+    <contribute xsi:type="menuItem" menuText="0-2 kft AGL" key="0-2kftAgl" indentText="true" />
+    <contribute xsi:type="menuItem" menuText="3 kft AGL" key="3kftAgl" indentText="false" />
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <contribute xsi:type="menuItem" menuText="5 kft AGL" key="5kftAgl" indentText="false" />
     <contribute xsi:type="menuItem" menuText="6 kft AGL" key="6kftAgl" indentText="false" />
     <contribute xsi:type="menuItem" menuText="10 kft AGL" key="10kftAgl" indentText="false" />

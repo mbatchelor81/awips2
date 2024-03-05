@@ -47,7 +47,11 @@ import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.app.VelocityEngine;
-import org.apache.velocity.tools.generic.ListTool;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.Polygon;
+import org.locationtech.jts.geom.TopologyException;
+import org.locationtech.jts.io.WKTReader;
 
 import com.raytheon.uf.common.dataplugin.text.db.MixedCaseProductSupport;
 import com.raytheon.uf.common.dataplugin.warning.AbstractWarningRecord;
@@ -100,11 +104,6 @@ import com.raytheon.viz.warngen.util.DurationUtil;
 import com.raytheon.viz.warngen.util.FipsUtil;
 import com.raytheon.viz.warngen.util.FollowUpUtil;
 import com.raytheon.viz.warngen.util.WarnGenMathTool;
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.Geometry;
-import org.locationtech.jts.geom.Polygon;
-import org.locationtech.jts.geom.TopologyException;
-import org.locationtech.jts.io.WKTReader;
 
 /**
  * Sets up and runs the velocity engine for a warngen product. Originally
@@ -166,6 +165,10 @@ import org.locationtech.jts.io.WKTReader;
  * Mar 02, 2018  6786      dgilling    Don't allow WMO header time to be
  *                                     different than VTEC start time for some
  *                                     products.
+ * Jan 13, 2023 8991       lsingh      Updated to support Velocity Engine 2.3.
+ *                                     Handle when secondTimeZone and watches are null.
+ * Apr 13, 2023 2030107    lsingh      Removed ListTool as part of Velocity Tools 3.1 upgrade.
+ * Apr 21, 2023 2030407    mapeters    Restore setting site/backup properties in initialize()
  *
  * </pre>
  *
@@ -177,7 +180,7 @@ public class TemplateRunner {
             .getHandler(TemplateRunner.class);
 
     private static final IPerformanceStatusHandler perfLog = PerformanceStatus
-            .getHandler("WG:");
+            .getHandler("WG");
 
     private static final String LOGIN_NAME_KEY = "LOGNAME";
 
@@ -430,7 +433,6 @@ public class TemplateRunner {
 
         /** Convenience tools for the template */
         context.put("timeFormat", dateFormat);
-        context.put("list", new ListTool());
         context.put("officeShort",
                 warngenLayer.getDialogConfig().getWarngenOfficeShort());
         context.put("officeLoc",
@@ -445,7 +447,8 @@ public class TemplateRunner {
         }
 
         String stormType = stormTrackState.displayType == DisplayType.POLY
-                ? "line" : "single";
+                ? "line"
+                : "single";
         context.put("stormType", stormType);
         context.put("mathUtil", new WarnGenMathTool());
         context.put("dateUtil", new DateUtil());
@@ -520,6 +523,9 @@ public class TemplateRunner {
                     }
                 }
             }
+            if (context.get("secondtimezone") == null) {
+                context.put("secondtimezone", context.get("localtimezone"));
+            }
 
             wx = new Wx(config, stormTrackState,
                     warngenLayer.getStormLocations(stormTrackState),
@@ -538,8 +544,8 @@ public class TemplateRunner {
             std.setDate(timeNow);
 
             // CAN and EXP products follow different rules as followups
-            if (!((selectedAction == WarningAction.CAN)
-                    || (selectedAction == WarningAction.EXP))) {
+            if (((selectedAction != WarningAction.CAN)
+                    && (selectedAction != WarningAction.EXP))) {
                 if (selectedAction == WarningAction.COR) {
                     wwaMNDTime = wx.getStartTime().getTime();
                 } else {
@@ -585,9 +591,9 @@ public class TemplateRunner {
                     }
                 }
 
-                calStormVelocityAndEventLocation(std, timeNow, wx,
-                        context, warngenLayer, stormTrackState, selectedAction,
-                        wkt, threeLetterSiteId, etn, phenSig);
+                calStormVelocityAndEventLocation(std, timeNow, wx, context,
+                        warngenLayer, stormTrackState, selectedAction, wkt,
+                        threeLetterSiteId, etn, phenSig);
 
                 if (std.getMotionSpeed() > 0) {
                     t0 = System.currentTimeMillis();
@@ -737,7 +743,7 @@ public class TemplateRunner {
                         zIndex = message.indexOf('Z', tmlIndex);
                         if (zIndex > 0) {
                             int startIndex = tmlIndex + 16 + 1;
-                            String tmlTime = null;
+                            String tmlTime;
                             tmlTime = message.substring(startIndex,
                                     startIndex + 4);
                             if (tmlTime.length() == 4) {
@@ -924,9 +930,7 @@ public class TemplateRunner {
             List<Watch> watches = watchUtil.getWatches(config, warnPolygon,
                     timeNow);
             perfLog.logDuration("getWatches", System.currentTimeMillis() - t0);
-            if (watches != null && !watches.isEmpty()) {
-                context.put("watches", watches);
-            }
+            context.put("watches", watches);
         } catch (Exception e) {
             e.printStackTrace();
             statusHandler.handle(Priority.VERBOSE,
@@ -949,29 +953,30 @@ public class TemplateRunner {
 
     private static VelocityEngine ENGINE;
 
-    /**
-     * @param issuingSite
-     */
     public static void initialize(String issuingSite) {
         synchronized (TemplateRunner.class) {
             ENGINE = new VelocityEngine();
             Properties p = new Properties();
-            p.setProperty("file.resource.loader.class",
+            p.setProperty("resource.loader.file.class",
                     LocalizationResourceLoader.class.getName());
             p.setProperty("runtime.log",
                     FileUtil.join(FileUtil
                             .join(LocalizationManager.getUserDir(), "logs"),
                             "velocity.log"));
             p.setProperty("velocimacro.permissions.allowInline", "true");
-            p.setProperty(
-                    "velocimacro.permissions.allow.inline.to.replace.global",
-                    "true");
-
+            p.setProperty("velocimacro.inline.replace_global", "true");
+            /*
+             * velocimacro.enable_bc_mode added for velocity 1.7 backwards
+             * compatibility. Allows global properties to pass through even when
+             * not explicitly named in the macro's signature.
+             */
+            p.setProperty("velocimacro.enable_bc_mode", "true");
             String site = LocalizationManager.getInstance().getCurrentSite();
-            p.setProperty(LocalizationResourceLoader.PROPERTY_SITE, site);
+            p.setProperty(LocalizationResourceLoader.ENGINE_PROPERTY_SITE,
+                    site);
 
             if (!issuingSite.equalsIgnoreCase(site)) {
-                p.setProperty(LocalizationResourceLoader.PROPERTY_BACKUP,
+                p.setProperty(LocalizationResourceLoader.ENGINE_PROPERTY_BACKUP,
                         issuingSite);
             }
 

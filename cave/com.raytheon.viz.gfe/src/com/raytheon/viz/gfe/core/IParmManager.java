@@ -26,6 +26,10 @@ import com.raytheon.uf.common.dataplugin.gfe.db.objects.GridLocation;
 import com.raytheon.uf.common.dataplugin.gfe.db.objects.GridParmInfo;
 import com.raytheon.uf.common.dataplugin.gfe.db.objects.ParmID;
 import com.raytheon.uf.common.dataplugin.gfe.slice.IGridSlice;
+<<<<<<< HEAD
+=======
+import com.raytheon.uf.common.site.notify.SiteActivationNotification;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.time.TimeRange;
 import com.raytheon.uf.viz.core.jobs.JobPool;
 import com.raytheon.viz.gfe.core.msgs.IAvailableSourcesChangedListener;
@@ -54,6 +58,11 @@ import com.raytheon.viz.gfe.core.parm.vcparm.VCModuleJobPool;
  * Aug 13, 2015  4749     njensen   Extends DisposableManager
  * Jan 04, 2018  7178     randerso  Removed deallocateUnusedGrids. Javadoc
  *                                  cleanup
+<<<<<<< HEAD
+=======
+ * Mar 25, 2021  8380     mapeters  Added {@link #resetCaches} and
+ *                                  {@link #handleSiteActivationNotification}
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -71,7 +80,11 @@ public interface IParmManager extends IParmInventoryChangedListener,
      * @param displayable
      * @return the new parm
      */
+<<<<<<< HEAD
     public Parm addParm(ParmID pid, boolean mutableParm, boolean displayable);
+=======
+    Parm addParm(ParmID pid, boolean mutableParm, boolean displayable);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * This function creates a new virtual parm with the specified
@@ -85,8 +98,13 @@ public interface IParmManager extends IParmInventoryChangedListener,
      * @param displayable
      * @return the virtual parm
      */
+<<<<<<< HEAD
     public Parm createVirtualParm(ParmID pid, GridParmInfo gpi,
             IGridSlice[] data, boolean mutableParm, boolean displayable);
+=======
+    Parm createVirtualParm(ParmID pid, GridParmInfo gpi, IGridSlice[] data,
+            boolean mutableParm, boolean displayable);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Deletes a known parm(s). Will not delete a parm that is modified.
@@ -94,20 +112,32 @@ public interface IParmManager extends IParmInventoryChangedListener,
      * @param parms
      *            parms to delete
      */
+<<<<<<< HEAD
     public void deleteParm(Parm... parms);
+=======
+    void deleteParm(Parm... parms);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Deletes all parms that are marked temporary.
      *
      */
+<<<<<<< HEAD
     public void deleteTemporaryParms();
+=======
+    void deleteTemporaryParms();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Returns a list of all parms
      *
      * @return the list of all parms
      */
+<<<<<<< HEAD
     public Parm[] getAllParms();
+=======
+    Parm[] getAllParms();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Returns the list of currently displayed databases. Displayed databases
@@ -115,7 +145,11 @@ public interface IParmManager extends IParmInventoryChangedListener,
      *
      * @return the list of displayed databases
      */
+<<<<<<< HEAD
     public List<DatabaseID> getDisplayedDbs();
+=======
+    List<DatabaseID> getDisplayedDbs();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Returns the list of currently undisplayed databases. Undisplayed
@@ -123,7 +157,11 @@ public interface IParmManager extends IParmInventoryChangedListener,
      *
      * @return the list of undisplayed databases
      */
+<<<<<<< HEAD
     public List<DatabaseID> getUndisplayedDbs();
+=======
+    List<DatabaseID> getUndisplayedDbs();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Returns a list of available databases.
@@ -131,7 +169,11 @@ public interface IParmManager extends IParmInventoryChangedListener,
      * @return the available databases, which is the sum of server+VParm, but no
      *         duplicates.
      */
+<<<<<<< HEAD
     public List<DatabaseID> getAvailableDbs();
+=======
+    List<DatabaseID> getAvailableDbs();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Returns a list of available parameters based on the database ID. If an
@@ -141,21 +183,33 @@ public interface IParmManager extends IParmInventoryChangedListener,
      *            the database ID
      * @return the parm IDs available
      */
+<<<<<<< HEAD
     public ParmID[] getAvailableParms(DatabaseID dbID);
+=======
+    ParmID[] getAvailableParms(DatabaseID dbID);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Returns a list of all available parameters in all databases
      *
      * @return the available parms
      */
+<<<<<<< HEAD
     public ParmID[] getAllAvailableParms();
+=======
+    ParmID[] getAllAvailableParms();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Returns a list of displayed parms
      *
      * @return the list of displayed parms
      */
+<<<<<<< HEAD
     public Parm[] getDisplayedParms();
+=======
+    Parm[] getDisplayedParms();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * NOTE: In the legacy system this was getModified() but the underlying
@@ -164,28 +218,44 @@ public interface IParmManager extends IParmInventoryChangedListener,
      *
      * @return an array of params that are currently locked
      */
+<<<<<<< HEAD
     public Parm[] getLockedParms();
+=======
+    Parm[] getLockedParms();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Returns a list of parms that have been modified.
      *
      * @return the modified parms
      */
+<<<<<<< HEAD
     public Parm[] getModifiedParms();
+=======
+    Parm[] getModifiedParms();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Returns the mutable database
      *
      * @return the mutable database
      */
+<<<<<<< HEAD
     public DatabaseID getMutableDatabase();
+=======
+    DatabaseID getMutableDatabase();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Returns the original mutable database
      *
      * @return the original mutable database
      */
+<<<<<<< HEAD
     public DatabaseID getOrigMutableDatabase();
+=======
+    DatabaseID getOrigMutableDatabase();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Return the parm for a parm ID
@@ -194,7 +264,11 @@ public interface IParmManager extends IParmInventoryChangedListener,
      *            the parm ID
      * @return the parm
      */
+<<<<<<< HEAD
     public Parm getParm(ParmID parmID);
+=======
+    Parm getParm(ParmID parmID);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Return a list of Parms for a list of ParmIDs with nulls in place of parms
@@ -203,7 +277,11 @@ public interface IParmManager extends IParmInventoryChangedListener,
      * @param parmIDs
      * @return see above
      */
+<<<<<<< HEAD
     public Parm[] getParms(ParmID[] parmIDs);
+=======
+    Parm[] getParms(ParmID[] parmIDs);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Gets the ParmID from each Parm.
@@ -212,7 +290,11 @@ public interface IParmManager extends IParmInventoryChangedListener,
      *            this list of Parms
      * @return the list of ParmIDs
      */
+<<<<<<< HEAD
     public ParmID[] getParmIDs(Parm[] parms);
+=======
+    ParmID[] getParmIDs(Parm[] parms);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * This function returns a parm pointer given an expression name for a parm.
@@ -231,7 +313,11 @@ public interface IParmManager extends IParmInventoryChangedListener,
      *            the variable parm
      * @return the parm or null if none matches the expression
      */
+<<<<<<< HEAD
     public Parm getParmInExpr(final String exprName, boolean enableTopo,
+=======
+    Parm getParmInExpr(final String exprName, boolean enableTopo,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             Parm variableParm);
 
     /**
@@ -243,14 +329,22 @@ public interface IParmManager extends IParmInventoryChangedListener,
      *            whether to enable topo
      * @return the parm or null if none matches the expression
      */
+<<<<<<< HEAD
     public Parm getParmInExpr(final String exprName, boolean enableTopo);
+=======
+    Parm getParmInExpr(final String exprName, boolean enableTopo);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Returns a list of regular parms that are selected.
      *
      * @return a list of all selected parms
      */
+<<<<<<< HEAD
     public Parm[] getSelectedParms();
+=======
+    Parm[] getSelectedParms();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Returns the system time range (a time range that contains all grids of
@@ -258,14 +352,22 @@ public interface IParmManager extends IParmInventoryChangedListener,
      *
      * @return the system time range
      */
+<<<<<<< HEAD
     public TimeRange getSystemTimeRange();
+=======
+    TimeRange getSystemTimeRange();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Returns a list of undisplayed parms
      *
      * @return the list of undisplayed parms
      */
+<<<<<<< HEAD
     public Parm[] getUndisplayedParms();
+=======
+    Parm[] getUndisplayedParms();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Returns a unique parm ID that cannot conflict with existing parm IDs nor
@@ -277,7 +379,11 @@ public interface IParmManager extends IParmInventoryChangedListener,
      * @param categoryHint
      * @return the unique parm ID
      */
+<<<<<<< HEAD
     public ParmID getUniqueParmID(final ParmID pid, final String nameHint,
+=======
+    ParmID getUniqueParmID(final ParmID pid, final String nameHint,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             final String categoryHint);
 
     /**
@@ -288,7 +394,11 @@ public interface IParmManager extends IParmInventoryChangedListener,
      *            the parm ID to look for
      * @return whether the parm is in the system
      */
+<<<<<<< HEAD
     public boolean isParmInDatabase(ParmID parmId);
+=======
+    boolean isParmInDatabase(ParmID parmId);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Save modified data for the specified parameter
@@ -296,7 +406,11 @@ public interface IParmManager extends IParmInventoryChangedListener,
      * @param parm
      * @return true if successful
      */
+<<<<<<< HEAD
     public boolean saveParm(Parm parm);
+=======
+    boolean saveParm(Parm parm);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Save modified data for the specified parameter over the specified time
@@ -306,7 +420,11 @@ public interface IParmManager extends IParmInventoryChangedListener,
      * @param timeRanges
      * @return true if successful
      */
+<<<<<<< HEAD
     public boolean saveParm(Parm parm, TimeRange[] timeRanges);
+=======
+    boolean saveParm(Parm parm, TimeRange[] timeRanges);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * This function adds or removes parms such that the displayed list matches
@@ -316,7 +434,11 @@ public interface IParmManager extends IParmInventoryChangedListener,
      * @param parmList
      *            the list of parm IDs
      */
+<<<<<<< HEAD
     public void setDisplayedParms(ParmID[] parmList);
+=======
+    void setDisplayedParms(ParmID[] parmList);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Controls the displayable characteristic of the parm. A displayable parm
@@ -327,7 +449,11 @@ public interface IParmManager extends IParmInventoryChangedListener,
      * @param displayable
      *            whether the parm is displayable or not
      */
+<<<<<<< HEAD
     public void setParmDisplayable(Parm parm, boolean displayable);
+=======
+    void setParmDisplayable(Parm parm, boolean displayable);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Register an available sources changed listener with the parm manager
@@ -337,7 +463,11 @@ public interface IParmManager extends IParmInventoryChangedListener,
      * @param listener
      *            the available sources change listener
      */
+<<<<<<< HEAD
     public void addAvailableSourcesChangedListener(
+=======
+    void addAvailableSourcesChangedListener(
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             IAvailableSourcesChangedListener listener);
 
     /**
@@ -346,7 +476,11 @@ public interface IParmManager extends IParmInventoryChangedListener,
      * @param listener
      *            the available sources change listener
      */
+<<<<<<< HEAD
     public void removeAvailableSourcesChangedListener(
+=======
+    void removeAvailableSourcesChangedListener(
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             IAvailableSourcesChangedListener listener);
 
     /**
@@ -357,7 +491,11 @@ public interface IParmManager extends IParmInventoryChangedListener,
      * @param listener
      *            the displayed parm change listener
      */
+<<<<<<< HEAD
     public void addDisplayedParmListChangedListener(
+=======
+    void addDisplayedParmListChangedListener(
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             IDisplayedParmListChangedListener listener);
 
     /**
@@ -366,7 +504,11 @@ public interface IParmManager extends IParmInventoryChangedListener,
      * @param listener
      *            the displayed parm change listener
      */
+<<<<<<< HEAD
     public void removeDisplayedParmListChangedListener(
+=======
+    void removeDisplayedParmListChangedListener(
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             IDisplayedParmListChangedListener listener);
 
     /**
@@ -377,8 +519,12 @@ public interface IParmManager extends IParmInventoryChangedListener,
      * @param listener
      *            the new model available listener
      */
+<<<<<<< HEAD
     public void addNewModelAvailableListener(
             INewModelAvailableListener listener);
+=======
+    void addNewModelAvailableListener(INewModelAvailableListener listener);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Unregister a new model available listener from the parm manager
@@ -386,8 +532,12 @@ public interface IParmManager extends IParmInventoryChangedListener,
      * @param listener
      *            the new model available listener
      */
+<<<<<<< HEAD
     public void removeNewModelAvailableListener(
             INewModelAvailableListener listener);
+=======
+    void removeNewModelAvailableListener(INewModelAvailableListener listener);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Register a ParmID change listener with the parm manager
@@ -397,7 +547,11 @@ public interface IParmManager extends IParmInventoryChangedListener,
      * @param listener
      *            the ParmID change listener
      */
+<<<<<<< HEAD
     public void addParmIDChangedListener(IParmIDChangedListener listener);
+=======
+    void addParmIDChangedListener(IParmIDChangedListener listener);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Unregister a ParmID change listener from the parm manager
@@ -405,7 +559,11 @@ public interface IParmManager extends IParmInventoryChangedListener,
      * @param listener
      *            the ParmID change listener
      */
+<<<<<<< HEAD
     public void removeParmIDChangedListener(IParmIDChangedListener listener);
+=======
+    void removeParmIDChangedListener(IParmIDChangedListener listener);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Register a parm change listener with the parm manager
@@ -415,7 +573,11 @@ public interface IParmManager extends IParmInventoryChangedListener,
      * @param listener
      *            the parm change listener
      */
+<<<<<<< HEAD
     public void addParmListChangedListener(IParmListChangedListener listener);
+=======
+    void addParmListChangedListener(IParmListChangedListener listener);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Unregister a parm change listener from the parm manager
@@ -423,8 +585,12 @@ public interface IParmManager extends IParmInventoryChangedListener,
      * @param listener
      *            the parm change listener
      */
+<<<<<<< HEAD
     public void removeParmListChangedListener(
             IParmListChangedListener listener);
+=======
+    void removeParmListChangedListener(IParmListChangedListener listener);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Unregister a sytem time range change listener with the parm manager
@@ -432,7 +598,11 @@ public interface IParmManager extends IParmInventoryChangedListener,
      * @param listener
      *            the system time range change listener
      */
+<<<<<<< HEAD
     public void addSystemTimeRangeChangedListener(
+=======
+    void addSystemTimeRangeChangedListener(
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             ISystemTimeRangeChangedListener listener);
 
     /**
@@ -443,7 +613,11 @@ public interface IParmManager extends IParmInventoryChangedListener,
      * @param listener
      *            the system time range change listener
      */
+<<<<<<< HEAD
     public void removeSystemTimeRangeChangedListener(
+=======
+    void removeSystemTimeRangeChangedListener(
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             ISystemTimeRangeChangedListener listener);
 
     /**
@@ -452,7 +626,11 @@ public interface IParmManager extends IParmInventoryChangedListener,
      *
      * @return the grid location
      */
+<<<<<<< HEAD
     public GridLocation compositeGridLocation();
+=======
+    GridLocation compositeGridLocation();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Command to enable or disable the topography parm.
@@ -462,7 +640,11 @@ public interface IParmManager extends IParmInventoryChangedListener,
      * @param wanted
      * @param forceVisibility
      */
+<<<<<<< HEAD
     public void enableDisableTopoParm(boolean wanted, boolean forceVisibility);
+=======
+    void enableDisableTopoParm(boolean wanted, boolean forceVisibility);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Returns a DatabaseID that represents the dbName string and the relative
@@ -478,7 +660,11 @@ public interface IParmManager extends IParmInventoryChangedListener,
      *            the version of the db
      * @return the DatabaseID
      */
+<<<<<<< HEAD
     public DatabaseID findDatabase(String databaseName, int version);
+=======
+    DatabaseID findDatabase(String databaseName, int version);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Returns the corresponding ISC parmID based on the incoming parmID. Does
@@ -491,26 +677,42 @@ public interface IParmManager extends IParmInventoryChangedListener,
      *            The parm ID to load the corresponding ISC parmID for
      * @return The ISC parmID
      */
+<<<<<<< HEAD
     public ParmID getISCParmID(ParmID pid);
+=======
+    ParmID getISCParmID(ParmID pid);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * @return the isc databases
      */
+<<<<<<< HEAD
     public List<DatabaseID> getIscDatabases();
+=======
+    List<DatabaseID> getIscDatabases();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Returns true if we are in isc mode, false if in normal mode.
      *
      * @return true if we are in isc mode, false if in normal mode.
      */
+<<<<<<< HEAD
     public boolean iscMode();
+=======
+    boolean iscMode();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Returns the product database as a DatabaseID.
      *
      * @return the product database ID
      */
+<<<<<<< HEAD
     public DatabaseID getProductDB();
+=======
+    DatabaseID getProductDB();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Replace displayed parms that represent old model data with new model
@@ -520,6 +722,7 @@ public interface IParmManager extends IParmInventoryChangedListener,
      * @param modelIdentifier
      *            The identifier of the new model.
      */
+<<<<<<< HEAD
     public void updateModel(DatabaseID modelIdentifier);
 
     /**
@@ -529,6 +732,9 @@ public interface IParmManager extends IParmInventoryChangedListener,
      *            The site to purge
      */
     public void purgeDbCacheForSite(String site);
+=======
+    void updateModel(DatabaseID modelIdentifier);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Create a parm
@@ -538,8 +744,12 @@ public interface IParmManager extends IParmInventoryChangedListener,
      * @param displayable
      * @return the created parm
      */
+<<<<<<< HEAD
     public Parm createParm(ParmID pid, boolean mutableParm,
             boolean displayable);
+=======
+    Parm createParm(ParmID pid, boolean mutableParm, boolean displayable);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Create a ParmID from an expression
@@ -547,15 +757,41 @@ public interface IParmManager extends IParmInventoryChangedListener,
      * @param parmName
      * @return the ParmID
      */
+<<<<<<< HEAD
     public ParmID fromExpression(String parmName);
+=======
+    ParmID fromExpression(String parmName);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * @return the notification pool
      */
+<<<<<<< HEAD
     public JobPool getNotificationPool();
+=======
+    JobPool getNotificationPool();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * @return the VDModule pool
      */
+<<<<<<< HEAD
     public VCModuleJobPool getVCModulePool();
+=======
+    VCModuleJobPool getVCModulePool();
+
+    /**
+     * Refresh all necessary caches to match the DB.
+     */
+    void refreshCaches();
+
+    /**
+     * Handle a site activation change notification.
+     *
+     * @param notification
+     *            the site activation notification
+     */
+    void handleSiteActivationNotification(
+            SiteActivationNotification notification);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

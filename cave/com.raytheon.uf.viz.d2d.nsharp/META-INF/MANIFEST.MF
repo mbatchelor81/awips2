@@ -32,4 +32,9 @@ Export-Package: com.raytheon.uf.viz.d2d.nsharp,
  com.raytheon.uf.viz.d2d.nsharp.rsc,
  com.raytheon.uf.viz.d2d.nsharp.vb
 Bundle-ClassPath: com.raytheon.uf.viz.d2d.nsharp.jar
-Import-Package: gov.noaa.nws.ncep.viz.soundingrequest
+Import-Package: com.raytheon.uf.common.dataplugin.grid,
+ com.raytheon.uf.viz.core.maps.display,
+ gov.noaa.nws.ncep.ui.pgen.tools,
+ gov.noaa.nws.ncep.viz.resources.manager,
+ gov.noaa.nws.ncep.viz.soundingrequest,
+ gov.noaa.nws.ncep.viz.ui.display

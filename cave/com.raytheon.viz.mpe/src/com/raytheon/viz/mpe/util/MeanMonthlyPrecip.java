@@ -23,7 +23,11 @@ import javax.measure.UnitConverter;
 
 import si.uom.SI;
 import systems.uom.common.USCustomary;
+<<<<<<< HEAD
 import tec.uom.se.unit.MetricPrefix;
+=======
+import javax.measure.MetricPrefix;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Reads the monthly precipitation prism data from XMRG files.

@@ -37,7 +37,13 @@ import com.raytheon.uf.common.jms.notification.NotificationMessage;
 import com.raytheon.uf.common.python.PyUtil;
 import com.raytheon.uf.common.python.PythonEval;
 import com.raytheon.uf.common.python.PythonIncludePathUtil;
+<<<<<<< HEAD
 import com.raytheon.uf.common.status.IUFStatusHandler;
+=======
+import com.raytheon.uf.common.status.IPerformanceStatusHandler;
+import com.raytheon.uf.common.status.IUFStatusHandler;
+import com.raytheon.uf.common.status.PerformanceStatus;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.status.UFStatus;
 import com.raytheon.uf.common.status.UFStatus.Priority;
 import com.raytheon.uf.common.time.SimulatedTime;
@@ -69,6 +75,11 @@ import jep.NamingConventionClassEnquirer;
  * Feb 20, 2018  6602     dgilling  Update for new text utilities path.
  * Jan 07, 2019  21019    ryu       Fix issue of gfeclient hanging on exit.
  * Jun 03, 2019  7852     dgilling  Update code for jep 3.8.
+<<<<<<< HEAD
+=======
+ * Dec 17, 2021  8342     sharbison Changes for Performance Logging.
+ * Jun  7, 2023  2034261  tgurney   Fixes for Jep 4 upgrade
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -81,6 +92,12 @@ public class GfeClientServer extends AbstractAWIPSComponent
     private static final IUFStatusHandler statusHandler = UFStatus
             .getHandler(GfeClientServer.class);
 
+<<<<<<< HEAD
+=======
+    private static final IPerformanceStatusHandler perfLog = PerformanceStatus
+            .getHandler("GFE");
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private class PythonThread extends Thread {
 
         private Semaphore queueSemaphore = new Semaphore(0);
@@ -98,6 +115,7 @@ public class GfeClientServer extends AbstractAWIPSComponent
 
         private void initializeJep() {
             try {
+<<<<<<< HEAD
                 String pyVizDir = new File(FileLocator
                         .resolve(FileLocator.find(
                                 Activator.getDefault().getBundle(),
@@ -108,6 +126,15 @@ public class GfeClientServer extends AbstractAWIPSComponent
                 String utilityDir = new File(FileLocator
                         .resolve(FileLocator.find(
                                 Activator.getDefault().getBundle(),
+=======
+                String pyVizDir = new File(FileLocator.resolve(FileLocator.find(
+                        Activator.getDefault().getBundle(),
+                        new Path(FileUtil.join("python", "pyViz")), null))
+                        .getPath()).getPath();
+
+                String utilityDir = new File(FileLocator.resolve(
+                        FileLocator.find(Activator.getDefault().getBundle(),
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                 new Path(FileUtil.join("python", "utility")),
                                 null))
                         .getPath()).getPath();
@@ -135,11 +162,19 @@ public class GfeClientServer extends AbstractAWIPSComponent
                         GfeCavePyIncludeUtil.getTestsIncludePath(),
                         GfePyIncludeUtil.getProceduresIncludePath(includeUser));
 
+<<<<<<< HEAD
                 JepConfig config = new JepConfig().setInteractive(false)
                         .setIncludePath(includePath)
                         .setClassLoader(GfeClientServer.class.getClassLoader())
                         .setClassEnquirer(new NamingConventionClassEnquirer())
                         .setRedirectOutputStreams(true);
+=======
+                JepConfig config = new JepConfig()
+                        .setIncludePath(includePath)
+                        .setClassLoader(GfeClientServer.class.getClassLoader())
+                        .setClassEnquirer(new NamingConventionClassEnquirer())
+                        .redirectStdout(System.out).redirectStdErr(System.err);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 pythonEval = new PythonEval(config);
                 pythonEval.eval("import sys");
             } catch (IOException | JepException e) {
@@ -264,8 +299,13 @@ public class GfeClientServer extends AbstractAWIPSComponent
 
         NotificationManagerJob.removeQueueObserver(queue, null, this);
 
+<<<<<<< HEAD
         statusHandler
                 .info("GFE Client process terminating. No longer listening on queue: "
+=======
+        statusHandler.info(
+                "GFE Client process terminating. No longer listening on queue: "
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         + queue);
     }
 
@@ -281,8 +321,13 @@ public class GfeClientServer extends AbstractAWIPSComponent
             try {
                 Object payload = message.getMessagePayload();
                 if (!(payload instanceof GfeClientRequest)) {
+<<<<<<< HEAD
                     statusHandler
                             .error("GfeClient received unexpected message of type: "
+=======
+                    statusHandler.error(
+                            "GfeClient received unexpected message of type: "
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                     + payload.getClass().getName());
                     continue;
                 }
@@ -301,8 +346,14 @@ public class GfeClientServer extends AbstractAWIPSComponent
                 pythonThread.queueRequest(request);
 
                 long t1 = System.currentTimeMillis();
+<<<<<<< HEAD
                 statusHandler.info(String.format("Time to run script %s: %d ms",
                         script, (t1 - t0)));
+=======
+                perfLog.logDuration(
+                        String.format("GFE Client running script %s", script),
+                        t1 - t0);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             } catch (NotificationException e) {
                 statusHandler.error(e.getLocalizedMessage(), e);
             }

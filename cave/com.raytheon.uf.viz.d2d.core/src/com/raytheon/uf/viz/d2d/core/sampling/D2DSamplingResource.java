@@ -1,19 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
- * 
+ *
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
- * 
+ *
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
- * 
+ *
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -31,39 +31,45 @@ import org.eclipse.core.runtime.jobs.Job;
 import com.raytheon.uf.viz.core.IDisplayPane;
 import com.raytheon.uf.viz.core.IDisplayPaneContainer;
 import com.raytheon.uf.viz.core.IGraphicsTarget;
+import com.raytheon.uf.viz.core.IPane;
+import com.raytheon.uf.viz.core.drawables.IDescriptor;
 import com.raytheon.uf.viz.core.drawables.PaintProperties;
 import com.raytheon.uf.viz.core.drawables.ResourcePair;
 import com.raytheon.uf.viz.core.exception.VizException;
 import com.raytheon.uf.viz.core.rsc.GenericResourceData;
+import com.raytheon.uf.viz.core.rsc.IPaneSyncedResource;
 import com.raytheon.uf.viz.core.rsc.LoadProperties;
 import com.raytheon.uf.viz.core.rsc.ResourceList;
 import com.raytheon.uf.viz.core.rsc.capabilities.BlendableCapability;
 import com.raytheon.uf.viz.core.rsc.sampling.SamplingInputAdapter;
 import com.raytheon.uf.viz.core.rsc.sampling.SamplingResource;
+import com.raytheon.viz.ui.UiUtil;
 import com.raytheon.viz.ui.editor.IMultiPaneEditor;
 import com.raytheon.viz.ui.input.preferences.MousePreferenceManager;
 
 /**
  * D2D Sampling resources, supports all pane sampling and long left click
  * sampling as well
- * 
+ *
  * <pre>
- * 
+ *
  * SOFTWARE HISTORY
- * 
+ *
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- --------------------------------------------
  * Dec 22, 2010  7712     mschenke  Initial creation
  * Aug 08, 2016  2676     bsteffen  Change return type of
  *                                  getSamplingInputHandler().
  * Mar 21, 2018  7245     mduff     Don't create a new ResourceList when sampling all panels.
- * 
+ * Sep 19, 2022  8792     mapeters  Don't sample inactive panes that aren't the same type as
+ *                                  the active one, implement IPaneSyncedResource
+ *
  * </pre>
- * 
+ *
  * @author mschenke
  */
 public class D2DSamplingResource extends SamplingResource
-        implements ID2DSamplingResource {
+        implements ID2DSamplingResource, IPaneSyncedResource {
 
     private class D2DMouseAdapter
             extends SamplingInputAdapter<D2DSamplingResource> {
@@ -153,6 +159,10 @@ public class D2DSamplingResource extends SamplingResource
     @Override
     protected void paintInternal(IGraphicsTarget target,
             PaintProperties paintProps) throws VizException {
+        if (!UiUtil.isDescriptorCompatibleWithActive(descriptor,
+                getResourceContainer())) {
+            return;
+        }
         if (!isAllPanelSampling()) {
             super.paintInternal(target, paintProps);
             return;
@@ -181,6 +191,10 @@ public class D2DSamplingResource extends SamplingResource
         }
 
         for (IDisplayPane pane : panes) {
+            if (!UiUtil.isDescriptorCompatibleWithActive(pane.getDescriptor(),
+                    container)) {
+                continue;
+            }
             for (ResourcePair pair : pane.getDescriptor().getResourceList()) {
                 if (pair.getResource() == null
                         || !pair.getProperties().isVisible()) {
@@ -257,5 +271,27 @@ public class D2DSamplingResource extends SamplingResource
                     .displayedPaneCount() == 1));
         }
         return allPanelSampling;
+    }
+
+    @Override
+    public void syncPane(IPane pane) {
+        /*
+         * Sampling resource is automatically added to all D2D panes, just
+         * update the pane's sampling resource to match our state.
+         */
+        IDescriptor canvasDescriptor = pane.getMainCanvas().getDescriptor();
+        if (canvasDescriptor != null) {
+            ResourceList rl = canvasDescriptor.getResourceList();
+            List<D2DSamplingResource> samplingRscs = rl
+                    .getResourcesByTypeAsType(D2DSamplingResource.class);
+            for (D2DSamplingResource samplingRsc : samplingRscs) {
+                if (isSampling() != samplingRsc.isSampling()) {
+                    samplingRsc.setSampling(isSampling());
+                }
+                if (isAllPanelSampling() != samplingRsc.isAllPanelSampling()) {
+                    samplingRsc.setAllPanelSampling(isAllPanelSampling());
+                }
+            }
+        }
     }
 }

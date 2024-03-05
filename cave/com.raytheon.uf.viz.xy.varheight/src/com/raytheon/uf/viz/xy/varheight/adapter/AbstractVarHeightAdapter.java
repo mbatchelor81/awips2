@@ -40,7 +40,11 @@ import com.raytheon.uf.viz.xy.varheight.rsc.VarHeightResourceData;
 import com.raytheon.viz.core.graphing.xy.XYData;
 import com.raytheon.viz.core.graphing.xy.XYWindImageData;
 
+<<<<<<< HEAD
 import tec.uom.se.AbstractConverter;
+=======
+import tech.units.indriya.function.AbstractConverter;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Abstract base class for writing var height adapters

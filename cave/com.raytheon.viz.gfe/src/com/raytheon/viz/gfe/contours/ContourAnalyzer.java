@@ -23,15 +23,28 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+<<<<<<< HEAD
 import com.raytheon.uf.common.dataplugin.gfe.grid.Grid2DFloat;
 import com.raytheon.uf.common.dataplugin.gfe.grid.Grid2DInteger;
+=======
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.LineString;
+
+import com.raytheon.uf.common.dataplugin.gfe.grid.Grid2DFloat;
+import com.raytheon.uf.common.dataplugin.gfe.grid.Grid2DInteger;
+import com.raytheon.uf.common.status.IPerformanceStatusHandler;
+import com.raytheon.uf.common.status.PerformanceStatus;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.time.util.ITimer;
 import com.raytheon.uf.common.time.util.TimeUtil;
 import com.raytheon.viz.gfe.contours.util.CLine;
 import com.raytheon.viz.gfe.contours.util.ContourValueDistance;
 import com.raytheon.viz.gfe.contours.util.SearchDir;
+<<<<<<< HEAD
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.LineString;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Computes a grid of values from contours. Rehosted from ContourAnalyzer.H and
@@ -158,6 +171,10 @@ import org.locationtech.jts.geom.LineString;
  *                                  C++ ContourAnalyzer.H and ContourAnalyzer.C
  * Dec 13, 2017  7178     randerso  Code formatting and cleanup
  * Jan 04, 2018  7178     randerso  Replaced clone() with copy()
+<<<<<<< HEAD
+=======
+ * Dec 17, 2021  8342     sharbison Changes for Performance Logging.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -165,6 +182,12 @@ import org.locationtech.jts.geom.LineString;
  */
 
 public class ContourAnalyzer extends AbstractGfeAnalyzer {
+<<<<<<< HEAD
+=======
+    private static final IPerformanceStatusHandler perfLog = PerformanceStatus
+            .getHandler("GFE");
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /* various flags to control processing */
     private boolean allNew;
 
@@ -292,8 +315,12 @@ public class ContourAnalyzer extends AbstractGfeAnalyzer {
         }
         timer.stop();
         this.timeUsed = timer.getElapsedTime();
+<<<<<<< HEAD
         logger.info(
                 "    ContourAnalyzer cstr         " + this.timeUsed + " ms");
+=======
+        perfLog.logDuration("Contour Analysis", this.timeUsed);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
@@ -353,8 +380,12 @@ public class ContourAnalyzer extends AbstractGfeAnalyzer {
         timer.stop();
         this.timeUsed += timer.getElapsedTime();
 
+<<<<<<< HEAD
         logger.info("    ContourAnalyzer.RecomputeGrid() used " + this.timeUsed
                 + " ms");
+=======
+        perfLog.logDuration("Contour Analyzer grid computation", this.timeUsed);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         return this.finalResultData.copy();
     }
@@ -1064,10 +1095,14 @@ public class ContourAnalyzer extends AbstractGfeAnalyzer {
          */
 
         timer.stop();
+<<<<<<< HEAD
         if (logger.isDebugEnabled()) {
             logger.debug("   analysis used " + timer.getElapsedTime() + " ms");
         }
 
+=======
+        perfLog.logDuration("Contour Analysis step 1", timer.getElapsedTime());
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
@@ -1359,7 +1394,11 @@ public class ContourAnalyzer extends AbstractGfeAnalyzer {
                 "   ContourAnalyzer step 2 did " + numstep2 + " grid points");
 
         timer.stop();
+<<<<<<< HEAD
         logger.info("    step 2 " + timer.getElapsedTime() + " ms");
+=======
+        perfLog.logDuration("Contour Analysis step 2", timer.getElapsedTime());
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**

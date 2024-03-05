@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -25,12 +37,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+<<<<<<< HEAD
+=======
+import org.locationtech.jts.geom.Coordinate;
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.dataplugin.grid.GridConstants;
 import com.raytheon.uf.common.dataplugin.grid.GridRecord;
 import com.raytheon.uf.common.dataplugin.grid.derivparam.GridMapKey;
 import com.raytheon.uf.common.dataplugin.level.Level;
 import com.raytheon.uf.common.dataquery.requests.RequestConstraint;
+<<<<<<< HEAD
 import com.raytheon.uf.common.datastorage.Request;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.datastorage.records.IDataRecord;
 import com.raytheon.uf.common.derivparam.library.DerivParamDesc;
 import com.raytheon.uf.common.derivparam.library.DerivParamField;
@@ -45,7 +65,10 @@ import com.raytheon.uf.common.time.DataTime;
 import com.raytheon.uf.viz.core.drawables.IDescriptor;
 import com.raytheon.uf.viz.core.drawables.ResourcePair;
 import com.raytheon.uf.viz.core.exception.VizException;
+<<<<<<< HEAD
 import com.raytheon.uf.viz.core.map.MapDescriptor;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.rsc.AbstractResourceData;
 import com.raytheon.uf.viz.core.rsc.AbstractVizResource;
 import com.raytheon.uf.viz.core.rsc.IResourceGroup;
@@ -54,6 +77,7 @@ import com.raytheon.uf.viz.datacube.DataCubeContainer;
 import com.raytheon.viz.grid.GridExtension;
 import com.raytheon.viz.radar.VizRadarRecord;
 import com.raytheon.viz.radar.rsc.AbstractRadarResource;
+<<<<<<< HEAD
 import org.locationtech.jts.geom.Coordinate;
 import com.raytheon.viz.radar.rsc.image.RadarRadialResource;
 
@@ -70,6 +94,32 @@ import com.raytheon.viz.radar.rsc.image.RadarRadialResource;
  * Aug 15, 2017  6332     bsteffen  Initial creation
  * Jul 17, 2020  17574    smoorthy  get true elevation angle and send with TiltRequest
  * 
+=======
+import com.raytheon.viz.radar.rsc.image.RadarRadialResource;
+import com.raytheon.viz.radar.util.RadarAsGridUtil;
+
+/**
+ *
+ * Hooks radar data and TILT levels into the grid plugin.
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+ * Date          Ticket#  Engineer  Description
+ * ------------- -------- --------- --------------------------------------------
+ * Aug 15, 2017  6332     bsteffen  Initial creation
+ * Jul 17, 2020  17574    smoorthy  get true elevation angle and send with
+ *                                  TiltRequest
+ * Mar 29, 2021  8374     randerso  Updated for changes to TiltRequest
+ *                                  constructor
+ * Jul 07, 2021  8576     randerso  Changed RadarAdapter to support multiple
+ *                                  local radars as defined in radarsInUse.txt
+ * Jul 26, 2021  8600     randerso  Include icao in update key
+ * Sep 08, 2021  8652     njensen   Added check for RCP to resolvePluginStaticData()
+ * Nov 14, 2022  8973     mapeters  Sync access to resources' radar records
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  *
  * @author bsteffen
@@ -97,7 +147,11 @@ public class RadarGridExtension implements GridExtension {
 
     @Override
     public String get3DMasterLevel(String model) {
+<<<<<<< HEAD
         if (model.equals(RadarAdapter.RADAR_SOURCE)) {
+=======
+        if (model.startsWith(RadarAdapter.RADAR_SOURCE)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return RadarAdapter.CUBE_MASTER_LEVEL_NAME;
         }
         return null;
@@ -106,7 +160,11 @@ public class RadarGridExtension implements GridExtension {
     @Override
     public LevelNode getCubeNode(String modelName,
             List<CubeLevel<AbstractRequestableNode, AbstractRequestableNode>> cubeLevels) {
+<<<<<<< HEAD
         if (modelName.equals(RadarAdapter.RADAR_SOURCE)) {
+=======
+        if (modelName.startsWith(RadarAdapter.RADAR_SOURCE)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return new RadarCubeLevelNode(cubeLevels, modelName);
         }
         return null;
@@ -121,7 +179,18 @@ public class RadarGridExtension implements GridExtension {
                 return new TiltGridDataLevelNode(sNode.getValue(),
                         fieldParamAbbrev, level);
             }
+<<<<<<< HEAD
         }
+=======
+        } else if (sNode.getValue().startsWith(RadarAdapter.RADAR_SOURCE)
+                && TILT.equals(level.getMasterLevel().getName())) {
+            if (RadarAsGridUtil.RCP.equals(fieldParamAbbrev)) {
+                return new RcpGridDataLevelNode(sNode.getValue(),
+                        fieldParamAbbrev, level);
+            }
+        }
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return null;
     }
 
@@ -131,7 +200,14 @@ public class RadarGridExtension implements GridExtension {
             RadarRequestableLevelNode rNode = (RadarRequestableLevelNode) node;
             Level level = rNode.getLevel();
             Map<String, Object> gribMap = new HashMap<>();
+<<<<<<< HEAD
             gribMap.put(GridConstants.DATASET_ID, RadarAdapter.RADAR_SOURCE);
+=======
+            gribMap.put(GridConstants.DATASET_ID,
+                    RadarAdapter.RADAR_SOURCE + "-"
+                            + rNode.getRequestConstraintMap().get("icao")
+                                    .getConstraintValue());
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             gribMap.put(GridConstants.PARAMETER_ABBREVIATION,
                     rNode.getParamAbbrev());
             gribMap.put(GridConstants.MASTER_LEVEL_NAME,
@@ -149,10 +225,18 @@ public class RadarGridExtension implements GridExtension {
             IDescriptor descriptor) throws VizException {
         if (TILT.equals(record.getLevel().getMasterLevel().getName())) {
             Coordinate tiltLoc = findTiltLocation(descriptor.getResourceList());
+<<<<<<< HEAD
             Double trueElevationAngle = getTrueElevationAngle(descriptor.getResourceList(), record.getDataTime(), record.getLevel().getLevelonevalue());
             if (tiltLoc != null && trueElevationAngle != null) {
                 TiltRequest request = new TiltRequest();
                 request.setType(Request.Type.ALL);
+=======
+            Double trueElevationAngle = getTrueElevationAngle(
+                    descriptor.getResourceList(),
+                    record.getLevel().getLevelonevalue());
+            if (tiltLoc != null && trueElevationAngle != null) {
+                TiltRequest request = new TiltRequest();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 request.setTiltLocation(tiltLoc);
                 request.setTrueElevationAngle(trueElevationAngle);
                 try {
@@ -185,14 +269,20 @@ public class RadarGridExtension implements GridExtension {
         return null;
     }
 
+<<<<<<< HEAD
     //e.g trim 1.30000012 to 1.3
     private double trimFloat(float angle){
+=======
+    // e.g trim 1.30000012 to 1.3
+    private double trimFloat(float angle) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         String angleString = String.format("%.1f", angle);
         double doubleAngle = Double.parseDouble(angleString);
         return doubleAngle;
     }
 
+<<<<<<< HEAD
     //find the corresponding true elevation angle based on what we have access to
     private Double getTrueElevationAngle(ResourceList resourceList, DataTime dt, double primaryElevationAngle){
 
@@ -211,5 +301,38 @@ public class RadarGridExtension implements GridExtension {
              }
          }
          return null;
+=======
+    /**
+     * Find the true elevation angle that corresponds to the given primary
+     * elevation angle, based on what we have access to
+     *
+     * @param resourceList
+     * @param primaryElevationAngle
+     */
+    private Double getTrueElevationAngle(ResourceList resourceList,
+            double primaryElevationAngle) {
+
+        for (ResourcePair rp : resourceList) {
+
+            AbstractVizResource<?, ?> resource = rp.getResource();
+
+            if (resource instanceof RadarRadialResource) {
+                Double trueElevationAngle = ((AbstractRadarResource<?>) resource)
+                        .processRadarRecords(radarRecords -> {
+                            for (VizRadarRecord r : radarRecords.values()) {
+                                if (r.getPrimaryElevationAngle() == primaryElevationAngle) {
+                                    return trimFloat(r.getTrueElevationAngle());
+                                }
+                            }
+                            return null;
+                        });
+
+                if (trueElevationAngle != null) {
+                    return trueElevationAngle;
+                }
+            }
+        }
+        return null;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 }

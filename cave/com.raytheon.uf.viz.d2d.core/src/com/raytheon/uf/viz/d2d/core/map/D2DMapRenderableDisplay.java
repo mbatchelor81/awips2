@@ -1,19 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
- * 
+ *
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
- * 
+ *
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
- * 
+ *
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -52,11 +52,11 @@ import com.raytheon.uf.viz.d2d.core.time.D2DTimeMatcher;
 
 /**
  * Implementation of a D2D-specific map renderable display
- * 
+ *
  * <pre>
- * 
+ *
  * SOFTWARE HISTORY
- * 
+ *
  * Date          Ticket#  Engineer   Description
  * ------------- -------- ---------- -------------------------------------------
  * Feb 09, 2009  1960     njensen    Initial creation
@@ -69,9 +69,10 @@ import com.raytheon.uf.viz.d2d.core.time.D2DTimeMatcher;
  * Dec 03, 2015  5147     bsteffen   Reset TimeMatcher on clear
  * Nov 08, 2016  5976     bsteffen   Remove unused D2D paint properties
  * Feb 13, 2018  6664     bsteffen   Reset load mode on clear.
- * 
+ * Oct 12, 2022  8946     mapeters   Add getScaleType()
+ *
  * </pre>
- * 
+ *
  * @author njensen
  */
 @XmlAccessorType(XmlAccessType.NONE)
@@ -82,13 +83,12 @@ public class D2DMapRenderableDisplay extends MapScaleRenderableDisplay
     /** The magnification */
     @XmlAttribute
     protected double magnification = ((Double) VizGlobalsManager
-            .getCurrentInstance().getPropery(VizConstants.MAGNIFICATION_ID))
-                    .doubleValue();
+            .getCurrentInstance().getProperty(VizConstants.MAGNIFICATION_ID));
 
     /** The density */
     @XmlAttribute
     protected double density = ((Double) VizGlobalsManager.getCurrentInstance()
-            .getPropery(VizConstants.DENSITY_ID)).doubleValue();
+            .getProperty(VizConstants.DENSITY_ID));
 
     protected ImageCombiner combinerListener = null;
 
@@ -197,9 +197,10 @@ public class D2DMapRenderableDisplay extends MapScaleRenderableDisplay
     public Map<String, Object> getGlobalsMap() {
         Map<String, Object> globals = super.getGlobalsMap();
         globals.put(VizConstants.FRAMES_ID,
-                new Integer(getDescriptor().getNumberOfFrames()));
-        globals.put(VizConstants.DENSITY_ID, new Double(density));
-        globals.put(VizConstants.MAGNIFICATION_ID, new Double(magnification));
+                Integer.valueOf(getDescriptor().getNumberOfFrames()));
+        globals.put(VizConstants.DENSITY_ID, Double.valueOf(density));
+        globals.put(VizConstants.MAGNIFICATION_ID,
+                Double.valueOf(magnification));
         globals.put(VizConstants.LOADMODE_ID,
                 ((D2DTimeMatcher) getDescriptor().getTimeMatcher())
                         .getLoadMode());
@@ -241,7 +242,7 @@ public class D2DMapRenderableDisplay extends MapScaleRenderableDisplay
 
     /**
      * Get the image combiner listener, instantiates if null
-     * 
+     *
      * @return
      */
     private AddListener getImageCombinerListener() {
@@ -270,4 +271,8 @@ public class D2DMapRenderableDisplay extends MapScaleRenderableDisplay
         super.clear();
     }
 
+    @Override
+    public ScaleType getScaleType() {
+        return ScaleType.MAP;
+    }
 }

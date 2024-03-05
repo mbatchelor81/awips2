@@ -38,7 +38,11 @@ import com.raytheon.uf.viz.core.rsc.LoadProperties;
 import com.raytheon.uf.viz.core.rsc.ResourceList;
 
 import si.uom.SI;
+<<<<<<< HEAD
 import tec.uom.se.unit.Units;
+=======
+import tech.units.indriya.unit.Units;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * 

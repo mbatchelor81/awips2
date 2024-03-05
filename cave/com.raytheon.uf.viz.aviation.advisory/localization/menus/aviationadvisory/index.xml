@@ -28,6 +28,8 @@
         fileName="menus/upperair/baseAviationConvectionProducts.xml" />
     <include installTo="menu:Aviation?before=IcingProductsEnd"
         fileName="menus/upperair/baseAviationIcingProducts.xml" />
+    <include installTo="menu:Aviation?before=NonConvectiveSigmetEnd"
+        fileName="menus/upperair/baseAviationNonConvectiveSigmetProducts.xml" />
     <include installTo="menu:Aviation?before=TurbulenceProductsEnd"
         fileName="menus/upperair/baseAviationTurbulenceProducts.xml" />
     <include installTo="menu:Aviation?before=VisibilityProductsEnd"

@@ -24,7 +24,11 @@ import javax.measure.UnitConverter;
 
 import com.raytheon.uf.common.units.UnitConv;
 
+<<<<<<< HEAD
 import tec.uom.se.AbstractConverter;
+=======
+import tech.units.indriya.function.AbstractConverter;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Common conversion utilities for MPE.

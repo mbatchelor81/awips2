@@ -53,6 +53,8 @@
 # Sep 23, 2020  8228      randerso    Disable GTK overlay scrollbars due to issues with TreeEditors.
 #                                     See Eclipse bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=560071
 # Apr 29, 2021  8137      randerso    Remove TEXTWS environment variable
+# Jul 30, 2021  8511      njensen     Change path to jep library to python 3.8
+# Mar 21, 2023  2032169   tjensen     Change path to jep library to python 3.9
 ##
 
 
@@ -90,7 +92,7 @@ deleteOldCaveDiskCaches &
 # Enable core dumps
 ulimit -c unlimited >> /dev/null 2>&1
 
-export LD_LIBRARY_PATH=${JAVA_INSTALL}/lib:${PYTHON_INSTALL}/lib:${PYTHON_INSTALL}/lib/python3.6/site-packages/jep:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=${JAVA_INSTALL}/lib:${PYTHON_INSTALL}/lib:${PYTHON_INSTALL}/lib/python3.11/site-packages/jep:$LD_LIBRARY_PATH
 if [[ -z "$CALLED_EXTEND_LIB_PATH" ]]; then
     extendLibraryPath
 fi

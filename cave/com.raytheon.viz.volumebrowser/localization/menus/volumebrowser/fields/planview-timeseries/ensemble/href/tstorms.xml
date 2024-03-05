@@ -60,6 +60,7 @@
     <contribute xsi:type="menuItem" menuText="Prob BL CIn &lt; -400 J/kg"
         key="ProbCIn-400" indentText="false" />
 
+<<<<<<< HEAD
     <contribute xsi:type="menuItem" menuText="Prob Helicity &gt; 100 J/kg"
         key="ProbHeli100" indentText="false" />
     <contribute xsi:type="menuItem" menuText="Prob Helicity &gt; 200 J/kg"
@@ -67,4 +68,13 @@
     <contribute xsi:type="menuItem" menuText="Prob Helicity &gt; 400 J/kg"
         key="ProbHeli400" indentText="false" />
 
+=======
+     <contribute xsi:type="menuItem" menuText="Prob Helicity &gt; 100 m^2/s^2"
+        key="Heli100.0m^2/s^2" indentText="false" />
+    <contribute xsi:type="menuItem" menuText="Prob Helicity &gt; 200 m^2/s^2"
+        key="Heli200.0m^2/s^2" indentText="false" />
+    <contribute xsi:type="menuItem" menuText="Prob Helicity &gt; 400 m^2/s^2"
+        key="Heli400.0m^2/s^2" indentText="false" />
+       
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 </menuTemplate>

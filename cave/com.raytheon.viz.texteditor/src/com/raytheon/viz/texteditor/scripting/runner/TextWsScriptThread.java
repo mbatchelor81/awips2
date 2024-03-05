@@ -34,6 +34,10 @@ import jep.Jep;
 import jep.JepConfig;
 import jep.JepException;
 import jep.NamingConventionClassEnquirer;
+<<<<<<< HEAD
+=======
+import jep.SubInterpreter;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Thread that runs a single TextWS Python script
@@ -55,6 +59,10 @@ import jep.NamingConventionClassEnquirer;
  * Mar 04, 2019  7601     tgurney   Add script path to the Python module
  *                                  globals. Add doContinue method impl.
  *                                  Add script start notifier. Remove waitFor
+<<<<<<< HEAD
+=======
+ * Jun 07, 2023  2034261  tgurney   Fixes for Jep 4 upgrade
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -100,6 +108,7 @@ public class TextWsScriptThread extends Thread
             String includePath = new PythonLocalizationPathBuilder()
                     .append(BASE_PATH, LocalizationType.CAVE_STATIC)
                     .getPathString();
+<<<<<<< HEAD
             JepConfig jepConfig = new JepConfig().setInteractive(false)
                     .setIncludePath(includePath)
                     .setClassLoader(TextWsScriptThread.class.getClassLoader())
@@ -108,6 +117,16 @@ public class TextWsScriptThread extends Thread
             boolean cancelled = false;
 
             try (Jep jep = new Jep(jepConfig)) {
+=======
+            JepConfig jepConfig = new JepConfig()
+                    .setIncludePath(includePath)
+                    .setClassLoader(TextWsScriptThread.class.getClassLoader())
+                    .setClassEnquirer(new NamingConventionClassEnquirer())
+                    .redirectStdout(System.out).redirectStdErr(System.err);
+            boolean cancelled = false;
+
+            try (Jep jep = new SubInterpreter(jepConfig)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 jep.runScript(bundle.getPath());
                 jep.set("observer", observer);
                 jep.set("scriptPath", scriptPath.toString());

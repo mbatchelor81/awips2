@@ -30,7 +30,11 @@ import javax.xml.bind.annotation.XmlElement;
 import com.raytheon.uf.common.colormap.prefs.ColorMapParameters;
 import com.raytheon.uf.viz.truecolor.extension.ITrueColorImagingExtension.Channel;
 
+<<<<<<< HEAD
 import tec.uom.se.format.SimpleUnitFormat;
+=======
+import tech.units.indriya.format.SimpleUnitFormat;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Channel information (range/unit) for a true color channel

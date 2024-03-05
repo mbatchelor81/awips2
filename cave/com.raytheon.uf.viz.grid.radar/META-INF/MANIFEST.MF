@@ -5,7 +5,12 @@ Bundle-SymbolicName: com.raytheon.uf.viz.grid.radar;singleton:=true
 Bundle-Version: 1.18.1.qualifier
 Bundle-Vendor: RAYTHEON
 Bundle-RequiredExecutionEnvironment: JavaSE-11
+<<<<<<< HEAD
 Require-Bundle: com.raytheon.uf.viz.core,
+=======
+Require-Bundle: org.eclipse.ui,
+ com.raytheon.uf.viz.core,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  com.raytheon.uf.viz.core.grid,
  com.raytheon.viz.grid,
  com.raytheon.uf.common.dataplugin.radar,
@@ -22,5 +27,15 @@ Require-Bundle: com.raytheon.uf.viz.core,
  com.raytheon.viz.alerts,
  com.raytheon.uf.viz.datacube,
  com.raytheon.uf.common.numeric,
+<<<<<<< HEAD
  javax.xml.bind
 Export-Package: com.raytheon.uf.viz.grid.radar
+=======
+ javax.xml.bind,
+ com.raytheon.viz.awipstools,
+ org.apache.commons.collections4,
+ com.raytheon.uf.common.localization
+Export-Package: com.raytheon.uf.viz.grid.radar
+Import-Package: com.raytheon.uf.common.wxmath,
+ org.apache.commons.lang3.tuple
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

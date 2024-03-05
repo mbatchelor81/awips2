@@ -50,7 +50,7 @@ import com.raytheon.viz.volumebrowser.datacatalog.DataCatalogEntry;
 import com.raytheon.viz.volumebrowser.datacatalog.IDataCatalogEntry;
 import com.raytheon.viz.volumebrowser.vbui.SelectedData;
 
-import tec.uom.se.format.SimpleUnitFormat;
+import tech.units.indriya.format.SimpleUnitFormat;
 
 /**
  *

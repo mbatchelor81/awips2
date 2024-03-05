@@ -26,6 +26,10 @@
 # Last modified: 12/10/2017 by P. Stanko, also added call to new baseline script for NWPS warning messages from WCOSS.
 # Last modified: 12/12/2017 by P. Stanko, Differentiate between structured and unstructured sites, TAFB and non-TAFB, always try hotstart
 # Last modified: 03/16/2020 by J. Maloney, modified /tmp folder creation b/c of IdM issues DCS21768
+<<<<<<< HEAD
+=======
+# Last modified: 04/26/2023 by J. Kelmer, added nohup to ssh and scp calls for IdM compatability
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # ----------------------------------------------------------------------------
 #
 # The MenuItems list defines the GFE menu item(s) under which the
@@ -257,6 +261,7 @@ class Procedure (SmartScript.SmartScript):
                     f.write(inp_args) 
                 os.chmod('/tmp/nwps'+GFEDomainname+'/inp_args',0o666)
                                   
+<<<<<<< HEAD
                 os.system('ssh -q pv2 mkdir -p /awips2/GFESuite/nwps/'+GFEDomainname+'_var')
                 os.system('ssh -q pv2 chmod 775 /awips2/GFESuite/nwps/'+GFEDomainname+'_var')              
                 os.system('scp -rpq /tmp/nwps'+GFEDomainname+'/inp_args pv2:/awips2/GFESuite/nwps/'+GFEDomainname+'_var/')   
@@ -264,6 +269,16 @@ class Procedure (SmartScript.SmartScript):
                     os.system('ssh -q pv2 /awips2/GFESuite/nwps/bin/runManualNWPS_OutsideAWIPS.sh '+GFEDomainname)                   
                 else:
                     os.system('nohup xterm -iconic -e ssh -q pv2 /awips2/GFESuite/nwps/bin/runManualNWPS_OutsideAWIPS.sh '+GFEDomainname+' &')
+=======
+                os.system('nohup ssh -q pv2 mkdir -p /awips2/GFESuite/nwps/'+GFEDomainname+'_var')
+                os.system('nohup ssh -q pv2 chmod 775 /awips2/GFESuite/nwps/'+GFEDomainname+'_var')              
+                os.system('nohup scp -rpq /tmp/nwps'+GFEDomainname+'/inp_args pv2:/awips2/GFESuite/nwps/'+GFEDomainname+'_var/')   
+                if cron:
+                    os.system('ssh -q pv2 /awips2/GFESuite/nwps/bin/runManualNWPS_OutsideAWIPS.sh '+GFEDomainname)                   
+                else:
+                    os.system('nohup ssh -q pv2 /awips2/GFESuite/nwps/bin/runManualNWPS_OutsideAWIPS.sh '+GFEDomainname+' &')
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     #ORIG#os.system('xterm -e ssh -q pv2 /awips2/GFESuite/nwps/bin/runManualNWPS_OutsideAWIPS.sh '+GFEDomainname)
                 shutil.rmtree('/tmp/nwps'+GFEDomainname)    
 

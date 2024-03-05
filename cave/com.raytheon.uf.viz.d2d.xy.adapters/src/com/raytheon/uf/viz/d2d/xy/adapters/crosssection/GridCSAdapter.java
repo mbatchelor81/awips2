@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -31,9 +43,17 @@ import java.util.Set;
 
 import javax.measure.Unit;
 
+<<<<<<< HEAD
 import org.geotools.coverage.grid.GridGeometry2D;
 import org.geotools.geometry.DirectPosition2D;
 import org.locationtech.jts.geom.Coordinate;
+=======
+import org.apache.commons.lang.ArrayUtils;
+import org.geotools.coverage.grid.GridGeometry2D;
+import org.geotools.geometry.DirectPosition2D;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.LineString;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 
 import com.raytheon.uf.common.dataplugin.PluginDataObject;
@@ -61,15 +81,26 @@ import com.raytheon.viz.core.map.GeoUtil;
 
 /**
  * Adapter providing CrossSections of grid data.
+<<<<<<< HEAD
  * 
  * <pre>
  * 
+=======
+ *
+ * <pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * SOFTWARE HISTORY
  * Date          Ticket#  Engineer    Description
  * ------------- -------- ------------ ----------------------------------------
  * Nov 23, 2009           mschenke     Initial creation
+<<<<<<< HEAD
  * Feb 04, 2011  7953     bkowal       Fill values will now be placed in the 
  *                                     data array for anything below 300MB for 
+=======
+ * Feb 04, 2011  7953     bkowal       Fill values will now be placed in the
+ *                                     data array for anything below 300MB for
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *                                     RUC80.
  * Oct 02, 2012  15259    M.Porricelli Allow plotting when 3 levels available
  *                                     (DGEX)
@@ -78,9 +109,21 @@ import com.raytheon.viz.core.map.GeoUtil;
  * Apr 03, 2018  6625     bsteffen     Do not make cross section with only two levels.
  * Apr 15, 2019  7596     lsingh       Upgraded javax.measure to JSR-363. Handled unit
  *                                     conversion.
+<<<<<<< HEAD
  * 
  * </pre>
  * 
+=======
+ * May 17, 2021  8452     randerso     Clear rectangleCache if line is changed.
+ * Oct 29, 2022  8959     mapeters     Update how data time levels are set
+ * Nov 03, 2022  8966     mapeters     Prevent NPE when Y records have no data
+ * Jan 25, 2023  9001     mapeters     Don't hold onto raw data records after
+ *                                     processing them
+ * Dec 20, 2023  2036519  mapeters     Add dispose()
+ *
+ * </pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author mschenke
  */
 public class GridCSAdapter extends AbstractCrossSectionAdapter<GridRecord> {
@@ -92,13 +135,23 @@ public class GridCSAdapter extends AbstractCrossSectionAdapter<GridRecord> {
 
     protected String yParameter = null;
 
+<<<<<<< HEAD
     protected Map<DataTime, Set<GridRecord>> yRecords = new HashMap<>();
+=======
+    protected LineString line = null;
+
+    protected final Map<DataTime, Set<GridRecord>> yRecords = new HashMap<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private Unit<?> unit;
 
     private CoordinateReferenceSystem crs;
 
+<<<<<<< HEAD
     private Map<GridCoverage, Map<DataTime, Rectangle>> rectangleCache = new HashMap<>(
+=======
+    private final Map<GridCoverage, Map<DataTime, Rectangle>> rectangleCache = new HashMap<>(
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             4);
 
     @Override
@@ -122,7 +175,11 @@ public class GridCSAdapter extends AbstractCrossSectionAdapter<GridRecord> {
     public List<float[]> loadData(DataTime currentTime, CrossSectionGraph graph,
             GridGeometry2D geometry) throws VizException {
         DataTime recordTime = currentTime.clone();
+<<<<<<< HEAD
         recordTime.setLevelValue(null);
+=======
+        recordTime.clearLevel();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         Set<GridRecord> yRecords = getYRecords(recordTime);
         Map<Level, GridRecord> xMap = new HashMap<>();
 
@@ -195,8 +252,17 @@ public class GridCSAdapter extends AbstractCrossSectionAdapter<GridRecord> {
             List<List<XYData>> dataLists = new ArrayList<>(result.size());
             for (Level level : xMap.keySet()) {
                 GridRecord yRecord = yMap.get(level);
+<<<<<<< HEAD
                 FloatDataRecord yRec = (FloatDataRecord) (((IDataRecord[]) yRecord
                         .getMessageData())[0]);
+=======
+                IDataRecord[] yDataRecords = (IDataRecord[]) yRecord
+                        .getMessageData();
+                if (ArrayUtils.isEmpty(yDataRecords)) {
+                    continue;
+                }
+                FloatDataRecord yRec = (FloatDataRecord) yDataRecords[0];
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 GridRecord xRecord = xMap.get(level);
                 IDataRecord[] results = (IDataRecord[]) xRecord
                         .getMessageData();
@@ -267,6 +333,20 @@ public class GridCSAdapter extends AbstractCrossSectionAdapter<GridRecord> {
                 }
             }
         }
+<<<<<<< HEAD
+=======
+
+        /*
+         * Clear the raw data records to save memory, now that we've already
+         * processed them to determine the graph data.
+         */
+        for (List<PluginDataObject> pdos : recordsByLocation.values()) {
+            for (PluginDataObject pdo : pdos) {
+                pdo.setMessageData(null);
+            }
+        }
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return result;
     }
 
@@ -325,7 +405,11 @@ public class GridCSAdapter extends AbstractCrossSectionAdapter<GridRecord> {
     @Override
     public void addRecord(PluginDataObject pdo) {
         super.addRecord(pdo);
+<<<<<<< HEAD
         if (pdo != null && pdo instanceof GridRecord) {
+=======
+        if (pdo instanceof GridRecord) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             unit = ((GridRecord) pdo).getParameter().getUnit();
             crs = ((GridRecord) pdo).getSpatialObject().getCrs();
         }
@@ -376,6 +460,14 @@ public class GridCSAdapter extends AbstractCrossSectionAdapter<GridRecord> {
             yParameter = descriptor.getHeightScale().getParameter();
             yRecords.clear();
         }
+<<<<<<< HEAD
+=======
+
+        if (line == null || !line.equals(descriptor.getCurrentLine())) {
+            rectangleCache.clear();
+            line = descriptor.getCurrentLine();
+        }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override
@@ -386,4 +478,13 @@ public class GridCSAdapter extends AbstractCrossSectionAdapter<GridRecord> {
         return crs;
     }
 
+<<<<<<< HEAD
+=======
+    @Override
+    public void dispose() {
+        super.dispose();
+        yRecords.clear();
+        rectangleCache.clear();
+    }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

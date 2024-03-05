@@ -23,10 +23,16 @@ import javax.measure.Unit;
 import javax.measure.quantity.Length;
 import javax.measure.quantity.Speed;
 
+<<<<<<< HEAD
 import si.uom.NonSI;
 import systems.uom.common.USCustomary;
 import tec.uom.se.format.SimpleUnitFormat;
 import tec.uom.se.unit.MetricPrefix;
+=======
+import systems.uom.common.USCustomary;
+import tech.units.indriya.format.SimpleUnitFormat;
+import javax.measure.MetricPrefix;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 /**
  * Contains references to units used by point data.
  * 

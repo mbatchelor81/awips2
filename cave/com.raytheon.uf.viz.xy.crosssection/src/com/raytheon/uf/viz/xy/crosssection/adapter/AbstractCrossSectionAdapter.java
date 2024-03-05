@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -22,7 +34,10 @@ package com.raytheon.uf.viz.xy.crosssection.adapter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+<<<<<<< HEAD
 import java.util.Comparator;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.Iterator;
 import java.util.List;
 
@@ -42,6 +57,7 @@ import com.raytheon.viz.core.graphing.xy.XYData;
 
 /**
  * TODO Add Description
+<<<<<<< HEAD
  * 
  * <pre>
  * 
@@ -56,6 +72,21 @@ import com.raytheon.viz.core.graphing.xy.XYData;
  * @version 1.0
  */
 
+=======
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ * Date         Ticket#    Engineer    Description
+ * ------------ ---------- ----------- --------------------------
+ * Nov 23, 2009            mschenke    Initial creation
+ * Dec 20, 2023 2036519    mapeters    Add dispose()
+ *
+ * </pre>
+ *
+ * @author mschenke
+ */
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 public abstract class AbstractCrossSectionAdapter<T extends PluginDataObject>
         implements Serializable {
 
@@ -65,7 +96,11 @@ public abstract class AbstractCrossSectionAdapter<T extends PluginDataObject>
 
     protected CrossSectionDescriptor descriptor;
 
+<<<<<<< HEAD
     protected List<T> records = new ArrayList<T>();
+=======
+    protected List<T> records = new ArrayList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * @param resourceData
@@ -108,6 +143,7 @@ public abstract class AbstractCrossSectionAdapter<T extends PluginDataObject>
     }
 
     public void sortData(List<XYData> data) {
+<<<<<<< HEAD
         Collections.sort(data, new Comparator<XYData>() {
 
             @Override
@@ -116,10 +152,20 @@ public abstract class AbstractCrossSectionAdapter<T extends PluginDataObject>
             }
 
         });
+=======
+        Collections.sort(data, (o1, o2) -> Float.compare((Float) o1.getY(),
+                (Float) o2.getY()));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     public CoordinateReferenceSystem getDataCoordinateReferenceSystem() {
         return MapUtil.LATLON_PROJECTION;
     }
 
+<<<<<<< HEAD
+=======
+    public void dispose() {
+        records.clear();
+    }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

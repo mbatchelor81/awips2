@@ -55,6 +55,7 @@
             </iterate>
          </with>
       </definition>
+      
       <definition id="com.raytheon.uf.viz.d2d.ui.inD2DPerspective">
             <with variable="activeWorkbenchWindow.activePerspective">
                 <equals value="com.raytheon.uf.viz.d2d.ui.perspectives.D2D5Pane">
@@ -68,6 +69,20 @@
    </extension>
 <extension
          point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:file.new?after=org.eclipse.ui.window.newEditor">
+         <visibleWhen>
+            <reference
+                  definitionId="com.raytheon.uf.viz.d2d.ui.inD2DActionSet">
+            </reference>
+         </visibleWhen>
+         <command
+               commandId="com.raytheon.viz.ui.actions.newComboEditor"
+               label="Combo Editor"
+               style="push"
+               tooltip="Open new editor that supports different pane types (e.g. map and cross section) alongside each other">
+         </command>
+      </menuContribution>
       <menuContribution
             locationURI="menu:org.eclipse.ui.main.menu?after=CAVE">
           <menu id="d2dFile" label="File" mnemonic="F">
@@ -427,13 +442,25 @@
                <command
                      commandId="com.raytheon.viz.ui.scalebutton"
                      id="com.raytheon.viz.ui.scale"
-                     label="Scale"
+                     label="Map Scale"
                      style="pulldown"
-                     tooltip="Scale">
+                     tooltip="Map Scale">
                   <visibleWhen>
-                    <reference
-                        definitionId="com.raytheon.uf.viz.d2d.ui.inD2DActionSet">
-                    </reference>
+                     <reference
+                           definitionId="com.raytheon.uf.viz.d2d.ui.inD2DActionSet">
+                     </reference>
+                  </visibleWhen>
+               </command>
+               <command
+                     commandId="com.raytheon.viz.ui.height.scalebutton"
+                     id="com.raytheon.viz.ui.height.scale"
+                     label="Height Scale"
+                     style="pulldown"
+                     tooltip="Height Scale">
+                  <visibleWhen>
+                     <reference
+                           definitionId="com.raytheon.uf.viz.d2d.ui.inD2DActionSet">
+                     </reference>
                   </visibleWhen>
                </command>
                <command
@@ -1680,7 +1707,80 @@
             <parameter id="direction" value="1"></parameter>
             <parameter id="startIndex" value="7"></parameter>
             <parameter id="hideIndex" value="1"></parameter>
-      </key>      
+      </key>
+      <!-- The next 7 binding are for Panels 10-16 in a sixteen panel set up
+      The sixteenPanelKey provides the panel index -->
+      <key
+            commandId="com.raytheon.uf.viz.d2d.ui.map.actions.rotatePanels"
+            contextId="com.raytheon.uf.viz.d2d.ui"
+            schemeId="com.raytheon.viz.ui.cave.scheme"
+            sequence="ALT+CTRL+0">
+            <parameter id="direction" value="1"></parameter>
+            <parameter id="startIndex" value="8"></parameter>
+            <parameter id="hideIndex" value="1"></parameter>
+            <parameter id="sixteenPanelKey" value="10"></parameter>
+      </key>
+      <key
+            commandId="com.raytheon.uf.viz.d2d.ui.map.actions.rotatePanels"
+            contextId="com.raytheon.uf.viz.d2d.ui"
+            schemeId="com.raytheon.viz.ui.cave.scheme"
+            sequence="ALT+CTRL+1">
+            <parameter id="direction" value="1"></parameter>
+            <parameter id="startIndex" value="8"></parameter>
+            <parameter id="hideIndex" value="1"></parameter>
+            <parameter id="sixteenPanelKey" value="11"></parameter>
+      </key>
+      <key
+            commandId="com.raytheon.uf.viz.d2d.ui.map.actions.rotatePanels"
+            contextId="com.raytheon.uf.viz.d2d.ui"
+            schemeId="com.raytheon.viz.ui.cave.scheme"
+            sequence="ALT+CTRL+2">
+            <parameter id="direction" value="1"></parameter>
+            <parameter id="startIndex" value="8"></parameter>
+            <parameter id="hideIndex" value="1"></parameter>
+            <parameter id="sixteenPanelKey" value="12"></parameter>
+      </key>
+      <key
+            commandId="com.raytheon.uf.viz.d2d.ui.map.actions.rotatePanels"
+            contextId="com.raytheon.uf.viz.d2d.ui"
+            schemeId="com.raytheon.viz.ui.cave.scheme"
+            sequence="ALT+CTRL+3">
+            <parameter id="direction" value="1"></parameter>
+            <parameter id="startIndex" value="8"></parameter>
+            <parameter id="hideIndex" value="1"></parameter>
+            <parameter id="sixteenPanelKey" value="13"></parameter>
+      </key>
+      <key
+            commandId="com.raytheon.uf.viz.d2d.ui.map.actions.rotatePanels"
+            contextId="com.raytheon.uf.viz.d2d.ui"
+            schemeId="com.raytheon.viz.ui.cave.scheme"
+            sequence="ALT+CTRL+4">
+            <parameter id="direction" value="1"></parameter>
+            <parameter id="startIndex" value="8"></parameter>
+            <parameter id="hideIndex" value="1"></parameter>
+            <parameter id="sixteenPanelKey" value="14"></parameter>
+      </key>
+      <key
+            commandId="com.raytheon.uf.viz.d2d.ui.map.actions.rotatePanels"
+            contextId="com.raytheon.uf.viz.d2d.ui"
+            schemeId="com.raytheon.viz.ui.cave.scheme"
+            sequence="ALT+CTRL+5">
+            <parameter id="direction" value="1"></parameter>
+            <parameter id="startIndex" value="8"></parameter>
+            <parameter id="hideIndex" value="1"></parameter>
+            <parameter id="sixteenPanelKey" value="15"></parameter>
+      </key>
+      <key
+            commandId="com.raytheon.uf.viz.d2d.ui.map.actions.rotatePanels"
+            contextId="com.raytheon.uf.viz.d2d.ui"
+            schemeId="com.raytheon.viz.ui.cave.scheme"
+            sequence="ALT+CTRL+6">
+            <parameter id="direction" value="1"></parameter>
+            <parameter id="startIndex" value="8"></parameter>
+            <parameter id="hideIndex" value="1"></parameter>
+            <parameter id="sixteenPanelKey" value="16"></parameter>
+      </key>
+         
       <key
             contextId="com.raytheon.uf.viz.d2d.ui"
             commandId="com.raytheon.uf.viz.d2d.ui.actions.imageCombination"
@@ -1693,7 +1793,7 @@
             schemeId="com.raytheon.viz.ui.cave.scheme"
             sequence="F12">
       </key>
-      <key
+            <key
             commandId="com.raytheon.viz.ui.tools.looping.fasterLoop"
             contextId="com.raytheon.viz.ui.loopContext"
             schemeId="com.raytheon.viz.ui.cave.scheme"
@@ -1843,6 +1943,11 @@
          	   name="hideIndex"
          	   optional="true">
          </commandParameter>
+         <commandParameter 
+         	   id="sixteenPanelKey"
+         	   name="sixteenPanelKey"
+         	   optional="true">
+         </commandParameter>
       </command>
       <command
             id="com.raytheon.uf.viz.d2d.ui.actions.imageCombination"
@@ -1923,12 +2028,24 @@
             description="Decreases the brightness on an image resource"
             name="Decrease Brightness">
       </command>
-     <command
+      <command
             id="com.raytheon.uf.viz.d2d.ui.actions.toggleTool"
             categoryId="com.raytheon.uf.viz.d2d.ui"
             description="Toggles a blended resource"
             name="Toggle Layer"/>
+      <command
+            id="com.raytheon.viz.ui.actions.newComboEditor"
+            categoryId="com.raytheon.uf.viz.d2d.ui"
+            defaultHandler="com.raytheon.viz.ui.actions.NewComboEditorCaveMenuAction"
+            name="New Combo Editor">
+      </command>
+      <command
+            id="com.raytheon.viz.ui.scalebutton"
+            name="Update Map Scale Button"
+            defaultHandler="com.raytheon.uf.viz.d2d.ui.map.actions.MapScaleButtonHandler">
+      </command>
    </extension>
+
    <extension
          point="com.raytheon.viz.ui.perspectiveManager">
       <perspectiveManager
@@ -2038,6 +2155,11 @@
  <!-- add right click on tab actions -->
  <extension
          point="com.raytheon.viz.ui.editorMenuAddition">
+      <editorMenuAddition
+            class="com.raytheon.viz.ui.actions.NewComboEditorContextMenuAction"
+            name="New Combo Editor"
+            perspectiveId="com.raytheon.uf.viz.d2d.ui.perspectives.D2D5Pane">
+      </editorMenuAddition>
       <editorMenuAddition
             class="com.raytheon.viz.ui.actions.RenameTabAction"
             name="Rename Tab"

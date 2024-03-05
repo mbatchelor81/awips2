@@ -4,6 +4,7 @@
 # support, and with no warranty, express or implied, as to its usefulness for
 # any purpose.
 #
+<<<<<<< HEAD
 # TornadoFloodThreat
 #
 # Author: Tom LeFebvre/Pablo Santos
@@ -27,6 +28,13 @@
 #
 # ----------------------------------------------------------------------------
 #
+=======
+# TCTornadoThreat
+#
+# Author: Tom LeFebvre/Pablo Santos
+#
+# ----------------------------------------------------------------------------
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # SOFTWARE HISTORY
 #
 # Date         Ticket#     Engineer           Description
@@ -42,6 +50,13 @@
 # 06/23/2021   DR22701     mscalora,psantos   Fix to properly determine Day 3. Tool logic broke
 #                                             when they added SPC days 4-7 probabilities with
 #                                             NIC 11.
+<<<<<<< HEAD
+=======
+#
+# 07/12/2021   DCS22519    jlamb              Cleaned up code, added time shift option
+# 02/15/2022   DCS22519    jlamb              Made GUI more intuitive based on feedback
+# 05/07/2022   DCS22519    jlamb              Fixed problem with move-forward option
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # ----------------------------------------------------------------------------
 ##
 # This is an absolute override file, indicating that a higher priority version
@@ -55,12 +70,16 @@ MenuItems = ["Populate"]
 
 import TropicalUtility
 import time
+<<<<<<< HEAD
 import sys
 import AbsTime
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import TimeRange
 import numpy as np
 import LogStream
 
+<<<<<<< HEAD
 VariableList = [("Days 1 and 2: If Prob Tor >= 2 -> Elevated\n>= 10 -> Mod\n>= 15 -> High\n>= 30 -> Extreme", "", "label"),
                 ("If Prob Sig Tor Present:\nMod -> High\nHigh -> Extreme", "", "label"),
                 ("Day 3:\nProb Svr >= 5 -> Elevated \n >= 15 -> Mod", "", "label"),
@@ -151,16 +170,48 @@ class Procedure (TropicalUtility.TropicalUtility):
 # first in your system the new Days 1 to 3 cycles are in the system. This is true of both the new and old versions
 # of the tool. Check HTI User Guide on how to check that.
 #
+=======
+VariableList = [
+    (
+        "Run Option",
+        "Recalculate grid using latest data",
+        "radio",
+        ["Recalculate grid using latest data", "Keep existing grid and shift forward"],
+    ),
+]
+
+
+class Procedure(TropicalUtility.TropicalUtility):
+    def __init__(self, dbss):
+        TropicalUtility.TropicalUtility.__init__(self, dbss)
+
+    def determineDay(self, modelTime, validTime):
+        """
+        SPC data for Days 1, 2, and 3 come into the system with different model cycle
+        times. Not as part of the same model cycle with forecast hours 24, 48, and 72.
+        Worse, they can come at different times. Because of that this is coded as shown
+        below to identify Days 1, 2, and 3. SPC never sends the data before 05Z for the
+        new Day 1-4 cycle. Because of this, you should never run the tool between 05-08Z
+        unless you confirm first in your system the new Days 1 to 3 cycles are in the
+        system.
+        """
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         diff = (validTime - modelTime) // 3600
         if diff < 30:
             return 1
         elif diff >= 30 and diff < 54:
             return 2
+<<<<<<< HEAD
         elif  diff >= 54 and diff < 78:
+=======
+        elif diff >= 54 and diff < 78:
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return 3
 
         return 0
 
+<<<<<<< HEAD
     # returns a unix time based on the specified model ID.
     def getModelTime(self, modelName):
 
@@ -201,16 +252,46 @@ class Procedure (TropicalUtility.TropicalUtility):
                 if gridDayNum == dayNum:
                     grid = self.getGrids(modelName, SPCVarName, SPCLevel, tr)
                     LogStream.logVerbose("modelName, modelTime, tr:", SPCVarName, modelName, modelTime, tr)
+=======
+    def getTornadoGrid(self, SPCVarName, dayNum):
+
+        # Narrow the search window
+        searchTR = self.createTimeRange(self.curHr - 12, self.curHr + 96)
+
+        for modelName in self.modelList:
+
+            # Look through valid D2D_SPC databases until we find data
+            trList = self.GM_getWEInventory(
+                SPCVarName, modelName, "SFC", timeRange=searchTR
+            )
+            if not trList:
+                continue
+
+            currentTime = int(time.time())
+
+            for tr in trList:
+                gridDayNum = self.determineDay(currentTime, tr.startTime().unixTime())
+                if gridDayNum == dayNum:
+                    grid = self.getGrids(modelName, SPCVarName, "SFC", tr)
+                    LogStream.logVerbose("modelName, tr:", SPCVarName, modelName, tr)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     return grid, 1
 
         return None, 0
 
+<<<<<<< HEAD
     # This method adjusts an existing threat grid
     def adjustTornadoGrid(self, tornadoThreat, threatKeys, var, dayNum, extThreshold):
+=======
+    def adjustTornadoGrid(self, tornadoThreat, threatKeys, var, dayNum, extThreshold):
+        """Adjusts an existing threat grid using additional SPC data."""
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         D2DGrid, NumberOfDays = self.getTornadoGrid(var, dayNum)
         if D2DGrid is None:
             return tornadoThreat, NumberOfDays
 
+<<<<<<< HEAD
         # Account for offices using the four key arrangement
         # Just change the "Very Low" to "Low" in the threshDict
         #if "Very Low" not in threatKeys:
@@ -228,6 +309,13 @@ class Procedure (TropicalUtility.TropicalUtility):
         xMask = D2DGrid >= extThreshold
 
         # increment the threat where these masks intersect
+=======
+        # finds all places in the extreme grid >= to the extThreshold
+        xMask = D2DGrid >= extThreshold
+
+        # increment the threat where these masks intersect
+        lowMask = tornadoThreat > 0
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         mask = lowMask & xMask
 
         # make sure we're not incrementing too far
@@ -235,14 +323,21 @@ class Procedure (TropicalUtility.TropicalUtility):
 
         # increment the category.  This code assumes that the categories are
         # defined in increasing order of severity.
+<<<<<<< HEAD
         tornadoThreat[mask] +=  1
+=======
+        tornadoThreat[mask] += 1
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # Clip the adjusted grid to the maximum allowed value - extremeIndex
         tornadoThreat = np.clip(tornadoThreat, 0, extremeIndex)
 
         return tornadoThreat, NumberOfDays
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def setTornadoGrid(self, tornadoThreat, threatKeys, var, dayNum, threshDict):
 
         D2DGrid, NumberOfDays = self.getTornadoGrid(var, dayNum)
@@ -250,6 +345,7 @@ class Procedure (TropicalUtility.TropicalUtility):
             return tornadoThreat, NumberOfDays
 
         # Account for offices using the four key arrangement
+<<<<<<< HEAD
         # Just change the "Very Low" to "Low" in the threshDict
       
         if "Very Low" not in threatKeys:
@@ -266,10 +362,28 @@ class Procedure (TropicalUtility.TropicalUtility):
             tempGrid[D2DGrid >= thresh] =  keyIndex
             # calculate areas where this temp grid exceeds the threatGrid
             mask = tempGrid > tornadoThreat
+=======
+        if "Very Low" not in threatKeys and "Very Low" in threshDict:
+            threshDict["Very Low"] = "Elevated"
+
+        # Set the grid values based on the tornado prob grid and thresholds
+        for key in sorted(threshDict):
+            thresh = int(key)
+            keyIndex = self.getIndex(threshDict[key], threatKeys)
+
+            # make a temp grid where the thresholds are exceeded
+            tempGrid = self.empty(dtype=np.int8)
+            tempGrid[D2DGrid >= thresh] = keyIndex
+
+            # calculate areas where this temp grid exceeds the threatGrid
+            mask = tempGrid > tornadoThreat
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             # update the threatGrid for these areas only
             tornadoThreat[mask] = keyIndex
 
         return tornadoThreat, NumberOfDays
+<<<<<<< HEAD
                     
     def execute(self, varDict):
 
@@ -277,6 +391,62 @@ class Procedure (TropicalUtility.TropicalUtility):
         
         threatKeys = self.getDiscreteKeys(threatWEName)
        
+=======
+
+    def execute(self, varDict):
+
+        # Current hour
+        self.curHr = self._gmtime().timetuple().tm_hour
+
+        threatWEName = "TornadoThreat"
+
+        # Setup time ranges
+        threatTR = self.createTimeRange(self.curHr, self.curHr + 8, "Zulu")
+        allTR = self.createTimeRange(self.curHr - 24, self.curHr + 24, "Zulu")
+
+        if varDict["Run Option"] == "Keep existing grid and shift forward":
+
+            # Search for active grids over this time range
+            thisInv = self.GM_getWEInventory(
+                threatWEName, self.mutableID(), "SFC", allTR
+            )
+            if not thisInv:
+                self.statusBarMsg(
+                    "You chose to move forward existing grid but {} is "
+                    "missing from Fcst db".format(threatWEName),
+                    "S",
+                )
+                return
+
+            # Get value from last grid of this type
+            lastGridVal = self.getGrids(
+                self.mutableID(), threatWEName, "SFC", thisInv[-1], noDataError=0
+            )
+
+            # No adjustment needed
+            if (
+                thisInv[-1].startTime() == threatTR.startTime()
+                and thisInv[-1].endTime() == threatTR.endTime()
+            ):
+                return
+
+            # Delete existing grid
+            self.deleteAllGrids(threatWEName)
+
+            # Recreate the grid over the desired time range
+            self.createGrid(
+                self.mutableID(),
+                threatWEName,
+                "DISCRETE",
+                lastGridVal,
+                threatTR,
+            )
+
+            return
+
+        threatKeys = self.getDiscreteKeys(threatWEName)
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # Set up the data for processing the various grids.
         # Each entry consists of the D2D variable to be checked,
         # the day number of that grid, and a dictionary that defines
@@ -284,6 +454,7 @@ class Procedure (TropicalUtility.TropicalUtility):
         # Note the grids will be processed in the order defined in
         # this list.
         actionList = [
+<<<<<<< HEAD
             ("ptor", 1, { 2  : "Elevated",
                           10 : "Mod",
                           15 : "High",
@@ -308,11 +479,60 @@ class Procedure (TropicalUtility.TropicalUtility):
                     ]
 
          # make a grid of zeros.  This will be the TornadoThreat grid
+=======
+            (
+                "ptor",
+                1,
+                {
+                    2: "Elevated",
+                    10: "Mod",
+                    15: "High",
+                    30: "Extreme",
+                },
+                "sigtrndprob",
+                10,
+            ),
+            (
+                "ptor",
+                2,
+                {
+                    2: "Elevated",
+                    10: "Mod",
+                    15: "High",
+                    30: "Extreme",
+                },
+                "sigtrndprob",
+                10,
+            ),
+            (
+                "prsvr",
+                3,
+                {
+                    5: "Elevated",
+                    15: "Mod",
+                },
+                "prsigsv",
+                10,
+            ),
+        ]
+
+        # Get list of available SPC D2D databases, listed latest to earliest
+        self.modelList = []
+        for i in range(0, -20, -1):
+            thisDb = self.findDatabase("D2D_SPC", i)
+            if not thisDb.isValid():
+                break
+
+            self.modelList.append(thisDb)
+
+        # make a grid of zeros.  This will be the TornadoThreat grid
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         tornadoThreat = self.empty(dtype=np.int8)
 
         TotalDays1 = 0
         TotalDays2 = 0
         for var, dayNum, threshDict, xVar, xThreshold in actionList:
+<<<<<<< HEAD
 
             tornadoThreat, NumberOfDays1 = self.setTornadoGrid(tornadoThreat, threatKeys,
                                                 var, dayNum, threshDict)
@@ -354,3 +574,50 @@ class Procedure (TropicalUtility.TropicalUtility):
                         defaultColorTable="Hazards")
 
         return
+=======
+            tornadoThreat, NumberOfDays1 = self.setTornadoGrid(
+                tornadoThreat, threatKeys, var, dayNum, threshDict
+            )
+
+            TotalDays1 += NumberOfDays1
+
+            # now adjust the grid based on the extreme grid category
+            tornadoThreat, NumberOfDays2 = self.adjustTornadoGrid(
+                tornadoThreat, threatKeys, xVar, dayNum, xThreshold
+            )
+
+            TotalDays2 += NumberOfDays2
+
+        LogStream.logVerbose(
+            "TotalDays1 and TotalDays2 for var1 and var2 are: ", TotalDays1, TotalDays2
+        )
+
+        if TotalDays1 != 3 or TotalDays2 != 3:
+            self.statusBarMsg(
+                "Did Not Retrieve SPC Probabilities For Days 1, 2, and 3. This likely "
+                "means you ran the tool between 05Z and 08Z and the new Day 1-3 data "
+                "is still coming in. Check SPC website and re-run after tornado "
+                "probabilities for Days 1 and 2 AND severe weather probabilities for "
+                "Day 3 have all been posted.",
+                "S",
+            )
+            return
+
+        # remove any old grids that are lying around
+        self.deleteAllGrids(threatWEName)
+
+        # create the TornadoThreat Grid
+        self.createGrid(
+            self.mutableID(),
+            threatWEName,
+            "DISCRETE",
+            (tornadoThreat, threatKeys),
+            threatTR,
+            discreteKeys=threatKeys,
+            discreteOverlap=0,
+            discreteAuxDataLength=2,
+            defaultColorTable="Hazards",
+        )
+
+        return
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

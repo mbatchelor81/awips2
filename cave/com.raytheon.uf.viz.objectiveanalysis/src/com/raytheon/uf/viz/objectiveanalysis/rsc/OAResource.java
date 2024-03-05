@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -25,6 +37,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+<<<<<<< HEAD
+=======
+import java.util.Objects;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -94,11 +110,19 @@ import com.raytheon.viz.core.contours.rsc.displays.GriddedStreamlineDisplay;
 /**
  * Objective Analysis Resource. Objective analysis interpolates data from
  * irregularly spaced locations to a fixed grid.
+<<<<<<< HEAD
  * 
  * <pre>
  * 
  * SOFTWARE HISTORY
  * 
+=======
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- --------------------------------------------
  * Nov 05, 2009           randerso  Initial creation
@@ -111,10 +135,21 @@ import com.raytheon.viz.core.contours.rsc.displays.GriddedStreamlineDisplay;
  * May 17, 2018  7294     njensen   Fixed inspect of contours, initInternal()
  * May 22, 2018  7311     njensen   Support streamlines and arrows for Wind
  * Nov 01, 2018  7314     bsteffen  Use same colormap parameters for all frames.
+<<<<<<< HEAD
  * Nov 15, 2018  58492    edebebe   Enabled configurable 'Wind Barb' properties 
  * 
  * </pre>
  * 
+=======
+ * Nov 15, 2018  58492    edebebe   Enabled configurable 'Wind Barb' properties
+ * Dec 06, 2021  8341     randerso  Added use of getResourceId for contour
+ *                                  logging
+ * Nov 03, 2022  8905     lsingh    Check for NaN when converting units.
+ * Feb 16, 2023  9018     lsingh    Additional check for NaN when converting units.
+ *
+ * </pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author randerso
  */
 public class OAResource
@@ -189,11 +224,15 @@ public class OAResource
             if (!getOuterType().equals(other.getOuterType())) {
                 return false;
             }
+<<<<<<< HEAD
             if (dataTime == null) {
                 if (other.dataTime != null) {
                     return false;
                 }
             } else if (!dataTime.equals(other.dataTime)) {
+=======
+            if (!Objects.equals(dataTime, other.dataTime)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 return false;
             }
             return true;
@@ -221,11 +260,21 @@ public class OAResource
 
     private OAGridTransformer transformer;
 
+<<<<<<< HEAD
     //Parameters used to construct 'VectorGraphicsConfig'
     private static final String PLUGIN_NAME = "ObjectiveAnalysisPlugin";
     private static final String CLASS_NAME = "OAResource";
 
     private VectorGraphicsConfig config = new VectorGraphicsConfig(PLUGIN_NAME, CLASS_NAME);
+=======
+    // Parameters used to construct 'VectorGraphicsConfig'
+    private static final String PLUGIN_NAME = "ObjectiveAnalysisPlugin";
+
+    private static final String CLASS_NAME = "OAResource";
+
+    private VectorGraphicsConfig config = new VectorGraphicsConfig(PLUGIN_NAME,
+            CLASS_NAME);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     protected OAResource(OAResourceData resourceData,
             LoadProperties loadProperties) {
@@ -264,6 +313,7 @@ public class OAResource
         if (renderable == null) {
             return;
         }
+<<<<<<< HEAD
         VizApp.runAsync(new Runnable() {
 
             @Override
@@ -279,6 +329,19 @@ public class OAResource
                 } else if (renderable instanceof GriddedVectorDisplay) {
                     ((GriddedVectorDisplay) renderable).dispose();
                 }
+=======
+        VizApp.runAsync(() -> {
+            if (renderable instanceof GriddedImageDisplay) {
+                ((GriddedImageDisplay) renderable).dispose();
+            } else if (renderable instanceof GriddedContourDisplay) {
+                /*
+                 * GriddedStreamlineDisplay extends GriddedContourDisplay so
+                 * streamlines will be safely disposed here
+                 */
+                ((GriddedContourDisplay) renderable).dispose();
+            } else if (renderable instanceof GriddedVectorDisplay) {
+                ((GriddedVectorDisplay) renderable).dispose();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         });
     }
@@ -393,7 +456,11 @@ public class OAResource
 
             String parameter = this.resourceData.getParameter();
             String levelKey = resourceData.getLevelKey();
+<<<<<<< HEAD
             if (levelKey.equals(OAResourceData.ALL_TILTS)) {
+=======
+            if (OAResourceData.ALL_TILTS.equals(levelKey)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if (dataTime.getLevelValue() < 0) {
                     return;
                 } else if (dataTime.getLevelValue() < 1) {
@@ -494,7 +561,12 @@ public class OAResource
                 FloatBuffer data = FloatBuffer.wrap(grid);
 
                 GriddedContourDisplay contour = new GriddedContourDisplay(
+<<<<<<< HEAD
                         descriptor, transformer.getGridGeom(), data);
+=======
+                        descriptor, getResourceId(dataTime),
+                        transformer.getGridGeom(), data);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                 ParamLevelMatchCriteria match = new ParamLevelMatchCriteria();
                 match.setLevel(level);
@@ -512,7 +584,15 @@ public class OAResource
 
                     for (int i = 0; i < grid.length; i++) {
                         if (grid[i] != GridUtil.GRID_FILL_VALUE) {
+<<<<<<< HEAD
                             grid[i] = (float) converter.convert(grid[i]);
+=======
+                            try {
+                                grid[i] = (float) converter.convert(grid[i]);
+                            } catch (NumberFormatException e) {
+                                grid[i] = Float.NaN;
+                            }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         }
                     }
 
@@ -535,8 +615,12 @@ public class OAResource
                 FloatBuffer dir = FloatBuffer.wrap(magDir[1]);
                 GriddedVectorDisplay vector = new GriddedVectorDisplay(mag, dir,
                         descriptor, transformer.getGridGeom(),
+<<<<<<< HEAD
                         VECTOR_DENSITY_FACTOR, true, displayType,
                         config);
+=======
+                        VECTOR_DENSITY_FACTOR, true, displayType, config);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                 renderableMap.put(dataTime, vector);
                 break;
@@ -551,7 +635,12 @@ public class OAResource
                 FloatBuffer uBuf = FloatBuffer.wrap(u);
                 FloatBuffer vBuf = FloatBuffer.wrap(v);
                 GriddedStreamlineDisplay streamline = new GriddedStreamlineDisplay(
+<<<<<<< HEAD
                         descriptor, transformer.getGridGeom(), uBuf, vBuf);
+=======
+                        descriptor, getResourceId(dataTime),
+                        transformer.getGridGeom(), uBuf, vBuf);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                 renderableMap.put(dataTime, streamline);
                 break;
@@ -572,7 +661,11 @@ public class OAResource
 
     /**
      * Calculates a grid of magnitudes of vectors.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param u
      * @param v
      * @return
@@ -589,7 +682,11 @@ public class OAResource
     /**
      * Calculates vectors where the first grid returned will be magnitude and
      * the second grid returned will be direction.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param u
      * @param v
      * @return
@@ -651,7 +748,16 @@ public class OAResource
 
                 ColorMapParameters parameters = getCapability(
                         ColorMapCapability.class).getColorMapParameters();
+<<<<<<< HEAD
                 value = parameters.getDataToDisplayConverter().convert(value);
+=======
+                try {
+                    value = parameters.getDataToDisplayConverter()
+                            .convert(value);
+                } catch (NumberFormatException e) {
+                    value = Double.NaN;
+                }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                 DecimalFormat format = new DecimalFormat(
                         parameters.getFormatString());
@@ -730,7 +836,11 @@ public class OAResource
             sb.append(" ").append(resourceData.getParameter());
         }
 
+<<<<<<< HEAD
         if (displayType.equals(DisplayType.IMAGE)) {
+=======
+        if (DisplayType.IMAGE.equals(displayType)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             sb.append(" ").append("Img");
         }
 
@@ -746,8 +856,14 @@ public class OAResource
 
         try {
             float smoothPts = 200 * 1000 * GRID_SIZE / descriptor.getMapWidth();
+<<<<<<< HEAD
             if (resourceData.getLevelKey().endsWith("deg") || resourceData
                     .getLevelKey().equals(OAResourceData.ALL_TILTS)) {
+=======
+            if (resourceData.getLevelKey().endsWith("deg")
+                    || OAResourceData.ALL_TILTS
+                            .equals(resourceData.getLevelKey())) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 transformer = new OATiltGridTransformer(
                         this.descriptor.getGridGeometry(),
                         this.descriptor.getCRS(), GRID_SIZE, smoothPts);
@@ -779,7 +895,11 @@ public class OAResource
 
     @Override
     public void resourceChanged(ChangeType type, Object object) {
+<<<<<<< HEAD
         if (type.equals(ChangeType.DATA_UPDATE)) {
+=======
+        if (ChangeType.DATA_UPDATE.equals(type)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if (!(object instanceof AlertMessage[])) {
                 return;
             }
@@ -807,7 +927,11 @@ public class OAResource
 
     @Override
     public ResourceOrder getResourceOrder() {
+<<<<<<< HEAD
         if (displayType.equals(DisplayType.IMAGE)) {
+=======
+        if (DisplayType.IMAGE.equals(displayType)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return RenderingOrderFactory.getRenderingOrder("IMAGE_WORLD");
         } else {
             return RenderingOrderFactory.getRenderingOrder("CONTOUR");

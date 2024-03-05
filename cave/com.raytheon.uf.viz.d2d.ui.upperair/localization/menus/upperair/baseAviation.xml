@@ -34,6 +34,11 @@
         <contribute xsi:type="separator" id="ConvectionProductsEnd" />
         <contribute xsi:type="titleItem" titleText="------ Icing Products ------" />
         <contribute xsi:type="separator" id="IcingProductsEnd" />
+<<<<<<< HEAD
+=======
+        <contribute xsi:type="titleItem" titleText="------ Non-Convective SIGMET ------" />
+        <contribute xsi:type="separator" id="NonConvectiveSigmetEnd" />
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <contribute xsi:type="titleItem"
             titleText="------ Turbulence Products ------" />
         <contribute xsi:type="separator" id="TurbulenceProductsEnd" />

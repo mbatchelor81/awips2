@@ -23,6 +23,10 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+<<<<<<< HEAD
+=======
+import java.util.Comparator;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.Iterator;
 import java.util.List;
 
@@ -46,7 +50,17 @@ import jep.NDArray;
  * Dec 15, 2017           randerso  Initial creation
  * Feb 13, 2019  7732     randerso  Fixed copy constructor to clone the
  *                                  DiscreteKeys.
+<<<<<<< HEAD
  *
+=======
+ * May 15, 2023  2033890  dhaines   Changed sorting of usedKeys in collapse to use 
+ *                                  a comparator with Byte::toUnsignedInt - this
+ *                                  prevents having keys with negative indeces at 
+ *                                  the beginning of the key list, which was causing
+ *                                  GFE hazard transformations to occur when the
+ *                                  number of unique keys exceeded 128
+ *                                
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  *
  * @author randerso
@@ -579,14 +593,22 @@ public class DiscreteDataObject implements IDataObject {
         /*
          * Now remove all unused keys
          */
+<<<<<<< HEAD
         Collections.sort(usedKeys);
+=======
+        Collections.sort(usedKeys, Comparator.comparingInt(Byte::toUnsignedInt));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         int keyIndex = 0;
         DiscreteKey newKey[] = new DiscreteKey[usedKeys.size()];
         for (Iterator<Byte> usedKeysI = usedKeys.iterator(); usedKeysI
                 .hasNext(); keyIndex++) {
             byte thisByte = usedKeysI.next();
             discreteGrid.setAllOfValue(thisByte, (byte) keyIndex);
+<<<<<<< HEAD
             newKey[keyIndex] = keys[0xFF & thisByte];
+=======
+            newKey[keyIndex] = keys[Byte.toUnsignedInt(thisByte)];
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         keys = newKey;

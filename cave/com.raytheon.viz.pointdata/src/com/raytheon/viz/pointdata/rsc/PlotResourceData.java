@@ -68,6 +68,10 @@ import com.raytheon.viz.pointdata.rsc.retrieve.PointDataPlotInfoRetriever;
  * Nov 16, 2017  5697     bsteffen  Remove profiler plugin
  * May 03, 2018  6894     njensen   Default lower limit to -9998.0 to
  *                                  ensure -9999.0 is excluded
+<<<<<<< HEAD
+=======
+ * Jun 04, 2021  DCS22300 dmurray   Add back in profiler plugin
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  *
@@ -184,6 +188,10 @@ public class PlotResourceData extends AbstractRequestableResourceData {
         pluginProps.put("airep", new PluginPlotProperties());
         pluginProps.put("acars", new PluginPlotProperties());
         pluginProps.put("lsr", new PluginPlotProperties());
+<<<<<<< HEAD
+=======
+        pluginProps.put("profiler", new PluginPlotProperties());
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     public PlotResourceData() {

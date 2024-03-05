@@ -29,7 +29,10 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+<<<<<<< HEAD
 import java.util.Iterator;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -42,7 +45,11 @@ import java.util.concurrent.Future;
 
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
+<<<<<<< HEAD
 import javax.measure.format.ParserException;
+=======
+import javax.measure.format.MeasurementParseException;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.measure.quantity.Speed;
 
 import org.apache.commons.lang3.Validate;
@@ -91,7 +98,11 @@ import com.raytheon.viz.warngen.util.AdjustAngle;
 import com.raytheon.viz.warngen.util.DateUtil;
 
 import si.uom.SI;
+<<<<<<< HEAD
 import tec.uom.se.format.SimpleUnitFormat;
+=======
+import tech.units.indriya.format.SimpleUnitFormat;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  *
@@ -135,6 +146,10 @@ import tec.uom.se.format.SimpleUnitFormat;
  *    Jul 29, 2020 ASM #21988 dhaines     Added fix for DR21988 - Time zone can be incorrect for cities in pathcast for line
  *                                        of storms along time zone boundary.
  *    Feb 22, 2021 8258       mapeters    Thread closest points calculations
+<<<<<<< HEAD
+=======
+ *    Nov 29, 2021 ASM #22724 dhaines     Changes for DR 22724 - Some Cities Can't be Added to Pathcasts
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  *
  * @author chammack
@@ -144,7 +159,11 @@ public class Wx {
             .getHandler(Wx.class);
 
     private static final IPerformanceStatusHandler perfLog = PerformanceStatus
+<<<<<<< HEAD
             .getHandler("WG:");
+=======
+            .getHandler("WG");
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private static final ExecutorService executor = Executors
             .newFixedThreadPool(4);
@@ -203,6 +222,26 @@ public class Wx {
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * returns coordinate based on supplied starting coordinate, angle, and distance
+     * @param c
+     * @param gc
+     * @param angle
+     * @param distance
+     * @return
+     */
+    private Coordinate computePoint(Coordinate c, DestinationGeodeticCalculator gc, double angle, double distance) {
+        gc.setStartingGeographicPoint(c.x, c.y);
+        gc.setDirection(StormTrackDisplay
+                .adjustAngle(angle), distance);
+        Point2D p = gc.getDestinationGeographicPoint();
+
+        return new Coordinate(p.getX(), p.getY());
+    }
+
+    /**
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * This method returns the pathcast given the proper configuration
      * parameters.
      *
@@ -225,8 +264,11 @@ public class Wx {
 
         int maxCount = pathcastConfiguration.getMaxResults();
         int maxGroup = pathcastConfiguration.getMaxGroup();
+<<<<<<< HEAD
         double thresholdInMeters = distanceToMeters
                 .convert(pathcastConfiguration.getDistanceThreshold());
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         String areaField = pathcastConfiguration.getAreaField();
         String areaSource = geospatialConfig.getAreaSource();
         String parentAreaField = pathcastConfiguration.getParentAreaField();
@@ -251,6 +293,7 @@ public class Wx {
         List<String> fields = pathcastConfiguration.getSortBy() != null
                 ? Arrays.asList(pathcastConfiguration.getSortBy())
                 : new ArrayList<>();
+<<<<<<< HEAD
 
         Validate.isTrue(maxCount > 0,
                 "Max count must be greater than zero. Check .xml if maxCount is set in pathcastConfig.\n");
@@ -261,21 +304,63 @@ public class Wx {
         Validate.notNull(areaField,
                 "An area field must be provided. Check .xml if areaField is set in pathcastConfig.\n");
         Validate.notNull(pointField,
+=======
+                
+        double thresholdInMeters;
+        Coordinate[] stormLocations = stormLocation.getCoordinates();
+        boolean lineOfStorms = stormLocations.length > 1;
+        
+        // --- Begin argument checking ---
+        if (!lineOfStorms) {
+            thresholdInMeters = distanceToMeters.convert(pathcastConfiguration.getDistanceThreshold());
+            Validate.isTrue(
+                    thresholdInMeters > 0,
+                    "Distance threshold must be greater than zero for a single storm. Check .xml if distanceThreshold is set in pathcastConfig.\n");
+        } else {
+            thresholdInMeters = distanceToMeters.convert(pathcastConfiguration.getDistanceThresholdLOS());
+            Validate.isTrue(
+                    thresholdInMeters >= 0,
+                    "Distance threshold must be greater than or equal to zero for a line of storms. Check .xml if distanceThresholdLOS is set in pathcastConfig.\n");
+        }
+        
+        Validate.isTrue(
+        		maxCount > 0,
+                "Max count must be greater than zero. Check .xml if maxCount is set in pathcastConfig.\n");
+        Validate.isTrue(
+        		maxGroup > 0,
+                "Max group must be greater than zero. Check .xml if maxGroup is set in pathcastConfig.\n");
+        Validate.notNull(
+        		areaField,
+                "An area field must be provided. Check .xml if areaField is set in pathcastConfig.\n");
+        Validate.notNull(
+        		pointField,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 "A point field must be provided. Check .xml if pointField is set in pathcastConfig.\n");
         Validate.isTrue(
                 (!(areaNotationAbbrevField != null
                         && areaNotationField == null)),
                 "Area notation field must be provided if translation is specified. Check .xml if areaNotationField and areaNotationTranslationFile are set in pathcastConfig.\n");
+<<<<<<< HEAD
         Validate.notNull(areaSource,
                 "Area source must be provided for pointcast to operate. Check .xml if areaSource is set in geosptatialConfig.\n");
         Validate.notNull(pointSource,
+=======
+        Validate.notNull(
+        		areaSource,
+                "Area source must be provided for pointcast to operate. Check .xml if areaSource is set in geosptatialConfig.\n");
+        Validate.notNull(
+        		pointSource,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 "Point source must be provided for pointcast to operate. Check .xml if pointSource is set in geospatialConfig.\n");
         // --- End argument checking ---
 
         GeometryFactory gf = new GeometryFactory();
 
+<<<<<<< HEAD
         boolean flag = true;
         List<ClosestPoint> pointsToBeRemoved = null;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         try {
             Abbreviation areaTypeAbbrev = null;
             String trxFileStr = pathcastConfiguration
@@ -296,13 +381,19 @@ public class Wx {
             CoordinateReferenceSystem crs = null;
             Geometry bufferedPathCastArea = null;
             List<PathCast> pathCasts = new ArrayList<>();
+<<<<<<< HEAD
             Map<PathCast, Coordinate[]> pathCastCoords = new HashMap<>();
             if (stormTrackState.isNonstationary()) {
                 List<Coordinate> coordinates = new ArrayList<>();
+=======
+
+            if (stormTrackState.isNonstationary()) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 Date stormTime = TimeUtil.newCalendar().getTime();
                 Date start = DateUtil.roundDate(
                         new Date(stormTime.getTime() + delta),
                         pathcastConfiguration.getInterval());
+<<<<<<< HEAD
                 DestinationGeodeticCalculator gc = new DestinationGeodeticCalculator();
                 while (start.getTime() <= wwaStopTime) {
                     PathCast cast = new PathCast();
@@ -361,6 +452,150 @@ public class Wx {
                     bufferedPathCastArea = warningPolygon.intersection(geom);
                 } else {
                     bufferedPathCastArea = geom;
+=======
+                long instant = start.getTime();
+                DestinationGeodeticCalculator gc = new DestinationGeodeticCalculator();
+
+                double deltaDistance = stormTrackState.speed * ((start.getTime() - stormTime.getTime()) / 1000);
+                double intervalDistance = stormTrackState.speed * (intervalInMillis / 1000);
+                double warningDuration = wwaStopTime - start.getTime();
+                double distanceOfExpiration = stormTrackState.speed * (warningDuration / 1000);
+                int pcIndex = 0;
+
+                // Compute where stormLocations would be given the
+                // speed/angle of the state
+                while (instant <= wwaStopTime) {
+                    PathCast cast = new PathCast();
+                    cast.time = new Date(instant);
+                    cast.index = pcIndex;
+                    pathCasts.add(cast);
+                    long time = (cast.time.getTime() - stormTime.getTime()) / 1000;
+                    double distance = stormTrackState.speed * time;
+
+                    // offset the pathcasts by half the distance to err on the side of warning cities sooner than later
+                    distance = distance - (intervalDistance / 2);
+                    if (!lineOfStorms) {
+                        // single storm
+                        Coordinate loc = stormLocations[0];
+                        Coordinate c1 = computePoint(loc, gc, stormTrackState.angle, distance);
+                        Coordinate c2 = computePoint(c1, gc, stormTrackState.angle, intervalDistance);
+                        Coordinate[] pcSegmentCoords = {c1, c2};
+                        Geometry pcSegmentGeom = gf.createLineString(pcSegmentCoords);
+
+                        Coordinate c = pcSegmentGeom.getCentroid().getCoordinate();
+                        crs = MapUtil.constructStereographic(
+                                MapUtil.AWIPS_EARTH_RADIUS, MapUtil.AWIPS_EARTH_RADIUS,
+                                c.y, c.x);
+                        latLonToLocal = MapUtil.getTransformFromLatLon(crs);
+                        pcSegmentGeom = JTS.transform(pcSegmentGeom, latLonToLocal);
+                        pcSegmentGeom = JTS.transform(pcSegmentGeom.buffer(thresholdInMeters),latLonToLocal.inverse());
+
+                        if (pcIndex == 0) {
+                            // create the bufferedPathCastArea on first pass.
+                            Coordinate startBound1 = computePoint(c1, gc, (stormTrackState.angle + 90), thresholdInMeters);
+                            Coordinate startBound2 = computePoint(c1, gc, (stormTrackState.angle - 90), thresholdInMeters);
+                            Coordinate endVectorCoord = computePoint(loc, gc, stormTrackState.angle, distanceOfExpiration + 
+                                    intervalDistance);
+                            Coordinate endBound1 = computePoint(endVectorCoord, gc, (stormTrackState.angle + 90), 
+                                    thresholdInMeters);
+                            Coordinate endBound2 = computePoint(endVectorCoord, gc, (stormTrackState.angle - 90), 
+                                    thresholdInMeters);
+                            bufferedPathCastArea = gf.createPolygon(new Coordinate[] {startBound1, endBound1, endBound2, 
+                                    startBound2, startBound1});
+                        }
+
+                        cast.pcGeom = pcSegmentGeom;
+                    } else {
+                        // line of storms
+                        if (pcIndex == 0) {
+                            // create the bufferedPathCastArea on first pass.
+                            Coordinate[] bufferedPCAreaStartBound = new Coordinate[stormLocations.length];
+                            for (int i = 0; i < bufferedPCAreaStartBound.length; i++) {
+                                /*
+                                 * Explanation of distance calculation here: we want to include cities before the delta distance 
+                                 * within half the interval distance. Since we already add a buffer to this geometry equal to 
+                                 * the distance threshold later, we want to add the distance threshold again to get the correct 
+                                 * distance for the starting boundary of the valid area of the warning
+                                 */
+                                 bufferedPCAreaStartBound[i] = computePoint(stormLocations[i], gc, stormTrackState.angle, 
+                                        (deltaDistance - (intervalDistance / 2)) + thresholdInMeters);
+                            }
+                            Coordinate[] bufferedPCAreaCoords = new Coordinate[(stormLocations.length * 2) + 1]; 
+                            int index = 0;
+                            for (int i = 0; i < bufferedPCAreaStartBound.length; i++) {
+                                bufferedPCAreaCoords[index] = bufferedPCAreaStartBound[i];
+                                index++;
+                            }
+                            // need to reverse the order of this array so they are added in the proper order to bufferedPCAreaCoords
+                            // to create a polygon (coordinates should form a linear ring)
+                            Coordinate[] stormLocationsReversed = stormLocations.clone();
+                            Collections.reverse(Arrays.asList(stormLocationsReversed));
+                            for (int i = 0; i < stormLocationsReversed.length; i++) {
+                                /*
+                                 * Explanation of distance calculation here: we want to include cities on the pathcast that fall 
+                                 * within the distance the storm is projected to travel within the warning duration, plus a 
+                                 * buffer equal to half the interval distance.  Since we already add a buffer to this geometry 
+                                 * equal to the distance threshold later, we want to subtract the distance threshold again to get 
+                                 * the correct distance for the ending boundary of the valid area of the warning. 
+                                 */
+                                bufferedPCAreaCoords[index] = computePoint(stormLocationsReversed[i], gc, stormTrackState.angle, 
+                                    (distanceOfExpiration + (intervalDistance / 2)) - thresholdInMeters);
+                                index++;
+                            }
+                            bufferedPCAreaCoords[bufferedPCAreaCoords.length - 1] = bufferedPCAreaStartBound[0];
+                            bufferedPathCastArea = gf.createPolygon(bufferedPCAreaCoords);
+                            Coordinate c = bufferedPathCastArea.getCentroid().getCoordinate();
+                            crs = MapUtil.constructStereographic(
+                                    MapUtil.AWIPS_EARTH_RADIUS, MapUtil.AWIPS_EARTH_RADIUS,
+                                    c.y, c.x);
+                            latLonToLocal = MapUtil.getTransformFromLatLon(crs);
+                            bufferedPathCastArea = JTS.transform(bufferedPathCastArea, latLonToLocal);
+                            bufferedPathCastArea = JTS.transform(
+                                    bufferedPathCastArea.buffer(thresholdInMeters),
+                                    latLonToLocal.inverse());
+                        }
+
+                        Coordinate[] losPCBound1 = new Coordinate[stormLocations.length];
+                        for (int i = 0; i < losPCBound1.length; i++) {
+                            losPCBound1[i] = computePoint(stormLocation.getCoordinates()[i], gc, stormTrackState.angle, distance);
+                        }
+                        Coordinate[] losPCBound2 = new Coordinate[stormLocations.length];
+                        for (int i = 0; i < losPCBound2.length; i++) {
+                            losPCBound2[i] = computePoint(losPCBound1[i], gc, stormTrackState.angle, intervalDistance);
+                        }
+
+                        // create pathcast area from the two coordinate sets
+                        Coordinate[] losPCAreaCoords = new Coordinate[losPCBound1.length + losPCBound2.length + 1];
+                        int index = 0;
+                        for (Coordinate c : losPCBound1) {
+                            losPCAreaCoords[index] = c;
+                            index++;
+                        }
+                        // need to reverse the order of this  so they are added in the proper order to losPCAreaCoords
+                        // to create a polygon (coordinates should form a linear ring)
+                        Collections.reverse(Arrays.asList(losPCBound2));
+                        for (Coordinate c : losPCBound2) {
+                            losPCAreaCoords[index] = c;
+                            index++;
+                        }
+                        losPCAreaCoords[index] = losPCBound1[0];
+                        Geometry pcGeom = gf.createPolygon(losPCAreaCoords);
+
+                        Coordinate c = pcGeom.getCentroid().getCoordinate();
+                        crs = MapUtil.constructStereographic(
+                                MapUtil.AWIPS_EARTH_RADIUS, MapUtil.AWIPS_EARTH_RADIUS,
+                                c.y, c.x);
+                        latLonToLocal = MapUtil.getTransformFromLatLon(crs);
+                        pcGeom = JTS.transform(pcGeom, latLonToLocal);
+                        pcGeom = JTS.transform(
+                                pcGeom.buffer(thresholdInMeters),
+                                latLonToLocal.inverse());
+
+                        cast.pcGeom = pcGeom;
+                    }
+                    instant += intervalInMillis;
+                    pcIndex++;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
             } else {
                 PathCast singleTime = new PathCast();
@@ -369,6 +604,14 @@ public class Wx {
                 bufferedPathCastArea = warningPolygon;
             }
 
+<<<<<<< HEAD
+=======
+            if (pathcastConfiguration.isWithinPolygon()) {
+                // Means that all points returned must be within the polygon
+                bufferedPathCastArea = warningPolygon.intersection(bufferedPathCastArea);
+            }
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             Set<String> ptFields = new HashSet<>();
             ptFields.add(pointField);
             for (String field : fields) {
@@ -398,6 +641,7 @@ public class Wx {
 
             Map<PathCast, List<ClosestPoint>> pcPoints = new HashMap<>();
             for (PathCast pc : pathCasts) {
+<<<<<<< HEAD
                 Geometry pcGeom = null;
                 Coordinate[] coords = pathCastCoords.get(pc);
                 if (coords != null) {
@@ -407,6 +651,11 @@ public class Wx {
                         pcGeom = gf.createLineString(coords);
                     }
                 }
+=======
+                pc.pcGeom = pc.getPcGeom().intersection(bufferedPathCastArea);
+                Geometry pcGeom = pc.getPcGeom();
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 Point centroid = pcGeom != null ? pcGeom.getCentroid()
                         : warningPolygon.getCentroid();
 
@@ -442,6 +691,7 @@ public class Wx {
                 if (pathcastDataAdaptor != null) {
                     points = pathcastDataAdaptor.getPathcastData(
                             pathcastConfiguration, distanceToMeters,
+<<<<<<< HEAD
                             latLonToLocal, pcGeom, centroid, areaFeatures,
                             pc.area, pc.parentArea);
                 } else {
@@ -469,13 +719,23 @@ public class Wx {
                         }
                     }
                 }
+=======
+                            latLonToLocal, areaFeatures, pc);
+                } else {
+                    points = new ArrayList<>(0);
+                }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 pcPoints.put(pc, points);
             }
 
             // Figure out which points should go with which pathcast. Starts
             // with first pathcast and goes through each point within maxCount,
             // check for same point in other pathcast objects. If same point
+<<<<<<< HEAD
             // exists, remove from which ever pathcast is furthest away
+=======
+            // exists, remove from which ever pathcast is later
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             Set<Coordinate> closestPtCoords = new HashSet<>(30);
             List<ClosestPoint> tmpPoints = new ArrayList<>(maxCount);
             Queue<PathCast> tmp = new ArrayDeque<>(pathCasts);
@@ -488,6 +748,7 @@ public class Wx {
                         if (pc2 != pc) {
                             List<ClosestPoint> points2 = pcPoints.get(pc2);
                             ClosestPoint found = find(cp, points2,
+<<<<<<< HEAD
                                     Integer.MAX_VALUE);
                             if (found != null) {
                                 // We found a point within maxCount in this
@@ -495,11 +756,22 @@ public class Wx {
                                 if (found.distance < cp.distance) {
                                     // This point is closer to the other
                                     // pathcast
+=======
+                            Integer.MAX_VALUE);
+                            if (found != null) {
+                                // We found a point within maxCount in this list.
+                                if (pc.index > pc2.index) {
+                                    // This point is earlier in the other pathcast
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                     points.remove(i);
                                     --i;
                                     break;
                                 } else {
+<<<<<<< HEAD
                                     // Remove from other pathcast, we are closer
+=======
+                                    // Remove from other pathcast, we are earlier
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                     points2.remove(found);
                                 }
                             }
@@ -997,7 +1269,11 @@ public class Wx {
                         .getInstance(SimpleUnitFormat.Flavor.ASCII)
                         .parseProductUnit(unit, new ParsePosition(0))
                         .asType(Speed.class);
+<<<<<<< HEAD
             } catch (ParserException e) {
+=======
+            } catch (MeasurementParseException e) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 statusHandler.handle(Priority.DEBUG,
                         "Unable to parse movement speed unit: " + unit, e);
             }
@@ -1045,6 +1321,7 @@ public class Wx {
     public Date getObsTime() {
         return new Date(this.wwaStartTime);
     }
+<<<<<<< HEAD
 
     private List<ClosestPoint> findPointsToBeRemoved(Point centroid,
             List<ClosestPoint> points, double stormtrackAngle) {
@@ -1079,3 +1356,7 @@ public class Wx {
         return angle;
     }
 }
+=======
+}
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

@@ -48,6 +48,18 @@
 # Jan 26, 2017  #6092     randerso    return exitCode so it can be propagated back to through the calling processes
 # Oct 22, 2019  #7943     tjensen     Remove -x flag from grep check in deleteOldEclipseConfigurationDirs()
 # Jan 31, 2022      tiffanym@ucar.edu Clean up output when CAVE is started
+# Feb 18, 2021  #8345     mchan       Added function to find and zip up cave logs where its file name contains 
+#                                     current pid. Function runs when application shuts down.
+# Mar 23, 2022  #8345     randerso    zip files without full directory path so file can be unzipped into the 
+#                                     current directory without creating a bunch of subdirectories.
+# Mar 15, 2023  #2028134  hvandam     zip log files by pid and date for files older than 2 days
+# Mar 22, 2023  #2028149  jkelmer     Added memory check to select ncep.ini if the site has enough memory
+# Apr 20, 2023  #2028134  njensen     Handle gfeclient log files when zipping up log files, improve searching/matching,
+#                                     and move zipUpLogFiles call from logExitStatus() to deleteOldCaveLogs()
+# May 04, 2023  #2028134  njensen     Save last purge time before doing the log purge and zip
+# Jun 15, 2023  #2028134  njensen     zip up log files in each directory under ~/caveData/logs/consoleLogs
+# Aug 02, 2023  #2028149  jkelmer     Moved ncep.ini check to only utilize if component or perspective args
+#                                     are found within definined array.
 ########################
 
 source /awips2/cave/iniLookup.sh
@@ -64,12 +76,22 @@ BYTES_IN_KB=1024
 BYTES_IN_MB=1048576
 BYTES_IN_GB=1073741824
 
+# Threshold in GB to use ncep.ini
+AVAIL_MEM=`free -b | awk 'NR == 2 {print $2}'`
+GB_FOR_NCEP_INI=120
+NCEP_INI_WHITELIST=("GFE" "D2D")
+
 # Looks up ini file first by component/perspective
 # then by SITE_TYPE before falling back to cave.ini.
 # Sets ini file cave argument string in $CAVE_INI_ARG.
 # Returns 0 if component/perspective found in args, else 1.
 function lookupINI()
 {
+   USE_NCEP_INI=false
+   let "AVAIL_MEM_GB = ${AVAIL_MEM}/${BYTES_IN_GB}"
+   if [[ "$AVAIL_MEM_GB" -gt "$GB_FOR_NCEP_INI" ]]; then
+       USE_NCEP_INI=true
+   fi
    # only check for component/perspective if arguments aren't empty
    if [[ "${1}" != "" ]]; then
        position=1
@@ -79,7 +101,12 @@ function lookupINI()
                # Get The Next Argument.
                position=$(( $position + 1 ))
                nextArg=${!position}
-
+               if [[ ${NCEP_INI_WHITELIST[@]} =~ (^|[[:space:]])${nextArg^^}($|[[:space:]]) &&
+                     ${USE_NCEP_INI} == true &&
+                     -e "/awips2/cave/ncep.ini" ]]; then
+                   export CAVE_INI_ARG="--launcher.ini /awips2/cave/ncep.ini"
+                   return 0
+               fi  
                retrieveAssociatedINI ${arg} "${nextArg}"
                RC=$?
                if [ ${RC} -eq 0 ]; then
@@ -89,19 +116,24 @@ function lookupINI()
            fi
            position=$(( $position + 1 ))
        done
-   fi   
-
+   fi
    # if ini wasn't found through component or perspective
    if [[ -z $CAVE_INI_ARG ]]
    then
-       # attempt to fall back to site type specific ini
-       siteTypeIni="/awips2/cave/${SITE_TYPE}.ini"
-       if [[ -e ${siteTypeIni} ]]
+      #Use NCEP.ini if no component/perspective yet over NCEP memory amount
+       if [[ ${USE_NCEP_INI} == true && -e "/awips2/cave/ncep.ini" ]] 
        then
-           export CAVE_INI_ARG="--launcher.ini ${siteTypeIni}"
+           export CAVE_INI_ARG="--launcher.ini /awips2/cave/ncep.ini"       
+       # attempt to fall back to site type specific ini
        else
-           # cave.ini if all else fails
-           export CAVE_INI_ARG="--launcher.ini /awips2/cave/cave.ini"
+           siteTypeIni="/awips2/cave/${SITE_TYPE}.ini"
+           if [[ -e ${siteTypeIni} ]]
+           then
+               export CAVE_INI_ARG="--launcher.ini ${siteTypeIni}"
+           else
+               # cave.ini if all else fails
+               export CAVE_INI_ARG="--launcher.ini /awips2/cave/cave.ini"
+           fi
        fi
    fi
    return 1
@@ -369,6 +401,45 @@ function logExitStatus()
    return $exitCode
 }
 
+# Go through the log directory, looking for all log files greater than 2 days old. Create a zip file
+# based on the pid and date, and store all related files.
+#
+# The BASE_LOGDIR environment variable is required
+function zipUpLogFiles() 
+{
+   # For each directory under BASE_LOGDIR (which should be the consoleLogs dir),
+   # find all cave log files ending in console.log that are 2 days old or older.
+   # Note: gfeclient logs are also named cave except for startup-shutdown logs.
+   # Chose console log since it's the last one to be written to on cave exit.
+   # -mtime +1 translates to greater than 2 days, see
+   # https://unix.stackexchange.com/questions/92346/why-does-find-mtime-1-only-return-files-older-than-2-days
+   for dir in $HOME/$BASE_LOGDIR/*
+   do
+      mainLogs=( $(find "$dir" -type f -mtime +1 -name 'cave_*pid*_console.log'))
+
+      # Go through each console log, extract the pid and date.  Use these values
+      # to find all the remaining files with the same pid and date.  Send to zip.
+      for lg in "${mainLogs[@]}"
+      do
+         [[ $lg =~ cave_([0-9]+)_[0-9]+_pid_([0-9]+)_.* ]]
+         date="${BASH_REMATCH[1]}"
+         caveJavaPid="${BASH_REMATCH[2]}"
+
+         # It should be impossible to match the regex and not have a date and
+         # caveJavaPid, but just in case we check that they are set.
+         if [[ -n ${date} && -n ${caveJavaPid} ]]; then
+            # Take these two values and find all the files, then pipe them to zip.
+            find "${dir}" -name "*${date}*_pid_${caveJavaPid}_*.log" -mtime +1 | zip --quiet --move --names-stdin "${dir}/cave_${date}_pid_${caveJavaPid}.zip"
+         fi
+      done
+
+      # Remove any gfeclient startup-shutdown logs that are older than 2 days and
+      # weren't made part of the zip. These logs sometimes have the wrong pid
+      # (doesn't match the cave pid) and are not useful.
+      find "${dir}" -type f -mtime +1 -name "gfeclient*startup-shutdown.log" | xargs rm -f
+   done
+}
+
 # takes in a PID
 # waits for PID to spawn child
 # outputs the PID of the child or nothing if PID exits first
@@ -404,6 +475,9 @@ function deleteOldCaveLogs()
         return
     fi
 
+    # Record the last purge time
+    echo $(date +%s) > "$last_purge_f"
+
     # Use a lock file to handle multiple CAVEs started at the same time.
     local lock_f=$logdir/.purge-lock
     set -o noclobber
@@ -419,12 +493,15 @@ function deleteOldCaveLogs()
 
     # Purge the old logs.
     local n_days_to_keep=${CAVE_LOG_DAYS_TO_KEEP:-30}
-    find "$logdir" -type f -name "*.log" -mtime +"$n_days_to_keep" | xargs -r rm
+    echo -e "Cleaning consoleLogs: "
+    find "${logdir}" -type f -mtime +${n_days_to_keep} \( -name '*.log' -o -name '*.zip' \) | xargs -r --no-run-if-empty rm
 
-    # Record the last purge time and remove the lock file.
-    echo $(date +%s) > "$last_purge_f"
+    # DR 2028134
+    echo -e "Zipping consoleLogs: "
+    zipUpLogFiles
+
+    # Remove the lock file.
     rm -f "$lock_f"
-
     exit 0
 }
 

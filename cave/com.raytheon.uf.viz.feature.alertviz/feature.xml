@@ -45,9 +45,12 @@
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.springframework" version="2.5.6" match="greaterOrEqual"/>
       <import plugin="org.apache.commons.beanutils" version="1.6.1" match="greaterOrEqual"/>
+<<<<<<< HEAD
       <import plugin="javax.vecmath" version="1.3.1" match="greaterOrEqual"/>
       <import plugin="org.geotools" version="21.1" match="greaterOrEqual"/>
       <import plugin="javax.measure" version="1.0.0" match="greaterOrEqual"/>
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    </requires>
 
    <plugin
@@ -75,18 +78,25 @@
          version="0.0.0"/>
 
    <plugin
+<<<<<<< HEAD
          id="net.sf.cglib"
+=======
+         id="com.raytheon.uf.viz.alertviz"
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
          download-size="0"
          install-size="0"
          version="0.0.0"/>
 
    <plugin
+<<<<<<< HEAD
          id="com.raytheon.uf.viz.alertviz"
          download-size="0"
          install-size="0"
          version="0.0.0"/>
 
    <plugin
+         id="com.raytheon.uf.common.localization"
+=======
          id="com.raytheon.uf.common.localization"
          download-size="0"
          install-size="0"
@@ -95,6 +105,18 @@
 
    <plugin
          id="com.raytheon.uf.common.serialization"
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+<<<<<<< HEAD
+         id="com.raytheon.uf.common.serialization"
+=======
+         id="com.raytheon.uf.common.security"
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -119,6 +141,15 @@
          install-size="0"
          version="0.0.0"/>
 
+<<<<<<< HEAD
+=======
+    <plugin
+         id="org.apache.commons.collections4"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    <plugin
          id="org.apache.commons.codec"
          download-size="0"
@@ -180,12 +211,15 @@
          version="0.0.0"/>
 
    <plugin
+<<<<<<< HEAD
          id="javax.vecmath"
          download-size="0"
          install-size="0"
          version="0.0.0"/>
 
    <plugin
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
          id="com.raytheon.uf.viz.product.alertviz"
          download-size="0"
          install-size="0"
@@ -458,6 +492,7 @@
          version="0.0.0"/>
 
    <plugin
+<<<<<<< HEAD
          id="com.raytheon.uf.common.velocity"
          download-size="0"
          install-size="0"
@@ -465,6 +500,8 @@
          unpack="false"/>
 
    <plugin
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
          id="org.quartz"
          download-size="0"
          install-size="0"
@@ -487,7 +524,11 @@
          id="com.google.guava"
          download-size="0"
          install-size="0"
+<<<<<<< HEAD
          version="0.0.0"/>
+=======
+         version="32.0.0"/>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
    <plugin
          id="org.reflections"
@@ -524,7 +565,11 @@
          id="org.apache.xerces"
          download-size="0"
          install-size="0"
+<<<<<<< HEAD
          version="0.0.0"/>
+=======
+         version="2.12.1"/>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
    <plugin
          id="com.raytheon.uf.common.convert"

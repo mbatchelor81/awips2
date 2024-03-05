@@ -1,19 +1,31 @@
 ##
 # This software was developed and / or modified by Raytheon Company,
 # pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
 # 
+=======
+#
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # U.S. EXPORT CONTROLLED TECHNICAL DATA
 # This software product contains export-restricted data whose
 # export/transfer/disclosure is restricted by U.S. law. Dissemination
 # to non-U.S. persons whether in the United States or abroad requires
 # an export license or other authorization.
+<<<<<<< HEAD
 # 
+=======
+#
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # Contractor Name:        Raytheon Company
 # Contractor Address:     6825 Pine Street, Suite 340
 #                         Mail Stop B8
 #                         Omaha, NE 68106
 #                         402.291.0100
+<<<<<<< HEAD
 # 
+=======
+#
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # See the AWIPS II Master Rights File ("Master Rights File.pdf") for
 # further licensing information.
 ##
@@ -42,10 +54,17 @@ scripts = [
     },
 
     {
+<<<<<<< HEAD
     "name":"AllowedHazardAFD_1", 
     "commentary": """Set up hazards in different zones to test AFD's hazards. 
 HU.W, TY.W, TR.W, HU.A, TY.A, TR.A, HF.W, SR.W, GL.W, SE.W, SC.Y, SW.Y, RB.Y, SI.Y, BW.Y, BZ.W""",
     "productType":"AFD", 
+=======
+    "name":"AllowedHazardAFD_1",
+    "commentary": """Set up hazards in different zones to test AFD's hazards.
+HU.W, TY.W, TR.W, HU.A, TY.A, TR.A, HF.W, SR.W, GL.W, SE.W, SC.Y, BW.Y, BZ.W""",
+    "productType":"AFD",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "createGrids": [
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "<None>", "all"),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "HU.W:1080", ["FLZ139"]),
@@ -59,12 +78,18 @@ HU.W, TY.W, TR.W, HU.A, TY.A, TR.A, HF.W, SR.W, GL.W, SE.W, SC.Y, SW.Y, RB.Y, SI
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "GL.W", ["FLZ057"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "SE.W", ["FLZ160"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "SC.Y", ["FLZ061"]),
+<<<<<<< HEAD
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "SW.Y", ["FLZ165"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "RB.Y", ["GMZ876"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "SI.Y", ["GMZ870"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "BW.Y", ["GMZ856"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "BZ.W", ["GMZ830"]),],
     "comboFlag": 0, 
+=======
+       ("Fcst", "Hazards", "DISCRETE", 0, 24, "BW.Y", ["GMZ856"]),
+       ("Fcst", "Hazards", "DISCRETE", 0, 24, "BZ.W", ["GMZ830"]),],
+    "comboFlag": 0,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "fileChanges": [("AFD_<site>_Definition", "TextUtility", "replace", (def1, def2), "undo")],
     "cmdLineVars": "{('Issued By', 'issuedBy'): None, ('Issuance Type', 'issuanceType'): 'ROUTINE', ('IncludePrevious AFD?', 'includePreviousAFD'): 'NO', ('Long TermForecaster', 'longTermFcstrNumber'): '99', ('Product Issuance', 'productIssuance'): 'Morning', ('Short TermForecaster', 'shortTermFcstrNumber'): '99', ('IncludePrevious AFDIssue Time?', 'includePreviousAFD_issueTime'): 'NO', ('OptionalTopics', 'optionalTopics'): [], ('AviationForecaster', 'aviationFcstrNumber'): '99'}",
     "checkStrings": [
@@ -86,6 +111,7 @@ HU.W, TY.W, TR.W, HU.A, TY.A, TR.A, HF.W, SR.W, GL.W, SE.W, SC.Y, SW.Y, RB.Y, SI
       "Tropical Storm Watch for FLZ050. ",
       "Tropical Storm Warning for FLZ043.",
       "Storm Warning until midnight EST tonight for FLZ056.",
+<<<<<<< HEAD
       "Small Craft Advisory for hazardous seas until midnight EST tonight for FLZ165.",
       "Gale Warning until midnight EST tonight for FLZ057.",
       "Hurricane Warning for FLZ139. ",
@@ -102,6 +128,21 @@ HU.W, TY.W, TR.W, HU.A, TY.A, TR.A, HF.W, SR.W, GL.W, SE.W, SC.Y, SW.Y, RB.Y, SI
     "commentary": """Set up hazards in different zones to test AFD's hazards. 
 IS.W, LE.W, WS.W, WW.Y, WS.A, WC.W, WC.Y, WC.A, DU.W, DU.Y""",
     "productType":"AFD", 
+=======
+      "Gale Warning until midnight EST tonight for FLZ057.",
+      "Hurricane Warning for FLZ139. ",
+      "GM...Brisk Wind Advisory until midnight EST tonight for GMZ856.",
+      "Blizzard Warning until midnight EST tonight for GMZ830.",
+      "&&",
+       ],
+    },
+
+    {
+    "name":"AllowedHazardAFD_2",
+    "commentary": """Set up hazards in different zones to test AFD's hazards.
+IS.W, LE.W, WS.W, WW.Y, WS.A, WC.W, WC.Y, WC.A, DU.W, DU.Y""",
+    "productType":"AFD",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "createGrids": [
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "<None>", "all"),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "IS.W", ["FLZ139"]),
@@ -122,7 +163,11 @@ IS.W, LE.W, WS.W, WW.Y, WS.A, WC.W, WC.Y, WC.A, DU.W, DU.Y""",
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "DU.Y", ["GMZ830"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "MH.Y", ["GMZ853"]),
        ],
+<<<<<<< HEAD
     "comboFlag": 0, 
+=======
+    "comboFlag": 0,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "fileChanges": [("AFD_<site>_Definition", "TextUtility", "replace", (def1, def2), "undo")],
     "cmdLineVars": "{('Issued By', 'issuedBy'): None, ('Issuance Type', 'issuanceType'): 'ROUTINE', ('IncludePrevious AFD?', 'includePreviousAFD'): 'NO', ('Long TermForecaster', 'longTermFcstrNumber'): '99', ('Product Issuance', 'productIssuance'): 'Morning', ('Short TermForecaster', 'shortTermFcstrNumber'): '99', ('IncludePrevious AFDIssue Time?', 'includePreviousAFD_issueTime'): 'NO', ('OptionalTopics', 'optionalTopics'): [], ('AviationForecaster', 'aviationFcstrNumber'): '99'}",
     "checkStrings": [
@@ -154,12 +199,21 @@ IS.W, LE.W, WS.W, WW.Y, WS.A, WC.W, WC.Y, WC.A, DU.W, DU.Y""",
       "Blowing Dust Advisory until midnight EST tonight for GMZ830.",
       "&&",
        ],
+<<<<<<< HEAD
     },   
 
     {
     "name":"AllowedHazardAFD_3",
     "productType":"AFD", 
     "commentary": """Set up hazards in different zones to test AFD's hazards. 
+=======
+    },
+
+    {
+    "name":"AllowedHazardAFD_3",
+    "productType":"AFD",
+    "commentary": """Set up hazards in different zones to test AFD's hazards.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 EC.W, EC.A, EH.W, EH.A, HT.Y, FG.Y, FZ.W, FR.Y, HW.W, WI.Y, LW.Y, HW.A, SM.Y, ZF.Y, FF.A, FA.A, CF.W, CF.Y""",
     "createGrids": [
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "<None>", "all"),
@@ -184,7 +238,11 @@ EC.W, EC.A, EH.W, EH.A, HT.Y, FG.Y, FZ.W, FR.Y, HW.W, WI.Y, LW.Y, HW.A, SM.Y, ZF
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "MF.Y", ["GMZ850"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "MS.Y", ["GMZ853"]),
        ],
+<<<<<<< HEAD
     "comboFlag": 0, 
+=======
+    "comboFlag": 0,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "fileChanges": [("AFD_<site>_Definition", "TextUtility", "replace", (def1, def2), "undo")],
     "cmdLineVars": "{('Issued By', 'issuedBy'): None, ('Issuance Type', 'issuanceType'): 'ROUTINE', ('IncludePrevious AFD?', 'includePreviousAFD'): 'NO', ('Long TermForecaster', 'longTermFcstrNumber'): '99', ('Product Issuance', 'productIssuance'): 'Morning', ('Short TermForecaster', 'shortTermFcstrNumber'): '99', ('IncludePrevious AFDIssue Time?', 'includePreviousAFD_issueTime'): 'NO', ('OptionalTopics', 'optionalTopics'): [], ('AviationForecaster', 'aviationFcstrNumber'): '99'}",
     "checkStrings": [
@@ -219,13 +277,22 @@ EC.W, EC.A, EH.W, EH.A, HT.Y, FG.Y, FZ.W, FR.Y, HW.W, WI.Y, LW.Y, HW.A, SM.Y, ZF
       "Coastal Flood Advisory until midnight EST tonight for GMZ830.",
       "&&",
        ],
+<<<<<<< HEAD
     },   
+=======
+    },
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 
     {
     "name":"AllowedHazardAFD_4",
+<<<<<<< HEAD
     "productType":"AFD", 
     "commentary": """Set up hazards in different zones to test AFD's hazards. 
+=======
+    "productType":"AFD",
+    "commentary": """Set up hazards in different zones to test AFD's hazards.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 CF.A, LS.W, LS.Y, LS.A, AS.Y, SU.W, SU.Y, AF.Y, TS.W, TS.A, FW.W, FW.A, UP.W, UP.Y, HZ.A, HZ.W, LO.Y""",
     "createGrids": [
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "<None>", "all"),
@@ -246,7 +313,11 @@ CF.A, LS.W, LS.Y, LS.A, AS.Y, SU.W, SU.Y, AF.Y, TS.W, TS.A, FW.W, FW.A, UP.W, UP
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "HZ.A", ["FLZ165"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "HZ.W", ["FLZ061"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "LO.Y", ["FLZ139"]),],
+<<<<<<< HEAD
     "comboFlag": 0, 
+=======
+    "comboFlag": 0,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "fileChanges": [("AFD_<site>_Definition", "TextUtility", "replace", (def1, def3), "undo")],
     "cmdLineVars": "{('Issued By', 'issuedBy'): None, ('Issuance Type', 'issuanceType'): 'ROUTINE', ('IncludePrevious AFD?', 'includePreviousAFD'): 'NO', ('Long TermForecaster', 'longTermFcstrNumber'): '99', ('Product Issuance', 'productIssuance'): 'Morning', ('Short TermForecaster', 'shortTermFcstrNumber'): '99', ('IncludePrevious AFDIssue Time?', 'includePreviousAFD_issueTime'): 'NO', ('OptionalTopics', 'optionalTopics'): [], ('AviationForecaster', 'aviationFcstrNumber'): '99'}",
     "checkStrings": [
@@ -275,12 +346,21 @@ CF.A, LS.W, LS.Y, LS.A, AS.Y, SU.W, SU.Y, AF.Y, TS.W, TS.A, FW.W, FW.A, UP.W, UP
       "Tsunami Watch through this evening for FLZ056.",
       "&&",
        ],
+<<<<<<< HEAD
     },   
 
     {
     "name":"AllowedHazardZFP_1", 
     "productType":"ZFP", 
     "commentary": """Set up hazards in different zones to test ZFP's hazards. 
+=======
+    },
+
+    {
+    "name":"AllowedHazardZFP_1",
+    "productType":"ZFP",
+    "commentary": """Set up hazards in different zones to test ZFP's hazards.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 HU.W, TY.W, TR.W, HU.A, TY.A, TR.A, HF.W, BZ.W, IS.W""",
     "cmdLineVars": "{('Product Issuance', 'productIssuance'): 'Morning', ('Issued By', 'issuedBy'): None }",
     "createGrids": [
@@ -294,12 +374,20 @@ HU.W, TY.W, TR.W, HU.A, TY.A, TR.A, HF.W, BZ.W, IS.W""",
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "HF.W", ["FLZ155", "FLZ255"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "BZ.W", ["FLZ160", "FLZ260"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "IS.W", ["FLZ061"])],
+<<<<<<< HEAD
     "comboFlag": 1, 
+=======
+    "comboFlag": 1,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "combinations": [(["FLZ139", "FLZ239"],""), (["FLZ142", "FLZ242"],""), (["FLZ043"],""),
       (["FLZ148", "FLZ248"],""), (["FLZ149", "FLZ249"],""), (["FLZ050"],""), (["FLZ151", "FLZ251"], ""),
       (["FLZ052"],""), (["FLZ155", "FLZ255"],""), (["FLZ056"],""), (["FLZ057"], ""),
       (["FLZ160", "FLZ260"],""), (["FLZ061"],""), (["FLZ162", "FLZ262"],""), (["FLZ165", "FLZ265"], ""),],
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "checkStrings": [
        "ZFPTBW",
        "Zone Forecast Product for Florida",
@@ -342,6 +430,7 @@ HU.W, TY.W, TR.W, HU.A, TY.A, TR.A, HF.W, BZ.W, IS.W""",
        "...ICE STORM WARNING IN EFFECT UNTIL MIDNIGHT EST TONIGHT...",
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
     {
@@ -349,6 +438,15 @@ HU.W, TY.W, TR.W, HU.A, TY.A, TR.A, HF.W, BZ.W, IS.W""",
     "productType":"ZFP", 
     "commentary": """Set up hazards in different zones to test ZFP's hazards. 
 LE.W, WS.W, ZR.Y, LE.Y, WW.Y, BZ.A, LE.A, WS.A""",
+=======
+    },
+
+    {
+    "name":"AllowedHazardZFP_2",
+    "productType":"ZFP",
+    "commentary": """Set up hazards in different zones to test ZFP's hazards.
+LE.W, WS.W, WW.Y, WS.A""",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "cmdLineVars": "{('Product Issuance', 'productIssuance'): 'Morning', ('Issued By', 'issuedBy'): None }",
     "createGrids": [
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "<None>", "all"),
@@ -356,12 +454,20 @@ LE.W, WS.W, ZR.Y, LE.Y, WW.Y, BZ.A, LE.A, WS.A""",
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "WS.W", ["FLZ043"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "WW.Y", ["FLZ057"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "WS.A", ["FLZ165", "FLZ265"]),],
+<<<<<<< HEAD
     "comboFlag": 1, 
+=======
+    "comboFlag": 1,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "combinations": [(["FLZ139", "FLZ239"],""), (["FLZ142", "FLZ242"],""), (["FLZ043"],""),
       (["FLZ148", "FLZ248"],""), (["FLZ149", "FLZ249"],""), (["FLZ050"],""), (["FLZ151", "FLZ251"], ""),
       (["FLZ052"],""), (["FLZ155", "FLZ255"],""), (["FLZ056"],""), (["FLZ057"], ""),
       (["FLZ160", "FLZ260"],""), (["FLZ061"],""), (["FLZ162", "FLZ262"],""), (["FLZ165", "FLZ265"], ""),],
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "checkStrings": [
       "FPUS52 KTBW 160500",
       "ZFPTBW",
@@ -385,12 +491,21 @@ LE.W, WS.W, ZR.Y, LE.Y, WW.Y, BZ.A, LE.A, WS.A""",
       "...WINTER STORM WATCH IN EFFECT THROUGH THIS EVENING...",
       "$$",
        ],
+<<<<<<< HEAD
     },   
 
     {
     "name":"AllowedHazardZFP_3", 
     "productType":"ZFP", 
     "commentary": """Set up hazards in different zones to test ZFP's hazards. 
+=======
+    },
+
+    {
+    "name":"AllowedHazardZFP_3",
+    "productType":"ZFP",
+    "commentary": """Set up hazards in different zones to test ZFP's hazards.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 WC.W, WC.Y, WC.A, DU.W, DU.Y, EC.W, EC.A, EH.W, EH.A, HT.Y, FG.Y, FZ.W, FR.Y, FZ.A""",
     "cmdLineVars": "{('Product Issuance', 'productIssuance'): 'Morning', ('Issued By', 'issuedBy'): None }",
     "createGrids": [
@@ -409,12 +524,20 @@ WC.W, WC.Y, WC.A, DU.W, DU.Y, EC.W, EC.A, EH.W, EH.A, HT.Y, FG.Y, FZ.W, FR.Y, FZ
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "FZ.W", ["FLZ160", "FLZ260"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "FR.Y", ["FLZ162", "FLZ262"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "FZ.A", ["FLZ165", "FLZ265"])],
+<<<<<<< HEAD
     "comboFlag": 1, 
+=======
+    "comboFlag": 1,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "combinations": [(["FLZ139", "FLZ239"],""), (["FLZ142", "FLZ242"],""), (["FLZ043"],""),
       (["FLZ148", "FLZ248"],""), (["FLZ149", "FLZ249"],""), (["FLZ050"],""), (["FLZ151", "FLZ251"], ""),
       (["FLZ052"],""), (["FLZ155", "FLZ255"],""), (["FLZ056"],""), (["FLZ057"], ""),
       (["FLZ160", "FLZ260"],""), (["FLZ061"],""), (["FLZ162", "FLZ262"],""), (["FLZ165", "FLZ265"], ""),],
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "checkStrings": [
       "FPUS52 KTBW 160500",
       "ZFPTBW",
@@ -482,9 +605,15 @@ WC.W, WC.Y, WC.A, DU.W, DU.Y, EC.W, EC.A, EH.W, EH.A, HT.Y, FG.Y, FZ.W, FR.Y, FZ
     },
 
     {
+<<<<<<< HEAD
     "name":"AllowedHazardZFP_4", 
     "productType":"ZFP", 
     "commentary": """Set up hazards in different zones to test ZFP's hazards. 
+=======
+    "name":"AllowedHazardZFP_4",
+    "productType":"ZFP",
+    "commentary": """Set up hazards in different zones to test ZFP's hazards.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 HW.W, WI.Y, LW.Y, HW.A, SM.Y, ZF.Y, FF.A, FA.W, FA.Y, CF.W, LS.W, CF.W, LS.Y, CF.A""",
     "cmdLineVars": "{('Product Issuance', 'productIssuance'): 'Morning', ('Issued By', 'issuedBy'): None }",
     "createGrids": [
@@ -504,12 +633,20 @@ HW.W, WI.Y, LW.Y, HW.A, SM.Y, ZF.Y, FF.A, FA.W, FA.Y, CF.W, LS.W, CF.W, LS.Y, CF
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "CF.W", ["FLZ061"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "LS.Y", ["FLZ162", "FLZ262"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "CF.A", ["FLZ165", "FLZ265"])],
+<<<<<<< HEAD
     "comboFlag": 1, 
+=======
+    "comboFlag": 1,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "combinations": [(["FLZ139", "FLZ239"],""), (["FLZ142", "FLZ242"],""), (["FLZ043"],""),
       (["FLZ148", "FLZ248"],""), (["FLZ149", "FLZ249"],""), (["FLZ050"],""), (["FLZ151", "FLZ251"], ""),
       (["FLZ052"],""), (["FLZ155", "FLZ255"],""), (["FLZ056"],""), (["FLZ057"], ""),
       (["FLZ160", "FLZ260"],""), (["FLZ061"],""), (["FLZ162", "FLZ262"],""), (["FLZ165", "FLZ265"], ""),],
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "checkStrings": [
        "FPUS52 KTBW 160500",
        "ZFPTBW",
@@ -582,6 +719,7 @@ HW.W, WI.Y, LW.Y, HW.A, SM.Y, ZF.Y, FF.A, FA.W, FA.Y, CF.W, LS.W, CF.W, LS.Y, CF
        "...COASTAL FLOOD WATCH IN EFFECT THROUGH THIS EVENING...",
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
     {
@@ -589,6 +727,15 @@ HW.W, WI.Y, LW.Y, HW.A, SM.Y, ZF.Y, FF.A, FA.W, FA.Y, CF.W, LS.W, CF.W, LS.Y, CF
     "commentary": """Set up hazards in different zones to test ZFP's hazards. 
 LS.A, UP.W, UP.Y, AS.Y, SU.W, SU.Y, AF.Y, LO.Y, TO.A, HZ.A, HZ.W, SV.A""",
     "productType":"ZFP", 
+=======
+    },
+
+    {
+    "name":"AllowedHazardZFP_5",
+    "commentary": """Set up hazards in different zones to test ZFP's hazards.
+LS.A, UP.W, UP.Y, AS.Y, SU.W, SU.Y, AF.Y, LO.Y, TO.A, HZ.A, HZ.W, SV.A""",
+    "productType":"ZFP",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "cmdLineVars": "{('Product Issuance', 'productIssuance'): 'Morning', ('Issued By', 'issuedBy'): None }",
     "createGrids": [
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "<None>", "all"),
@@ -604,12 +751,20 @@ LS.A, UP.W, UP.Y, AS.Y, SU.W, SU.Y, AF.Y, LO.Y, TO.A, HZ.A, HZ.W, SV.A""",
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "HZ.A", ["FLZ057"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "HZ.W", ["FLZ160", "FLZ260"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "SV.A:1234", ["FLZ056"])],
+<<<<<<< HEAD
     "comboFlag": 1, 
+=======
+    "comboFlag": 1,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "combinations": [(["FLZ139", "FLZ239"],""), (["FLZ142", "FLZ242"],""), (["FLZ043"],""),
       (["FLZ148", "FLZ248"],""), (["FLZ149", "FLZ249"],""), (["FLZ050"],""), (["FLZ151", "FLZ251"], ""),
       (["FLZ052"],""), (["FLZ155", "FLZ255"],""), (["FLZ056"],""), (["FLZ057"], ""),
       (["FLZ160", "FLZ260"],""), (["FLZ061"],""), (["FLZ162", "FLZ262"],""), (["FLZ165", "FLZ265"], ""),],
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "checkStrings": [
       "FPUS52 KTBW 160500",
       "ZFPTBW",
@@ -665,11 +820,19 @@ LS.A, UP.W, UP.Y, AS.Y, SU.W, SU.Y, AF.Y, LO.Y, TO.A, HZ.A, HZ.W, SV.A""",
       "...HARD FREEZE WARNING IN EFFECT UNTIL MIDNIGHT EST TONIGHT...",
       "$$",
        ],
+<<<<<<< HEAD
     },   
 
     {
     "name":"AllowedHazard_FWF", 
     "productType":"FWF", 
+=======
+    },
+
+    {
+    "name":"AllowedHazard_FWF",
+    "productType":"FWF",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": """Set up hazards in different zones to test FWF hazards.
 FW.W, FW.A, HW.W, WI.Y, EH.W, HT.Y""",
     "createGrids": [
@@ -680,12 +843,20 @@ FW.W, FW.A, HW.W, WI.Y, EH.W, HT.Y""",
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "WI.Y", ["FLZ148", "FLZ248"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "EH.W", ["FLZ149", "FLZ249"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "HT.Y", ["FLZ050"]),],
+<<<<<<< HEAD
     "comboFlag": 1, 
+=======
+    "comboFlag": 1,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "combinations": [(["FLZ139", "FLZ239"],""), (["FLZ142", "FLZ242"],""), (["FLZ043"],""),
       (["FLZ148", "FLZ248"],""), (["FLZ149", "FLZ249"],""), (["FLZ050"],""), (["FLZ151", "FLZ251"], ""),
       (["FLZ052"],""), (["FLZ155", "FLZ255"],""), (["FLZ056"],""), (["FLZ057"], ""),
       (["FLZ160", "FLZ260"],""), (["FLZ061"],""), (["FLZ162", "FLZ262"],""), (["FLZ165", "FLZ265"], ""),],
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "checkStrings": [
       "FNUS52 KTBW 160500",
       "FWFTBW",
@@ -740,19 +911,32 @@ FW.W, FW.A, HW.W, WI.Y, EH.W, HT.Y""",
       ".TODAY...",
       "$$",
        ],
+<<<<<<< HEAD
     },   
 
 
     {
     "name":"AllowedHazard_FWFTable", 
     "productType":"FWFTable", 
+=======
+    },
+
+
+    {
+    "name":"AllowedHazard_FWFTable",
+    "productType":"FWFTable",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": """Set up hazards in different zones to test FWFTable hazards.
 FW.W, FW.A""",
     "createGrids": [
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "<None>", "all"),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "FW.W", ["FLZ139", "FLZ239"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "FW.A", ["FLZ142", "FLZ242"]),],
+<<<<<<< HEAD
     "comboFlag": 1, 
+=======
+    "comboFlag": 1,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "combinations": [(["FLZ139", "FLZ239"],""), (["FLZ142", "FLZ242"],""), (["FLZ043"],""),
       (["FLZ148", "FLZ248"],""), (["FLZ149", "FLZ249"],""), (["FLZ050"],""), (["FLZ151", "FLZ251"], ""),
       (["FLZ052"],""), (["FLZ155", "FLZ255"],""), (["FLZ056"],""), (["FLZ057"], ""),
@@ -839,12 +1023,21 @@ FW.W, FW.A""",
       ".THURSDAY...",
       ".FRIDAY...",
        ],
+<<<<<<< HEAD
     },   
 
 
     {
     "name":"AllowedHazardNSH_1", 
     "productType":"NSH", 
+=======
+    },
+
+
+    {
+    "name":"AllowedHazardNSH_1",
+    "productType":"NSH",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": """Set up hazards in different zones to test NSH hazards.
 HF.W, SR.W, GL.W, SE.W, UP.W, RB.Y""",
     "createGrids": [
@@ -855,7 +1048,11 @@ HF.W, SR.W, GL.W, SE.W, UP.W, RB.Y""",
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "SE.W", ["GMZ850"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "UP.W", ["GMZ873"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "RB.Y", ["GMZ830"]),],
+<<<<<<< HEAD
     "comboFlag": 1, 
+=======
+    "comboFlag": 1,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "combinations": [(["GMZ876","GMZ870","GMZ856","GMZ850","GMZ873","GMZ830"],
        "")],
     "cmdLineVars": "{('Product Issuance', 'productIssuance'): '430 AM', ('Issued By', 'issuedBy'): None}",
@@ -903,6 +1100,7 @@ HF.W, SR.W, GL.W, SE.W, UP.W, RB.Y""",
        "...SMALL CRAFT ADVISORY FOR ROUGH BAR IN EFFECT THROUGH THIS EVENING...",
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
     {
@@ -919,6 +1117,22 @@ SI.Y, SC.Y, SW.Y, BW.Y, MF.Y, MS.Y""",
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "MF.Y", ["GMZ873"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "MS.Y", ["GMZ830"]),],
     "comboFlag": 1, 
+=======
+    },
+
+    {
+    "name":"AllowedHazardNSH_2",
+    "commentary": """Set up hazards in different zones to test NSH hazards.
+SC.Y, BW.Y, MF.Y, MS.Y""",
+    "productType":"NSH",
+    "createGrids": [
+       ("Fcst", "Hazards", "DISCRETE", 0, 24, "<None>", "all"),
+       ("Fcst", "Hazards", "DISCRETE", 0, 24, "SC.Y", ["GMZ870"]),
+       ("Fcst", "Hazards", "DISCRETE", 0, 24, "BW.Y", ["GMZ850"]),
+       ("Fcst", "Hazards", "DISCRETE", 0, 24, "MF.Y", ["GMZ873"]),
+       ("Fcst", "Hazards", "DISCRETE", 0, 24, "MS.Y", ["GMZ830"]),],
+    "comboFlag": 1,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "combinations": [(["GMZ876","GMZ870","GMZ856","GMZ850","GMZ873","GMZ830"],
        "")],
     "cmdLineVars": "{('Product Issuance', 'productIssuance'): '430 AM', ('Issued By', 'issuedBy'): None}",
@@ -929,12 +1143,15 @@ SI.Y, SC.Y, SW.Y, BW.Y, MF.Y, MS.Y""",
        "National Weather Service Tampa Bay Ruskin FL",
        "1200 AM EST Sat Jan 16 2010",
        "For waters within five nautical miles of shore on Lake (name)",
+<<<<<<< HEAD
        "GMZ876-161600-",
        "/O.NEW.KTBW.SI.Y.0001.100116T0500Z-100117T0500Z/",
        "Waters from Bonita Beach to Englewood FL out 20 to 60 NM-",
        "1200 AM EST Sat Jan 16 2010",
        "...SMALL CRAFT ADVISORY FOR WINDS IN EFFECT THROUGH THIS EVENING...",
        "$$",
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        "GMZ870-161600-",
        "/O.NEW.KTBW.SC.Y.0001.100116T0500Z-100117T0500Z/",
        "Waters from Tarpon Springs to Suwannee River FL out 20 to 60 NM-",
@@ -942,12 +1159,15 @@ SI.Y, SC.Y, SW.Y, BW.Y, MF.Y, MS.Y""",
        "1200 AM EST Sat Jan 16 2010",
        "...SMALL CRAFT ADVISORY IN EFFECT THROUGH THIS EVENING...",
        "$$",
+<<<<<<< HEAD
        "GMZ856-161600-",
        "/O.NEW.KTBW.SW.Y.0001.100116T0500Z-100117T0500Z/",
        "Coastal waters from Bonita Beach to Englewood FL out 20 NM-",
        "1200 AM EST Sat Jan 16 2010",
        "...SMALL CRAFT ADVISORY FOR HAZARDOUS SEAS IN EFFECT THROUGH THIS EVENING...",
        "$$",
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        "GMZ850-161600-",
        "/O.NEW.KTBW.BW.Y.0001.100116T0500Z-100117T0500Z/",
        "Coastal waters from Tarpon Springs to Suwannee River FL out 20 NM-",
@@ -967,11 +1187,19 @@ SI.Y, SC.Y, SW.Y, BW.Y, MF.Y, MS.Y""",
        "...DENSE SMOKE ADVISORY IN EFFECT UNTIL MIDNIGHT EST TONIGHT...",
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
     {
     "name":"AllowedHazardNSH_3", 
     "productType":"NSH", 
+=======
+    },
+
+    {
+    "name":"AllowedHazardNSH_3",
+    "productType":"NSH",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": """Set up hazards in different zones to test NSH hazards.
 UP.Y, MH.Y, LO.Y, TO.A, SV.A""",
     "createGrids": [
@@ -981,7 +1209,11 @@ UP.Y, MH.Y, LO.Y, TO.A, SV.A""",
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "LO.Y", ["GMZ856"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "TO.A:411", ["GMZ850"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "SV.A:911", ["GMZ873"]),],
+<<<<<<< HEAD
     "comboFlag": 1, 
+=======
+    "comboFlag": 1,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "combinations": [(["GMZ876","GMZ870","GMZ856","GMZ850","GMZ873","GMZ830"],
        "")],
     "cmdLineVars": "{('Product Issuance', 'productIssuance'): '430 AM', ('Issued By', 'issuedBy'): None}",
@@ -1027,11 +1259,19 @@ UP.Y, MH.Y, LO.Y, TO.A, SV.A""",
        "1200 AM EST Sat Jan 16 2010",
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
     {
     "name":"AllowedHazardNSH_4", 
     "productType":"NSH", 
+=======
+    },
+
+    {
+    "name":"AllowedHazardNSH_4",
+    "productType":"NSH",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": """Set up hazards in different zones to test NSH hazards.
 HF.A, SR.A, GL.A, SE.A, UP.A""",
     "createGrids": [
@@ -1041,7 +1281,11 @@ HF.A, SR.A, GL.A, SE.A, UP.A""",
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "GL.A", ["GMZ856"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "SE.A", ["GMZ850"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "UP.A", ["GMZ873"]),],
+<<<<<<< HEAD
     "comboFlag": 1, 
+=======
+    "comboFlag": 1,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "combinations": [(["GMZ876","GMZ870","GMZ856","GMZ850","GMZ873","GMZ830"],
        "")],
     "cmdLineVars": "{('Product Issuance', 'productIssuance'): '430 AM', ('Issued By', 'issuedBy'): None}",
@@ -1087,11 +1331,19 @@ HF.A, SR.A, GL.A, SE.A, UP.A""",
        "1200 AM EST Sat Jan 16 2010",
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
     {
     "name":"AllowedHazardGLF_1", 
     "productType":"GLF", 
+=======
+    },
+
+    {
+    "name":"AllowedHazardGLF_1",
+    "productType":"GLF",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": """Set up hazards in different zones to test GLF hazards.
 HF.W, UP.W, TO.A, MF.Y, MF.Y, MS.Y, LO.Y in east_half
 SR.W, SV.A, UP.A in west_half""",
@@ -1124,11 +1376,19 @@ SR.W, SV.A, UP.A in west_half""",
        "...TORNADO WATCH 1234 IN EFFECT UNTIL MIDNIGHT EST TONIGHT...",
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
     {
     "name":"AllowedHazardGLF_2", 
     "productType":"GLF", 
+=======
+    },
+
+    {
+    "name":"AllowedHazardGLF_2",
+    "productType":"GLF",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": """Set up hazards in different zones to test GLF hazards.
 GL.W in east_one_third
 SE.W in west_two_thirds""",
@@ -1153,11 +1413,19 @@ SE.W in west_two_thirds""",
        "...GALE WARNING IN EFFECT THROUGH THIS EVENING...",
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
     {
     "name":"AllowedHazardGLF_3", 
     "productType":"GLF", 
+=======
+    },
+
+    {
+    "name":"AllowedHazardGLF_3",
+    "productType":"GLF",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": """Set up hazards in different zones to test GLF hazards.
 HF.A in west_one_quarter
 SR.A in east_three_quarters""",
@@ -1182,11 +1450,19 @@ SR.A in east_three_quarters""",
        "...STORM WATCH IN EFFECT THROUGH THIS EVENING...",
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
     {
     "name":"AllowedHazardGLF_4", 
     "productType":"GLF", 
+=======
+    },
+
+    {
+    "name":"AllowedHazardGLF_4",
+    "productType":"GLF",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": """Set up hazards in different zones to test GLF hazards.
 GL.A in east_half
 SE.A in west_half""",
@@ -1211,11 +1487,19 @@ SE.A in west_half""",
        "...GALE WATCH IN EFFECT THROUGH THIS EVENING...",
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
     {
     "name":"AllowedHazardSRF", 
     "productType":"SRF", 
+=======
+    },
+
+    {
+    "name":"AllowedHazardSRF",
+    "productType":"SRF",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": """Set up hazards in different zones to test SRF hazards.
 SU.W, SU.Y""",
     "createGrids": [
@@ -1237,7 +1521,11 @@ SU.W, SU.Y""",
        "Including the beaches of Cedar Key, Hudson Beach, ",
        "McKethan Pine Island Park",
        "1200 AM EST Sat Jan 16 2010",
+<<<<<<< HEAD
        
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        "FLZ050-162100-",
        "/O.NEW.KTBW.SU.W.0001.100116T0500Z-100117T0500Z/",
        "Pinellas-",
@@ -1246,7 +1534,11 @@ SU.W, SU.Y""",
        "1200 AM EST Sat Jan 16 2010",
        "...HIGH SURF WARNING IN EFFECT UNTIL MIDNIGHT EST TONIGHT...",
        ".TODAY...",
+<<<<<<< HEAD
        
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        "FLZ151-162100-",
        "/O.NEW.KTBW.SU.Y.0001.100116T0500Z-100117T0500Z/",
        "Hillsborough-",
@@ -1256,11 +1548,19 @@ SU.W, SU.Y""",
 
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
     {
     "name":"AllowedHazardCWF_1", 
     "productType":"CWF", 
+=======
+    },
+
+    {
+    "name":"AllowedHazardCWF_1",
+    "productType":"CWF",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": """Set up hazards in different zones to test CWF hazards.
 HF.A SR.A GL.A SE.A UP.A HU.A""",
     "createGrids": [
@@ -1271,7 +1571,11 @@ HF.A SR.A GL.A SE.A UP.A HU.A""",
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "SE.A", ["GMZ850"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "UP.A", ["GMZ873"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "HU.A:1080", ["GMZ830"]),],
+<<<<<<< HEAD
     "comboFlag": 1, 
+=======
+    "comboFlag": 1,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "combinations": [(["GMZ876","GMZ870","GMZ856","GMZ850","GMZ873","GMZ830"],
        "")],
     "cmdLineVars": "{('Product Issuance', 'productIssuance'): 'Morning', ('Issued By', 'issuedBy'): None}",
@@ -1322,11 +1626,19 @@ HF.A SR.A GL.A SE.A UP.A HU.A""",
        "...HURRICANE WATCH IN EFFECT...",
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
     {
     "name":"AllowedHazardCWF_2", 
     "productType":"CWF", 
+=======
+    },
+
+    {
+    "name":"AllowedHazardCWF_2",
+    "productType":"CWF",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": """Set up hazards in different zones to test CWF hazards.
 HU.W, TR.A, TR.W, TY.W, TY.A""",
     "createGrids": [
@@ -1337,7 +1649,11 @@ HU.W, TR.A, TR.W, TY.W, TY.A""",
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "TY.W:1082", ["GMZ850"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "TY.A:1082", ["GMZ873"]),
        ],
+<<<<<<< HEAD
     "comboFlag": 1, 
+=======
+    "comboFlag": 1,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "combinations": [(["GMZ876","GMZ870","GMZ856","GMZ850","GMZ873","GMZ830"],
        "")],
     "cmdLineVars": "{('Product Issuance', 'productIssuance'): 'Morning', ('Issued By', 'issuedBy'): None}",
@@ -1382,11 +1698,19 @@ HU.W, TR.A, TR.W, TY.W, TY.A""",
        "...TYPHOON WATCH IN EFFECT...",
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
     {
     "name":"AllowedHazardCWFPacific_1", 
     "productType":"CWF_Pacific", 
+=======
+    },
+
+    {
+    "name":"AllowedHazardCWFPacific_1",
+    "productType":"CWF_Pacific",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": """Set up hazards in different zones to test CWF Pacific hazards.
 HF.A SR.A GL.A SE.A UP.A HU.A""",
     "createGrids": [
@@ -1397,7 +1721,11 @@ HF.A SR.A GL.A SE.A UP.A HU.A""",
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "SE.A", ["GMZ850"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "UP.A", ["GMZ873"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "HU.A:1080", ["GMZ830"]),],
+<<<<<<< HEAD
     "comboFlag": 1, 
+=======
+    "comboFlag": 1,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "combinations": [(["GMZ876","GMZ870","GMZ856","GMZ850","GMZ873","GMZ830"],
        "")],
     "cmdLineVars": "{('Product Issuance', 'productIssuance'): 'Morning', ('Issued By', 'issuedBy'): None}",
@@ -1448,11 +1776,19 @@ HF.A SR.A GL.A SE.A UP.A HU.A""",
        "...HURRICANE WATCH IN EFFECT...",
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
     {
     "name":"AllowedHazardCWFPacific_2", 
     "productType":"CWF_Pacific", 
+=======
+    },
+
+    {
+    "name":"AllowedHazardCWFPacific_2",
+    "productType":"CWF_Pacific",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": """Set up hazards in different zones to test CWF Pacific hazards.
 HU.W, TR.A, TR.W, TY.W, TY.A""",
     "createGrids": [
@@ -1463,7 +1799,11 @@ HU.W, TR.A, TR.W, TY.W, TY.A""",
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "TY.W:1082", ["GMZ850"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "TY.A:1082", ["GMZ873"]),
        ],
+<<<<<<< HEAD
     "comboFlag": 1, 
+=======
+    "comboFlag": 1,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "combinations": [(["GMZ876","GMZ870","GMZ856","GMZ850","GMZ873","GMZ830"],
        "")],
     "cmdLineVars": "{('Product Issuance', 'productIssuance'): 'Morning', ('Issued By', 'issuedBy'): None}",
@@ -1508,11 +1848,19 @@ HU.W, TR.A, TR.W, TY.W, TY.A""",
        "...TYPHOON WATCH IN EFFECT...",
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
     {
     "name":"AllowedHazardWCN", 
     "productType":"Hazard_WCN_Local", 
+=======
+    },
+
+    {
+    "name":"AllowedHazardWCN",
+    "productType":"Hazard_WCN_Local",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": """Set up hazards in different zones to test WCN hazards.
 TO.A, SV.A""",
     "vtecMode": "O",
@@ -1541,11 +1889,19 @@ TO.A, SV.A""",
        "Citrus",
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
     {
     "name":"AllowedHazardMWS", 
     "productType":"Hazard_MWS_Local", 
+=======
+    },
+
+    {
+    "name":"AllowedHazardMWS",
+    "productType":"Hazard_MWS_Local",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": """Set up hazards in different zones to test MWS hazards.
 MA.S""",
     "vtecMode": "O",
@@ -1554,11 +1910,19 @@ MA.S""",
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "MA.S", ["FLZ139", "FLZ239"]),],
     "checkStrings": [
        ],
+<<<<<<< HEAD
     },   
 
     {
     "name":"AllowedHazardFFA", 
     "productType":"Hazard_FFA_Local", 
+=======
+    },
+
+    {
+    "name":"AllowedHazardFFA",
+    "productType":"Hazard_FFA_Local",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": """Set up hazards in different zones to test FFA hazards.
 FF.A, FA.A""",
     "vtecMode": "O",
@@ -1569,11 +1933,19 @@ FF.A, FA.A""",
     "cmdLineVars" : "{('Issued By', 'issuedBy'): None, ('Flood Reason (HVTEC)', 'floodReason'): 'ER (Excessive Rainfall)'}",
     "checkStrings": [
        ],
+<<<<<<< HEAD
     },   
 
     {
     "name":"AllowedHazardRFW", 
     "productType":"Hazard_RFW_Local", 
+=======
+    },
+
+    {
+    "name":"AllowedHazardRFW",
+    "productType":"Hazard_RFW_Local",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": """Set up hazards in different zones to test RFW hazards.
 FW.W, FW.A""",
     "vtecMode": "O",
@@ -1603,12 +1975,21 @@ FW.W, FW.A""",
        "...FIRE WEATHER WATCH IN EFFECT THROUGH THIS EVENING FOR |* EVENT TYPE *| FOR FIRE WEATHER ZONES 142 AND 242...",
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
 
     {
     "name":"AllowedHazardCFW_1", 
     "productType":"Hazard_CFW_Local", 
+=======
+    },
+
+
+    {
+    "name":"AllowedHazardCFW_1",
+    "productType":"Hazard_CFW_Local",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": """Set up hazards in different zones to test CFW hazards.
 CF.W, CF.Y, CF.A""",
     "vtecMode": "O",
@@ -1645,6 +2026,7 @@ CF.W, CF.Y, CF.A""",
        "...COASTAL FLOOD WATCH IN EFFECT THROUGH THIS EVENING...",
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
     {
@@ -1653,6 +2035,16 @@ CF.W, CF.Y, CF.A""",
     "commentary": """Set up hazards in different zones to test CFW hazards.
 LS.W, LS.Y, LS.A""",
     "productType":"Hazard_CFW_Local", 
+=======
+    },
+
+    {
+    "name":"AllowedHazardCFW_2",
+    "vtecMode": "O",
+    "commentary": """Set up hazards in different zones to test CFW hazards.
+LS.W, LS.Y, LS.A""",
+    "productType":"Hazard_CFW_Local",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "createGrids": [
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "<None>", "all"),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "LS.W", ["FLZ139", "FLZ239"]),
@@ -1686,6 +2078,7 @@ LS.W, LS.Y, LS.A""",
        "...LAKESHORE FLOOD WATCH IN EFFECT THROUGH THIS EVENING...",
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
     {
@@ -1694,6 +2087,16 @@ LS.W, LS.Y, LS.A""",
     "commentary": """Set up hazards in different zones to test CFW hazards.
 CF.S""",
     "productType":"Hazard_CFW_Local", 
+=======
+    },
+
+    {
+    "name":"AllowedHazardCFW_3",
+    "vtecMode": "O",
+    "commentary": """Set up hazards in different zones to test CFW hazards.
+CF.S""",
+    "productType":"Hazard_CFW_Local",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "createGrids": [
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "<None>", "all"),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "CF.S", ["FLZ139"]),],
@@ -1712,6 +2115,7 @@ CF.S""",
        "|* Add statement headline *|.",
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
     {
@@ -1719,6 +2123,15 @@ CF.S""",
     "commentary": """Set up hazards in different zones to test CFW hazards.
 LS.S""",
     "productType":"Hazard_CFW_Local", 
+=======
+    },
+
+    {
+    "name":"AllowedHazardCFW_4",
+    "commentary": """Set up hazards in different zones to test CFW hazards.
+LS.S""",
+    "productType":"Hazard_CFW_Local",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "vtecMode": "O",
     "createGrids": [
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "<None>", "all"),
@@ -1738,11 +2151,19 @@ LS.S""",
        "|* Add statement headline *|.",
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
     {
     "name":"AllowedHazardNPW_1", 
     "productType":"Hazard_NPW_Local", 
+=======
+    },
+
+    {
+    "name":"AllowedHazardNPW_1",
+    "productType":"Hazard_NPW_Local",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": """Set up hazards in different zones to test NPW hazards.
 DU.W, DU.Y, EC.W, EC.A, EH.W, EH.A, HT.Y, FG.Y, FZ.W, FR.Y, FZ.A""",
     "vtecMode": "O",
@@ -1834,11 +2255,19 @@ DU.W, DU.Y, EC.W, EC.A, EH.W, EH.A, HT.Y, FG.Y, FZ.W, FR.Y, FZ.A""",
        "...FREEZE WATCH IN EFFECT THROUGH THIS EVENING...",
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
     {
     "name":"AllowedHazardNPW_2", 
     "productType":"Hazard_NPW_Local", 
+=======
+    },
+
+    {
+    "name":"AllowedHazardNPW_2",
+    "productType":"Hazard_NPW_Local",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": """Set up hazards in different zones to test NPW hazards.
 HW.W, WI.Y, LW.Y, HW.A, SM.Y, ZF.Y, AF.Y, HZ.A, HZ.W, AS.Y""",
     "vtecMode": "O",
@@ -1918,12 +2347,21 @@ HW.W, WI.Y, LW.Y, HW.A, SM.Y, ZF.Y, AF.Y, HZ.A, HZ.W, AS.Y""",
        "...HIGH WIND WATCH IN EFFECT THROUGH THIS EVENING...",
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
 
     {
     "name":"AllowedHazardWSW_1", 
     "productType":"Hazard_WSW_Local", 
+=======
+    },
+
+
+    {
+    "name":"AllowedHazardWSW_1",
+    "productType":"Hazard_WSW_Local",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": """Set up hazards in different zones to test WSW hazards.
 BZ.W, IS.W, LE.W, WS.W, WW.Y""",
     "vtecMode": "O",
@@ -1971,11 +2409,19 @@ BZ.W, IS.W, LE.W, WS.W, WW.Y""",
        "...WINTER WEATHER ADVISORY IN EFFECT UNTIL MIDNIGHT EST TONIGHT...",
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
     {
     "name":"AllowedHazardWSW_2", 
     "productType":"Hazard_WSW_Local", 
+=======
+    },
+
+    {
+    "name":"AllowedHazardWSW_2",
+    "productType":"Hazard_WSW_Local",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": """Set up hazards in different zones to test WSW hazards.
 WS.A, WC.W, WC.Y, WC.A""",
     "vtecMode": "O",
@@ -2030,12 +2476,21 @@ WS.A, WC.W, WC.Y, WC.A""",
        "...WIND CHILL WATCH IN EFFECT THROUGH THIS EVENING...",
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
 
     {
     "name":"AllowedHazardMWW_1", 
     "productType":"Hazard_MWW_Local", 
+=======
+    },
+
+
+    {
+    "name":"AllowedHazardMWW_1",
+    "productType":"Hazard_MWW_Local",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": """Set up hazards in different zones to test MWW hazards.
 GL.W, HF.W, SE.W, GL.A, HF.A, SE.A""",
     "vtecMode": "O",
@@ -2092,11 +2547,19 @@ GL.W, HF.W, SE.W, GL.A, HF.A, SE.A""",
        "...HAZARDOUS SEAS WATCH IN EFFECT THROUGH THIS EVENING...",
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
     {
     "name":"AllowedHazardMWW_2", 
     "productType":"Hazard_MWW_Local", 
+=======
+    },
+
+    {
+    "name":"AllowedHazardMWW_2",
+    "productType":"Hazard_MWW_Local",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": """Set up hazards in different zones to test MWW hazards.
 SR.W, UP.W, SR.A, UP.A""",
     "vtecMode": "O",
@@ -2139,11 +2602,19 @@ SR.W, UP.W, SR.A, UP.A""",
        "...HEAVY FREEZING SPRAY WATCH IN EFFECT THROUGH THIS EVENING...",
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
     {
     "name":"AllowedHazardMWW_3", 
     "productType":"Hazard_MWW_Local", 
+=======
+    },
+
+    {
+    "name":"AllowedHazardMWW_3",
+    "productType":"Hazard_MWW_Local",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": """Set up hazards in different zones to test MWW hazards.
 MH.Y, BW.Y, MF.Y, LO.Y, RB.Y, SI.Y""",
     "vtecMode": "O",
@@ -2200,6 +2671,7 @@ MH.Y, BW.Y, MF.Y, LO.Y, RB.Y, SI.Y""",
        "...SMALL CRAFT ADVISORY FOR WINDS IN EFFECT UNTIL MIDNIGHT EST TONIGHT...",
        "$$",
        ],
+<<<<<<< HEAD
     },   
 
     {
@@ -2207,12 +2679,24 @@ MH.Y, BW.Y, MF.Y, LO.Y, RB.Y, SI.Y""",
     "productType":"Hazard_MWW_Local", 
     "commentary": """Set up hazards in different zones to test MWW hazards.
 SC.Y, MS.Y, SW.Y, UP.Y""",
+=======
+    },
+
+    {
+    "name":"AllowedHazardMWW_4",
+    "productType":"Hazard_MWW_Local",
+    "commentary": """Set up hazards in different zones to test MWW hazards.
+SC.Y, MS.Y, UP.Y""",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "vtecMode": "O",
     "createGrids": [
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "<None>", "all"),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "SC.Y", ["GMZ870"]),
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "MS.Y", ["GMZ850"]),
+<<<<<<< HEAD
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "SW.Y", ["GMZ856"]),
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Hazards", "DISCRETE", 0, 24, "UP.Y", ["GMZ853"]),
        ],
     "checkStrings": [
@@ -2235,12 +2719,15 @@ SC.Y, MS.Y, SW.Y, UP.Y""",
        "1200 AM EST Sat Jan 16 2010",
        "...DENSE SMOKE ADVISORY IN EFFECT UNTIL MIDNIGHT EST TONIGHT...",
        "$$",
+<<<<<<< HEAD
        "GMZ856-161300-",
        "/O.NEW.KTBW.SW.Y.0001.100116T0500Z-100117T0500Z/",
        "Coastal waters from Bonita Beach to Englewood FL out 20 NM-",
        "1200 AM EST Sat Jan 16 2010",
        "...SMALL CRAFT ADVISORY FOR HAZARDOUS SEAS IN EFFECT UNTIL MIDNIGHT EST TONIGHT...",
        "$$",
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        "GMZ853-161300-",
        "/O.NEW.KTBW.UP.Y.0001.100116T0500Z-100117T0500Z/",
        "Coastal waters from Englewood to Tarpon Springs FL out 20 NM-",
@@ -2248,7 +2735,11 @@ SC.Y, MS.Y, SW.Y, UP.Y""",
        "...FREEZING SPRAY ADVISORY IN EFFECT UNTIL MIDNIGHT EST TONIGHT...",
        "$$",
        ],
+<<<<<<< HEAD
     },   
+=======
+    },
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     {
     "commentary": "Deleting hazard grids.",
@@ -2259,7 +2750,11 @@ SC.Y, MS.Y, SW.Y, UP.Y""",
     },
     ]
 
+<<<<<<< HEAD
        
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import TestScript
 def testScript(self, dataMgr):
     gridsStartTime = self.getAbsFromLocal(2010, 1, 1, 0, 0)

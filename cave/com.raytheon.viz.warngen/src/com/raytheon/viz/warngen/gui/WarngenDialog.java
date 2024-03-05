@@ -98,6 +98,7 @@ import com.raytheon.uf.viz.core.requests.ThriftClient;
 import com.raytheon.uf.viz.core.rsc.AbstractVizResource;
 import com.raytheon.uf.viz.core.rsc.AbstractVizResource.ResourceStatus;
 import com.raytheon.uf.viz.core.rsc.IDisposeListener;
+import com.raytheon.uf.viz.d2d.ui.map.SideView;
 import com.raytheon.uf.viz.vtec.VtecUtil;
 import com.raytheon.viz.awipstools.common.stormtrack.StormTrackState.DisplayType;
 import com.raytheon.viz.awipstools.common.stormtrack.StormTrackState.Mode;
@@ -105,11 +106,13 @@ import com.raytheon.viz.core.mode.CAVEMode;
 import com.raytheon.viz.texteditor.TextWorkstationConstants;
 import com.raytheon.viz.texteditor.dialogs.TextEditorDialog;
 import com.raytheon.viz.texteditor.util.SiteAbbreviationUtil;
+import com.raytheon.viz.texteditor.msgs.IWarngenObserver;
 import com.raytheon.viz.ui.EditorUtil;
 import com.raytheon.viz.ui.dialogs.CaveSWTDialog;
 import com.raytheon.viz.ui.input.EditableManager;
 import com.raytheon.viz.ui.simulatedtime.SimulatedTimeOperations;
 import com.raytheon.viz.warngen.Activator;
+import com.raytheon.viz.warngen.comm.WarningSender;
 import com.raytheon.viz.warngen.gis.PolygonUtil;
 import com.raytheon.viz.warngen.template.TemplateRunner;
 import com.raytheon.viz.warngen.util.CurrentWarnings;
@@ -278,6 +281,9 @@ import com.raytheon.viz.warngen.util.FollowUpUtil;
  *                                        combobox (not used in Unidata version)
  * Apr 17, 2023           srcarter@ucar   Re-enable single clicking for multiple selections
  *                                        in bullet list. Increase default size of list
+ * Feb 17, 2023  8991        lsingh       Removed unused parameters in
+ *                                        TemplateRunner call.
+ * Apr 21, 2023  2030407     mapeters     Restore backup site logic
  *
  * </pre>
  *
@@ -289,7 +295,7 @@ public class WarngenDialog extends CaveSWTDialog
             .getHandler(WarngenDialog.class);
 
     private static final IPerformanceStatusHandler perfLog = PerformanceStatus
-            .getHandler("WG:");
+            .getHandler("WG");
 
     /*
      * This flag allows a hidden button to appear to help recreating warning
@@ -307,7 +313,8 @@ public class WarngenDialog extends CaveSWTDialog
 
     private static Pattern PATTERN = Pattern.compile("(\\d{1,1})");
 
-    private class TemplateRunnerInitJob extends Job {
+    private static class TemplateRunnerInitJob extends Job {
+
         private final String site;
 
         public TemplateRunnerInitJob() {
@@ -442,13 +449,7 @@ public class WarngenDialog extends CaveSWTDialog
         CurrentWarnings.addListener(this);
         new TemplateRunnerInitJob().schedule();
         SimulatedTime.getSystemTime().addSimulatedTimeChangeListener(this);
-        layer.registerListener(new IDisposeListener() {
-
-            @Override
-            public void disposed(AbstractVizResource<?, ?> rsc) {
-                close();
-            }
-        });
+        layer.registerListener((IDisposeListener) rsc -> close());
     }
 
     @Override
@@ -689,9 +690,7 @@ public class WarngenDialog extends CaveSWTDialog
         mainProducts = new ArrayList<>();
         String[] mainProductsStr = warngenLayer.getDialogConfig()
                 .getMainWarngenProducts().split(",");
-        for (String str : mainProductsStr) {
-            mainProducts.add(str);
-        }
+        Collections.addAll(mainProducts, mainProductsStr);
 
         String defaultTemplate = getDefaultTemplate();
 
@@ -1076,9 +1075,9 @@ public class WarngenDialog extends CaveSWTDialog
                 .getCurrentWarnings();
 
         ArrayList<String> dropDownItems = new ArrayList<>();
-        WarningAction[] acts = new WarningAction[] { WarningAction.CON,
-                WarningAction.COR, WarningAction.CAN, WarningAction.EXP,
-                WarningAction.NEW, WarningAction.EXT };
+        WarningAction[] acts = { WarningAction.CON, WarningAction.COR,
+                WarningAction.CAN, WarningAction.EXP, WarningAction.NEW,
+                WarningAction.EXT };
         for (AbstractWarningRecord warning : warnings) {
             for (WarningAction act : acts) {
                 if (FollowUpUtil.checkApplicable(site,
@@ -1295,40 +1294,41 @@ public class WarngenDialog extends CaveSWTDialog
         final String[] resultContainer = new String[1];
 
         try {
-            pmd.run(false, false, new IRunnableWithProgress() {
-
-                @Override
-                public void run(IProgressMonitor monitor)
-                        throws InvocationTargetException, InterruptedException {
-                    long t0 = System.currentTimeMillis();
-                    try {
-                        monitor.beginTask("Generating product", 1);
-                        statusHandler
-                                .debug("using startTime " + startTime.getTime()
-                                        + " endTime " + endTime.getTime());
-                        String result = TemplateRunner.runTemplate(warngenLayer,
-                                startTime.getTime(), endTime.getTime(),
-                                selectedBullets, followupData, null);
-                        resultContainer[0] = result;
-                        Matcher m = FollowUpUtil.vtecPtrn.matcher(result);
-                        totalSegments = 0;
-                        while (m.find()) {
-                            totalSegments++;
-                        }
-                    } catch (Exception e) {
-                        statusHandler.handle(Priority.PROBLEM,
-                                "Error running warngen template: "
-                                        + e.getLocalizedMessage(),
-                                e);
-                    } finally {
-                        monitor.done();
-                        perfLog.logDuration("Run template",
-                                System.currentTimeMillis() - t0);
-                        perfLog.logDuration("click to finish template",
-                                System.currentTimeMillis() - t0okPressed);
+            pmd.run(false, false, monitor -> {
+                long t0 = System.currentTimeMillis();
+                try {
+                    monitor.beginTask("Generating product", 1);
+                    statusHandler.debug("using startTime " + startTime.getTime()
+                            + " endTime " + endTime.getTime());
+                    if (warngenLayer.getConfiguration().isEnableDuration()) {
+                        int duration = getSelectedDuration();
+                        resultContainer[0] = TemplateRunner.runTemplate(
+                                warngenLayer, duration, extEndTime,
+                                selectedBullets, followupData, backupData);
+                    } else {
+                        resultContainer[0] = TemplateRunner.runTemplate(
+                                warngenLayer, startTime.getTime(),
+                                endTime.getTime(), selectedBullets,
+                                followupData, backupData);
                     }
+                    Matcher m = FollowUpUtil.vtecPtrn
+                            .matcher(resultContainer[0]);
+                    totalSegments = 0;
+                    while (m.find()) {
+                        totalSegments++;
+                    }
+                } catch (Exception e) {
+                    statusHandler.handle(Priority.PROBLEM,
+                            "Error running warngen template: "
+                                    + e.getLocalizedMessage(),
+                            e);
+                } finally {
+                    monitor.done();
+                    perfLog.logDuration("Run template",
+                            System.currentTimeMillis() - t0);
+                    perfLog.logDuration("click to finish template",
+                            System.currentTimeMillis() - t0okPressed);
                 }
-
             });
 
             statusHandler.handle(Priority.DEBUG,
@@ -2097,15 +2097,12 @@ public class WarngenDialog extends CaveSWTDialog
             @Override
             public void run() {
 
-                getDisplay().syncExec(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            changeStartEndTimes();
-                        } catch (Exception e) {
-                            statusHandler.handle(Priority.PROBLEM,
-                                    "WarnGen Error", e);
-                        }
+                getDisplay().syncExec(() -> {
+                    try {
+                        changeStartEndTimes();
+                    } catch (Exception e) {
+                        statusHandler.handle(Priority.PROBLEM, "WarnGen Error",
+                                e);
                     }
                 });
             }
@@ -2124,15 +2121,12 @@ public class WarngenDialog extends CaveSWTDialog
             @Override
             public void run() {
 
-                getDisplay().syncExec(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            recreateUpdates();
-                        } catch (Exception e) {
-                            statusHandler.handle(Priority.PROBLEM,
-                                    "WarnGen Error", e);
-                        }
+                getDisplay().syncExec(() -> {
+                    try {
+                        recreateUpdates();
+                    } catch (Exception e) {
+                        statusHandler.handle(Priority.PROBLEM, "WarnGen Error",
+                                e);
                     }
                 });
             }
@@ -2460,13 +2454,10 @@ public class WarngenDialog extends CaveSWTDialog
 
     @Override
     public void warningsArrived() {
-        VizApp.runAsync(new Runnable() {
-            @Override
-            public void run() {
-                if (!isDisposed()) {
-                    // Just recreate updates since that is all that is needed
-                    recreateUpdates();
-                }
+        VizApp.runAsync(() -> {
+            if (!isDisposed()) {
+                // Just recreate updates since that is all that is needed
+                recreateUpdates();
             }
         });
     }
@@ -2749,15 +2740,11 @@ public class WarngenDialog extends CaveSWTDialog
 
     @Override
     public void timechanged() {
-        VizApp.runAsync(new Runnable() {
-
-            @Override
-            public void run() {
-                if ((getShell().isVisible())
-                        && (!SimulatedTimeOperations.isTransmitAllowed())) {
-                    SimulatedTimeOperations
-                            .displayFeatureLevelWarning(getShell(), "WarnGen");
-                }
+        VizApp.runAsync(() -> {
+            if ((getShell().isVisible())
+                    && (!SimulatedTimeOperations.isTransmitAllowed())) {
+                SimulatedTimeOperations.displayFeatureLevelWarning(getShell(),
+                        "WarnGen");
             }
         });
     }

@@ -97,7 +97,11 @@ public class CurrentWarnings {
             .getHandler(CurrentWarnings.class);
 
     private static final IPerformanceStatusHandler perfLog = PerformanceStatus
+<<<<<<< HEAD
             .getHandler("WG:");
+=======
+            .getHandler("WG");
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     public interface IWarningsArrivedListener {
         void warningsArrived();

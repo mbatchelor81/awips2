@@ -90,7 +90,12 @@ import com.raytheon.viz.ui.dialogs.ICloseCallback;
  * 10/13/2020   73084      ksunil        addButton.widgetSelected now adds the element selected from the available params
  *                                        instead of defaulting to the first one.
  * 02/05/2020   74587      ksunil        code to prevent exception in sample plot when all parameters are unchecked.
+<<<<<<< HEAD
  * 03/02/2020    75528     ksunil        Changed enum PLOT to VISIBLE. Use svg's built in visibility attribute.
+=======
+ * 03/02/2020   75528      ksunil        Changed enum PLOT to VISIBLE. Use svg's built in visibility attribute.
+ * 04/13/2020   77336      ksunil        while applying changes, redraw canvas and repopulate values
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  *
  * </pre>
@@ -710,8 +715,14 @@ public class EditPlotModelComposite extends Composite {
         } else {
             boolean isText = true;
             for (IPlotModelElement element : elements) {
+<<<<<<< HEAD
                 if (element.getParamDef()
                         .getDisplayType() != DisplayType.TEXT) {
+=======
+                if (element.getParamDef().getDisplayType() != DisplayType.TEXT
+                        && !"text"
+                                .equals(element.getParamDef().getSvgClass())) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     isText = false;
                     break;
                 }
@@ -847,9 +858,15 @@ public class EditPlotModelComposite extends Composite {
     }
 
     public void apply() {
+<<<<<<< HEAD
         // TODO validate (e.g. added parameter that doesn't actually have
         // parameter selected yet)
         factory.savePlotModel();
+=======
+        factory.savePlotModel();
+        populateValues();
+        canvas.redraw();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     private IPlotModelFactory getFactoryFromFile() throws VizException {

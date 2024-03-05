@@ -34,9 +34,16 @@
    <extension
          point="com.raytheon.uf.viz.core.descriptor">
       <descriptor
+<<<<<<< HEAD
       		name="TimeSeriesDescriptor"
             class="com.raytheon.uf.viz.xy.timeseries.display.TimeSeriesDescriptor"
             editor="com.raytheon.uf.viz.xy.timeseries.TimeSeriesEditor">
+=======
+            class="com.raytheon.uf.viz.xy.timeseries.display.TimeSeriesDescriptor"
+            editor="com.raytheon.uf.viz.xy.timeseries.TimeSeriesEditor"
+            name="TimeSeriesDescriptor"
+            paneCreator="com.raytheon.uf.viz.xy.timeseries.display.TimeSeriesXyPaneCreator">
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
       </descriptor>
    </extension>
 </plugin>

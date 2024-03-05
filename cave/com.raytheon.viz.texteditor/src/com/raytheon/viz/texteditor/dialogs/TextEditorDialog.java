@@ -106,6 +106,8 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.commands.ICommandService;
 import org.eclipse.ui.menus.IMenuService;
 
+import com.raytheon.uf.common.activetable.SendPracticeProductRequest;
+import com.raytheon.uf.common.dataplugin.text.AfosWmoIdDataContainer;
 import com.raytheon.uf.common.dataplugin.text.RemoteRetrievalResponse;
 import com.raytheon.uf.common.dataplugin.text.alarms.AlarmAlertProduct;
 import com.raytheon.uf.common.dataplugin.text.db.MixedCaseProductSupport;
@@ -113,12 +115,15 @@ import com.raytheon.uf.common.dataplugin.text.db.OperationalStdTextProduct;
 import com.raytheon.uf.common.dataplugin.text.db.PracticeStdTextProduct;
 import com.raytheon.uf.common.dataplugin.text.db.StdTextProduct;
 import com.raytheon.uf.common.dataplugin.text.db.StdTextProductId;
+import com.raytheon.uf.common.dataplugin.text.request.GetAfosIdRequest;
 import com.raytheon.uf.common.dataplugin.text.request.RemoteRetrievalRequest;
 import com.raytheon.uf.common.dataplugin.text.request.StdTextProductServerRequest;
 import com.raytheon.uf.common.dataplugin.text.request.TextProductInfoCreateRequest;
 import com.raytheon.uf.common.dataplugin.text.util.AFOSParser;
 import com.raytheon.uf.common.dissemination.OUPRequest;
 import com.raytheon.uf.common.dissemination.OUPResponse;
+import com.raytheon.uf.common.dissemination.OUPTestRequest;
+import com.raytheon.uf.common.dissemination.OfficialUserProduct;
 import com.raytheon.uf.common.jms.notification.INotificationObserver;
 import com.raytheon.uf.common.jms.notification.NotificationException;
 import com.raytheon.uf.common.jms.notification.NotificationMessage;
@@ -133,13 +138,18 @@ import com.raytheon.uf.common.localization.exception.LocalizationException;
 import com.raytheon.uf.common.serialization.JAXBManager;
 import com.raytheon.uf.common.serialization.comm.IServerRequest;
 import com.raytheon.uf.common.site.SiteMap;
+import com.raytheon.uf.common.status.IPerformanceStatusHandler;
 import com.raytheon.uf.common.status.IUFStatusHandler;
+import com.raytheon.uf.common.status.PerformanceStatus;
 import com.raytheon.uf.common.status.UFStatus;
 import com.raytheon.uf.common.status.UFStatus.Priority;
 import com.raytheon.uf.common.time.ISimulatedTimeChangeListener;
 import com.raytheon.uf.common.time.SimulatedTime;
 import com.raytheon.uf.common.time.util.TimeUtil;
 import com.raytheon.uf.viz.core.VizApp;
+import com.raytheon.uf.common.wmo.WMOHeader;
+import com.raytheon.uf.viz.core.VizApp;
+import com.raytheon.uf.viz.core.auth.UserController;
 import com.raytheon.uf.viz.core.exception.VizException;
 import com.raytheon.uf.viz.core.notification.jobs.NotificationManagerJob;
 import com.raytheon.uf.viz.core.requests.ThriftClient;
@@ -159,6 +169,10 @@ import com.raytheon.viz.texteditor.command.CommandType;
 import com.raytheon.viz.texteditor.command.ICommand;
 import com.raytheon.viz.texteditor.command.IProductQueryCallback;
 import com.raytheon.viz.texteditor.command.ProductQueryJob;
+import com.raytheon.viz.texteditor.dialogs.LineWrapCheckConfirmationMsg.AnswerChoices;
+import com.raytheon.viz.texteditor.dialogs.TextEditorUndoManager.EditGroup;
+import com.raytheon.viz.texteditor.fax.dialogs.FaxMessageDlg;
+import com.raytheon.viz.texteditor.fax.dialogs.LdadFaxSitesDlg;
 import com.raytheon.viz.texteditor.msgs.IAfosBrowserCallback;
 import com.raytheon.viz.texteditor.msgs.IAwipsBrowserCallback;
 import com.raytheon.viz.texteditor.msgs.IRecoverEditSessionCallback;
@@ -607,6 +621,16 @@ import com.raytheon.viz.ui.simulatedtime.SimulatedTimeOperations;
  *                                        time at product transmission for the
  *                                        SQW and DSW products
  * Oct 13, 2020  8238     randerso        Set minimum size on dialog.
+ * Jun 30, 2021  22670    jkelmer         Removed excludedCCCs from check to
+ *                                        see if product is editable in TextWS
+ * Aug 03, 2020 82094     dfriedman       Support derived editors.
+ * Aug 11, 2020 82095     dfriedman       Support undo/redo.
+ * Nov 12, 2020 85078     dfriedman       Support product fragment editing.
+ * Mar 22, 2021 88518     dfriedman       Support editor height hints. Rework use of
+ *                                        headers in beginEditingProduct.
+ * Jun 30, 2021 22670     jkelmer         Removed excludedCCCs from check to
+ *                                        see if product is editable in TextWS
+ * Dec 16, 2021  8341     randerso        Changed to use performance logging
  * Jan 19, 2022  8742     randerso        Remove minimum size, suppress
  *                                        SonarQube warnings for intentially
  *                                        unlogged exceptions.
@@ -627,13 +651,10 @@ public class TextEditorDialog extends CaveSWTDialog
     private static final IUFStatusHandler statusHandler = UFStatus
             .getHandler(TextEditorDialog.class);
 
-    private static volatile JAXBManager jaxb;
+    private static final IPerformanceStatusHandler perfLog = PerformanceStatus
+            .getHandler("TextEditorDialog");
 
-    /**
-     * List of CCCs that can be handled even if the PIL is on the gfe pil list.
-     */
-    private static List<String> exceptionCCCs = Arrays.asList("SJU", "MFL",
-            "MLB", "BRO", "EPZ", "GUM", "HFO");
+    private static volatile JAXBManager jaxb;
 
     /**
      * List of forbidden GFE pils.
@@ -822,7 +843,7 @@ public class TextEditorDialog extends CaveSWTDialog
     /**
      * Use to determine the height of the text field.
      */
-    private static final int EDITOR_HEIGHT = 30;
+    private static final int DEFAULT_EDITOR_HEIGHT = 30;
 
     /**
      * Filters for file import/export and attach functions.
@@ -881,6 +902,16 @@ public class TextEditorDialog extends CaveSWTDialog
      * Close menu item.
      */
     private MenuItem closeItem;
+
+    /**
+     * Undo edit menu item.
+     */
+    private MenuItem undoItem;
+
+    /**
+     * Redo edit menu item.
+     */
+    private MenuItem redoItem;
 
     /**
      * Cut text menu item.
@@ -1166,6 +1197,11 @@ public class TextEditorDialog extends CaveSWTDialog
     private Combo editorInsertCmb;
 
     /**
+     * Editor note label;
+     */
+    private Label editorNoteLabel;
+
+    /**
      * Flag indicating if the editor is in edit mode.
      */
     private volatile boolean inEditMode = false;
@@ -1449,6 +1485,11 @@ public class TextEditorDialog extends CaveSWTDialog
     private Color highlightBackgroundClr;
 
     private IExecutionListener pasteCommandListener;
+
+    private TextEditorUndoManager undoManager;
+
+    /** Optional message to display above the editor area. */
+    private String editorNote;
 
     private static volatile List<Pattern> paddingPatternList = new ArrayList<>();
 
@@ -1811,6 +1852,28 @@ public class TextEditorDialog extends CaveSWTDialog
         Menu editMenu = new Menu(menuBar);
         editMenuItem.setMenu(editMenu);
 
+        undoItem = new MenuItem(editMenu, SWT.NONE);
+        undoItem.setText("Undo\tCtrl+Z");
+        undoItem.setAccelerator(SWT.CTRL | 'Z');
+        undoItem.setEnabled(false);
+        undoItem.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent event) {
+                undoEdit();
+            }
+        });
+
+        redoItem = new MenuItem(editMenu, SWT.NONE);
+        redoItem.setText("Redo\tShift+Ctrl+Z");
+        redoItem.setAccelerator(SWT.CTRL | SWT.SHIFT | 'Z');
+        redoItem.setEnabled(false);
+        redoItem.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent event) {
+                redoEdit();
+            }
+        });
+
         cutItem = new MenuItem(editMenu, SWT.NONE);
         cutItem.setText("Cut\tCtrl+X");
         cutItem.setAccelerator(SWT.CTRL + 'X');
@@ -1915,6 +1978,7 @@ public class TextEditorDialog extends CaveSWTDialog
             public void widgetSelected(SelectionEvent event) {
                 if (textEditor.getSelectionCount() > 0) {
                     Point p = textEditor.getSelectionRange();
+                    undoManager.recordCaretAndSelection();
                     textEditor.replaceTextRange(p.x, p.y, "");
                 } else {
                     userInformation("You must first select a region to\n"
@@ -2541,6 +2605,7 @@ public class TextEditorDialog extends CaveSWTDialog
                     deletedChar = textEditor.getText(
                             textEditor.getCaretOffset(),
                             textEditor.getCaretOffset());
+                    undoManager.recordCaretAndSelection();
                     textEditor.replaceTextRange(textEditor.getCaretOffset(), 1,
                             "");
                 }
@@ -2560,6 +2625,7 @@ public class TextEditorDialog extends CaveSWTDialog
                     result[1]--;
                 }
                 deletedWord = textEditor.getText(result[0], result[1]);
+                undoManager.recordCaretAndSelection();
                 textEditor.replaceTextRange(result[0], deletedWord.length(),
                         "");
             }
@@ -2585,6 +2651,7 @@ public class TextEditorDialog extends CaveSWTDialog
                     }
 
                     deletedLine = textEditor.getText(caretOffset, finish);
+                    undoManager.recordCaretAndSelection();
                     textEditor.replaceTextRange(caretOffset,
                             deletedLine.length(), "");
                 }
@@ -2608,6 +2675,7 @@ public class TextEditorDialog extends CaveSWTDialog
             @Override
             public void widgetSelected(SelectionEvent event) {
                 undeleteCharacterItem.setEnabled(false);
+                undoManager.recordCaretAndSelection();
                 if (overwriteMode) {
                     textEditor.replaceTextRange(textEditor.getCaretOffset(), 1,
                             deletedChar);
@@ -2625,6 +2693,7 @@ public class TextEditorDialog extends CaveSWTDialog
             @Override
             public void widgetSelected(SelectionEvent event) {
                 undeleteWordItem.setEnabled(false);
+                undoManager.recordCaretAndSelection();
                 if (overwriteMode) {
                     textEditor.replaceTextRange(textEditor.getCaretOffset(),
                             deletedWord.length(), deletedWord);
@@ -2642,6 +2711,7 @@ public class TextEditorDialog extends CaveSWTDialog
             @Override
             public void widgetSelected(SelectionEvent event) {
                 undeleteLineItem.setEnabled(false);
+                undoManager.recordCaretAndSelection();
                 if (overwriteMode) {
                     textEditor.replaceTextRange(textEditor.getCaretOffset(),
                             deletedLine.length(), deletedLine);
@@ -3285,7 +3355,7 @@ public class TextEditorDialog extends CaveSWTDialog
                             clearUpdateFlag(offset);
                         } catch (@SuppressWarnings("squid:S1166")
                         IllegalArgumentException ex) {
-                            /* bad mouse location ignore */
+                            // bad mouse location ignore
                         }
                     }
                 };
@@ -3509,7 +3579,31 @@ public class TextEditorDialog extends CaveSWTDialog
             }
         });
 
+        editorNoteLabel = new Label(editorBtnRowComp, SWT.LEFT);
+        gd = new GridData(SWT.DEFAULT, SWT.DEFAULT);
+        gd.horizontalSpan = 10;
+        editorNoteLabel.setLayoutData(gd);
+        realizeEditorNote();
+
         editorBtnRowComp.layout();
+    }
+
+    protected void setEditorNote(String editorNote) {
+        this.editorNote = editorNote;
+        realizeEditorNote();
+    }
+
+    /** Update controls to display the editor note. */
+    private void realizeEditorNote() {
+        if (editorNoteLabel != null) {
+            boolean visible = editorNote != null;
+            if (visible) {
+                editorNoteLabel.setText(editorNote);
+            }
+            editorNoteLabel.setVisible(visible);
+            ((GridData) editorNoteLabel.getLayoutData()).exclude = !visible;
+            editorBtnRowComp.layout(true);
+        }
     }
 
     /**
@@ -3529,12 +3623,17 @@ public class TextEditorDialog extends CaveSWTDialog
         gd = new GridData(SWT.FILL, SWT.FILL, true, true);
         textEditor.setFont(dftFont);
 
+        undoManager = new TextEditorUndoManager(this, textEditor);
+
         GC gc = new GC(textEditor);
         FontMetrics fm = gc.getFontMetrics();
         gc.dispose();
+        Integer heightHint = getEditorHeightHint();
         Rectangle size = textEditor.computeTrim(0, 0,
-                EDITOR_WIDTH * fm.getAverageCharWidth(),
-                EDITOR_HEIGHT * textEditor.getLineHeight());
+                (int) Math.round(EDITOR_WIDTH * fm.getAverageCharacterWidth()),
+                (heightHint != null
+                        ? Math.max(heightHint, DEFAULT_EDITOR_HEIGHT)
+                        : DEFAULT_EDITOR_HEIGHT) * textEditor.getLineHeight());
         gd.widthHint = size.width;
         gd.heightHint = size.height;
 
@@ -3594,8 +3693,23 @@ public class TextEditorDialog extends CaveSWTDialog
         textEditor.addExtendedModifyListener(event -> {
             eventStart = event.start;
             if (userKeyPressed) {
+                /*
+                 * Assumes there will not be a reentrant execution with
+                 * userKeyPressed==true.
+                 */
+                EditGroup group = undoManager.beginGroup();
+
                 userKeyPressed = false;
-                rewrap(eventStart, eventStart);
+                if (inEditMode) {
+                    undoManager.modifyTextHook(event, true);
+                }
+                try {
+                    rewrap(eventStart, eventStart);
+                } finally {
+                    undoManager.endGroup(group);
+                }
+            } else if (inEditMode) {
+                undoManager.modifyTextHook(event, false);
             }
         });
 
@@ -3660,6 +3774,9 @@ public class TextEditorDialog extends CaveSWTDialog
                     && event.character != '\r') {
                 userKeyPressed = true;
             }
+
+            undoManager.recordCaretAndSelection();
+
             if (AFOSParser.isTemplate) {
 
                 if (event.keyCode == SWT.BS) {
@@ -3696,12 +3813,16 @@ public class TextEditorDialog extends CaveSWTDialog
                             "%1$-" + (neededPadSpaces + 1) + "s", newString);
                     String spacedoutString = String
                             .format("%1$-" + editableTextWidth + "s", " ");
-                    textEditor.replaceTextRange(leftMost,
-                            spacedoutString.length(), spacedoutString);
-                    textEditor.replaceTextRange(leftMost,
-                            newPaddedString.length(), newPaddedString);
-                    textEditor.setCaretOffset(currentPos1 - 1);
-
+                    EditGroup group1 = undoManager.beginGroup();
+                    try {
+                        textEditor.replaceTextRange(leftMost,
+                                spacedoutString.length(), spacedoutString);
+                        textEditor.replaceTextRange(leftMost,
+                                newPaddedString.length(), newPaddedString);
+                        textEditor.setCaretOffset(currentPos1 - 1);
+                    } finally {
+                        undoManager.endGroup(group1);
+                    }
                 } else if (event.keyCode == SWT.TAB) {
                     if (!isTemplateOverwriteModeSet) {
                         if (overwriteMode) {
@@ -3733,9 +3854,14 @@ public class TextEditorDialog extends CaveSWTDialog
                 for (int x = 0; x < numberOfSpaces; x++) {
                     spaces.append(' ');
                 }
-                textEditor.insert(spaces.toString());
-                textEditor.setCaretOffset(
-                        textEditor.getCaretOffset() + numberOfSpaces);
+                EditGroup group2 = undoManager.beginGroup();
+                try {
+                    textEditor.insert(spaces.toString());
+                    textEditor.setCaretOffset(
+                            textEditor.getCaretOffset() + numberOfSpaces);
+                } finally {
+                    undoManager.endGroup(group2);
+                }
                 event.doit = false;
             }
         });
@@ -3998,6 +4124,14 @@ public class TextEditorDialog extends CaveSWTDialog
 
         headerTFComp.getParent().layout();
         editorBtnRowComp.layout();
+        /*
+         * If a height hint was provided, need to pack the shell in order to
+         * preserve the requested height of the text editor control.
+         */
+        if (getEditorHeightHint() != null) {
+            textEditor.pack(true);
+            shell.pack(true);
+        }
 
         // Set the search and replace dialog to reflect the edit state.
         if (searchReplaceDlg != null) {
@@ -4010,6 +4144,8 @@ public class TextEditorDialog extends CaveSWTDialog
 
         // Edit the header block of the text product.
         editHeader("warning", true);
+
+        undoManager.reset();
     }
 
     private void configureAutoWrap(WrapButtonCfg buttonCfg) {
@@ -4232,7 +4368,7 @@ public class TextEditorDialog extends CaveSWTDialog
      *            True if the text editor should be closed on a cancel action,
      *            false otherwise.
      */
-    private void editHeader(String warning, boolean closeEditorOnCancel) {
+    protected void editHeader(String warning, boolean closeEditorOnCancel) {
         if (headerEditSession != null) {
             return;
         }
@@ -4348,7 +4484,7 @@ public class TextEditorDialog extends CaveSWTDialog
      * @param inEditMode
      *            Flag indicating if the text editor is in edit mode.
      */
-    private void editorButtonMenuStates(boolean inEditMode) {
+    protected void editorButtonMenuStates(boolean inEditMode) {
         closeItem.setEnabled(!inEditMode);
 
         // -----------------------------------
@@ -4391,6 +4527,7 @@ public class TextEditorDialog extends CaveSWTDialog
         // Edit Menu menu items
         // Enabled when in editor mode
         // ---------------------------------
+        realizeUndoState();
         cutItem.setEnabled(inEditMode);
         pasteItem.setEnabled(inEditMode);
         fillItem.setEnabled(inEditMode);
@@ -4510,17 +4647,22 @@ public class TextEditorDialog extends CaveSWTDialog
     private void pasteText() {
         // AWIPS I just does the pasted in both overwrite and insert mode.
         try {
-            int start = -1;
-            if (textEditor.getSelectionCount() == 0) {
-                start = textEditor.getCaretOffset();
-            } else {
-                start = textEditor.getSelectionRange().x;
+            EditGroup group = undoManager.beginGroup();
+            try {
+                int start = -1;
+                if (textEditor.getSelectionCount() == 0) {
+                    start = textEditor.getCaretOffset();
+                } else {
+                    start = textEditor.getSelectionRange().x;
+                }
+                textEditor.paste();
+                rewrap(start, textEditor.getCaretOffset());
+            } finally {
+                undoManager.endGroup(group);
             }
-            textEditor.paste();
-            rewrap(start, textEditor.getCaretOffset());
         } catch (@SuppressWarnings("squid:S1166")
         IllegalArgumentException ex) {
-            /* Ignore */
+            // Ignore
         }
     }
 
@@ -4875,7 +5017,8 @@ public class TextEditorDialog extends CaveSWTDialog
      */
     private synchronized String saveEditedProduct(StdTextProduct product,
             boolean isAutoSave, boolean resend, boolean isOperationalSend) {
-        if (isProductForbiddenToEdit(product, true)) {
+        boolean isFullProduct = isFullProduct();
+        if (isFullProduct && isProductForbiddenToEdit(product, true)) {
             inEditMode = false;
             return StringUtils.EMPTY;
         }
@@ -4890,7 +5033,7 @@ public class TextEditorDialog extends CaveSWTDialog
         TextDisplayModel tdmInst = TextDisplayModel.getInstance();
 
         // Convert the text in the text editor to uppercase
-        if (!isAutoSave) {
+        if (isFullProduct && !isAutoSave) {
             if (!verifyRequiredFields()) {
                 return StringUtils.EMPTY;
             }
@@ -4913,7 +5056,7 @@ public class TextEditorDialog extends CaveSWTDialog
         StdTextProduct storedProduct = tdmInst.getStdTextProduct(token, true);
         String productText = combineOriginalMessage();
 
-        if (!isAutoSave) {
+        if (isFullProduct && !isAutoSave) {
             if (!resend) {
                 // If not a resend, set the DDHHMM field to the current time
                 if (productText.startsWith("- -")
@@ -5068,7 +5211,7 @@ public class TextEditorDialog extends CaveSWTDialog
      *
      * @return true request saved to server otherwise false.
      */
-    private boolean saveTextProductInfo() {
+    protected boolean saveTextProductInfo() {
         StdTextProduct product = TextDisplayModel.getInstance()
                 .getStdTextProduct(token);
         if (isProductForbiddenToEdit(product)) {
@@ -5117,7 +5260,7 @@ public class TextEditorDialog extends CaveSWTDialog
      * @param storedProduct
      * @return true product saved to server otherwise false
      */
-    private boolean saveStoredTextProduct(StdTextProduct storedProduct) {
+    protected boolean saveStoredTextProduct(StdTextProduct storedProduct) {
         StdTextProduct product = TextDisplayModel.getInstance()
                 .getStdTextProduct(token);
         if (isProductForbiddenToEdit(product)) {
@@ -5331,10 +5474,8 @@ public class TextEditorDialog extends CaveSWTDialog
                     textEditor.setEditable(false);
                 } catch (@SuppressWarnings("squid:S1166")
                 IllegalArgumentException e) {
-                    /*
-                     * There is no text product body, so set it to the empty
-                     * string.
-                     */
+                    // There is no text product body, so set it to the empty
+                    // string.
                     textEditor.setText("");
                 }
             } else {
@@ -5378,9 +5519,7 @@ public class TextEditorDialog extends CaveSWTDialog
                         }
                     } catch (@SuppressWarnings("squid:S1166")
                     IllegalArgumentException e) {
-                        /*
-                         * Assume this header block is a legacy AFOS identifier.
-                         */
+                        // Assume this header block is a legacy AFOS identifier.
                         numberOfLinesOfHeaderText = 1;
                     }
                 }
@@ -5971,43 +6110,42 @@ public class TextEditorDialog extends CaveSWTDialog
 
             workProductId = afosId.substring(3);
             warnGenFlag = true;
-            VizApp.runAsync(() -> {
-                long t0 = System.currentTimeMillis();
-                // For VTEC related warning messages, turn off wordwrap by
-                // default.
-                if (textEditor == null) {
-                    openDialog();
-                }
-
-                if (textEditor.isDisposed()) {
-                    return;
-                }
-
-                // Set the text editor's contents to the warning message.
-                verifyUndeditableText = false;
-                textEditor.setText(w);
-
-                showDialog();
-                long t1 = System.currentTimeMillis();
-                SimpleDateFormat sdf = new SimpleDateFormat(
-                        "yyyy-MM-dd HH:mm:ss.SSS");
-                sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-                statusHandler.debug(
-                        sdf.format(new Date()) + ": Text Workstation took "
-                                + (t1 - t0) + "ms to show dialog");
-                enterEditor1();
-
-                // TODO: is this necessary?
-                Menu menu = autoWrapMenuItem.getMenu();
-                for (MenuItem item : menu.getItems()) {
-                    if (item.getSelection()) {
-                        currentWrapCfg = (WrapButtonCfg) item.getData();
-                        configureAutoWrap(currentWrapCfg);
-                    }
-                }
-                saved = false;
-            });
+            finishShowProduct(w);
         }
+    }
+
+    private void finishShowProduct(String text) {
+        VizApp.runAsync(() -> {
+            long t0 = System.currentTimeMillis();
+            // For VTEC related warning messages, turn off wordwrap by
+            // default.
+            if (textEditor == null) {
+                openDialog();
+            }
+
+            if (textEditor.isDisposed()) {
+                return;
+            }
+
+            // Set the text editor's contents to the warning message.
+            verifyUndeditableText = false;
+            textEditor.setText(text);
+
+            showDialog();
+            long t1 = System.currentTimeMillis();
+            perfLog.logDuration("Showing dialog", (t1 - t0));
+            enterEditor1();
+
+            // TODO: is this necessary?
+            Menu menu = autoWrapMenuItem.getMenu();
+            for (MenuItem item : menu.getItems()) {
+                if (item.getSelection()) {
+                    currentWrapCfg = (WrapButtonCfg) item.getData();
+                    configureAutoWrap(currentWrapCfg);
+                }
+            }
+            saved = false;
+        });
     }
 
     /**
@@ -7700,7 +7838,7 @@ public class TextEditorDialog extends CaveSWTDialog
      * @param line
      * @return true if line is the start of a paragraph, or is line 0
      */
-    private boolean isParagraphStart(int line) {
+    protected boolean isParagraphStart(int line) {
         boolean rval = false;
         // return true if this is line 0
         if (line == 0) {
@@ -7846,7 +7984,7 @@ public class TextEditorDialog extends CaveSWTDialog
             }
         } catch (@SuppressWarnings("squid:S1166")
         StringIndexOutOfBoundsException ex) {
-            /* User has non METAR/SAO products and the parsing failed. */
+            // User has non METAR/SAO products and the parsing failed.
             result = null;
         }
 
@@ -7990,7 +8128,7 @@ public class TextEditorDialog extends CaveSWTDialog
             // DR 20284).
             if (!"SPN".equals(product.getXxxid().trim())) {
                 if (ccc != null && nnn != null) {
-                    if (gfePils.contains(nnn) && !exceptionCCCs.contains(ccc)) {
+                    if (gfePils.contains(nnn)) {
                         if (!supressUserInfo) {
                             userInformation(prefix
                                     + "This product MUST be edited in GFE!"
@@ -8288,4 +8426,152 @@ public class TextEditorDialog extends CaveSWTDialog
     public String getStatusMsg() {
         return statusBarLabel.getText();
     }
+
+    /**
+     * Set up to edit a product in a way similar to WarnGen to support other
+     * applications.
+     * <p>
+     * This is intended to be used without a "WRKWGn" scratch product in the
+     * TextDB.
+     *
+     * @param product
+     * @param notify
+     */
+    public void beginEditingProduct(String product, NotifyExpiration notify) {
+        if (inEditMode) {
+            return;
+        }
+        inEditMode = true;
+        this.notify = notify;
+        String afosId = null;
+        String[] nnnxxx = null;
+        String siteNode = null;
+
+        WMOHeader header = new WMOHeader(product.getBytes());
+        if (header.isValid()) {
+            GetAfosIdRequest request = new GetAfosIdRequest();
+            request.setTtaaii(header.getTtaaii());
+            request.setCccc(header.getCccc());
+            try {
+                AfosWmoIdDataContainer result = (AfosWmoIdDataContainer) ThriftClient
+                        .sendRequest(request);
+                if (!result.getIdList().isEmpty()) {
+                    afosId = result.getIdList().get(0).getAfosid();
+                }
+            } catch (Exception e) {
+                statusHandler
+                        .error("Unable to look up AFOS ID: " + e.toString(), e);
+            }
+        }
+
+        if (afosId != null) {
+            siteNode = afosId.substring(0, 3);
+            nnnxxx = new String[] { afosId.substring(3, 6),
+                    afosId.substring(6, Math.min(9, afosId.length())) };
+        } else {
+            nnnxxx = TextDisplayModel.getNnnXxx(product);
+            siteNode = TextDisplayModel.getSiteNode(product, nnnxxx[1]);
+            /*
+             * getSiteNode calls SiteMap.getAFOSTableMap() which only uses
+             * afos_lookup_table.dat, but this will not work for KNHC which has
+             * the mapping in national_category_table.template.
+             */
+            if (siteNode == null || siteNode.isEmpty() && header.isValid()) {
+                siteNode = SiteMap.getInstance().mapICAOToCCC(header.getCccc());
+            }
+            if (siteNode == null || siteNode.isEmpty()) {
+                siteNode = "ccc";
+            }
+        }
+
+        TextDisplayModel.getInstance().createStdTextProduct(token, product,
+                siteNode);
+
+        workProductId = nnnxxx[0] + nnnxxx[1];
+        finishShowProduct(product);
+    }
+
+    /**
+     * Get the given line of text from the editor.
+     *
+     * @param line
+     */
+    protected String getLine(int line) {
+        return textEditor.getLine(line);
+    }
+
+    /**
+     * Insert the given text into the editor. Based on @code{pasteText}.
+     *
+     * @param text
+     */
+    protected void insertText(String text) {
+        // AWIPS I just does the pasted in both overwrite and insert mode.
+        if (!textEditor.getEditable()) {
+            return;
+        }
+        try {
+            int start;
+            if (textEditor.getSelectionCount() == 0) {
+                start = textEditor.getCaretOffset();
+            } else {
+                start = textEditor.getSelectionRange().x;
+            }
+            undoManager.recordCaretAndSelection();
+            EditGroup group = undoManager.beginGroup();
+            try {
+                textEditor.insert(text);
+                textEditor.setCaretOffset(start + text.length());
+                rewrap(start, textEditor.getCaretOffset());
+            } finally {
+                undoManager.endGroup(group);
+            }
+        } catch (@SuppressWarnings("squid:S1166")
+        IllegalArgumentException ex) {
+            // Ignore
+        }
+    }
+
+    private void undoEdit() {
+        if (inEditMode) {
+            undoManager.undo();
+        }
+    }
+
+    private void redoEdit() {
+        if (inEditMode) {
+            undoManager.redo();
+        }
+    }
+
+    /* Update controls to reflect undo/redo state. */
+    /* package */ void realizeUndoState() {
+        if (undoItem != null) {
+            undoItem.setEnabled(inEditMode && undoManager.canUndo());
+        }
+        if (redoItem != null) {
+            redoItem.setEnabled(inEditMode && undoManager.canRedo());
+        }
+    }
+
+    /**
+     * Controls if standard, full-product actions are performed such as
+     * capitalization, VTEC updates, etc.
+     *
+     * @return true if full-product actions should be performed.
+     */
+    protected boolean isFullProduct() {
+        return true;
+    }
+
+    /**
+     * Get a hint for the editor height (in lines.)
+     *
+     * @return height hint or null for the default
+     */
+    protected Integer getEditorHeightHint() {
+        return null;
+    }
+
 }
+

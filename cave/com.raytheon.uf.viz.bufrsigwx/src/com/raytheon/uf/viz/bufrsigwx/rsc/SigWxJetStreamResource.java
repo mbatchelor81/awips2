@@ -19,6 +19,7 @@
  **/
 package com.raytheon.uf.viz.bufrsigwx.rsc;
 
+import javax.measure.MetricPrefix;
 import javax.measure.UnitConverter;
 
 import org.eclipse.swt.graphics.RGB;
@@ -40,10 +41,8 @@ import com.raytheon.uf.viz.core.exception.VizException;
 import com.raytheon.uf.viz.core.rsc.LoadProperties;
 import com.raytheon.uf.viz.core.rsc.capabilities.ColorableCapability;
 
-import si.uom.NonSI;
 import si.uom.SI;
 import systems.uom.common.USCustomary;
-import tec.uom.se.unit.MetricPrefix;
 
 /**
  * Provides a resource that will display jet stream data for a given reference

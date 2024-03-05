@@ -30,8 +30,11 @@
         <contribute xsi:type="subinclude"
             fileName="menus/radar/dualPol/terminal/baseRadarTerminalBestResBaseProducts.xml" />
         <contribute xsi:type="subinclude"
+<<<<<<< HEAD
             fileName="menus/radar/dualPol/terminal/baseRadarTerminalPrecip.xml" />
         <contribute xsi:type="subinclude"
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             fileName="menus/radar/dualPol/terminal/baseRadarTerminalDerivedProducts.xml" />
         <contribute xsi:type="subinclude"
             fileName="menus/radar/dualPol/terminal/baseRadarTerminalAlgorithmOverlays.xml" />
@@ -41,5 +44,15 @@
             fileName="menus/radar/dualPol/terminal/baseRadarTerminalDataQuality.xml" />
         <contribute xsi:type="subinclude"
             fileName="menus/radar/dualPol/terminal/baseRadarTerminalLegacyProds.xml" />
+<<<<<<< HEAD
     </contribute>
 </menuTemplate>
+=======
+        <!-- This section can be uncommented for sites who want to ingest archived obsolete
+             SPG products.  It will activate an obsolete products menu containing removed
+             products. -->
+        <!-- <contribute xsi:type="subinclude"
+            fileName="menus/radar/dualPol/terminal/baseRadarTerminalObsolete.xml" /> -->
+    </contribute>
+</menuTemplate>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

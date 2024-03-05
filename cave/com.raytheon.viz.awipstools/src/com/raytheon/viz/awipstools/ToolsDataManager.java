@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -44,6 +56,13 @@ import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
+<<<<<<< HEAD
+=======
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.LineSegment;
+import org.locationtech.jts.geom.LineString;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.uf.common.localization.FileUpdatedMessage;
 import com.raytheon.uf.common.localization.ILocalizationFile;
@@ -70,14 +89,18 @@ import com.raytheon.viz.awipstools.common.RangeRing;
 import com.raytheon.viz.awipstools.common.RangeRing.RangeRingType;
 import com.raytheon.viz.awipstools.common.StormTrackData;
 import com.raytheon.viz.core.CorePlugin;
+<<<<<<< HEAD
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.LineSegment;
 import org.locationtech.jts.geom.LineString;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * A Single class responsible for generating, storing, and loading any data used
  * by various tools. This includes baselines, range rings and distance bearings.
+<<<<<<< HEAD
  * 
  * <pre>
  * 
@@ -98,6 +121,34 @@ import org.locationtech.jts.geom.LineString;
  * 
  * </pre>
  * 
+=======
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+ * Date          Ticket#  Engineer     Description
+ * ------------- -------- ------------ -----------------------------------------
+ * Oct 21, 2009  1711     bsteffen     Initial Creation
+ * Apr 07, 2010  4614     randerso     Reworked to use localization files
+ * Jul 11, 2012  875      rferrel      Move points to PointsDataManager.
+ * Jan 29, 2014  16351    D. Friedman  Fix updates to storm track from
+ *                                     preferences.
+ * Apr 02, 2014  16351    D. Friedman  Fix updates to storm track from
+ *                                     preferences. (backport from 14.2.2)
+ * Jun 03, 2014  3191     njensen      Improved saving/loading storm track data
+ * Feb 24, 2015  3978     njensen      Changed to use abstract InputStream
+ * Aug 18, 2015  3806     njensen      Use SaveableOutputStream to save
+ * Feb 12, 2016  5242     dgilling     Remove calls to deprecated Localization
+ *                                     APIs.
+ * Aug 02, 2017  6347     njensen      Use common_static instead of cave_static
+ * Apr 06, 2018  6718     bsteffen     Track last edit.
+ * May 13, 2021  8451     randerso     Changed baseline listeners to use
+ *                                     IBaseLineChangedListener
+ *
+ * </pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author bsteffen
  */
 public class ToolsDataManager implements ILocalizationFileObserver {
@@ -129,7 +180,11 @@ public class ToolsDataManager implements ILocalizationFileObserver {
 
     private Map<String, LineString> baselines;
 
+<<<<<<< HEAD
     private final ListenerList<IToolChangedListener> baselineListeners = new ListenerList<>();
+=======
+    private final ListenerList<IBaselineChangedListener> baselineListeners = new ListenerList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private String lastEditedBaseline = null;
 
@@ -164,9 +219,13 @@ public class ToolsDataManager implements ILocalizationFileObserver {
         LocalizationContext userCtx = pathMgr.getContext(
                 LocalizationType.COMMON_STATIC, LocalizationLevel.USER);
         /*
+<<<<<<< HEAD
          * TODO: Since it's already under the user localization, why does it
          * then want to have the site underneath that? If anyone knows, please
          * document it and remove this TODO. PointsManager does a similar thing.
+=======
+         * Include siteID so each user has separate baselines for each site
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
          */
         userToolsDir = pathMgr.getLocalizationFile(userCtx,
                 TOOLS_DIR + IPathManager.SEPARATOR
@@ -179,7 +238,11 @@ public class ToolsDataManager implements ILocalizationFileObserver {
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param name
      * @return the baseline associated with the given name, null if the given
      *         name isn't associated with any baseline
@@ -202,7 +265,11 @@ public class ToolsDataManager implements ILocalizationFileObserver {
     /**
      * Get the name of the baseline that was most recently changed with this
      * instance of {@link ToolsDataManager}.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return the name of the last edited baseline.
      */
     public String getLastEditedBaselineName() {
@@ -287,7 +354,11 @@ public class ToolsDataManager implements ILocalizationFileObserver {
 
     /**
      * Creates and returns a default storm track data
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return
      */
     private static StormTrackData defaultStormTrackData() {
@@ -359,10 +430,16 @@ public class ToolsDataManager implements ILocalizationFileObserver {
         }
         float[] result = new float[3];
         rangeRings = new ArrayList<>();
+<<<<<<< HEAD
         for (int r = 0; r < rows.size(); r++) {
             String rda_id = "";
             if (!rows.isEmpty()) {
                 Object[] row = rows.get(r);
+=======
+        for (Object[] row : rows) {
+            String rda_id = "";
+            if (!rows.isEmpty()) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 for (int i = 0; i < result.length; ++i) {
                     if (row[i] instanceof String) {
                         rda_id = (String) row[i];
@@ -577,8 +654,13 @@ public class ToolsDataManager implements ILocalizationFileObserver {
                     .replace(BASELINE_EXT, "");
             baselines.put(name, baseline);
 
+<<<<<<< HEAD
             for (IToolChangedListener listener : baselineListeners) {
                 listener.toolChanged();
+=======
+            for (IBaselineChangedListener listener : baselineListeners) {
+                listener.baselineChanged(name, baseline);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         }
     }
@@ -586,14 +668,23 @@ public class ToolsDataManager implements ILocalizationFileObserver {
     /**
      * @param listener
      */
+<<<<<<< HEAD
     public void addBaselinesChangedListener(IToolChangedListener listener) {
+=======
+    public void addBaselinesChangedListener(IBaselineChangedListener listener) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         baselineListeners.add(listener);
     }
 
     /**
      * @param listener
      */
+<<<<<<< HEAD
     public void removeBaselinesChangedListener(IToolChangedListener listener) {
+=======
+    public void removeBaselinesChangedListener(
+            IBaselineChangedListener listener) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         baselineListeners.remove(listener);
     }
 

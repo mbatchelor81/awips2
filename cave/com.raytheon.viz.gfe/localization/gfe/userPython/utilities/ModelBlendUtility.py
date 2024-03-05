@@ -108,7 +108,11 @@ class ModelBlendUtility(SmartScript.SmartScript):
             for run in range(0,-versions,-1):
                 db=self.findDatabase(model,run)
                 id=db.modelIdentifier()
+<<<<<<< HEAD
                 if ((id is not "") and (id not in DbaseIDs)):
+=======
+                if ((id != "") and (id not in DbaseIDs)):
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     modtime=db.modelTime()
                     year=modtime.year()
                     month=modtime.month()

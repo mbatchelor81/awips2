@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -30,20 +42,35 @@ import javax.xml.bind.annotation.XmlElement;
 import com.raytheon.uf.common.dataplugin.radar.RadarRecord;
 
 /**
+<<<<<<< HEAD
  * 
  * Take a product dependent parameter and apply the given format
  * 
  * <pre>
  * 
+=======
+ *
+ * Take a product dependent parameter and apply the given format
+ *
+ * <pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * SOFTWARE HISTORY
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
  * Sep 7, 2010            bsteffen     Initial creation
  * Feb 1, 2018  DCS20568  jdynina      Special handling for dual pol
  *                                     precip bias fields
+<<<<<<< HEAD
  * 
  * </pre>
  * 
+=======
+ * Oct 28,2021  DCS22845  jdynina      Added RRC handling
+ *
+ * </pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author bsteffen
  * @version 1.0
  */
@@ -87,7 +114,12 @@ public class ProdDepTextContributor implements IRadarTextContributor {
         }
         Float value = record.getProductDependentValue(index) * multiplier;
 
+<<<<<<< HEAD
         if ((record.getProductCode() == 169) || (record.getProductCode() ==171)) {
+=======
+        if ((record.getProductCode() == 169)
+                || (record.getProductCode() == 171)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if ((index == 6) && (value == 0)) {
                 return "BIAS/#G-R: N/A";
             }
@@ -97,13 +129,30 @@ public class ProdDepTextContributor implements IRadarTextContributor {
             }
         }
 
+<<<<<<< HEAD
         if ((record.getProductCode() == 170) || (record.getProductCode() ==172) ||
                 (record.getProductCode() == 173)) {
+=======
+        if ((record.getProductCode() == 170) || (record.getProductCode() == 172)
+                || (record.getProductCode() == 173)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if ((index == 6) && (value == 0)) {
                 return "BIAS: N/A";
             }
         }
 
+<<<<<<< HEAD
+=======
+        if (record.getProductCode() == 197) {
+            if ((index == 6) && (value == 0.0)) {
+                return "SI Multiplier: N/A";
+            } else {
+                value = value / 10;
+                return String.format(format, value);
+            }
+        }
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if (multiplier == 1) {
             return String.format(format, value.intValue());
         } else {

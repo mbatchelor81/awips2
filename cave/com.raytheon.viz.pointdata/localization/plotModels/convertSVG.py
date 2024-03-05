@@ -65,7 +65,10 @@ def processCDATA(fName, postProcess=False):
     else:
         file_string = file_string.replace("<CDATA>", "<![CDATA[")
         file_string = file_string.replace("</CDATA>", "]]>")
+<<<<<<< HEAD
         file_string = file_string.replace("#NEWCDATA#", getDefaultCDATAText() )
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     with open(fName, 'w') as f:
         f.write(file_string)
@@ -98,6 +101,7 @@ def getLicenseText():
     '''
     return licenseText
 ############################################
+<<<<<<< HEAD
 def getDefaultCDATAText():
     cText = '''
             <![CDATA[
@@ -113,6 +117,9 @@ def getDefaultCDATAText():
     '''
     return cText
 ############################################
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 def getSampleValue(plot):
     val = plot.text
     commaCnt = plot.attrib["plotParam"].count(",")
@@ -273,6 +280,12 @@ def main():
     root.set("xmlns", "http://www.w3.org/2000/svg")
     root.set("xmlns:xlink", "http://www.w3.org/1999/xlink")
     root.set("plugin", pluginName)
+<<<<<<< HEAD
+=======
+    root.set("height","150")
+    root.set("viewBox", "0 0 150 150")
+    root.set("width", "150") 
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     
     new_root.append(root)
 
@@ -292,9 +305,13 @@ def main():
             'plotLookupTable' : 'lookupTable',
             'plotIndex': 'index',
             'class':'svgClass'}
+<<<<<<< HEAD
     
     hasStyle = False
     
+=======
+        
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     for child in root:
 
     # The heavy lifting is under the "symbol" element
@@ -355,6 +372,7 @@ def main():
             line.text=' '
             
         
+<<<<<<< HEAD
    # Now, add the markerFont in the style section
         for script in child.findall(svgNS + 'style'):
             hasStyle = True
@@ -372,6 +390,20 @@ def main():
             style.text = '#NEWCDATA#'
             style.tail=NEW_LINE
         
+=======
+   # Now, remove the style section
+        for script in child.findall(svgNS + 'style'):
+            child.remove(script)
+                
+    
+    
+    for useElement in root.findall(svgNS + 'use'):
+    	useElement.set("height", "150")
+    	useElement.set("width", "150")
+    	useElement.set("x", "75")
+    	useElement.set("y", "75")
+    	    
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     newTree = ET.ElementTree(new_root)
     newTree.write(svgFileName, encoding='UTF-8', method='xml')
 

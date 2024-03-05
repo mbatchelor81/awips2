@@ -711,6 +711,7 @@ class VectorRelatedPhrases(PhraseBuilder.PhraseBuilder):
         return self.DONE()
 
     def pws_words(self, tree, node):
+<<<<<<< HEAD
         """
         Words method for the tropical probabilistic wind phrase.
         """
@@ -722,10 +723,23 @@ class VectorRelatedPhrases(PhraseBuilder.PhraseBuilder):
                          (repr(node.parent.getTimeRange())), 1)
 
         #  Get name and index of this node's component
+=======
+        """Words method for the tropical probabilistic wind phrase."""
+
+        self.debug_print("NNN_FILETYPE version of VectorRelatedPhrases.pws_words", 1)
+
+        # Get Wind
+        self.debug_print("\nBegin period***********", 1)
+        self.debug_print(f"\nNode time range -> {node.getTimeRange()}", 1)
+        self.debug_print(f"Parent time range -> {node.parent.getTimeRange()}", 1)
+
+        # Get name and index of this node's component
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         component = node.getComponent()
         compIndex = node.getComponent().getIndex()
         compPeriod = int(compIndex + self.firstComponentPeriod(tree, node))
         print("COMPONENT IN pws_words", compPeriod)
+<<<<<<< HEAD
         
         if self._pil.startswith("ZFP"):
             productType = "ZFP"
@@ -738,13 +752,37 @@ class VectorRelatedPhrases(PhraseBuilder.PhraseBuilder):
             #!!! Wait for wind phrase to complete
             #    We're assuming that all the wind phrases have completed (including
             #    local effect phrases) if one has.
+=======
+        componentName = node.getComponentName()
+
+        if "ZFP" in self._pil:
+            productType = "ZFP"
+        else:
+            productType = "CWF"
+
+        # ======================================================================
+        # If this is one of the first 5 periods of the ZFP, or this is the CWF
+
+        if productType == "CWF" or compPeriod <= 5:
+            print("I AM IN (<= 5th period or not ZFP): ", node.getTimeRange())
+            #!!! Wait for wind phrase to complete
+            # We're assuming that all the wind phrases have completed (including
+            # local effect phrases) if one has.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if productType == "ZFP":
                 phraseList = ["wind_withGusts_phrase"]
             else:
                 phraseList = ["marine_wind_withGusts_phrase"]
+<<<<<<< HEAD
             windWords = self.findWords(tree, node, "Wind", phraseList = phraseList)
             self.debug_print("windWords = '%s'" % (windWords), 1)
             # Wait for Wind phrase
+=======
+            windWords = self.findWords(tree, node, "Wind", phraseList=phraseList)
+            self.debug_print(f"windWords = '{windWords}'", 1)
+
+            # Wait for Wind phrase to complete
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if windWords is None:
                 return
 
@@ -753,14 +791,23 @@ class VectorRelatedPhrases(PhraseBuilder.PhraseBuilder):
             if maxMagList is None:
                 return self.setWords(node, "")
 
+<<<<<<< HEAD
             self.debug_print("MaxMagList from pws_words %s %s" % (maxMagList,
                                                 repr(node.getTimeRange())), 1)
             # print "MaxMagList from pws_words", maxMagList, node.getTimeRange()
+=======
+            self.debug_print(
+                f"MaxMagList from pws_words {maxMagList} {node.getTimeRange()}",
+                1,
+            )
+            # print("MaxMagList from pws_words", maxMagList, node.getTimeRange())
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             maxMag = 0.0
             for mag in maxMagList:
                 if mag > maxMag:
                     maxMag = mag
 
+<<<<<<< HEAD
             if productType == "ZFP":
                 # print "PWS MAXMAG in MPH IS: ", maxMag
                 maxMag = maxMag*0.868976242
@@ -790,12 +837,55 @@ class VectorRelatedPhrases(PhraseBuilder.PhraseBuilder):
         self.debug_print("dayNight IS %s" % (dayNight), 1)
 
         #  See which grids to use for probability of 34 and 64 kts
+=======
+            # Convert wind speeds for the ZFP from KT to MPH
+            if productType == "ZFP":
+                self.debug_print(f"PWS MAXMAG in KTS IS: {maxMag}", 1)
+                maxMag *= 0.868976242
+                self.debug_print(f"PWS MAXMAG in MPH IS: {maxMag}", 1)
+
+        # ======================================================================
+        # Othwerwise Periods 6 and beyond in the ZFP.
+        # Although wind phrases are not included in extended ZFP you
+        # still need to do the analysis so tropical cyclone formatter
+        # logic can be carried out through the extended (day 5) periods.
+        #
+        else:
+            print("I AM IN (ZFP and >= 6th period): ", node.getTimeRange())
+            windStats = tree.stats.get(
+                "Wind",
+                node.getTimeRange(),
+                node.getAreaLabel(),
+                statLabel="vectorModeratedMinMax",
+                mergeMethod="Max",
+            )
+            # print("WINDSTATS", windStats)
+
+            # Wait until we have wind stats
+            if windStats is None:
+                return self.setWords(node, "")
+
+            # Get the wind components
+            maxMag, wdir = windStats
+
+            # Convert wind speeds for the ZFP from KT to MPH
+            self.debug_print(f"PWS MAXMAG in KTS IS: {maxMag}", 1)
+            maxMag *= 0.868976242
+            self.debug_print(f"PWS MAXMAG in MPH IS: {maxMag}", 1)
+
+        # See if this is a day or night period
+        dayNight = self.getPeriod(node.getTimeRange(), 1)
+        self.debug_print(f"dayNight IS {dayNight}", 1)
+
+        # See which grids to use for probability of 34 and 64 kts
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if dayNight == 1:
             prob34 = "pwsD34"
             prob64 = "pwsD64"
         else:
             prob34 = "pwsN34"
             prob64 = "pwsN64"
+<<<<<<< HEAD
         self.debug_print("USING pws34 = "+prob34, 1)
         self.debug_print("USING pws64 = "+prob64, 1)
         pws64 = tree.stats.get(prob64, node.getTimeRange(),
@@ -805,10 +895,24 @@ class VectorRelatedPhrases(PhraseBuilder.PhraseBuilder):
             return self.setWords(node, "")
         pws34 = tree.stats.get(prob34, node.getTimeRange(),
                                node.getAreaLabel(), mergeMethod="Max")
+=======
+        self.debug_print(f"USING pws34 = {prob34}", 1)
+        self.debug_print(f"USING pws64 = {prob64}", 1)
+        pws64 = tree.stats.get(
+            prob64, node.getTimeRange(), node.getAreaLabel(), mergeMethod="Max"
+        )
+        if pws64 is None:
+            self.debug_print("pws64 NONE", 1)
+            return self.setWords(node, "")
+        pws34 = tree.stats.get(
+            prob34, node.getTimeRange(), node.getAreaLabel(), mergeMethod="Max"
+        )
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if pws34 is None:
             self.debug_print("pws34 NONE", 1)
             return self.setWords(node, "")
 
+<<<<<<< HEAD
         #print "check   ", "check"
         ####################################################################
         #print "WORDS1", words
@@ -837,6 +941,31 @@ class VectorRelatedPhrases(PhraseBuilder.PhraseBuilder):
         print("warningpws64 = ", pws64)
         print("warningpws34 = ", pws34)
         print("Headline stats for warning ", headlines)
+=======
+        # print("check   ", "check")
+        ########################################################################
+        # print("WORDS1", words)
+        words = ""
+        areaLabel = tree.getAreaLabel()
+        print("\nBegin period***********", node.getTimeRange())
+        self.debug_print(f"\nNode time range -> {node.getTimeRange()}", 1)
+        self.debug_print(f"Parent time range -> {node.parent.getTimeRange()}", 1)
+        self.debug_print(f"MAXMAG IS -> {maxMag} KTS", 1)
+        self.debug_print(
+            f"\nNode time and label -> {node.getTimeRange()} {node.getAreaLabel()}",
+            1,
+        )
+        # tree.stats.printDictionary("Hazards")
+        # Get Hazards
+        headlines = tree.stats.get(
+            "Hazards", node.getTimeRange(), areaLabel, mergeMethod="List"
+        )
+
+        self.debug_print(f"maxMag = {maxMag}", 1)
+        self.debug_print(f"warningpws64 = {pws64}", 1)
+        self.debug_print(f"warningpws34 = {pws34}", 1)
+        self.debug_print(f"Headline stats for warning -> {headlines}", 1)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         if headlines is not None:
             # Sort the headlines by startTime
@@ -855,27 +984,47 @@ class VectorRelatedPhrases(PhraseBuilder.PhraseBuilder):
                 allowedHazards.append(key)
 
             # Create a list of headline keys as strings e.g. HU.A
+<<<<<<< HEAD
             headlineKeys = [] 
+=======
+            headlineKeys = []
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             for key, tr in headlines:  # value == list of subkeys
                 if key not in allowedHazards:
                     continue
                 # Don't call headlinesTimeRange_descriptor function due to
                 # an exception which is caused - DR19483
+<<<<<<< HEAD
                 #timeDescriptor = self.headlinesTimeRange_descriptor(
                 #    tree, node, key, tr, areaLabel, issuanceTime)
+=======
+                # timeDescriptor = self.headlinesTimeRange_descriptor(
+                #     tree, node, key, tr, areaLabel, issuanceTime)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if key == "<None>":
                     continue
                 if key not in headlineKeys:
                     headlineKeys.append(key)
+<<<<<<< HEAD
                 self.debug_print("key: %s" % (key), 1)
   
             self.debug_print("headlineKeys: %s" % (repr(headlineKeys)), 1)
             words = self.getTropicalDescription(
                     tree, node, headlineKeys, maxMag, pws64, pws34)
+=======
+                self.debug_print(f"key: {key}", 1)
+
+            self.debug_print(f"headlineKeys: {headlineKeys}", 1)
+            words = self.getTropicalDescription(
+                tree, node, headlineKeys, maxMag, pws64, pws34
+            )
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             # Store the headlineKeys at the component node for later examination
             component = node.getComponent()
             component.set("headlineKeys", headlineKeys)
 
+<<<<<<< HEAD
         elif headlines is None or headlines is NoData: 
             words = words + self.getTropicalDescription(
                 tree, node, "", maxMag, pws64, pws34)
@@ -894,6 +1043,78 @@ class VectorRelatedPhrases(PhraseBuilder.PhraseBuilder):
                          (words, node.getAncestor('name')), 1)
         self.debug_print("%s %s\n" % (node.getComponentName(),
                                       repr(node.getTimeRange())), 1)
+=======
+        elif headlines is None or headlines is NoData:
+            words += self.getTropicalDescription(tree, node, "", maxMag, pws64, pws34)
+
+        print(f"After headline check, words = '{words}'")
+
+        # ======================================================================
+        # If we have words from the pws_phrase during tropical cyclones,
+        # the following lines of code will make sure the appropriate phrases
+        # are not included per national directive.
+
+        if words is not None and words.strip():
+
+            # Display the current product type and component period
+            print("productType = ", productType, "\tcompPeriod = ", compPeriod)
+
+            # ------------------------------------------------------------------
+            # If this is the ZFP
+
+            if productType == "ZFP":
+
+                # Remove the wind summary phrase from this component and all
+                # local-effect areas
+                self.removeComponentPhrases(
+                    tree,
+                    node,
+                    "wind_summary",
+                    areaLabels=[
+                        node.getAreaLabel(),
+                        node.getComponent().getAreaLabel(),
+                    ],
+                )
+
+            # ------------------------------------------------------------------
+            # Otherwise, if this is beyond the 6th period in the CWF
+
+            elif compPeriod > 6:
+                print(
+                    "Beyond 6th period - Only uncertainty phrase and weather included in CWF"
+                )
+
+                # Remove all possible wind and wave phrases from this component and
+                # all local-effect areas
+                remove_phrases = [
+                    "marine_wind_phrase",
+                    "marine_wind_withGusts_phrase",
+                    "gust_phrase",
+                    "embedded_gust_phrase",
+                    "wave_phrase",
+                    "waveHeight_phrase",
+                    "wave_withPeriods_phrase",
+                    "chop_phrase",
+                    "embedded_period_phrase",
+                    "period_phrase",
+                    "swell_phrase",
+                    "swell_withPeriods_phrase",
+                ]
+
+                for remove_phrase in remove_phrases:
+                    self.removeComponentPhrases(
+                        tree,
+                        node,
+                        remove_phrase,
+                        areaLabels=[
+                            node.getAreaLabel(),
+                            node.getComponent().getAreaLabel(),
+                        ],
+                    )
+
+        self.debug_print(f"\nSetting words '{words}' for {node.getAncestor('name')}", 1)
+        self.debug_print(f"{node.getComponentName()} {node.getTimeRange()}\n", 1)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return self.setWords(node, words)
 
     def getTropicalDescription(self, tree, node, headlineKeys, maxMag, pws64,
@@ -1495,4 +1716,7 @@ class VectorRelatedPhrases(PhraseBuilder.PhraseBuilder):
             desc = ""
 
         return desc
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

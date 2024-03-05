@@ -1,19 +1,31 @@
 ##
 # This software was developed and / or modified by Raytheon Company,
 # pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
 # 
+=======
+#
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # U.S. EXPORT CONTROLLED TECHNICAL DATA
 # This software product contains export-restricted data whose
 # export/transfer/disclosure is restricted by U.S. law. Dissemination
 # to non-U.S. persons whether in the United States or abroad requires
 # an export license or other authorization.
+<<<<<<< HEAD
 # 
+=======
+#
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # Contractor Name:        Raytheon Company
 # Contractor Address:     6825 Pine Street, Suite 340
 #                         Mail Stop B8
 #                         Omaha, NE 68106
 #                         402.291.0100
+<<<<<<< HEAD
 # 
+=======
+#
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # See the AWIPS II Master Rights File ("Master Rights File.pdf") for
 # further licensing information.
 ##
@@ -41,6 +53,12 @@
 # Jun 23, 2017 6138       dgilling    Changes for Winter Weather VTEC
 #                                     consolidation.
 # Oct 12, 2017 DR20389    swhite      Remove HTI/TCV Restrictions on CFW Hazards.
+<<<<<<< HEAD
+=======
+# Jan 14, 2021 DCS22296   dkingfiel   Remove FF.A and FA.A
+# May 10, 2021 DCS22297   dkingfiel   Remove RB.Y, SI.Y, and SW.Y
+# May 18, 2021 DCS22297   dkingfiel   Add CW.Y, XH.A, and XH.W
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 ########################################################################
 
@@ -75,14 +93,21 @@ HazardsConflictDict = {
    "AQ.Y" : ["AS.O", "AS.Y"],
    "AS.O" : ["AQ.Y", "AS.Y"],
    "AS.Y" : ["AQ.Y", "AS.O"],
+<<<<<<< HEAD
    "BH.S" : ["HU.A", "HU.W", "TR.A", "TR.W", "TY.A","TY.W", "SS.W", "SS.A"],
    "BW.Y" : ["GL.W", "SR.W", "HF.W", "TR.A", "TR.W", "HU.A", "HU.W", "HU.S",
              "SC.Y", "SW.Y", "SE.W", "RB.Y", "SI.Y"],
+=======
+   "BH.S" : ["HU.A", "HU.W", "TR.A", "TR.W", "TY.A", "TY.W", "SS.W", "SS.A"],
+   "BW.Y" : ["GL.W", "SR.W", "HF.W", "TR.A", "TR.W", "HU.A", "HU.W", "HU.S",
+             "SC.Y", "SE.W"],
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    "BZ.W" : ["WS.A", "IS.W", "LE.W", "WS.W", "WW.Y"],
    "CF.A" : ["CF.W", "CF.Y", "SS.A", "SS.W"],
    "CF.W" : ["CF.A", "CF.Y", "SS.A", "SS.W"],
    "CF.Y" : ["CF.W", "CF.A", "SS.A", "SS.W"],
    "CF.S" : ["CF.Y", "CF.W", "CF.A", "SS.A", "SS.W"],
+<<<<<<< HEAD
    "DU.W" : ["DU.Y"],
    "DU.Y" : ["DU.W"],
    "EC.A" : ["WC.A", "EC.W", "WC.W"],
@@ -93,6 +118,17 @@ HazardsConflictDict = {
    "FA.W" : [],
    "FA.Y" : [],
    "FF.A" : ["FA.A"],
+=======
+   "CW.Y" : ["EC.A", "EC.W"],
+   "DU.W" : ["DU.Y"],
+   "DU.Y" : ["DU.W"],
+   "EC.A" : ["WC.A", "EC.W", "WC.W", "CW.Y"],
+   "EC.W" : ["EC.A", "WC.A", "WC.W", "WC.Y", "CW.Y"],
+   "EH.A" : ["EH.W", "HT.Y"],
+   "EH.W" : ["EH.A", "HT.Y"],
+   "FA.W" : [],
+   "FA.Y" : [],
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    "FF.W" : [],
    "FG.Y" : [],
    "FL.A" : [],
@@ -104,6 +140,7 @@ HazardsConflictDict = {
    "FZ.A" : ["FZ.W", "FR.Y", "HZ.W", "HZ.A"],
    "FZ.W" : ["FZ.A", "FR.Y", "HZ.W", "HZ.A"],
    "GL.A" : ["SR.W", "HF.W", "BW.Y", "TR.A", "TR.W", "HU.A", "HU.W",
+<<<<<<< HEAD
              "SC.Y", "SW.Y", "SE.W", "RB.Y", "SI.Y", "GL.W", "SR.A",
              "HF.A", "SE.A", "TY.A", "TY.W"],
    "GL.W" : ["SR.W", "HF.W", "BW.Y", "TR.W", "HU.W",
@@ -115,12 +152,27 @@ HazardsConflictDict = {
              "SC.Y", "SW.Y", "SE.W", "RB.Y", "SI.Y", "GL.A", "SR.A",
              "HF.A", "SE.A", "TY.W"],
    "HT.Y" : ["EH.A", "EH.W"],
+=======
+             "SC.Y", "SE.W", "GL.W", "SR.A", "HF.A", "SE.A", "TY.A",
+             "TY.W"],
+   "GL.W" : ["SR.W", "HF.W", "BW.Y", "TR.W", "HU.W", "SC.Y", "SE.W",
+             "GL.A", "SR.A", "SE.A", "TY.W"],
+   "HF.A" : ["BW.Y", "TR.A", "TR.W", "HU.A", "HU.W", "GL.A", "SR.A",
+             "HF.W", "SE.A", "TY.A", "TY.W"],
+   "HF.W" : ["GL.W", "SR.W", "BW.Y", "TR.A", "TR.W", "HU.A", "HU.W",
+             "SC.Y", "SE.W", "GL.A", "SR.A", "HF.A", "SE.A", "TY.W"],
+   "HT.Y" : ["EH.A", "EH.W", "XH.A", "XH.W"],
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    "HU.A" : ["HF.W", "BW.Y", "TR.A", "HU.W", "HU.S",
              "GL.A", "SR.A", "HF.A", "SE.A"],
    "HU.S" : ["TR.A", "TR.W", "HU.A", "HU.W", "TY.A", "TY.W"],
    "HU.W" : ["GL.W", "SR.W", "HF.W", "BW.Y", "TR.A", "TR.W", "HU.A", "SC.Y",
+<<<<<<< HEAD
              "SW.Y", "SE.W", "RB.Y", "SI.Y", "GL.A", "SR.A", "HF.A", "SE.A",
              "HU.S"],
+=======
+             "SE.W", "GL.A", "SR.A", "HF.A", "SE.A", "HU.S"],
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    "HW.A" : ["HW.W", "WI.Y"],
    "HW.W" : ["HW.A", "LW.Y", "WI.Y"],
    "HZ.A" : ["FZ.W", "FR.Y", "FZ.A", "HZ.W"],
@@ -139,12 +191,16 @@ HazardsConflictDict = {
    "MH.W" : ["MH.Y"],
    "MH.Y" : ["MH.W"],
    "MS.Y" : [],
+<<<<<<< HEAD
    "RB.Y" : ["GL.W", "SR.W", "HF.W", "BW.Y", "TR.W", "HU.W",
              "SE.W", "GL.A", "SR.A", "SE.A", "TY.W"],
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    "RP.S" : [],
    "SC.Y" : ["GL.W", "SR.W", "SR.A", "BW.Y", "TR.W", "HU.W",
              "SE.W", "SE.A", "HF.W", "GL.A", "TY.W"],
    "SE.A" : ["SR.W", "HF.W", "HF.A", "BW.Y", "TR.A", "TR.W", "HU.A", "HU.W",
+<<<<<<< HEAD
              "SC.Y", "SW.Y", "RB.Y", "SI.Y", "GL.A", "GL.W", "SE.W", "SR.A",
              "TY.A", "TY.W"],
    "SE.W" : ["SR.W", "HF.W", "BW.Y", "TR.W", "HU.W", "TY.W",
@@ -156,12 +212,23 @@ HazardsConflictDict = {
              "RB.Y", "SC.Y", "SE.A", "SE.W", "SI.Y", "SR.W", "SW.Y", "TY.W", "TY.A"],
    "SR.W" : ["GL.W", "HF.W", "BW.Y", "TR.W", "HU.W", "TY.W",
              "SC.Y", "SW.Y", "SE.W", "SE.A", "RB.Y", "SI.Y", "GL.A", "SR.A"],
+=======
+             "SC.Y", "GL.A", "GL.W", "SE.W", "SR.A", "TY.A", "TY.W"],
+   "SE.W" : ["SR.W", "HF.W", "BW.Y", "TR.W", "HU.W", "TY.W",
+             "SC.Y", "GL.A", "GL.W", "SE.A", "SR.A"],
+   "SM.Y" : [],
+   "SR.A" : ["GL.A", "GL.W", "HF.A", "HF.W", "HU.W", "HU.A", "TR.W", "TR.A",
+             "SC.Y", "SE.A", "SE.W", "SR.W", "TY.W", "TY.A"],
+   "SR.W" : ["GL.W", "HF.W", "BW.Y", "TR.W", "HU.W", "TY.W",
+             "SC.Y", "SE.W", "SE.A", "GL.A", "SR.A"],
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    "SS.A" : ["CF.A", "CF.W", "CF.Y", "SS.W"],
    "SS.W" : ["CF.A", "CF.W", "CF.Y", "SS.A"],
    "SU.W" : ["SU.Y"],
    "SU.Y" : ["SU.W"],
    "SV.A" : ["TO.A"],
    "SV.W" : [],
+<<<<<<< HEAD
    "SW.Y" : ["GL.W", "SR.W", "HF.W", "BW.Y", "TR.W", "HU.W", "TY.W",
              "SE.W", "GL.A", "SR.A", "SE.A"],
    "TO.A" : ["SV.A"],
@@ -171,21 +238,42 @@ HazardsConflictDict = {
    "TR.W" : ["GL.W", "SR.W", "HF.W", "BW.Y", "TR.A", "HU.W", "HU.S",
              "SC.Y", "SW.Y", "SE.W", "RB.Y", "SI.Y", "TY.W",
              "GL.A", "SR.A", "HF.A", "SE.A"],
+=======
+   "TO.A" : ["SV.A"],
+   "TO.W" : [],
+   "TR.A" : ["HF.W", "TR.W", "HU.A", "HU.S", "HU.W", "TY.A", "TY.W",
+             "GL.A", "SR.A", "HF.A", "SE.A"],
+   "TR.W" : ["GL.W", "SR.W", "HF.W", "BW.Y", "TR.A", "HU.W", "HU.S",
+             "SC.Y", "SE.W", "TY.W", "GL.A", "SR.A", "HF.A", "SE.A"],
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    "TS.A" : ["TS.W", "TS.Y"],
    "TS.W" : ["TS.A", "TS.Y"],
    "TS.Y" : ["TS.A", "TS.W"],
    "TY.A" : ["TR.A", "TY.W", "HU.S", "HF.W", "GL.A", "SR.A", "HF.A", "SE.A"],
    "TY.W" : ["TY.A", "HU.S", "TR.A", "TR.W", "GL.A", "SR.A", "HF.A", "SE.A"
+<<<<<<< HEAD
              "GL.W", "SR.W", "HF.W", "BW.Y","SC.Y", "SW.Y", "SE.W", "RB.Y", "SI.Y"],
+=======
+             "GL.W", "SR.W", "HF.W", "BW.Y", "SC.Y", "SE.W",],
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    "UP.W" : ["TR.A", "TR.W", "HU.A", "HU.S", "HU.W", "UP.Y"],
    "UP.Y" : ["TR.A", "TR.W", "HU.A", "HU.S", "HU.W", "UP.W"],
    "WC.A" : ["WC.Y", "WC.W"],
    "WC.W" : ["WC.A", "WC.Y"],
+<<<<<<< HEAD
    "WC.Y" : ["WC.A","WC.W"],
+=======
+   "WC.Y" : ["WC.A", "WC.W"],
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    "WI.Y" : ["HW.A", "HW.W", "LW.Y"],
    "WS.A" : ["BZ.W", "IS.W", "WS.W", "LE.W", "WW.Y"],
    "WS.W" : ["WS.A", "BZ.W", "IS.W", "LE.W", "WW.Y"],
    "WW.Y" : ["WS.A", "BZ.W", "IS.W", "WS.W", "LE.W"],
+<<<<<<< HEAD
+=======
+   "XH.A" : ["XH.W", "HT.Y"],
+   "XH.W" : ["XH.A", "HT.Y"],
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    "ZF.Y" : [],
    }
 
@@ -227,7 +315,11 @@ class Procedure(SmartScript.SmartScript):
     # Unload (delete) all the temporary hazards
     def removeTempHazards(self):
         parms = self.loadedParms()
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         toRemovePairs = []
         for weName, level, dbID in parms:
             if weName.startswith("haz"):
@@ -280,7 +372,11 @@ class Procedure(SmartScript.SmartScript):
     # @param timeRange: The time range to check for overlap with
     # @type timeRange: Python TimeRange
     # @return: Byte grids and keys of the overlapping parms
+<<<<<<< HEAD
     # @rtype: 2-tuple: list of byte arrays, list of list of strings   
+=======
+    # @rtype: 2-tuple: list of byte arrays, list of list of strings
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def getOverlappingHazGrids(self, hazParms, timeRange):
         byteGridList = []
         keyList = []
@@ -328,12 +424,20 @@ class Procedure(SmartScript.SmartScript):
     def conflictingHazards(self, hazGrid1, hazGrid2):
         byteGrid1, hazKey1 = hazGrid1
         byteGrid2, hazKey2 = hazGrid2
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         key1 = self.getHazardKey(hazKey1)
         key2 = self.getHazardKey(hazKey2)
         phenSig1 = key1[0:4]   # remove the etn
         phenSig2 = key2[0:4]
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         keyConflict = False
         if phenSig1 == phenSig2 and key1 != key2:
             keyConflict = True
@@ -348,9 +452,15 @@ class Procedure(SmartScript.SmartScript):
             overlapMask = numpy.greater(totalGrid, 1)
             if numpy.any(overlapMask):
                 return [key1, key2]
+<<<<<<< HEAD
         
         return []
         
+=======
+
+        return []
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     ##
     # See if there are any temporary hazards for the same position and time
     # that conflict with one another.
@@ -389,12 +499,20 @@ class Procedure(SmartScript.SmartScript):
 
         # if we made it to here, all is well
         return None
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     ##
     # Perform checks to see if it's OK to merge hazards. If there are no conflicting
     # locks or incompatible hazards, do the merge. If there are conflicting locks,
     # generate a status bar message and quit. If there incompatible
+<<<<<<< HEAD
     # hazards, show a warning and let the user decide whether to continue. 
+=======
+    # hazards, show a warning and let the user decide whether to continue.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def checkForMerge(self):
         # get the hazards selected by the forecaster
         hazParms = self.getHazardParmNames()
@@ -470,7 +588,11 @@ class Procedure(SmartScript.SmartScript):
                           subKey + "\n")
 
         self.removeTempHazards()
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return
 
     ##

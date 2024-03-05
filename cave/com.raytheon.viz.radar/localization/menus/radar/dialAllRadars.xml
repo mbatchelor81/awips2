@@ -133,7 +133,11 @@
     <contribute xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:type="subMenu" menuText="kcrp-kdtx">
         <contribute xsi:type="subinclude"
+<<<<<<< HEAD
             fileName="menus/radar/dualPol/baseLocalRadarMenu.xml">
+=======
+            fileName="menus/radar/kcrp/baseLocalRadarMenu.xml">
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute value="kcrp" key="icao" />
         </contribute>
         <contribute xsi:type="subinclude"
@@ -302,6 +306,13 @@
             <substitute value="kgyx" key="icao" />
         </contribute>
         <contribute xsi:type="subinclude"
+<<<<<<< HEAD
+=======
+            fileName="menus/radar/khdc/baseLocalRadarMenu.xml">
+            <substitute value="khdc" key="icao" />
+        </contribute>
+        <contribute xsi:type="subinclude"
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             fileName="menus/radar/dualPol/baseLocalRadarMenu.xml">
             <substitute value="khdx" key="icao" />
         </contribute>
@@ -514,7 +525,11 @@
             <substitute value="kotx" key="icao" />
         </contribute>
         <contribute xsi:type="subinclude"
+<<<<<<< HEAD
             fileName="menus/radar/dualPol/baseLocalRadarMenu.xml">
+=======
+            fileName="menus/radar/kpah/baseLocalRadarMenu.xml">
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute value="kpah" key="icao" />
         </contribute>
         <contribute xsi:type="subinclude"
@@ -522,7 +537,11 @@
             <substitute value="kpbz" key="icao" />
         </contribute>
         <contribute xsi:type="subinclude"
+<<<<<<< HEAD
             fileName="menus/radar/dualPol/baseLocalRadarMenu.xml">
+=======
+            fileName="menus/radar/kpdt/baseLocalRadarMenu.xml">
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute value="kpdt" key="icao" />
         </contribute>
         <contribute xsi:type="subinclude"
@@ -561,7 +580,11 @@
             <substitute value="ksfx" key="icao" />
         </contribute>
         <contribute xsi:type="subinclude"
+<<<<<<< HEAD
             fileName="menus/radar/dualPol/baseLocalRadarMenu.xml">
+=======
+            fileName="menus/radar/ksgf/baseLocalRadarMenu.xml">
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute value="ksgf" key="icao" />
         </contribute>
         <contribute xsi:type="subinclude"

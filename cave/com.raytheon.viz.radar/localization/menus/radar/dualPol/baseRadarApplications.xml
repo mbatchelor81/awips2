@@ -34,7 +34,11 @@
         menuText="4-D Storm Investigator (FSI)" id="${icao}4DStormInvestigatorFSI" />
     <contribute xsi:type="command"
         commandId="com.raytheon.uf.viz.radarapps.ccm.ccmRequest"
+<<<<<<< HEAD
         menuText="VCP Change Request..." id="${icao}CcmRequest" />
+=======
+        menuText="VCP/VMI Change Request..." id="${icao}CcmRequest" />
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <contribute xsi:type="command"
         commandId="com.raytheon.uf.viz.radarapps.otr.oneTimeRequest"
         menuText="One Time Request..." id="${icao}OneTimeRequest" />
@@ -53,4 +57,8 @@
     <contribute xsi:type="command"
         commandId="com.raytheon.viz.awipstools.vrshear" menuText="VR - Shear"
         id="${icao}VRShear" />
+<<<<<<< HEAD
 </menuTemplate>
+=======
+</menuTemplate>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

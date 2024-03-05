@@ -24,11 +24,19 @@
 # May  6, 2020 21682      tlefebvr    Code clean-up.
 # May  6, 2020 21682      tlefebvr    Addressed code review comments.
 # June 3, 2020 21682      tlefebvr    Addressed code review comments.
+<<<<<<< HEAD
+=======
+# Feb 10, 2021 21682      tlefebvre   Add optioin in zoneMap to restrict to mask.
+# Feb 11, 2021 21682      tlefebvre   Fixed bugs realated to above change.
+# Feb 16, 2021 21682      tlefebvre   Comparing eaName to list to aviod error messages.
+# Jul.29  2021 22531      tlefebvr    Final code clean-up before check-in.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 ##################################################################################
 
 import SmartScript
 import numpy as np
+<<<<<<< HEAD
 
 class ZoneMap(SmartScript.SmartScript):
     def __init__(self, dbss):
@@ -45,6 +53,34 @@ class ZoneMap(SmartScript.SmartScript):
         self._objectCategory = "ZoneMap"
         self._coastalMask = None  # initialize before defining
         self._coastalMask = self.coastalZonesMask()
+=======
+import WindWWUtils
+
+
+class ZoneMap(SmartScript.SmartScript):
+
+    def __init__(self, dbss, wfoMask=None):
+        """
+        Define some constants and make the coastal mask used to determine the zone type.
+        If wfoMask is not None, the map will be restricted to the specified mask.
+        """
+        SmartScript.SmartScript.__init__(self, dbss)
+
+        # Make the utility object
+        self._WindWWUtils = WindWWUtils.WindWWUtils(dbss)
+
+        # List of valid state IDs.
+        self._stateIDList = ['No State', 'SC', 'NC', 'NJ', 'TX', 'MD', 'VA', 'MA', 'RI', 'LA', 'ME',
+                             'GA', 'MS', 'FL', 'AL', 'OK', 'DE', 'NY', 'CT', 'NH', 'AR', 'WV', 'PA',
+                             'TN', 'MO', 'PR', 'VI', 'CA', 'HI', 'VT']
+        siteID = self.getSiteID()
+        self._zoneMapName = "NHCZoneMap" + siteID
+        self._objectCategory = "ZoneMap"
+
+        self._wfoMask = wfoMask
+        self._NHCZoneMask = None  # initialize before defining
+        self._NHCZoneMask = self.fetchNHCZonesMask()
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         self.getZoneMap()
 
     def getZoneMap(self):
@@ -57,6 +93,7 @@ class ZoneMap(SmartScript.SmartScript):
         try:
             self._zoneMap = self.getObject(self._zoneMapName, self._objectCategory)
         except:
+<<<<<<< HEAD
             self._zoneMap = self.makeAndStoreCoastalZoneMap() # stored for later use
             
     def nhcMask(self):
@@ -94,6 +131,27 @@ class ZoneMap(SmartScript.SmartScript):
             self.saveEditArea(eaName, ea)
             self.statusBarMsg(eaName + " was created from the zone list and must be saved under SITE!", "U")
         return self._coastalMask
+=======
+            self._zoneMap = self.makeAndStoreCoastalZoneMap()  # stored for later use
+
+    def fetchNHCZonesMask(self):
+        """
+        Fetch and/or create and store an edit area that represents the set of zones
+        that are the responsibility of NHC. If the edit area is not found, create
+        and store it for faster performance next time.
+        """
+        if self._NHCZoneMask is not None:
+            return self._NHCZoneMask
+        nhcEA = self._WindWWUtils.fetchNHCZonesEditArea()
+        nhcZoneMask = self.encodeEditArea(nhcEA)
+        return nhcZoneMask
+
+    def nhcMask(self):
+        """
+        Returns the mask corresponding to the national center area of responsibility
+        """
+        return (self._zoneMap > 0.0) & (self._zoneMap <= 100.0)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def makeAndStoreCoastalZoneMap(self):
         """
@@ -120,6 +178,7 @@ class ZoneMap(SmartScript.SmartScript):
         """
         Returns the entire list of editAreas configured for the system matching
         the pattern STZNNN, where ST is the stateID, Z is literal, NNN is the
+<<<<<<< HEAD
         zone number. This filters out all but public zones.
         """
         zoneList = []
@@ -127,6 +186,25 @@ class ZoneMap(SmartScript.SmartScript):
         for ea in eaList:
             if len(ea) == 6 and ea[0:2] in self._stateIDList and ea[2] == "Z":
                 zoneList.append(ea)
+=======
+        zone number. If specified, the zoneList will be trimmed to those that
+        overlap the mask.
+        """
+        zoneList = []
+        # If mask is None, make a mask of all True (no restrictions)
+
+        if self._wfoMask is None:
+            self._wfoMask = self.newGrid(True, np.bool)
+
+        eaList = self.editAreaList()
+        for ea in eaList:
+            if len(ea) == 6 and ea[0:2] in self._stateIDList and ea[2] == "Z":
+                eaMask = self.encodeEditArea(ea)
+                # Append if the mask lies completely within the wfoMask
+#                 if (self._wfoMask & eaMask) == eaMask:
+                if np.array_equal((self._wfoMask & eaMask), eaMask):
+                    zoneList.append(ea)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return zoneList
 
     def zoneName(self, zoneID):
@@ -135,13 +213,22 @@ class ZoneMap(SmartScript.SmartScript):
         """
         stateIndex = int(zoneID)
         zoneNum = (zoneID - stateIndex) * 1000
+<<<<<<< HEAD
         zoneNum = int(self.round(zoneNum, "Nearest", 1))
         
+=======
+        zoneNum = int(round(zoneNum))
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if stateIndex >= 100:
             stateIndex = stateIndex - 100
 
         zoneName = self._stateIDList[stateIndex] + "Z" + str(zoneNum).zfill(3)
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return zoneName
 
     def zoneID(self, zoneName, zoneMask=None):
@@ -167,7 +254,11 @@ class ZoneMap(SmartScript.SmartScript):
             return None
 
         stateIndex = self._stateIDList.index(stateID)
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if self.isACoastalZone(zoneMask):
             zoneID = stateIndex + (zoneNum / 1000.0)
         else:
@@ -179,7 +270,11 @@ class ZoneMap(SmartScript.SmartScript):
         """
         Returns True if the zone is a Coastal zone and False otherwise.
         """
+<<<<<<< HEAD
         overlap = zoneMask & self._coastalMask
+=======
+        overlap = zoneMask & self._NHCZoneMask
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         return overlap.any()
 
@@ -195,7 +290,11 @@ class ZoneMap(SmartScript.SmartScript):
         Returns a list of zoneNames that overlap the specified mask
         """
         whereArray = np.extract(mask, self._zoneMap)
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         uniqueList = np.unique(whereArray).tolist()
         zoneList = []
         for zoneID in uniqueList:
@@ -231,5 +330,10 @@ class ZoneMap(SmartScript.SmartScript):
             if zoneID is None:
                 continue
             mask = mask | (self._zoneMap == zoneID)
+<<<<<<< HEAD
         return mask
 
+=======
+
+        return mask
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

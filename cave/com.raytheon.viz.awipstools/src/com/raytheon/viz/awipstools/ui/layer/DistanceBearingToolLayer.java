@@ -61,7 +61,11 @@ import com.raytheon.viz.ui.cmenu.IContextMenuContributor;
 
 import si.uom.SI;
 import systems.uom.common.USCustomary;
+<<<<<<< HEAD
 import tec.uom.se.unit.MetricPrefix;
+=======
+import javax.measure.MetricPrefix;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Implements the distance bearing functionality.
@@ -105,6 +109,11 @@ import tec.uom.se.unit.MetricPrefix;
  *                                  This change now covers both 7757 and 7762.
  * Feb 12, 2020  8032     randerso  Fix merge error causing values to always be
  *                                  in statute miles.
+<<<<<<< HEAD
+=======
+ * Sep 13, 2022  8792     mapeters  Only handle input events in the pane this
+ *                                  layer is in
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -214,8 +223,12 @@ public class DistanceBearingToolLayer
         if (isEditable()) {
             DrawableCircle circle0 = new DrawableCircle();
             DrawableCircle circle1 = new DrawableCircle();
+<<<<<<< HEAD
             DrawableCircle[] circles = new DrawableCircle[] { circle0,
                     circle1 };
+=======
+            DrawableCircle[] circles = { circle0, circle1 };
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             for (int i = 0; i <= 1; i++) {
                 double[] center = descriptor
                         .worldToPixel(new double[] { ends[i].x, ends[i].y });
@@ -272,6 +285,7 @@ public class DistanceBearingToolLayer
                     "Invalid Distance Scale Unit: " + distanceScaleUnit);
         }
 
+<<<<<<< HEAD
         String rangeAndAzimuth = "0mi@0";
 
         double azimuth = 000;
@@ -280,6 +294,12 @@ public class DistanceBearingToolLayer
         gc.setDestinationGeographicPoint(line.p0.x, line.p0.y);
 
         azimuth = gc.getAzimuth();
+=======
+        gc.setStartingGeographicPoint(line.p1.x, line.p1.y);
+        gc.setDestinationGeographicPoint(line.p0.x, line.p0.y);
+
+        double azimuth = gc.getAzimuth();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         if (azimuth < 0) {
             azimuth = 360 + azimuth;
@@ -294,7 +314,11 @@ public class DistanceBearingToolLayer
             s = "00" + s;
         }
 
+<<<<<<< HEAD
         rangeAndAzimuth = (int) conv.convert(gc.getOrthodromicDistance())
+=======
+        String rangeAndAzimuth = (int) conv.convert(gc.getOrthodromicDistance())
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 + displayUnit.toString() + "@" + s;
 
         return rangeAndAzimuth;
@@ -307,7 +331,11 @@ public class DistanceBearingToolLayer
 
     @Override
     public void addContextMenuItems(IMenuManager menuManager, int x, int y) {
+<<<<<<< HEAD
         if (isEditable() && selectedObject != null) {
+=======
+        if (isInteractive() && selectedObject != null) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             menuManager.add(deleteElementAction);
             menuManager.add(moveElementAction);
             if (selectedVertex != null) {

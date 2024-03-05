@@ -36,7 +36,11 @@ import com.raytheon.uf.viz.core.rsc.interrogation.Interrogator;
 import com.raytheon.uf.viz.core.rsc.interrogation.StringInterrogationKey;
 
 import si.uom.SI;
+<<<<<<< HEAD
 import tec.uom.se.AbstractConverter;
+=======
+import tech.units.indriya.function.AbstractConverter;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Interrogator for Velocity Radar products.

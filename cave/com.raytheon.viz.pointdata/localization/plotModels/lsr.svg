@@ -25,7 +25,11 @@
         of the file.
     -->
 <?xml-stylesheet type="text/css" href="plots.css"?>
+<<<<<<< HEAD
 <svg width="80" height="80" viewBox="0 0 80 80" overflow="visible"
+=======
+<svg width="150" height="150" viewBox="0 0 150 150" overflow="visible"
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
     style="stroke: rgb(255,255,255);">
     <defs>
@@ -53,6 +57,10 @@
                 style="text-anchor: end" x="-5" y="0">0</text>
         </symbol>
     </defs>
+<<<<<<< HEAD
     <use id="wind" x="40" y="40" width="80" height="80" visibility="visible"
+=======
+    <use id="wind" x="75" y="75" width="150" height="150" visibility="visible"
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         xlink:href="#plotData" />
 </svg>

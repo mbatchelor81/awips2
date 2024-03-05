@@ -38,7 +38,17 @@ import com.raytheon.uf.common.dataplugin.gfe.request.GetIscSendStatusRequest.Isc
 import com.raytheon.uf.common.dataplugin.gfe.request.IscRequestQueryRequest.IscQueryResponse;
 import com.raytheon.uf.common.dataplugin.gfe.server.message.ServerResponse;
 import com.raytheon.uf.common.gfe.ifpclient.IFPClient;
+<<<<<<< HEAD
 import com.raytheon.uf.common.message.WsId;
+=======
+import com.raytheon.uf.common.jms.notification.ConnectionAdapter;
+import com.raytheon.uf.common.jms.notification.IConnectionObserver;
+import com.raytheon.uf.common.jms.notification.INotificationObserver;
+import com.raytheon.uf.common.jms.notification.NotificationException;
+import com.raytheon.uf.common.jms.notification.NotificationMessage;
+import com.raytheon.uf.common.message.WsId;
+import com.raytheon.uf.common.site.notify.SiteActivationNotification;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
 import com.raytheon.uf.common.status.UFStatus.Priority;
@@ -122,6 +132,10 @@ import com.raytheon.viz.ui.simulatedtime.SimulatedTimeProhibitedOpException;
  *                                        doesn't close with jobs still running
  *                                        in the background
  * Feb 18, 2020  74905       tjensen      Added constructor that takes a siteID
+<<<<<<< HEAD
+=======
+ * Mar 25, 2021  8380        mapeters     Handle QPID reconnects and site activation changes
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -133,6 +147,13 @@ public class DataManager implements ISimulatedTimeChangeListener {
     private static final IUFStatusHandler statusHandler = UFStatus
             .getHandler(DataManager.class);
 
+<<<<<<< HEAD
+=======
+    private static final String EDEX_ALERTS_TOPIC = "edex.alerts.gfe";
+
+    private static final String SITE_ACTIVATION_TOPIC = "edex.alerts.siteActivate";
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /**
      * Use {@link DataManagerUIFactory#getCurrentInstance()}
      */
@@ -169,6 +190,13 @@ public class DataManager implements ISimulatedTimeChangeListener {
 
     private final NotificationRouter router;
 
+<<<<<<< HEAD
+=======
+    private final IConnectionObserver connectObserver;
+
+    private final INotificationObserver siteActivationObserver;
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private final ITopoManager topoManager;
 
     private IGridManager gridManager;
@@ -257,7 +285,11 @@ public class DataManager implements ISimulatedTimeChangeListener {
                 discriminator);
         this.client = new IFPClient(VizApp.getWsId(), siteID);
         this.router = new NotificationRouter(this.getSiteID());
+<<<<<<< HEAD
         NotificationManagerJob.addObserver("edex.alerts.gfe", this.router);
+=======
+        NotificationManagerJob.addObserver(EDEX_ALERTS_TOPIC, this.router);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         this.parmManager = new ParmManager(this);
         GFEParmCacheInitJob cacheJob = new GFEParmCacheInitJob(this);
@@ -335,6 +367,53 @@ public class DataManager implements ISimulatedTimeChangeListener {
             SimulatedTime.getSystemTime().addSimulatedTimeChangeListener(this);
         }
         this.previousIscSendState = clientISCSendStatus();
+<<<<<<< HEAD
+=======
+
+        this.connectObserver = new ConnectionAdapter() {
+
+            @Override
+            public void onConnect() {
+                if (getClient().isIFPServerActive()) {
+                    parmManager.refreshCaches();
+                } else {
+                    statusHandler.info(
+                            "Unable to refresh GFE data upon QPID reconnection due to inactive IFP server, data will be refreshed upon activation");
+                }
+            }
+        };
+        NotificationManagerJob.addConnectionObserver(connectObserver);
+
+        this.siteActivationObserver = new INotificationObserver() {
+
+            @Override
+            public void notificationArrived(NotificationMessage[] messages) {
+                for (NotificationMessage message : messages) {
+                    Object payload;
+                    try {
+                        payload = message.getMessagePayload();
+                    } catch (NotificationException e) {
+                        statusHandler.error(
+                                "Error unmarshalling notification message payload: "
+                                        + message,
+                                e);
+                        continue;
+                    }
+                    if (!(payload instanceof SiteActivationNotification)) {
+                        continue;
+                    }
+                    SiteActivationNotification notification = (SiteActivationNotification) payload;
+                    if (notification.isSuccess() || notification.isFailure()) {
+                        statusHandler.info(notification.toString());
+                    }
+
+                    parmManager.handleSiteActivationNotification(notification);
+                }
+            }
+        };
+        NotificationManagerJob.addObserver(SITE_ACTIVATION_TOPIC,
+                siteActivationObserver);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
@@ -383,7 +462,14 @@ public class DataManager implements ISimulatedTimeChangeListener {
                     .removeSimulatedTimeChangeListener(this);
         }
 
+<<<<<<< HEAD
         NotificationManagerJob.removeObserver("edex.alerts.gfe", router);
+=======
+        NotificationManagerJob.removeObserver(EDEX_ALERTS_TOPIC, router);
+        NotificationManagerJob.removeObserver(SITE_ACTIVATION_TOPIC,
+                siteActivationObserver);
+        NotificationManagerJob.removeConnectionObserver(connectObserver);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
@@ -618,7 +704,12 @@ public class DataManager implements ISimulatedTimeChangeListener {
      */
     public List<ActiveTableRecord> getActiveTable() {
         ActiveTableMode tableName = (CAVEMode.getMode() == CAVEMode.PRACTICE)
+<<<<<<< HEAD
                 ? ActiveTableMode.PRACTICE : ActiveTableMode.OPERATIONAL;
+=======
+                ? ActiveTableMode.PRACTICE
+                : ActiveTableMode.OPERATIONAL;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         ServerResponse<List<ActiveTableRecord>> sr = getClient()
                 .getVTECActiveTable(tableName);
         if (!sr.isOkay()) {

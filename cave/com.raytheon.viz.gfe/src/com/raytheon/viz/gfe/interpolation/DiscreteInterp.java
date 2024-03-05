@@ -128,6 +128,11 @@ import com.raytheon.viz.gfe.Activator;
  * Oct 31, 2013  2508     randerso  Change to use DiscreteGridSlice.getKeys()
  * Apr 04, 2016  5539     randerso  Fix unsigned byte issues
  * Feb 23, 2018  7178     randerso  Code cleanup.
+<<<<<<< HEAD
+=======
+ * May 15, 2023  2033890  dhaines   Changed unsigned integer handling to be 
+ *                                  more clear 
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -492,7 +497,11 @@ public class DiscreteInterp extends Interp {
         for (i = 0; i < _xDim; i++) {
             for (j = 0; j < _yDim; j++) {
                 // get the index value from the actual first input grid of bytes
+<<<<<<< HEAD
                 index = 0xFF & grid1.get(i, j);
+=======
+                index = Byte.toUnsignedInt(grid1.get(i, j));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                 // Can save a lot of processing here if index=0
                 // ALWAYS means "no weather": the workGrid1 and 2 values
@@ -512,7 +521,11 @@ public class DiscreteInterp extends Interp {
 
                 // get the index value from the actual second input grid of
                 // bytes
+<<<<<<< HEAD
                 index = 0xFF & grid2.get(i, j);
+=======
+                index = Byte.toUnsignedInt(grid2.get(i, j));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 // get its key
                 key = keys2[index];
                 // find this key in the new list, and save the corresponding

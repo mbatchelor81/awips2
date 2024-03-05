@@ -30,6 +30,7 @@
                 <substitute key="elevation" value="-0.4---0.4" />
             </contribute>
             <contribute xsi:type="bundleItem" file="bundles/DefaultRadarGraphic.xml"
+<<<<<<< HEAD
                 menuText="0.0 ML" id="${icao}00MeltingLayer">
                 <substitute key="icao" value="${icao}" />
                 <substitute key="product" value="166" />
@@ -38,6 +39,8 @@
                 <substitute key="elevation" value="0.0--0.0" />
             </contribute>
             <contribute xsi:type="bundleItem" file="bundles/DefaultRadarGraphic.xml"
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 menuText="0.5 ML" id="${icao}05MeltingLayer">
                 <substitute key="icao" value="${icao}" />
                 <substitute key="product" value="166" />

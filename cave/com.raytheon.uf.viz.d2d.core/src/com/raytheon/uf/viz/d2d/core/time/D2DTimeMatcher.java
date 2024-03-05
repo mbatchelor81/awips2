@@ -1,19 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
- * 
+ *
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
- * 
+ *
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
- * 
+ *
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -28,12 +28,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -69,11 +71,11 @@ import com.raytheon.uf.viz.d2d.core.D2DLoadProperties;
 
 /**
  * Performs D2D-style time matching
- * 
+ *
  * <pre>
- * 
+ *
  * SOFTWARE HISTORY
- * 
+ *
  * Date          Ticket#  Engineer   Description
  * ------------- -------- ---------- -------------------------------------------
  * Feb 10, 2009  1959     chammack   Initial creation
@@ -96,9 +98,13 @@ import com.raytheon.uf.viz.d2d.core.D2DLoadProperties;
  * Jan 04, 2018  6753     bsteffen   Check for existing basis first when finding basis.
  * Feb 13, 2018  6664     bsteffen   Track "sticky" load mode.
  * Jul 30, 2018  7259     bsteffen   Use clockDelta to set clock.
- * 
+ * Oct 29, 2022  8959     mapeters   Freeze non-basis resources at their current level.
+ * Nov 14, 2022  8971     mapeters   Prevent deadlock introduced under 8959.
+ * Dec 04, 2023  2036544  mapeters   Fix time match basis determination in
+ *                                   updateAndApplyFrozenLevels()
+ *
  * </pre>
- * 
+ *
  * @author chammack
  */
 @XmlAccessorType(XmlAccessType.NONE)
@@ -126,6 +132,10 @@ public class D2DTimeMatcher extends AbstractTimeMatcher {
         /** The number of frames time matched against */
         private int lastFrameCount;
 
+        private String levelType;
+
+        private boolean multipleLevels;
+
         public DataTime[] getLastBaseTimes() {
             return lastBaseTimes;
         }
@@ -136,6 +146,19 @@ public class D2DTimeMatcher extends AbstractTimeMatcher {
 
         public int getLastFrameCount() {
             return lastFrameCount;
+        }
+
+        public String getLevelType() {
+            return levelType;
+        }
+
+        public boolean hasMultipleLevels() {
+            return multipleLevels;
+        }
+
+        public void setLevelInfo(String levelType, boolean multipleLevels) {
+            this.levelType = levelType;
+            this.multipleLevels = multipleLevels;
         }
 
         public void setTimes(DataTime[] baseTimes, DataTime[] frameTimes) {
@@ -162,14 +185,8 @@ public class D2DTimeMatcher extends AbstractTimeMatcher {
      */
     protected final AtomicReference<AbstractVizResource<?, ?>> timeMatchBasisRef = new AtomicReference<>();
 
-    private final IDisposeListener timeMatchBasisDisposeListener = new IDisposeListener() {
-
-        @Override
-        public void disposed(AbstractVizResource<?, ?> resource) {
-            timeMatchBasisRef.compareAndSet(resource, null);
-        }
-
-    };
+    private final IDisposeListener timeMatchBasisDisposeListener = resource -> timeMatchBasisRef
+            .compareAndSet(resource, null);
 
     /** A clock time limit for loading data (optional) */
     @XmlAttribute
@@ -186,13 +203,29 @@ public class D2DTimeMatcher extends AbstractTimeMatcher {
     /** The load mode */
     @XmlAttribute
     protected LoadMode loadMode = (LoadMode) VizGlobalsManager
-            .getCurrentInstance().getPropery(VizConstants.LOADMODE_ID);
+            .getCurrentInstance().getProperty(VizConstants.LOADMODE_ID);
 
     protected LoadMode stickyLoadMode;
 
     private AbstractTimeMatchingConfigurationFactory configFactory;
 
     private final Map<AbstractVizResource<?, ?>, TimeCache> timeCacheMap = new IdentityHashMap<>();
+
+    /**
+     * Map of level type -> level value. This is used to keep spatial resources
+     * frozen at their current level when they are not the time match basis (and
+     * when switching the basis off of them) and have a different level type
+     * from the time match basis. For example, this makes it possible to display
+     * any tilt level of radar data next to any altitude level of radar data. A
+     * null value indicates that the time match basis uses that level type, so
+     * it is not frozen.
+     */
+    private final Map<String, Double> frozenLevels = new HashMap<>();
+
+    /**
+     * Lock object for frozenLevels and level values in {@link TimeCache}
+     */
+    private final Object levelLock = new Object();
 
     public D2DTimeMatcher() {
         super();
@@ -226,7 +259,7 @@ public class D2DTimeMatcher extends AbstractTimeMatcher {
     /**
      * Checks if a resource is contained in the {@link IResourceGroup}
      * recursively checking for {@link IResourceGroup}s in the group's list
-     * 
+     *
      */
     private boolean contained(IResourceGroup group,
             AbstractVizResource<?, ?> resource) {
@@ -312,7 +345,7 @@ public class D2DTimeMatcher extends AbstractTimeMatcher {
     /**
      * Recursively determine times for all resource, or if it is an
      * IResourceGroup then for all resources in it.
-     * 
+     *
      * @param descriptor
      *            the descriptor that is being updated
      * @param timeMatchBasis
@@ -356,10 +389,14 @@ public class D2DTimeMatcher extends AbstractTimeMatcher {
                             timeCache.getLastFrameTimes());
                 } else {
                     config = config.clone();
-                    if ((config.getDataTimes() == null)
-                            || (config.getDataTimes().length < 1)) {
-                        config.setDataTimes(getLatestTimes(rsc, timeSteps));
+
+                    DataTime[] times = config.getDataTimes();
+                    if (ArrayUtils.isEmpty(times)) {
+                        times = getLatestTimes(rsc, timeSteps);
                     }
+                    times = updateAndApplyFrozenLevels(rsc, times, false);
+                    config.setDataTimes(times);
+
                     populateConfiguration(config);
                     TimeMatcher tm = new TimeMatcher();
                     if (rsc instanceof ID2DTimeMatchingExtension) {
@@ -509,10 +546,10 @@ public class D2DTimeMatcher extends AbstractTimeMatcher {
      * Recursive operation to search for a resource that is able to be the time
      * match basis. Returns the resource and the matched times for that
      * resource. If no resources is able to be the timeMatchBasis then null is
-     * returned. This method does not actually change {@link #timeMatchBasisRef}
-     * .
+     * returned. This method does not actually change
+     * {@link #timeMatchBasisRef}.
      */
-    public Pair<AbstractVizResource<?, ?>, DataTime[]> findNewBasis(
+    private Pair<AbstractVizResource<?, ?>, DataTime[]> findNewBasis(
             ResourceList resourceList, int numberOfFrames) {
 
         /*
@@ -562,14 +599,16 @@ public class D2DTimeMatcher extends AbstractTimeMatcher {
             AbstractVizResource<?, ?> rsc) {
         TimeMatchingConfiguration config = getConfiguration(
                 rsc.getLoadProperties()).clone();
-        if ((config.getDataTimes() == null)
-                || (config.getDataTimes().length < 1)) {
-            config.setDataTimes(getLatestTimes(rsc, null));
-            if ((config.getDataTimes() == null)
-                    || (config.getDataTimes().length < 1)) {
-                return null;
-            }
+        DataTime[] times = config.getDataTimes();
+        if (ArrayUtils.isEmpty(times)) {
+            times = getLatestTimes(rsc, null);
         }
+        times = updateAndApplyFrozenLevels(rsc, times, true);
+        if (ArrayUtils.isEmpty(times)) {
+            return null;
+        }
+        config.setDataTimes(times);
+
         populateConfiguration(config);
         DataTime[] timeSteps = TimeMatcher.makeEmptyLoadList(
                 config.getDataTimes(), config.getClock(), numberOfFrames,
@@ -673,10 +712,10 @@ public class D2DTimeMatcher extends AbstractTimeMatcher {
 
     /**
      * Retrieves the latest times from a resource
-     * 
+     *
      * If the resource data is an {@link AbstractRequestableResourceData} then
      * this will query for the available times.
-     * 
+     *
      */
     protected DataTime[] getLatestTimes(AbstractVizResource<?, ?> rsc,
             DataTime[] timeSteps) {
@@ -690,8 +729,7 @@ public class D2DTimeMatcher extends AbstractTimeMatcher {
         if (resourceData instanceof AbstractRequestableResourceData) {
             AbstractRequestableResourceData req = (AbstractRequestableResourceData) resourceData;
             if (req.isRequeryNecessaryOnTimeMatch()
-                    || (rsc.getDataTimes() == null)
-                    || (rsc.getDataTimes().length == 0)) {
+                    || ArrayUtils.isEmpty(rsc.getDataTimes())) {
                 try {
                     availableTimes = req.getAvailableTimes();
                 } catch (VizException e) {
@@ -711,9 +749,117 @@ public class D2DTimeMatcher extends AbstractTimeMatcher {
     }
 
     /**
+     * Update the map of frozen levels for the given resource, and filter the
+     * given times by the frozen levels.
+     *
+     * @param rsc
+     *            the resource whose times we are working with
+     * @param availableTimes
+     *            the available times for the resource
+     * @param isBasis
+     *            true if the given resource is the time match basis, false
+     *            otherwise
+     * @return the filtered available times
+     */
+    private DataTime[] updateAndApplyFrozenLevels(AbstractVizResource<?, ?> rsc,
+            DataTime[] availableTimes, boolean isBasis) {
+
+        if (ArrayUtils.isEmpty(availableTimes)) {
+            return availableTimes;
+        }
+
+        TimeCache timeCache = getTimeCache(rsc);
+
+        /*
+         * Syncing is just to prevent this conflicting with handleRemove. This
+         * method can't run on multiple threads itself since it always runs
+         * within redoTimeMatching which syncs on "this".
+         */
+        synchronized (levelLock) {
+            String levelType = availableTimes[0].getLevelType();
+            boolean multipleLevelsAvailable = hasMultipleLevels(availableTimes);
+
+            // Cache the level info so we can use it in handleRemove()
+            timeCache.setLevelInfo(levelType, multipleLevelsAvailable);
+
+            if (isBasis) {
+                /*
+                 * Null value indicates basis, remove the previous basis from
+                 * the frozen levels.
+                 */
+                frozenLevels.values().remove(null);
+            }
+
+            if (levelType != null) {
+                if (isBasis) {
+                    /*
+                     * Use null mapping to prevent the basis level type from
+                     * being frozen
+                     */
+                    frozenLevels.put(levelType, null);
+                } else if (multipleLevelsAvailable
+                        && !frozenLevels.containsKey(levelType)) {
+                    /*
+                     * Freeze the resource at its current level, if it doesn't
+                     * already have a mapping (i.e. if it's not already frozen
+                     * and doesn't match the level type of the basis)
+                     */
+                    IDescriptor descriptor = rsc.getDescriptor();
+                    if (descriptor != null) {
+                        DataTime rscTime = descriptor.getTimeForResource(rsc);
+                        /*
+                         * isSpatial check specifically needed when enabling
+                         * Vertical Interaction for non-basis resource
+                         */
+                        if (rscTime != null && rscTime.isSpatial()) {
+                            frozenLevels.put(levelType,
+                                    rscTime.getLevelValue());
+                        }
+                    }
+                }
+
+                if (multipleLevelsAvailable) {
+                    /*
+                     * Filter the available times by the frozen level if
+                     * multi-level. A fixed level radar tilt should be
+                     * unaffected by whatever a radar all tilts is frozen to.
+                     */
+                    Double frozenLevel = frozenLevels.get(levelType);
+                    if (frozenLevel != null) {
+                        availableTimes = Arrays.stream(availableTimes)
+                                .filter(time -> {
+                                    return frozenLevel
+                                            .equals(time.getLevelValue());
+                                }).toArray(DataTime[]::new);
+                    }
+                }
+            }
+        }
+
+        return availableTimes;
+    }
+
+    private static boolean hasMultipleLevels(DataTime[] times) {
+        Double levelValue = null;
+        boolean first = true;
+        for (DataTime time : times) {
+            if (first) {
+                if (!time.isSpatial()) {
+                    return false;
+                }
+                levelValue = time.getLevelValue();
+                first = false;
+            } else if (!Objects.equals(levelValue, time.getLevelValue())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Prunes data that is no longer used by calling
      * {@link AbstractVizResource#remove(DataTime)}
-     * 
+     *
      * @param rsc
      *            the resource to prune
      * @param times
@@ -760,7 +906,7 @@ public class D2DTimeMatcher extends AbstractTimeMatcher {
     /**
      * Takes a list of data times that are available for a resource and requests
      * the products that are missing
-     * 
+     *
      * @param dataTimes
      *            available dataTimes
      * @param resource
@@ -804,8 +950,37 @@ public class D2DTimeMatcher extends AbstractTimeMatcher {
     public void handleRemove(AbstractVizResource<?, ?> resource,
             IDescriptor descriptor) {
         timeMatchBasisRef.compareAndSet(resource, null);
+
+        TimeCache removedTimeCache;
+        List<TimeCache> remainingTimeCaches;
         synchronized (timeCacheMap) {
-            timeCacheMap.remove(resource);
+            // Remove the time cache for the resource
+            removedTimeCache = timeCacheMap.remove(resource);
+            remainingTimeCaches = new ArrayList<>(timeCacheMap.values());
+        }
+
+        if (removedTimeCache != null) {
+            /*
+             * If no remaining multi-level resource uses the same level type as
+             * the removed resource, remove the level type from frozenLevels
+             */
+            synchronized (levelLock) {
+                String levelType = removedTimeCache.getLevelType();
+                if (levelType != null && frozenLevels.containsKey(levelType)) {
+                    boolean keepLevelType = false;
+                    for (TimeCache remainingTimeCache : remainingTimeCaches) {
+                        if (remainingTimeCache.hasMultipleLevels() && levelType
+                                .equals(remainingTimeCache.getLevelType())) {
+                            keepLevelType = true;
+                            break;
+                        }
+                    }
+
+                    if (!keepLevelType) {
+                        frozenLevels.remove(levelType);
+                    }
+                }
+            }
         }
     }
 
@@ -830,7 +1005,7 @@ public class D2DTimeMatcher extends AbstractTimeMatcher {
      * the time matcher. This can be used while loading a resource to determine
      * if any matching times are possible and for preloading any data for those
      * times.
-     * 
+     *
      * This method is also responsible for using the
      * AbstractTimeMatchingConfigurationFactory for this matcher to configure
      * the time match settings. The final times the resource displays may change
@@ -1056,12 +1231,14 @@ public class D2DTimeMatcher extends AbstractTimeMatcher {
          */
         IRenderableDisplay display = descriptor.getRenderableDisplay();
         IDisplayPaneContainer container = display != null
-                ? display.getContainer() : null;
+                ? display.getContainer()
+                : null;
         if (container != null) {
             for (IDisplayPane pane : container.getDisplayPanes()) {
                 IRenderableDisplay paneDisplay = pane.getRenderableDisplay();
                 IDescriptor paneDescriptor = paneDisplay != null
-                        ? paneDisplay.getDescriptor() : null;
+                        ? paneDisplay.getDescriptor()
+                        : null;
                 if ((paneDescriptor != null) && validateTimeMatchBasis(
                         paneDescriptor.getResourceList(), timeMatchBasis)) {
                     return true;
@@ -1103,12 +1280,14 @@ public class D2DTimeMatcher extends AbstractTimeMatcher {
     private static boolean validateDescriptor(IDescriptor descriptor) {
         IRenderableDisplay display = descriptor.getRenderableDisplay();
         IDisplayPaneContainer container = display != null
-                ? display.getContainer() : null;
+                ? display.getContainer()
+                : null;
         if (container != null) {
             for (IDisplayPane pane : container.getDisplayPanes()) {
                 IRenderableDisplay paneDisplay = pane.getRenderableDisplay();
                 IDescriptor paneDescriptor = paneDisplay != null
-                        ? paneDisplay.getDescriptor() : null;
+                        ? paneDisplay.getDescriptor()
+                        : null;
                 if (paneDescriptor == descriptor) {
                     return true;
                 }
@@ -1116,5 +1295,4 @@ public class D2DTimeMatcher extends AbstractTimeMatcher {
         }
         return false;
     }
-
 }

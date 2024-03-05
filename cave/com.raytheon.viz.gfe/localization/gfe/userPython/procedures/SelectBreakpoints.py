@@ -3,7 +3,7 @@
 # support, and with no warranty, express or implied, as to its usefulness for
 # any purpose.
 #
-# SelectBreakpoints
+# SelectBreakPoints
 #
 # March 10, 2020 21020      tlefebvr    Original version
 # March 13, 2020 21020      tlefebvr    Added dialog to save edits if cancel
@@ -37,49 +37,70 @@
 # May   20, 2020 22033      tlefebvr    Addressed code review comments.
 # May   29, 2020 22033      tlefebvr    Addressed code review comment.
 # June   3, 2020 22033      tlefebvr    Addressed several code review comments.
-#
+# June  11, 2020 22033      tlefebvr    Fixed bug with binButton lists.
+# June  12, 2020 22033      tlefebvr    Added Storm ID to display.
+# Sep  12, 2020 22033      tlefebvr     Changed "Save" to save only the currently selected
+#                                       storm. Save/Dismiss saves all storms.
+# Sep  22, 2020 22033      tlefebvr     Changed "Save/Exit" to save only the currently selected
+#                                       storm. Save/Dismiss saves all storms.
+# Sep  22, 2020 22033      tlefebvr     Changed Are you sure dialog to save only the currently
+#                                       selected storm.
+# Feb  19, 2021 22033      tlefebvr     Hazard conflict checking disabled for international BPs.
+# May  10, 2021 22033      tlefebvr     Changed data file location to edex/data/share.
+# May  11, 2021 22033      tlefebvr     Changed layout to accommodate 10 bins from each basin.
+# May  13, 2021 22033      tlefebvr     Extra code to accommodate Western Pacific.
+# July 29, 2021 22531      tlefebvr     Final code clean-up before check-in.
+# Aug.  5, 2021 22531      tlefebvr     Fixed a bug in the display of consecutive
+#                                       but unselected BP segments.
+# Aug   5, 2021 22531      tlefebvr     Users are not allowed to select a single breakpoint,
+#                                       if it's part of a breakpoint segment sequence.
+# Aug   24, 2021 22531      tlefebvr    Fixed dated comments out of order.
+# Jan   20, 2022 22531      tlefebvr    Fixed issue with points outside domain.
+# Feb   24, 2022 22531      tlefebvr    Added display of JSON hazards so forecasters can double check.
+# Apr  13,  2022 22531      tlefebvr    Made a few changes for Python3 compatibility.
+# Sep  15,  2022 22531      santos/scamp Fixes after 21.4.1-14 testing.
 # Author: lefebvre
 ################################################################################
 
-MenuItems = ["Populate"]
+MenuItems = ["None"]
 
-import numpy as np
 import AbsTime, TimeRange
 import TropicalUtility
 import WindWWUtils
+import ZoneMap
 import copy
+import numpy as np
+import os
 import sys
+import tkinter as tk
 
-if sys.version_info.major == 2:
-    import Tkinter as tk
-else:
-    import tkinter as tk
 
-class Procedure (TropicalUtility.TropicalUtility):
-
+class Procedure(TropicalUtility.TropicalUtility):
     def __init__(self, dbss):
         TropicalUtility.TropicalUtility.__init__(self, dbss)
         self._dbss = dbss
-        
+
         # Instantiate the WindWWUtils modules
         self._WindWWUtils = WindWWUtils.WindWWUtils(self._dbss)
+        self._path = self._WindWWUtils.getDataFilePath()
+        self._zoneMap = ZoneMap.ZoneMap(self._dbss)
 
-    def makeZoneDict(self, bpDict):
-        """ 
+    def makeZoneDict(self, pil, bpDict):
+        """
         Makes a dictionary of {haz : zoneList} based on the bpDict.
         This structure is stored in the JSON file.
-        """        
+        """
         hazZoneDict = {}
         allZoneList = []
         reverseHazList = copy.copy(self._hazardOrder)
-        reverseHazList.reverse() 
+        reverseHazList.reverse()
         for haz in reverseHazList:
             if haz == "<None>":
                 continue
             if haz not in bpDict:
                 hazZoneDict[haz] = []
                 continue
-            
+
             for bp in bpDict[haz]:
                 zoneList = self._WindWWUtils.getBPZones(bpDict, haz)
                 if haz not in hazZoneDict:
@@ -88,9 +109,9 @@ class Procedure (TropicalUtility.TropicalUtility):
                     if zone not in hazZoneDict[haz] and zone not in allZoneList:
                         hazZoneDict[haz].append(zone)
                         allZoneList.append(zone)
-                        
+
         return hazZoneDict
-    
+
     def getBPLatLon(self, bpName):
         """
         Fetches the lan/lon based on the breakpoint name
@@ -100,10 +121,10 @@ class Procedure (TropicalUtility.TropicalUtility):
                 gridCell, (name, lat, lon) = item
                 if name == bpName:
                     return lat, lon
-                       
-        self.statusBarMsg(bpName + "not found in Breakpoint Lat/Lon dict.", "S")
+
+        self.statusBarMsg(bpName + " not found in Breakpoint Lat/Lon dict.", "S")
         return None, None
-    
+
     def dualBP(self, bpName):
         """
         Returns true in the bpName is a segment (two names)
@@ -129,7 +150,7 @@ class Procedure (TropicalUtility.TropicalUtility):
         """
         if not segmentList:
             return []
-        
+
         segList = []
         groupList = []
 
@@ -141,23 +162,23 @@ class Procedure (TropicalUtility.TropicalUtility):
                     segList = []
                 groupList.append([segment])
             else:  # DualBP
-                if i == 0: # Special case for first time
+                if i == 0:  # Special case for first time
                     segList.append(segment)
                     continue
-                
-                if self.lastBP(segmentList[i-1]) == self.firstBP(segmentList[i]):
+
+                if self.lastBP(segmentList[i - 1]) == self.firstBP(segmentList[i]):
                     segList.append(segment)
                 else:
                     groupList.append(segList)
                     segList = [segment]
 
-        if self.dualBP(segmentList[-1]):   # If the last segment is a dual
-            groupList.append(segList)   # append the last segList
+        if self.dualBP(segmentList[-1]):  # If the last segment is a dual
+            groupList.append(segList)  # append the last segList
 
         return groupList
 
     def latLonsFromBreakpoints(self, bpDict, haz):
-        """ 
+        """
         This method returns a list of lat/lon pairs based on the specified
         bpDict and hazard.
         """
@@ -174,12 +195,12 @@ class Procedure (TropicalUtility.TropicalUtility):
             for p in parts:
                 if p not in singleBPList:
                     singleBPList.append(p)
-                
+
         sortedSegList = self.makeBPSegments(singleBPList)
-        
+
         # Group the segments in lists of contiguous sets
         sortedSegments = self.groupBPSegments(sortedSegList)
-                
+
         hazLatLons = []
         for segmentList in sortedSegments:
             segLatLons = []
@@ -190,9 +211,9 @@ class Procedure (TropicalUtility.TropicalUtility):
                     if [lat, lon] not in segLatLons:
                         segLatLons.append([lat, lon])
             hazLatLons.append(segLatLons)
-            
+
         return hazLatLons
-    
+
     def makeLatLonDict(self, bpDict):
         """
         Makes a dictionary of lat/lon to store in the JSON file.
@@ -203,7 +224,7 @@ class Procedure (TropicalUtility.TropicalUtility):
                 continue
             # Initialize for this hazard
             latLonDict[haz] = self.latLonsFromBreakpoints(bpDict, haz)
-            
+
         return latLonDict
 
     def saveStormInfo(self, pil):
@@ -213,40 +234,41 @@ class Procedure (TropicalUtility.TropicalUtility):
         # Find the dict with the matching pil
         for (stormPil, stormInfo) in self._stormInfoDict.items():
             if stormPil == pil:
-                # insert the bpDict                
+                # insert the bpDict
                 stormInfo["Breakpoints"] = self._stormInfoDict[pil]["Breakpoints"]
-                zoneDict = self.makeZoneDict(stormInfo["Breakpoints"])
+                zoneDict = self.makeZoneDict(pil, stormInfo["Breakpoints"])
                 stormInfo["zoneDict"] = zoneDict
 
                 latLonDict = self.makeLatLonDict(stormInfo["Breakpoints"])
-                
+
                 stormInfo["latLonDict"] = latLonDict
-                    
-                # Use TropicalUtility to save advisories. 
-                self._saveAdvisory(pil, stormInfo)
+
+                # Use TropicalUtility to save advisories.
+                self._WindWWUtils.saveAdvisory(pil, stormInfo, self._siteID)
                 break
 
+        self._savingNeeded = False
+
         return
-    
+
     def saveAllStormInfo(self):
         """
         Save all of the stormInfo dicts in the JSON files.
         """
         for adv in self._stormInfoDict:
             self.saveStormInfo(adv)
-            
+
         self._savingNeeded = False
-        
+
         return
 
-    def saveHazards(self):
+    def saveActiveStorm(self):
         """
-        Save all edited stormInfo
+        Saves the selected storm.
         """
-        self.saveAllStormInfo()
+        self.saveStormInfo(self._selectedAdvisory)
         self.cancelCommand()
-        return
-    
+
     def saveNotWanted(self):
         """
         Called when the user discards edits.
@@ -254,8 +276,8 @@ class Procedure (TropicalUtility.TropicalUtility):
         self._savingNeeded = False
         self.cancelCommand()
         return
-    
-    # Make a temporary dialog to see if the user wants to continue.        
+
+    # Make a temporary dialog to see if the user wants to continue.
     def dialogPrompt(self):
         """
         Pops a dialog and asks the user if they want to save before exiting.
@@ -266,46 +288,54 @@ class Procedure (TropicalUtility.TropicalUtility):
 
         dialogFrame = tk.Frame(self._dialogMaster)
         dialogFrame.grid()
-        
+
         label = tk.Label(dialogFrame, text="Your edits have not been saved.")
         label.grid(row=0, column=0, columnspan=2)
-        
-        saveButton = tk.Button(dialogFrame, text="Save", command=self.saveHazards, bg="green")
+
+        saveButton = tk.Button(
+            dialogFrame, text="Save", command=self.saveActiveStorm, bg="green"
+        )
         saveButton.grid(row=1, column=0, padx=20, pady=30)
-        saveButton = tk.Button(dialogFrame, text="Discard Edits", command=self.saveNotWanted, bg="red")
+        saveButton = tk.Button(
+            dialogFrame, text="Discard Edits", command=self.saveNotWanted, bg="red"
+        )
         saveButton.grid(row=1, column=1, padx=20, pady=30)
-        
+
         self._savingNeeded = False
-        
+
         self.displayWindowOnCursor(self._dialogMaster)
 
         tk.mainloop()
-        
-        return 
+
+        return
 
     def cancelCommand(self):
         """
         Called when the cancel button is clicked
         """
-        self.updateDisplay(plotAllStorms=True) # update with all storms
+        self.updateDisplay(plotAllStorms=True)  # update with all storms
         if self._savingNeeded:
             self.dialogPrompt()
+
+        # Display the contents of the newly written JSON file
+        self._WindWWUtils.displayJSONHazards("AllUSJSONHazards", self._zoneMap)
+
         try:
             self._tkmaster.destroy()
         except:
             pass
-        
+
     def runCommand(self):
         """
         Called when run is selected. Just saves the stormInfo for the current pil.
         """
-        self.saveAllStormInfo()
+        self.saveStormInfo(self._selectedAdvisory)
 
     def runDismissCommand(self):
         """
         Called when Run/Dismiss button is clicked.
         """
-        self.saveAllStormInfo()
+        self.saveStormInfo(self._selectedAdvisory)
         self.cancelCommand()
 
     def makeBottomButtons(self, frame):
@@ -318,29 +348,37 @@ class Procedure (TropicalUtility.TropicalUtility):
 
         # Cancel button
         saveColor = "green"
-        self._saveButton = tk.Button(self._bottomButtonFrame, text="Save",
-                                       command=self.runCommand, bg=saveColor)
+        self._saveButton = tk.Button(
+            self._bottomButtonFrame, text="Save", command=self.runCommand, bg=saveColor
+        )
         self._saveButton.grid(row=0, column=0, padx=20)
         # Cancel button
         runDismissColor = "lightgreen"
-        self._saveDismissButton = tk.Button(self._bottomButtonFrame, text="Save/Dismiss",
-                                       command=self.runDismissCommand, bg=runDismissColor)
+        self._saveDismissButton = tk.Button(
+            self._bottomButtonFrame,
+            text="Save/Dismiss",
+            command=self.runDismissCommand,
+            bg=runDismissColor,
+        )
         self._saveDismissButton.grid(row=0, column=1, padx=20)
-
 
         # Cancel button
         cancelColor = "red"
-        self._cancelButton = tk.Button(self._bottomButtonFrame, text="Cancel",
-                                       command=self.cancelCommand, bg=cancelColor)
+        self._cancelButton = tk.Button(
+            self._bottomButtonFrame,
+            text="Cancel",
+            command=self.cancelCommand,
+            bg=cancelColor,
+        )
         self._cancelButton.grid(row=0, column=2, padx=20)
 
         return
-    
+
     def bpRank(self, breakpoint):
         """
         A ranking algorithm used to sort the breakpoints.
         """
-        
+
         for bpType in self._bpLatLonDict:
             majorRank = self._bpTypes.index(bpType) + 1
             bpDict = self._bpLatLonDict[bpType]
@@ -349,8 +387,6 @@ class Procedure (TropicalUtility.TropicalUtility):
                 if name == breakpoint:
                     countryNum = int(self._countryDict[name])
                     return (majorRank * 1000000) + (countryNum) * 1000 + i
-        # This should never happen
-        print(breakpoint, "not found in bpRank.")
         return 0
 
     def calcBlobCoords(self, x, y):
@@ -359,12 +395,12 @@ class Procedure (TropicalUtility.TropicalUtility):
         """
         gridShape = self.getGridShape()
         if self._blobSize <= 2:
-            return y, y+1, x, x+1
+            return y, y + 1, x, x + 1
         else:
-            inc = int(self._blobSize - 1) // 2
+            inc = int((self._blobSize - 1) / 2)
         y0 = y - inc
         y1 = y + inc + 1
-        x0 = x - inc 
+        x0 = x - inc
         x1 = x + inc + 1
         if y0 < 0:
             y0 = 0
@@ -383,9 +419,9 @@ class Procedure (TropicalUtility.TropicalUtility):
         Missing x2, y2 returns the blob for the first grid point.
         """
         mask = self.empty(np.bool)
-        
+
         if not (x2 and y2):
-            top, bottom,left, right = self.calcBlobCoords(y1, x1)
+            top, bottom, left, right = self.calcBlobCoords(y1, x1)
             mask[top:bottom, left:right] = True
             return mask
         # Calculate the path between the two points
@@ -402,7 +438,7 @@ class Procedure (TropicalUtility.TropicalUtility):
             top, bottom, left, right = self.calcBlobCoords(y, x)
             mask[top:bottom, left:right] = True
         return mask
-    
+
     def getBPGridCell(self, bpName):
         """
         Returns the GFE grid cell corresponding to the specified breakpoint
@@ -412,50 +448,61 @@ class Procedure (TropicalUtility.TropicalUtility):
                 name, lat, lon = self._bpLatLonDict[bpType][gridCell]
                 if name == bpName:
                     return gridCell
-        print("****** Grid cell not found for:", bpName)   
         return None
-    
+
+    def parseBP(self, bp):
+        """
+        Returns a tuple with the breakpoints split into its parts.
+        """
+        delimiter = " - "
+        parts = bp.split(delimiter)
+        if len(parts) == 1:
+            return (bp,)
+        if len(parts) == 2:
+            return (parts[0], parts[1])
+
+        return None
+
     def getGridCellSequence(self, bpList):
         """
-        Returns a sequence of grid coordinates that match the format and 
+        Returns a sequence of grid coordinates that match the format and
         location of the specified sequence of breakpoints.
         """
         gridCellList = []
-        delimiter = " - "
-        
-        parsedBPList = []
+        innerList = []
         for bp in bpList:
-            if delimiter in bp:
-                parts = bp.split(delimiter)
-                for p in parts:
-                    if p not in parsedBPList:
-                        parsedBPList.append(p)
-            else:
-                if bp not in parsedBPList:
-                    parsedBPList.append(bp)
-                    
-        segmentList = self.makeBPSegments(parsedBPList)
-        
-        for segment in segmentList:
-            if delimiter in segment:  # two breakpoints
-                parts = segment.split(delimiter)
-                bp0 =  self.getBPGridCell(parts[0])
-                bp1 =  self.getBPGridCell(parts[1])
-                if not (bp0 and bp1):
+            bpTuple = self.parseBP(bp)
+            # Singleton
+            if len(bpTuple) == 1:
+                c0 = self.getBPGridCell(bp)
+                if not c0:
                     continue
-                cellTuple = (bp0, bp1)
-            else:
-                bp = self.getBPGridCell(segment)
-                if not bp:
+                if innerList:
+                    gridCellList.append(innerList)
+                    innerList = []
+                gridCellList.append([c0])
+            elif len(bpTuple) == 2:
+                c0 = self.getBPGridCell(bpTuple[0])
+                c1 = self.getBPGridCell(bpTuple[1])
+                if not c0 or not c1:
                     continue
-                cellTuple = (bp)
-            
-            gridCellList.append(cellTuple)
-            
+                if innerList:
+                    # See if the first bp matches the last one saved.
+                    if innerList[-1] == c0:
+                        innerList.append(c1)
+                    # No match, close out this sequence
+                    else:
+                        gridCellList.append(innerList)
+                        innerList = [c0, c1]
+                else:
+                    innerList = [c0, c1]
+        if innerList:
+            gridCellList.append(innerList)
+
         return gridCellList
-        
+
     # Updates the GFE spatial display based on the specified list of BP names
-    def updateDisplay(self, plotAllStorms = False):
+    def updateDisplay(self, plotAllStorms=False):
         """
         Update the spatial GFE display based on the current state of the
         stormInfo data.
@@ -464,7 +511,7 @@ class Procedure (TropicalUtility.TropicalUtility):
 
         self._bpHazGrid = self.empty(np.int8)
         grid = self.empty(np.int8)
-        
+
         # Define the advisory list based on specified flag
         if plotAllStorms:
             advisoryList = list(self._stormInfoDict.keys())
@@ -474,47 +521,59 @@ class Procedure (TropicalUtility.TropicalUtility):
         for advisory in advisoryList:
             if advisory == "":
                 continue
-        
+
             if "Breakpoints" not in self._stormInfoDict[advisory]:
                 continue
-            
+
             stormInfoBPKeys = self._stormInfoDict[advisory]["Breakpoints"].keys()
-                
+
             for hazard in self._hazardOrder:
                 if hazard not in stormInfoBPKeys:
                     continue
-                
+
                 mask = self.empty(np.bool)
-    
-                bpList = self._stormInfoDict[advisory]["Breakpoints"][hazard]            
-                
+
+                bpList = self._stormInfoDict[advisory]["Breakpoints"][hazard]
+                if not bpList:
+                    continue
+                bpList = self.makeBPSegments(bpList)
+
                 gridCellList = self.getGridCellSequence(bpList)
-                for points in gridCellList:
-                    if isinstance(points[0], tuple):
-                        mask |= self.getPathMask(points[0][0], points[0][1],
-                                                 points[1][0], points[1][1])
-                    else:
-                        mask |= self.getPathMask(points[0], points[1])
-                                    
+                for pointList in gridCellList:
+                    for i, point in enumerate(pointList):
+                        if i == 0:
+                            mask |= self.getPathMask(point[0], point[1])
+                        else:
+                            mask |= self.getPathMask(
+                                lastPoint[0], lastPoint[1], point[0], point[1]
+                            )
+                        lastPoint = point
+
                 hazIndex = hazKeys.index(hazard)
                 grid[mask] = hazIndex
-        
+
         # Create the grid showing the breakpoint areas
         weName = "BreakpointHazards"
-        self.createGrid(self.mutableID(), weName, "DISCRETE", (grid, hazKeys), self._timeRange,
-                        defaultColorTable="Hazards", discreteKeys=hazKeys,
-                        discreteOverlap=1, discreteAuxDataLength=5)
-        
+        self.createGrid(
+            self.mutableID(),
+            weName,
+            "DISCRETE",
+            (grid, hazKeys),
+            self._timeRange,
+            defaultColorTable="GFE/TC_Hazards_WWA",
+            discreteKeys=hazKeys,
+            discreteOverlap=1,
+            discreteAuxDataLength=5,
+        )
+
         if not self._selectedAdvisory:
             return
         # Plot the storm number label
         stormNum = self._stormInfoDict[self._selectedAdvisory]["stormNumber"]
-        labelText = "Storm\nNumber\n" + str(stormNum)
+        stormID = self._stormInfoDict[self._selectedAdvisory]["stormID"]
+        labelText = f"           Storm #: {stormNum}       Storm ID: {stormID}"
         self._stormLabel.config(text=labelText)
-        
-        # This is commented out for now as it causes a crash from time to time 
-        self.setActiveElement(self.mutableID(), weName, "SFC", self._timeRange)
-            
+
     def makeStormButton(self, frame, label, row, column, active):
         """
         Makes a single storm button. This is implemented as a separate method
@@ -528,11 +587,18 @@ class Procedure (TropicalUtility.TropicalUtility):
         bgColor = self._unselectedColor
         if label == self._selectedAdvisory:
             bgColor = self._selectedColor
-            
-        button = tk.Button(frame, text=label,  command=lambda: self.stormButtonSelected(label),
-                           font=self._font14Bold, state=state, bg=bgColor, activebackground=bgColor)
+
+        button = tk.Button(
+            frame,
+            text=label,
+            command=lambda: self.stormButtonSelected(label),
+            font=self._font14Bold,
+            state=state,
+            bg=bgColor,
+            activebackground=bgColor,
+        )
         button.grid(row=row, column=column, padx=20, pady=5)
-        
+
         return button
 
     def makeHazardButton(self, frame, label, row):
@@ -540,9 +606,14 @@ class Procedure (TropicalUtility.TropicalUtility):
         Makes a single hazard button. This is implemented as a separate method
         so the lambda method works properly.
         """
-        button = tk.Button(frame, text=label,  command=lambda: self.hazardButtonSelected(label),
-                           font=self._font14Bold, bg=self._colors[label])
-        button.grid(row=row, padx=20, pady=7)
+        button = tk.Button(
+            frame,
+            text=label,
+            command=lambda: self.hazardButtonSelected(label),
+            font=self._font14Bold,
+            bg=self._colors[label],
+        )
+        button.grid(row=row, padx=40, pady=7)
         return button
 
     def stormButtonSelected(self, buttonLabel):
@@ -552,16 +623,20 @@ class Procedure (TropicalUtility.TropicalUtility):
         """
         if self._selectedAdvisory:
             if buttonLabel != self._selectedAdvisory:
-                self._advisoryButtons[self._selectedAdvisory].config(bg=self._unselectedColor)
-                self._advisoryButtons[self._selectedAdvisory].config(activebackground=self._unselectedColor)
-                
+                self._advisoryButtons[self._selectedAdvisory].config(
+                    bg=self._unselectedColor
+                )
+                self._advisoryButtons[self._selectedAdvisory].config(
+                    activebackground=self._unselectedColor
+                )
+
         self._advisoryButtons[buttonLabel].config(bg=self._selectedColor)
         self._advisoryButtons[buttonLabel].config(activebackground=self._selectedColor)
-            
+
         self._selectedAdvisory = buttonLabel
-        
+
         self.updateDisplay()
-        
+
         return
 
     def dumpBPs(self):
@@ -577,26 +652,33 @@ class Procedure (TropicalUtility.TropicalUtility):
                 print(adv, haz, bp)
         print("------------------------------------------------------------")
         return
-    
+
     def maskToBreakpoints(self, mask):
-        """ 
+        """
         Calculates the set of breakpoint that lie inside the specified mask.
         """
-        
+
         # Mask of breakpoints inside the specified mask
         selectedBPMask = mask & self._breakpointMask
         # The grid coordinates of the above mask
         selectedY, selectedX = np.nonzero(selectedBPMask)
 
         bpList = []
+        isitsingleAndbpTypeLand = False
+        foundInLand = False
         for bpType in self._bpLatLonDict:
             for bp in zip(selectedY, selectedX):
                 # See if this point is in this breakpoint type
-                if bp in self._bpLatLonDict[bpType]:                # See if this point is in this breakpoint type
+                if bp in self._bpLatLonDict[bpType]:
+                    if bpType == "land":
+                        foundInLand = True
                     name, lat, lon = self._bpLatLonDict[bpType][bp]
                     bpList.append(name)
-
-        return bpList
+         
+        if len(bpList) == 1 and foundInLand:
+            isitsingleAndbpTypeLand = True
+            
+        return bpList, isitsingleAndbpTypeLand
 
     def makeBPSegments(self, bpList):
         """
@@ -607,7 +689,7 @@ class Procedure (TropicalUtility.TropicalUtility):
         rankDict = {}
         for bp in sortedBPs:
             rankDict[bp] = self.bpRank(bp)
-            
+
         segmentList = []
 
         lastBP = ""
@@ -627,28 +709,29 @@ class Procedure (TropicalUtility.TropicalUtility):
             if lastBP == "":
                 lastBP = bp
                 continue
-            
+
             # It's a land BP so group pairs that are consecutive
             if abs(rankDict[lastBP] - rankDict[bp]) == 1:  # they're consecutive
-                segmentName = lastBP + " - "  + bp
+                segmentName = f"{lastBP} - {bp}"
                 segmentList.append(segmentName)
-           
+
             lastBP = bp
-        
+
         # Places where gaps form because of the way the breakpoints are defined
         # in the *.tbl files.
-        bpGaps = [("Mouth of the Rio Grande River", "Barra El Mezquital"),
-                  ("Samana", "Cabo Engano"),
-                  ("Cabo San Antonio", "Artemisa/Pinar del Rio"),
-                  ]
+        bpGaps = [
+            ("Mouth of the Rio Grande River", "Barra El Mezquital"),
+            ("Samana", "Cabo Engano"),
+            ("Cabo San Antonio", "Artemisa/Pinar del Rio"),
+        ]
         # Because of the way that the breakpoints are defined in the land.tbl file
         # there are gaps that occur when selecting particular breakpoints that
         # span across borders and end points of large islands.
         # So, check for this case and add a "phantom" segment so this gap is filled.
         for bp1, bp2 in bpGaps:
             if bp1 in bpList and bp2 in bpList:
-                segmentList.append(bp1 + " - " + bp2)  # add the segment
-                 
+                segmentList.append(f"{bp1} - {bp2}")  # add the segment
+
         return segmentList
 
     def hazardButtonSelected(self, hazard):
@@ -659,47 +742,58 @@ class Procedure (TropicalUtility.TropicalUtility):
         segment is assigned to only on hazard. Finally it updates the display.
         """
         ea = self.getActiveEditArea()
-        
-        # Calculate the mask and 
+
+        # Calculate the mask and
         mask = self.encodeEditArea(ea)
         if not mask.any():
-            self.statusBarMsg("Please select an edit area before assigning a Hazard.", "S")
+            self.statusBarMsg(
+                "Please select an edit area before assigning a Hazard.", "S"
+            )
             return
-        bpList = self.maskToBreakpoints(mask)
+        bpList,isitsingleAndbpTypeLand = self.maskToBreakpoints(mask)
         
+        if isitsingleAndbpTypeLand:
+            self.statusBarMsg(
+                "Please select more than one breakpoint to identify a breakpoint segment.",
+                "S"
+            )
+            return
+
         segmentList = self.makeBPSegments(bpList)
-        
+
         # First check to see if any conflict with existing storms
         if hazard != "<None>":
             if self.anyBreakpointConflicts(segmentList):
-                return 
+                return
 
-        # Remove any BPs in the existing lists found in with any hazard 
-        self.removeBreakpoints(segmentList)        
+        # Remove any BPs in the existing lists found in with any hazard
+        self.removeBreakpoints(segmentList)
 
         # Add the new BPs to the list, unless it's None
         if hazard != "<None>":
             self.addBreakpoints(hazard, segmentList)
-            
+
         self._savingNeeded = True
 
         # Update the display
         self.updateDisplay()
-                
+
         return
-    
+
     def makeStormNumLabel(self, frame):
         """
         Makes the label to be plotted in the GUI.
         """
         stormNumFrame = tk.Frame(frame)
-        stormNumFrame.grid(row=6, column=0, columnspan=2) 
+        stormNumFrame.grid(row=6, column=0, columnspan=2)
         self._stormLabel = tk.Label(stormNumFrame, text="", font=self._font12Normal)
-        self._stormLabel.grid(row=0, column=0, pady=10)
+        self._stormLabel.grid(row=0, column=0, pady=5)
         return
-    
+
     def binButtons(self, siteID):
-        
+        """
+        Returns the bins for the specified siteID
+        """
         basins = self._WindWWUtils.forecastBasins(siteID)
         return self._WindWWUtils.basinBins(basins)
 
@@ -707,50 +801,54 @@ class Procedure (TropicalUtility.TropicalUtility):
         """
         Makes the advisory buttons on the GUI.
         """
-        siteID = self.getSiteID()
-        allButtonLabels = self.binButtons(siteID)
+        allButtonLabels = self.binButtons(self._siteID)
         if not allButtonLabels:
             return
-
         for column, buttonLabels in enumerate(allButtonLabels):
             for i, label in enumerate(buttonLabels):
                 activeButton = label in self._advisoryNames
                 row = i
-                self._advisoryButtons[label] = self.makeStormButton(frame, label, row, column,
-                                                                    activeButton)
-        return 
-    
+                self._advisoryButtons[label] = self.makeStormButton(
+                    frame, label, row, column, activeButton
+                )
+        return
+
     def makeWindHazardButtons(self, frame):
         """
         Makes the wind hazard buttons on the GUI.
         """
-        buttonLabels = ["HU.W", "HU.A", "TR.W^HU.A", "TR.W", "TR.A", "<None>"]
+        buttonLabels = [haz for haz in reversed(self._hazardOrder)]
+
         for i, label in enumerate(buttonLabels):
             self.makeHazardButton(frame, label, i)
-        
+
         return
-    
+
     def removeBreakpoints(self, bpList):
         """
         Removes the specified breakpoints from the stormInfoDict.
-        """ 
+        """
         bpDict = self._stormInfoDict[self._selectedAdvisory]["Breakpoints"]
 
         for hazard in self._hazardOrder:
             if hazard == "<None>":
                 continue
             for bp in bpList:
+                if hazard not in bpDict:
+                    continue
                 if bp in bpDict[hazard]:
                     # Remove the Breakpoint segment
                     bpDict[hazard].remove(bp)
         return
-    
+
     def addBreakpoints(self, hazard, bpList):
         """
         Adds the specified breakpoints to the stormInfoDict.
         """
         # Fetch the current set of BPs
-        currentBPs = self._stormInfoDict[self._selectedAdvisory]["Breakpoints"].get(hazard, None)
+        currentBPs = self._stormInfoDict[self._selectedAdvisory]["Breakpoints"].get(
+            hazard, None
+        )
         if currentBPs is None:
             currentBPs = []
         # Add the new BPs
@@ -758,17 +856,16 @@ class Procedure (TropicalUtility.TropicalUtility):
             if bp in currentBPs:
                 continue
             currentBPs.append(bp)
-        
+
         # Replace the old list with this one.
         self._stormInfoDict[self._selectedAdvisory]["Breakpoints"][hazard] = currentBPs
-        
+
         return
-    
+
     def anyBreakpointConflicts(self, addedBPSegments):
         """
         Returns True if any of the specified added segments also exist in another storm.
         """
-        
         for advisory in self._stormInfoDict:
             if advisory == self._selectedAdvisory:
                 continue
@@ -776,27 +873,33 @@ class Procedure (TropicalUtility.TropicalUtility):
             for hazard in bpDict:
                 bpList = bpDict[hazard]
                 for bp in addedBPSegments:
+                    # Check for conflicts over US breakpoints only.
+                    if (
+                        self._countryNMDict.get(self.firstBP(bp), None) != self._USCountryCode
+                        or self._countryNMDict.get(self.lastBP(bp), None) != self._USCountryCode
+                    ):
+                        continue
                     if bp in bpList:
-                        self.statusBarMsg(bp + " conflicts with breakpoints in advisory: " + advisory + " for hazard: " + hazard, "S")
+                        self.statusBarMsg(f"{bp} conflicts with breakpoints in advisory: "
+                                          f"{advisory} for hazard: {hazard}", "S")
                         return True
         return False
-        
+
     def displayWindowOnCursor(self, master):
         """
-        Moves the specified window to the curso location.
+        Moves the specified window to the cursor location.
         """
         master.update_idletasks()
-        wh= master.winfo_height()
-        ww= master.winfo_width()
+        wh = master.winfo_height()
+        ww = master.winfo_width()
         px, py = master.winfo_pointerxy()
-        master.geometry("%dx%d+%d+%d" % (ww, wh, px - (ww //2 ),py - (wh // 2)))
+        master.geometry("%dx%d+%d+%d" % (ww, wh, px - (ww // 2), py - (wh // 2)))
         return
 
     def setUpUI(self):
         """
         Makes the tk calls to set up the GUI.
         """
-
         self._tkmaster = tk.Tk()
         self._master = tk.Toplevel(self._tkmaster)
         self._dialogMaster = None
@@ -805,44 +908,58 @@ class Procedure (TropicalUtility.TropicalUtility):
         self._master.attributes("-topmost", True)
 
         # Capture the "x" click to close the GUI
-        self._master.protocol('WM_DELETE_WINDOW', self.cancelCommand)
+        self._master.protocol("WM_DELETE_WINDOW", self.cancelCommand)
 
         self._topFrame = tk.Frame(self._master)
         self._topFrame.grid()
-        self._tkmaster.withdraw() # remove the master from the display
-        
+        self._tkmaster.withdraw()  # remove the master from the display
+
         self._advisoryButtons = {}
         stormFrame = tk.Frame(self._master, relief=tk.GROOVE, bd=3)
-        stormFrame.grid(row=0, column=0, padx=20, pady=20)
-        
+        stormFrame.grid(row=0, column=0, padx=20, pady=10)
+
         self.makeStormButtons(stormFrame)
-        self.makeStormNumLabel(stormFrame)
-        
+
+        stormInfoFrame = tk.Frame(self._master, relief=tk.GROOVE, bd=3)
+        stormInfoFrame.grid(
+            row=1,
+            column=0,
+            columnspan=2,
+            padx=20,
+            pady=10,
+            sticky=tk.N + tk.S + tk.E + tk.W,
+        )
+        self.makeStormNumLabel(stormInfoFrame)
+
         hazFrame = tk.Frame(self._master, relief=tk.GROOVE, bd=3)
-        hazFrame.grid(row=0, column=1, padx=20, pady=20)
+        hazFrame.grid(row=0, column=1, padx=20, pady=10)
         self.makeWindHazardButtons(hazFrame)
         # Make the Run, Run/Dismiss, Cancel buttons
         bottomButtonFrame = tk.Frame(self._master, relief=tk.GROOVE, bd=3)
-        bottomButtonFrame.grid(row=5, columnspan=2, pady=20)
+        bottomButtonFrame.grid(row=5, columnspan=2, pady=5)
         self.makeBottomButtons(bottomButtonFrame)
-        
+
         self.updateDisplay()
 
         return
-    
+
     def getAdvisoryNames(self):
         """
         Picks the first active advisory for this site.
         """
-        binList = self.binButtons(self.getSiteID())
-        
-        nameList =[]
+        binButtonLabels = self.binButtons(self._siteID)
+        binList = []
+        for column, buttonLabels in enumerate(binButtonLabels):
+            for label in buttonLabels:
+                binList.append(label)
+
+        nameList = []
         for advisory in self._stormInfoDict:
             if advisory in binList:
                 nameList.append(advisory)
         return nameList
 
-    def execute(self):
+    def execute(self, editArea, timeRange, varDict):
         """
         Main method to start the tool.
         """
@@ -852,67 +969,80 @@ class Procedure (TropicalUtility.TropicalUtility):
         self._bgColor = "#d9d9d9"
         self._selectedColor = "green"
         self._unselectedColor = "gray80"
-        # List of tropical wind hazards in increasing order of severity
-        self._hazardOrder =  ["<None>", "TR.A", "HU.A", "TR.W", "TR.W^HU.A", "HU.W"]
-        
-        self._colors = {"HU.W" : "red",
-                        "HU.A" : "pink",
-                        "TR.W^HU.A" : "purple",
-                        "TR.W" : "#0092FF", # not too dark blue
-                        "TR.A" : "yellow",
-                        "<None>" : 'white'
-                        }
 
-        self._bpTypes = ["land", "island", "water",
-                         ]
-        
-        #  Path for the breakpoint tables.
-        path = "/localapps/runtime/RecommendWindWatchWarning/"
+        self._siteID = self.getSiteID()
+        # List of tropical wind hazards in increasing order of severity dependent on basin
+        self._hazardOrder = ["<None>", "TR.A", "HU.A", "TR.W^HU.A", "TR.W", "HU.W"]
+        basinList = self._WindWWUtils.forecastBasins(self._siteID)
+        if "Western Pacific" in basinList:
+            self._hazardOrder = ["<None>", "TR.A", "TY.A", "TR.W^TY.A", "TR.W", "TY.W"]
+
+        self._colors = {
+            "HU.W": "red",
+            "TY.W": "red",
+            "HU.A": "pink",
+            "TY.A": "pink",
+            "TR.W^HU.A": "purple",
+            "TR.W^TY.A": "purple",
+            "TR.W": "#0092FF",  # not too dark blue
+            "TR.A": "yellow",
+            "<None>": "white",
+        }
+
+        self._bpTypes = [
+            "land",
+            "island",
+            "water",
+        ]
 
         self._filePaths = {
-                           "land" : path + "tcabkpt_land.tbl",
-                           "island" : path + "tcabkpt_island.tbl",
-                           "water" : path + "tcabkpt_water.tbl",
-                           }
-        
+            "land": os.path.join(self._path, "tables", "tcabkpt_land.tbl"),
+            "island": os.path.join(self._path, "tables", "tcabkpt_island.tbl"),
+            "water": os.path.join(self._path, "tables", "tcabkpt_water.tbl"),
+        }
+
         self._blobSize = 5
+        self._USCountryCode = "US"
 
         # Make a timeRange used for displaying the grid, one day long starting now.
         start = int((self._gmtime().unixTime()) / 3600) * 3600 - (6 * 3600)
         end = start + 24 * 3600
-        self._timeRange = TimeRange.TimeRange(AbsTime.AbsTime(start),
-                                              AbsTime.AbsTime(end))
-        
+        self._timeRange = TimeRange.TimeRange(
+            AbsTime.AbsTime(start), AbsTime.AbsTime(end)
+        )
+
         # Fetch the storm information from the JOSN files.
         self._stormInfoDict = self._WindWWUtils.fetchStormInfo(self._hazardOrder)
 
         # Fetch the active advisory names from the JSON files.
         self._advisoryNames = self.getAdvisoryNames()
         if not self._advisoryNames:
-            self.statusBarMsg("No Advisory files found. Please run StormInfo first.", "U")
+            self.statusBarMsg(
+                "No Advisory files found. Please run StormInfo first.", "U"
+            )
             return
-                
+
         # Set the default selectedAdvisory
         self._selectedAdvisory = self._advisoryNames[0]
-            
+
         self._savingNeeded = False
-               
+
         self._countryDict = {}
-        self._bpLatLonDict, self._countryDict = \
-            self._WindWWUtils.createBreakpointsDict(self._filePaths)
-        
+        self._countryNMDict = {}
+        self._bpLatLonDict, self._countryDict, self._countryNMDict = self._WindWWUtils.createBreakpointsDict(
+            self._filePaths
+        )
+
         # Create a mask consisting of the locations of the breakpoints.
         # This helps later when we need to find the breakpoints inside
         # the selected edit area.
-        
         self._breakpointMask = self.empty(np.bool)
         for bpDict in self._bpLatLonDict.values():
-            for gridCell in bpDict:        
+            for gridCell in bpDict:
                 self._breakpointMask[gridCell] = True
-        
+
         self.setUpUI()
         self.displayWindowOnCursor(self._master)
         tk.mainloop()
 
         return
-

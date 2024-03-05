@@ -29,7 +29,11 @@ import javax.measure.IncommensurableException;
 import javax.measure.UnconvertibleException;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
+<<<<<<< HEAD
 import javax.measure.format.ParserException;
+=======
+import javax.measure.format.MeasurementParseException;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -40,8 +44,13 @@ import org.apache.commons.lang.StringUtils;
 import com.raytheon.uf.viz.core.exception.VizException;
 import com.raytheon.viz.pointdata.IPlotData;
 
+<<<<<<< HEAD
 import tec.uom.se.format.SimpleUnitFormat;
 import tec.uom.se.format.SimpleUnitFormat.Flavor;
+=======
+import tech.units.indriya.format.SimpleUnitFormat;
+import tech.units.indriya.format.SimpleUnitFormat.Flavor;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Group of parameter constraints (T<50 and windSpeed >30). This class is
@@ -54,8 +63,15 @@ import tec.uom.se.format.SimpleUnitFormat.Flavor;
  *
  * Date         Ticket#    Engineer      Description
  * ------------ ---------- -----------   --------------------------
+<<<<<<< HEAD
  * 10/10/2019   71272      Mark Peters   Initial Creation
  * Jan 07, 2020 73083      ksunil        Some code moved to ColorCondition
+=======
+ * 2019-10-10   71272      Mark Peters   Initial Creation
+ * 2020-01-07   73083      ksunil        Some code moved to ColorCondition
+ * 2023-10-04   2036243    tgurney       Unconvertible values shall return NaN
+ *                                       instead of throwing NumberFormatException
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  *
  * @author mpeters
@@ -147,7 +163,11 @@ public class Condition {
                                         unitStr, new ParsePosition(0));
                         converter = plotData.getUnit(param)
                                 .getConverterToAny(unit);
+<<<<<<< HEAD
                     } catch (ParserException | UnconvertibleException
+=======
+                    } catch (MeasurementParseException | UnconvertibleException
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                             | IncommensurableException e) {
                         throw new VizException(
                                 "Unable to parse or convert units " + unitStr
@@ -155,7 +175,16 @@ public class Condition {
                                         + plotData.getUnit(param).toString(),
                                 e);
                     }
+<<<<<<< HEAD
                     rval = converter.convert(value.doubleValue());
+=======
+                    try {
+                        rval = converter.convert(value.doubleValue());
+                    } catch (NumberFormatException e) {
+                        // unconvertible value
+                        rval = Double.NaN;
+                    }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 } else {
                     rval = value.doubleValue();
                 }

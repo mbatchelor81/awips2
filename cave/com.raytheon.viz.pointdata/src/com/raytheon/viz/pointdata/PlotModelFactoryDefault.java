@@ -38,7 +38,11 @@ import java.util.regex.Pattern;
 import javax.measure.IncommensurableException;
 import javax.measure.UnconvertibleException;
 import javax.measure.Unit;
+<<<<<<< HEAD
 import javax.measure.format.ParserException;
+=======
+import javax.measure.format.MeasurementParseException;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import org.eclipse.swt.graphics.RGB;
 import org.geotools.referencing.GeodeticCalculator;
@@ -68,8 +72,13 @@ import com.raytheon.viz.pointdata.python.PlotPythonScriptFactory;
 import com.raytheon.viz.pointdata.python.SampleTextExecutor;
 import com.raytheon.viz.pointdata.rsc.PlotResource;
 
+<<<<<<< HEAD
 import tec.uom.se.format.SimpleUnitFormat;
 import tec.uom.se.format.SimpleUnitFormat.Flavor;
+=======
+import tech.units.indriya.format.SimpleUnitFormat;
+import tech.units.indriya.format.SimpleUnitFormat.Flavor;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * A factory for generating plot images and sample messages by parsing the
@@ -735,7 +744,11 @@ public class PlotModelFactoryDefault extends SVGImageFactory
                                             element.unit, new ParsePosition(0));
                             element.converter = ob.getUnit(param)
                                     .getConverterToAny(unit);
+<<<<<<< HEAD
                         } catch (ParserException | UnconvertibleException
+=======
+                        } catch (MeasurementParseException | UnconvertibleException
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                 | IncommensurableException e) {
                             throw new VizException(
                                     "Unable to parse or convert units "
@@ -799,7 +812,11 @@ public class PlotModelFactoryDefault extends SVGImageFactory
                             .parseProductUnit(element.unit,
                                     new ParsePosition(0));
                     element.converter = speedUnit.getConverterToAny(unit);
+<<<<<<< HEAD
                 } catch (ParserException | UnconvertibleException
+=======
+                } catch (MeasurementParseException | UnconvertibleException
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         | IncommensurableException e) {
                     throw new VizException("Unable to parse or convert units "
                             + element.unit + " and " + speedUnit.toString(), e);
@@ -866,7 +883,11 @@ public class PlotModelFactoryDefault extends SVGImageFactory
                             .parseSingleUnit(element.unit,
                                     new ParsePosition(0));
                     element.converter = speedUnit.getConverterToAny(unit);
+<<<<<<< HEAD
                 } catch (ParserException | UnconvertibleException
+=======
+                } catch (MeasurementParseException | UnconvertibleException
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         | IncommensurableException e) {
                     throw new VizException("Unable to parse or convert units "
                             + element.unit + " and " + speedUnit.toString(), e);
@@ -1007,7 +1028,11 @@ public class PlotModelFactoryDefault extends SVGImageFactory
                                             element.unit, new ParsePosition(0));
                             element.converter = ob.getUnit(parameter)
                                     .getConverterToAny(unit);
+<<<<<<< HEAD
                         } catch (ParserException | UnconvertibleException
+=======
+                        } catch (MeasurementParseException | UnconvertibleException
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                 | IncommensurableException e) {
                             throw new VizException(
                                     "Unable to parse or convert units "
@@ -1090,7 +1115,11 @@ public class PlotModelFactoryDefault extends SVGImageFactory
                                             element.unit, new ParsePosition(0));
                             element.converter = ob.getUnit(element.parameter)
                                     .getConverterToAny(unit);
+<<<<<<< HEAD
                         } catch (ParserException | UnconvertibleException
+=======
+                        } catch (MeasurementParseException | UnconvertibleException
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                 | IncommensurableException e) {
                             throw new VizException(
                                     "Unable to parse or convert units "

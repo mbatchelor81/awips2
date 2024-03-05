@@ -86,7 +86,11 @@ import com.raytheon.viz.core.graphing.xy.XYDataList;
 import com.raytheon.viz.core.graphing.xy.XYImageData;
 import com.raytheon.viz.core.graphing.xy.XYWindImageData;
 
+<<<<<<< HEAD
 import tec.uom.se.format.SimpleUnitFormat;
+=======
+import tech.units.indriya.format.SimpleUnitFormat;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Represents a series of associated data, e.g. time and temperature, height and

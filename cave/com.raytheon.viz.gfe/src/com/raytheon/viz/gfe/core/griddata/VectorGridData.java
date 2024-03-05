@@ -49,7 +49,11 @@ import com.raytheon.viz.gfe.core.parm.ParmState.VectorMode;
 import com.raytheon.viz.gfe.core.wxvalue.VectorWxValue;
 import com.raytheon.viz.gfe.core.wxvalue.WxValue;
 
+<<<<<<< HEAD
 import tec.uom.se.format.SimpleUnitFormat;
+=======
+import tech.units.indriya.format.SimpleUnitFormat;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * GridData class dealing with a vector grid.

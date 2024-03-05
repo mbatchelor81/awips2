@@ -43,10 +43,15 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+<<<<<<< HEAD
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Layout;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Listener;
+=======
+import org.eclipse.swt.widgets.Layout;
+import org.eclipse.swt.widgets.List;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IPartListener2;
 import org.eclipse.ui.IWorkbench;
@@ -67,7 +72,10 @@ import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
 import com.raytheon.uf.common.status.UFStatus.Priority;
 import com.raytheon.uf.common.time.DataTime;
+<<<<<<< HEAD
 import com.raytheon.uf.viz.core.DescriptorMap;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.VizApp;
 import com.raytheon.uf.viz.core.VizConstants;
 import com.raytheon.uf.viz.core.drawables.AbstractDescriptor;
@@ -91,7 +99,10 @@ import com.raytheon.viz.ui.IRenameablePart;
 import com.raytheon.viz.ui.UiUtil;
 import com.raytheon.viz.ui.actions.SaveBundle;
 import com.raytheon.viz.ui.dialogs.CaveSWTDialog;
+<<<<<<< HEAD
 import com.raytheon.viz.ui.dialogs.ICloseCallback;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.viz.ui.dialogs.localization.VizLocalizationFileListDlg;
 import com.raytheon.viz.ui.editor.AbstractEditor;
 import com.raytheon.viz.ui.views.PartAdapter2;
@@ -140,6 +151,12 @@ import com.raytheon.viz.ui.views.PartAdapter2;
  * Sep 21, 2018  7470     dgilling     Force LoopTool state update when loading
  *                                     bundles.
  * Dec 13, 2018  6883     tgurney      Remove workbench listener when the dialog is closed
+<<<<<<< HEAD
+=======
+ * Apr 22, 2022  8791     mapeters     Update determination of editor type to load to
+ * Oct 19, 2022 8956       mapeters    Handle UiUtil.createOrOpenEditorForBundle
+ *                                     signature change
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -341,6 +358,7 @@ public class ProcedureDlg extends CaveSWTDialog implements IWorkbenchListener {
     private void addHistoryAndShellListeners() {
         final ProcedureDlg thisDlg = this;
 
+<<<<<<< HEAD
         final ProcedureComm.ICopyOutStateChangeListener changeListener = new ProcedureComm.ICopyOutStateChangeListener() {
 
             @Override
@@ -374,10 +392,32 @@ public class ProcedureDlg extends CaveSWTDialog implements IWorkbenchListener {
                 resyncProcedureAndList();
             }
 
+=======
+        final ProcedureComm.ICopyOutStateChangeListener changeListener = () -> VizApp
+                .runAsync(() -> {
+                    if (!copyOutBtn.isDisposed()) {
+                        copyOutBtn.setEnabled(ProcedureComm.getInstance()
+                                .getCopyListenerCount() > 1 && bundles != null
+                                && !bundles.isEmpty()
+                                && dataList.getSelectionIndex() >= 0);
+                    }
+                });
+
+        ProcedureComm.getInstance().addCopyOutStateListener(changeListener);
+        final ProcedureComm.ICopyOutListener copyOutListener = (b, src) -> {
+            if (src != thisDlg) {
+                bundles.add(b);
+                saved = false;
+                saveBtn.setEnabled(true);
+            }
+
+            resyncProcedureAndList();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         };
 
         ProcedureComm.getInstance().addCopyOutListener(copyOutListener);
 
+<<<<<<< HEAD
         addListener(SWT.Dispose, new Listener() {
             @Override
             public void handleEvent(Event event) {
@@ -386,10 +426,17 @@ public class ProcedureDlg extends CaveSWTDialog implements IWorkbenchListener {
                 ProcedureComm.getInstance()
                         .removeCopyOutStateListener(changeListener);
             }
+=======
+        addListener(SWT.Dispose, event -> {
+            ProcedureComm.getInstance().removeCopyOutListener(copyOutListener);
+            ProcedureComm.getInstance()
+                    .removeCopyOutStateListener(changeListener);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         });
     }
 
     private void resyncProcedureAndList() {
+<<<<<<< HEAD
         VizApp.runAsync(new Runnable() {
 
             @Override
@@ -428,6 +475,41 @@ public class ProcedureDlg extends CaveSWTDialog implements IWorkbenchListener {
                 }
             }
 
+=======
+        VizApp.runAsync(() -> {
+            if (!dataList.isDisposed()) {
+                if (bundles != null && !bundles.isEmpty()) {
+                    String[] list = new String[bundles.size()];
+                    int i = 0;
+                    for (BundlePair b : bundles) {
+                        list[i] = (b.name != null ? b.name : " ");
+                        i++;
+                    }
+                    int currIdx = dataList.getSelectionIndex();
+                    dataList.setItems(list);
+                    if (!firstNextBtn.isEnabled()) {
+                        if (currIdx == -1 && FIRST
+                                .equals(firstNextBtn.getText().toString())) {
+                            firstNextBtn.setEnabled(true);
+                            alterBtn.setEnabled(false);
+                            loadBtn.setEnabled(false);
+                        }
+                    }
+                    if (currIdx > -1) {
+                        if (currIdx > dataList.getItemCount() - 1) {
+                            currIdx = dataList.getItemCount() - 1;
+                        }
+                        dataList.setSelection(currIdx);
+                    }
+                } else {
+                    dataList.setItems();
+                    firstNextBtn.setEnabled(false);
+                    firstNextBtn.setText(FIRST);
+                    loadBtn.setEnabled(false);
+                    alterBtn.setEnabled(false);
+                }
+            }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         });
 
     }
@@ -636,14 +718,22 @@ public class ProcedureDlg extends CaveSWTDialog implements IWorkbenchListener {
             @Override
             public void widgetSelected(SelectionEvent event) {
                 String text = firstNextBtn.getText().toString();
+<<<<<<< HEAD
                 if (text.equals(FIRST)) {
+=======
+                if (FIRST.equals(text)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     dataList.setSelection(0);
                     firstNextBtn.setText(NEXT);
                     loadBtn.setEnabled(true);
                     alterBtn.setEnabled(true);
                     load();
                     ProcedureComm.getInstance().refreshCopyOutState();
+<<<<<<< HEAD
                 } else if (text.equals(NEXT)) {
+=======
+                } else if (NEXT.equals(text)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     int nextIdx = (dataList.getSelectionIndex() + 1)
                             % dataList.getItemCount();
                     dataList.setSelection(nextIdx);
@@ -829,6 +919,7 @@ public class ProcedureDlg extends CaveSWTDialog implements IWorkbenchListener {
 
     private void load(final Bundle b) {
         statusHandler.info("Loading bundle: " + b.getName());
+<<<<<<< HEAD
         String editorName = null;
         if (b.getDisplays().length > 0) {
             editorName = DescriptorMap.getEditorId(
@@ -836,6 +927,10 @@ public class ProcedureDlg extends CaveSWTDialog implements IWorkbenchListener {
         }
         final AbstractEditor editor = UiUtil.createOrOpenEditor(editorName,
                 b.getDisplays());
+=======
+        final AbstractEditor editor = UiUtil.createOrOpenEditorForBundle(b,
+                false);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         // set the loop properties
         if (b.getLoopProperties() != null) {
@@ -867,6 +962,7 @@ public class ProcedureDlg extends CaveSWTDialog implements IWorkbenchListener {
                 Bundle b = Bundle.unmarshalBundle(bp.xml, null);
 
                 alterDlg = new AlterBundleDlg(b, getShell());
+<<<<<<< HEAD
                 alterDlg.addCloseCallback(new ICloseCallback() {
 
                     @Override
@@ -882,6 +978,19 @@ public class ProcedureDlg extends CaveSWTDialog implements IWorkbenchListener {
                                 final String err = "Error altering bundle";
                                 statusHandler.handle(Priority.PROBLEM, err, e);
                             }
+=======
+                alterDlg.addCloseCallback(returnValue -> {
+                    if (returnValue instanceof Bundle) {
+                        Bundle b1 = (Bundle) returnValue;
+                        try {
+                            // Load was issued in alterBundleDlg
+                            bp.xml = b1.toXML();
+                            saveProcedure(false);
+                            load(b1);
+                        } catch (VizException e) {
+                            final String err = "Error altering bundle";
+                            statusHandler.handle(Priority.PROBLEM, err, e);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         }
                     }
                 });
@@ -928,6 +1037,13 @@ public class ProcedureDlg extends CaveSWTDialog implements IWorkbenchListener {
                         if (resourceData != null) {
                             AbstractDescriptor desc = (AbstractDescriptor) rsc
                                     .getDescriptor();
+<<<<<<< HEAD
+=======
+                            /*
+                             * TODO get(ProcedureDlg) makes no sense and can
+                             * only ever return null
+                             */
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                             DataTime[] times = desc.getTimeMatchingMap()
                                     .get(this);
                             if (times != null && times.length > 0) {
@@ -988,6 +1104,7 @@ public class ProcedureDlg extends CaveSWTDialog implements IWorkbenchListener {
             saveAsDlg = new ProcedureListFileDlg("Save Procedure As...", shell,
                     VizLocalizationFileListDlg.Mode.SAVE, PROCEDURES_DIR);
 
+<<<<<<< HEAD
             saveAsDlg.addCloseCallback(new ICloseCallback() {
 
                 @Override
@@ -1010,6 +1127,26 @@ public class ProcedureDlg extends CaveSWTDialog implements IWorkbenchListener {
                         fileName = fn;
                         saveProcedure(closeAfterSave);
                     }
+=======
+            saveAsDlg.addCloseCallback(returnValue -> {
+                String fn = saveAsDlg.getSelectedFileName();
+                if (fn != null) {
+                    ProcedureDlg oldDlg = getDialog(fn);
+
+                    if (oldDlg != null) {
+                        oldDlg.close();
+                    }
+
+                    // Update mapping to new file name.
+                    synchronized (openDialogs) {
+                        openDialogs.remove(fileName);
+                        openDialogs.put(fn, ProcedureDlg.this);
+                    }
+
+                    frozen = saveAsDlg.isFrozen();
+                    fileName = fn;
+                    saveProcedure(closeAfterSave);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
             });
             saveAsDlg.open();

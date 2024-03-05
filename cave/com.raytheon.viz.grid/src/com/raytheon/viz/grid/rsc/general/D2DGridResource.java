@@ -82,7 +82,11 @@ import com.raytheon.viz.grid.rsc.GridResourceData;
 import com.raytheon.viz.grid.util.ReprojectionUtil;
 import com.raytheon.viz.grid.xml.FieldDisplayTypesFactory;
 
+<<<<<<< HEAD
 import tec.uom.se.AbstractUnit;
+=======
+import tech.units.indriya.AbstractUnit;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  *
@@ -122,12 +126,24 @@ import tec.uom.se.AbstractUnit;
  * Feb 15, 2018  6902     njensen      Support sampling arrow direction
  * Aug 29, 2019  67962    tjensen      Update for GeneralGridData refactor
  * Apr 16, 2020  8145     randerso     Updated to allow new sample formatting
+<<<<<<< HEAD
+=======
+ * Sep 03, 2021  8651     njensen      Extends IntermediateGridResource instead
+ *                                     of GridResource
+ * Dec 20, 2023  2036519  mapeters     Records are now passed into resource constructor
+ *                                     instead of being stored in resource data
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
  * @author bsteffen
  */
+<<<<<<< HEAD
 public class D2DGridResource extends GridResource<GridResourceData>
+=======
+public class D2DGridResource extends IntermediateGridResource
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         implements IGridNameResource {
 
     private static final IUFStatusHandler statusHandler = UFStatus
@@ -144,12 +160,20 @@ public class D2DGridResource extends GridResource<GridResourceData>
     private Boolean lastInterpolationState = null;
 
     public D2DGridResource(GridResourceData resourceData,
+<<<<<<< HEAD
             LoadProperties loadProperties) {
+=======
+            LoadProperties loadProperties, GridRecord[] records) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         super(resourceData, loadProperties);
         if (resourceData.getNameGenerator() == null) {
             resourceData.setNameGenerator(new GridNameGenerator());
         }
+<<<<<<< HEAD
         for (GridRecord record : resourceData.getRecords()) {
+=======
+        for (GridRecord record : records) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             addDataObject(record);
         }
         if (this.hasCapability(ImagingCapability.class)) {

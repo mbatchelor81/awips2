@@ -66,6 +66,11 @@
 # 04/16/2019   7056       troberts     Changed floats to float32.
 # 05/06/2019   7842       dgilling     Update to use netcdf4-python.
 # 03/09/2020   8047       tgurney      Update remaining netcdf references
+<<<<<<< HEAD
+=======
+# 01/19/2023   23407      alockleigh   Update getBases to set Bases variable
+#                                      more efficiently.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #=====================================================================
 
 
@@ -1345,6 +1350,7 @@ class BOIVerifyUtility(SmartScript.SmartScript):
        if not self.checkFile(inputParm,model):
           return Bases
        if model in self.OBSMODELS:
+<<<<<<< HEAD
           for i in range(self.onumRecs):
              if self.oncBtime[i] not in Bases:
                 Bases.append(self.oncBtime[i])
@@ -1354,6 +1360,12 @@ class BOIVerifyUtility(SmartScript.SmartScript):
                 Bases.append(self.fncBtime[i])
        Bases.sort()
        return Bases
+=======
+          Bases = set(self.oncBtime[:])
+       else:
+          Bases = set(self.fncBtime[:])
+       return sorted(Bases)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     #=================================================================
     #  getStarts - get sorted list of all grid start times stored for
     #              an inputParm and model.  Can be helpful when

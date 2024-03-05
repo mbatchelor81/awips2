@@ -24,6 +24,7 @@
         of the file. 
     -->
 <menuTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
     <contribute xsi:type="titleItem"
         titleText="------ Clutter Filter Control (CFC) ------" id="${icao}ClutterFilterControlCFC" />
     <contribute xsi:type="bundleItem" file="bundles/DefaultRadarLayered.xml"
@@ -56,6 +57,8 @@
         <substitute key="product" value="34" />
         <substitute key="layer" value="5.0" />
     </contribute>
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <contribute xsi:type="subMenu" menuText="${icao} Power Removed Control"
         id="${icao}PowerRemovedControl">
         <contribute xsi:type="bundleItem" file="bundles/DefaultRadar.xml"

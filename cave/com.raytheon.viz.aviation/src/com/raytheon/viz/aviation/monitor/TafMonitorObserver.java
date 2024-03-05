@@ -43,6 +43,10 @@ import com.raytheon.viz.aviation.observer.TafMonitorDlg;
  * Nov 12, 2010 6195       rferrel     Clear guidance's TAF cache when
  *                                     an alert received.
  * May 15, 2014 3002       bgonzale    Moved common taf code to com.raytheon.uf.common.dataplugin.taf.
+<<<<<<< HEAD
+=======
+ * May 26, 2022 20788      smoorthy    Find station ID using new key, "location.stationId".
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -69,7 +73,11 @@ public class TafMonitorObserver extends MonitorObserver implements
         ArrayList<String> siteIDs = new ArrayList<String>();
 
         for (AlertMessage alert : alertMessages) {
+<<<<<<< HEAD
             String station = (String) alert.decodedAlert.get("stationId");
+=======
+            String station = (String) alert.decodedAlert.get("location.stationId");
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             for (TafSiteComp tsc : dialog.getTafSiteComps()) {
                 if (tsc.getStationName().equals(station)) {
                     siteIDs.add(station);

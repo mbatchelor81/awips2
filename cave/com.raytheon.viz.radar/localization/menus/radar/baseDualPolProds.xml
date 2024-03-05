@@ -345,6 +345,15 @@
         <substitute key="product" value="177" />
         <substitute key="elevation" value="0.0--0.0" />
     </contribute>
+<<<<<<< HEAD
+=======
+    <contribute xsi:type="bundleItem" file="bundles/DefaultRadar.xml"
+        menuText="Rain Rate Classification (RRC)" id="${icao}RainRateClassification">
+        <substitute key="icao" value="${icao}" />
+        <substitute key="product" value="197" />
+        <substitute key="elevation" value="0.0--0.0" />
+    </contribute>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <contribute xsi:type="subMenu" menuText="${icao} Hydrometeor Class (HC)"
         id="{icao}HydrometeorClassHC">
         <contribute xsi:type="bundleItem" file="bundles/DefaultRadar.xml"
@@ -924,4 +933,8 @@
         <substitute key="product" value="169" />
         <substitute key="elevation" value="0.0--0.0" />
     </contribute>
+<<<<<<< HEAD
 </menuTemplate>
+=======
+</menuTemplate>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

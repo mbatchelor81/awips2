@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -52,6 +64,7 @@ import com.raytheon.uf.viz.grid.radar.TiltUtils;
  * Grid Transformer which attempts to slice columns at Tilt levels and makes a
  * single grid. The problem is that for steep tilts there is not enough columns
  * of data nearby to make any relevant grid.
+<<<<<<< HEAD
  * 
  * <pre>
  * 
@@ -68,6 +81,27 @@ import com.raytheon.uf.viz.grid.radar.TiltUtils;
  * 
  * </pre>
  * 
+=======
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+ * Date          Ticket#  Engineer  Description
+ * ------------- -------- --------- --------------------------------------------
+ * May 20, 2010           bsteffen  Initial creation
+ * Jun 04, 2013  2041     bsteffen  Switch derived parameters to use concurrent
+ *                                  python for threading.
+ * Aug 20, 2013  2262     njensen   Use wxmath instead of meteolib
+ * Aug 22, 2017  6332     bsteffen  Change import, cleanup.
+ * May 17, 2018  7294     njensen   Check for NaN in computeGrid(...)
+ * May 22, 2018  7311     njensen   Support computing grids of vectors
+ * Jul 14, 2021  8576     randerso  Changed RadarAdapter to support multiple
+ *                                  local radars as defined in radarsInUse.txt
+ *
+ * </pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author bsteffen
  */
 public class OATiltGridTransformer extends OAGridTransformer {
@@ -81,7 +115,11 @@ public class OATiltGridTransformer extends OAGridTransformer {
     /**
      * Given a pdc and pressure level determine the value of the parameter by
      * performing one d column interpolation and then OA gridding the result
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param parameter
      * @param pdc
      *            a PontDataContainer which must have lat, lon, multidimensional
@@ -145,7 +183,11 @@ public class OATiltGridTransformer extends OAGridTransformer {
     /**
      * Column interpolation to get the value of a parameter at a given pressure
      * level.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param paramCol
      * @param presCol
      * @param presLvl
@@ -237,7 +279,13 @@ public class OATiltGridTransformer extends OAGridTransformer {
         }
         FloatDataRecord heightRecord;
         try {
+<<<<<<< HEAD
             heightRecord = TiltUtils.getInstance().getHeightGrid(
+=======
+            // use null icao for home radar location
+            String icao = null;
+            heightRecord = TiltUtils.getInstance().getHeightGrid(icao,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     gridGeom.getGridRange2D(), latLonToGrid.inverse(), tilt);
         } catch (Exception e) {
             throw new VizException("Error building TiltHeight for tilt " + tilt,
@@ -258,8 +306,12 @@ public class OATiltGridTransformer extends OAGridTransformer {
             } else {
                 DerivedParameterRequest presRequestV = new DerivedParameterRequest();
                 presRequestV.setMethod("Hgt2Pres");
+<<<<<<< HEAD
                 presRequestV
                         .setArgumentRecords(new Object[] { heightRecord });
+=======
+                presRequestV.setArgumentRecords(new Object[] { heightRecord });
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 DerivedParameterRequest sliceRequestV = new DerivedParameterRequest();
                 sliceRequestV.setMethod("Slice");
                 sliceRequestV.setArgumentRecords(

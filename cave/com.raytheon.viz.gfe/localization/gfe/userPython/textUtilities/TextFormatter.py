@@ -40,6 +40,11 @@
 # Jul 19, 2016  5749     randerso  Fix issue with new Jep in __createArea()
 # Oct 31, 2016  5979     njensen   Cast to primitives for compatibility
 # Feb 19, 2018  6768     randerso  Added deleteAllTempReferenceData
+<<<<<<< HEAD
+=======
+# May 11, 2023  2033877  smoorthy  Utilize timezone in offsetTime.py, as opposed to
+#                                  os.environ['TZ']
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 ##
 
@@ -829,7 +834,14 @@ class TextFormatter:
 
         accessor = ModuleAccessor.ModuleAccessor()
         areaDict = accessor.variable(areaDictName, "AreaDictionary")
+<<<<<<< HEAD
         localTZ = os.environ['TZ']   #current WFO time zone
+=======
+
+        import offsetTime
+        localTZ = offsetTime.getTimeZone() #current WFO time zone
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         localTZid = time.strftime("%Z", time.localtime(creationTime))
         #print("Current WFO tz: ", localTZ)
         for areas in editAreaGroups:
@@ -840,12 +852,22 @@ class TextFormatter:
                 #print("processing area: ", area)
                 try:
                     zoneTZ = areaDict[area]['ugcTimeZone']
+<<<<<<< HEAD
                     prevTZ = os.environ['TZ']
                     os.environ['TZ'] = zoneTZ
                     time.tzset()
                     tzid = time.strftime("%Z", time.localtime(creationTime))
                     os.environ['TZ'] = prevTZ
                     time.tzset()
+=======
+
+                    prevTZ = offsetTime.getTimeZone()
+                    offsetTime.setTimeZone(zoneTZ)
+
+                    tzid = time.strftime("%Z", time.localtime(creationTime))
+
+                    offsetTime.setTimeZone(prevTZ)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                     #print("areadict entry: ", zoneTZ)
                 except:

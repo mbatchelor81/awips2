@@ -30,6 +30,10 @@ import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.menus.IMenuService;
+<<<<<<< HEAD
+=======
+import org.locationtech.jts.geom.Coordinate;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.uf.common.geospatial.ReferencedCoordinate;
 import com.raytheon.uf.common.localization.IPathManager;
@@ -68,7 +72,10 @@ import com.raytheon.viz.ui.editor.AbstractEditor;
 import com.raytheon.viz.ui.editor.IMultiPaneEditor;
 import com.raytheon.viz.ui.input.InputAdapter;
 import com.raytheon.viz.ui.perspectives.AbstractCAVEPerspectiveManager;
+<<<<<<< HEAD
 import org.locationtech.jts.geom.Coordinate;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Perspective manager for MPE Perspective
@@ -84,21 +91,41 @@ import org.locationtech.jts.geom.Coordinate;
  * Oct 22, 2013  2491     bsteffen    Switch serialization to
  *                                    ProcedureXmlManager
  * Aug 11, 2017  6148     bkowal      Cleanup.
+<<<<<<< HEAD
  * May 10, 2017  7131     mduff       When opening edit station dialogs they are added 
  * Feb 21, 2018  7225     bkowal      Individual edit dialogs cannot be opened in Group Edit mode.
  *                                    Right-click (matches A1) will now change the quality in Group
  *                                    Edit mode.
  * May 10, 2018  7131     mduff       When opening edit station dialogs they are added 
+=======
+ * May 10, 2017  7131     mduff       When opening edit station dialogs they are added
+ * Feb 21, 2018  7225     bkowal      Individual edit dialogs cannot be opened in Group Edit mode.
+ *                                    Right-click (matches A1) will now change the quality in Group
+ *                                    Edit mode.
+ * May 10, 2018  7131     mduff       When opening edit station dialogs they are added
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *                                    as children to the DQC dialog.
  * Aug  8, 2018  6891     tgurney     Change the right-click menu to allow
  *                                    loading to "This" or "Other" pane
  * Aug  9, 2018  7098     tgurney     Close edit station dlg if a second copy
  *                                    is opened, + fix leaked child dlgs
+<<<<<<< HEAD
+=======
+ * Apr 01, 2022  8790     mapeters    Implement new openNewEditor(String editorId)
+ *                                    instead of no-arg version
+ * Apr 25, 2022  8791     mapeters    Handle minor DescriptorMap change
+ * Oct 21, 2022  8956     mapeters    DescriptorMap.getEditorId() now can take multiple displays
+ *                                    to determine if a Combo editor is needed
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  *
  * @author randerso
  */
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 public class MPEPerspectiveManager extends AbstractCAVEPerspectiveManager {
 
     private static final String MPE = "mpe";
@@ -129,19 +156,36 @@ public class MPEPerspectiveManager extends AbstractCAVEPerspectiveManager {
     }
 
     @Override
+<<<<<<< HEAD
     public AbstractEditor openNewEditor() {
+=======
+    public AbstractEditor openNewEditor(String editorId) {
+        if (editorId != null) {
+            throw new IllegalArgumentException(
+                    "MPEPerspectiveManager.openNewEditor doesn't support a non-null editorId arg: "
+                            + editorId);
+        }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         try {
             // Unmarshal default bundle xml
             Bundle b = ProcedureXmlManager.getInstance().unmarshal(Bundle.class,
                     PathManagerFactory.getPathManager().getStaticFile(MPE
                             + IPathManager.SEPARATOR + "default-bundle.xml"));
             // Load Bundle to perspective window in new editor
+<<<<<<< HEAD
             String editorId = b.getEditor();
             if (editorId != null) {
                 IRenderableDisplay[] displays = b.getDisplays();
                 if (displays.length > 0) {
                     editorId = DescriptorMap.getEditorId(
                             displays[0].getDescriptor().getClass().getName());
+=======
+            editorId = b.getEditor();
+            if (editorId != null) {
+                IRenderableDisplay[] displays = b.getDisplays();
+                if (displays.length > 0) {
+                    editorId = DescriptorMap.getEditorId(displays);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     AbstractEditor editor = UiUtil.createEditor(
                             perspectiveWindow, editorId, displays);
                     if (editor != null) {
@@ -234,7 +278,11 @@ public class MPEPerspectiveManager extends AbstractCAVEPerspectiveManager {
                         }
                     }
                 } else if (mouseButton == 3) {
+<<<<<<< HEAD
                     if (displayManager.isQpf()) {                         
+=======
+                    if (displayManager.isQpf()) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         QcPrecipOptionsDialog dlg = displayManager
                                 .getQcPrecipDialog();
                         if (editPrecipStnsDlg != null) {
@@ -281,8 +329,13 @@ public class MPEPerspectiveManager extends AbstractCAVEPerspectiveManager {
             }
         };
 
+<<<<<<< HEAD
         List<IInputHandler> handlers = new ArrayList<>();
         handlers.addAll(Arrays.asList(superHandlers));
+=======
+        List<IInputHandler> handlers = new ArrayList<>(
+                Arrays.asList(superHandlers));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         handlers.add(handler);
         return handlers.toArray(new IInputHandler[handlers.size()]);
     }

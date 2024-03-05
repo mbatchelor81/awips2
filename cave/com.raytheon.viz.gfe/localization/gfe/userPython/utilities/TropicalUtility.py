@@ -3,15 +3,11 @@
 # support, and with no warranty, express or implied, as to its usefulness for
 # any purpose.
 #
-# TropicalUtility - Version 4.0
+# TropicalUtility
 #
 # Authors:  Matthew H. Belk (BOX), Shannon White (AWIPS), Pablo Santos (MFL),
 # Tom LeFebvre (GSD)
 #
-# Created:  03/03/2012        Last Modified:  04/26/2016
-#
-#  04/26/2016 - Modified to add the displayProduct method supplied by Ron
-#               Anderson (Raytheon)
 # ------------------------------------------------------------------------------
 #
 # SOFTWARE HISTORY
@@ -36,25 +32,34 @@
 # May 14, 2020 22033      lefebvre    Added Central, WestPac sites to activeSites
 # May 21, 2020 22033      lefebvre    Addressed code review comments.
 # May 21, 2020 22033      lefebvre    Minor adjustments to a few things.
-# Jun 03, 2020 22033      lefebvre    Addressed code review comments.
+# Jun  3, 2020 22033      lefebvre    Addressed code review comments.
+# Jun  3, 2020 22033      lefebvre    Fixed exception statement.
+# Jul 23, 2020 22033      lefebvre    Change ProposedWindWW logic in sendMessageToWFOs
+# Jul 24, 2020 22033      lefebvre    Changed message for Wind Hazards in sendMsgTOWFOs
 # Jan 05, 2021 8313       randerso    Moved "Bad Map result" message inside result
 #                                     check so it's only displayed when no result
 #                                     is returned.
 # Feb 15, 2021 8362       randerso    Fix exception handling in getWfosAttention()
 #                                     check so it's only displayed when no result
 #                                     is returned.
+# Aug 24, 2021 22519      jlamb       Added deleteAllGrids method for HTI tools.
+# Sep 13, 2021 8657       randerso    Moved a number of tropical configuration
+#                                     items up to TropicalUtility
+# Sep 15, 2022            santos/scamp/white fixes post 21.4.1-13 testing
+#                                     in support of NHC WHR.
+# May 24, 2023  2029646   swhite      Eastern Pacific National TCV Update
+# Sep 29, 2023  2036298   santos/scomp/white Additional fixes after 21.4.1-13 testing.
 ################################################################################
 
-##
+# #
 # This is an absolute override file, indicating that a higher priority version
 # of the file will completely replace a lower priority version of the file.
-##
-
+# #
+from itertools import chain
 import collections
 import errno
 import os
 import re
-
 from awips.dataaccess import DataAccessLayer
 
 import GridManipulation
@@ -66,6 +71,7 @@ import ProcessVariableList
 import TimeRange
 import numpy as np
 import pprint as pp
+import tkinter as tk
 
 
 class TropicalUtility(GridManipulation.GridManipulation):
@@ -78,7 +84,7 @@ class TropicalUtility(GridManipulation.GridManipulation):
         self._hazUtils = HazardUtils.HazardUtils(dbss, None)
 
         #  Define a base for the ETN issued by a national center
-        self._natlBaseETN = 1000    #  Not used in current tools/procedures
+        self._natlBaseETN = 1000
 
         #  Get the current mutable database ID
         self._mutableID = self.mutableID()
@@ -89,78 +95,96 @@ class TropicalUtility(GridManipulation.GridManipulation):
         self._surgeWfos = ["CAR", "GYX", "BOX", "OKX", "PHI", "LWX", "AKQ",
                            "MHX", "ILM", "CHS", "JAX", "MLB", "MFL", "KEY",
                            "TBW", "TAE", "MOB", "LIX", "LCH", "HGX", "CRP",
-                           "BRO"]
+                           "BRO", "SGX", "LOX"]
         self._windWfos = ["ALY", "MRX", "FFC", "OHX", "HUN", "BMX", "MEG",
                           "JAN", "LZK", "SHV", "CAE", "FWD", "RAH", "GSP",
-                          "EWX", "RNK", "BGM", "BTV", "CTP"]
-
+                          "EWX", "RNK", "BGM", "BTV", "CTP"] + self._surgeWfos
         #  Toggle for debugging output
-        self._debug = False                 #  True = On / False = Off
+        self._debug = False  # True = On / False = Off
 
         #  Define test mode for procedure which communicate with WFOs
-        #self._testMode = True    # if True, the command is only printed (test)
-        self._testMode = False     # if False, messages get sent to WFOs (live)
-        
+        # self._testMode = True  # if True, the command is only printed (test)
+        self._testMode = False  # if False, messages get sent to WFOs (live)
+
         # JSON files are always saved to all of the following sites on the local
         # EDEX cluster.
         self._activeSiteIDs = ["NHA", "NHZ", "NHP", "HPA", "GUM", "PQE", "PQW"]
 
+        # Defines which sites are responsible for which basins
+        self._basinDomains = {
+            "Atlantic": ["NHA", "NHZ"],
+            "Eastern Pacific": ["NHZ", "NHP"],
+            "Central Pacific": ["HPA"],
+            "Western Pacific": ["GUM", "PQE", "PQW"],
+        }
+        # Defines the "bins" that are used for each basin
+        # Note: These items can be modified to add or remove bins as needed.
+        self._basinBins = {
+            # Testing 10 bins for AT and EP
+            "Atlantic": ["AT1", "AT2", "AT3", "AT4", "AT5"],  # "AT6", "AT7", "AT8", "AT9", "AT0"],
+            "Eastern Pacific": ["EP1", "EP2", "EP3", "EP4", "EP5"],  # "EP6", "EP7", "EP8", "EP9", "EP0"],
+            "Central Pacific": ["CP1", "CP2", "CP3", "CP4", "CP5"],
+            "Western Pacific": ["PQ1", "PQ2", "PQ3", "PQ4", "PQ5"],
+        }
+        self._maxStorms = 35
+        self._etnDict = {
+            "AL": 1000,
+            "EP": 2000,
+            "CP": 3000,
+            "WP": 4000,
+        }
+        self._NHCSites = frozenset(["NHA", "NHZ", "NHP"])
+        self._HFOSites = frozenset(["HPA"])
+        self._GUMSites = frozenset(["GUM", "PQE", "PQW"])
 
-    #===========================================================================
+    # ===========================================================================
     #  Utility methods to create common dialog buttons and actions
 
-    ### Makes the Run button
+    # ## Makes the Run button
     def makeRunButton(self, buttonFrame):
-        Tkinter.Button(buttonFrame, text="Run", width=10,
-                       command=self.runCommand,
-                       state=Tkinter.NORMAL).pack(side=Tkinter.LEFT, pady=5,
-                                                  padx=50, fill=Tkinter.X)
+        tk.Button(buttonFrame, text="Run", width=10,
+                  command=self.runCommand,
+                  state=tk.NORMAL).pack(side=tk.LEFT, pady=5,
+                                        padx=50, fill=tk.X)
 
-
-    ### Makes the Run/Dismiss button
+    # ## Makes the Run/Dismiss button
     def makeRunDismissButton(self, buttonFrame):
-        Tkinter.Button(buttonFrame, text="Run/Dismiss", width=10,
-                       command=self.runDismissCommand,
-                       state=Tkinter.NORMAL).pack(side=Tkinter.LEFT, pady=5,
-                                                  padx=50, fill=Tkinter.X)
+        tk.Button(buttonFrame, text="Run/Dismiss", width=10,
+                  command=self.runDismissCommand,
+                  state=tk.NORMAL).pack(side=tk.LEFT, pady=5,
+                                        padx=50, fill=tk.X)
 
-
-    ### Makes the Cancel button
+    # ## Makes the Cancel button
     def makeCancelButton(self, buttonFrame):
-        Tkinter.Button(buttonFrame, text="Cancel", width=10,
-                       command=self.cancelCommand,
-                       state=Tkinter.NORMAL).pack(side=Tkinter.LEFT, pady=5,
-                                                  padx=50, fill=Tkinter.X)
+        tk.Button(buttonFrame, text="Cancel", width=10,
+                  command=self.cancelCommand,
+                  state=tk.NORMAL).pack(side=tk.LEFT, pady=5,
+                                        padx=50, fill=tk.X)
 
-
-    ### Action when "Run" button is clicked
+    # ## Action when "Run" button is clicked
     def runCommand(self):
         LogStream.logUse("Run")
         self.makeHazardGrid()
         return
 
-
-    ### Action when "Run/Dismiss" button is clicked
+    # ## Action when "Run/Dismiss" button is clicked
     def runDismissCommand(self):
         LogStream.logUse("Run/Dismiss")
         if self.makeHazardGrid() == 1:
             self.cancelIt()
 
-
-    ### Action when "Cancel" button is clicked
+    # ## Action when "Cancel" button is clicked
     def cancelCommand(self):
         # unregister the maps
         LogStream.logUse("Cancel")
         self.cancelIt()
 
-
-    ### Actual steps required to cancel/exit
+    # ## Actual steps required to cancel/exit
     def cancelIt(self):
         # unregister the maps
         for key in self._registeredMaps:
             self._mapManager.unregisterMapSet(self._registeredMaps[key].mapId())
         self.__master.destroy()
-
 
     def getSubKeys(self, key):
         parts = key.split("^")
@@ -168,33 +192,29 @@ class TropicalUtility(GridManipulation.GridManipulation):
             parts = parts.remove("<None>")
         return parts
 
-
-    #===========================================================================
+    # ===========================================================================
     #  Utility methods to manipulate Hazard grids
 
     # Returns the phen for specified hazard key.
     # If not a VTEC hazard, returns ""
     def keyPhen(self, key):
         pos = key.find(".")
-        if pos == -1:   # not found
+        if pos == -1:  # not found
             return ""
 
         return key[0:pos]
 
-
     # Parses specified key and returns the sig field.
     def keySig(self, key):
         pos = key.find(".")
-        if pos == -1:   # not found
+        if pos == -1:  # not found
             return ""
 
         return key[pos + 1]
 
-
     # Parse the specified key and return the ETN. If none found,
     # return an empty string ("")
     def getETN(self, key):
-
         subKeys = key.split("^")
         subKey = subKeys[0]
         parts = subKey.split(":")
@@ -202,7 +222,6 @@ class TropicalUtility(GridManipulation.GridManipulation):
             return ""
         else:
             return parts[1]
-        
     def activeSiteIDs(self):
         return self._activeSiteIDs
 
@@ -221,19 +240,19 @@ class TropicalUtility(GridManipulation.GridManipulation):
         # selectedMask
         hazList = []
         for hazKey in hazKeys:
-            if hazKey == "<None>":      #  Ignore the <None> key
+            if hazKey == "<None>":  # Ignore the <None> key
                 continue
-            
+
             #  Identify the area where this hazard exists
             hazIndex = self.getIndex(hazKey, hazKeys)
             mask = hazGrid == hazIndex
 
-            #  Check for overlapping points 
+            #  Check for overlapping points
             overlap = mask & selectedMask
-            
+
             #  If there is any overlap
             if overlap.any():
-                
+
                 # These keys can have subKeys so separate those, too
                 subKeyList = self.getSubKeys(hazKey)
                 for subKey in subKeyList:
@@ -242,7 +261,7 @@ class TropicalUtility(GridManipulation.GridManipulation):
 
         #  Look over the proposed hazards keys
         for propKey in propKeys:
-            if propKey == "<None>":     #  Ignore the <None> key
+            if propKey == "<None>":  # Ignore the <None> key
                 continue
 
             # Check for overlapping points
@@ -270,7 +289,6 @@ class TropicalUtility(GridManipulation.GridManipulation):
                 hazETN = self.getETN(hazKey)
                 hazPhen = self.keyPhen(hazKey)
                 hazSig = self.keySig(hazKey)
-                
                 if propPhen == "SS" and hazPhen in localHazList:
                     return True
 
@@ -280,7 +298,7 @@ class TropicalUtility(GridManipulation.GridManipulation):
 
                 # If the hazard keys are both tropical one the ETNs must match
                 if hazPhenSig in tropicalHazList and \
-                   propPhenSig in tropicalHazList:
+                        propPhenSig in tropicalHazList:
                     if hazETN != propETN:
                         return True
 
@@ -290,19 +308,15 @@ class TropicalUtility(GridManipulation.GridManipulation):
                         return True
         return False
 
-
     # Check for hazard conflicts on a point by point basis.  Uses the method
     # anyHazadConflicts to do the logic for checking hazard phen, sig and ETN.
     def anyHazardConflictsByPoint(self, hazardGrid, proposedGrid, selectedMask):
-        # Make the list of tropical hazards
-        tropicalHazList = ["TR.W", "TR.A", "HU.W", "HU.A", "SS.A", "SS.W"]
 
         hazGrid, hazKeys = hazardGrid
         propGrid, propKeys = proposedGrid
 
         # Make the list of hazards found in the hazard grid over the
         # selectedMask
-        hazList = []
         for hazKey in hazKeys:
             if hazKey == "<None>":
                 continue
@@ -319,25 +333,20 @@ class TropicalUtility(GridManipulation.GridManipulation):
                 overlap = hazMask & propMask & selectedMask
                 if overlap.any():
                     if self.anyHazardConflicts(hazardGrid, proposedGrid, overlap):
-                        start = int(self._gmtime().unixTime() / 3600) * 3600
-                        end = start + 3600
-                        timeRange = self.GM_makeTimeRange(start, end)
                         return True
         return False
 
     #  Calculates a difference grid (added versus removed)
-    #  Calculates a difference grid (added versus removed)
-    def calcDiffGrid(self, initialGrid, proposedGrid, diffName, timeRange, 
-                     isWFO=False):
+    def calcDiffGrid(self, initialGrid, proposedGrid, diffName, timeRange, isWFO=False):
 
         #  If this is a WFO
         if isWFO:
             #  Filter the Hazards to only keep the Storm Surge hazards
             ssKeys = ["SS.W", "SS.A"]
-        
+
             initialGrid = self.filterHazardGrid(initialGrid, ssKeys)
             proposedGrid = self.filterHazardGrid(proposedGrid, ssKeys)
-        
+
         #  Split these grids into their components
         initGrid, initKeys = initialGrid
         propGrid, propKeys = proposedGrid
@@ -347,8 +356,8 @@ class TropicalUtility(GridManipulation.GridManipulation):
         propNone = self.getIndex("<None>", propKeys)
 
         #  Mask of these areas
-        initNoneMask = (initGrid == initNone)
-        propNoneMask = (propGrid == propNone)
+        initNoneMask = initGrid == initNone
+        propNoneMask = propGrid == propNone
 
         #  Make an empty grid to hold difference indicator
         diffGrid = np.zeros(self.getGridShape(), np.float32)
@@ -358,43 +367,41 @@ class TropicalUtility(GridManipulation.GridManipulation):
 
         # Calculate hazards that were added
         diffGrid[~propNoneMask & initNoneMask] = 1
-        
+
         # Find areas that had some hazard and it changed to another hazard
         for initKey in initKeys:
             for propKey in propKeys:
-                if initKey == "<None>" or propKey == "<None>":   # ignore any <None> cases
+                if initKey == "<None>" or propKey == "<None>":  # ignore any <None> cases
                     continue
-                if initKey == propKey: # ignore cases where the keys are the same
+                if initKey == propKey:  # ignore cases where the keys are the same
                     continue
-                
+
                 # Now we know the keys are different and neither is <None>
                 initIndex = self.getIndex(initKey, initKeys)
                 propIndex = self.getIndex(propKey, propKeys)
 
                 initMask = (initGrid == initIndex)
                 propMask = (propGrid == propIndex)
-                
                 # The intersection is where they changed
                 diffGrid[initMask & propMask] = 2
 
         #  Add this temporary grid to the grid manager so it can be seen
         self.createGrid("Fcst", diffName, "SCALAR", diffGrid, timeRange,
-                descriptiveName="Diff Between NHC and WFO",
-                precision=0, minAllowedValue=-1.0, maxAllowedValue=2.0)
-        
-        return 
-    
+                        descriptiveName="Diff Between NHC and WFO",
+                        precision=0, minAllowedValue=-1.0, maxAllowedValue=2.0)
+
+        return
 
     def filterHazardGrid(self, hazardGrid, filterKeys):
-        
+
         filteredGrid = self.empty(np.int8)
         filteredKeys = ["<None>"]
         hazGrid, hazKeys = hazardGrid
-        
+
         # Find the hazard keys that contain any filter key
         for filterKey in filterKeys:
             for hazKey in hazKeys:
-                
+
                 if filterKey not in hazKey:
                     continue
                 hazIndex = self.getIndex(hazKey, hazKeys)
@@ -406,32 +413,32 @@ class TropicalUtility(GridManipulation.GridManipulation):
                     phenSig = splitKey.split(":")[0]
                     if phenSig not in filterKeys:
                         continue
-                    
+
                     newKey = newKey + splitKey + "^"
-                    
+
                 if newKey[-1] == "^":
-                    newKey = newKey[0:-1]   # trim the trailing "^"
-                    
-                    
+                    newKey = newKey[0:-1]  # trim the trailing "^"
+
                 newIndex = self.getIndex(newKey, filteredKeys)
-               
+
                 filteredGrid[mask] = newIndex
-            
+
         return filteredGrid, filteredKeys
+
     #  Calculates a difference grid (added versus removed) for WFOs
 
- #==============================================================================
- #  Methods for sending messages to WFOs
- #==============================================================================
+    # ==============================================================================
+    #  Methods for sending messages to WFOs
+    # ==============================================================================
 
     #  Define method to send a message to WFOs
     def sendMessageToWfos(self, wfos, message, testMode=True):
-        SendMessageResult = collections.namedtuple('SendMessageResult',
-                                                   ('success', 'wfo', 'output'))
+        SendMessageResult = collections.namedtuple("SendMessageResult",
+                                                   ("success", "wfo", "output"))
 
         if len(wfos) == 0:
             msg = "sendMessageToWfos called with empty WFO list, nothing to do."
-            self.statusBarMsg(msg, 'A')
+            self.statusBarMsg(msg, "A")
             return
 
         #  Look at each WFO which needs a message
@@ -439,8 +446,7 @@ class TropicalUtility(GridManipulation.GridManipulation):
         for wfo in wfos:
 
             #  Start constructing the final message
-            final_message = "{} - {} have been sent by NHC.".format(wfo.strip(),
-                                                                message.strip())
+            final_message = f"{wfo.strip()} - {message.strip()} have been sent by NHC."
 
             #  If the ProposedSS grids are mentioned, send one message
             if "ProposedSS" in message:
@@ -448,13 +454,11 @@ class TropicalUtility(GridManipulation.GridManipulation):
                 final_message += " chat room in NWSChat. You should run "
                 final_message += "the Populate -> CopyNHCProposed procedure "
                 final_message += "now, and start the collaboration process."
-            
-            #  Otherwise, let the WFO's know we're finished with this round 
+
+            #  Otherwise, let the WFO's know we're finished with this round
             elif "ProposedTropWindWW" in message:
-                final_message += " NHC has sent you a ProposedTropWindWWnc guidance "
-                final_message += "grid via ISC. You can view it as guidance when "
-                final_message += "making your inland watches and warnings with Make Hazards."
-            
+                pos = message.find("ProposedTropWindWW") + len("ProposedTropWindWW")
+                final_message = message[pos:]
             else:
                 final_message += " The collaboration process is now done. "
                 final_message += "You should run the Populate -> "
@@ -464,42 +468,40 @@ class TropicalUtility(GridManipulation.GridManipulation):
             #  If we are in test mode, just display the command which
             #  would be executed
             if testMode:
-                msg = "Test message to WFO {}: '{}'".format(wfo, final_message)
+                msg = f"Test message to WFO {wfo}: '{final_message}'"
                 LogStream.logDebug(msg)
 
-                result = ""          #  Simulate a successful transfer
+                result = ""  # Simulate a successful transfer
 
             #  Otherwise, actually send this message
             else:
-                msg = "Live message to WFO {}: '{}'".format(wfo, final_message)
+                msg = f"Live message to WFO {wfo}: '{final_message}'"
                 LogStream.logDebug(msg)
-
                 result = self.sendWFOMessage(wfo, final_message)
 
             #  Keep track of which offices successfully got the message
             results.append(SendMessageResult(result == "", wfo, result))
 
-
         total_count = 0
         fail_count = 0
         details = ""
-        
+
         #  Construct a final status message of the message send status
-        for result in sorted(results, key=lambda x: (x.success, x.wfo)):
+        #  for result in sorted(results, cmp=compare):
+        for result in results:
             total_count += 1
             if result.success:
-                details += "\nMessage successfully sent to site {}.".format(result.wfo)
+                details += f"\nMessage successfully sent to site {result.wfo}."
             else:
                 fail_count += 1
-                details += "\nCould not send message to site {}. Command output:\n{}".format(result.wfo, result.output)
+                details += f"\nCould not send message to site {result.wfo}. Command output:\n{result.output}"
 
         if fail_count:
-            msg = "{} of {} server(s) failed to receive WFO message. Site-by-site detail: \n{}".format(fail_count, total_count, details)
-            self.statusBarMsg(msg, 'A')
+            msg = f"{fail_count} of {total_count} server(s) failed to receive WFO message. Site-by-site detail: \n{details}"
+            self.statusBarMsg(msg, "A")
         else:
-            msg = "WFO message sent to all {} sites successfully. Site-by-site detail: \n{}".format(total_count, details)
-            self.statusBarMsg(msg, 'R')
-
+            msg = f"WFO message sent to all {total_count} sites successfully. Site-by-site detail: \n{details}"
+            self.statusBarMsg(msg, "R")
 
     #  Define method to determine WFOs which should get a message from NHC
     def getWfosAttention(self, WEname, anyChanges=None, percentThresh=3):
@@ -518,29 +520,29 @@ class TropicalUtility(GridManipulation.GridManipulation):
         officeMasks = {}
         for wfo in searchWfos:
             try:
-                officeMasks[wfo] = self.encodeEditArea("ISC_%s" % (wfo.upper()))
-                
+                officeMasks[wfo] = self.encodeEditArea(f"ISC_{wfo.upper()}")
+
                 #  If we are looking for any changes to the underlying field
                 if anyChanges is not None:
-                    
+
                     #  See if there are any changes in hazards for this WFO
                     overlay = (anyChanges & officeMasks[wfo])
-                
+
                     if overlay.any():
                         msg = "Adding to surge - " + wfo + " for changes"
-                        self.statusBarMsg(msg, 'R')
+                        self.statusBarMsg(msg, "R")
                         surgeWfos.add(wfo)
             except:
                 msg = "No edit area found. Removing " + wfo + \
                       " from further processing."
-                self.statusBarMsg(msg, 'U')
+                self.statusBarMsg(msg, "U")
 
         #  Get the Hazards grid
         hazardGridList = self.getGrids(self._mutableID, WEname, "SFC",
-                                       TimeRange.allTimes(), mode="List", 
+                                       TimeRange.allTimes(), mode="List",
                                        noDataError=0)
 
-#         print "hazardGridList =", hazardGridList
+        # print "hazardGridList =", hazardGridList
 
         #  If there are no hazard grids
         if hazardGridList is None:
@@ -549,36 +551,36 @@ class TropicalUtility(GridManipulation.GridManipulation):
         #  Look at each WFO which needs a message
         for (hazardBytes, hazardKeys) in hazardGridList:
 
-#             print "Starting to examine hazards"
+            # print "Starting to examine hazards"
 
             #  Look at each hazard key in this grid - except the first, <None>
             for (index, key) in enumerate(hazardKeys):
 
                 #  Ignore the <None> and <Invalid> keys
                 if key in ["<None>", "<Invalid>"]:
-                    continue   #  do not bother looking further
+                    continue  # do not bother looking further
 
-#                 print "\n\nLooking at ", index, key
+                # print "\n\nLooking at ", index, key
 
                 #  Check this key for either storm surge (SS), or wind (HU, TR)
                 #  hazards
                 if re.search("(SS|HU|TR).[AW]", key) is not None:
 
-#                     print "found a tropical hazard"
-                    hazardType = "both"         #  assume both hazards are here
+                    #                     print "found a tropical hazard"
+                    hazardType = "both"  # assume both hazards are here
 
-                    #-----------------------------------------------------------
+                    # -----------------------------------------------------------
                     #  See if which type of hazard this is
 
                     #  Wind hazard, no surge hazard
                     if re.search("(HU|TR).[AW]", key) is not None and \
-                       re.search("SS.[AW]", key) is None:
+                            re.search("SS.[AW]", key) is None:
 
                         hazardType = "wind-only"
 
                     #  Surge hazard, no wind hazard
                     elif re.search("SS.[AW]", key) is not None and \
-                         re.search("(HU|TR).[AW]", key) is None:
+                            re.search("(HU|TR).[AW]", key) is None:
 
                         hazardType = "surge-only"
 
@@ -607,40 +609,40 @@ class TropicalUtility(GridManipulation.GridManipulation):
                                 #  Get the mask for this zone
                                 try:
                                     zoneMask = self.encodeEditArea(zone)
-                                except:
+                                except errno:
                                     msg = "\tCould not get zone mask for " + wfo
                                     LogStream.logProblem(msg, LogStream.exc())
                                     continue
 
-#                                #  If we did not get this mask - move on
-#                                if zoneMask is None:
-#                                    continue
+                                #                                #  If we did not get this mask - move on
+                                #                                if zoneMask is None:
+                                #                                    continue
 
                                 #  See if there is an overlap with current
                                 #  hazard type
                                 zoneOverlap = zoneMask & hazardMask
 
-    #=======================================================================
-    #  This code kept in case we need to enforce the 3% area of a zone
-    #  requirement in the future. This would mimic the process of the text
-    #  formatters.
+                                # =======================================================================
+                                #  This code kept in case we need to enforce the 3% area of a zone
+                                #  requirement in the future. This would mimic the process of the text
+                                #  formatters.
                                 #  Count all the points of the masks
-#                                 countOverlap = np.count_nonzero(zoneOverlap)
-#                                 countMask = np.count_nonzero(zoneMask)
-#
-#                                 #  See if there are enough points to justify
-#                                 #  keeping this zone in the list
-#                                 zonePercent = (
-#                                     float(countOverlap) / float(countMask)
-#                                 )
+                                #                                 countOverlap = np.count_nonzero(zoneOverlap)
+                                #                                 countMask = np.count_nonzero(zoneMask)
+                                #
+                                #                                 #  See if there are enough points to justify
+                                #                                 #  keeping this zone in the list
+                                #                                 zonePercent = (
+                                #                                     float(countOverlap) / float(countMask)
+                                #                                 )
 
-#                                 print "overlap = %d\tmask = %d\tpercent =%.2f" % \
-#                                       (countOverlap, countMask, zonePercent)
-#
+                                #                                 print "overlap = %d\tmask = %d\tpercent =%.2f" % \
+                                #                                       (countOverlap, countMask, zonePercent)
+                                #
                                 #  If the percentage is high enough
-#                                 if int((zonePercent*100.0) + 0.5) >= percentThresh:
-    #
-    #=======================================================================
+                                #                                 if int((zonePercent*100.0) + 0.5) >= percentThresh:
+                                #
+                                # =======================================================================
 
                                 #  For now, notify any zone which has a
                                 #  possibility for a storm surge hazard
@@ -657,24 +659,24 @@ class TropicalUtility(GridManipulation.GridManipulation):
                                         msg = "Adding to both - " + wfo
                                         bothWfos.add(wfo)
 
-                                    self.statusBarMsg(msg, 'R')
+                                    self.statusBarMsg(msg, "R")
                                     print(msg)
 
                                     #  No point in looking at further zones
                                     break
 
-        #=======================================================================
+        # =======================================================================
         #  Now ensure we do not duplicate WFOs with both hazards in the
         #  individual hazard sets.  Use this code when we are no longer using
         #  the text TCV to notify WFOs of tropical wind hazards.
 
-#         for wfo in bothWfos:
-#             if wfo in windWfos:
-#                 windWfos.discard(wfo)
-#             if wfo in surgeWfos:
-#                 surgeWfos.discard(wfo)
+        #         for wfo in bothWfos:
+        #             if wfo in windWfos:
+        #                 windWfos.discard(wfo)
+        #             if wfo in surgeWfos:
+        #                 surgeWfos.discard(wfo)
 
-        #=======================================================================
+        # =======================================================================
         #  Now ensure we do not duplicate WFOs with both hazards in the
         #  individual hazard sets - this is for the 2016 season
 
@@ -688,17 +690,16 @@ class TropicalUtility(GridManipulation.GridManipulation):
         #  Return the completed WFO notification list
         return (list(bothWfos), list(windWfos), list(surgeWfos))
 
-
     #  Define a method to find zones associated with a WFO
     def findWfoZones(self, wfo):
 
         #  Construct the SQL to get these attributes from the maps database
-        reqParms = {'datatype' : 'maps',
-                    'table' : 'mapdata.zone',
-                    'locationField' : 'cwa',
-                    'geomField' : 'the_geom',
-                    'locationNames' : [wfo.strip()],
-                    'parameters' : ['state', 'zone'],
+        reqParms = {"datatype": "maps",
+                    "table": "mapdata.zone",
+                    "locationField": "cwa",
+                    "geomField": "the_geom",
+                    "locationNames": [wfo.strip()],
+                    "parameters": ["state", "zone"],
                     }
 
         #  Create the Data Access request
@@ -706,20 +707,21 @@ class TropicalUtility(GridManipulation.GridManipulation):
 
         #  Process the response
         result = DataAccessLayer.getGeometryData(req)
+        self.statusBarMsg("Bad result in Map request for map: " + wfo, "S")
 
         #  Check if we got a response
         if not result:
-            self.statusBarMsg("Bad result in Map request for map: " + wfo, "S")
+            # What should be done in this case?
+            print("Bad result from getGeometryData.")
 
         #  Get ready to track matching zones
         zoneSet = set()
 
         #  Process the response contents
         for record in result:
-
             #  Retrieve state and zone
-            state = record.getString('state')
-            zone = record.getString('zone')
+            state = record.getString("state")
+            zone = record.getString("zone")
 
             #  Construct a UGC code and store it for later
             zoneSet.add(state + "Z" + zone)
@@ -735,57 +737,57 @@ class TropicalUtility(GridManipulation.GridManipulation):
         if testMode is None:
             testMode = self._testMode
 
-#         #  Get the status of each WFO's communications
-#         wfoStatus = self.getWfoStatus()
+        #         #  Get the status of each WFO's communications
+        #         wfoStatus = self.getWfoStatus()
 
         #  See which WFOs we need to notify
-        (bothWfos, windWfos, surgeWfos) = self.getWfosAttention(field, 
+        (bothWfos, windWfos, surgeWfos) = self.getWfosAttention(field,
                                                                 anyChanges)
 
         #  Send a message to each office
-#         message = "%s grids containing tropical, wind and storm surge hazards"%\
-#                   (field)
-#         self.sendMessageToWfos(bothWfos, message, self._testMode)
+        #         message = "%s grids containing tropical, wind and storm surge hazards"%\
+        #                   (field)
+        #         self.sendMessageToWfos(bothWfos, message, self._testMode)
 
-#         message = "%s grids containing tropical, wind hazards" % (field)
-#         self.sendMessageToWfos(windWfos, message, self._testMode)
+        #         message = "%s grids containing tropical, wind hazards" % (field)
+        #         self.sendMessageToWfos(windWfos, message, self._testMode)
 
         message = "%s grids containing tropical, storm surge hazards" % (field)
         self.sendMessageToWfos(surgeWfos, message, testMode)
 
-
-#===============================================================================
-#  Code to process StormInfo files -
-#===============================================================================
+    # ===============================================================================
+    #  Code to process StormInfo files -
+    # ===============================================================================
 
     def _synchronizeAdvisories(self):
-        # Retrieving a directory causes synching to occur.
+        # Retrieving a directory causes syncing to occur.
         # This code can throw an exception but don't catch it
         # so that forecasters can be made aware of the issue.
-        file = LocalizationSupport.getLocalizationFile(
-                                    LocalizationSupport.CAVE_STATIC,
-                                    LocalizationSupport.SITE, self.getSiteID(),
-                                    self._getAdvisoryPath()).getFile()
-        return file
+        return LocalizationSupport.getLocalizationFile(
+            LocalizationSupport.CAVE_STATIC,
+            LocalizationSupport.SITE, self.getSiteID(),
+            self._getAdvisoryPath()).getFile()
 
     #  Constructs the absolute path to the JSON files for this site
     def _getLocalAdvisoryDirectoryPath(self):
-        file = self._synchronizeAdvisories()
-        path = file.getPath()
+        path = self._synchronizeAdvisories().getPath()
 
         try:
-             os.makedirs(path)
+            os.makedirs(path)
         except OSError as exception:
             if exception.errno != errno.EEXIST:
                 raise
 
         return path
 
-    #  Retrieves the names of the active storm JSON files for further processing  
-    def _getStormAdvisoryNames(self, filterATOnly=True):
+    #  Retrieves the names of the active storm JSON files for further processing
+    def _getStormAdvisoryNames(self, filterATOnly=False):
         advisoryDirectoryPath = self._getLocalAdvisoryDirectoryPath()
         filenames = os.listdir(advisoryDirectoryPath)
         allAdvisories = [filename for filename in filenames if filename[-5:] == ".json"]
+
+        if self.getSiteID() == "NHA":
+            filterATOnly = True
 
         if filterATOnly:
             stormAdvisories = [filename for filename in allAdvisories if filename[:2] == "AT"]
@@ -800,29 +802,23 @@ class TropicalUtility(GridManipulation.GridManipulation):
 
         try:
             pythonDict = JsonSupport.loadFromJson(LocalizationSupport.CAVE_STATIC,
-                                             self.getSiteID(), fileName)
-
-            statFileName = os.path.join(os.environ["HOME"], "caveData", "etc",
-                                        "site", self.getSiteID(), fileName)
-
+                                                  self.getSiteID(), fileName)
             return pythonDict
 
         except Exception as e:
             self.statusBarMsg("Error when loading JSON file:" + advisoryName, "S")
             return None
 
-
     #  Saves a JSON storm record
     def _saveAdvisory(self, advisoryName, advisoryDict):
         self._synchronizeAdvisories()
         fileName = self._getAdvisoryFilename(advisoryName)
 
-        print("Saving %s to %s" % (advisoryName, fileName))
-        print("advisoryDict: %s" % (pp.pformat(advisoryDict)))
+        print(f"Saving {advisoryName} to {fileName}")
+        print("advisoryDict: {}".format(pp.pformat(advisoryDict)))
 
-        # Time stamp the storminfo
-        now = self._gmtime().unixTime()
-        advisoryDict["lastModified"] = now
+        # Time stamp the stormInfo
+        advisoryDict["lastModified"] = self._gmtime().unixTime()
 
         # Save this advisory for all active sites
         for siteID in self._activeSiteIDs:
@@ -831,10 +827,10 @@ class TropicalUtility(GridManipulation.GridManipulation):
                 JsonSupport.saveToJson(LocalizationSupport.CAVE_STATIC,
                                        siteID, fileName, advisoryDict)
             except Exception as e:
-                print("Save Exception for %s : %s" % (fileName, e))
-            else: # No exceptions occurred
-                print("Wrote file contents for: %s" % (fileName))
-    
+                print(f"Save Exception for {fileName} : {e}")
+            else:  # No exceptions occurred
+                print(f"Wrote file contents for: {fileName}")
+
                 # Purposely allow this to throw
                 self._synchronizeAdvisories()
 
@@ -849,29 +845,30 @@ class TropicalUtility(GridManipulation.GridManipulation):
         else:
             return os.path.join("gfe", "tcvAdvisories")
 
-    #  Helper method which constructs the absolute filename for a JSON record 
+    #  Helper method which constructs the absolute filename for a JSON record
     def _getAdvisoryFilename(self, advisoryName):
         advisoryFilename = os.path.join(self._getAdvisoryPath(), advisoryName)
 
         if not advisoryFilename.endswith(".json"):
             advisoryFilename += ".json"
-        
+
         return advisoryFilename
 
-    #  Helper method which coordinates the actual extraction of JSON records 
+    #  Helper method which coordinates the actual extraction of JSON records
     #  into our Python environment
-    def extractStormInfo(self, filterATOnly=True):
+    def extractStormInfo(self, filterATOnly=False):
 
         #  Sync the CAVE localization store
         self._synchronizeAdvisories()
 
         #  Get the list of all available storm advisories
+        if self.getSiteID() == "NHA":
+            filterATOnly = True
         fileList = self._getStormAdvisoryNames(filterATOnly)
         #  Get the storm information from each advisory
         stormList = []
 
         for f in fileList:
-
             #  Load this storm info
             curStorm = self._loadAdvisory(f)
 
@@ -880,10 +877,9 @@ class TropicalUtility(GridManipulation.GridManipulation):
 
         return stormList
 
-
-    def determineStorm (self, stormList, bogusStormName):
+    def determineStorm(self, stormList, bogusStormName):
         # Decide if this is a new storm or if we need to pre-populate info from existing storm
-##        stormList = self.extractStormInfo()
+        # stormList = self.extractStormInfo()
         stormNames = []
         for sDict in stormList:
             stormNames.append(sDict["stormName"])
@@ -910,50 +906,22 @@ class TropicalUtility(GridManipulation.GridManipulation):
 
         return selectedName
 
+    def makeStormID(self, pil, stormNumber):
+        """
+        Makes a stormID from the specified pil and stormNumber.
+        """
+        yearStr = self._gmtime().strftime("%Y")
+        basinID = pil[0:2]
+        if basinID == "AT":
+            basinID = "AL"
+        elif basinID == "PQ":
+            basinID = "WP"
+        stormID = f"{basinID}{stormNumber:02d}{yearStr}"
+        return stormID
 
-#===============================================================================
-#  Miscellaneous helper methods
-#===============================================================================
-
-    # Extract just the wind hazards from the specified hazard grid.
-    def extractWindHazards(self, hazardGridList,
-                           windHazards=["TR.W", "TR.A", "HU.W", "HU.A"]):
-
-        #hazGrid, hazKeys = hazardGridList[hazWindIndex]
-        # Make new empty wind hazard grid
-        windHazGrid = self.empty(np.int8)
-        windKeys = ["<None>"]
-
-        # Find the hazardGrid that contains any windHazards.
-        # Reverse the list first so we search backwards
-        hazardGridList.reverse()
-        hazardGrid = None
-        for grid, keys in hazardGridList:
-            if hazardGrid is not None:
-                break
-            for key in keys:
-                for windHaz in windHazards:
-                    # If we find a windHazard, save that grid
-                    if key.find(windHaz):
-                        hazardGrid = (grid, keys)
-
-        # If we didn't find any wind hazards above, return the empty grid
-        if hazardGrid is None:
-            return (windHazGrid, windKeys)
-
-        # Extract just the wind hazards from the grid we found
-        hazGrid, hazKeys = hazardGrid
-        for hazKey in hazKeys:
-            phen = self.keyPhen(hazKey)
-            sig = self.keySig(hazKey)
-            phenSig = phen + "." + sig
-            if phenSig in windHazards:
-                hazIndex = self.getIndex(hazKey, hazKeys)
-                windIndex = self.getIndex(hazKey, windKeys)
-                windHazGrid[hazGrid == hazIndex] = windIndex
-
-        return (windHazGrid, windKeys)
-
+    # ===============================================================================
+    #  Miscellaneous helper methods
+    # ===============================================================================
 
     # Merge the specified Discrete grid into the Hazard grid.
     def mergeDiscreteGrid(self, mergeHazGrid, timeRange):
@@ -961,7 +929,6 @@ class TropicalUtility(GridManipulation.GridManipulation):
         mergeGrid, mergeKeys = mergeHazGrid
 
         for mergeKey in mergeKeys:
-
             mergeIndex = self.getIndex(mergeKey, mergeKeys)
             mask = mergeGrid == mergeIndex
 
@@ -969,14 +936,13 @@ class TropicalUtility(GridManipulation.GridManipulation):
 
         return
 
-
     def variableExists(self, modelName, weName, weLevel):
 
         # it turns out the the modelName will not match the dbID().model()
         # directly, so it needs to be massaged.
         modelPos = modelName.find("_D2D_")
         if modelPos > -1:
-            modelName = modelName[modelPos+5:]
+            modelName = modelName[modelPos + 5:]
 
         availParms = self.availableParms()
         for pName, level, dbID in availParms:
@@ -985,7 +951,6 @@ class TropicalUtility(GridManipulation.GridManipulation):
                     return True
 
         return False
-
 
     def getAvgTopoGrid(self, topodb):
 
@@ -1008,7 +973,6 @@ class TropicalUtility(GridManipulation.GridManipulation):
 
         return topoGrid
 
-
     def removeEarlierTRs(self, weName):
 
         #  Get an inventory of all the grids
@@ -1023,7 +987,6 @@ class TropicalUtility(GridManipulation.GridManipulation):
 
         return
 
-
     def getParmMinMaxLimits(self, modelName, weName):
 
         #  Get the info for this parameter
@@ -1033,84 +996,83 @@ class TropicalUtility(GridManipulation.GridManipulation):
         return (parm.getGridInfo().getMinValue(),
                 parm.getGridInfo().getMaxValue())
 
-
     #  Define a method to sort breakpoint record keys
     def sortBreakpoints(self, a, b):
 
         #  Make a list of valid string parts
         validTypes = [
-            "LN",     #  mainland segments
-            "KEY",    #  Florida Keys
-            "ISL",    #  islands
-            "CUBA",   #  Cuba
-            "HISP",   #  Hispaniola
-            "NAI",    #  North Atlantic islands
-            "WTDE",   #  Deleware Bay
-            "WTTP",   #  Tidal Potomac
-            "WTCP",   #  Chesapeake Bay
-            "WTPT",   #  Generic water points
-            "GYC",    #  Guyana
-            "VEC",    #  Venezuela
-            "COC",    #  Colombia
-            "PAC",    #  Panama
-            "CRC",    #  Costa Rica
-            "NIC",    #  Nicaragua
-            "HNC",    #  Honduras
-            "GTC",    #  Guatemala
-            "BZC",    #  Belize
-            "MXC",    #  Mexico
-            "USC",    #  United States
-            "CNC",    #  Canada
-            "KEC",    #  Dry Tortugas
-            "AWC",    #  Aruba
-            "CWC",    #  Curacao
-            "TTC",    #  Trinidad and Tobago
-            "BBC",    #  Barbados
-            "LCC",    #  St. Lucia
-            "MQC",    #  France - Caribbean
-            "AGC",    #  Antigua and Barbuda
-            "BSC",    #  Bahamas
-            "BMC",    #  Bermuda
-            "JMC",    #  Jamaica
-            "KYC",    #  Cayman Islands
-            "CUC",    #  Cuba
-            "DOC",    #  Dominican Republic
-            "HTC",    #  Haiti
-            "PMC",    #  France - North Atlantic
-            "LOC",    #  Lake_Okeechobee
-            "FBC",    #  Florida Bay
-            "PSC",    #  Pamlico Sound
-            "ASC",    #  Albemarle Sound
-            "TXZ",    #  Texas
-            "LAZ",    #  Louisiana
-            "MSZ",    #  Mississippi
-            "ALZ",    #  Alabama
-            "FLZ",    #  Florida
-            "GAZ",    #  Georgia
-            "SCZ",    #  South Carolina
-            "NCZ",    #  North Carolina
-            "VAZ",    #  Virginia
-            "MDZ",    #  Maryland
-            "DCZ",    #  District of Columbia
-            "DEZ",    #  Deleware
-            "NJZ",    #  New Jersey
-            "NYZ",    #  New York
-            "CTZ",    #  Connecticut
-            "RIZ",    #  Rhode Island
-            "MAZ",    #  Massachusetts
-            "NHZ",    #  New Hampshire
-            "MEZ",    #  Maine
-            "NMZ",    #  New Mexico
-            "ARZ",    #  Arkansas
-            "OKZ",    #  Oklahoma
-            "MOZ",    #  Missouri
-            "TNZ",    #  Tennessee
-            "WVZ",    #  West Virginia
-            "PAZ",    #  Pennsylvania
-            "VTZ",    #  Vermont
-            "PRZ",    #  Puerto Rico
-            "VIZ",    #  U.S. Virgin Islands
-            "RE",     #  General edit area collection
+            "LN",  # mainland segments
+            "KEY",  # Florida Keys
+            "ISL",  # islands
+            "CUBA",  # Cuba
+            "HISP",  # Hispaniola
+            "NAI",  # North Atlantic islands
+            "WTDE",  # Delaware Bay
+            "WTTP",  # Tidal Potomac
+            "WTCP",  # Chesapeake Bay
+            "WTPT",  # Generic water points
+            "GYC",  # Guyana
+            "VEC",  # Venezuela
+            "COC",  # Colombia
+            "PAC",  # Panama
+            "CRC",  # Costa Rica
+            "NIC",  # Nicaragua
+            "HNC",  # Honduras
+            "GTC",  # Guatemala
+            "BZC",  # Belize
+            "MXC",  # Mexico
+            "USC",  # United States
+            "CNC",  # Canada
+            "KEC",  # Dry Tortugas
+            "AWC",  # Aruba
+            "CWC",  # Curacao
+            "TTC",  # Trinidad and Tobago
+            "BBC",  # Barbados
+            "LCC",  # St. Lucia
+            "MQC",  # France - Caribbean
+            "AGC",  # Antigua and Barbuda
+            "BSC",  # Bahamas
+            "BMC",  # Bermuda
+            "JMC",  # Jamaica
+            "KYC",  # Cayman Islands
+            "CUC",  # Cuba
+            "DOC",  # Dominican Republic
+            "HTC",  # Haiti
+            "PMC",  # France - North Atlantic
+            "LOC",  # Lake_Okeechobee
+            "FBC",  # Florida Bay
+            "PSC",  # Pamlico Sound
+            "ASC",  # Albemarle Sound
+            "TXZ",  # Texas
+            "LAZ",  # Louisiana
+            "MSZ",  # Mississippi
+            "ALZ",  # Alabama
+            "FLZ",  # Florida
+            "GAZ",  # Georgia
+            "SCZ",  # South Carolina
+            "NCZ",  # North Carolina
+            "VAZ",  # Virginia
+            "MDZ",  # Maryland
+            "DCZ",  # District of Columbia
+            "DEZ",  # Deleware
+            "NJZ",  # New Jersey
+            "NYZ",  # New York
+            "CTZ",  # Connecticut
+            "RIZ",  # Rhode Island
+            "MAZ",  # Massachusetts
+            "NHZ",  # New Hampshire
+            "MEZ",  # Maine
+            "NMZ",  # New Mexico
+            "ARZ",  # Arkansas
+            "OKZ",  # Oklahoma
+            "MOZ",  # Missouri
+            "TNZ",  # Tennessee
+            "WVZ",  # West Virginia
+            "PAZ",  # Pennsylvania
+            "VTZ",  # Vermont
+            "PRZ",  # Puerto Rico
+            "VIZ",  # U.S. Virgin Islands
+            "RE",  # General edit area collection
         ]
 
         aSeg = a.split("_")[0]
@@ -1123,18 +1085,18 @@ class TropicalUtility(GridManipulation.GridManipulation):
 
         for c in aSeg:
             if c.isalpha():
-                aSegType += c
+                aSegType = aSegType + c
 
         for c in bSeg:
             if c.isalpha():
-                bSegType += c
+                bSegType = bSegType + c
 
         for c in aSeg:
             if c.isdigit():
-                aSegNum += c
+                aSegNum = aSegNum + c
         for c in bSeg:
             if c.isdigit():
-                bSegNum += c
+                bSegNum = bSegNum + c
 
         aTypeIndex = validTypes.index(aSegType)
         bTypeIndex = validTypes.index(bSegType)
@@ -1152,10 +1114,101 @@ class TropicalUtility(GridManipulation.GridManipulation):
             self.statusBarMsg("ERROR!!!!!!! Segment names are equal!!!!!!!", "S")
             return 0
 
+    def deleteAllGrids(self, weList):
+        """
+        Delete all Fcst grids at all times for requested weather elements.
+        weList can contain a single element or a list of elements.
+        """
 
-#===============================================================================
-#  Hazard grid helper methods
-#===============================================================================
+        if not weList:
+            return
+
+        if not isinstance(weList, list):
+            weList = [weList]
+
+        for weName in weList:
+            trList = self.GM_getWEInventory(weName)
+            if not trList:
+                continue
+
+            start = trList[0].startTime().unixTime()
+            end = trList[-1].endTime().unixTime()
+            tr = self.GM_makeTimeRange(start, end)
+
+            self.deleteCmd([weName], tr)
+
+        return
+
+    def siteInBasin(self, siteID, basin):
+        """
+        Returns True if site is in the specified basin's list of responsible sites
+        """
+        return siteID in self._basinDomains[basin]
+
+    def basinNames(self):
+        """
+        Returns the list of basin names.
+        """
+        return self._basinDomains.keys()
+
+    def getNationalCenterIDs(self):
+        """
+        Returns the set of National Center site IDs.
+        """
+        ids = set(chain.from_iterable(self._basinDomains.values()))
+        return ids
+
+    def maxStorms(self):
+        """
+        Returns the maximum number of storms.
+        """
+        return self._maxStorms
+
+    def forecastBasins(self, siteID):
+        """
+        Returns the list of basins for which the specified siteID is responsible.
+        """
+        basinList = [basinName for basinName, siteList in self._basinDomains.items() if siteID in siteList]
+        return basinList
+
+    def basinBins(self, basinList):
+        """
+        Returns the list of bins defined for the given basin
+        """
+        binList = []
+        for basinName in basinList:
+            binList.append(self._basinBins.get(basinName, None))
+        return binList
+
+    def etnBaseForBasin(self, basinID):
+        """
+        Returns the ETN base for the specified basin.
+            Parameters:
+                basinID: 2-letter basing ID as used in the PIL or StormID
+        """
+        return self._etnDict[basinID]
+
+    def NHCSites(self):
+        """
+        Returns the list of NHC sites.
+        """
+        return self._NHCSites
+
+    def HFOSites(self):
+        """
+        Returns the list of HFO sites.
+        """
+        return self._HFOSites
+
+    def GUMSites(self):
+        """
+        Returns the list of GUM sites.
+        """
+        return self._GUMSites
+
+    # ===============================================================================
+    #  Hazard grid helper methods
+    # ===============================================================================
 
     # Extracts the specified hazard from the hazardGrid. Returns a list of
     # keys, mask pairs where each hazard exists.
@@ -1175,7 +1228,6 @@ class TropicalUtility(GridManipulation.GridManipulation):
                 keyMaskList.append((hazKey, mask))
 
         return keyMaskList
-
 
     def purifyKey(self, hazKey, allowedKeys):
 
@@ -1199,15 +1251,16 @@ class TropicalUtility(GridManipulation.GridManipulation):
         #  Return the final key
         return "^".join(subKeyList)
 
+    def mergeCertainHazards(self, initialGrid, gridToMerge, hazTR, selectedHazards=None):
 
-    def mergeCertainHazards(self, initalGrid, gridToMerge, hazTR,
-                            selectedHazards=["SS.W", "SS.A"]):
+        if selectedHazards is None:
+            selectedHazards = ["SS.W", "SS.A"]
 
         #  Use the Proposed grid is now the one to use for GFE hazards, for now
         HazardUtils.ELEMENT = "ProposedSS"
 
         #  Split the initial grid into its components
-        initialBytes, initialKeys = initalGrid
+        initialBytes, initialKeys = initialGrid
 
         #  Look for all the hazards we wish to keep
         for haz in selectedHazards:
@@ -1226,7 +1279,6 @@ class TropicalUtility(GridManipulation.GridManipulation):
                     continue
 
                 #  Merge these hazards into the initial grid
-                hazIndex = self.getIndex(pureHazKey, initialKeys)
                 self._hazUtils._addHazard("ProposedSS", hazTR, pureHazKey,
                                           hazMask, combine=1)
 
@@ -1236,10 +1288,9 @@ class TropicalUtility(GridManipulation.GridManipulation):
         #  Return the merged grid
         return (initialBytes, initialKeys)
 
-
-#===============================================================================
-#  Generic method to display product text via a GFE procedure/smartTool
-#===============================================================================
+    # ===============================================================================
+    #  Generic method to display product text via a GFE procedure/smartTool
+    # ===============================================================================
 
     def displayProduct(self, product):
         """
@@ -1252,4 +1303,4 @@ class TropicalUtility(GridManipulation.GridManipulation):
         varList.append(("Click OK to transmit the product", "", "label"))
         widgetList = self.getVariableListInputs(varList)
         dialog = ValuesDialog.openDialog("Text Product", widgetList, None)
-        return dialog.getReturnCode() == 0 # 0 is OK, 1 is CANCEL
+        return dialog.getReturnCode() == 0  # 0 is OK, 1 is CANCEL

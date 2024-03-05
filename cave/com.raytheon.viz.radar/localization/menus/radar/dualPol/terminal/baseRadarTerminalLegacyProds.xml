@@ -218,6 +218,7 @@
                 <substitute key="elevation" value="0.0--360.0" />
             </contribute>
         </contribute>
+<<<<<<< HEAD
         <contribute xsi:type="subMenu" menuText="${icao} 4-Bit V"
             id="${icao}Terminal4-Bit V">
             <contribute xsi:type="bundleItem" file="bundles/DefaultRadar.xml"
@@ -403,5 +404,7 @@
                 <substitute key="elevation" value="0.0--360.0" />
             </contribute>
         </contribute>
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     </contribute>
 </menuTemplate>

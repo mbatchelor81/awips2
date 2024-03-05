@@ -30,6 +30,7 @@
         <substitute key="product" value="37" />
         <substitute key="elevation" value="0.0--0.0" />
     </contribute>
+<<<<<<< HEAD
     <contribute xsi:type="bundleItem" file="bundles/DefaultRadar.xml"
         menuText="User Sel Lyr Ref (ULR)" id="${icao}TerminalUserSelLyrRefULR">
         <substitute key="icao" value="${icao}" />
@@ -39,20 +40,32 @@
     <contribute xsi:type="bundleItem" file="bundles/DefaultRadarXY.xml"
         menuText="VAD Wind Profile (VWP)" id="${icao}TerminalVADWindProfileVWP"
         editorType="com.raytheon.viz.radar.ui.xy.RadarXYEditor">
+=======
+    <contribute xsi:type="bundleItem" file="bundles/DefaultRadarXY.xml"
+        menuText="VAD Wind Profile (VWP)" id="${icao}TerminalVADWindProfileVWP">
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="icao" value="${icao}" />
         <substitute key="product" value="48" />
         <substitute key="insetMap" value="false" />
     </contribute>
     <contribute xsi:type="bundleItem" file="bundles/DefaultRadarXY.xml"
+<<<<<<< HEAD
         menuText="Vel Az Display (VAD)" id="${icao}TerminalVelAzDisplayVAD"
         editorType="com.raytheon.viz.radar.ui.xy.RadarXYEditor">
+=======
+        menuText="Vel Az Display (VAD)" id="${icao}TerminalVelAzDisplayVAD">
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="icao" value="${icao}" />
         <substitute key="product" value="84" />
         <substitute key="insetMap" value="false" />
     </contribute>
     <contribute xsi:type="bundleItem" file="bundles/DefaultRadarXY.xml"
+<<<<<<< HEAD
         menuText="TDWR SPG Unit Status" id="${icao}TerminalTDWRSPGUnitStatus"
         editorType="com.raytheon.viz.radar.ui.xy.RadarXYEditor">
+=======
+        menuText="TDWR SPG Unit Status" id="${icao}TerminalTDWRSPGUnitStatus">
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="icao" value="${icao}" />
         <substitute key="product" value="2" />
         <substitute key="insetMap" value="false" />

@@ -1,19 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
- * 
+ *
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
- * 
+ *
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
- * 
+ *
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -34,20 +34,21 @@ import si.uom.SI;
 import systems.uom.common.USCustomary;
 
 /**
- * 
+ *
  * A class containing all parameters necessary for an outline resource to be
  * rendered.
- * 
+ *
  * <pre>
- * 
+ *
  * SOFTWARE HISTORY
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
  * Oct 2, 2009            bsteffen     Initial creation
  * Jul 7, 2015  10352     byin         Added labelSymbolId
- * 
+ * Sep 21, 2020 79536     tjensen      Add null checks
+ *
  * </pre>
- * 
+ *
  * @author bsteffen
  * @version 1.0
  */
@@ -72,9 +73,9 @@ public class AdvisoryRecord {
 
     private Coordinate[] line;
 
-    private Coordinate labelLoc;
+    private final Coordinate labelLoc;
 
-    private String label;
+    private final String label;
 
     private char labelSymbolId = 0;
 
@@ -117,8 +118,8 @@ public class AdvisoryRecord {
         for (int i = 0; i < line.length - 1; i++) {
             Coordinate thisPoint = line[i];
             Coordinate nextPoint = line[i + 1];
-            double angle = Math.atan2(nextPoint.y - thisPoint.y, thisPoint.x
-                    - nextPoint.x);
+            double angle = Math.atan2(nextPoint.y - thisPoint.y,
+                    thisPoint.x - nextPoint.x);
             angle = Math.toDegrees(angle);
             Coordinate[] thisLine1 = getLine(thisPoint, nextPoint, angle,
                     radius);
@@ -134,15 +135,18 @@ public class AdvisoryRecord {
             }
             lastLine1 = thisLine1;
             lastLine2 = thisLine2;
-
         }
-        // Enter the points for the last coordinate
-        polygon[line.length - 1] = lastLine1[1];
-        polygon[line.length] = lastLine2[1];
-        // Make start and endpointt he same
-        polygon[polygon.length - 1] = polygon[0];
-        LinearRing ring = FACTORY.createLinearRing(polygon);
-        this.polygon = FACTORY.createPolygon(ring, null);
+
+        // Ensure lastLine1 & lastLine2 are set to non-null values
+        if (lastLine1 != null && lastLine2 != null) {
+            // Enter the points for the last coordinate
+            polygon[line.length - 1] = lastLine1[1];
+            polygon[line.length] = lastLine2[1];
+            // Make start and endpointt he same
+            polygon[polygon.length - 1] = polygon[0];
+            LinearRing ring = FACTORY.createLinearRing(polygon);
+            this.polygon = FACTORY.createPolygon(ring, null);
+        }
         this.label = label;
         this.inspectString = inspectString;
     }
@@ -173,7 +177,7 @@ public class AdvisoryRecord {
     /**
      * Convert a pair of Lat Lon coords to a pair of pixel coords in a certain
      * direction and a certain distance away
-     * 
+     *
      * @param point1
      *            the first endpoint
      * @param point2
@@ -194,7 +198,7 @@ public class AdvisoryRecord {
 
     /**
      * Get a Coordinate that is correct distance and angle from coord
-     * 
+     *
      * @param center
      *            the Lat Lon coordinate representing the center of a circle
      * @param distance
@@ -220,7 +224,7 @@ public class AdvisoryRecord {
 
     /**
      * Find the intersection point between two lines
-     * 
+     *
      * @param line1
      *            a 2x2 array representing two endpoints
      * @param line2

@@ -19,15 +19,32 @@
  **/
 package com.raytheon.viz.pointdata;
 
+<<<<<<< HEAD
+=======
+import java.text.ParsePosition;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 import javax.measure.Unit;
+<<<<<<< HEAD
 
 import com.raytheon.uf.common.pointdata.PointDataDescription.Type;
 import com.raytheon.uf.common.pointdata.PointDataView;
 import com.raytheon.uf.viz.datacube.CubeUtil;
+=======
+import javax.measure.format.MeasurementParseException;
+
+import com.raytheon.uf.common.pointdata.PointDataDescription;
+import com.raytheon.uf.common.pointdata.PointDataDescription.Type;
+import com.raytheon.uf.common.pointdata.PointDataView;
+import com.raytheon.uf.viz.core.exception.VizException;
+import com.raytheon.uf.viz.datacube.CubeUtil;
+import com.raytheon.viz.pointdata.util.MetarPrecipDataContainer.PrecipData;
+
+import tech.units.indriya.format.SimpleUnitFormat;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Plot Data Object.
@@ -43,11 +60,19 @@ import com.raytheon.uf.viz.datacube.CubeUtil;
  * Aug 07, 2014 3478       bclement    removed PointDataDescription.Type.Double
  * Nov 01, 2019 71272      ksunil      tweaks to accommodate new plot
  *                                     customization changes
+<<<<<<< HEAD
  *
  * </pre>
  *
  * @author njensen
  * @version 1.0
+=======
+ * Mar 24, 2020 75529      ksunil      added new addData method for precipData. implemented isValidParameter
+ * Apr 10, 2020 77336      ksunil      Minor logging enhancement
+ * </pre>
+ *
+ * @author njensen
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  */
 
 public class PlotData implements IPlotData {
@@ -148,6 +173,27 @@ public class PlotData implements IPlotData {
 
     }
 
+<<<<<<< HEAD
+=======
+    public void addData(PrecipData pdv) throws VizException {
+        PlotValue pv = new PlotValue();
+        pv.value = pdv.getPrecipAmt();
+        String unitStr = pdv.getUnit();
+        if (unitStr != null) {
+            try {
+                Unit<?> unit = SimpleUnitFormat
+                        .getInstance(SimpleUnitFormat.Flavor.ASCII)
+                        .parseProductUnit(unitStr, new ParsePosition(0));
+                pv.unit = unit;
+            } catch (MeasurementParseException e) {
+                throw new VizException("Unable parse units:  " + unitStr, e);
+            }
+        }
+        pv.type = PointDataDescription.Type.FLOAT;
+        valueMap.put(pdv.getParamName(), pv);
+    }
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public int getInt(String parameter) {
         safetyCheck(parameter);
@@ -228,6 +274,10 @@ public class PlotData implements IPlotData {
     }
 
     private void safetyCheck(String parameter) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if (!valueMap.containsKey(parameter)) {
             throw new IllegalArgumentException(
                     "Parameter " + parameter + " not present in PlotData");
@@ -241,6 +291,10 @@ public class PlotData implements IPlotData {
      *            The parameter to check
      * @return true if the parameter exists in the valueMap, false if not
      */
+<<<<<<< HEAD
+=======
+    @Override
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public boolean isValidParameter(String param) {
         return valueMap.containsKey(param);
     }

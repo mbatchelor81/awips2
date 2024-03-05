@@ -20,7 +20,10 @@ import com.raytheon.uf.common.time.SimulatedTime;
 import com.raytheon.uf.viz.core.IGraphicsTarget;
 import com.raytheon.uf.viz.core.drawables.FillPatterns;
 import com.raytheon.uf.viz.core.drawables.IShadedShape;
+<<<<<<< HEAD
 import com.raytheon.uf.viz.core.drawables.IWireframeShape;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.drawables.JTSCompiler;
 import com.raytheon.uf.viz.core.drawables.JTSCompiler.JTSGeometryData;
 import com.raytheon.uf.viz.core.drawables.JTSCompiler.PointStyle;
@@ -39,7 +42,10 @@ import org.locationtech.jts.geom.Geometry;
  * ------------ ---------- ----------- --------------------------
  * 2014-08-28   ASM #15682 D. Friemdan Initial creation
  * 2016-09-14   3241       bsteffen    Update deprecated JTSCompiler method calls
+<<<<<<< HEAD
  * 2022-03-15           srcarter@ucar  Changed initshape() to draw a shadedshape and wireframeshape for every entry
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  * 
  */
@@ -244,10 +250,18 @@ public class WouWcnWatchesResource extends WatchesResource implements ISimulated
         }
         AbstractWarningRecord record = entry.record;
         if (record.getGeometry() != null) {
+<<<<<<< HEAD
             //added fill (shadedshape)
             IShadedShape ss = target.createShadedShape(false, descriptor.getGridGeometry());
             Geometry geo = (Geometry) record.getGeometry().clone();
             JTSCompiler jtsCompiler = new JTSCompiler(ss, null, this.descriptor);
+=======
+            IShadedShape ss = target.createShadedShape(false,
+                    descriptor.getGridGeometry());
+            Geometry geo = (Geometry) record.getGeometry().clone();
+            JTSCompiler jtsCompiler = new JTSCompiler(ss, null,
+                    this.descriptor);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             JTSGeometryData jtsData = jtsCompiler.createGeometryData();
             jtsData.setPointStyle(PointStyle.CROSS);
             jtsData.setGeometryColor(color);
@@ -256,6 +270,7 @@ public class WouWcnWatchesResource extends WatchesResource implements ISimulated
                     .equals("TO") ? "VERTICAL" : "HORIZONTAL"));
             ss.compile();
             entry.shadedShape = ss;
+<<<<<<< HEAD
             
             //added outline (wireshape)
             IWireframeShape wfs = entry.wireframeShape;
@@ -271,6 +286,8 @@ public class WouWcnWatchesResource extends WatchesResource implements ISimulated
             jtsCompiler.handle(geo);
             wfs.compile();
             entry.wireframeShape = wfs;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 

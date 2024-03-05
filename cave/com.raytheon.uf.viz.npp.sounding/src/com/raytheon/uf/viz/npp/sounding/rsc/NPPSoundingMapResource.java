@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -28,6 +40,10 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.swt.graphics.RGB;
+<<<<<<< HEAD
+=======
+import org.locationtech.jts.geom.Coordinate;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.uf.common.dataplugin.PluginDataObject;
 import com.raytheon.uf.common.dataplugin.npp.sounding.NPPSoundingRecord;
@@ -44,35 +60,63 @@ import com.raytheon.uf.viz.core.exception.VizException;
 import com.raytheon.uf.viz.core.map.IMapDescriptor;
 import com.raytheon.uf.viz.core.procedures.Bundle;
 import com.raytheon.uf.viz.core.rsc.AbstractVizResource;
+<<<<<<< HEAD
 import com.raytheon.uf.viz.core.rsc.IResourceDataChanged;
+=======
+import com.raytheon.uf.viz.core.rsc.IResourceDataChanged.ChangeType;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.rsc.LoadProperties;
 import com.raytheon.uf.viz.core.rsc.capabilities.ColorableCapability;
 import com.raytheon.uf.viz.core.rsc.capabilities.EditableCapability;
 import com.raytheon.uf.viz.core.rsc.capabilities.MagnificationCapability;
 import com.raytheon.viz.ui.BundleProductLoader;
+<<<<<<< HEAD
 import com.raytheon.viz.ui.UiUtil;
 import com.raytheon.viz.ui.editor.AbstractEditor;
 import com.raytheon.viz.ui.input.EditableManager;
 import org.locationtech.jts.geom.Coordinate;
+=======
+import com.raytheon.viz.ui.EditorTypeInfo;
+import com.raytheon.viz.ui.UiUtil;
+import com.raytheon.viz.ui.editor.AbstractEditor;
+import com.raytheon.viz.ui.input.EditableManager;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import gov.noaa.nws.ncep.ui.nsharp.display.NsharpSkewTPaneDescriptor;
 import gov.noaa.nws.ncep.ui.nsharp.display.NsharpSkewTPaneDisplay;
 
 /**
  * Sounding available resource. Draws points on map where data is available
+<<<<<<< HEAD
  * 
  * <pre>
  * 
  * SOFTWARE HISTORY
  * 
+=======
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- --------------------------------------------
  * Jan 14, 2013           mschenke  Initial creation
  * Aug 27, 2013  2190     mschenke  Fixed so can't click point when not visible
  * Nov 28, 2017  5863     bsteffen  Change dataTimes to a NavigableSet
+<<<<<<< HEAD
  * 
  * </pre>
  * 
+=======
+ * Apr 22, 2022  8791     mapeters  Update determination of editor type to load to
+ * Oct 19, 2022  8956     mapeters  Handle UiUtil.createOrOpenEditor signature
+ *                                  change
+ *
+ * </pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author mschenke
  */
 public class NPPSoundingMapResource extends
@@ -89,6 +133,7 @@ public class NPPSoundingMapResource extends
         super(resourceData, loadProperties, false);
         this.inputManager = new NPPSoundingMapInputHandler(this);
         getCapability(EditableCapability.class).setEditable(true);
+<<<<<<< HEAD
         resourceData.addChangeListener(new IResourceDataChanged() {
             @Override
             public void resourceChanged(ChangeType type, Object object) {
@@ -96,6 +141,12 @@ public class NPPSoundingMapResource extends
                     if (object instanceof PluginDataObject[]) {
                         addRecords((PluginDataObject[]) object);
                     }
+=======
+        resourceData.addChangeListener((type, object) -> {
+            if (type == ChangeType.DATA_UPDATE) {
+                if (object instanceof PluginDataObject[]) {
+                    addRecords((PluginDataObject[]) object);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
             }
         });
@@ -172,7 +223,11 @@ public class NPPSoundingMapResource extends
 
     /**
      * Check if the resource is editable
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public boolean isEditable() {
         return getCapability(EditableCapability.class).isEditable()
@@ -217,9 +272,15 @@ public class NPPSoundingMapResource extends
         NsharpSkewTPaneDisplay display = new NsharpSkewTPaneDisplay();
         display.setDescriptor(new NsharpSkewTPaneDescriptor());
         display.getDescriptor().getResourceList().add(pair);
+<<<<<<< HEAD
         String editorId = DescriptorMap
                 .getEditorId(display.getDescriptor().getClass().getName());
         AbstractEditor editor = UiUtil.createOrOpenEditor(editorId,
+=======
+        String editorId = DescriptorMap.getEditorId(display);
+        EditorTypeInfo editorTypeInfo = new EditorTypeInfo(editorId, false);
+        AbstractEditor editor = UiUtil.createOrOpenEditor(editorTypeInfo, true,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 display.cloneDisplay());
         Bundle b = new Bundle();
         b.setDisplays(new AbstractRenderableDisplay[] { display });

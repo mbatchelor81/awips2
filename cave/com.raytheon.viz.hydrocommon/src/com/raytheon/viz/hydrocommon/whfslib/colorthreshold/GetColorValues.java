@@ -53,6 +53,10 @@ import com.raytheon.viz.hydrocommon.whfslib.IHFSDbGenerated;
  * Mar 01, 2017 6160       bkowal      Alternatively use the "database color name" when
  *                                     retrieving user and office level color information.
  * Jul 06, 2018 6885       mduff       Changes to handle the NamedColorUseSet encapsulation of fields.
+<<<<<<< HEAD
+=======
+ * Feb 03, 2022 22005      jrohwein    Make some methods protected, so they may be used by MPEGetColorValues
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  * 
  * @author randerso
@@ -252,7 +256,11 @@ public class GetColorValues {
      *            Cannot be {@code null}.
      * @return the "database color name" if found; {@code null}, otherwise.
      */
+<<<<<<< HEAD
     private static String lookupDBColorNameByDisplayName(
+=======
+    protected static String lookupDBColorNameByDisplayName(
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             final String colorDisplayName,
             final List<NamedColorUseSet> pColorSetGroup) {
         if (colorDisplayName == null) {
@@ -327,7 +335,11 @@ public class GetColorValues {
      * @return A collection of ColorValue structures representing a specific
      *         color set. Returns null if no data are found.
      */
+<<<<<<< HEAD
     private static List<Colorvalue> getDefaultColorSet(
+=======
+    protected static List<Colorvalue> getDefaultColorSet(
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             final String application_name, final String coloruse_name,
             String threshold_unit, List<NamedColorUseSet> pColorSetGroup) {
 
@@ -387,7 +399,11 @@ public class GetColorValues {
      * @return A collection of ColorValue structures representing a specific
      *         color set. Returns null if no data are found.
      */
+<<<<<<< HEAD
     private static List<Colorvalue> getColorValueTableEntries(
+=======
+    protected static List<Colorvalue> getColorValueTableEntries(
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             final String user_id, final String application_name,
             final String coloruse_name, int duration, String threshold_unit) {
 
@@ -428,7 +444,11 @@ public class GetColorValues {
      *         specified user id, application, color use, and threshold unit or
      *         NO_DURATION_FOUND if a close duration could not be found.
      */
+<<<<<<< HEAD
     private static int get_closest_multihour_duration(final String user_id,
+=======
+    protected static int get_closest_multihour_duration(final String user_id,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             final String application_name, final String coloruse_name,
             int duration, String threshold_unit) {
         int closest_duration = NO_DURATION_FOUND;

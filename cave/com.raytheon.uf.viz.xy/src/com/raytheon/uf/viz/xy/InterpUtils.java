@@ -3,7 +3,10 @@ package com.raytheon.uf.viz.xy;
 import java.awt.Rectangle;
 import java.util.Arrays;
 import java.util.Collections;
+<<<<<<< HEAD
 import java.util.Comparator;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.Iterator;
 import java.util.List;
 
@@ -11,6 +14,7 @@ import com.raytheon.uf.viz.xy.graph.IGraph;
 import com.raytheon.viz.core.graphing.xy.XYData;
 
 /**
+<<<<<<< HEAD
  * SOFTWARE HISTORY
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
@@ -21,11 +25,31 @@ import com.raytheon.viz.core.graphing.xy.XYData;
  * 
  * @author mschenke
  * @version 1.0
+=======
+ * Utilities for interpolating graph data.
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ * Date         Ticket#    Engineer     Description
+ * ------------ ---------- ------------ --------------------------
+ * ??                      ??           Initial creation
+ * Oct 02, 2012 DR 15259   M.Porricelli Interpolate below 850MB
+ * Nov 14, 2022 8973       mapeters     Prevent index out of bounds error
+ *
+ * </pre>
+ *
+ * @author mschenke
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  */
 public class InterpUtils {
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param dataList
      * @param ny
      * @param graph
@@ -45,6 +69,7 @@ public class InterpUtils {
             return column;
         }
         if (lowToHigh) {
+<<<<<<< HEAD
             Collections.sort(dataList, new Comparator<XYData>() {
                 @Override
                 public int compare(XYData o1, XYData o2) {
@@ -62,14 +87,30 @@ public class InterpUtils {
                 }
 
             });
+=======
+            Collections.sort(dataList,
+                    (o1, o2) -> Double.compare(
+                            ((Number) o1.getY()).doubleValue(),
+                            ((Number) o2.getY()).doubleValue()));
+        } else {
+            Collections.sort(dataList,
+                    (o1, o2) -> Double.compare(
+                            ((Number) o2.getY()).doubleValue(),
+                            ((Number) o1.getY()).doubleValue()));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         double maxYAxisVal = ((Number) dataList.get(0).getY()).doubleValue();
         double minYAxisVal = ((Number) dataList.get(dataList.size() - 1).getY())
                 .doubleValue();
         // Allow interpolation below 850 when this is lowest level
+<<<<<<< HEAD
         if (maxYAxisVal == 850.0){
         	maxYAxisVal = 1000.0;
+=======
+        if (maxYAxisVal == 850.0) {
+            maxYAxisVal = 1000.0;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         if (maxYAxisVal < minYAxisVal) {
@@ -191,8 +232,13 @@ public class InterpUtils {
                 // if we are inside .0001% greater than min and .0001% less than
                 // max go ahead and set the value
                 if (relativeError < 0.000001) {
+<<<<<<< HEAD
                     if (((!left_to_right && x > x2) || (left_to_right && x < x2))
                             && c < xVals.length) {
+=======
+                    if (((!left_to_right && x > x2)
+                            || (left_to_right && x < x2)) && c < xVals.length) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         c += 1;
                         // Scan through the columns finding the next value that
                         // is not NaN.
@@ -207,8 +253,13 @@ public class InterpUtils {
                         }
                     }
 
+<<<<<<< HEAD
                     result[j * nx + nx - 1 - i] = (float) (y1 + (x - x1)
                             * (y2 - y1) / (x2 - x1));
+=======
+                    result[j * nx + nx - 1 - i] = (float) (y1
+                            + (x - x1) * (y2 - y1) / (x2 - x1));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
             }
         }
@@ -232,6 +283,7 @@ public class InterpUtils {
         }
         for (int x1 : xr) {
             for (int y1 : yr) {
+<<<<<<< HEAD
                 float val11 = -999999;
                 if (y1 < area.getMinY() || y1 >= area.getMaxY()) {
                     val11 = -999999;
@@ -240,6 +292,21 @@ public class InterpUtils {
                 } else {
                     val11 = data[(int) ((y1 - area.getMinY()) * area.getWidth() + (x1 - area
                             .getMinX()))];
+=======
+                float val11 = -999_999;
+                if (y1 >= area.getMinY() && y1 < area.getMaxY()
+                        && x1 >= area.getMinX() && x1 < area.getMaxX()) {
+
+                    int index = (int) ((y1 - area.getMinY()) * area.getWidth()
+                            + (x1 - area.getMinX()));
+                    /*
+                     * The index can sometimes be out of bounds, not sure why.
+                     * It happens rarely enough that ignoring it should be fine.
+                     */
+                    if (index < data.length) {
+                        val11 = data[index];
+                    }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
                 if (val11 > -9999) {
                     val += (1 - Math.abs(x1 - x)) * (1 - Math.abs(y1 - y))

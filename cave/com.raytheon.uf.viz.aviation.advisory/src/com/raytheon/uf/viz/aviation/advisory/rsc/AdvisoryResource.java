@@ -1,19 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
- * 
+ *
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
- * 
+ *
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
- * 
+ *
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -63,14 +63,14 @@ import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.geom.Polygon;
 
 /**
- * 
+ *
  * Resource for any Aviation Data that is represented as an outline with a
  * single label
- * 
+ *
  * <pre>
- * 
+ *
  * SOFTWARE HISTORY
- * 
+ *
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- --------------------------------------------
  * Oct 01, 2009           bsteffen  Initial creation
@@ -83,9 +83,15 @@ import org.locationtech.jts.geom.Polygon;
  * Nov 05, 2015  5070     randerso  Adjust font sizes for dpi scaling
  * Nov 28, 2017  5863     bsteffen  Change dataTimes to a NavigableSet
  * Feb 22, 2018  6629     njensen   Removed special color handling
- * 
+ * Jul 24, 2020  79536    pbutler   D2D and wx statements to hover over Sigmet polygons.
+ * Sep 21, 2020  79536    tjensen   Add null checks
+ * Jul 16, 2021  93845    OMoncayo  Create Separation from the outlook line
+ * Mar 07, 2022  97246    tjensen   Refactor paintInternal to reduce null pointers.
+ * Mar 11, 2022  99348    Achalla   Added label for Init Sigmet Line types in paintInternal()
+ *
+ *
  * </pre>
- * 
+ *
  * @author bsteffen
  */
 public class AdvisoryResource
@@ -135,7 +141,7 @@ public class AdvisoryResource
 
     /**
      * Adds a new record to this resource
-     * 
+     *
      * @param obj
      */
     protected void addRecord(PluginDataObject obj) {
@@ -145,12 +151,6 @@ public class AdvisoryResource
             clearShapes();
             DataTime dataTime = obj.getDataTime();
             if (this.resourceData.getBinOffset() != null) {
-                // long timeInMillis = dataTime.getRefTime().getTime();
-                // timeInMillis = this.resourceData.getBinOffset()
-                // .getNormalizedTime(timeInMillis);
-                // timeInMillis -=
-                // this.resourceData.getBinOffset().virtualOffset * 1000;
-                // dataTime = new DataTime(new Date(timeInMillis));
                 dataTime = this.resourceData.getBinOffset()
                         .getNormalizedTime(dataTime);
 
@@ -204,55 +204,69 @@ public class AdvisoryResource
             PaintProperties paintProps) throws VizException {
         RGB color = getCapability(ColorableCapability.class).getColor();
         DataTime curDataTime = paintProps.getDataTime();
-        if (curDataTime == null || records.get(curDataTime) == null) {
+        Collection<AdvisoryRecord> currentRecords = null;
+        if (curDataTime != null) {
+            currentRecords = records.get(curDataTime);
+        }
+
+        if (curDataTime == null || currentRecords == null) {
             this.displayedDataTime = null;
             clearShapes();
 
             return;
         } else if (!curDataTime.equals(displayedDataTime)) {
             clearShapes();
-
         }
 
         this.displayedDataTime = curDataTime;
         double scale[] = getScale(paintProps);
 
         if (mainShape == null || dottedShape == null || dashedShape == null) {
-            clearShapes();
-            mainShape = target.createWireframeShape(false, descriptor);
-            dottedShape = target.createWireframeShape(false, descriptor);
-            dashedShape = target.createWireframeShape(false, descriptor);
-            for (AdvisoryRecord record : records.get(curDataTime)) {
+            IWireframeShape newMainShape = target.createWireframeShape(false,
+                    descriptor);
+            IWireframeShape newDottedShape = target.createWireframeShape(false,
+                    descriptor);
+            IWireframeShape newDashedShape = target.createWireframeShape(false,
+                    descriptor);
+            for (AdvisoryRecord record : currentRecords) {
                 if (record.getType() == AdvisoryResourceType.AREA) {
-                    mainShape.addLineSegment(
-                            record.getPolygon().getCoordinates());
-                    if (record.getLabel() != null
-                            || !record.getLabel().isEmpty()) {
-                        double[] pixelLoc = descriptor.worldToPixel(
-                                new double[] { record.getLabelLoc().x,
-                                        record.getLabelLoc().y });
-                        mainShape.addLabel(record.getLabel(), pixelLoc);
+                    if (record.getPolygon() != null) {
+                        newMainShape.addLineSegment(
+                                record.getPolygon().getCoordinates());
+                        if (record.getLabel() != null
+                                || !record.getLabel().isEmpty()) {
+                            double[] pixelLoc = descriptor.worldToPixel(
+                                    new double[] { record.getLabelLoc().x,
+                                            record.getLabelLoc().y + 0.4 });
+                            newMainShape.addLabel(record.getLabel(), pixelLoc);
+                        }
                     }
                 } else if (record.getType() == AdvisoryResourceType.LINE) {
-                    mainShape.addLineSegment(record.getLine());
-                    dashedShape.addLineSegment(
-                            record.getPolygon().getCoordinates());
-                    if (record.getLabel() != null
-                            || !record.getLabel().isEmpty()) {
-                        double[] pixelLoc = descriptor.worldToPixel(
-                                new double[] { record.getLabelLoc().x,
-                                        record.getLabelLoc().y });
-                        dashedShape.addLabel(record.getLabel(), pixelLoc);
+                    if (record.getPolygon() != null) {
+                        newMainShape.addLineSegment(record.getLine());
+                        newDashedShape.addLineSegment(
+                                record.getPolygon().getCoordinates());
+                        if (record.getLabel() != null
+                                || !record.getLabel().isEmpty()) {
+                            double[] pixelLoc = descriptor.worldToPixel(
+                                    new double[] { record.getLabelLoc().x,
+                                            record.getLabelLoc().y });
+                            newDashedShape.addLabel(record.getLabel(),
+                                    pixelLoc);
+                        }
                     }
                 } else if (record.getType() == AdvisoryResourceType.ISOL) {
-                    dottedShape.addLineSegment(
-                            record.getPolygon().getCoordinates());
-                    if (record.getLabel() != null
-                            || !record.getLabel().isEmpty()) {
-                        double[] pixelLoc = descriptor.worldToPixel(
-                                new double[] { record.getLabelLoc().x,
-                                        record.getLabelLoc().y });
-                        dottedShape.addLabel(record.getLabel(), pixelLoc);
+                    if (record.getPolygon() != null) {
+                        newDottedShape.addLineSegment(
+                                record.getPolygon().getCoordinates());
+                        if (record.getLabel() != null
+                                || !record.getLabel().isEmpty()) {
+                            double[] pixelLoc = descriptor.worldToPixel(
+                                    new double[] { record.getLabelLoc().x,
+                                            record.getLabelLoc().y });
+                            newDottedShape.addLabel(record.getLabel(),
+                                    pixelLoc);
+                        }
                     }
                 } else {
                     double[] pixelLoc = descriptor.worldToPixel(new double[] {
@@ -269,20 +283,27 @@ public class AdvisoryResource
                     target.drawStrings(dStrings);
                 }
             }
-            mainShape.compile();
-            dottedShape.compile();
-            dashedShape.compile();
+            newMainShape.compile();
+            newDottedShape.compile();
+            newDashedShape.compile();
+
+            // Update all shapes
+            clearShapes();
+            mainShape = newMainShape;
+            dottedShape = newDottedShape;
+            dashedShape = newDashedShape;
         } else {
             mainShape.clearLabels();
             dashedShape.clearLabels();
             dottedShape.clearLabels();
 
             List<DrawableString> strings = new ArrayList<>();
-            for (AdvisoryRecord record : records.get(curDataTime)) {
+            for (AdvisoryRecord record : currentRecords) {
                 if (record.getType() == AdvisoryResourceType.AREA) {
                     font.setMagnification(magnification);
-                    double[] pixelLoc = descriptor.worldToPixel(new double[] {
-                            record.getLabelLoc().x, record.getLabelLoc().y });
+                    double[] pixelLoc = descriptor
+                            .worldToPixel(new double[] { record.getLabelLoc().x,
+                                    record.getLabelLoc().y + 0.4 });
                     String[] labels = record.getLabel().split("\n");
                     RGB[] colors = new RGB[labels.length];
                     Arrays.fill(colors, color);
@@ -325,11 +346,24 @@ public class AdvisoryResource
                     dStrings.verticallAlignment = VerticalAlignment.TOP;
                     strings.add(dStrings);
                 }
+                /* Add Label string for Intil Sigmet Line types */
+                else if (record.getType() == AdvisoryResourceType.LINE) {
+                    double[] pixelLoc = descriptor.worldToPixel(new double[] {
+                            record.getLabelLoc().x, record.getLabelLoc().y });
+                    font.setMagnification(magnification);
+                    DrawableString dStrings = new DrawableString(
+                            record.getLabel(), color);
+                    dStrings.font = font;
+                    dStrings.setCoordinates(pixelLoc[0], pixelLoc[1]);
+                    dStrings.addTextStyle(TextStyle.DROP_SHADOW);
+                    dStrings.horizontalAlignment = HorizontalAlignment.CENTER;
+                    dStrings.verticallAlignment = VerticalAlignment.MIDDLE;
+                    strings.add(dStrings);
+                }
             }
             target.drawStrings(strings);
         }
-        // LineStyle lineStyle = resourceData.getDataAdapter().getLineStyle();
-        // float lineWidth = resourceData.getDataAdapter().getLineWidth();
+
         LineStyle lineStyle = getCapability(OutlineCapability.class)
                 .getLineStyle();
         float lineWidth = getCapability(OutlineCapability.class)
@@ -343,9 +377,6 @@ public class AdvisoryResource
         magnification = (float) (1
                 * getCapability(MagnificationCapability.class)
                         .getMagnification());
-
-        // Questionable
-        // double density = getCapability(DensityCapability.class).getDensity();
 
         if (nonStandardInspectCoordinate != null) {
             paintNonstandardInspect(target, paintProps);
@@ -373,6 +404,8 @@ public class AdvisoryResource
             double dy = firstPixel[1] - nonStandardInspectCoordinate.y;
             double distance = (dx * dx + dy * dy) / zoomLevel;
             if (distance < 500 && record.getInspectString() != null) {
+                // - this will print out text in the upper left of the d2d
+                // screen
                 RGB color = getCapability(ColorableCapability.class).getColor();
                 String[] nonStandardInspectStrings = record.getInspectString()
                         .split("\n");
@@ -408,11 +441,6 @@ public class AdvisoryResource
             return "";
         }
         try {
-            if (resourceData.isEnableNonstandardInspect()) {
-                nonStandardInspectCoordinate = refCoord
-                        .asPixel(descriptor.getGridGeometry());
-                return "";
-            }
             GeometryFactory factory = new GeometryFactory();
 
             for (AdvisoryRecord record : curRecords) {
@@ -429,7 +457,7 @@ public class AdvisoryResource
             throw new VizException("Error inspecting aviation advisory data",
                     e);
         }
-        return "";
+        return "NO DATA";
 
     }
 

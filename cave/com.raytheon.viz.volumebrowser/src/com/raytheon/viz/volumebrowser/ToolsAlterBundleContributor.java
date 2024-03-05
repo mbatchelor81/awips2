@@ -1,6 +1,10 @@
 /*****************************************************************************************
  * COPYRIGHT (c), 2007, RAYTHEON COMPANY
+<<<<<<< HEAD
  * ALL RIGHTS RESERVED, An Unpublished Work 
+=======
+ * ALL RIGHTS RESERVED, An Unpublished Work
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * RAYTHEON PROPRIETARY
  * If the end user is not the U.S. Government or any agency thereof, use
@@ -30,6 +34,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+<<<<<<< HEAD
+=======
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.LineString;
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.dataquery.requests.RequestConstraint;
 import com.raytheon.uf.viz.core.drawables.AbstractRenderableDisplay;
 import com.raytheon.uf.viz.core.drawables.IDescriptor;
@@ -54,6 +64,7 @@ import com.raytheon.viz.awipstools.ToolsDataManager;
 import com.raytheon.viz.volumebrowser.datacatalog.AbstractDataCatalog;
 import com.raytheon.viz.volumebrowser.datacatalog.DataCatalogManager;
 import com.raytheon.viz.volumebrowser.vbui.SelectedData;
+<<<<<<< HEAD
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.LineString;
 
@@ -75,6 +86,31 @@ import org.locationtech.jts.geom.LineString;
  * 
  * </pre>
  * 
+=======
+
+/**
+ * This class generates the alter bundle's contributions for points and lines.
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+ * Date          Ticket#  Engineer        Description
+ * ------------- -------- --------------- --------------------------------------
+ * Aug 08, 2012  875      rferrel         Generate menu entries for points.
+ * Oct 03, 2012  1248     rferrel         Added listener for when points change.
+ * May 03, 2013  14824    mgamazaychikov  Added alterResource method
+ * Dec 11, 2013  2602     bsteffen        Fix compiler warnings and format.
+ * Aug 25, 2015  4785     njensen         Fix point alters of sources without
+ *                                        reportType
+ * Apr 06, 2018  6718     bsteffen        Add last edit.
+ * May 17, 2021  8452     randerso        Changed
+ *                                        CrossSectionDescriptor.getBaseline()
+ *                                        to return value set by setBaseline().
+ *
+ * </pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author mschenke
  */
 public class ToolsAlterBundleContributor extends AlterBundleContributorAdapter {
@@ -226,9 +262,14 @@ public class ToolsAlterBundleContributor extends AlterBundleContributorAdapter {
             IDescriptor desc = display.getDescriptor();
             if (desc instanceof IBaseLinesContainer) {
                 String line = ((IBaseLinesContainer) desc).getBaseLine();
+<<<<<<< HEAD
                 if (line != null && line.startsWith("Line")) {
                     alterContainer((IBaseLinesContainer) desc,
                             line.replace("Line", ""));
+=======
+                if (line != null) {
+                    alterContainer((IBaseLinesContainer) desc, line);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
             }
         }

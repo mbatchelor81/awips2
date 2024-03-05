@@ -49,6 +49,11 @@ import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
 import org.geotools.coverage.grid.GridGeometry2D;
+<<<<<<< HEAD
+=======
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Envelope;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.opengis.metadata.spatial.PixelOrientation;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 
@@ -160,8 +165,11 @@ import com.raytheon.viz.gfe.smarttool.SmartUtil;
 import com.raytheon.viz.gfe.ui.GfeUiUtil;
 import com.raytheon.viz.ui.cmenu.AbstractRightClickAction;
 import com.raytheon.viz.ui.cmenu.IContextMenuContributor;
+<<<<<<< HEAD
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Envelope;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Resource for displaying renderables for a particular Parm.
@@ -203,7 +211,14 @@ import org.locationtech.jts.geom.Envelope;
  *                                  an error message indicating the issue has
  *                                  occurred and NCF should be notified, and
  *                                  save off the associated grids.
+<<<<<<< HEAD
  * May 29, 2019 60162     ksunil    changes to absorb new Contour Label structure
+=======
+ * May 29, 2019  60162    ksunil    changes to absorb new Contour Label
+ *                                  structure
+ * Dec 06, 2021  8341     randerso  Added use of getResourceId for contour
+ *                                  logging
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -281,6 +296,7 @@ public class GFEResource
     private VectorGraphicsConfig vectorConfig = new VectorGraphicsConfig(
             PLUGIN_NAME, CLASS_NAME);
 
+<<<<<<< HEAD
     protected IGridDataChangedListener gridChanged = new IGridDataChangedListener() {
         @Override
         public void gridDataChanged(ParmID incomingParm, TimeRange validTime) {
@@ -306,6 +322,19 @@ public class GFEResource
         }
 
     };
+=======
+    protected IGridDataChangedListener gridChanged = (incomingParm,
+            validTime) -> resetFrame(validTime);
+
+    protected IParmInventoryChangedListener parmInventoryChanged = (parm,
+            timeRange) -> {
+        resetFrame(timeRange);
+        TimeMatchingJob.scheduleTimeMatch(getDescriptor());
+    };
+
+    protected IParmIDChangedListener parmIdChanged = (parm,
+            newParmID) -> resetFrame(TimeRange.allTimes());
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Construct a resource that is capable of displaying a particular parm
@@ -551,7 +580,11 @@ public class GFEResource
 
             int renderingOrder = RenderingOrderFactory
                     .getRenderingOrder("CONTOUR").value;
+<<<<<<< HEAD
             if (lastVisMode.equals(VisMode.IMAGE)) {
+=======
+            if (VisMode.IMAGE.equals(lastVisMode)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 renderingOrder = RenderingOrderFactory
                         .getRenderingOrder("IMAGE_LOCAL").value;
             }
@@ -737,7 +770,12 @@ public class GFEResource
 
                     if (visTypes.contains(VisualizationType.CONTOUR)) {
                         this.contourDisplay = new GriddedContourDisplay(
+<<<<<<< HEAD
                                 descriptor, this.gridGeometry, fb);
+=======
+                                descriptor, getResourceId(curTime),
+                                this.gridGeometry, fb);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     }
                 }
             } else if (gridData instanceof DiscreteGridData) {
@@ -825,7 +863,12 @@ public class GFEResource
                             shapeList.add(shadedShape);
 
                             IWireframeShape outlineShape = first
+<<<<<<< HEAD
                                     ? outlineShapes.get(discreteKey) : null;
+=======
+                                    ? outlineShapes.get(discreteKey)
+                                    : null;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                             first = false;
 
                             JTSCompiler jtsCompiler = new JTSCompiler(
@@ -908,7 +951,12 @@ public class GFEResource
                             shapeList.add(shadedShape);
 
                             IWireframeShape outlineShape = first
+<<<<<<< HEAD
                                     ? outlineShapes.get(weatherKey) : null;
+=======
+                                    ? outlineShapes.get(weatherKey)
+                                    : null;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                             first = false;
 
                             JTSCompiler jtsCompiler = new JTSCompiler(
@@ -1000,8 +1048,13 @@ public class GFEResource
                 for (Entry<Object, IWireframeShape> entry : outlineShapes
                         .entrySet()) {
                     Object defaultKey = null;
+<<<<<<< HEAD
                     if (parm.getGridInfo().getGridType()
                             .equals(GridType.WEATHER)) {
+=======
+                    if (GridType.WEATHER
+                            .equals(parm.getGridInfo().getGridType())) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         defaultKey = WeatherWxValue.defaultValue(parm)
                                 .getWeatherKey();
                     } else {
@@ -1110,8 +1163,13 @@ public class GFEResource
                         .getVisualizationType(EditorType.SPATIAL, visMode));
 
         getCapability(ColorMapCapability.class).setSuppressingMenuItems(
+<<<<<<< HEAD
                 !visTypes.contains(VisualizationType.IMAGE) || parm
                         .getGridInfo().getGridType().equals(GridType.WEATHER));
+=======
+                !visTypes.contains(VisualizationType.IMAGE) || GridType.WEATHER
+                        .equals(parm.getGridInfo().getGridType()));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         getCapability(ImagingCapability.class).setSuppressingMenuItems(
                 !visTypes.contains(VisualizationType.IMAGE));
@@ -1343,6 +1401,7 @@ public class GFEResource
             final Point pt = new Point((int) Math.round(gridCoord.x),
                     (int) Math.round(gridCoord.y));
 
+<<<<<<< HEAD
             BusyIndicator.showWhile(Display.getCurrent(), new Runnable() {
 
                 @Override
@@ -1376,6 +1435,35 @@ public class GFEResource
                     }
                 }
 
+=======
+            BusyIndicator.showWhile(Display.getCurrent(), () -> {
+                if (select) {
+
+                    Grid2DBit gridCells = grid.getContiguousArea(
+                            curTime.getValidPeriod().getStart(), pt);
+                    ReferenceData refData1 = new ReferenceData(gridLocation,
+                            new ReferenceID("contiguous"), gridCells);
+                    dataManager.getRefManager().incomingRefSet(refData1,
+                            RefSetMode.USE_CURRENT);
+
+                } else {
+                    // deselect
+
+                    // Get the refSet and the contiguous area for this
+                    // intCoord
+                    final Grid2DBit refSet = dataManager.getRefManager()
+                            .getActiveRefSet().getGrid();
+                    Grid2DBit editInfluence = refSet.contiguousBitArray(pt);
+                    if (editInfluence.isAnyBitsSet()) {
+                        ReferenceData refData2 = new ReferenceData(gridLocation,
+                                new ReferenceID("contiguous"), editInfluence);
+                        // Send the message that changes the current
+                        // reference set
+                        dataManager.getRefManager().incomingRefSet(refData2,
+                                RefSetMode.SUBTRACT);
+                    }
+                }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             });
 
         }
@@ -1436,10 +1524,17 @@ public class GFEResource
         Point[] points = findLabelLoc(gridDim, rect, multiplier);
 
         // now consider every label point returned.
+<<<<<<< HEAD
         for (int i = 0; i < points.length; i++) {
             try {
                 int xGrid = points[i].x;
                 int yGrid = points[i].y;
+=======
+        for (Point point : points) {
+            try {
+                int xGrid = point.x;
+                int yGrid = point.y;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                 // figure out how many adjacent grid cells I need to draw
                 // this label. first get the string for the label.

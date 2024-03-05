@@ -64,6 +64,10 @@ import com.raytheon.viz.hydrocommon.pdc.data.IngestFilter;
  * July 10, 2018 20678     djingtao   Hydroview incorrectly displays ts FP and FR
  * Sep 21, 2018 7379       mduff      Moved for PDC Refactor.
  * Feb 03, 2020 20555      ryu        Fix river stage display for selected time and value change.
+<<<<<<< HEAD
+=======
+ * Feb 04, 2021 21871   mgamazaychikov Added support for height min/max calculation
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  * 
  * @author mpduff
@@ -215,7 +219,17 @@ public class PointDataControlDerive {
                 heightList = new ArrayList<>(tmpList.size());
                 heightList.addAll(tmpList);
                 tmpList = null;
+<<<<<<< HEAD
                 repObsPtr = processList(heightList, changeWindow);
+=======
+                if ((pcOptions.getTimeMode() == PDCConstants.TimeModeType.MAXSELECT
+                        .getTimeMode()) || (pcOptions.getTimeMode() == PDCConstants.TimeModeType.MINSELECT
+                        .getTimeMode())  ){
+                    repObsPtr = processListForMinMax(heightList);
+                } else {
+                    repObsPtr = processList(heightList, changeWindow);
+                }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
 
             if ((qList != null) && (!qList.isEmpty())) {
@@ -299,6 +313,29 @@ public class PointDataControlDerive {
         return dataList;
     }
 
+<<<<<<< HEAD
+=======
+    private List<GageData> processListForMinMax(List<Observation> obsList) {
+        List<GageData> returnList = new ArrayList<>();
+        for (Observation obs:obsList) {
+            GageData oneRpt = new GageData();
+            oneRpt.setLid(obs.getLid());
+            oneRpt.setPe(obs.getPe());
+            oneRpt.setDur(obs.getDur());
+            oneRpt.setTs(obs.getTs());
+            oneRpt.setExtremum(obs.getExtremum());
+            oneRpt.setProbability(-1);
+            oneRpt.setShefQualCode("Z");
+            oneRpt.setQuality_code(PDCConstants.DEFAULT_QC_VALUE);
+            oneRpt.setValue(obs.getValue());
+            oneRpt.setValidtime(obs.getObstime());
+            returnList.add(oneRpt);
+        }
+
+        return returnList;
+    }
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private List<GageData> processList(List<Observation> obsList,
             int changeWindow) {
         /* loop thru the list and process each lid. */
@@ -1295,4 +1332,8 @@ public class PointDataControlDerive {
 
         return hoursInWindow;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

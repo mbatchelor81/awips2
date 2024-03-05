@@ -1,5 +1,4 @@
 #!/bin/sh
-export DISPLAY=:0.0
 export FXA_HOME=/awips2/cave/caveEnvironment
 if [ $6 = "kde" ]
 then

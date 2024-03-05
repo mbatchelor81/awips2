@@ -35,12 +35,21 @@ import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
+<<<<<<< HEAD
+=======
+import org.locationtech.jts.geom.Coordinate;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
 import com.raytheon.uf.common.status.UFStatus.Priority;
 import com.raytheon.uf.viz.core.DescriptorMap;
 import com.raytheon.uf.viz.core.IDisplayPane;
+<<<<<<< HEAD
+=======
+import com.raytheon.uf.viz.core.IPane;
+import com.raytheon.uf.viz.core.IPane.CanvasType;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.IRenderableDisplayChangedListener;
 import com.raytheon.uf.viz.core.IRenderableDisplayChangedListener.DisplayChangeType;
 import com.raytheon.uf.viz.core.datastructure.LoopProperties;
@@ -68,13 +77,20 @@ import com.raytheon.viz.ui.UiUtil;
 import com.raytheon.viz.ui.color.BackgroundColor;
 import com.raytheon.viz.ui.color.IBackgroundColorChangedListener;
 import com.raytheon.viz.ui.editor.AbstractEditor;
+<<<<<<< HEAD
+=======
+import com.raytheon.viz.ui.editor.ComboEditor;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.viz.ui.editor.IMultiPaneEditor;
 import com.raytheon.viz.ui.editor.ISelectedPanesChangedListener;
 import com.raytheon.viz.ui.input.EditableManager;
 import com.raytheon.viz.ui.input.InputAdapter;
 import com.raytheon.viz.ui.input.PanHandler;
 import com.raytheon.viz.ui.panes.PaneManager;
+<<<<<<< HEAD
 import org.locationtech.jts.geom.Coordinate;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * The side view for "docking" displays.
@@ -105,11 +121,27 @@ import org.locationtech.jts.geom.Coordinate;
  * Jun 25, 2018    6660     bsteffen    Ensure outgoing display keeps background color during swap.
  * Jan 09, 2019    7526     tgurney     Make resources uneditable while they are
  *                                      in the side view
+<<<<<<< HEAD
+=======
+ * Apr 25, 2022    8791     mapeters    Handle minor DescriptorMap change
+ * Sep 12, 2022    8792     mapeters    Implement new methods for combo editor
+ * Oct 12, 2022    8946     mapeters    Add getCanvases(CanvasType)
+ * Oct 13, 2022    8955     mapeters    Support swapping combo editor in/out, fix some swapping
+ *                                      cases with panes hidden that didn't maintain visible/hidden
+ *                                      state correctly
+ * Oct 21, 2022    8956     mapeters    DescriptorMap.getEditorId() now can take multiple displays
+ *                                      to determine if a Combo editor is needed
+ * May 11, 2023 2029803     mapeters    Add horizontal layout methods
+ * Feb 07, 2024 2036825     mapeters    Preserve horizontal layout when swapping
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
  * @author chammack
+<<<<<<< HEAD
  *
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  */
 public class SideView extends ViewPart implements IMultiPaneEditor,
         IBackgroundColorChangedListener, IRenameablePart {
@@ -134,6 +166,16 @@ public class SideView extends ViewPart implements IMultiPaneEditor,
     private AbstractVizResource<?, ?> editableRsc;
 
     /**
+<<<<<<< HEAD
+=======
+     * The ID of the editor whose panes were last swapped in to this side view.
+     * Used to make sure that panes that were swapped in from a combo editor are
+     * swapped back out to a combo editor.
+     */
+    private String editorId;
+
+    /**
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * The constructor.
      */
     public SideView() {
@@ -171,7 +213,11 @@ public class SideView extends ViewPart implements IMultiPaneEditor,
     public void createPartControl(Composite parent) {
         try {
             if (paneManager == null) {
+<<<<<<< HEAD
                 paneManager = new PaneManager();
+=======
+                paneManager = new SideViewPaneManager();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 paneManager.registerMouseHandler(new PanHandler(this),
                         InputPriority.LOWEST);
                 paneManager.registerMouseHandler(swappingListener,
@@ -188,8 +234,12 @@ public class SideView extends ViewPart implements IMultiPaneEditor,
                 }
             });
         } catch (Exception e) {
+<<<<<<< HEAD
             statusHandler.handle(Priority.SIGNIFICANT,
                     "Error creating SideView", e);
+=======
+            statusHandler.error("Error creating SideView", e);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         if (bundleToLoad != null) {
@@ -287,11 +337,19 @@ public class SideView extends ViewPart implements IMultiPaneEditor,
      */
     public void swapPanes() {
         IEditorPart editor = EditorUtil.getActiveEditor();
+<<<<<<< HEAD
         if (editor != null && editor instanceof AbstractEditor) {
+=======
+        if (editor instanceof AbstractEditor) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             Set<IRenderableDisplay> myHiddenDisplays = new HashSet<>();
             Set<IRenderableDisplay> editorHiddenDisplays = new HashSet<>();
 
             AbstractEditor theEditor = (AbstractEditor) editor;
+<<<<<<< HEAD
+=======
+            String theEditorId = theEditor.getSite().getId();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             // swap part name
             String editorName = theEditor.getPartName();
@@ -360,11 +418,26 @@ public class SideView extends ViewPart implements IMultiPaneEditor,
 
             int editorPaneCount = editorPanes.length;
             int viewPaneCount = viewPanes.length;
+<<<<<<< HEAD
 
             try {
                 boolean isCompatibleEditor = theEditor.getSite().getId()
                         .equals(DescriptorMap.getEditorId(myRenderables[0]
                                 .getDescriptor().getClass().getName()));
+=======
+            boolean editorHorizontalLayout = theEditor instanceof IMultiPaneEditor
+                    && ((IMultiPaneEditor) theEditor).isHorizontalLayout();
+            boolean viewHorizontalLayout = isHorizontalLayout();
+
+            try {
+                String requiredEditorId = editorId;
+                if (requiredEditorId == null) {
+                    requiredEditorId = DescriptorMap.getEditorId(myRenderables);
+                }
+
+                boolean isCompatibleEditor = theEditorId
+                        .equals(requiredEditorId);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 // I have my renderables saved off, load editor renderables
                 // to me first
                 if (viewPaneCount > editorPaneCount) {
@@ -372,6 +445,7 @@ public class SideView extends ViewPart implements IMultiPaneEditor,
                     for (int i = viewPaneCount - 1; i >= editorPaneCount; --i) {
                         removePane(viewPanes[i]);
                     }
+<<<<<<< HEAD
                     for (int i = 0; i < editorPaneCount; ++i) {
                         IRenderableDisplay display = editorPanes[i]
                                 .getRenderableDisplay();
@@ -415,6 +489,33 @@ public class SideView extends ViewPart implements IMultiPaneEditor,
                             if (hide) {
                                 hidePane(pane);
                             }
+=======
+                }
+                for (int i = 0; i < editorPaneCount; ++i) {
+                    IRenderableDisplay display = editorPanes[i]
+                            .getRenderableDisplay();
+                    boolean hide = editorHiddenDisplays.contains(display);
+                    /*
+                     * TODO: This condition is currently needed because the
+                     * NSHARP input handlers incorrectly retain references to
+                     * VizDisplayPane instances. Should do this unconditionally
+                     * when that is fixed.
+                     */
+                    if (isCompatibleEditor) {
+                        editorPanes[i].setRenderableDisplay(null);
+                    }
+                    if (i < viewPaneCount) {
+                        viewPanes[i].setRenderableDisplay(display);
+                        if (hide) {
+                            hidePane(viewPanes[i]);
+                        } else if (!viewPanes[i].isVisible()) {
+                            showPane(viewPanes[i]);
+                        }
+                    } else {
+                        IDisplayPane pane = addPane(display);
+                        if (hide) {
+                            hidePane(pane);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         }
                     }
                 }
@@ -435,6 +536,7 @@ public class SideView extends ViewPart implements IMultiPaneEditor,
                                     - 1; i >= viewPaneCount; --i) {
                                 mpe.removePane(editorPanes[i]);
                             }
+<<<<<<< HEAD
                             for (int i = 0; i < viewPaneCount; ++i) {
                                 editorPanes[i]
                                         .setRenderableDisplay(myRenderables[i]);
@@ -464,6 +566,34 @@ public class SideView extends ViewPart implements IMultiPaneEditor,
                                             .contains(myRenderables[i])) {
                                         mpe.hidePane(pane);
                                     }
+=======
+                        }
+                        for (int i = 0; i < viewPaneCount; ++i) {
+                            if (i < editorPaneCount) {
+                                if (theEditor instanceof ComboEditor) {
+                                    ((ComboEditor) theEditor).replacePane(
+                                            editorPanes[i], myRenderables[i]);
+                                    editorPanes[i] = theEditor
+                                            .getDisplayPanes()[i];
+                                } else {
+                                    editorPanes[i].setRenderableDisplay(
+                                            myRenderables[i]);
+                                }
+                                if (!myHiddenDisplays.contains(myRenderables[i])
+                                        && !editorPanes[i].isVisible()) {
+                                    mpe.showPane(editorPanes[i]);
+                                } else if (myHiddenDisplays
+                                        .contains(myRenderables[i])
+                                        && editorPanes[i].isVisible()) {
+                                    mpe.hidePane(editorPanes[i]);
+                                }
+                            } else {
+                                IDisplayPane pane = mpe
+                                        .addPane(myRenderables[i]);
+                                if (myHiddenDisplays
+                                        .contains(myRenderables[i])) {
+                                    mpe.hidePane(pane);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                 }
                             }
                         }
@@ -477,9 +607,13 @@ public class SideView extends ViewPart implements IMultiPaneEditor,
                 } else {
                     PlatformUI.getWorkbench().getActiveWorkbenchWindow()
                             .getActivePage().closeEditor(theEditor, false);
+<<<<<<< HEAD
                     String editorId = DescriptorMap.getEditorId(myRenderables[0]
                             .getDescriptor().getClass().getName());
                     if (editorId == null) {
+=======
+                    if (requiredEditorId == null) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         throw new VizException(
                                 "No editor mapping for descriptor: "
                                         + getActiveDisplayPane()
@@ -489,15 +623,42 @@ public class SideView extends ViewPart implements IMultiPaneEditor,
                     }
                     LoopProperties editorLoopProperties = theEditor
                             .getLoopProperties();
+<<<<<<< HEAD
                     theEditor = UiUtil.createEditor(editorId, myRenderables);
                     // closed the editor above so have to set the name again
                     theEditor.setPartName(viewName);
 
+=======
+                    theEditor = UiUtil.createEditor(requiredEditorId,
+                            myRenderables);
+                    // closed the editor above so have to set the name again
+                    theEditor.setPartName(viewName);
+
+                    // Hide panes that were hidden in the Side View
+                    if (theEditor instanceof IMultiPaneEditor) {
+                        IMultiPaneEditor mpe = (IMultiPaneEditor) theEditor;
+                        for (int i = 0; i < myRenderables.length; ++i) {
+                            if (myHiddenDisplays.contains(myRenderables[i])) {
+                                mpe.hidePane(mpe.getMainCanvases()[i]);
+                            }
+                        }
+                    }
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     theEditor.setLoopProperties(loopProperties);
                     this.loopProperties = editorLoopProperties;
 
                 }
 
+<<<<<<< HEAD
+=======
+                if (theEditor instanceof IMultiPaneEditor) {
+                    ((IMultiPaneEditor) theEditor)
+                            .setHorizontalLayout(viewHorizontalLayout);
+                }
+                this.setHorizontalLayout(editorHorizontalLayout);
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 // Must jump to latest frame!
                 for (IDisplayPane pane : getDisplayPanes()) {
                     pane.getDescriptor().getFrameCoordinator().changeFrame(
@@ -591,6 +752,11 @@ public class SideView extends ViewPart implements IMultiPaneEditor,
                     }
                 }
 
+<<<<<<< HEAD
+=======
+                editorId = theEditorId;
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 refresh();
 
                 theEditor.refresh();
@@ -748,7 +914,46 @@ public class SideView extends ViewPart implements IMultiPaneEditor,
 
     @Override
     public void setPartName(String partName) {
+<<<<<<< HEAD
         super.setPartName(partName);
     }
 
+=======
+        /*
+         * We have to override the implementation in ViewPart since we also
+         * implement the interface IRenameablePart which defines this method.
+         */
+        super.setPartName(partName);
+    }
+
+    @Override
+    public List<IPane> getPanes() {
+        return paneManager.getPanes();
+    }
+
+    @Override
+    public IPane getActivePane() {
+        return paneManager.getActivePane();
+    }
+
+    @Override
+    public List<IDisplayPane> getCanvasesCompatibleWithActive() {
+        return paneManager.getCanvasesCompatibleWithActive();
+    }
+
+    @Override
+    public IDisplayPane[] getCanvases(CanvasType type) {
+        return paneManager.getCanvases(type);
+    }
+
+    @Override
+    public boolean isHorizontalLayout() {
+        return paneManager.isHorizontalLayout();
+    }
+
+    @Override
+    public void setHorizontalLayout(boolean horizontalLayout) {
+        paneManager.setHorizontalLayout(horizontalLayout);
+    }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

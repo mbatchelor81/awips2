@@ -29,8 +29,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+<<<<<<< HEAD
 import javax.vecmath.Vector2f;
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.dataplugin.gfe.db.objects.GridParmInfo.GridType;
 import com.raytheon.uf.common.dataplugin.gfe.db.objects.ParmID;
 import com.raytheon.uf.common.dataplugin.gfe.discrete.DiscreteKey;
@@ -48,10 +51,15 @@ import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
 import com.raytheon.uf.common.status.UFStatus.Priority;
 import com.raytheon.uf.common.time.TimeRange;
+<<<<<<< HEAD
+=======
+import com.raytheon.uf.common.util.Pair;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.viz.gfe.types.MutableInteger;
 
 /**
  * Contains a complete histogram for a single grid and parameter
+<<<<<<< HEAD
  * 
  * <pre>
  * SOFTWARE HISTORY
@@ -60,16 +68,34 @@ import com.raytheon.viz.gfe.types.MutableInteger;
  * Jun 5, 2008	1167		mnash	    Initial creation
  * Sep 3, 2008  1283        njensen     Fixed issues
  * Sep 9, 2008  1283        njensen     Implemented sample methods
+=======
+ *
+ * <pre>
+ * SOFTWARE HISTORY
+ * Date         Ticket#     Engineer    Description
+ * ------------ ----------  ----------- --------------------------
+ * Jun  5, 2008 1167        mnash       Initial creation
+ * Sep  3, 2008 1283        njensen     Fixed issues
+ * Sep  9, 2008 1283        njensen     Implemented sample methods
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * May 29, 2009 2159        rjpeter     Optimized sample methods.
  * May 24, 2012  673        randerso    Added defaulted method calls
  * Jun 17, 2013 15951       ryu         Fix index to wx/discrete key array
  * Oct 31, 2013 2508        randerso    Change to use DiscreteGridSlice.getKeys()
  * Jun 30, 2015 14552       yteng       Fix binnedHistogram method for SCALAR data
+<<<<<<< HEAD
  * 
  * </pre>
  * 
  * @author mnash
  * @version 1.0
+=======
+ * Nov 18, 2022 8429        thuggins    Remove Vecmath
+ *
+ * </pre>
+ *
+ * @author mnash
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  */
 public class HistSample {
     private static final transient IUFStatusHandler statusHandler = UFStatus
@@ -87,9 +113,15 @@ public class HistSample {
 
     public boolean _subkeymode;
 
+<<<<<<< HEAD
     private List<HistPair> _histPairs = new ArrayList<HistPair>();
 
     private List<HistValue> _rawPoints = new ArrayList<HistValue>();
+=======
+    private List<HistPair> _histPairs = new ArrayList<>();
+
+    private List<HistValue> _rawPoints = new ArrayList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     // cached values
     private HistValue _average;
@@ -150,7 +182,11 @@ public class HistSample {
 
     public TimeRange timeRange;
 
+<<<<<<< HEAD
     public List<HistPair> histPairs = new ArrayList<HistPair>();
+=======
+    public List<HistPair> histPairs = new ArrayList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     public IGridSlice gridSlice;
 
@@ -178,7 +214,11 @@ public class HistSample {
      * Description : Constructor far HistSample taking a histogram in the form
      * of a time range and a sequence of HistPairs, stores the information in
      * private data. Counts up the samples and stores that in _numSamplePoints.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param timeRange
      * @param histPairs
      */
@@ -200,7 +240,11 @@ public class HistSample {
         _stdDevMaxD = 0.0f;
         _stdDevMinD = 0.0f;
         _binnedMostCommonValue = new HistValue(0.0f);
+<<<<<<< HEAD
         _binnedHistPairs = new ArrayList<HistPair>();
+=======
+        _binnedHistPairs = new ArrayList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         _binnedHistPairsValue = 0.0f;
 
         // count up the number of sample points
@@ -214,7 +258,11 @@ public class HistSample {
      * cached. Sets number of sample points to zero. Calls sampleGrid() to
      * sample the grid. If successful, stores the time range and counts up the
      * number of sample points.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param gridSlice
      * @param sampleArea
      * @param cachePoints
@@ -254,7 +302,11 @@ public class HistSample {
      * for WEATHER. The most common value for DISCRETE. For vector, if
      * separateMagDir is true, the magnitude is averaged separately from the
      * direction.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param separateMagDir
      * @return
      */
@@ -264,7 +316,11 @@ public class HistSample {
             return _average;
         }
 
+<<<<<<< HEAD
         if (_histPairs.size() == 0) {
+=======
+        if (_histPairs.isEmpty()) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return _average; // HistValue()
         }
 
@@ -302,8 +358,13 @@ public class HistSample {
                                     * (Math.PI / 180));
                 }
                 float mag = binit(sum / count, _resolution);
+<<<<<<< HEAD
                 float dir = binit(
                         (float) (Math.atan2(uSum, vSum) * RAD_TO_DEG), 10.0f);
+=======
+                float dir = binit((float) (Math.atan2(uSum, vSum) * RAD_TO_DEG),
+                        10.0f);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 while (dir < 0.0) {
                     dir += 360.0;
                 }
@@ -316,6 +377,7 @@ public class HistSample {
                 hs._average = new HistValue(mag, dir);
                 return _average;
             } else {
+<<<<<<< HEAD
                 for (int i = 0; i < _histPairs.size(); i++) {
                     int tCount = _histPairs.get(i).count();
                     count += tCount;
@@ -327,6 +389,19 @@ public class HistSample {
                             * Math.cos(_histPairs.get(i).value().direction()
                                     * (Math.PI / 180))
                             * _histPairs.get(i).value().magnitude();
+=======
+                for (HistPair _histPair : _histPairs) {
+                    int tCount = _histPair.count();
+                    count += tCount;
+                    uSum += tCount
+                            * Math.sin(_histPair.value().direction()
+                                    * (Math.PI / 180))
+                            * _histPair.value().magnitude();
+                    vSum += tCount
+                            * Math.cos(_histPair.value().direction()
+                                    * (Math.PI / 180))
+                            * _histPair.value().magnitude();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     float v = uSum / count;
                     float u = vSum / count;
                     float mag = binit((float) Math.sqrt((u * u) + (v * v)),
@@ -346,6 +421,10 @@ public class HistSample {
                     return _average;
                 }
             }
+<<<<<<< HEAD
+=======
+            return _average;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         case WEATHER: {
             hs._average = mostCommonValue();
@@ -358,18 +437,31 @@ public class HistSample {
         }
 
         default:
+<<<<<<< HEAD
             return _average; // unknown type, default HistValue
+=======
+            // unknown type, default HistValue
+            return _average;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 
     /**
      * Description : the square root function
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param val
      * @return
      */
     public static double squareRoot(double val) {
+<<<<<<< HEAD
         Double rval = new Double(Math.sqrt(val));
+=======
+        Double rval = Double.valueOf(Math.sqrt(val));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if (rval.isNaN()) {
             return 0.0;
         }
@@ -381,12 +473,22 @@ public class HistSample {
      * Returns the standard deviation of each component separately for VECTOR.
      * Should not be called for WEATHER. For vector, if separate MagDir is true,
      * the magnitude is averaged separately from the direction.
+<<<<<<< HEAD
      * 
      * @return
      */
     public final HistValue stdDev() {
         if (_histPairs.size() == 0) {
             return _stdDev; // no average possible, empty HistValue()
+=======
+     *
+     * @return
+     */
+    public final HistValue stdDev() {
+        if (_histPairs.isEmpty()) {
+            // no average possible, empty HistValue()
+            return _stdDev;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         // cached?
@@ -411,7 +513,12 @@ public class HistSample {
 
             float dev = 0.0f;
             if (count != 0) {
+<<<<<<< HEAD
                 dev = (float) squareRoot((sum2 - ((sum * sum) / count)) / count);
+=======
+                dev = (float) squareRoot(
+                        (sum2 - ((sum * sum) / count)) / count);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
             hs._stdDev = new HistValue(dev);
             return _stdDev;
@@ -447,17 +554,27 @@ public class HistSample {
             float vdev = 0.0f;
 
             if (count != 0) {
+<<<<<<< HEAD
                 dev = (float) squareRoot((sum2 - ((sum * sum) / count)) / count);
                 udev = (float) squareRoot((uSum2 - ((uSum * uSum) / count))
                         / count);
                 vdev = (float) squareRoot((vSum2 - ((vSum * vSum) / count))
                         / count);
+=======
+                dev = (float) squareRoot(
+                        (sum2 - ((sum * sum) / count)) / count);
+                udev = (float) squareRoot(
+                        (uSum2 - ((uSum * uSum) / count)) / count);
+                vdev = (float) squareRoot(
+                        (vSum2 - ((vSum * vSum) / count)) / count);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
             hs._stdDev = new HistValue(dev, udev + udev);
             return _stdDev;
         }
 
         case WEATHER:
+<<<<<<< HEAD
             return _stdDev; // empty HistValue
 
         case DISCRETE:
@@ -465,6 +582,18 @@ public class HistSample {
 
         default:
             return _stdDev; // empty HistValue
+=======
+            // empty HistValue
+            return _stdDev;
+
+        case DISCRETE:
+            // empty HistValue
+            return _stdDev;
+
+        default:
+            // empty HistValue
+            return _stdDev;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 
@@ -473,12 +602,22 @@ public class HistSample {
      * the HistPair's for the maximum count value and returns it. In the case
      * where more than one entry shares the maximum count value, then only the
      * highest value (sort order) value will be returned.
+<<<<<<< HEAD
      * 
      * @return
      */
     public final HistValue mostCommonValue() {
         if (_histPairs.size() == 0) {
             return _mostCommonValue; // default HistValue()
+=======
+     *
+     * @return
+     */
+    public final HistValue mostCommonValue() {
+        if (_histPairs.isEmpty()) {
+            // default HistValue()
+            return _mostCommonValue;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         // cached?
@@ -507,13 +646,23 @@ public class HistSample {
      * case where more than one entyr shares the maximum count value, then only
      * the highest value (sort order) value will be returned. Works only on
      * SCALAR and VECTOR.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param resolution
      * @return
      */
     public final HistValue mostCommonValueBinned(float resolution) {
+<<<<<<< HEAD
         if (_histPairs.size() == 0) {
             return _mostCommonValue; // default HistValue()
+=======
+        if (_histPairs.isEmpty()) {
+            // default HistValue()
+            return _mostCommonValue;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         // cached?
@@ -546,6 +695,7 @@ public class HistSample {
      * Finds and returns the middle value associated with the sample. The middle
      * value is that value that is halfway between the lowest and highest in
      * terms of count, and not value. This is a no-op for WEATHER/DISCRETE.
+<<<<<<< HEAD
      * 
      * @return
      */
@@ -556,6 +706,18 @@ public class HistSample {
                 || _histPairs.get(0).value().dataType()
                         .equals(GridType.DISCRETE)) {
             return _middleValue; // default HistValue()
+=======
+     *
+     * @return
+     */
+    public final HistValue middleValue() {
+        if ((_histPairs.isEmpty())
+                || _histPairs.get(0).value().dataType().equals(GridType.WEATHER)
+                || _histPairs.get(0).value().dataType()
+                        .equals(GridType.DISCRETE)) {
+            // default HistValue()
+            return _middleValue;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         // cached?
@@ -580,6 +742,7 @@ public class HistSample {
      * Description : Returns the absolute minimum value for the sample points.
      * This is a no-op for WEATHER/DISCRETE. Only the magnitude component for
      * VECTOR is used for comparison.
+<<<<<<< HEAD
      * 
      * @return
      */
@@ -590,6 +753,18 @@ public class HistSample {
                 || _histPairs.get(0).value().dataType()
                         .equals(GridType.DISCRETE)) {
             return _absoluteMin; // no minimum possible
+=======
+     *
+     * @return
+     */
+    public final HistValue absoluteMin() {
+        if ((_histPairs.isEmpty())
+                || _histPairs.get(0).value().dataType().equals(GridType.WEATHER)
+                || _histPairs.get(0).value().dataType()
+                        .equals(GridType.DISCRETE)) {
+            // no minimum possible
+            return _absoluteMin;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         // cached?
@@ -606,6 +781,7 @@ public class HistSample {
      * Description : REturns the absolute maximum value for the sample points.
      * This is a no-op for WEATHER/DISCRETE. Only the magnitude component for
      * VECTOR is used for comparison.
+<<<<<<< HEAD
      * 
      * @return
      */
@@ -616,6 +792,18 @@ public class HistSample {
                 || _histPairs.get(0).value().dataType()
                         .equals(GridType.DISCRETE)) {
             return _absoluteMax; // default HistValue
+=======
+     *
+     * @return
+     */
+    public final HistValue absoluteMax() {
+        if ((_histPairs.isEmpty())
+                || _histPairs.get(0).value().dataType().equals(GridType.WEATHER)
+                || _histPairs.get(0).value().dataType()
+                        .equals(GridType.DISCRETE)) {
+            // default HistValue
+            return _absoluteMax;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         // cached?
@@ -646,7 +834,11 @@ public class HistSample {
      * most common value is provide for WEATERH. Outliers are eliminated.
      * Percent ranges from 0 to 50. For vector, if separateMagDir is true, the
      * magnitude is averaged separately from the direction.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param minpercent
      * @param maxpercent
      * @param separateMagDir
@@ -656,7 +848,11 @@ public class HistSample {
             boolean separateMagDir) {
         HistValue bogus = new HistValue();
         HistSample hs = this;
+<<<<<<< HEAD
         if ((_histPairs.size() == 0) || (minpercent < 0) || (minpercent > 50)
+=======
+        if ((_histPairs.isEmpty()) || (minpercent < 0) || (minpercent > 50)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 || (maxpercent < 0) || (maxpercent > 50)) {
             hs._moderatedAverage = new HistValue();
             hs._moderatedAverageMinPercent = hs._moderatedAverageMaxPercent = 0;
@@ -676,13 +872,19 @@ public class HistSample {
 
         float runningCount = 0;
         int minlimitCount = (int) ((minpercent * _numSamplePoints) / 100.0);
+<<<<<<< HEAD
         int maxlimitCount = (int) (((100 - maxpercent) * _numSamplePoints) / 100.0);
+=======
+        int maxlimitCount = (int) (((100 - maxpercent) * _numSamplePoints)
+                / 100.0);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         switch (_histPairs.get(0).value().dataType()) {
         case SCALAR: {
             float sum = 0.0f;
             int count = 0;
             for (int i = 0; i < _histPairs.size(); i++) {
+<<<<<<< HEAD
                 int minVCount = (int) runningCount + 1; // indices for this pair
                 int maxVCount = (int) runningCount + _histPairs.get(i).count();
 
@@ -692,6 +894,19 @@ public class HistSample {
                 } else {
                     numInclude = (Math.max(minlimitCount, minVCount) - Math
                             .min(maxlimitCount, maxVCount)) + 1;
+=======
+                // indices for this pair
+                int minVCount = (int) runningCount + 1;
+                int maxVCount = (int) runningCount + _histPairs.get(i).count();
+
+                int numInclude = 0;
+                if ((minlimitCount > maxVCount)
+                        || (maxlimitCount < minVCount)) {
+                    numInclude = 0;
+                } else {
+                    numInclude = (Math.max(minlimitCount, minVCount)
+                            - Math.min(maxlimitCount, maxVCount)) + 1;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
 
                 if (numInclude != 0) {
@@ -711,7 +926,12 @@ public class HistSample {
             float vSum = 0.0f;
             if (separateMagDir) {
                 for (int i = 0; i < _histPairs.size(); i++) {
+<<<<<<< HEAD
                     int minVCount = (int) runningCount + 1; // indexes for this
+=======
+                    // indexes for this
+                    int minVCount = (int) runningCount + 1;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     // pair
                     int maxVCount = (int) runningCount
                             + _histPairs.get(i).count();
@@ -721,27 +941,44 @@ public class HistSample {
                             || (maxlimitCount < minVCount)) {
                         numInclude = 0;
                     } else {
+<<<<<<< HEAD
                         numInclude = (Math.max(minlimitCount, minVCount) - Math
                                 .min(maxlimitCount, maxVCount)) + 1;
+=======
+                        numInclude = (Math.max(minlimitCount, minVCount)
+                                - Math.min(maxlimitCount, maxVCount)) + 1;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     }
                     if (numInclude != 0) {
                         int tCount = numInclude;
                         sum += tCount * _histPairs.get(i).value().magnitude();
                         count += tCount;
                         uSum += tCount
+<<<<<<< HEAD
                                 * Math.sin(_histPairs.get(i).value()
                                         .direction()
                                         * (Math.PI / 180));
                         vSum += tCount
                                 * Math.cos(_histPairs.get(i).value()
                                         .direction()
+=======
+                                * Math.sin(_histPairs.get(i).value().direction()
+                                        * (Math.PI / 180));
+                        vSum += tCount
+                                * Math.cos(_histPairs.get(i).value().direction()
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                         * (Math.PI / 180));
                     }
                     runningCount += _histPairs.get(i).count();
                 }
                 float mag = binit(sum / count, _resolution);
+<<<<<<< HEAD
                 float dir = binit(
                         (float) (Math.atan2(uSum, vSum) * RAD_TO_DEG), 10.0f);
+=======
+                float dir = binit((float) (Math.atan2(uSum, vSum) * RAD_TO_DEG),
+                        10.0f);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 while (dir < 0.0) {
                     dir += 360.0;
                 }
@@ -755,7 +992,12 @@ public class HistSample {
                 return _moderatedAverage;
             } else {
                 for (int i = 0; i < _histPairs.size(); i++) {
+<<<<<<< HEAD
                     int minVCount = (int) runningCount + 1; // indexes for this
+=======
+                    // indexes for this
+                    int minVCount = (int) runningCount + 1;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     // pair
                     int maxVCount = (int) runningCount
                             + _histPairs.get(i).count();
@@ -765,14 +1007,20 @@ public class HistSample {
                             || (maxlimitCount < minVCount)) {
                         numInclude = 0;
                     } else {
+<<<<<<< HEAD
                         numInclude = (Math.max(minlimitCount, minVCount) - Math
                                 .min(maxlimitCount, maxVCount)) + 1;
+=======
+                        numInclude = (Math.max(minlimitCount, minVCount)
+                                - Math.min(maxlimitCount, maxVCount)) + 1;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     }
 
                     if (numInclude != 0) {
                         int tCount = _histPairs.get(i).count();
                         count += tCount;
                         uSum += tCount
+<<<<<<< HEAD
                                 * Math.sin(_histPairs.get(i).value()
                                         .direction()
                                         * DEG_TO_RAD)
@@ -780,6 +1028,13 @@ public class HistSample {
                         vSum += tCount
                                 * Math.cos(_histPairs.get(i).value()
                                         .direction()
+=======
+                                * Math.sin(_histPairs.get(i).value().direction()
+                                        * DEG_TO_RAD)
+                                * _histPairs.get(i).value().magnitude();
+                        vSum += tCount
+                                * Math.cos(_histPairs.get(i).value().direction()
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                         * DEG_TO_RAD)
                                 * _histPairs.get(i).value().magnitude();
                     }
@@ -827,18 +1082,33 @@ public class HistSample {
      * points. this is a no-op for WEATHER/DISCRETE. Percent should be between 0
      * and 50. This routine eliminates the bottom xx% of sample values and
      * returns that value.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param percent
      * @return
      */
     public final HistValue moderatedMin(int percent) {
         HistSample hs = this;
+<<<<<<< HEAD
         if ((_histPairs.size() == 0) || (percent < 0) || (percent > 50)
                 || (_histPairs.get(0).value().dataType() == GridType.WEATHER)
                 || (_histPairs.get(0).value().dataType() == GridType.DISCRETE)) {
             hs._moderatedMin = new HistValue();
             hs._moderatedMinPercent = 0;
             return _moderatedMin; // default histValue()
+=======
+        if ((_histPairs.isEmpty()) || (percent < 0) || (percent > 50)
+                || (_histPairs.get(0).value().dataType() == GridType.WEATHER)
+                || (_histPairs.get(0).value()
+                        .dataType() == GridType.DISCRETE)) {
+            hs._moderatedMin = new HistValue();
+            hs._moderatedMinPercent = 0;
+            // default histValue()
+            return _moderatedMin;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         // cached?
@@ -871,22 +1141,36 @@ public class HistSample {
      * points. This is a no-op for WEATHER/DISCRETE. Percent should be between 0
      * and 50. This routine eliminates the top 15% of sample values and returns
      * that value.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param percent
      * @return
      */
     public final HistValue moderatedMax(int percent) {
         HistSample hs = this;
+<<<<<<< HEAD
         if ((_histPairs.size() == 0)
                 || (percent < 0)
                 || (percent > 50)
                 || _histPairs.get(0).value().dataType()
                         .equals(GridType.WEATHER)
+=======
+        if ((_histPairs.isEmpty()) || (percent < 0) || (percent > 50)
+                || _histPairs.get(0).value().dataType().equals(GridType.WEATHER)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 || _histPairs.get(0).value().dataType()
                         .equals(GridType.DISCRETE)) {
             hs._moderatedMaxPercent = 0;
             hs._moderatedMax = new HistValue();
+<<<<<<< HEAD
             return _moderatedMax; // default histValue()
+=======
+            // default histValue()
+            return _moderatedMax;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         // cached?
@@ -928,7 +1212,11 @@ public class HistSample {
      * most common value is provided for WEATHER/DISCRETE. Outliers are
      * eliminated based on standard deviation. For vector, if separateMagDir is
      * true, the magnitude is averaged separately from the direction.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param minStdD
      * @param maxStdD
      * @param separateMagDir
@@ -939,7 +1227,11 @@ public class HistSample {
         HistValue bogus = new HistValue();
         HistSample hs = this;
 
+<<<<<<< HEAD
         if ((_histPairs.size() == 0) || (minStdD < 0) || (maxStdD < 0)) {
+=======
+        if ((_histPairs.isEmpty()) || (minStdD < 0) || (maxStdD < 0)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             hs._stdDevAvgMinStdD = hs._stdDevAvgMaxStdD = 0;
             hs._stdDevMagDir = false;
             hs._stdDevAvg = new HistValue();
@@ -995,12 +1287,19 @@ public class HistSample {
                         sum += tCount * _histPairs.get(i).value().magnitude();
                         count += tCount;
                         uSum += tCount
+<<<<<<< HEAD
                                 * Math.sin(_histPairs.get(i).value()
                                         .direction()
                                         * DEG_TO_RAD);
                         vSum += tCount
                                 * Math.cos(_histPairs.get(i).value()
                                         .direction()
+=======
+                                * Math.sin(_histPairs.get(i).value().direction()
+                                        * DEG_TO_RAD);
+                        vSum += tCount
+                                * Math.cos(_histPairs.get(i).value().direction()
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                         * DEG_TO_RAD);
                     }
                 }
@@ -1008,8 +1307,13 @@ public class HistSample {
                     return average(true);
                 }
                 float mag = binit(sum / count, _resolution);
+<<<<<<< HEAD
                 float dir = binit(
                         (float) (Math.atan2(uSum, vSum) * RAD_TO_DEG), 10.0f);
+=======
+                float dir = binit((float) (Math.atan2(uSum, vSum) * RAD_TO_DEG),
+                        10.0f);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 while (dir < 0.0) {
                     dir += 360.0;
                 }
@@ -1028,6 +1332,7 @@ public class HistSample {
                         int tCount = _histPairs.get(i).count();
                         count += tCount;
                         uSum += tCount
+<<<<<<< HEAD
                                 * Math.sin(_histPairs.get(i).value()
                                         .direction()
                                         * DEG_TO_RAD)
@@ -1035,6 +1340,13 @@ public class HistSample {
                         vSum += tCount
                                 * Math.cos(_histPairs.get(i).value()
                                         .direction()
+=======
+                                * Math.sin(_histPairs.get(i).value().direction()
+                                        * DEG_TO_RAD)
+                                * _histPairs.get(i).value().magnitude();
+                        vSum += tCount
+                                * Math.cos(_histPairs.get(i).value().direction()
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                         * DEG_TO_RAD)
                                 * _histPairs.get(i).value().magnitude();
                     }
@@ -1081,17 +1393,26 @@ public class HistSample {
      * Description : Returns the representative minimum value for the sample
      * points. This is a no-op for WEATHER/DISCRETE. Based on standard
      * deviations.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param stdD
      * @return
      */
     public final HistValue stdDevMin(float stdD) {
         HistSample hs = this;
 
+<<<<<<< HEAD
         if ((_histPairs.size() == 0)
                 || (stdD < 0)
                 || _histPairs.get(0).value().dataType()
                         .equals(GridType.WEATHER)
+=======
+        if ((_histPairs.isEmpty()) || (stdD < 0)
+                || _histPairs.get(0).value().dataType().equals(GridType.WEATHER)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 || _histPairs.get(0).value().dataType()
                         .equals(GridType.DISCRETE)) {
             hs._stdDevMinD = 0.0f;
@@ -1124,15 +1445,23 @@ public class HistSample {
      * Description : Returns the representative maximum value for the sample
      * points. This is a no-op for WEATHER/DISCRETE. Based on standard
      * deviations.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param stdD
      * @return
      */
     public final HistValue stdDevMax(float stdD) {
         HistSample hs = this;
 
+<<<<<<< HEAD
         if ((_histPairs.size() == 0)
                 || (stdD < 0)
+=======
+        if ((_histPairs.isEmpty()) || (stdD < 0)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 || _histPairs.get(0).value().dataType()
                         .equals(GridType.DISCRETE)
                 || _histPairs.get(0).value().dataType()
@@ -1162,17 +1491,27 @@ public class HistSample {
     /**
      * OUtputs the histogram for this grid, but binned by the specified float
      * value. This only applies to SCALAR and VECTOR data.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param resolution
      * @return
      */
     public List<HistPair> binnedHistogram(float resolution) {
         HistSample hs = this;
+<<<<<<< HEAD
         if ((_histPairs.size() == 0)
                 || (resolution <= 0.0)
                 || _histPairs.get(0).value().dataType().equals(GridType.NONE)
                 || _histPairs.get(0).value().dataType()
                         .equals(GridType.WEATHER)
+=======
+        if ((_histPairs.isEmpty()) || (resolution <= 0.0)
+                || _histPairs.get(0).value().dataType().equals(GridType.NONE)
+                || _histPairs.get(0).value().dataType().equals(GridType.WEATHER)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 || _histPairs.get(0).value().dataType()
                         .equals(GridType.DISCRETE)) {
             hs._binnedHistPairs.clear();
@@ -1190,6 +1529,7 @@ public class HistSample {
 
         // calculate the binned histogram for SCALAR
         if (_histPairs.get(0).value().dataType().equals(GridType.SCALAR)) {
+<<<<<<< HEAD
             Map<Float, Integer> hp = new HashMap<Float, Integer>();
             for (int i = 0; i < _histPairs.size(); i++) {
                 float value = binit(_histPairs.get(i).value().scalar(), resolution);
@@ -1198,6 +1538,17 @@ public class HistSample {
             }
 
             hs._binnedHistPairs = new ArrayList<HistPair>();
+=======
+            Map<Float, Integer> hp = new HashMap<>();
+            for (int i = 0; i < _histPairs.size(); i++) {
+                float value = binit(_histPairs.get(i).value().scalar(),
+                        resolution);
+                hp.put(value, (hp.get(value) == null ? 0 : (int) hp.get(value))
+                        + _histPairs.get(i).count());
+            }
+
+            hs._binnedHistPairs = new ArrayList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             Iterator<Map.Entry<Float, Integer>> pos = hp.entrySet().iterator();
             while (pos.hasNext()) {
                 Entry<Float, Integer> p = pos.next();
@@ -1207,7 +1558,11 @@ public class HistSample {
         }
         // calculate the binned histogram for VECTOR
         else {
+<<<<<<< HEAD
             Map<Float, Float> hp = new HashMap<Float, Float>();
+=======
+            Map<Float, Float> hp = new HashMap<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             for (int i = 0; i < _histPairs.size(); i++) {
                 // Map<Float, Float> pair = new HashMap<Float, Float>();
                 // hp.set(hp.put(binit(_histPairs.get(i).value().magnitude(),
@@ -1234,7 +1589,11 @@ public class HistSample {
 
     /**
      * Description : Bins the data sample based on the resolution
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param v
      * @param resolution
      * @return
@@ -1259,20 +1618,36 @@ public class HistSample {
      * that the grid is valid and grid and Grid2DBit sizes match. Ensures there
      * are points in the sample area. Switch cases on data type and then
      * extracts out the data for each sample point.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param grid
      * @param area
      * @param cachePoints
      */
+<<<<<<< HEAD
     private void sampleGrid(IGridSlice grid, Grid2DBit area, boolean cachePoints) {
+=======
+    private void sampleGrid(IGridSlice grid, Grid2DBit area,
+            boolean cachePoints) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         _histPairs.clear();
 
         // ensure grid sizes match
         Point saSize = new Point(area.getXdim(), area.getYdim());
         if (!grid.getGridInfo().getGridLoc().gridSize().equals(saSize)) {
+<<<<<<< HEAD
             statusHandler.handle(Priority.PROBLEM, "Grid size ["
                     + grid.getGridInfo().getGridLoc().gridSize()
                     + "] and Grid2DBit size [" + saSize + "] not the same");
+=======
+            statusHandler.handle(Priority.PROBLEM,
+                    "Grid size [" + grid.getGridInfo().getGridLoc().gridSize()
+                            + "] and Grid2DBit size [" + saSize
+                            + "] not the same");
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return;
         }
 
@@ -1314,7 +1689,11 @@ public class HistSample {
 
     /**
      * If the sample was of scalars this function is called
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param grid
      * @param area
      * @param cachePoints
@@ -1323,7 +1702,11 @@ public class HistSample {
      */
     private void sampleScalar(IGridSlice grid, Grid2DBit area,
             boolean cachePoints, Point ll, Point ur) {
+<<<<<<< HEAD
         Map<Float, MutableInteger> hp = new HashMap<Float, MutableInteger>();
+=======
+        Map<Float, MutableInteger> hp = new HashMap<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         Grid2DFloat gs = ((ScalarGridSlice) grid).getScalarGrid();
         for (int x = ll.x; x <= ur.x; x++) {
             for (int y = ll.y; y <= ur.y; y++) {
@@ -1352,7 +1735,11 @@ public class HistSample {
     private void sampleVector(IGridSlice grid, final Grid2DBit area,
             boolean cachePoints, final Point ll, final Point ur) {
 
+<<<<<<< HEAD
         Map<Vector2f, MutableInteger> hp = new HashMap<Vector2f, MutableInteger>();
+=======
+        Map<Pair<Float, Float>, MutableInteger> hp = new HashMap<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         Grid2DFloat mag = ((VectorGridSlice) grid).getMagGrid();
         Grid2DFloat dir = ((VectorGridSlice) grid).getDirGrid();
@@ -1373,7 +1760,11 @@ public class HistSample {
                     if (fdir == 360) {
                         fdir = 0.0f;
                     }
+<<<<<<< HEAD
                     Vector2f val = new Vector2f(fmag, fdir);
+=======
+                    Pair<Float, Float> val = new Pair<>(fmag, fdir);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                     MutableInteger count = hp.get(val);
                     if (count == null) {
@@ -1383,18 +1774,30 @@ public class HistSample {
                     count.add(1);
 
                     if (cachePoints) {
+<<<<<<< HEAD
                         _rawPoints.add(new HistValue(mag.get(x, y), dir.get(x,
                                 y)));
+=======
+                        _rawPoints.add(
+                                new HistValue(mag.get(x, y), dir.get(x, y)));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     }
                 }
             }
         }
 
         // Now store our histogram in ArrayList form
+<<<<<<< HEAD
         for (Entry<Vector2f, MutableInteger> entry : hp.entrySet()) {
             Vector2f first = entry.getKey();
             HistPair histPair = new HistPair(entry.getValue().getValue(),
                     new HistValue(first.x, first.y));
+=======
+        for (Entry<Pair<Float, Float>, MutableInteger> entry : hp.entrySet()) {
+            Pair<Float, Float> first = entry.getKey();
+            HistPair histPair = new HistPair(entry.getValue().getValue(),
+                    new HistValue(first.getFirst(), first.getSecond()));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             _histPairs.add(histPair);
         }
     }
@@ -1408,8 +1811,13 @@ public class HistSample {
     // ---------------------------------------------------------------------------
     private void sampleWx(final IGridSlice grid, final Grid2DBit area,
             boolean cachePoints, final Point ll, final Point ur) {
+<<<<<<< HEAD
         Map<WeatherKey, MutableInteger> hp = new HashMap<WeatherKey, MutableInteger>();
         Map<WeatherKey, MutableInteger> skhp = new HashMap<WeatherKey, MutableInteger>();
+=======
+        Map<WeatherKey, MutableInteger> hp = new HashMap<>();
+        Map<WeatherKey, MutableInteger> skhp = new HashMap<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         Grid2DByte gs = ((WeatherGridSlice) grid).getWeatherGrid();
         String siteId = grid.getGridInfo().getGridLoc().getSiteId();
         WeatherKey[] key = ((WeatherGridSlice) grid).getKeys();
@@ -1468,8 +1876,13 @@ public class HistSample {
 
     private void sampleDiscrete(final IGridSlice grid, final Grid2DBit area,
             boolean cachePoints, final Point ll, final Point ur) {
+<<<<<<< HEAD
         Map<DiscreteKey, MutableInteger> hp = new HashMap<DiscreteKey, MutableInteger>();
         Map<DiscreteKey, MutableInteger> skhp = new HashMap<DiscreteKey, MutableInteger>();
+=======
+        Map<DiscreteKey, MutableInteger> hp = new HashMap<>();
+        Map<DiscreteKey, MutableInteger> skhp = new HashMap<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         ParmID parmId = grid.getGridInfo().getParmID();
         Grid2DByte gs = ((DiscreteGridSlice) grid).getDiscreteGrid();
         String siteId = parmId.getDbId().getSiteId();
@@ -1529,7 +1942,11 @@ public class HistSample {
 
     /**
      * Description : counts the number of sample points and returns the number
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return
      */
     private int countSamplePoints() {
@@ -1557,7 +1974,11 @@ public class HistSample {
 
     /**
      * Description : Returns the sample's valid time
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return
      */
     public final TimeRange validTime() {
@@ -1566,7 +1987,11 @@ public class HistSample {
 
     /**
      * Description : Returns the histogram associated with this sample
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return
      */
     public final HistPair[] histogram() {
@@ -1575,7 +2000,11 @@ public class HistSample {
 
     /**
      * Description : Returns the number of points associated with this sample
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return
      */
     public int numOfPoints() {

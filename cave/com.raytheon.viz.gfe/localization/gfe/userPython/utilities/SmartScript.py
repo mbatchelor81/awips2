@@ -107,7 +107,16 @@
 # Apr 19, 2018  7271     randerso  Renamed and/or removed models
 # Oct 23, 2018  6594     randerso  Fixed import of JavaTimeRange
 # Apr 29, 2020  8151     randerso  Use SiteMap.getSite4LetterId()
+<<<<<<< HEAD
 #
+=======
+# Jun 30, 2021  21064    aghanava  Added optional timeInfluence argument to encodeEditArea().
+#                                  Updated so edit area queries are only evaluated when a
+#                                  timeInfluence is provided.
+#
+# Aug 24, 2021  22531    tlefebvr  Added optional parameter to getTextProductFromDB to force
+#                                  use of the OPERATIONAL database.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ########################################################################
 
 ##
@@ -378,8 +387,17 @@ class SmartScript(BaseTool.BaseTool):
             raise TypeError("SmartScript vtecActiveTable: could not convert to python objects.")
 
     def gfeOperatingMode(self):
+<<<<<<< HEAD
         #returns the current operating mode of the GFE.
         #Standard, PRACTICE, TEST
+=======
+        """
+        Returns the current CAVE mode.
+        Returns:
+            The current CAVE mode: one of "OPERATIONAL", "PRACTICE", "TEST".
+        """
+       
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return self.__dataMgr.getOpMode().name()
 
 #------------------------------------------------------------------------
@@ -2231,6 +2249,7 @@ class SmartScript(BaseTool.BaseTool):
 
         keys.append(uglyStr)
         return len(keys) - 1
+<<<<<<< HEAD
 
     ##
     # Returns a Numeric Python mask for the edit area
@@ -2247,6 +2266,34 @@ class SmartScript(BaseTool.BaseTool):
 
         if editArea.isQuery():
             editArea = self.__refSetMgr.evaluateQuery(editArea.getQuery())
+=======
+    
+    ##
+    # Returns a Numeric Python mask for the edit area. If timeInfluence is provided, 
+    #   re-evaluates an edit area query at the given time influence.
+    # "editArea" can be a named area or a ReferenceData object
+    # "timeInfluence" can be a Date or AbsTime object
+    # @param editArea: An edit area to obtain a mask for
+    # @type editArea: String or referenceArea
+    # @param timeInfluence: The time influence an edit area query is evaluated at
+    # @type timeInfluence: Date or AbsTime
+    # @return: grid for the edit area
+    # @rtype: numpy array of int8
+    def encodeEditArea(self, editArea, timeInfluence=None):
+        # Returns a Numeric Python mask for the edit area
+        # "editArea" can be a named area or a referenceData object
+        if isinstance(editArea, str):
+            editArea = self.getEditArea(editArea)
+
+        if timeInfluence is not None and editArea.isQuery():
+            if isinstance(timeInfluence, AbsTime.AbsTime):
+                timeInfluence = timeInfluence.javaDate()
+
+            elif not hasattr(timeInfluence, 'java_name') or timeInfluence.java_name != "java.util.Date":
+                raise TypeError("Argument timeInfluence must be a java.util.Date or AbsTime.")
+
+            editArea = self.__refSetMgr.evaluateQuery(editArea.getQuery(), timeInfluence)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         return editArea.getGrid().getNDArray().astype(numpy.bool)
 
@@ -2645,11 +2692,33 @@ class SmartScript(BaseTool.BaseTool):
     def knownOfficeTypes(self):
         return JUtil.javaStringListToPylist(self.__dataMgr.knownOfficeTypes())
 
+<<<<<<< HEAD
     # Retrieves a text product from the text database
     def getTextProductFromDB(self, productID):
         from com.raytheon.viz.gfe.product import TextDBUtil
 
         opMode = self.gfeOperatingMode() in ("OPERATIONAL", "TEST")
+=======
+    def getTextProductFromDB(self, productID, mode=None):
+        """
+        Retrieves a text product from the text database.
+            Parameters:
+                productID: ID of product to be retrieved
+                mode: (optional) Should be one of "OPERATIONAL", "PRACTICE", or "TEST". 
+                       If omitted defaults to current CAVE mode.
+        Returns: 
+            Full text of the requested product as a list of lines.
+        """
+        from com.raytheon.viz.gfe.product import TextDBUtil
+        if not mode:
+            mode = self.gfeOperatingMode()
+ 
+        validModes = ("OPERATIONAL", "PRACTICE", "TEST")
+        if mode.upper() not in validModes:
+            raise ValueError("Invalid mode: '{}'. Expected one of {}".format(mode, validModes))
+ 
+        opMode = mode.upper() in ("OPERATIONAL", "TEST")        
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         fullText = TextDBUtil.retrieveProduct(productID, opMode)
         textList = fullText.splitlines(True)
         return textList

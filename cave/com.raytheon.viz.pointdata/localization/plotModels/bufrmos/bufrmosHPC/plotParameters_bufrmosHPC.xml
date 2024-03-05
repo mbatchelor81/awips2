@@ -32,7 +32,18 @@
 
    <plotParameterDefinition displayName="Marker" displayType="MARKER" param="Marker" sampleValue=" " svgClass="marker" />
 
+<<<<<<< HEAD
    <plotParameterDefinition displayName="maxTemp24Hour (°F)" displayType="TEXT" format="%3.0f" param="maxTemp24Hour" sampleValue="1" svgClass="text" unit="°F" />
 
    <plotParameterDefinition displayName="minTemp24Hour (°F)" displayType="TEXT" format="%3.0f" param="minTemp24Hour" sampleValue="1" svgClass="text" unit="°F" />
+=======
+   <plotParameterDefinition displayName="maxTemp24Hour (°F)" displayType="TEXT" format="%3.0f" param="maxTemp24Hour" sampleValue="68" svgClass="text" unit="°F" />
+
+   <plotParameterDefinition displayName="maxTemp24Hour (°C)" displayType="TEXT" format="%3.0f" param="maxTemp24Hour" sampleValue="20" svgClass="text" unit="°C" />
+
+   <plotParameterDefinition displayName="minTemp24Hour (°F)" displayType="TEXT" format="%3.0f" param="minTemp24Hour" sampleValue="68" svgClass="text" unit="°F" />
+
+   <plotParameterDefinition displayName="minTemp24Hour (°C)" displayType="TEXT" format="%3.0f" param="minTemp24Hour" sampleValue="10" svgClass="text" unit="°C" />
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 </plotParameterDefinitions>

@@ -41,7 +41,11 @@ import com.raytheon.uf.viz.core.rsc.interrogation.StringInterrogationKey;
 import si.uom.NonSI;
 import si.uom.SI;
 import systems.uom.common.USCustomary;
+<<<<<<< HEAD
 import tec.uom.se.quantity.Quantities;
+=======
+import tech.units.indriya.quantity.Quantities;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Interrogator for radial radar products.
@@ -61,6 +65,10 @@ import tec.uom.se.quantity.Quantities;
  * Sep 25, 2018 17574      kshrestha   Display appropriate temperatures for Radar/Tilts levels.
  * Nov 26, 2018 20926      jdynina     Display MSL/AGL for below 0 degree elevs.
  * Jul 17, 2019 21421      jdynina     Bring MSL calculation in line with RPG
+<<<<<<< HEAD
+=======
+ * Oct 31, 2022 8905       lsingh      Check for NaN before converting units
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -73,7 +81,11 @@ public class RadarRadialInterrogator extends RadarDefaultInterrogator
     private static final transient IUFStatusHandler statusHandler = UFStatus
             .getHandler(RadarRadialInterrogator.class);
 
+<<<<<<< HEAD
     private static final double EFFECTIVE_EARTH_RADIUS = 1.21 * 6371000; // meters
+=======
+    private static final double EFFECTIVE_EARTH_RADIUS = 1.21 * 6_371_000; // meters
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     public static final InterrogationKey<Quantity<Length>> ELEVATION = new StringInterrogationKey<>(
             "Elevation", Interrogator.getTypedQuantityClass());
@@ -94,9 +106,15 @@ public class RadarRadialInterrogator extends RadarDefaultInterrogator
             InterrogateMap dataMap, Set<InterrogationKey<?>> keys) {
         int dataValue = 0;
         // Unit Converters
+<<<<<<< HEAD
         UnitConverter feetToMeters = USCustomary.FOOT.getConverterTo(SI.METRE);
         UnitConverter metersToFeet = SI.METRE.getConverterTo(USCustomary.FOOT);
         UnitConverter metersToNm = SI.METRE.getConverterTo(USCustomary.NAUTICAL_MILE);
+=======
+        final UnitConverter feetToMeters = USCustomary.FOOT.getConverterTo(SI.METRE);
+        final UnitConverter metersToFeet = SI.METRE.getConverterTo(USCustomary.FOOT);
+        final UnitConverter metersToNm = SI.METRE.getConverterTo(USCustomary.NAUTICAL_MILE);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         // Get value for Radial
         dataValue = interrogator.getDataValue(radarRecord, latLon);
@@ -135,11 +153,25 @@ public class RadarRadialInterrogator extends RadarDefaultInterrogator
                     }
                 }
                 double agl = msl - topoHeight;
+<<<<<<< HEAD
                 // modified msl and agl based on A1 code
                 addValueToMap(dataMap, keys, MSL,
                         Quantities.getQuantity(metersToFeet.convert(msl), USCustomary.FOOT));
                 addValueToMap(dataMap, keys, AGL,
                         Quantities.getQuantity(metersToFeet.convert(agl), USCustomary.FOOT));
+=======
+
+                double mslFt = (!Double.isNaN(msl) ? metersToFeet.convert(msl)
+                        : msl);
+                double aglFt = (!Double.isNaN(agl) ? metersToFeet.convert(agl)
+                        : agl);
+
+                // modified msl and agl based on A1 code
+                addValueToMap(dataMap, keys, MSL,
+                        Quantities.getQuantity(mslFt, USCustomary.FOOT));
+                addValueToMap(dataMap, keys, AGL,
+                        Quantities.getQuantity(aglFt, USCustomary.FOOT));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         }
         return dataValue;

@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -57,16 +69,25 @@ import systems.uom.common.USCustomary;
 
 /**
  * Implements a home drawing layer.
+<<<<<<< HEAD
  * 
  * <pre>
  * 
  *  SOFTWARE HISTORY
  * 
+=======
+ *
+ * <pre>
+ *
+ *  SOFTWARE HISTORY
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *  Date         Ticket#     Engineer    Description
  *  ------------ ----------  ----------- --------------------------
  *  19Dec2007    #647        ebabin     Fix mouse following issue..
  *  20Dec2007   #656         ebabin     Updated to refresh location after clicking GO.
  *                                      from put home cursor.
+<<<<<<< HEAD
  *  20Dec2007    #645        ebabin     Updated to fix sampling.           
  *  15Jan2007                ebabin     Update for lat/lon put home cursor bug.
  *  10-21-09     #1049       bsteffen    Refactor to common MovableTool model
@@ -85,6 +106,25 @@ import systems.uom.common.USCustomary;
  * 
  */
 
+=======
+ *  20Dec2007    #645        ebabin     Updated to fix sampling.
+ *  15Jan2007                ebabin     Update for lat/lon put home cursor bug.
+ *  10-21-09     #1049       bsteffen    Refactor to common MovableTool model
+ *  15Mar2013   15693   mgamazaychikov   Added magnification capability.
+ *  23Jul2014    3429        mapeters    Updated deprecated drawLine() calls.
+ *  28Jul2014    3430        mapeters    Updated move function to prevent errors when
+ *                                       MB3 clicking off the map in editable mode.
+ *  14Aug2014    3523        mapeters    Updated deprecated {@link DrawableString#textStyle}
+ *                                       assignments.
+ *  05Nov2015   #5070        randerso    Adjust font sizes for dpi scalin
+ *  Sep 13, 2022 8792        mapeters    Only handle input events in the pane this
+ *                                       layer is in
+ *
+ * </pre>
+ *
+ * @author ebabin
+ */
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 public class HomeToolLayer extends AbstractMovableToolLayer<Coordinate>
         implements IContextMenuContributor, IPointChangedListener {
 
@@ -132,9 +172,14 @@ public class HomeToolLayer extends AbstractMovableToolLayer<Coordinate>
     @Override
     protected void initInternal(IGraphicsTarget target) throws VizException {
         // initialize font for magnification capability
+<<<<<<< HEAD
         labelFont = target.initializeFont(
                 target.getDefaultFont().getFontName(), 10,
                 new Style[] { Style.BOLD });
+=======
+        labelFont = target.initializeFont(target.getDefaultFont().getFontName(),
+                10, new Style[] { Style.BOLD });
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         super.initInternal(target);
         resetHome();
         gc = new GeodeticCalculator(descriptor.getCRS());
@@ -143,7 +188,11 @@ public class HomeToolLayer extends AbstractMovableToolLayer<Coordinate>
 
     private void resetHome() {
         Coordinate home = dataManager.getHome();
+<<<<<<< HEAD
         Collection<Coordinate> dummy = new ArrayList<Coordinate>();
+=======
+        Collection<Coordinate> dummy = new ArrayList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         dummy.add(home);
         setObjects(dummy);
     }
@@ -161,10 +210,17 @@ public class HomeToolLayer extends AbstractMovableToolLayer<Coordinate>
         double radius = (MAGIC_X_RADIUS * paintProps.getZoomLevel());
         double[] center = descriptor
                 .worldToPixel(new double[] { home.x, home.y });
+<<<<<<< HEAD
         double[] p1 = target.getPointOnCircle(center[0], center[1], 0.0,
                 radius, 45);
         double[] p2 = target.getPointOnCircle(center[0], center[1], 0.0,
                 radius, 225);
+=======
+        double[] p1 = target.getPointOnCircle(center[0], center[1], 0.0, radius,
+                45);
+        double[] p2 = target.getPointOnCircle(center[0], center[1], 0.0, radius,
+                225);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         DrawableLine[] lines = new DrawableLine[2];
         lines[0] = new DrawableLine();
         lines[0].setCoordinates(p1[0], p1[1]);
@@ -200,9 +256,13 @@ public class HomeToolLayer extends AbstractMovableToolLayer<Coordinate>
         Coordinate dest;
         try {
             dest = refCoord.asLatLon();
+<<<<<<< HEAD
         } catch (TransformException e) {
             throw new VizException("Error inspecting Home Point", e);
         } catch (FactoryException e) {
+=======
+        } catch (TransformException | FactoryException e) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             throw new VizException("Error inspecting Home Point", e);
         }
         return inspect(dest);
@@ -210,9 +270,15 @@ public class HomeToolLayer extends AbstractMovableToolLayer<Coordinate>
 
     private String inspect(Coordinate dest) {
 
+<<<<<<< HEAD
         String rangeAndAzimuth = "0mi@0";
 
         double azimuth = 000;
+=======
+        String rangeAndAzimuth;
+
+        double azimuth;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         Coordinate home = dataManager.getHome();
 
@@ -242,10 +308,17 @@ public class HomeToolLayer extends AbstractMovableToolLayer<Coordinate>
 
     @Override
     public void addContextMenuItems(IMenuManager menuManager, int x, int y) {
+<<<<<<< HEAD
         if (isEditable() && selectedObject != null) {
             menuManager.add(moveElementAction);
         }
         if (isEditable()) {
+=======
+        if (isInteractive()) {
+            if (selectedObject != null) {
+                menuManager.add(moveElementAction);
+            }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             menuManager.add(selectLocationAction);
         }
     }
@@ -262,8 +335,13 @@ public class HomeToolLayer extends AbstractMovableToolLayer<Coordinate>
         this.endpointClicked = false;
         double[] pointPixel = container.translateInverseClick(object);
         double distance = (mouseLoc.x - pointPixel[0])
+<<<<<<< HEAD
                 * (mouseLoc.x - pointPixel[0]) + (mouseLoc.y - pointPixel[1])
                 * (mouseLoc.y - pointPixel[1]);
+=======
+                * (mouseLoc.x - pointPixel[0])
+                + (mouseLoc.y - pointPixel[1]) * (mouseLoc.y - pointPixel[1]);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if (distance < MAGIC_CLICK_DISTANCE * MAGIC_CLICK_DISTANCE) {
             this.endpointClicked = true;
             return true;
@@ -279,8 +357,13 @@ public class HomeToolLayer extends AbstractMovableToolLayer<Coordinate>
     @Override
     protected Coordinate move(Coordinate lastMouseLoc, Coordinate mouseLoc,
             Coordinate lastHomeLoc) {
+<<<<<<< HEAD
         return (lastMouseLoc == null) ? lastHomeLoc : new Coordinate(
                 mouseLoc != null ? mouseLoc : lastMouseLoc);
+=======
+        return (lastMouseLoc == null) ? lastHomeLoc
+                : new Coordinate(mouseLoc != null ? mouseLoc : lastMouseLoc);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override

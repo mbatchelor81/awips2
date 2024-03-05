@@ -78,6 +78,11 @@ import org.locationtech.jts.geom.Coordinate;
  *                                  with copy(). Code cleanup
  * Jan 29, 2018  7178     randerso  Fix regression from earlier changes
  * Feb 13, 2019  7732     randerso  Remove obsolete TODOs
+<<<<<<< HEAD
+=======
+ * May 15, 2023  2033890  dhaines   Changed unsigned integer handling to be 
+ *                                  more clear 
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -356,7 +361,11 @@ public class ISCDataAccess implements IISCDataAccess {
                 for (int i = 0; i < iscSiteMask.getXdim(); i++) {
                     if (iscSiteMask.getAsBoolean(i, j)) {
                         byte index = lookupKeyValue(keyIndexMap,
+<<<<<<< HEAD
                                 iscKeys[0xFF & iscGrid.get(i, j)]);
+=======
+                                iscKeys[Byte.toUnsignedInt(iscGrid.get(i, j))]);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         compositeGrid.set(i, j, index);
                     }
                 }
@@ -390,7 +399,11 @@ public class ISCDataAccess implements IISCDataAccess {
                 for (int i = 0; i < iscSiteMask.getXdim(); i++) {
                     if (iscSiteMask.getAsBoolean(i, j)) {
                         byte index = lookupKeyValue(keyIndexMap,
+<<<<<<< HEAD
                                 iscKeys[0xFF & iscGrid.get(i, j)]);
+=======
+                                iscKeys[Byte.toUnsignedInt(iscGrid.get(i, j))]);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         compositeGrid.set(i, j, index);
                     }
                 }

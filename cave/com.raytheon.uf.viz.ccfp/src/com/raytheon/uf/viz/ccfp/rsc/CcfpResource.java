@@ -1,19 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
- * 
+ *
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
- * 
+ *
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
- * 
+ *
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -44,6 +44,7 @@ import com.raytheon.uf.viz.core.IGraphicsTarget;
 import com.raytheon.uf.viz.core.IGraphicsTarget.LineStyle;
 import com.raytheon.uf.viz.core.IGraphicsTarget.TextStyle;
 import com.raytheon.uf.viz.core.IGraphicsTarget.VerticalAlignment;
+import com.raytheon.uf.viz.core.drawables.IShadedShape;
 import com.raytheon.uf.viz.core.drawables.IWireframeShape;
 import com.raytheon.uf.viz.core.drawables.PaintProperties;
 import com.raytheon.uf.viz.core.exception.VizException;
@@ -54,16 +55,19 @@ import com.raytheon.uf.viz.core.rsc.LoadProperties;
 import com.raytheon.uf.viz.core.rsc.capabilities.ColorableCapability;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.LineString;
 import org.locationtech.jts.geom.Point;
+import org.locationtech.jts.geom.GeometryFactory;
 
 /**
- * 
+ *
  * Resource for CCFP data
- * 
+ *
  * <pre>
- * 
+ *
  * SOFTWARE HISTORY
- * 
+ *
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- --------------------------------------------
  * Sep 22, 2009  3072     bsteffen  Initial creation
@@ -72,9 +76,10 @@ import org.locationtech.jts.geom.Point;
  * Jul 29, 2014  3465     mapeters  Updated deprecated drawStrings() calls.
  * Aug 04, 2014  3489     mapeters  Updated deprecated getStringBounds() calls.
  * Nov 28, 2017  5863     bsteffen  Change dataTimes to a NavigableSet
- * 
+ * Aug 04, 2021  93041    mroos     Change coverage areas to have fill patterns and outlines.
+ *
  * </pre>
- * 
+ *
  * @author bsteffen
  */
 public class CcfpResource
@@ -96,14 +101,49 @@ public class CcfpResource
     private static final String[] resourceTypes = { "", "Solid Coverage",
             "Medium Coverage", "Sparse Coverage", "Line" };
 
+    private final byte[] BROKEN_HATCH_PATTERN = { (byte) 0x80, (byte) 0x80,
+            (byte) 0x80, (byte) 0x80, 0x40, 0x40, 0x40, 0x40, 0x20, 0x20, 0x20,
+            0x20, 0x10, 0x10, 0x10, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            (byte) 0x80, (byte) 0x80, (byte) 0x80, (byte) 0x80, 0x40, 0x40,
+            0x40, 0x40, 0x20, 0x20, 0x20, 0x20, 0x10, 0x10, 0x10, 0x10, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00, (byte) 0x80, (byte) 0x80, (byte) 0x80,
+            (byte) 0x80, 0x40, 0x40, 0x40, 0x40, 0x20, 0x20, 0x20, 0x20, 0x10,
+            0x10, 0x10, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, (byte) 0x80,
+            (byte) 0x80, (byte) 0x80, (byte) 0x80, 0x40, 0x40, 0x40, 0x40, 0x20,
+            0x20, 0x20, 0x20, 0x10, 0x10, 0x10, 0x10, 0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x00 };
+
+    private final byte[] SOLID_HATCH_PATTERN = { 0x08, 0x08, 0x08, 0x08, 0x04,
+            0x04, 0x04, 0x04, 0x02, 0x02, 0x02, 0x02, 0x01, 0x01, 0x01, 0x01,
+            (byte) 0x80, (byte) 0x80, (byte) 0x80, (byte) 0x80, 0x40, 0x40,
+            0x40, 0x40, 0x20, 0x20, 0x20, 0x20, 0x10, 0x10, 0x10, 0x10, 0x08,
+            0x08, 0x08, 0x08, 0x04, 0x04, 0x04, 0x04, 0x02, 0x02, 0x02, 0x02,
+            0x01, 0x01, 0x01, 0x01, (byte) 0x80, (byte) 0x80, (byte) 0x80,
+            (byte) 0x80, 0x40, 0x40, 0x40, 0x40, 0x20, 0x20, 0x20, 0x20, 0x10,
+            0x10, 0x10, 0x10, 0x08, 0x08, 0x08, 0x08, 0x04, 0x04, 0x04, 0x04,
+            0x02, 0x02, 0x02, 0x02, 0x01, 0x01, 0x01, 0x01, (byte) 0x80,
+            (byte) 0x80, (byte) 0x80, (byte) 0x80, 0x40, 0x40, 0x40, 0x40, 0x20,
+            0x20, 0x20, 0x20, 0x10, 0x10, 0x10, 0x10, 0x08, 0x08, 0x08, 0x08,
+            0x04, 0x04, 0x04, 0x04, 0x02, 0x02, 0x02, 0x02, 0x01, 0x01, 0x01,
+            0x01, (byte) 0x80, (byte) 0x80, (byte) 0x80, (byte) 0x80, 0x40,
+            0x40, 0x40, 0x40, 0x20, 0x20, 0x20, 0x20, 0x10, 0x10, 0x10, 0x10, };
+
     // This class holds cached shapes to avoid recalculating everything all
     // the time
     private class DisplayFrame {
         public Collection<CcfpRecord> records = new ArrayList<>();
 
-        public IWireframeShape dottedPolygons;
+        public IShadedShape dottedPolygons;
 
-        public IWireframeShape solidPolygons;
+        public IShadedShape solidPolygons;
+
+        public IWireframeShape dottedOutlines;
+
+        public IWireframeShape solidOutlines;
 
         // Separate from solidPolygon because it needs to be redrawn when zooms
         // occur
@@ -121,6 +161,14 @@ public class CcfpResource
                 solidPolygons.dispose();
                 solidPolygons = null;
             }
+            if (dottedOutlines != null) {
+                dottedOutlines.dispose();
+                dottedOutlines = null;
+            }
+            if (solidOutlines != null) {
+                solidOutlines.dispose();
+                solidOutlines = null;
+            }
             if (zoomDependentShapes != null) {
                 zoomDependentShapes.dispose();
                 zoomDependentShapes = null;
@@ -129,8 +177,10 @@ public class CcfpResource
 
         protected void createShapes(IGraphicsTarget target) {
             dispose();
-            dottedPolygons = target.createWireframeShape(false, descriptor);
-            solidPolygons = target.createWireframeShape(false, descriptor);
+            dottedPolygons = target.createShadedShape(false, descriptor, false);
+            dottedOutlines = target.createWireframeShape(false, descriptor);
+            solidPolygons = target.createShadedShape(false, descriptor, false);
+            solidOutlines = target.createWireframeShape(false, descriptor);
             zoomDependentShapes = target.createWireframeShape(false,
                     descriptor);
         }
@@ -138,9 +188,9 @@ public class CcfpResource
     }
 
     // Place to store records that have not yet been stored
-    private Map<DataTime, Collection<CcfpRecord>> unprocessedRecords = new HashMap<>();
+    private final Map<DataTime, Collection<CcfpRecord>> unprocessedRecords = new HashMap<>();
 
-    private Map<DataTime, DisplayFrame> frames = new HashMap<>();
+    private final Map<DataTime, DisplayFrame> frames = new HashMap<>();
 
     private DataTime displayedDataTime;
 
@@ -217,7 +267,7 @@ public class CcfpResource
 
     /**
      * process all records for the displayedDataTime
-     * 
+     *
      * @param target
      * @param paintProps
      * @throws VizException
@@ -292,14 +342,26 @@ public class CcfpResource
 
         RGB color = getCapability(ColorableCapability.class).getColor();
 
+        if (this.resourceData.getCoverageFilter() == 2) {
+            frame.solidPolygons.setFillPattern(SOLID_HATCH_PATTERN);
+            frame.dottedPolygons.setFillPattern(SOLID_HATCH_PATTERN);
+        } else if (this.resourceData.getCoverageFilter() == 3) {
+            frame.solidPolygons.setFillPattern(BROKEN_HATCH_PATTERN);
+            frame.dottedPolygons.setFillPattern(BROKEN_HATCH_PATTERN);
+        }
+
         // Draw the polygons from cache
         if (frame.dottedPolygons != null) {
-            target.drawWireframeShape(frame.dottedPolygons, color, 1.5f,
+            target.drawShadedShape(frame.dottedPolygons, paintProps.getAlpha(),
+                    1.5f);
+            target.drawWireframeShape(frame.dottedOutlines, color, 1.5f,
                     LineStyle.DASHED);
         }
 
         if (frame.solidPolygons != null) {
-            target.drawWireframeShape(frame.solidPolygons, color, 1.5f,
+            target.drawShadedShape(frame.solidPolygons, paintProps.getAlpha(),
+                    1.5f);
+            target.drawWireframeShape(frame.solidOutlines, color, 1.5f,
                     LineStyle.SOLID);
         }
 
@@ -337,7 +399,7 @@ public class CcfpResource
 
     /**
      * Paint the text onto the target
-     * 
+     *
      * @param record
      * @param target
      * @throws VizException
@@ -360,7 +422,7 @@ public class CcfpResource
 
     /**
      * Add an arrow to the current frame
-     * 
+     *
      * @param record
      * @param frame
      * @param target
@@ -397,7 +459,7 @@ public class CcfpResource
 
     /**
      * Add a box that will be drawn around the text to the current frame
-     * 
+     *
      * @param record
      * @param frame
      * @param target
@@ -490,24 +552,30 @@ public class CcfpResource
 
     /**
      * Get a polygon from a record and add it to the frame
-     * 
+     *
      * @param record
      * @param frame
      * @throws VizException
      */
     private void preparePolygon(CcfpRecord record, DisplayFrame frame)
             throws VizException {
-        IWireframeShape shape = frame.solidPolygons;
+        IShadedShape shape = frame.solidPolygons;
+        IWireframeShape outline = frame.solidOutlines;
         if (record.getConf() == 3) { // low
             shape = frame.dottedPolygons;
+            outline = frame.dottedOutlines;
         }
         Geometry geom = record.getLocation().getGeometry();
-        shape.addLineSegment(geom.getCoordinates());
+        GeometryFactory gf = new GeometryFactory();
+        LineString ls = gf.createLineString(geom.getCoordinates());
+        RGB color = getCapability(ColorableCapability.class).getColor();
+        shape.addPolygon(new LineString[] { ls }, color);
+        outline.addLineSegment(geom.getCoordinates());
     }
 
     /**
      * Get the line from a record and add it to the frame
-     * 
+     *
      * @param record
      * @param frame
      * @throws VizException
@@ -515,17 +583,24 @@ public class CcfpResource
     private void prepareLine(CcfpRecord record, DisplayFrame frame)
             throws VizException {
         Geometry geom = record.getLocation().getGeometry();
+        GeometryFactory gf = new GeometryFactory();
+        LineString ls = gf.createLineString(geom.getCoordinates());
+        RGB color = getCapability(ColorableCapability.class).getColor();
         if (record.getCoverage() == 2) {
-            frame.dottedPolygons.addLineSegment(geom.getCoordinates());
+            frame.dottedPolygons.addPolygonPixelSpace(new LineString[] { ls },
+                    color);
+            frame.dottedOutlines.addLineSegment(geom.getCoordinates());
         } else {
-            frame.solidPolygons.addLineSegment(geom.getCoordinates());
+            frame.solidPolygons.addPolygonPixelSpace(new LineString[] { ls },
+                    color);
+            frame.solidOutlines.addLineSegment(geom.getCoordinates());
         }
 
     }
 
     /**
      * Adds a new record to this resource
-     * 
+     *
      * @param obj
      */
     protected void addRecord(CcfpRecord obj) {
@@ -553,17 +628,17 @@ public class CcfpResource
     public String getName() {
         int coverage = this.resourceData.getCoverageFilter();
         int validDuration = resourceData.getValidDuration() / 3600;
-        return validDuration + " Hour CCFP " + resourceTypes[coverage];
+        return validDuration + " Hour TCF " + resourceTypes[coverage];
     }
 
     /**
      * Get the commonly used output strings for this record
-     * 
+     *
      * @param record
      * @return
      */
     private String[] getFormattedData(CcfpRecord record) {
-        String[] lines = new String[4];
+        String[] lines = new String[3];
 
         int tops = record.getTops();
         if (tops < topsValues.length) {
@@ -571,34 +646,25 @@ public class CcfpResource
         } else {
             lines[0] = "TOPS: ";
             statusHandler.handle(Priority.EVENTA,
-                    "Problem interogating CCFP data: tops value out of range");
-        }
-
-        int gwth = record.getGrowth();
-        if (gwth < growthValues.length) {
-            lines[1] = "GWTH: " + growthValues[gwth];
-        } else {
-            lines[1] = "GWTH: ";
-            statusHandler.handle(Priority.EVENTA,
-                    "Problem interogating CCFP data: growth value out of range");
+                    "Problem interogating TCF data: tops value out of range");
         }
 
         int conf = record.getConf();
         if (conf < confValues.length) {
-            lines[2] = "CONF: " + confValues[conf];
+            lines[1] = "CONF: " + confValues[conf];
         } else {
-            lines[2] = "CONF: ";
+            lines[1] = "CONF: ";
             statusHandler.handle(Priority.EVENTA,
-                    "Problem interogating CCFP data: confidence value out of range");
+                    "Problem interogating TCF data: confidence value out of range");
         }
 
         int cvrg = record.getCoverage();
         if (cvrg < coverageValues.length) {
-            lines[3] = "CVRG: " + coverageValues[cvrg];
+            lines[2] = "CVRG: " + coverageValues[cvrg];
         } else {
-            lines[3] = "CVRG: ";
+            lines[2] = "CVRG: ";
             statusHandler.handle(Priority.EVENTA,
-                    "Problem interogating CCFP data: coverage value out of range");
+                    "Problem interogating TCF data: coverage value out of range");
         }
 
         return lines;
@@ -606,7 +672,7 @@ public class CcfpResource
 
     /**
      * determine if this resource will paint a polygon for this record
-     * 
+     *
      * @param record
      * @return
      */
@@ -618,7 +684,7 @@ public class CcfpResource
 
     /**
      * determine if this resource will paint a line for this record
-     * 
+     *
      * @param record
      * @return
      */
@@ -630,7 +696,7 @@ public class CcfpResource
 
     /**
      * determine if this resource will paint text for this record
-     * 
+     *
      * @param record
      * @return
      */
@@ -642,7 +708,7 @@ public class CcfpResource
 
     /**
      * determine if this resource will paint movement arrow for this record
-     * 
+     *
      * @param record
      * @return
      */
@@ -655,7 +721,7 @@ public class CcfpResource
     /**
      * Determine the appropriate scale to use on both axis for constant sized
      * objects
-     * 
+     *
      * @param paintProps
      * @return
      */
@@ -670,7 +736,7 @@ public class CcfpResource
 
     /**
      * Find a point on the geometry on the outer edge of direction
-     * 
+     *
      * @param geometry
      * @param direction
      * @return
@@ -721,7 +787,7 @@ public class CcfpResource
     /**
      * Used to calculate the rotation around a point maintaining a consistent
      * size across zoom levels
-     * 
+     *
      * @param center
      * @param radius
      * @param angle

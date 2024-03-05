@@ -19,6 +19,7 @@
  **/
 package com.raytheon.uf.viz.d2d.nsharp;
 
+import javax.measure.MetricPrefix;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.quantity.Angle;
@@ -38,9 +39,8 @@ import gov.noaa.nws.ncep.edex.common.sounding.NcSoundingLayer;
 import si.uom.NonSI;
 import si.uom.SI;
 import systems.uom.common.USCustomary;
-import tec.uom.se.quantity.Quantities;
-import tec.uom.se.unit.MetricPrefix;
-import tec.uom.se.unit.Units;
+import tech.units.indriya.quantity.Quantities;
+import tech.units.indriya.unit.Units; 
 
 /**
  * Builder for conveniently making NcSoundingLayers with the correct units.

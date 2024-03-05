@@ -3,16 +3,25 @@ package com.raytheon.viz.warnings.rsc;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.eclipse.swt.graphics.RGB;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Point;
+import org.locationtech.jts.geom.prep.PreparedGeometry;
+import org.locationtech.jts.geom.prep.PreparedGeometryFactory;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 
 import com.raytheon.uf.common.dataplugin.PluginDataObject;
@@ -53,13 +62,6 @@ import com.raytheon.uf.viz.core.rsc.capabilities.MagnificationCapability;
 import com.raytheon.uf.viz.core.rsc.capabilities.OutlineCapability;
 import com.raytheon.uf.viz.datacube.DataCubeContainer;
 import com.raytheon.viz.core.mode.CAVEMode;
-import com.raytheon.viz.warnings.ui.DrawingPropertiesDialog;
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.Geometry;
-import org.locationtech.jts.geom.GeometryFactory;
-import org.locationtech.jts.geom.Point;
-import org.locationtech.jts.geom.prep.PreparedGeometry;
-import org.locationtech.jts.geom.prep.PreparedGeometryFactory;
 
 /**
  *
@@ -99,6 +101,8 @@ import org.locationtech.jts.geom.prep.PreparedGeometryFactory;
  * Jun 24, 2022			 srcarter@ucar Add 'statement/other' display settings, set enabled for only relevant WWA types
  * Jun 28, 2022			 srcarter@ucar Display sampling based on new 'sampling' settings
  * Mar 27, 2023          srcarter@ucar Optimize drawing to improve performance
+ * Apr 9,  2021   21181    jkelmer     Check for CAN to prevent displaying CANd warning
+ * Apr 15, 2022   21181    jkelmer     Modified CAN checks to prevent issues with non-VTEC warnings
  *
  * </pre>
  *
@@ -867,7 +871,63 @@ public abstract class AbstractWWAResource extends
         } catch (DataCubeException e) {
             throw new VizException(e);
         }
-        addRecord(sort(pdos));
+
+        PluginDataObject[] cancelledPdos;
+        cancelledPdos = getCancels(pdos);
+
+        // merge original PDO array with array of cancelled warnings.
+        PluginDataObject[] mergedPdos = Arrays.copyOf(pdos,
+                pdos.length + cancelledPdos.length);
+        System.arraycopy(cancelledPdos, 0, mergedPdos, pdos.length,
+                cancelledPdos.length);
+
+        addRecord(sort(mergedPdos));
+    }
+
+    protected PluginDataObject[] getCancels(PluginDataObject[] pdos)
+            throws VizException {
+        // gather ETN of warnings and check for cancellation
+        Map<String, RequestConstraint> map = (Map<String, RequestConstraint>) resourceData
+                .getMetadataMap().clone();
+        Map<String, Set<String>> warningEtnPhensig = new HashMap<>();
+
+        for (Object o : pdos) {
+            if (((PluginDataObject) o) instanceof AbstractWarningRecord) {
+                AbstractWarningRecord record = (AbstractWarningRecord) o;
+                String etn = record.getEtn();
+                String phenSig = record.getPhensig();
+                // Skip adding if it is already a CAN, or missing VTEC
+                // which usually means an SPS
+                if ((etn == null || phenSig == null)
+                        || record.getAct().equals("CAN")) {
+                    continue;
+                }
+                Set<String> phenSigs = warningEtnPhensig.get(etn);
+                if (phenSigs == null) {
+                    phenSigs = new HashSet<>();
+                    warningEtnPhensig.put(etn, phenSigs);
+                }
+                warningEtnPhensig.get(etn).add(phenSig);
+            }
+        }
+
+        RequestConstraint etnConstraint = new RequestConstraint(
+                warningEtnPhensig.keySet());
+        etnConstraint.setConstraintType(ConstraintType.IN);
+        map.put("etn", etnConstraint);
+
+        RequestConstraint cancelled = new RequestConstraint("CAN",
+                ConstraintType.EQUALS);
+        map.put("act", cancelled);
+
+        PluginDataObject[] cancelledPdos;
+        try {
+            cancelledPdos = DataCubeContainer.getData(map);
+        } catch (DataCubeException e) {
+            throw new VizException(e);
+        }
+
+        return cancelledPdos;
     }
 
     protected String getPhensigColor(String phensig){
@@ -881,15 +941,19 @@ public abstract class AbstractWWAResource extends
     }
 
     protected String[] getText(AbstractWarningRecord record, double mapWidth) {
-    	
-        String[] textToPrint = new String[] { "", "" };
+        String vid = record.getPhensig();
+        String phen = record.getPhen();
+        String[] textToPrint = new String[] { "", "", "", "" };
 
-        if ( ! record.getPil().equals("SPS")) {
-            textToPrint[0] = getPhensigName(record.getPhensig());
-        } else {
-        	textToPrint[0] = "Special Weather Statement";
+        textToPrint[0] = record.getProductClass();
+        if ((vid != null && phen != null)
+                && (vid.equals("TO.A") || vid.equals("SV.A")
+                        || phen.equals("FL") || phen.equals("FA"))) {
+            textToPrint[0] += "." + vid;
         }
-        
+        textToPrint[0] += "." + record.getEtn();
+        textToPrint[1] = record.getPil();
+
         String startFormatString = DEFAULT_FORMAT;
         String endFormatString = DEFAULT_FORMAT;
         if (mapWidth == 0) {
@@ -901,14 +965,14 @@ public abstract class AbstractWWAResource extends
         }
 
         DateFormat startFormat = new SimpleDateFormat(startFormatString);
-        DateFormat endFormat = new SimpleDateFormat(endFormatString);
-
         startFormat.setTimeZone(TimeUtil.GMT_TIME_ZONE);
+        textToPrint[2] = "Valid "
+                + startFormat.format(record.getStartTime().getTime());
+
+        DateFormat endFormat = new SimpleDateFormat(endFormatString);
         endFormat.setTimeZone(TimeUtil.GMT_TIME_ZONE);
-        
-        textToPrint[1] = startFormat.format(record.getStartTime().getTime()) 
-                + "-" + endFormat.format(record.getEndTime().getTime());;
-               
+        textToPrint[3] = "Thru "
+                + endFormat.format(record.getEndTime().getTime());
 
         return textToPrint;
     }

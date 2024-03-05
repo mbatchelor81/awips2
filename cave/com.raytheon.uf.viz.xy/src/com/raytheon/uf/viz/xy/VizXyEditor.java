@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -25,11 +37,18 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
 import com.raytheon.uf.viz.core.IDisplayPane;
+<<<<<<< HEAD
+=======
+import com.raytheon.uf.viz.core.IInsetMapDisplayPaneContainer;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.IRenderableDisplayChangedListener;
 import com.raytheon.uf.viz.core.drawables.IRenderableDisplay;
 import com.raytheon.uf.viz.xy.graph.AbstractXyRenderableDisplay;
 import com.raytheon.uf.viz.xy.map.IInsetMapContainer.InsetMapUtil;
+<<<<<<< HEAD
 import com.raytheon.uf.viz.xy.map.IInsetMapDisplayPaneContainer;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.viz.ui.editor.EditorInput;
 import com.raytheon.viz.ui.editor.VizMultiPaneEditor;
 import com.raytheon.viz.ui.panes.PaneManager;
@@ -38,9 +57,15 @@ import com.raytheon.viz.ui.panes.PaneManager;
  * Default xy editor, contains a graphPane and insetMap, the insetMap can be
  * disregarded if the renderable display is not of type IInsetMapContainer or
  * the function getInsetMapLocation returns null
+<<<<<<< HEAD
  * 
  * <pre>
  * 
+=======
+ *
+ * <pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * SOFTWARE HISTORY
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
@@ -48,9 +73,17 @@ import com.raytheon.viz.ui.panes.PaneManager;
  * Mar 02, 2015  4204      njensen     Overrode setPartName()
  * Oct 21, 2015  5023      njensen     Renamed getEditorName() to getDefaultName()
  * Feb 19, 2018  7060      njensen     Implemented IInsetMapDisplayContainer
+<<<<<<< HEAD
  * 
  * </pre>
  * 
+=======
+ * Apr 22, 2022  8791      mapeters    Remove unused getInsetPanes(IDisplayPane),
+ *                                     handle utility method being moved
+ *
+ * </pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author mschenke
  */
 
@@ -69,8 +102,13 @@ public class VizXyEditor extends VizMultiPaneEditor implements
         super.validateEditorInput(input);
         if (input.getPaneManager() != null
                 && !(input.getPaneManager() instanceof XyPaneManager)) {
+<<<<<<< HEAD
             throw new PartInitException("Expected pane manager of type: "
                     + XyPaneManager.class);
+=======
+            throw new PartInitException(
+                    "Expected pane manager of type: " + XyPaneManager.class);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         for (IRenderableDisplay display : input.getRenderableDisplays()) {
@@ -98,7 +136,11 @@ public class VizXyEditor extends VizMultiPaneEditor implements
             IRenderableDisplay newRenderableDisplay, DisplayChangeType type) {
         if (type == DisplayChangeType.ADD) {
             XyPaneManager pm = getPaneManager();
+<<<<<<< HEAD
             if (pm.isInsetMapDisplay(newRenderableDisplay)) {
+=======
+            if (InsetMapUtil.isInsetMapDisplay(newRenderableDisplay)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 IDisplayPane insetMap = pm.getInsetMapForPane(pane);
                 if (insetMap != null) {
                     IRenderableDisplay display = InsetMapUtil
@@ -149,10 +191,13 @@ public class VizXyEditor extends VizMultiPaneEditor implements
     public IDisplayPane[] getInsetPanes() {
         return getPaneManager().getInsetPanes();
     }
+<<<<<<< HEAD
 
     @Override
     public IDisplayPane[] getInsetPanes(IDisplayPane pane) {
         return getPaneManager().getInsetPanes(pane);
     }
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

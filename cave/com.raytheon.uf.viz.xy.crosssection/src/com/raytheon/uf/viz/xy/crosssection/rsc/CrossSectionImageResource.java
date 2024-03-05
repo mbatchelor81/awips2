@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -77,6 +89,7 @@ import com.raytheon.uf.viz.xy.crosssection.display.CrossSectionDescriptor;
 
 /**
  * Resource for displaying cross sections as images
+<<<<<<< HEAD
  * 
  * <pre>
  * SOFTWARE HISTORY
@@ -103,6 +116,42 @@ import com.raytheon.uf.viz.xy.crosssection.display.CrossSectionDescriptor;
  * 
  * </pre>
  * 
+=======
+ *
+ * <pre>
+ * SOFTWARE HISTORY
+ *
+ * Date          Ticket#  Engineer     Description
+ * ------------- -------- ------------ -----------------------------------------
+ * Nov 29, 2007           njensen      Initial creation
+ * Feb 17, 2009           njensen      Refactored to new rsc architecture
+ * Dec 11, 2013  16795    D. Friedman  Transform pixel coordinate in inspect
+ * Mar 07, 2014  2791     bsteffen     Move Data Source/Destination to numeric
+ *                                     plugin.
+ * Oct 02, 2015  4914     bsteffen     Create custom style type for rules that
+ *                                     apply only to cross section.
+ * Apr 12, 2016  5567     bsteffen     Fix conversion in inspect
+ * Feb 28, 2018  7231     njensen      Use super's statusHandler
+ * Mar 14, 2018  6815     njensen      Add Contour as alternative display type
+ * Apr 04, 2018  6889     njensen      Use brightness from ImagePreferences if
+ *                                     present but missing in ImagingCapability
+ * Apr 09, 2018  6931     njensen      When loading procedures use saved
+ *                                     colormap
+ * Apr 19, 2018  6760     njensen      Sample only out to 5 decimal places
+ * Apr 15, 2019  7596     lsingh       Updated units framework to JSR-363.
+ *                                     Handled unit conversion.
+ * Sep 10, 2019  7922     bsteffen     Ensure custom colormap is used when
+ *                                     loading from bundle.
+ * May 17, 2021  8452     randerso     Make CrossSectionImageResource respect
+ *                                     the interpolate flag if specified in a
+ *                                     styleRule.
+ * Feb 22, 2023  9021     mapeters     Use getSliceData() to access sliceMap
+ * Jul 19, 2023  2035935  mapeters     Add isEmpty() checks to prevent errors
+ *                                     when the line isn't near the data
+ *
+ * </pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author njensen
  */
 
@@ -112,6 +161,7 @@ public class CrossSectionImageResource extends AbstractCrossSectionResource {
      * A custom style type is used for creating rules that apply to only cross
      * section.
      */
+<<<<<<< HEAD
     public static final IStyleType STYLE_TYPE = new IStyleType() {
 
         @Override
@@ -119,6 +169,10 @@ public class CrossSectionImageResource extends AbstractCrossSectionResource {
             return new String[] { "ImageryCrossSectionStyleRules.xml" };
         }
     };
+=======
+    public static final IStyleType STYLE_TYPE = () -> new String[] {
+            "ImageryCrossSectionStyleRules.xml" };
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * One image per frame.
@@ -188,8 +242,13 @@ public class CrossSectionImageResource extends AbstractCrossSectionResource {
         imageMap.clear();
     }
 
+<<<<<<< HEAD
     private IImage constructImage(DataTime time, IGraphicsTarget target)
             throws VizException {
+=======
+    private IImage constructImage(DataTime time, List<float[]> data,
+            IGraphicsTarget target) throws VizException {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         ColorMapParameters colorMapParams;
 
         // if loaded from a procedure, the colormap is already somewhat set up
@@ -205,7 +264,11 @@ public class CrossSectionImageResource extends AbstractCrossSectionResource {
         }
 
         if (needsColorMapInit) {
+<<<<<<< HEAD
             float[] floatData = sliceMap.get(time).get(0);
+=======
+            float[] floatData = data.get(0);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             StyleRule styleRule = loadStyleRule();
             try {
                 if (styleRule == null || !(styleRule
@@ -225,6 +288,10 @@ public class CrossSectionImageResource extends AbstractCrossSectionResource {
                                 && imgPrefs.getBrightness() != null) {
                             imgCap.setBrightness(imgPrefs.getBrightness());
                         }
+<<<<<<< HEAD
+=======
+                        imgCap.setInterpolationState(imgPrefs.isInterpolate());
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     }
                 }
             } catch (StyleException e) {
@@ -286,13 +353,23 @@ public class CrossSectionImageResource extends AbstractCrossSectionResource {
             PaintProperties paintProps) throws VizException {
         super.paintInternal(target, paintProps);
         DataTime currentTime = paintProps.getDataTime();
+<<<<<<< HEAD
         if (sliceMap.get(currentTime) == null) {
+=======
+
+        List<float[]> data = getSliceData(currentTime);
+        if (data == null || data.isEmpty()) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return;
         }
 
         IImage image = imageMap.get(currentTime);
         if (image == null) {
+<<<<<<< HEAD
             image = constructImage(currentTime, target);
+=======
+            image = constructImage(currentTime, data, target);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             imageMap.put(currentTime, image);
         }
 
@@ -331,10 +408,19 @@ public class CrossSectionImageResource extends AbstractCrossSectionResource {
     @Override
     public String inspect(ReferencedCoordinate coord) throws VizException {
         DataTime currentTime = descriptor.getTimeForResource(this);
+<<<<<<< HEAD
         if (sliceMap.get(currentTime) == null) {
             return "NO DATA";
         }
         float[] sliceData = sliceMap.get(currentTime).get(0);
+=======
+
+        List<float[]> data = getSliceData(currentTime);
+        if (data == null || data.isEmpty()) {
+            return "NO DATA";
+        }
+        float[] sliceData = data.get(0);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if (sliceData == null) {
             return null;
         }
@@ -377,7 +463,11 @@ public class CrossSectionImageResource extends AbstractCrossSectionResource {
                     UnitConverter converter = UnitConv
                             .getConverterToUnchecked(dataUnit, displayUnit);
                     val = converter.convert(val);
+<<<<<<< HEAD
                     
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
             }
             return decimalFormat.format(val) + getUnitString();
@@ -407,12 +497,20 @@ public class CrossSectionImageResource extends AbstractCrossSectionResource {
 
         @Override
         public ColorMapData getColorMapData() throws VizException {
+<<<<<<< HEAD
             List<float[]> data = sliceMap.get(time);
+=======
+            List<float[]> data = getSliceData(time);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if (data == null || data.isEmpty()) {
                 throw new VizException("No Image Data available for "
                         + getSafeName() + " at " + time.getDisplayString());
             }
+<<<<<<< HEAD
             int[] dims = new int[] { geometry.getGridRange().getSpan(0),
+=======
+            int[] dims = { geometry.getGridRange().getSpan(0),
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     geometry.getGridRange().getSpan(1) };
             return new ColorMapData(FloatBuffer.wrap(data.get(0)), dims);
         }

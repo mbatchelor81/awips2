@@ -114,6 +114,11 @@
       <feature id="com.raytheon.uf.viz.npp.sounding.feature" version="1.0.0.qualifier"/>
       <feature id="com.raytheon.uf.viz.d2d.gfe.feature" version="1.0.0.qualifier"/>
       <feature id="com.raytheon.uf.viz.server.edex.feature" version="1.0.0.qualifier"/>
+<<<<<<< HEAD
+=======
+      <feature id="gov.noaa.nws.ocp.viz.atcf.feature" version="1.0.0.qualifier"/>
+      <feature id="com.raytheon.uf.viz.grid.radar.rsc.feature" version="1.0.0.qualifier"/>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    </features>
 
    <configurations>

@@ -20,6 +20,10 @@
 package com.raytheon.viz.radar.rsc;
 
 import java.util.HashSet;
+<<<<<<< HEAD
+=======
+import java.util.Objects;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.Set;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -29,6 +33,10 @@ import javax.xml.bind.annotation.XmlAttribute;
 import com.raytheon.uf.common.dataplugin.PluginDataObject;
 import com.raytheon.uf.common.dataplugin.radar.RadarRecord;
 import com.raytheon.uf.common.dataplugin.radar.util.RadarInfo;
+<<<<<<< HEAD
+=======
+import com.raytheon.uf.common.dataplugin.radar.util.RadarUtil;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.dataquery.requests.RequestConstraint;
 import com.raytheon.uf.common.dataquery.requests.RequestConstraint.ConstraintType;
 import com.raytheon.uf.common.status.IUFStatusHandler;
@@ -57,7 +65,12 @@ import com.raytheon.viz.radar.interrogators.IRadarInterrogator;
  * Apr 19, 2017 6071       mapeters    Prevent NPE in update()
  * Mar 12, 2018 6939       njensen     Support loadWithoutData with IN constraint
  * Jun 17, 2019 21063      kshrestha   Fixed radar plotting issues.
+<<<<<<< HEAD
  * 
+=======
+ * Oct 29, 2022 8959       mapeters    Update how data time levels are set
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  *
  * @author chammack
@@ -98,13 +111,22 @@ public class RadarResourceData extends AbstractRequestableResourceData {
         int productCode = -1;
         if (objects.length > 0) {
             format = (objects.length > 0)
+<<<<<<< HEAD
                     ? ((RadarRecord) objects[0]).getFormat() : "";
+=======
+                    ? ((RadarRecord) objects[0]).getFormat()
+                    : "";
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             productCode = ((RadarRecord) objects[0]).getProductCode();
         } else if (loadProperties.isLoadWithoutData()) {
             // I must be trying to load without data, Ill try.
             RequestConstraint productCodeConstraint = metadataMap
                     .get("productCode");
+<<<<<<< HEAD
             RequestConstraint primaryElevationAngleConstraint  = metadataMap
+=======
+            RequestConstraint primaryElevationAngleConstraint = metadataMap
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     .get("primaryElevationAngle");
             if (productCodeConstraint != null && productCodeConstraint
                     .getConstraintType() == ConstraintType.EQUALS) {
@@ -115,10 +137,17 @@ public class RadarResourceData extends AbstractRequestableResourceData {
                     // It was a good effort but it just wasn't meant to be.
                 }
             } else if ((productCodeConstraint != null && productCodeConstraint
+<<<<<<< HEAD
                     .getConstraintType() == ConstraintType.IN) && 
                     (primaryElevationAngleConstraint != null && 
                     primaryElevationAngleConstraint.getConstraintType() == 
                     ConstraintType.BETWEEN)) {
+=======
+                    .getConstraintType() == ConstraintType.IN)
+                    && (primaryElevationAngleConstraint != null
+                            && primaryElevationAngleConstraint
+                                    .getConstraintType() == ConstraintType.BETWEEN)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 String[] codes = productCodeConstraint.getConstraintValue()
                         .split(",");
                 for (String s : codes) {
@@ -213,6 +242,7 @@ public class RadarResourceData extends AbstractRequestableResourceData {
         if (latest != other.latest) {
             return false;
         }
+<<<<<<< HEAD
         if (mode == null) {
             if (other.mode != null) {
                 return false;
@@ -225,6 +255,12 @@ public class RadarResourceData extends AbstractRequestableResourceData {
                 return false;
             }
         } else if (!pointID.equals(other.pointID)) {
+=======
+        if (!Objects.equals(mode, other.mode)) {
+            return false;
+        }
+        if (!Objects.equals(pointID, other.pointID)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return false;
         }
         return true;
@@ -236,7 +272,11 @@ public class RadarResourceData extends AbstractRequestableResourceData {
         if (latest) {
             Set<DataTime> times = new HashSet<>();
             for (DataTime time : all) {
+<<<<<<< HEAD
                 time.setLevelValue(null);
+=======
+                time.clearLevel();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 times.add(time);
             }
             all = times.toArray(new DataTime[0]);
@@ -261,14 +301,24 @@ public class RadarResourceData extends AbstractRequestableResourceData {
              * Since radar dataTimes are expected to set the level value, need
              * to do that here.
              */
+<<<<<<< HEAD
             Object timeObj = message.decodedAlert.get("dataTime");
+=======
+            Object timeObj = message.decodedAlert
+                    .get(PluginDataObject.DATATIME_ID);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if (timeObj instanceof DataTime) {
                 Object primaryElevationAngleObj = message.decodedAlert
                         .get("primaryElevationAngle");
                 if (primaryElevationAngleObj instanceof Number) {
                     DataTime time = (DataTime) timeObj;
                     Number primaryElevationAngle = (Number) primaryElevationAngleObj;
+<<<<<<< HEAD
                     time.setLevelValue(primaryElevationAngle.doubleValue());
+=======
+                    time.setLevel(primaryElevationAngle.doubleValue(),
+                            RadarUtil.TILT);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
             }
         }

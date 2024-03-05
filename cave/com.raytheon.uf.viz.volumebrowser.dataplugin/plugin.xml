@@ -58,17 +58,29 @@
       </productCreator>
       <productCreator
             creatorClass="com.raytheon.viz.volumebrowser.loader.TimeSeriesProductCreator"
+<<<<<<< HEAD
             plugins="goessounding,poessounding,bufrmosLAMP,modelsounding,radar,ldadmesonet"
+=======
+            plugins="goessounding,poessounding,profiler,bufrmosLAMP,modelsounding,radar,ldadmesonet"
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             resourceType="time_series">
       </productCreator>
       <productCreator
             creatorClass="com.raytheon.uf.viz.volumebrowser.dataplugin.point.PointCrossSectionProductCreator"
+<<<<<<< HEAD
             plugins="goessounding,poessounding,bufrua,modelsounding"
+=======
+            plugins="goessounding,poessounding,profiler,bufrua,modelsounding"
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             resourceType="cross_section">
       </productCreator>
       <productCreator
             creatorClass="com.raytheon.uf.viz.volumebrowser.dataplugin.point.PointTimeHeightProductCreator"
+<<<<<<< HEAD
             plugins="goessounding,poessounding,bufrua,modelsounding,radar"
+=======
+            plugins="goessounding,poessounding,profiler,bufrua,modelsounding,radar"
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             resourceType="time_height">
       </productCreator>
       <productCreator
@@ -78,12 +90,20 @@
       </productCreator>
       <productCreator
             creatorClass="com.raytheon.viz.volumebrowser.loader.VarHeightProductCreator"
+<<<<<<< HEAD
             plugins="goessounding,poessounding,bufrua,modelsounding,radar"
+=======
+            plugins="goessounding,poessounding,profiler,bufrua,modelsounding,radar"
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             resourceType="var_height">
       </productCreator>
       <productCreator
             creatorClass="com.raytheon.viz.volumebrowser.loader.VarHeightHodoProductCreator"
+<<<<<<< HEAD
             plugins="radar"
+=======
+            plugins="radar,profiler"
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             resourceType="sounding">
       </productCreator>
    </extension>

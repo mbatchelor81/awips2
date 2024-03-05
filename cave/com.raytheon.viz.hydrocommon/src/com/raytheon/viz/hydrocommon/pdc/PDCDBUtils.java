@@ -43,6 +43,10 @@ import com.raytheon.viz.hydrocommon.pdc.PDCConstants.TimeModeType;
  * Feb 03, 2020 20555      ryu         Fix SQL time constraints for river height 
  *                                     for selected time and value change options
  * Mar 11, 2020 19533   mgamazaychikov Use constants from CommonHydroConstants
+<<<<<<< HEAD
+=======
+ * Feb 04, 2021 21871   mgamazaychikov Adjusted composition of where for height max/min
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  * 
  * @author mpduff
@@ -117,7 +121,14 @@ public class PDCDBUtils {
 
             durCode = durHoursToShefCode();
 
+<<<<<<< HEAD
             where.append(" and extremum = '" + durCode + "' ");
+=======
+            if (!where.toString().contains("HG")) {
+                where.append(" and extremum = '" + durCode + "' ");
+            }
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         } else if (pcOptions.getTimeMode() == TimeModeType.LATEST
                 .getTimeMode()) {
             long millis = now.getTime()
@@ -178,7 +189,16 @@ public class PDCDBUtils {
                     " and  obstime <= '" + dateFormat.format(maxTime) + "' ");
             where.append(" and value != " + PDCConstants.MISSING_VALUE);
         }
+<<<<<<< HEAD
         where.append(" order by lid asc, ts, obstime desc");
+=======
+
+        if (where.toString().contains("HG") && !where.toString().contains("extremum")) {
+            return where.toString();
+        } else {
+            where.append(" order by lid asc, ts, obstime desc");
+        }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         return where.toString();
     }

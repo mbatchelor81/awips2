@@ -27,6 +27,10 @@ import java.util.Map;
 import com.raytheon.uf.common.dataplugin.PluginDataObject;
 import com.raytheon.uf.common.dataplugin.satellite.SatelliteRecord;
 import com.raytheon.uf.common.dataquery.requests.RequestConstraint;
+<<<<<<< HEAD
+=======
+import com.raytheon.uf.common.dataquery.requests.TimeQueryRequest;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.datastorage.Request;
 import com.raytheon.uf.common.derivparam.library.DerivedParameterGenerator;
 import com.raytheon.uf.common.derivparam.tree.AbstractDerivedDataNode;
@@ -51,6 +55,11 @@ import com.raytheon.uf.viz.datacube.AbstractDataCubeAdapter;
  * ------------ ---------- ----------- --------------------------
  * Apr 09, 2014  2947     bsteffen    Initial creation
  * May 04, 2015  4453     bsteffen    Fix getBaseUpdateConstraints when the database is empty.
+<<<<<<< HEAD
+=======
+ * Feb 10, 2021 20421  mgamazaychikov Add getTimeQueryRequest, processTimeQueryResponse
+ * Mar 09, 2023  23414 mgamazaychikov Fix the handling of centalWaveLength functionality
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -113,7 +122,11 @@ public class SatelliteDataCubeAdapter extends AbstractDataCubeAdapter {
             Map<String, RequestConstraint> constraints,
             DataTime[] selectedTimes, List<AbstractRequestableData> requesters)
             throws DataCubeException {
+<<<<<<< HEAD
         List<PluginDataObject> results = new ArrayList<PluginDataObject>(
+=======
+        List<PluginDataObject> results = new ArrayList<>(
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 requesters.size());
         for (AbstractRequestableData requester : requesters) {
             if(requester instanceof SatelliteRequestableData){
@@ -128,7 +141,11 @@ public class SatelliteDataCubeAdapter extends AbstractDataCubeAdapter {
     @Override
     public void getRecords(List<PluginDataObject> objs, Request req,
             String dataset) throws DataCubeException {
+<<<<<<< HEAD
         List<PluginDataObject> simpleRecords = new ArrayList<PluginDataObject>(
+=======
+        List<PluginDataObject> simpleRecords = new ArrayList<>(
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 objs.size());
         for (PluginDataObject obj : objs) {
             if (obj instanceof DerivedSatelliteRecord) {
@@ -153,7 +170,11 @@ public class SatelliteDataCubeAdapter extends AbstractDataCubeAdapter {
         if (nodes.isEmpty()) {
             return Collections.singletonList(constraints);
         }
+<<<<<<< HEAD
         List<Map<String, RequestConstraint>> baseConstraints = new ArrayList<Map<String, RequestConstraint>>(
+=======
+        List<Map<String, RequestConstraint>> baseConstraints = new ArrayList<>(
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 nodes.size() * 2);
         for (AbstractRequestableNode node : nodes) {
             baseConstraints.addAll(getBaseUpdateConstraints(node));
@@ -168,7 +189,11 @@ public class SatelliteDataCubeAdapter extends AbstractDataCubeAdapter {
             return Collections.singletonList(satNode.getRequestConstraintMap());
         } else if (node instanceof AbstractDerivedDataNode) {
             AbstractDerivedDataNode derivedNode = (AbstractDerivedDataNode) node;
+<<<<<<< HEAD
             List<Map<String, RequestConstraint>> baseConstraints = new ArrayList<Map<String, RequestConstraint>>();
+=======
+            List<Map<String, RequestConstraint>> baseConstraints = new ArrayList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             for (Dependency d : derivedNode.getDependencies()) {
                 baseConstraints.addAll(getBaseUpdateConstraints(d.node));
             }
@@ -177,6 +202,26 @@ public class SatelliteDataCubeAdapter extends AbstractDataCubeAdapter {
         return Collections.emptyList();
     }
 
+<<<<<<< HEAD
 
 
+=======
+    @Override
+    public List<List<DataTime>> timeQuery(List<TimeQueryRequest> requests) throws DataCubeException {
+        boolean cwf = false;
+        for (TimeQueryRequest request : requests) {
+            if (request.getQueryTerms().containsKey(SatelliteInventory.CENTRAL_WAVELENGTH_FIELD)) {
+                cwf = true;
+                break;
+            }
+        }
+
+        if (cwf) {
+            return inventory.timeQuery(requests);
+        } else {
+            return super.timeQuery(requests);
+
+        }
+    }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

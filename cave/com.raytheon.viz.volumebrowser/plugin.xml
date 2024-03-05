@@ -77,10 +77,17 @@
     <extension
          point="org.eclipse.ui.menus">
       <menuContribution
+<<<<<<< HEAD
             locationURI="menu:models?after=top">
              <command
                    commandId="com.raytheon.viz.volumebrowser.volumeBrowserRef"
                    label="Volume Browser">
+=======
+            locationURI="menu:volume?after=top">
+             <command
+                   commandId="com.raytheon.viz.volumebrowser.volumeBrowserRef"
+                   label="Browser...">
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
              </command>
              <separator name="afterVB" visible="false"/>
              <separator name="VolumeBundles" visible="true"/>
@@ -88,6 +95,7 @@
              <separator name="SurfaceFamilies" visible="false"/>
              <separator name="StdEnvDataPackageFamilies" visible="true"/>
       </menuContribution>
+<<<<<<< HEAD
       <menuContribution
             locationURI="menu:tools?after=tools.U">
              <command
@@ -95,6 +103,8 @@
                    label="Volume Browser">
              </command>
       </menuContribution>
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     </extension>
     <extension
         point="com.raytheon.uf.viz.ui.menus.contribItemProvider">

@@ -28,6 +28,7 @@
 -Dlogback.statusListenerClass=com.raytheon.uf.common.logback.UFLogbackInternalStatusListener
 -Dthrift.stream.maxsize=320
 -Dviz.memory.warn.threshold=10M
+-Dui.thread.monitor.threshold.millis=500
 -Dhttps.certificate.check=true
 -XX:+UnlockExperimentalVMOptions
 -XX:G1HeapRegionSize=4M
@@ -38,10 +39,10 @@
 -XX:G1HeapWastePercent=5
 -XX:SoftRefLRUPolicyMSPerMB=1000
       </vmArgs>
-      <vmArgsLin>-Xmx6144M -XX:MaxDirectMemorySize=2G
+      <vmArgsLin>-Xmx8192M -XX:MaxDirectMemorySize=2G
 -XX:OnOutOfMemoryError=&quot;capture -t no -p %p &amp;&quot;
       </vmArgsLin>
-      <vmArgsWin>-Dfile.encoding=UTF-8 -Xmx6144M
+      <vmArgsWin>-Dfile.encoding=UTF-8 -Xmx8192M
       </vmArgsWin>
    </launcherArgs>
 
@@ -130,6 +131,7 @@
       <feature id="edu.wisc.ssec.cimss.viz.probsevere.feature"/>
       <feature id="com.raytheon.uf.viz.satellite.goesr.feature" installMode="root"/>
       <feature id="gov.noaa.nws.sti.mdl.viz.griddednucaps.feature" installMode="root"/>
+      <feature id="com.raytheon.uf.viz.grid.radar.rsc.feature"/>
    </features>
 
    <configurations>
@@ -138,5 +140,12 @@
       <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="4" />
       <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="2" />
    </configurations>
+
+   <preferencesInfo>
+      <targetfile overwrite="false"/>
+   </preferencesInfo>
+
+   <cssInfo>
+   </cssInfo>
 
 </product>

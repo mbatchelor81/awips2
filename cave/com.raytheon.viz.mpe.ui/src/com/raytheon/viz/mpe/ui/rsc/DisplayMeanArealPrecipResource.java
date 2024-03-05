@@ -1,18 +1,27 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
@@ -20,6 +29,15 @@
  * 
  * SOFTWARE HISTORY
  * 
+=======
+ *
+ * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
+ * further licensing information.
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
  * Jan 7, 2015  16954      cgobs      Fix for cv_use issue - using getFieldName() in certain parts.
@@ -83,6 +101,7 @@ import com.raytheon.viz.mpe.util.MPEConversionUtils;
 
 /**
  * Mean Areal Precipitation Resource
+<<<<<<< HEAD
  * 
  * <pre>
  * 
@@ -97,6 +116,29 @@ import com.raytheon.viz.mpe.util.MPEConversionUtils;
  * 
  * </pre>
  * 
+=======
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+ * Date          Ticket#  Engineer  Description
+ * ------------- -------- --------- --------------------------------------------
+ * Jul 28, 2009  ?        snaples   Initial creation
+ * Dec 23, 2013  16329    snaples   Added target assignment to paintInternal().
+ * Mar 01, 2017  6160     bkowal    Updates for {@link
+ *                                  MPEDisplayManager#createColorMap(String,
+ *                                  String, int, javax.measure.unit.Unit,
+ *                                  javax.measure.unit.Unit)}.
+ * Mar 01, 2017  6163     bkowal    Correctly construct the legend text. Partial
+ *                                  cleanup.
+ * Oct 06, 2017  6407     bkowal    Cleanup. Updates to support GOES-R SATPRE.
+ * Dec 06, 2021  8341     randerso  Added use of getResourceId for contour
+ *                                  logging
+ *
+ * </pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author snaples
  */
 
@@ -107,6 +149,7 @@ public class DisplayMeanArealPrecipResource extends
     private final IUFStatusHandler statusHandler = UFStatus
             .getHandler(getClass());
 
+<<<<<<< HEAD
     private MPEDisplayManager displayMgr = null;
 
     private String area_type = "";
@@ -128,13 +171,20 @@ public class DisplayMeanArealPrecipResource extends
     private final String name;
 
     public static enum ImageSize {
+=======
+    public enum ImageSize {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         VERY_SMALL(11, 20), SMALL(13, 25), MEDIUM(15, 30), LARGE(17, 35);
 
         private final int width;
 
         private final int height;
 
+<<<<<<< HEAD
         private ImageSize(int width, int height) {
+=======
+        ImageSize(int width, int height) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             this.width = width;
             this.height = height;
         }
@@ -148,6 +198,7 @@ public class DisplayMeanArealPrecipResource extends
         }
     }
 
+<<<<<<< HEAD
     public DisplayMeanArealPrecipResource(MPEDisplayManager displayMgr,
             String boundary_type, DisplayFieldData displayField,
             int accumInterval, final String displayAs,
@@ -163,6 +214,39 @@ public class DisplayMeanArealPrecipResource extends
                 accumInterval, displayAs, dataTime.getLegendString());
     }
 
+=======
+    private static final SimpleDateFormat sds;
+
+    private static final SimpleDateFormat sxf;
+
+    static {
+        sds = new SimpleDateFormat("yyyyMMddHH");
+        sds.setTimeZone(TimeUtil.GMT_TIME_ZONE);
+        sxf = new SimpleDateFormat("MMddyyyyHH");
+        sxf.setTimeZone(TimeUtil.GMT_TIME_ZONE);
+    }
+
+    private MPEDisplayManager displayMgr = null;
+
+    private String area_type = "";
+
+    private int xor = 0;
+
+    private int yor = 0;
+
+    private int max_columns = 0;
+
+    private int max_rows = 0;
+
+    private int accumInterval;
+
+    private DisplayFieldData displayField;
+
+    private IFont font = null;
+
+    private final String name;
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private GriddedImageDisplay2 gridDisplay;
 
     private GriddedContourDisplay contourDisplay;
@@ -187,6 +271,7 @@ public class DisplayMeanArealPrecipResource extends
 
     private UnitConverter cvt;
 
+<<<<<<< HEAD
     private static final SimpleDateFormat sds;
 
     private static final SimpleDateFormat sxf;
@@ -200,6 +285,34 @@ public class DisplayMeanArealPrecipResource extends
 
     private List<GeoAreaLineSegs> meanAreaNodes = new ArrayList<>();
 
+=======
+    private List<GeoAreaLineSegs> meanAreaNodes = new ArrayList<>();
+
+    /**
+     *
+     * @param displayMgr
+     * @param boundary_type
+     * @param displayField
+     * @param accumInterval
+     * @param displayAs
+     * @param endDateTime
+     */
+    public DisplayMeanArealPrecipResource(MPEDisplayManager displayMgr,
+            String boundary_type, DisplayFieldData displayField,
+            int accumInterval, final String displayAs,
+            final Calendar endDateTime) {
+        super(new DisplayMeanArealPrecipResourceData(), new LoadProperties());
+        this.displayMgr = displayMgr;
+        this.area_type = boundary_type;
+        this.displayField = displayField;
+        this.accumInterval = accumInterval;
+
+        final DataTime dataTime = new DataTime(endDateTime);
+        name = String.format(DisplayFieldData.multiHour.toString(),
+                accumInterval, displayAs, dataTime.getLegendString());
+    }
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private void compute_mean_areal_precip(FloatBuffer fbuf,
             List<GeoAreaLineSegs> meanAreaNodes, int xor, int yor,
             int max_columns, int max_rows) {
@@ -356,7 +469,10 @@ public class DisplayMeanArealPrecipResource extends
                 }
             }
         }
+<<<<<<< HEAD
         return;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override
@@ -383,7 +499,12 @@ public class DisplayMeanArealPrecipResource extends
         if (mode.contains(DisplayMode.Contour)) {
             if (contourDisplay == null) {
                 contourDisplay = new GriddedContourDisplay(descriptor,
+<<<<<<< HEAD
                         gridGeometry, buf2);
+=======
+                        getResourceId(paintProps.getDataTime()), gridGeometry,
+                        buf2);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                 contourDisplay.setColor(ColorUtil.WHITE);
                 contourDisplay.setLineStyle(LineStyle.SOLID);
@@ -488,17 +609,28 @@ public class DisplayMeanArealPrecipResource extends
                 parameters.getColorMapUnit());
 
         this.readData();
+<<<<<<< HEAD
         meanAreaNodes = (ArrayList<GeoAreaLineSegs>) GeoUtil.getInstance()
                 .getGeoAreaLinesegs(area_type);
+=======
+        meanAreaNodes = GeoUtil.getInstance().getGeoAreaLinesegs(area_type);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         compute_mean_areal_precip(buf, meanAreaNodes, xor, yor, max_columns,
                 max_rows);
         HRAPSubGrid subGrid = null;
         try {
             subGrid = new HRAPSubGrid(extent);
         } catch (Exception e) {
+<<<<<<< HEAD
             statusHandler
                     .error("Failed to create a HRAP Sub Grid based on the extents: "
                             + extent.toString() + ".", e);
+=======
+            statusHandler.error(
+                    "Failed to create a HRAP Sub Grid based on the extents: "
+                            + extent.toString() + ".",
+                    e);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             /*
              * The HRAP Sub Grid would not be available for use below. So, might
              * as well exit early.
@@ -521,7 +653,11 @@ public class DisplayMeanArealPrecipResource extends
 
     /**
      * Set the width scalar
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param props
      * @return
      */
@@ -534,7 +670,11 @@ public class DisplayMeanArealPrecipResource extends
 
     /**
      * get the scale width value
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return
      */
     private double getScaleWidth() {
@@ -543,7 +683,11 @@ public class DisplayMeanArealPrecipResource extends
 
     /**
      * Set the height scalar
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param props
      * @return
      */
@@ -556,7 +700,11 @@ public class DisplayMeanArealPrecipResource extends
 
     /**
      * Get the scalar height
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return
      */
     private double getScaleHeight() {
@@ -583,7 +731,11 @@ public class DisplayMeanArealPrecipResource extends
         String cv_use = displayMgr.getDisplayFieldType().getFieldName();
         String dirname = appsDefaults
                 .getToken(displayMgr.getDisplayFieldType().getDirToken());
+<<<<<<< HEAD
         String fname = "";
+=======
+        String fname;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         String dtform = "";
         String use = "";
         Calendar cal1 = TimeUtil
@@ -689,7 +841,10 @@ public class DisplayMeanArealPrecipResource extends
                 extent = coord;
             } else {
                 xmrg = null;
+<<<<<<< HEAD
                 return;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         }
     }

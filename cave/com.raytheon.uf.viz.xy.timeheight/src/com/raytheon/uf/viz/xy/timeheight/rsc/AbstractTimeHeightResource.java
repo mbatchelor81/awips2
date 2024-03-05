@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -48,7 +60,11 @@ import com.raytheon.uf.viz.core.exception.VizException;
 import com.raytheon.uf.viz.core.map.MapDescriptor;
 import com.raytheon.uf.viz.core.rsc.AbstractVizResource;
 import com.raytheon.uf.viz.core.rsc.DisplayType;
+<<<<<<< HEAD
 import com.raytheon.uf.viz.core.rsc.IResourceDataChanged;
+=======
+import com.raytheon.uf.viz.core.rsc.IResourceDataChanged.ChangeType;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.rsc.LoadProperties;
 import com.raytheon.uf.viz.core.rsc.capabilities.ColorableCapability;
 import com.raytheon.uf.viz.core.rsc.capabilities.DisplayTypeCapability;
@@ -70,6 +86,7 @@ import com.raytheon.viz.core.graphing.util.GraphPrefsFactory;
 import com.raytheon.viz.core.graphing.xy.XYData;
 import com.raytheon.viz.core.map.GeoUtil;
 
+<<<<<<< HEAD
 import tec.uom.se.AbstractUnit;
 
 /**
@@ -80,6 +97,18 @@ import tec.uom.se.AbstractUnit;
  * <pre>
  * SOFTWARE HISTORY
  * 
+=======
+import tech.units.indriya.AbstractUnit;
+
+/**
+ *
+ * Abstract resource for cross sections, TODO: Extract DataCube needs out and
+ * into the adapters
+ *
+ * <pre>
+ * SOFTWARE HISTORY
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- --------------------------------------------
  * Dec 04, 2007  625      njensen   Initial creation
@@ -94,9 +123,16 @@ import tec.uom.se.AbstractUnit;
  * Nov 28, 2017  5863     bsteffen  Change dataTimes to a NavigableSet
  * Feb 19, 2018  6666     bsteffen  Get data from adapter using loadPreparedData
  * Feb 28, 2018  7231     njensen   Made statusHandler protected
+<<<<<<< HEAD
  * 
  * </pre>
  * 
+=======
+ * Oct 29, 2022  8959     mapeters  Update how data time levels are set
+ *
+ * </pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author njensen
  */
 public abstract class AbstractTimeHeightResource extends
@@ -190,6 +226,7 @@ public abstract class AbstractTimeHeightResource extends
             this.combineOperation = combinedResourceData.getCombineOperation();
         }
 
+<<<<<<< HEAD
         data.addChangeListener(new IResourceDataChanged() {
 
             @Override
@@ -205,6 +242,18 @@ public abstract class AbstractTimeHeightResource extends
                 issueRefresh();
             }
 
+=======
+        data.addChangeListener((type, object) -> {
+            if (type == ChangeType.DATA_UPDATE) {
+                synchronized (AbstractTimeHeightResource.this) {
+                    PluginDataObject[] pdos = (PluginDataObject[]) object;
+                    for (PluginDataObject pdo : pdos) {
+                        addRecord(pdo);
+                    }
+                }
+            }
+            issueRefresh();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         });
     }
 
@@ -346,12 +395,19 @@ public abstract class AbstractTimeHeightResource extends
         }
         if (!"".equals(stnID)) {
             completeName += " " + stnID;
+<<<<<<< HEAD
         } else {
             if (resourceData.getPointCoordinate() != null) {
                 String formattedPoint = GeoUtil
                         .formatCoordinate(resourceData.getPointCoordinate());
                 completeName += " " + formattedPoint;
             }
+=======
+        } else if (resourceData.getPointCoordinate() != null) {
+            String formattedPoint = GeoUtil
+                    .formatCoordinate(resourceData.getPointCoordinate());
+            completeName += " " + formattedPoint;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         String parameterName = resourceData.getParameterName();
@@ -415,7 +471,11 @@ public abstract class AbstractTimeHeightResource extends
     public void addRecord(PluginDataObject pdo) {
         adapter.addRecord(pdo);
         DataTime pdoTime = pdo.getDataTime().clone();
+<<<<<<< HEAD
         pdoTime.setLevelValue(null);
+=======
+        pdoTime.clearLevel();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         synchronized (dataTimes) {
             if (dataTimes.add(pdoTime)) {
                 if (descriptor != null) {

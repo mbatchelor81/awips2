@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -23,9 +35,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+<<<<<<< HEAD
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.action.ContributionItem;
 import org.eclipse.jface.action.IMenuManager;
+=======
+import org.eclipse.jface.action.ContributionItem;
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.MenuManager;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.eclipse.jface.action.Separator;
 
 import com.raytheon.uf.common.status.IUFStatusHandler;
@@ -62,7 +80,12 @@ import com.raytheon.uf.viz.d2d.ui.map.actions.SinglePanelLayoutMenuAction;
 import com.raytheon.uf.viz.d2d.ui.map.actions.SkipFramesAction;
 import com.raytheon.uf.viz.d2d.ui.map.actions.SkipFramesAction.SkipFrameMode;
 import com.raytheon.uf.viz.d2d.ui.map.actions.SwapWithLargePaneAction;
+<<<<<<< HEAD
 import com.raytheon.viz.ui.actions.MultiPanes;
+=======
+import com.raytheon.viz.ui.actions.MultiPanelLayout;
+import com.raytheon.viz.ui.actions.MultiPanelLayoutsManager;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.viz.ui.actions.SelectPaneAction;
 import com.raytheon.viz.ui.cmenu.AbstractRightClickAction;
 import com.raytheon.viz.ui.cmenu.LoopingAction;
@@ -71,6 +94,10 @@ import com.raytheon.viz.ui.cmenu.UnloadAllGraphicsAction;
 import com.raytheon.viz.ui.cmenu.ZoomMenuAction;
 import com.raytheon.viz.ui.editor.AbstractEditor;
 import com.raytheon.viz.ui.editor.IMultiPaneEditor;
+<<<<<<< HEAD
+=======
+import com.raytheon.viz.ui.editor.VizMultiPaneEditor;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.viz.ui.perspectives.AbstractCAVEPerspectiveManager;
 import com.raytheon.viz.ui.statusline.FrameCountDisplay;
 
@@ -84,6 +111,7 @@ import com.raytheon.viz.ui.statusline.FrameCountDisplay;
  *
  * <pre>
  * SOFTWARE HISTORY
+<<<<<<< HEAD
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
  * 04/27/2010               mschenke    Initial Creation.
@@ -92,6 +120,30 @@ import com.raytheon.viz.ui.statusline.FrameCountDisplay;
  * Jan 14, 2014       2594  bclement    added low memory notification
  * Feb 13, 2020       74164 ksunil      Adding Multi Panel Layouts
  * Dec 21, 2020       86204 Robert.Blum Added support for any number of panes.
+=======
+ *
+ * Date          Ticket#  Engineer     Description
+ * ------------- -------- ------------ -----------------------------------------
+ * Apr 27, 2010           mschenke     Initial Creation.
+ * Mar 21, 2013  1638     mschenke     Changed map scales not tied to d2d
+ * Oct 10, 2013  2104     mschenke     Switched to use MapScalesManager
+ * Jan 14, 2014  2594     bclement     added low memory notification
+ * Feb 13, 2020  74164    ksunil       Adding Multi Panel Layouts
+ * Jun 15, 2020  79555    ksunil       While on 'n' panel layout, right click
+ *                                     now shows 'n' panel as an entry.
+ * Nov 04, 2020  84068    smanoj       Removing "NCTEXT" multi-panel Layouts
+ *                                     options.
+ * Dec 21, 2020  86204    Robert.Blum  Added support for any number of panes.
+ * Feb 24, 2021  88439    smanoj       Add right-click menu option "Sample" for
+ *                                     Turbulence and Icing in NsharpEditor.
+ * Mar 30, 2022 102227    achalla      Modified addContextMenuItems to enable Map Resources when
+ *                                     in Ensemble Mode Case(LEGEND_OVERRIDE)
+ * Apr 01, 2022 8790      mapeters     Implement new openNewEditor(String editorId)
+ *                                     instead of no-arg version
+ * May 11, 2023 2029803   mapeters     Move panel layout menu items to submenu and add
+ *                                     more panel counts and horizontal layouts
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  *
  * @author mschenke
@@ -112,7 +164,17 @@ public class D2DPerspectiveManager extends AbstractCAVEPerspectiveManager {
 
     private static final Separator sep = new Separator();
 
+<<<<<<< HEAD
     private static Map<Object, AbstractRightClickAction> legendActions = new HashMap<Object, AbstractRightClickAction>();
+=======
+    private static final Map<Object, AbstractRightClickAction> legendActions = new HashMap<>();
+
+    public static final int GRAPH_ICING = 2;
+
+    public static final int GRAPH_TURB = 3;
+
+    private boolean isSamplingNsharp = false;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     @Override
     public void open() {
@@ -126,6 +188,7 @@ public class D2DPerspectiveManager extends AbstractCAVEPerspectiveManager {
     }
 
     @Override
+<<<<<<< HEAD
     public AbstractEditor openNewEditor() {
         try {
             return new NewMapEditor().execute(null);
@@ -134,6 +197,10 @@ public class D2DPerspectiveManager extends AbstractCAVEPerspectiveManager {
                     "Error opening new map editor", e);
         }
         return null;
+=======
+    public AbstractEditor openNewEditor(String editorId) {
+        return NewMapEditor.openEditor(editorId);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override
@@ -148,7 +215,11 @@ public class D2DPerspectiveManager extends AbstractCAVEPerspectiveManager {
             IDisplayPaneContainer container, IDisplayPane pane) {
         boolean hasImages = false;
         boolean hasGraphics = false;
+<<<<<<< HEAD
         boolean hasTimeFrames = false;
+=======
+        boolean hasTimeFrames;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         D2DLegendResource ld = null;
 
@@ -167,7 +238,11 @@ public class D2DPerspectiveManager extends AbstractCAVEPerspectiveManager {
         FramesInfo currentFrameInfo = descriptor.getFramesInfo();
 
         hasTimeFrames = currentFrameInfo.getFrameCount() > 0;
+<<<<<<< HEAD
         if (container instanceof SideView == false) {
+=======
+        if (!(container instanceof SideView)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             LegendMode mode = null;
             if (ld != null) {
                 mode = ld.getLegendMode();
@@ -191,22 +266,49 @@ public class D2DPerspectiveManager extends AbstractCAVEPerspectiveManager {
                                 .add(getLegendAction(LegendMode.PRODUCT, ld));
                         break;
                     }
+<<<<<<< HEAD
+=======
+                    case LEGEND_OVERRIDE: {
+                        menuManager.add(getLegendAction(LegendMode.HIDE, ld));
+                        menuManager.add(getLegendAction(LegendMode.MAP, ld));
+                        break;
+                    }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     }
                 }
                 menuManager.add(sep);
             }
         }
 
+<<<<<<< HEAD
         // need to do this only on a multipane with multiple panes.
         if (container instanceof IMultiPaneEditor) {
+=======
+        boolean ncTextMapEditor = false;
+        if (container instanceof VizMultiPaneEditor) {
+            VizMultiPaneEditor vizeditor = (VizMultiPaneEditor) container;
+            if (vizeditor.getPartName().contains("NCTEXT")) {
+                ncTextMapEditor = true;
+            }
+        }
+
+        // need to do this only on a multipane with multiple panes.
+        // Multi Panel Layouts do not apply to NCTEXT.
+        if ((!ncTextMapEditor) && (container instanceof IMultiPaneEditor)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             IMultiPaneEditor editor = (IMultiPaneEditor) container;
 
             if (editor.getNumberofPanes() > 1
                     && editor.displayedPaneCount() > 1) {
                 // Set up load to pane menu
                 if (editor.getSelectedPane(IMultiPaneEditor.LOAD_ACTION) == null
+<<<<<<< HEAD
                         || editor.isSelectedPane(IMultiPaneEditor.LOAD_ACTION,
                                 pane) == false) {
+=======
+                        || !editor.isSelectedPane(IMultiPaneEditor.LOAD_ACTION,
+                                pane)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     SelectPaneAction selectPaneAction = new SelectPaneAction(
                             pane, IMultiPaneEditor.LOAD_ACTION);
                     selectPaneAction.setContainer(container);
@@ -225,8 +327,13 @@ public class D2DPerspectiveManager extends AbstractCAVEPerspectiveManager {
                 // Set up control color of menu
                 if (editor
                         .getSelectedPane(IMultiPaneEditor.IMAGE_ACTION) == null
+<<<<<<< HEAD
                         || editor.isSelectedPane(IMultiPaneEditor.IMAGE_ACTION,
                                 pane) == false) {
+=======
+                        || !editor.isSelectedPane(IMultiPaneEditor.IMAGE_ACTION,
+                                pane)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     for (ResourcePair rp : pane.getDescriptor()
                             .getResourceList()) {
                         AbstractVizResource<?, ?> rsc = rp.getResource();
@@ -262,6 +369,7 @@ public class D2DPerspectiveManager extends AbstractCAVEPerspectiveManager {
                     menuManager.add(selectPaneAction);
                 }
 
+<<<<<<< HEAD
                 SinglePanelLayoutMenuAction singlePanelLayoutMenuAction = new SinglePanelLayoutMenuAction(
                         pane);
                 singlePanelLayoutMenuAction.setContainer(container);
@@ -269,11 +377,25 @@ public class D2DPerspectiveManager extends AbstractCAVEPerspectiveManager {
 
                 setupPanelLayouts(menuManager, (IMultiPaneEditor) container,
                         pane, false);
+=======
+                setupPanelLayoutSubMenu(menuManager,
+                        (IMultiPaneEditor) container, pane, true);
 
                 RotatePanelLayoutMenuAction rotatePanelLayoutMenuAction = new RotatePanelLayoutMenuAction();
                 rotatePanelLayoutMenuAction.setPaneInFocus(pane);
                 rotatePanelLayoutMenuAction.setContainer(container);
                 menuManager.add(rotatePanelLayoutMenuAction);
+            } else if (editor.getNumberofPanes() > 1) {
+                AllPanelSampleAction sample = new AllPanelSampleAction();
+                sample.setContainer(container);
+                menuManager.add(sample);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
+
+                RotatePanelLayoutMenuAction rotatePanelLayoutMenuAction = new RotatePanelLayoutMenuAction();
+                rotatePanelLayoutMenuAction.setPaneInFocus(pane);
+                rotatePanelLayoutMenuAction.setContainer(container);
+                menuManager.add(rotatePanelLayoutMenuAction);
+<<<<<<< HEAD
             } else {
                 if (editor.getNumberofPanes() > 1) {
                     AllPanelSampleAction sample = new AllPanelSampleAction();
@@ -292,6 +414,21 @@ public class D2DPerspectiveManager extends AbstractCAVEPerspectiveManager {
                     setupPanelLayouts(menuManager, (IMultiPaneEditor) container,
                             pane, false);
                 }
+=======
+
+                setupPanelLayoutSubMenu(menuManager,
+                        (IMultiPaneEditor) container, pane, false);
+
+                SelectPaneAction selectPaneAction = new SelectPaneAction(pane,
+                        IMultiPaneEditor.LOAD_ACTION);
+                selectPaneAction.setContainer(container);
+                selectPaneAction.setSelectedRsc(null);
+                menuManager.add(selectPaneAction);
+
+            } else {
+                setupPanelLayoutSubMenu(menuManager,
+                        (IMultiPaneEditor) container, pane, false);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
             menuManager.add(sep);
         }
@@ -342,7 +479,11 @@ public class D2DPerspectiveManager extends AbstractCAVEPerspectiveManager {
                 menuManager.add(rotatePanelLayoutMenuAction);
 
                 if (editor.displayedPaneCount() == 1) {
+<<<<<<< HEAD
                     setupPanelLayouts(menuManager, editor, pane, false);
+=======
+                    setupPanelLayoutSubMenu(menuManager, editor, pane, false);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
             }
 
@@ -364,7 +505,25 @@ public class D2DPerspectiveManager extends AbstractCAVEPerspectiveManager {
         menuManager.add(setBackGroundColor);
         menuManager.add(new Separator());
 
+<<<<<<< HEAD
         if (hasProducts) {
+=======
+        if (container instanceof AbstractEditor) {
+            AbstractEditor editor = (AbstractEditor) container;
+            if (editor.getPartName().contains("NsharpEditor")) {
+                int graphMode = editor.getGraphMode();
+                // "Sample" Display feature available in NSHARP Editor only for
+                // Icing and Turbulence.
+                if ((graphMode == GRAPH_ICING) || (graphMode == GRAPH_TURB)) {
+                    isSamplingNsharp = true;
+                } else {
+                    isSamplingNsharp = false;
+                }
+            }
+        }
+
+        if (hasProducts || isSamplingNsharp) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             sampleAction.setContainer(container);
             sampleAction.setSelectedRsc(null);
             menuManager.add(sampleAction);
@@ -417,6 +576,7 @@ public class D2DPerspectiveManager extends AbstractCAVEPerspectiveManager {
     }
 
     /**
+<<<<<<< HEAD
      *
      * Loops through and creates 2/4/9/16 panels (or whatever is defined in the
      * MultiPanes Enum) and adds links in the menu. Does not create a link for
@@ -443,6 +603,42 @@ public class D2DPerspectiveManager extends AbstractCAVEPerspectiveManager {
             selectPaneAction.setContainer(container);
             selectPaneAction.setSelectedRsc(null);
             menuManager.add(selectPaneAction);
+=======
+     * Add a submenu to the given menu that contains menu actions for all panel
+     * layouts defined in the {@link MultiPanes} enum. For non-square panel
+     * counts, vertical and horizontal menu actions are setup.
+     *
+     * @param menuManager
+     *            menu manager to add the submenu to
+     * @param container
+     *            editor that the actions are for
+     * @param pane
+     *            pane to add Single Panel Layout action for (if
+     *            addSinglePanelAction is true)
+     * @param addSinglePanelAction
+     *            true to add Single Panel Layout action
+     */
+    private void setupPanelLayoutSubMenu(IMenuManager menuManager,
+            IMultiPaneEditor container, IDisplayPane pane,
+            boolean addSinglePanelAction) {
+        MenuManager subMenuManager = new MenuManager("Change Panel Layout",
+                null);
+        menuManager.add(subMenuManager);
+
+        if (addSinglePanelAction) {
+            SinglePanelLayoutMenuAction singlePanelLayoutMenuAction = new SinglePanelLayoutMenuAction(
+                    pane);
+            singlePanelLayoutMenuAction.setContainer(container);
+            subMenuManager.add(singlePanelLayoutMenuAction);
+        }
+
+        for (MultiPanelLayout layout : MultiPanelLayoutsManager
+                .getLayouts()) {
+            MultiPanelLayoutMenuAction action = new MultiPanelLayoutMenuAction(
+                    layout.getCount(), layout.isHorizontal());
+            action.setContainer(container);
+            subMenuManager.add(action);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 }

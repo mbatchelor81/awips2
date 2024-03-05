@@ -1,19 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
- * 
+ *
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
- * 
+ *
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
- * 
+ *
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  * 
@@ -30,6 +30,7 @@
 package com.raytheon.uf.viz.aviation.advisory.adapter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Set;
 
@@ -50,6 +51,28 @@ import gov.noaa.nws.ncep.common.dataplugin.convsigmet.ConvSigmetSection;
 import si.uom.SI;
 import systems.uom.common.USCustomary;
 
+import gov.noaa.nws.ncep.common.dataplugin.convsigmet.ConvSigmetLocation;
+import gov.noaa.nws.ncep.common.dataplugin.convsigmet.ConvSigmetRecord;
+import gov.noaa.nws.ncep.common.dataplugin.convsigmet.ConvSigmetSection;
+
+/**
+ *
+ * Aviation data adapter for Conv Sigmet for Now cast and Forecast. This class
+ * adds wx statement text to sigmet polygons in d2d.
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+ * Date          Ticket#  Engineer  Description
+ * ------------- -------- --------- --------------------------------------------
+ * ????    2001  ????     ????      Initial creation
+ * Jul 24, 2020  79536    pbutler   D2D and wx statements to hover over Sigmet polygons.
+ * Dec 14  2020  82254    srussell  Updated convertIsol()
+ * Feb 07, 2022  97246    tjensen   Add error handling for convertLine()
+ *
+ * </pre>
+ */
 @XmlAccessorType(XmlAccessType.NONE)
 public class ConvSigmetCastDataAdapter extends AbstractAdvisoryDataAdapter {
 
@@ -68,13 +91,17 @@ public class ConvSigmetCastDataAdapter extends AbstractAdvisoryDataAdapter {
     protected static final UnitConverter KNTS_TO_MPS = USCustomary.KNOT
             .getConverterTo(SI.METRE_PER_SECOND);
 
+    private static final String FORMAT = "Valid UNTIL %02d%02d%02d\n%s";
+
+    private static final String SEGMENT_SEPERATOR = "\n.  \n";
+
     @XmlAttribute
     private boolean forecast = false;
 
     @Override
     public Collection<AdvisoryRecord> convertRecords(
             Collection<PluginDataObject> records) {
-        Collection<AdvisoryRecord> result = new ArrayList<AdvisoryRecord>();
+        Collection<AdvisoryRecord> result = new ArrayList<>();
         for (PluginDataObject record : records) {
             result.addAll(convertRecord(record));
         }
@@ -83,18 +110,20 @@ public class ConvSigmetCastDataAdapter extends AbstractAdvisoryDataAdapter {
 
     @Override
     public Collection<AdvisoryRecord> convertRecord(PluginDataObject record) {
-        Collection<AdvisoryRecord> result = new ArrayList<AdvisoryRecord>();
+        Collection<AdvisoryRecord> result = new ArrayList<>();
         if (record instanceof ConvSigmetRecord) {
             ConvSigmetRecord sigmetRecord = (ConvSigmetRecord) record;
             if (sigmetRecord.getConvSigmetSection() != null) {
                 for (ConvSigmetSection section : sigmetRecord
                         .getConvSigmetSection()) {
+                    // - create new rec ----
                     AdvisoryRecord newRec = null;
                     if (forecast && isSectionDirectionOrSpeedInvalid(section)) {
                         continue;
                     }
+
                     if (section.getClassType().equals(STR_AREA)) {
-                        newRec = convertArea(section);
+                        newRec = convertSection(section);
                     } else if (section.getClassType().equals(STR_ISOL)) {
                         newRec = convertIsol(section);
                     } else if (section.getClassType().equals(STR_LINE)) {
@@ -130,26 +159,42 @@ public class ConvSigmetCastDataAdapter extends AbstractAdvisoryDataAdapter {
         return rval;
     }
 
-    private AdvisoryRecord convertLine(ConvSigmetSection section) {
+    private AdvisoryRecord convertSection(ConvSigmetSection section) {
         Set<ConvSigmetLocation> locations = section.getConvSigmetLocation();
-        if (locations == null) {
+        if (locations == null || locations.isEmpty()) {
             return null;
         }
         Coordinate[] coords = new Coordinate[locations.size()];
         for (ConvSigmetLocation loc : locations) {
+
             coords[loc.getIndex() - 1] = new Coordinate(loc.getLongitude(),
                     loc.getLatitude());
+
         }
-        String label = section.getSequenceID();
-        if (forecast) {
-            movePoints(coords, section);
-            label = "";
+        String sequenceId = section.getSequenceID();
+        if (sequenceId == null) {
+            sequenceId = "";
+        } else if (sequenceId.length() >= 3) {
+            sequenceId = sequenceId.substring(0, 3);
         }
-        return new AdvisoryRecord(coords, section.getDistance(), label, "");
+
+        String inspectString = formatWxStatmentText(section);
+
+        String label = "";
+
+        AdvisoryRecord aRecord = null;
+
+        if (coords.length >= 4) {
+            aRecord = new AdvisoryRecord(coords, label, inspectString);
+        }
+
+        return aRecord;
     }
 
     private AdvisoryRecord convertIsol(ConvSigmetSection section) {
         Set<ConvSigmetLocation> locations = section.getConvSigmetLocation();
+        // Coordinate[] coords = new Coordinate[locations.size()];
+
         if (locations == null || locations.isEmpty()) {
             return null;
         }
@@ -162,21 +207,46 @@ public class ConvSigmetCastDataAdapter extends AbstractAdvisoryDataAdapter {
             movePoint(center, section);
             label = "";
         }
-        return new AdvisoryRecord(center, section.getDistance(), label, "");
+
+        String inspectString = formatWxStatmentText(section);
+
+        AdvisoryRecord aRecord = null;
+
+        /*-
+         * TODO
+         * The commented out section below does what it says, BUT it also
+         * prevents ISOL SEV TS from rendering by forcing a return of a null
+         * AdvisoryRecord object
+         * - steve.russell@noaa.gov
+         ---------------------------------------------------------------------
+        // - check for making sure we do not get wrapping lines at top of d2d
+        // view.
+        if (coords.length >= 4) {
+            aRecord = new AdvisoryRecord(center, section.getDistance(), label,
+                    inspectString);
+        }
+        -----------------------------------------------------------------------
+        */
+
+        if (center != null && section != null) {
+            aRecord = new AdvisoryRecord(center, section.getDistance(), label,
+                    inspectString);
+        }
+
+        return aRecord;
     }
 
-    /**
-     * convert an Area sigmet section
-     * 
-     * @param section
-     *            the section convert
-     */
-    private AdvisoryRecord convertArea(ConvSigmetSection section) {
+    private AdvisoryRecord convertLine(ConvSigmetSection section) {
         Set<ConvSigmetLocation> locations = section.getConvSigmetLocation();
-        if (locations == null) {
+        /*
+         * If we somehow have a line with no points, return null. Calling method
+         * convertRecord() has handling for a null return
+         */
+        if (locations.isEmpty()) {
             return null;
         }
         Coordinate[] coords = new Coordinate[locations.size()];
+
         for (ConvSigmetLocation loc : locations) {
             coords[loc.getIndex() - 1] = new Coordinate(loc.getLongitude(),
                     loc.getLatitude());
@@ -187,14 +257,39 @@ public class ConvSigmetCastDataAdapter extends AbstractAdvisoryDataAdapter {
             label = "";
         }
 
-        return new AdvisoryRecord(coords, label, "");
+        String inspectString = formatWxStatmentText(section);
 
+        return new AdvisoryRecord(coords, section.getDistance(), label,
+                inspectString);
+
+    }
+
+    private String formatWxStatmentText(ConvSigmetSection section) {
+        Calendar endTime = section.getEndTime();
+        int day = 0;
+        int hour = 0;
+        int min = 0;
+        if (endTime != null) {
+            day = endTime.get(Calendar.DAY_OF_MONTH);
+            hour = endTime.get(Calendar.HOUR_OF_DAY);
+            min = endTime.get(Calendar.MINUTE);
+        }
+        String segment = section.getSegment();
+        if (segment != null) {
+            segment = segment.split(SEGMENT_SEPERATOR)[0];
+        } else {
+            segment = "";
+        }
+
+        String inspectString = String.format(FORMAT, day, hour, min, segment);
+
+        return inspectString;
     }
 
     /**
      * Move an array of Coordinates by the direction and speed specified in a
      * ConvSigmetSection
-     * 
+     *
      * @param coords
      *            the coordinates to move in Lat, Lon
      * @param section
@@ -203,15 +298,15 @@ public class ConvSigmetCastDataAdapter extends AbstractAdvisoryDataAdapter {
      */
     private Coordinate[] movePoints(Coordinate[] coords,
             ConvSigmetSection section) {
-        for (int i = 0; i < coords.length; i++) {
-            movePoint(coords[i], section);
+        for (Coordinate coord : coords) {
+            movePoint(coord, section);
         }
         return coords;
     }
 
     /**
      * Move a coord by the direction and speed specified in a ConvSigmetSection
-     * 
+     *
      * @param coord
      *            the coordinate to move in Lat, Lon
      * @param section
@@ -260,15 +355,19 @@ public class ConvSigmetCastDataAdapter extends AbstractAdvisoryDataAdapter {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         ConvSigmetCastDataAdapter other = (ConvSigmetCastDataAdapter) obj;
-        if (forecast != other.forecast)
+        if (forecast != other.forecast) {
             return false;
+        }
         return true;
     }
 

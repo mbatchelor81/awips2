@@ -62,7 +62,11 @@ public class CigVisTrendDataManager implements ClimatePythonListener {
             .getHandler(CigVisTrendDataManager.class);
 
     private final IPerformanceStatusHandler perfLog = PerformanceStatus
+<<<<<<< HEAD
             .getHandler("CigVisTrend:");
+=======
+            .getHandler("CigVisTrend");
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private static final CigVisTrendDataManager INSTANCE = new CigVisTrendDataManager();
 

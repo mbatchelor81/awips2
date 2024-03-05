@@ -47,6 +47,13 @@
 # Jul 13, 2017  6346     dgilling  renamed to allow easier overrides.
 # Feb 08, 2018  7214     randerso  fixed spelling errors in ctaUPW
 # Feb 20, 2018  7028     randerso  fixed capitalization and wording errors
+<<<<<<< HEAD
+=======
+# Jan 14, 2021  DCS22296 dkingfiel Remove FF.A and FA.A
+# May 10, 2021  DCS22297 dkingfiel Remove RB.Y, SI.Y, and SW.Y
+# May 18, 2021  DCS22297 dkingfiel Add CW.Y, XH.A, and XH.W. Update CTAs for EC.A,
+#                                  EC.W, EH.A, EH.W, and HT.Y.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # ----------------------------------------------------------------------------
 
 ##
@@ -118,14 +125,21 @@ class CallToActions(object):
          "CF.A": self.ctaCFA,
          "CF.W": self.ctaCFW,
          "CF.Y": self.ctaCFY,
+<<<<<<< HEAD
+=======
+         "CW.Y": self.ctaCWY,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
          "DU.W": self.ctaDUW,
          "DU.Y": self.ctaDUY,
          "EC.A": self.ctaECA,
          "EC.W": self.ctaECW,
          "EH.A": self.ctaEHA,
          "EH.W": self.ctaEHW,
+<<<<<<< HEAD
          "FA.A": self.ctaFAA,
          "FF.A": self.ctaFFA,
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
          "FG.Y": self.ctaFGY,
          "FR.Y": self.ctaFRY,
          "FW.A": self.ctaFWA,
@@ -154,18 +168,27 @@ class CallToActions(object):
          "MH.W": self.ctaMHW,
          "MH.Y": self.ctaMHY,
          "MS.Y": self.ctaMSY,
+<<<<<<< HEAD
          "RB.Y": self.ctaRBY,
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
          "RP.S": self.ctaRPS,
          "SC.Y": self.ctaSCY,
          "SE.A": self.ctaSEA,
          "SE.W": self.ctaSEW,
+<<<<<<< HEAD
          "SI.Y": self.ctaSIY,
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
          "SM.Y": self.ctaSMY,
          "SR.A": self.ctaSRA,
          "SR.W": self.ctaSRW,
          "SU.W": self.ctaSUW,
          "SU.Y": self.ctaSUY,
+<<<<<<< HEAD
          "SW.Y": self.ctaSWY,
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
          "TR.A": self.ctaTRA,
          "TR.W": self.ctaTRW,
          "UP.A": self.ctaUPA,
@@ -178,6 +201,11 @@ class CallToActions(object):
          "WS.A": self.ctaWSA,
          "WS.W": self.ctaWSW,
          "WW.Y": self.ctaWWY,
+<<<<<<< HEAD
+=======
+         "XH.A": self.ctaXHA,
+         "XH.W": self.ctaXHW,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
          "ZF.Y": self.ctaZFY,
           }
 
@@ -275,7 +303,11 @@ class CallToActions(object):
     def ctaAFW(self):
         return [
 """An Ashfall Warning means that significant accumulation of volcanic ash is expected or occurring due to a volcanic eruption or resuspension of previously deposited ash.
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 Seal windows and doors.  Protect electronics and cover air intakes and open water sources.  Avoid driving. Remain indoors unless absolutely necessary.  Use extreme caution clearing rooftops of ash.
 
 Listen to NOAA Weather Radio or local media for further information.""",
@@ -326,6 +358,20 @@ Listen to NOAA Weather Radio or local media for further information.""",
  """A Coastal Flood Advisory indicates that onshore winds and tides will combine to generate flooding of low areas along the shore.""",
         ]
 
+<<<<<<< HEAD
+=======
+    def ctaCWY(self):
+        return [
+"""|*Choose the appropriate CTA(s) below and delete the rest*|
+
+Make frequent checks on older family, friends, neighbors, and pets. Ensure portable heaters are used correctly. Do not use generators or grills inside.
+
+Make sure outdoor animals have a warm, dry shelter, food, and unfrozen water.
+
+Monitor the latest forecasts and warnings for updates.""",
+        ]
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def ctaDUW(self):
         return [
  """A Blowing Dust Warning means severely limited visibilities are expected with blowing dust. Travel could become extremely dangerous. Persons with respiratory problems should make preparations to stay indoors until the storm passes.""",
@@ -338,22 +384,69 @@ Listen to NOAA Weather Radio or local media for further information.""",
 
     def ctaECA(self):
         return [
+<<<<<<< HEAD
  """An Extreme Cold Watch means that prolonged periods of very cold temperatures are expected. Ensure that outdoor animals have warm shelter, and that children wear a hat and gloves.""",
+=======
+ """|*Choose the appropriate CTA(s) below and delete the rest*|
+
+Dress in layers including a hat, face mask, and gloves if you must go outside.
+
+To prevent water pipes from freezing; wrap or drain or allow them to drip slowly.
+
+Drain in-ground sprinkler systems and cover above ground pipes.
+
+Keep pets indoors as much as possible.
+
+Make sure outdoor animals have a warm, dry shelter, food, and unfrozen water.
+
+Make frequent checks on older family, friends, and neighbors. Ensure portable heaters are used correctly. Do not use generators or grills inside.
+
+Monitor the latest forecasts and warnings for updates.""",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         ]
 
     def ctaECW(self):
         return [
+<<<<<<< HEAD
  """An Extreme Cold Warning means that dangerously low temperatures are expected for a prolonged period of time. Frostbite and hypothermia are likely if exposed to these temperatures, so make sure a hat, facemask, and heavy gloves or mittens are available.""",
+=======
+ """|*Choose the appropriate CTA(s) below and delete the rest*|
+
+Dress in layers including a hat, face mask, and gloves if you must go outside.
+
+To prevent water pipes from freezing; wrap or drain or allow them to drip slowly.
+
+Drain in-ground sprinkler systems and cover above ground pipes.
+
+Keep pets indoors as much as possible.
+
+Make sure outdoor animals have a warm, dry shelter, food, and unfrozen water.
+
+Make frequent checks on older family, friends, and neighbors. Ensure portable heaters are used correctly. Do not use generators or grills inside.
+
+Monitor the latest forecasts and warnings for updates.""",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         ]
 
     def ctaEHA(self):
         return [
+<<<<<<< HEAD
  """An Excessive Heat Watch means that a prolonged period of hot temperatures is expected. The combination of hot temperatures and high humidity will combine to create a DANGEROUS SITUATION in which heat illnesses are possible. Drink plenty of fluids, stay in an air-conditioned room, stay out of the sun, and check up on relatives and neighbors.""",
  """Young children and pets should never be left unattended in vehicles under any circumstances.  This is especially true during warm or hot weather when car interiors can reach lethal temperatures in a matter of minutes.""",
+=======
+"""|*Choose the appropriate CTA(s) below and delete the rest*|
+
+Drink plenty of fluids, stay in an air-conditioned room, stay out of the sun, and check up on relatives and neighbors.
+
+Do not leave young children and pets in unattended vehicles. Car interiors will reach lethal temperatures in a matter of minutes.
+
+Monitor the latest forecasts and warnings for updates.""",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         ]
 
     def ctaEHW(self):
         return [
+<<<<<<< HEAD
  """Take extra precautions, if you work or spend time outside. When possible, reschedule strenuous activities to early morning or evening. Know the signs and symptoms of heat exhaustion and heat stroke. Wear light weight and loose fitting clothing when possible and drink plenty of water.\n\n
     To reduce risk during outdoor work, the Occupational Safety and Health Administration recommends scheduling frequent rest breaks in shaded or air conditioned environments. Anyone overcome by heat should be moved to a cool and shaded location.   Heat stroke is an emergency, call 9 1 1.\n\n
     An Excessive Heat Warning means that a prolonged period of dangerously hot temperatures will occur. The combination of hot temperatures and high humidity will combine to create a DANGEROUS SITUATION in which heat illnesses are likely. Drink plenty of fluids, stay in an air-conditioned room, stay out of the sun, and check up on relatives and neighbors.\n\n
@@ -368,6 +461,21 @@ Listen to NOAA Weather Radio or local media for further information.""",
     def ctaFFA(self):
         return [
  """A Flash Flood Watch means that conditions may develop that lead to flash flooding. Flash flooding is a VERY DANGEROUS SITUATION.\n\nYou should monitor later forecasts and be prepared to take action should Flash Flood Warnings be issued.""",
+=======
+ """|*Choose the appropriate CTA(s) below and delete the rest*|
+
+Drink plenty of fluids, stay in an air-conditioned room, stay out of the sun, and check up on relatives and neighbors.
+
+Do not leave young children and pets in unattended vehicles. Car interiors will reach lethal temperatures in a matter of minutes.
+
+Take extra precautions when outside. Wear lightweight and loose fitting clothing. Try to limit  strenuous activities to early morning or evening. Take action when you see symptoms of heat exhaustion and heat stroke.
+
+To reduce risk during outdoor work, the Occupational Safety and Health Administration recommends scheduling frequent rest breaks in shaded or air conditioned environments. Anyone overcome by heat should be moved to a cool and shaded location. Heat stroke is an emergency! Call 9 1 1.
+
+Stay cool, stay hydrated, stay informed.
+
+Monitor the latest forecasts and warnings for updates.""",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         ]
 
     def ctaFGY(self):
@@ -422,9 +530,21 @@ Listen to NOAA Weather Radio or local media for further information.""",
 
     def ctaHTY(self):
         return [
+<<<<<<< HEAD
  """A Heat Advisory means that a period of hot temperatures is expected. The combination of hot temperatures and high humidity will combine to create a situation in which heat illnesses are possible. Drink plenty of fluids, stay in an air-conditioned room, stay out of the sun, and check up on relatives and neighbors.\n\n
     Take extra precautions, if you work or spend time outside. When possible, reschedule strenuous activities to early morning or evening. Know the signs and symptoms of heat exhaustion and heat stroke. Wear light weight and loose fitting clothing when possible and drink plenty of water.\n\n
     To reduce risk during outdoor work, the Occupational Safety and Health Administration recommends scheduling frequent rest breaks in shaded or air conditioned environments. Anyone overcome by heat should be moved to a cool and shaded location.   Heat stroke is an emergency, call 9 1 1.""",
+=======
+"""|*Choose the appropriate CTA(s) below and delete the rest*|
+
+Drink plenty of fluids, stay in an air-conditioned room, stay out of the sun, and check up on relatives and neighbors.
+
+Take extra precautions when outside. Wear lightweight and loose fitting clothing. Try to limit  strenuous activities to early morning or evening. Take action when you see symptoms of heat exhaustion and heat stroke.
+
+To reduce risk during outdoor work, the Occupational Safety and Health Administration recommends scheduling frequent rest breaks in shaded or air conditioned environments. Anyone overcome by heat should be moved to a cool and shaded location. Heat stroke is an emergency! Call 9 1 1.
+
+Monitor the latest forecasts and warnings for updates.""",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         ]
 
     def ctaHUA(self):
@@ -512,11 +632,14 @@ Listen to NOAA Weather Radio or local media for further information.""",
  """A Dense Smoke Advisory means widespread fires will create smoke, limiting visibilities. Inexperienced mariners, especially those operating smaller vessels should avoid navigating in these conditions.""",
         ]
 
+<<<<<<< HEAD
     def ctaRBY(self):
         return [
  """A Small Craft Advisory for rough bar means that wave conditions are expected to be hazardous to small craft in or near harbor entrances.""",
         ]
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def ctaRPS(self):
         return [
  """There is a high risk of rip currents.
@@ -541,11 +664,14 @@ If you become caught in a rip current, yell for help. Remain calm, do not exhaus
  """A Hazardous Seas Warning means hazardous sea conditions are imminent or occurring. Recreational boaters should remain in port, or take shelter until waves subside.  Commercial vessels should prepare for rough seas and consider remaining in port or taking shelter in port until hazardous seas subside.""",
         ]
 
+<<<<<<< HEAD
     def ctaSIY(self):
         return [
  """A Small Craft Advisory for wind means that wind speeds of 21 to 33 knots are expected. Inexperienced mariners, especially those operating smaller vessels should avoid navigating in these conditions.""",
         ]
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def ctaSMY(self):
         return [
  """A Dense Smoke Advisory means widespread fires will create smoke, limiting visibilities. If driving, slow down, use your headlights, and leave plenty of distance ahead of you in case a sudden stop is needed.""",
@@ -571,11 +697,14 @@ If you become caught in a rip current, yell for help. Remain calm, do not exhaus
  """A High Surf Advisory means that high surf will affect beaches in the advisory area, producing localized beach erosion and dangerous swimming conditions.""",
         ]
 
+<<<<<<< HEAD
     def ctaSWY(self):
         return [
  """A Small Craft Advisory for hazardous seas means that waves are expected to be hazardous to small craft. Mariners should avoid shoaling areas. Long period swell can sharpen into large breaking waves in shoaling areas. It is not unusual for waves to break much farther from shoaling areas than is normally experienced. Remember, breaking waves can easily capsize even larger vessels.""",
         ]
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def ctaTRA(self):
         return [
  """A Tropical Storm Watch means sustained winds of |* 34 to 63 kt or 39 to 73 mph or 63 to 118 km per hr *| are possible due to a tropical storm within 48 hours.""",
@@ -601,6 +730,37 @@ If you become caught in a rip current, yell for help. Remain calm, do not exhaus
  """A Freezing Spray Advisory means that light to moderate accumulation of ice is expected on vessels. Operating a vessel in freezing spray can be hazardous. It is recommended that vessels be prepared to take appropriate counter measures before putting to sea or enter the advisory area.""",
         ]
 
+<<<<<<< HEAD
+=======
+    def ctaXHA(self):
+        return [
+"""|*Choose the appropriate CTA(s) below and delete the rest*|
+
+ Drink plenty of fluids, stay in an air-conditioned room, stay out of the sun, and check up on relatives and neighbors.
+
+ Do not leave young children and pets in unattended vehicles. Car interiors will reach lethal temperatures in a matter of minutes.
+
+ Monitor the latest forecasts and warnings for updates.""",
+        ]
+
+    def ctaXHW(self):
+        return [
+ """|*Choose the appropriate CTA(s) below and delete the rest*|
+
+ Drink plenty of fluids, stay in an air-conditioned room, stay out of the sun, and check up on relatives and neighbors.
+
+ Do not leave young children and pets in unattended vehicles. Car interiors will reach lethal temperatures in a matter of minutes.
+
+ Take extra precautions when outside. Wear lightweight and loose fitting clothing. Try to limit  strenuous activities to early morning or evening. Take action when you see symptoms of heat exhaustion and heat stroke.
+
+ To reduce risk during outdoor work, the Occupational Safety and Health Administration recommends scheduling frequent rest breaks in shaded or air conditioned environments. Anyone overcome by heat should be moved to a cool and shaded location. Heat stroke is an emergency! Call 9 1 1.
+
+ Stay cool, stay hydrated, stay informed.
+
+ Monitor the latest forecasts and warnings for updates.""",
+        ]
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def ctaWCA(self):
         return [
  """A Wind Chill Watch means the there is the potential for a combination of very cold air and strong winds to create dangerously low wind chill values. Monitor the latest forecasts and warnings for updates on this situation.""",
@@ -644,7 +804,11 @@ A Winter Storm Warning for sleet means that a winter storm system is impacting t
 A Winter Weather Advisory means that periods of snow, sleet, or freezing rain will cause travel difficulties. Be prepared for slippery roads and limited visibilities, and use caution while driving.
 
 A Winter Weather Advisory for blowing snow means that visibilities will be limited due to strong winds blowing snow around. Use caution when traveling, especially in open areas.
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 A Winter Weather Advisory for sleet means periods of sleet are imminent or occurring. Sleet may cause driving to become extremely dangerous, so be prepared to use caution when traveling.
 
 A Winter Weather Advisory for |*lake effect*| snow and blowing snow means that visibilities will be limited due to a combination of falling and blowing snow. Use caution when traveling, especially in open areas.

@@ -44,6 +44,10 @@ import com.raytheon.viz.pointdata.lookup.IAbstractLookupTable;
  * ------------ ---------- ----------- --------------------------
  * 10/31/2019   71272      K Sunil     Initial Creation
  * 03/02/2020   75528      ksunil      General cleanup
+<<<<<<< HEAD
+=======
+ * 04/10/2020   77336      ksunil      getParamDef shoud return non null
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  *
  * @author ksunil
@@ -197,8 +201,12 @@ public class PlotModelElementDefault implements IPlotModelElement {
 
     @Override
     public PlotParameterDefinition getParamDef() {
+<<<<<<< HEAD
         // TODO Auto-generated method stub
         return null;
+=======
+        return new PlotParameterDefinition();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override

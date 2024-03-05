@@ -30,6 +30,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Objects;
 import java.util.TimeZone;
 
 import org.apache.commons.collections.MultiMap;
@@ -59,14 +60,18 @@ import com.raytheon.uf.common.time.util.TimeUtil;
  * Nov 03, 2015  4857     bsteffen   Set radar on radar volume scan interval
  * Aug 16, 2018  7406     dgilling   Fix off by one error in filterOldForecasts.
  * Aug 19, 2019  67362    ksunil     Code to support previous run -1 and -2.
- * Aug 20, 2020  21952    dhaines    Added support for timematching radar 
- *  			              datasets with negative tilts >= -1
+ * Aug 20, 2020  21952    dhaines    Added support for timematching radar
+ *                                   datasets with negative tilts >= -1
+ * Jul 28, 2021  8611     randerso   Code cleanup. Use isSpatial() vs comparing
+ *                                   levelValue to determine if dataTime is
+ *                                   spatial.
+ * Oct 29, 2022  8959     mapeters   Prevent spatially matching resources with different
+ *                                   level types, cleanup doValTimOverlay variable names
  *
  * </pre>
  *
  * @author chammack
  */
-
 public class TimeMatcher {
 
     // 1 minutes in milliseconds
@@ -299,7 +304,6 @@ public class TimeMatcher {
                 haveFcst = true;
             }
             if (d >= dt2) {
-                ;
             } else if (d == dt) {
                 nn++;
             } else if (d < dt) {
@@ -416,7 +420,6 @@ public class TimeMatcher {
             } else if (d == dt) {
                 nn++;
             } else if (d >= dt2) {
-                ;
             } else if (d < dt) {
                 dt2 = dt;
                 dt = d;
@@ -558,16 +561,7 @@ public class TimeMatcher {
             float tolerance) {
 
         List<DataTime> depictTimes = new ArrayList<>();
-        for (DataTime dt : depictTimeArr) {
-            depictTimes.add(dt);
-        }
-
-        int f, f0;
-        int p, pp, m, n, q;
-        int best;
-        long dtf, dt, dtd, fd;
-        double fo;
-        long vf, v1, v2, vd;
+        Collections.addAll(depictTimes, depictTimeArr);
 
         if (depictTimes.isEmpty()) {
             return new DataTime[0];
@@ -575,8 +569,10 @@ public class TimeMatcher {
 
         DataTime[] loadTimes = new DataTime[frameTimes.length];
 
+        // f0 is first valid frame time index
+        int f0;
         for (f0 = 0; f0 < frameTimes.length; f0++) {
-            if ((frameTimes)[f0].getRefTime().getTime() != 0) {
+            if (frameTimes[f0].getRefTime().getTime() != 0) {
                 break;
             }
         }
@@ -599,10 +595,10 @@ public class TimeMatcher {
                 // Code added by chammack to support gfe time matching
                 for (int i = 0; i < loadTimes.length; i++) {
 
-                    for (int j = 0; j < depictTimeArr.length; j++) {
-                        if (depictTimeArr[j].getValidPeriod().contains(
+                    for (DataTime element : depictTimeArr) {
+                        if (element.getValidPeriod().contains(
                                 frameTimes[i].getValidTime().getTime())) {
-                            loadTimes[i] = depictTimeArr[j];
+                            loadTimes[i] = element;
                             break;
                         }
                     }
@@ -632,155 +628,181 @@ public class TimeMatcher {
         boolean fspatial = frameTimes[f0].isSpatial();
         boolean dspatial = depictTimes.get(0).isSpatial();
         boolean spatial = fspatial && dspatial;
-        if (mode != LoadMode.DPROG_DT && mode != LoadMode.FCST_TIME_MATCH) {
-            ;
-        } else if (spatial) {
-            depictTimes = filterByForecast(
-                    depictTimes.toArray(new DataTime[] {}),
-                    frameTimes[f0].getMatchFcst());
-        } else {
-            byFcst = true;
+        if (mode == LoadMode.DPROG_DT || mode == LoadMode.FCST_TIME_MATCH) {
+            if (spatial) {
+                depictTimes = filterByForecast(
+                        depictTimes.toArray(new DataTime[] {}),
+                        frameTimes[f0].getMatchFcst());
+            } else {
+                byFcst = true;
+            }
         }
 
-        // Sort data times and record length of majorIndex, which is how many
-        // different valid times we have.
-        // validTimeSort sorts primarily on valid time and secondarily on
-        // forecast time. Because valid = reference + forecast, having forecast
-        // time increase within each valid time group means reference time
-        // decreases. Thus the first items in each valid time group, which
-        // are pointed to by majorIndex, are the most recent data for each
-        // valid time.
+        /*
+         * Sort data times and record length of majorIndex, which is how many
+         * different valid times we have. validTimeSort sorts primarily on valid
+         * time and secondarily on forecast time. Because valid = reference +
+         * forecast, having forecast time increase within each valid time group
+         * means reference time decreases. Thus the first items in each valid
+         * time group, which are pointed to by majorIndex, are the most recent
+         * data for each valid time.
+         */
         List<Integer> majorIndex = new ArrayList<>();
         validTimeSort(depictTimes, majorIndex, false);
-        m = majorIndex.size() - 1;
-        n = depictTimes.size();
 
         // Compute time separation of data, frames, calculate time tolerance
-        int ef = frameTimes.length - 1;
-        boolean dataFcsts = false, frameFcsts = false;
+        boolean dataFcsts = false;
+        boolean frameFcsts = false;
 
-        IntrinsicReturnVal rv = intrinsicPeriod(depictTimes, majorIndex,
-                dataFcsts);
-        dt = rv.intrinsicPeriod;
-        dtd = (rv.intrinsicPeriod * 3) / 2;
-        dataFcsts = rv.haveForecasts;
+        IntrinsicReturnVal dIntrinsicReturnVal = intrinsicPeriod(depictTimes,
+                majorIndex, dataFcsts);
+        long toleranceMillis = dIntrinsicReturnVal.intrinsicPeriod;
+        long extToleranceMillis = (toleranceMillis * 3) / 2;
+        dataFcsts = dIntrinsicReturnVal.haveForecasts;
 
-        rv = intrinsicPeriod(frameTimes, frameFcsts);
-        dtf = rv.intrinsicPeriod;
-        frameFcsts = rv.haveForecasts;
+        IntrinsicReturnVal fIntrinsicReturnVal = intrinsicPeriod(frameTimes,
+                frameFcsts);
+        long fIntrinsicPeriod = fIntrinsicReturnVal.intrinsicPeriod;
+        frameFcsts = fIntrinsicReturnVal.haveForecasts;
 
         if (fspatial) {
             frameFcsts = dataFcsts;
-        } else if (dtf > dt) {
-            dt = dtf;
+        } else if (fIntrinsicPeriod > toleranceMillis) {
+            toleranceMillis = fIntrinsicPeriod;
         }
 
         // A1 TimeMatchFunctions.C ~ line 952
-        if (dt > ONE_MINUTE_MS && dt <= ELEVEN_MINUTES_MS && dtf > ONE_MINUTE_MS
-                && dtf <= ELEVEN_MINUTES_MS && isRadarOnRadar()) {
-            if (dtf < dt) {
-                dt = dtf;
+        if (toleranceMillis > ONE_MINUTE_MS
+                && toleranceMillis <= ELEVEN_MINUTES_MS
+                && fIntrinsicPeriod > ONE_MINUTE_MS
+                && fIntrinsicPeriod <= ELEVEN_MINUTES_MS && isRadarOnRadar()) {
+            if (fIntrinsicPeriod < toleranceMillis) {
+                toleranceMillis = fIntrinsicPeriod;
             }
-        } else if (dtf > dt) {
-            dt = dtf;
+        } else if (fIntrinsicPeriod > toleranceMillis) {
+            toleranceMillis = fIntrinsicPeriod;
         }
 
         if (isRadarOnRadar()) {
-            dt = radarOnRadarVolumeScanInterval;
+            toleranceMillis = radarOnRadarVolumeScanInterval;
         }
 
         if (tolerance > 99) {
-            dt = 0x7FFFFFl * 1000l;
+            toleranceMillis = 0x7FFFFFl * 1000l;
         } else if (!isRadarOnRadar()) {
-            dt = (int) (dt * tolerance);
+            toleranceMillis = (int) (toleranceMillis * tolerance);
         }
-        if (dt == 0) {
-            ;
-        } else if (dataFcsts && frameFcsts) {
-            dt--;
-        } else {
-            dt++;
-        }
-
-        if (dt > dtd || dt < dtf
-                || frameTimes[ef].getMatchValid() - latest.getTime() > dtd) {
-            // Three conditions here:
-            // 1) dtd is supposed to provide extra padding compared to dt, so if
-            // dt is bigger then set them equal to avoid reducing the padding.
-            // 2) Clear the extra padding if the acceptable depict time spacing
-            // is not bigger than the frame time spacing
-            // 3) Clear the extra padding if the latest frame time is not within
-            // dtd of the latest depict time
-
-            // setting dtd to dt makes any use of dtd a noop.
-            dtd = dt;
+        if (toleranceMillis != 0) {
+            if (dataFcsts && frameFcsts) {
+                toleranceMillis--;
+            } else {
+                toleranceMillis++;
+            }
         }
 
-        // Try to find match for each frame. Dependent on valid times increasing
-        // monotonically in depictTimes.
-        for (f = f0; f <= ef; f++) {
-            // vf is frame valid time, vd is data valid time
-            if ((frameTimes)[f].getRefTime().getTime() == 0) {
+        if (toleranceMillis > extToleranceMillis
+                || toleranceMillis < fIntrinsicPeriod
+                || frameTimes[frameTimes.length - 1].getMatchValid()
+                        - latest.getTime() > extToleranceMillis) {
+            /*
+             * Three conditions here:
+             *
+             * 1) extToleranceMillis is supposed to provide extra padding
+             * compared to toleranceMillis, so if toleranceMillis is bigger,
+             * then set them equal to avoid reducing the padding.
+             *
+             * 2) Clear the extra padding if the acceptable depict time spacing
+             * is not bigger than the frame time spacing
+             *
+             * 3) Clear the extra padding if the latest frame time is not within
+             * extToleranceMillis of the latest depict time
+             */
+
+            /*
+             * Setting extToleranceMillis to toleranceMillis makes any use of
+             * extToleranceMillis a no-op.
+             */
+            extToleranceMillis = toleranceMillis;
+        }
+
+        /*
+         * Try to find match for each frame. Dependent on valid times increasing
+         * monotonically in depictTimes.
+         */
+        for (int f = f0; f < frameTimes.length; f++) {
+            DataTime frameTime = frameTimes[f];
+            if (frameTime.getRefTime().getTime() == 0) {
                 continue;
             }
-            vf = (frameTimes)[f].getMatchValid() + deltaTime;
+            long fValidTime = frameTime.getMatchValid() + deltaTime;
             // first usable valid time
-            v1 = vf - dt;
+            long minValidTime = fValidTime - toleranceMillis;
             // last usable valid time
-            v2 = vf + dt;
+            long maxValidTime = fValidTime + toleranceMillis;
             if (!isRadarOnRadar() && !dataFcsts && !frameFcsts
-                    && vf > latest.getTime()) {
-                // if we are dealing with live data(without forecast times) then
-                // we want to allow extra time on the latest frame. For example
-                // LAPS data arrives hourly, and radar arrives every 6 minutes,
-                // in this scenario dt is around 36 minutes so 36 minutes after
-                // the hour when radar updates LAPS disappears. This code
-                // changes that so for the latest frame LAPS will be visible for
-                // 90 minutes which is enough time for the next LAPS frame to
-                // come in, this means that the latest frame always has data.
-                v1 = vf - dtd;
+                    && fValidTime > latest.getTime()) {
+                /*
+                 * If we are dealing with live data (without forecast times)
+                 * then we want to allow extra time on the latest frame. For
+                 * example LAPS data arrives hourly, and radar arrives every 6
+                 * minutes, in this scenario toleranceMillis is around 36
+                 * minutes so 36 minutes after the hour when radar updates LAPS
+                 * disappears. This code changes that so for the latest frame
+                 * LAPS will be visible for 90 minutes which is enough time for
+                 * the next LAPS frame to come in, this means that the latest
+                 * frame always has data.
+                 */
+                minValidTime = fValidTime - extToleranceMillis;
             }
-            fo = frameTimes[f].getLevelValue();
-            spatial = fo >= -1.0 && dspatial;
+            spatial = frameTime.isSpatial() && dspatial;
             // have no best match yet
-            best = -1;
-            for (p = 0; p <= m; p++) {
-                pp = majorIndex.get(p);
-                vd = (depictTimes).get(pp).getMatchValid();
-                if (vd > v2) {
+            int bestDTimeIndex = -1;
+            for (int m = 0; m < majorIndex.size(); m++) {
+                int dTimeIndex = majorIndex.get(m);
+                long dValidTime = depictTimes.get(dTimeIndex).getMatchValid();
+                if (dValidTime > maxValidTime) {
                     // past last valid, no more matches possible
                     break;
                 }
-                if (vd < v1) {
+                if (dValidTime < minValidTime) {
                     // before first valid time, no match
                     continue;
                 }
-                if (spatial && depictTimes.get(pp).getLevelValue() != fo) {
+                if (spatial
+                        && Objects.equals(
+                                depictTimes.get(dTimeIndex).getLevelType(),
+                                frameTime.getLevelType())
+                        && !Objects.equals(
+                                depictTimes.get(dTimeIndex).getLevelValue(),
+                                frameTime.getLevelValue())) {
                     continue;
                 }
                 if (byFcst) {
-                    q = p == m ? n : majorIndex.get(p + 1);
-                    fd = frameTimes[f].getMatchFcst();
-                    while (pp < q
-                            && (depictTimes).get(pp).getMatchFcst() != fd) {
-                        pp++;
+                    int maxDTimeIndex = m == majorIndex.size() - 1
+                            ? depictTimes.size()
+                            : majorIndex.get(m + 1);
+                    while (dTimeIndex < maxDTimeIndex && depictTimes
+                            .get(dTimeIndex)
+                            .getMatchFcst() != frameTime.getMatchFcst()) {
+                        dTimeIndex++;
                     }
-                    if (pp >= q) {
+                    if (dTimeIndex >= maxDTimeIndex) {
                         continue;
                     }
                 }
                 // record this match
-                best = pp;
-                if (vd >= vf) {
+                bestDTimeIndex = dTimeIndex;
+                if (dValidTime >= fValidTime) {
                     // past frame time, new matches no better
                     break;
                 }
-                // new matches must be at least as this good
-                v2 = vf + (vf - vd);
+                // new matches must be at least this good
+                long validTimeOffset = fValidTime - dValidTime;
+                maxValidTime = fValidTime + validTimeOffset;
             }
-            if (best >= 0) {
+            if (bestDTimeIndex >= 0) {
                 // put best match into sequence
-                loadTimes[f] = depictTimes.get(best);
+                loadTimes[f] = depictTimes.get(bestDTimeIndex);
             }
 
         }
@@ -802,9 +824,7 @@ public class TimeMatcher {
         int next, check;
 
         List<DataTime> times = new ArrayList<>();
-        for (DataTime t : incomingTimes) {
-            times.add(t);
-        }
+        Collections.addAll(times, incomingTimes);
 
         if (times.isEmpty()) {
             return times;
@@ -1188,7 +1208,7 @@ public class TimeMatcher {
     private static Date makeDprogDtList(List<DataTime> depictTimes,
             long fcstTime, List<DataTime> loadTimes) {
         int p, q, n;
-        long v = 0L;
+        long v;
 
         // check for case of no data available.
         if (depictTimes.isEmpty()) {
@@ -1246,7 +1266,8 @@ public class TimeMatcher {
         Date preferred = new Date(0);
         boolean preferredLast = deltaTime > 0 && forecast > ONE_HUNDRED_DAYS_S;
         long filterTime = forecast < 0 || forecast >= ONE_HUNDRED_DAYS_S
-                ? forecast : ONE_HUNDRED_DAYS_S + forecast;
+                ? forecast
+                : ONE_HUNDRED_DAYS_S + forecast;
         loadTimes.clear();
         if (depictTimes == null || depictTimes.length == 0) {
             return loadTimes.toArray(new DataTime[loadTimes.size()]);
@@ -1267,7 +1288,6 @@ public class TimeMatcher {
             if (filteredTimes.isEmpty()) {
                 return loadTimes.toArray(new DataTime[loadTimes.size()]);
             }
-            ;
             latest = makeValTimSeqList(filteredTimes, latest, loadTimes);
             if (preferredLast) {
                 preferred = new Date(forecast);
@@ -1475,71 +1495,43 @@ public class TimeMatcher {
     public DataTime[] makeOverlayList(DataTime[] depictTimes, Date clock,
             DataTime[] frameTimes, LoadMode mode, long forecast, long deltaTime,
             float tolerance) {
-        // The levelvalue check has been added to allow resources on a single
-        // level to avoid using spatial time matching(This must work for Radar 4
-        // panels)
-        Double levelvalue = null;
-        for (DataTime time : depictTimes) {
-            if (!time.isSpatial() || (levelvalue != null
-                    && levelvalue.doubleValue() != time.getLevelValue())) {
-                levelvalue = null;
-                break;
-            }
-            levelvalue = time.getLevelValue();
-        }
-        if (levelvalue != null) {
-            for (int i = 0; i < depictTimes.length; i++) {
-                depictTimes[i] = depictTimes[i].clone();
-                depictTimes[i].setLevelValue(null);
-            }
-        }
-
         if (depictTimes.length == 0) {
             return new DataTime[0];
         }
+
+        /*
+         * This level value check allows resources on a single level to avoid
+         * using spatial time matching (this must work for Radar 4 panels)
+         */
+        Double levelValue = null;
+        String levelType = null;
+        for (DataTime time : depictTimes) {
+            if (!time.isSpatial() || (levelValue != null
+                    && levelValue.doubleValue() != time.getLevelValue())) {
+                levelValue = null;
+                levelType = null;
+                break;
+            }
+            levelValue = time.getLevelValue();
+            levelType = time.getLevelType();
+        }
+        if (levelValue != null) {
+            /*
+             * Single level resource, clear levels so that we don't do spatial
+             * matching. The levels are restored at the end of this method.
+             */
+            for (int i = 0; i < depictTimes.length; i++) {
+                depictTimes[i] = depictTimes[i].clone();
+                depictTimes[i].clearLevel();
+            }
+        }
+
         long filterTime = forecast < 0 || forecast >= ONE_HUNDRED_DAYS_S
-                ? forecast : ONE_HUNDRED_DAYS_S + forecast;
+                ? forecast
+                : ONE_HUNDRED_DAYS_S + forecast;
 
         // handle case of static data
-        DataTime[] loadTimes = new DataTime[0];
-        // if (depictTimes.length == 1 && depictTimes[0].isStatic()) {
-        // loadTimes = new DataTime[frameTimes.length];
-        // for (int i = 0; i < frameTimes.length; i++)
-        // loadTimes[i] = depictTimes[0];
-        // radarOnRadarYes = false;
-        // vbOnNonvbYes = false;
-        // return loadTimes;
-        // }
-
-        // Check for case of special matching for the latest overlay data set.
-        // Need default time options and non-forecast VB prod overlaid on
-        // non-forecast non-VB prod.
-        // while (vbOnNonvbYes) {
-        // vbOnNonvbYes = false;
-        // float dtol = tolerance - DEFAULT_TOLERANCE_FACTOR;
-        // if (dtol > 0.0001 || dtol < -0.0001 || deltaTime != 0)
-        // break;
-        // if (mode != LoadMode.NO_BACKFILL && mode != LoadMode.LATEST
-        // && mode != LoadMode.VALID_TIME_SEQ && mode != LoadMode.STD
-        // && mode != LoadMode.PROG_LOOP)
-        // break;
-        // int i;
-        // for (i = depictTimes.length - 1; i >= 0; i--)
-        // if (depictTimes[i].getMatchFcst() != 0
-        // || depictTimes[i].getRefTime().getTime() > clock
-        // .getTime())
-        // break;
-        // if (i >= 0)
-        // break;
-        // for (i = frameTimes.length - 1; i >= 0; i--)
-        // if (frameTimes[i].getMatchFcst() != 0
-        // || frameTimes[i].getRefTime().getTime() > clock
-        // .getTime())
-        // break;
-        // if (i < 0)
-        // vbOnNonvbYes = true;
-        // break;
-        // }
+        DataTime[] loadTimes = {};
 
         // filter the able to be depicted times by the clock setting.
         Date latest;
@@ -1597,7 +1589,7 @@ public class TimeMatcher {
                         filteredTimes.get(filteredTimes.size() - 1));
             }
             break;
-        case ANALYSIS_LOOP:
+        case ANALYSIS_LOOP: // NOSONAR
             // intentional fall through
             forecast = 0;
         case INVENTORY:
@@ -1629,11 +1621,11 @@ public class TimeMatcher {
             break;
         }
         // radarOnRadarYes = false; // A2 uses setRadarOnRadar().
-        // If we stripped the levelvalue, restore it.
-        if (levelvalue != null) {
+        // If we stripped the level value, restore it.
+        if (levelValue != null) {
             for (DataTime time : loadTimes) {
                 if (time != null) {
-                    time.setLevelValue(levelvalue);
+                    time.setLevel(levelValue, levelType);
                 }
             }
         }
@@ -1702,26 +1694,26 @@ public class TimeMatcher {
         // Add any of the auto intervals that fall within the range of
         // data intervals.
         int m = intervals.size() - 1;
-        for (int a = 0; a < autoIntervals.length; a++) {
-            if (autoIntervals[a] <= minInterval
-                    || autoIntervals[a] > minInterval * 60) {
+        for (long autoInterval : autoIntervals) {
+            if (autoInterval <= minInterval
+                    || autoInterval > minInterval * 60) {
                 continue;
             }
             int aa;
             for (aa = 0; aa <= m; aa++) {
-                if (autoIntervals[a] <= intervals.get(aa)) {
+                if (autoInterval <= intervals.get(aa)) {
                     break;
                 }
             }
             if (aa > m) {
-                if (autoIntervals[a] < 1.5 * intervals.get(m)) {
+                if (autoInterval < 1.5 * intervals.get(m)) {
                     continue;
                 }
-                intervals.add(autoIntervals[a]);
-            } else if (autoIntervals[a] == intervals.get(aa)) {
+                intervals.add(autoInterval);
+            } else if (autoInterval == intervals.get(aa)) {
                 continue;
             } else {
-                intervals.add(aa, autoIntervals[a]);
+                intervals.add(aa, autoInterval);
             }
             m++;
         }
@@ -1738,10 +1730,8 @@ public class TimeMatcher {
                 intervals.add(a, -intervals.get(m));
                 a++;
             }
-        } else {
-            if (oneMin) {
-                intervals.add(1, 60L);
-            }
+        } else if (oneMin) {
+            intervals.add(1, 60L);
         }
         return intervals;
     }

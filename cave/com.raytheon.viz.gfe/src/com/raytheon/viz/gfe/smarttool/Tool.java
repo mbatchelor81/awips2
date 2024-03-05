@@ -87,6 +87,11 @@ import jep.JepException;
  * Feb 13, 2018  6906     randerso  Updated for merged SmartToolController
  * Feb 19, 2018  7222     mapeters  Moved handling of SmartScript.cancel() back
  *                                  to here, fixed error message string check
+<<<<<<< HEAD
+=======
+ * Aug 20, 2021  21543    alockleig Added try/finally block in cleanup() to
+ *                                  ensure unlocking of Parm lock.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -101,7 +106,11 @@ public class Tool {
     private static final String CANCEL_MSG = "Cancel: Cancel";
 
     private final IPerformanceStatusHandler perfLog = PerformanceStatus
+<<<<<<< HEAD
             .getHandler("GFE:");
+=======
+            .getHandler("GFE");
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private final IParmManager parmMgr;
 
@@ -532,7 +541,10 @@ public class Tool {
                 } else {
                     trueEditArea = editArea;
                 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 try {
                     handlePreAndPostProcess("preProcessGrid", gridTimeRange,
                             timeRange, trueEditArea, dataMode);
@@ -625,6 +637,10 @@ public class Tool {
             if (first) {
                 try {
                     parmToEdit.startParmEdit(new Date[] { timeInfluence });
+<<<<<<< HEAD
+=======
+                    startedParmEdit = true;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 } catch (GFEOperationFailedException e) {
                     statusHandler.handle(Priority.PROBLEM,
                             "Error during start parm edit for " + toolName
@@ -633,7 +649,11 @@ public class Tool {
                             e);
                     return;
                 }
+<<<<<<< HEAD
                 startedParmEdit = true;
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             } else {
                 try {
                     parmToEdit.extendParmEdit(new Date[] { timeInfluence });
@@ -678,6 +698,7 @@ public class Tool {
     private void cleanUp(Parm parmToEdit, boolean save, String toolname,
             MissingDataMode dataMode) {
         if (parmToEdit != null) {
+<<<<<<< HEAD
             inputParm.setMutable(saveMutableFlag);
             // If modified parm is not loaded, save it automatically
             if (save) {
@@ -696,6 +717,29 @@ public class Tool {
             if (startedParmEdit) {
                 parmToEdit.endParmEdit();
             }
+=======
+            try {
+                inputParm.setMutable(saveMutableFlag);
+                // If modified parm is not loaded, save it automatically
+                if (save) {
+                    boolean inputParmInDisplayedParms = false;
+                    Parm[] parms = parmMgr.getDisplayedParms();
+                    for (Parm p : parms) {
+                        if (p.equals(inputParm)) {
+                            inputParmInDisplayedParms = true;
+                            break;
+                        }
+                    }
+                    if (!inputParmInDisplayedParms) {
+                        parmMgr.saveParm(inputParm);
+                    }
+                }
+            } finally {
+                if (startedParmEdit) {
+                    parmToEdit.endParmEdit();
+                }
+            }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         parmMgr.deleteTemporaryParms();
 

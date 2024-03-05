@@ -23,14 +23,21 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.LinearRing;
+import org.locationtech.jts.geom.Point;
+import org.locationtech.jts.geom.Polygon;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 
 import com.raytheon.uf.common.dataplugin.PluginDataObject;
@@ -43,6 +50,7 @@ import com.raytheon.uf.common.pointdata.PointDataView;
 import com.raytheon.uf.common.time.DataTime;
 import com.raytheon.uf.common.time.ISimulatedTimeChangeListener;
 import com.raytheon.uf.common.time.SimulatedTime;
+import com.raytheon.uf.common.time.TimeRange;
 import com.raytheon.uf.common.time.util.TimeUtil;
 import com.raytheon.uf.viz.core.AbstractTimeMatcher;
 import com.raytheon.uf.viz.core.DrawableString;
@@ -62,11 +70,6 @@ import com.raytheon.uf.viz.core.rsc.capabilities.MagnificationCapability;
 import com.raytheon.uf.viz.core.rsc.capabilities.OutlineCapability;
 import com.raytheon.uf.viz.core.time.TimeMatchingJob;
 import com.raytheon.viz.pointdata.PointDataRequest;
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.GeometryFactory;
-import org.locationtech.jts.geom.LinearRing;
-import org.locationtech.jts.geom.Point;
-import org.locationtech.jts.geom.Polygon;
 
 /**
  * Resource for Center Weather Advisory
@@ -85,14 +88,18 @@ import org.locationtech.jts.geom.Polygon;
  * Nov 05, 2015  5070     randerso  Adjust font sizes for dpi scaling
  * Nov 28, 2017  5863     bsteffen  Change dataTimes to a NavigableSet
  * Mar 13, 2018  6657     tgurney   Fix resource name
- *
+ * May 03, 2022  DR22985  aghanava  Modified displayedDataTime to use current
+ *                                  frame's time to avoid null values when
+ *                                  painting.
+ * May 13, 2022  DR22985  aghanava  Added a boolean to CWAFrame to limit
+ *                                  point data requests.
  * </pre>
  *
  * @author jsanchez
  */
 public class CWAResource
-        extends AbstractVizResource<CWAResourceData, MapDescriptor>
-        implements ISimulatedTimeChangeListener {
+extends AbstractVizResource<CWAResourceData, MapDescriptor>
+implements ISimulatedTimeChangeListener {
 
     private static final String LATS = "latitudes";
 
@@ -109,6 +116,8 @@ public class CWAResource
     private static final String CWA_NAME = "CONUS Center Weather Advisories";
 
     private static final String REF_TIME = "refTime";
+
+    private static final String END_RANGE = "endRange";
 
     protected static RefreshTimerTask refreshTask;
 
@@ -133,16 +142,19 @@ public class CWAResource
 
         private List<DrawableString> strings;
 
+        private boolean needsUpdate;
+
         private CWAFrame(DataTime time) {
             this.time = time;
             strings = new ArrayList<>();
+            this.needsUpdate = false;
         }
 
         @Override
         public void paint(IGraphicsTarget target, PaintProperties paintProps)
                 throws VizException {
             synchronized (this) {
-                if (wfs == null) {
+                if (wfs == null || needsUpdate) {
                     updateFrame(target, paintProps);
                 }
             }
@@ -163,27 +175,42 @@ public class CWAResource
             target.drawStrings(strings);
         }
 
+        private boolean hasExpiredCWAs(long currentTime) {
+            if (this.pdc != null) {
+                long[] endTimes = (long[]) this.pdc.getData(END_RANGE);
+
+                for (long endTime : endTimes) {
+                    if (endTime < currentTime) {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
         private void updateFrame(IGraphicsTarget target,
                 PaintProperties paintProps) throws VizException {
             Map<String, RequestConstraint> constraints = new HashMap<>();
-            String startTime = TimeUtil.formatToSqlTimestamp(time.getRefTime());
+            String currentTime = TimeUtil.formatToSqlTimestamp(
+                    paintProps.getDataTime().getRefTime());
 
-            // Select CWAs whose valid period contains this frame's start time.
+            // Select CWAs whose valid period contains the current frame's time.
             RequestConstraint constraint = new RequestConstraint();
             constraint.setConstraintType(ConstraintType.LESS_THAN_EQUALS);
-            constraint.setConstraintValue(startTime);
+            constraint.setConstraintValue(currentTime);
             constraints.put(PluginDataObject.STARTTIME_ID, constraint);
 
             constraint = new RequestConstraint();
             constraint.setConstraintType(ConstraintType.GREATER_THAN_EQUALS);
-            constraint.setConstraintValue(startTime);
+            constraint.setConstraintValue(currentTime);
             constraints.put(PluginDataObject.ENDTIME_ID, constraint);
 
             // Request the point data
             this.pdc = PointDataRequest.requestPointDataAllLevels(
                     (DataTime) null,
                     resourceData.getMetadataMap().get("pluginName")
-                            .getConstraintValue(),
+                    .getConstraintValue(),
                     getParameters(), null, constraints);
 
             if (wfs != null) {
@@ -230,7 +257,7 @@ public class CWAResource
                     String eventId = pdv.getString(EVENT_ID);
                     DrawableString string = new DrawableString(eventId,
                             getCapability(ColorableCapability.class)
-                                    .getColor());
+                            .getColor());
                     string.font = font;
                     double[] loc = descriptor.worldToPixel(
                             new double[] { rightMost.x, rightMost.y });
@@ -276,9 +303,7 @@ public class CWAResource
                 }
             }
 
-            List<PointDataView> pdvs = new ArrayList<>();
-            pdvs.addAll(eventIdMap.values());
-
+            List<PointDataView> pdvs = new ArrayList<>(eventIdMap.values());
             return pdvs;
         }
 
@@ -382,22 +407,88 @@ public class CWAResource
 
     @Override
     public String getName() {
-        return CWA_NAME;
+        DataTime dataTime = this.descriptor.getFramesInfo().getCurrentFrame();
+        return CWA_NAME + " " + dataTime.getLegendString();
+    }
+
+    @Override
+    public boolean isTimeAgnostic() {
+        return true;
     }
 
     @Override
     protected void paintInternal(IGraphicsTarget target,
             PaintProperties paintProps) throws VizException {
-        displayedDataTime = paintProps.getDataTime();
+        displayedDataTime = this.descriptor.getFramesInfo().getCurrentFrame();
         if (displayedDataTime == null) {
             return;
         }
 
+        cleanupData();
+
+        CWAFrame frame;
         synchronized (frameMap) {
-            CWAFrame frame = frameMap.get(displayedDataTime);
-            if (frame != null) {
-                frame.paint(target, paintProps);
+            /*
+             * Search for the latest valid CWAFrame in the frameMap.
+             * The latest valid CWAFrame should contain all of the valid CWAs
+             * that contain the current frame's time.
+             */
+            DataTime latestValidDataTime = null;
+            for (Entry<DataTime, CWAFrame> entry : frameMap.entrySet()) {
+                DataTime dataTime = entry.getKey();
+                if (dataTime.getValidPeriod().contains(
+                        displayedDataTime.getRefTime())) {
+                    if (latestValidDataTime == null
+                            || dataTime.getRefTime().compareTo(
+                                    latestValidDataTime.getRefTime()) > 0) {
+                        latestValidDataTime = dataTime;
+                    }
+                }
             }
+
+            if (latestValidDataTime != null) {
+                frame = frameMap.get(latestValidDataTime);
+                if (frame.hasExpiredCWAs(displayedDataTime.
+                        getRefTime().getTime())) {
+                    frame.needsUpdate = true;
+                }
+            } else {
+                /*
+                 * If a valid CWAFrame does not exist, valid CWAs will not be
+                 * displayed if their start time is before the first frame's
+                 * time in the time-match basis. To handle this case, we will
+                 * construct a new CWAFrame to paint.
+                 */
+                frame = new CWAFrame(displayedDataTime);
+                frameMap.put(displayedDataTime, frame);
+            }
+        }
+
+        paintProps.setDataTime(displayedDataTime);
+        frame.paint(target, paintProps);
+    }
+
+    protected void cleanupData() {
+        List<DataTime> toRemove = new ArrayList<>();
+
+        DataTime[] dataTimes = this.descriptor.getFramesInfo().getFrameTimes();
+        Date timeMatchStart = dataTimes[0].getRefTime();
+        Date timeMatchEnd = dataTimes[dataTimes.length-1].getRefTime();
+        TimeRange timeMatchPeriod = new TimeRange(
+                timeMatchStart, timeMatchEnd);
+
+        // remove invalid CWA frames from frameMap
+        synchronized (frameMap) {
+            for (Entry<DataTime, CWAFrame> entry : frameMap.entrySet()) {
+                DataTime dataTime = entry.getKey();
+                if (!timeMatchPeriod.contains(dataTime.getRefTime())) {
+                    toRemove.add(dataTime);
+                }
+            }
+        }
+
+        for (DataTime dataTime : toRemove) {
+            remove(dataTime);
         }
     }
 
@@ -527,10 +618,10 @@ public class CWAResource
 
     private String[] getParameters() {
         return new String[] { LATS, LONS, EVENT_ID, DIMENSION, TEXT,
-                NUM_OF_POINTS, REF_TIME };
+                NUM_OF_POINTS, REF_TIME, END_RANGE };
     }
 
-    public class CoordinateComparator implements Comparator<Coordinate> {
+    public static class CoordinateComparator implements Comparator<Coordinate> {
 
         @Override
         public int compare(Coordinate o1, Coordinate o2) {

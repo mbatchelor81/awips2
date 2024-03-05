@@ -68,6 +68,10 @@ import com.raytheon.viz.radar.rsc.RadarResourceData;
  * Nov 28, 2017  16763    jdynina   Acknowledge SPG for OP Mode
  * Mar 26, 2018  6711     randerso  Changed to use methods/fields from
  *                                  RadarUtil/RadarConstants. Code cleanup.
+<<<<<<< HEAD
+=======
+ * Feb 19, 2021  22417    jdynina   Added VMI to VCP Supplemental
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -139,13 +143,21 @@ public class RadarGSMResource extends AbstractRadarResource<RadarXYDescriptor> {
             if (mode == 1) {
                 if (vcp == 80) {
                     temp = "Hazardous Mode (clear air)";
+<<<<<<< HEAD
                 } else if (vcp ==90) {
+=======
+                } else if (vcp == 90) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     temp = "Monitor Mode (clear air)";
                 }
             } else if (mode == 2) {
                 if (vcp == 80) {
                     temp = "Hazardous Mode";
+<<<<<<< HEAD
                 } else if (vcp ==90) {
+=======
+                } else if (vcp == 90) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     temp = "Monitor Mode";
                 }
             }
@@ -159,7 +171,20 @@ public class RadarGSMResource extends AbstractRadarResource<RadarXYDescriptor> {
                     RadarConstants.vcpInfoStr);
             vcpInfoString = vcpInfoString.replace("{n}",
                     String.valueOf(message.getNumSupplementalCuts()));
+<<<<<<< HEAD
             drawNexradString("VCP Supplemental Info = " + vcpInfoString,
+=======
+            String vmiString = "";
+            if (message.getBuildVersion() >= 210) {
+                if (((short) message.getVcpInfo() & (1 << 10)) != 0) {
+                    vmiString = ", VMI=1.0 m/s";
+                } else {
+                    vmiString = ", VMI=0.5 m/s";
+                }
+            }
+            drawNexradString(
+                    "VCP Supplemental Info = " + vcpInfoString + vmiString,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     xOffset, yOffset, target, color);
             yOffset += lineSpace;
             String rdaAvailString = RadarUtil.formatBits(
@@ -394,7 +419,11 @@ public class RadarGSMResource extends AbstractRadarResource<RadarXYDescriptor> {
             box3.addPoint(xOffset, yOffset + boxHeight);
             box3.addPoint(xOffset, yOffset);
             box3.basics.color = color;
+<<<<<<< HEAD
             ;
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             lines.add(box3);
 
             target.drawLine(lines.toArray(new DrawableLine[0]));

@@ -21,8 +21,13 @@ package com.raytheon.uf.viz.preciprate;
 
 import com.raytheon.viz.core.units.IUnitRegistrar;
 
+<<<<<<< HEAD
 import tec.uom.se.format.SimpleUnitFormat;
 import tec.uom.se.unit.Units;
+=======
+import tech.units.indriya.format.SimpleUnitFormat;
+import tech.units.indriya.unit.Units;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * TODO Add Description

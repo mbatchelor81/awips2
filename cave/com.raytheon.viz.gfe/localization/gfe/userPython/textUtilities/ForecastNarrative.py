@@ -29,6 +29,15 @@
 #
 # Author: hansen
 # ----------------------------------------------------------------------------
+<<<<<<< HEAD
+=======
+
+##
+# This is a base file that is not intended to be overridden.
+##
+
+# ----------------------------------------------------------------------------
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 # SOFTWARE HISTORY
 #
@@ -36,6 +45,7 @@
 # ------------- -------- --------- ---------------------------------------------
 # Feb 06, 2017  5959     randerso  Removed Java .toString() calls 
 # Aug 31, 2020  8221     randerso  Fix bug introduced by Python 3 updates
+<<<<<<< HEAD
 #
 ##
 
@@ -43,6 +53,12 @@
 # This is a base file that is not intended to be overridden.
 ##
 
+=======
+# Dec 17, 2021  8342     sharbison Changes for Performance Logging.
+#
+##
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import time, types
 import TextRules
 import SampleAnalysis
@@ -61,6 +77,10 @@ from java.util import ArrayList
 import copy
 import traceback
 import JUtil
+<<<<<<< HEAD
+=======
+from PerformanceStatusHandler import PerformanceStatusHandler
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 class Node:
     def __init__(self, childList, methodList):
@@ -440,7 +460,11 @@ class StatisticsDictionary(TextRules.TextRules):
                     for stats, subRange in value:
                         #print stats, subRange
                         temp.append((subRange.startTime(), (stats, subRange)))
+<<<<<<< HEAD
                     temp.sort()
+=======
+                    temp.sort(key=lambda t:t[0])
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     value = []
                     #print "after sort"
                     lastRange = None
@@ -506,6 +530,10 @@ class ForecastNarrative(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         #  Otherwise returns a text string indicating the problem
 
         # General set up
+<<<<<<< HEAD
+=======
+        perfLog = PerformanceStatusHandler("GFE")
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         self.__ut = argDict["utility"]
         self.__narrativeDefinition = narrativeDefinition
         self.__timeRange = timeRange
@@ -555,7 +583,11 @@ class ForecastNarrative(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             self.progressMessage(.3, 80, "Sampling Data from Server -- please wait...")
             self.__sampler = argDict["ifpClient"].sampleRequest(self.__samplerRequests)
         else:
+<<<<<<< HEAD
             self.progressMessage(.3, 80, "Sampling Data -- please wait...")                        
+=======
+            self.progressMessage(.3, 80, "Sampling Data -- please wait...")
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             self.__sampler = HistoSampler(argDict["ifpClient"].getJavaClient(), self.__samplerRequests)
         print("Time to Sample Data", time.time()-time1)
         #if error is not None:
@@ -565,10 +597,17 @@ class ForecastNarrative(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         # Call SampleAnalysis methods to complete statisticsDict
         # and instantiate the StatisticsDictionary class
         #  Sets up self.__statisticsDict
+<<<<<<< HEAD
         time1 = time.time()
         self.progressMessage(.6, 80, "Analyzing Data -- please wait...")
         error = self.__createStatisticsDictionary(argDict)
         print("Time to Get Statistics", time.time()-time1)
+=======
+        t0 = time.perf_counter()
+        self.progressMessage(.6, 80, "Analyzing Data -- please wait...")
+        error = self.__createStatisticsDictionary(argDict)
+        perfLog.logDuration("Sampling and analyzing forecast narrative statistics", time.perf_counter()-t0)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         #error = self.__createStatisticsDictionary0(argDict)
         if error is not None:
             return error
@@ -726,7 +765,10 @@ class ForecastNarrative(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         #          self.__statisticsDict
         #
         # Set up self.__compList
+<<<<<<< HEAD
         time1 = time.time()
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         narrativeDef = self.__ut.set(definition,"narrativeDef", None)
         # Get list of tuples: forecastType, timeRange, definition
         self.__compList = self.__breakOutTimeRange(
@@ -738,12 +780,18 @@ class ForecastNarrative(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         #print "Time to make compList", time.time() - time1
 
         # Make samplerRequests
+<<<<<<< HEAD
         firstTime = 1
         samplerRequests = ArrayList()
         statisticsDict = {}
         moreAreas = []
 
         time1 = time.time()
+=======
+        samplerRequests = ArrayList()
+        statisticsDict = {}
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         for compName, timeRange, compDefinition in self.__compList:
             # Add the analysisList entries to the sampleList and statisticsDict
             # for this component
@@ -1048,10 +1096,13 @@ class ForecastNarrative(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                 stats = method(parmHisto, timeRange, componentName, args)
             else:
                 stats = method(parmHisto, timeRange, componentName)
+<<<<<<< HEAD
             parmName = parmHisto.parmID().compositeNameUI()
             #if element == "SnowAmt":
             #    print "Called method", parmName, editArea.id().name(), method.__name__, timeRange
             #    print "    Result", stats
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return stats
 
     def __convertStatistics(self, tree, node, productSelf, statsByRange, dataType,

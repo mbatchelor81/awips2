@@ -32,8 +32,11 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
+<<<<<<< HEAD
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Font;
@@ -68,6 +71,10 @@ import com.raytheon.viz.ui.dialogs.CaveJFACEDialog;
  * ------------- -------- --------- ----------------------
  * Feb 19, 2015  4300     randerso  Initial creation
  * Jan 07, 2019  7704     randerso  Fix IN_PROGRESS icons
+<<<<<<< HEAD
+=======
+ * Dec 01, 2023  2036681  dgilling  Fix IN_PROGRESS icons for RHEL8.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -78,9 +85,15 @@ public class ServiceBackupStatusDlg extends CaveJFACEDialog {
     private final transient IUFStatusHandler statusHandler = UFStatus
             .getHandler(ServiceBackupStatusDlg.class);
 
+<<<<<<< HEAD
     private static enum StatusIcons {
         NOT_STARTED("…", "Not started", SWT.COLOR_WIDGET_FOREGROUND),
         IN_PROGRESS("⭹⭽⭶⭺", "In progress", SWT.COLOR_WIDGET_FOREGROUND),
+=======
+    private enum StatusIcons {
+        NOT_STARTED("…", "Not started", SWT.COLOR_WIDGET_FOREGROUND),
+        IN_PROGRESS("", "In progress", SWT.COLOR_WIDGET_FOREGROUND),
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         SUCCESS("✔", "Successful", SWT.COLOR_GREEN),
         FAILED("✘", "Failed", SWT.COLOR_RED);
 
@@ -92,7 +105,11 @@ public class ServiceBackupStatusDlg extends CaveJFACEDialog {
 
         private int cycle = 0;
 
+<<<<<<< HEAD
         private StatusIcons(String symbol, String toolTip, int color) {
+=======
+        StatusIcons(String symbol, String toolTip, int color) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             this.symbol = symbol;
             this.toolTip = toolTip;
             this.color = color;
@@ -189,6 +206,7 @@ public class ServiceBackupStatusDlg extends CaveJFACEDialog {
         return site;
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      *
@@ -196,10 +214,13 @@ public class ServiceBackupStatusDlg extends CaveJFACEDialog {
      * org.eclipse.jface.window.Window#configureShell(org.eclipse.swt.widgets
      * .Shell)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     protected void configureShell(Shell newShell) {
         super.configureShell(newShell);
         newShell.setText(this.site + " Service Backup Status");
+<<<<<<< HEAD
         newShell.addDisposeListener(new DisposeListener() {
             @Override
             public void widgetDisposed(DisposeEvent e) {
@@ -210,16 +231,28 @@ public class ServiceBackupStatusDlg extends CaveJFACEDialog {
                 if (executor != null) {
                     executor.cancel();
                 }
+=======
+        newShell.addDisposeListener(e -> {
+            if (bigFont != null) {
+                bigFont.dispose();
+            }
+
+            if (executor != null) {
+                executor.cancel();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         });
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      *
      * @see org.eclipse.jface.dialogs.Dialog#getInitialLocation(org.eclipse.swt.
      * graphics .Point)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     protected Point getInitialLocation(Point initialSize) {
         Rectangle bounds = getParentShell().getBounds();
@@ -242,6 +275,7 @@ public class ServiceBackupStatusDlg extends CaveJFACEDialog {
         return location;
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      *
@@ -249,6 +283,8 @@ public class ServiceBackupStatusDlg extends CaveJFACEDialog {
      * com.raytheon.viz.ui.dialogs.CaveJFACEDialog#createDialogArea(org.eclipse
      * .swt.widgets.Composite)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     protected Control createDialogArea(Composite parent) {
         final Composite comp = (Composite) super.createDialogArea(parent);
@@ -291,9 +327,12 @@ public class ServiceBackupStatusDlg extends CaveJFACEDialog {
         return comp;
     }
 
+<<<<<<< HEAD
     /**
      *
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private void createStatusControls() {
         controls.clear();
         for (AbstractSbuTask task : tasks) {
@@ -330,6 +369,7 @@ public class ServiceBackupStatusDlg extends CaveJFACEDialog {
         }
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      *
@@ -337,28 +377,36 @@ public class ServiceBackupStatusDlg extends CaveJFACEDialog {
      * org.eclipse.jface.dialogs.Dialog#createButtonsForButtonBar(org.eclipse
      * .swt.widgets.Composite)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     protected void createButtonsForButtonBar(Composite parent) {
         createButton(parent, IDialogConstants.CANCEL_ID,
                 IDialogConstants.CANCEL_LABEL, false).setEnabled(false);
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      *
      * @see org.eclipse.jface.dialogs.Dialog#cancelPressed()
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     protected void cancelPressed() {
         cancelJob();
         getButton(IDialogConstants.CANCEL_ID).setEnabled(false);
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      *
      * @see com.raytheon.viz.ui.dialogs.CaveJFACEDialog#open()
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public int open() {
         int status = super.open();
@@ -368,11 +416,14 @@ public class ServiceBackupStatusDlg extends CaveJFACEDialog {
         return status;
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      *
      * @see org.eclipse.jface.dialogs.Dialog#close()
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public boolean close() {
         if (executor.isAlive()) {
@@ -477,5 +528,8 @@ public class ServiceBackupStatusDlg extends CaveJFACEDialog {
             }
         }
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

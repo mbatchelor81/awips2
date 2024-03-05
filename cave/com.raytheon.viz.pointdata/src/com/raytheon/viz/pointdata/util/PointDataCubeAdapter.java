@@ -66,6 +66,10 @@ import com.raytheon.viz.pointdata.PointDataRequest;
  * Feb 09, 2016  5283     nabowle   Remove NGM MOS support.
  * Jan 04, 2018  6861     njensen   Added qc support
  * Jul 19, 2018  7355     mapeters  Re-add fssobs support
+<<<<<<< HEAD
+=======
+ * Jun 04, 2021  DCS22300 dmurray   Add back in profiler plugin
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -83,7 +87,11 @@ public class PointDataCubeAdapter extends DefaultDataCubeAdapter {
             "modelsounding", "bufrssmi", "lsr", "sfcobs", "goessounding",
             "bufrascat", "poessounding", "bufrua", "ldadmesonet", "ldadhydro",
             "bufrmosAVN", "bufrmosETA", "bufrmosGFS", "bufrmosHPC",
+<<<<<<< HEAD
             "bufrmosLAMP", "bufrmosMRF", "qc", "fssobs" };
+=======
+            "bufrmosLAMP", "bufrmosMRF", "qc", "fssobs", "profiler" };
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     protected AbstractPointDataInventory inventory;
 

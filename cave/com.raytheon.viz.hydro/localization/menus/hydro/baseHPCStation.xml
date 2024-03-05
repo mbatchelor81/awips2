@@ -24,7 +24,11 @@
         of the file. 
     -->
 <menuTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
     <contribute xsi:type="subMenu" menuText="WPC Station Data">
+=======
+    <contribute xsi:type="subMenu" menuText="HPC Station Data">
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <contribute xsi:type="bundleItem" file="bundles/BufrMosPlot.xml" menuText="MaxT/MinT"
             id="HPCmaxTminT">
             <substitute key="model" value="HPC" />

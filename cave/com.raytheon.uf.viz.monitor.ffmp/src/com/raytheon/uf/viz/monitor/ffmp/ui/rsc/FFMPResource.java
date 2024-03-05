@@ -159,7 +159,11 @@ import com.raytheon.uf.viz.monitor.ffmp.ui.thread.UpdateLoadJob;
 import com.raytheon.viz.ui.input.EditableManager;
 import com.raytheon.viz.ui.input.InputAdapter;
 
+<<<<<<< HEAD
 import tec.uom.se.quantity.Quantities;
+=======
+import tech.units.indriya.quantity.Quantities;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Resource to display FFMP data

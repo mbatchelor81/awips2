@@ -26,7 +26,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.measure.Unit;
+<<<<<<< HEAD
 import javax.measure.format.ParserException;
+=======
+import javax.measure.format.MeasurementParseException;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.uf.common.dataplugin.HDF5Util;
 import com.raytheon.uf.common.dataplugin.radar.RadarDataKey;
@@ -42,8 +46,13 @@ import com.raytheon.uf.common.datastorage.StorageException;
 import com.raytheon.uf.common.wxmath.ZToPsa;
 import com.raytheon.uf.viz.core.exception.VizException;
 
+<<<<<<< HEAD
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.format.SimpleUnitFormat;
+=======
+import tech.units.indriya.AbstractUnit;
+import tech.units.indriya.format.SimpleUnitFormat;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * TODO Add Description
@@ -147,7 +156,11 @@ public class DmdTools {
         try {
             return (Unit<?>) SimpleUnitFormat.getInstance(SimpleUnitFormat.Flavor.ASCII).parseObject(
                     getUnitString(record, featureId, level, parameter), new ParsePosition(0) );
+<<<<<<< HEAD
         } catch (ParserException e) {
+=======
+        } catch (MeasurementParseException e) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return AbstractUnit.ONE;
         }
     }

@@ -14,6 +14,11 @@
 #  Feb 12,2014 17058      ryu          Extend converter for Collections$EmptyList objects.
 #  Apr 23, 2015 4259      njensen      Updated for new JEP API
 #  Jul 29,2015 17770      lshi         Added TY.A TY.W to tropicalHaz
+<<<<<<< HEAD
+=======
+#  Oct 05,2023 2028154    alockleigh   Added check in setUI to make sure MakeHazardDialog
+#                                      is not disposed before proceeding.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 # Author: randerso
 # ----------------------------------------------------------------------------
@@ -88,7 +93,11 @@ class Procedure (SmartScript.SmartScript):
         # run the Java/SWT event loop
         try:
             dismiss = False
+<<<<<<< HEAD
             while not dismiss:
+=======
+            while (not dismiss) and (not self.__dlg.isDisposed()):
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 args = JUtil.javaObjToPyVal(self.__dlg.runFromPython(), converter)
                 dismiss = True
                 # if args is None, then Cancel was pressed

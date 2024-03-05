@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -24,6 +36,10 @@ import javax.measure.UnitConverter;
 import com.raytheon.uf.common.colormap.prefs.ColorMapParameters;
 import com.raytheon.uf.common.colormap.prefs.DataMappingPreferences;
 import com.raytheon.uf.common.colormap.prefs.DataMappingPreferences.DataMappingEntry;
+<<<<<<< HEAD
+=======
+import com.raytheon.uf.common.dataplugin.grid.GridRecord;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.geospatial.ReferencedCoordinate;
 import com.raytheon.uf.viz.core.exception.VizException;
 import com.raytheon.uf.viz.core.grid.rsc.data.GeneralGridData;
@@ -37,25 +53,47 @@ import com.raytheon.viz.grid.rsc.general.D2DGridResource;
  * Grid Resource that does not do simple mapping from data to colors but has an
  * overly complex mapping, usually for something where pixel values are actually
  * enums.
+<<<<<<< HEAD
  * 
  * <pre>
  * 
  * SOFTWARE HISTORY
  * 
+=======
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- -------------------------------
  * Oct 13, 2010  4820     bsteffen  Initial creation
  * Feb 07, 2014  2211     bsteffen  Fix sampling
  * Aug 30, 2016  3240     bsteffen  Use Interrogatable for inspect
+<<<<<<< HEAD
  * 
  * </pre>
  * 
+=======
+ * Dec 20, 2023  2036519  mapeters  Records are now passed into resource constructor
+ *                                  instead of being stored in resource data
+ *
+ * </pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author bsteffen
  */
 public class DataMappedGridResource extends D2DGridResource {
 
+<<<<<<< HEAD
     public DataMappedGridResource(GridResourceData data, LoadProperties props) {
         super(data, props);
+=======
+    public DataMappedGridResource(GridResourceData data, LoadProperties props,
+            GridRecord[] records) {
+        super(data, props, records);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override

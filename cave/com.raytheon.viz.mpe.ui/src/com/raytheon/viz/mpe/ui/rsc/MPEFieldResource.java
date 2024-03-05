@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -74,11 +86,19 @@ import com.raytheon.viz.mpe.ui.rsc.MPEFieldResourceData.MPEFieldFrame;
 
 /**
  * MPE resource that displays field data. Also supports data editing
+<<<<<<< HEAD
  * 
  * <pre>
  * 
  * SOFTWARE HISTORY
  * 
+=======
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#     Engineer   Description
  * ------------- ----------- ---------- ----------------------------------------
  * Nov 29, 2012              mschenke   Initial creation.
@@ -108,6 +128,7 @@ import com.raytheon.viz.mpe.ui.rsc.MPEFieldResourceData.MPEFieldFrame;
  *                                      support automatic refreshing of certain
  *                                      precip field types within the hour.
  * Oct 30, 2017  17911       wkwock     Display RFC QPE
+<<<<<<< HEAD
  * May 29, 2019 60162        ksunil     changes to absorb new Contour Label structure
  * Jun 20, 2019  7137        bhurley    Changed data type to allow for
  *                                      accumulation values greater than 13
@@ -115,6 +136,19 @@ import com.raytheon.viz.mpe.ui.rsc.MPEFieldResourceData.MPEFieldFrame;
  * 
  * </pre>
  * 
+=======
+ * May 29, 2019  60162       ksunil     changes to absorb new Contour Label
+ *                                      structure
+ * Jun 20, 2019  7137        bhurley    Changed data type to allow for
+ *                                      accumulation values greater than 13
+ *                                      inches.
+ * Dec 06, 2021  8341        randerso   Added use of getResourceId for contour
+ *                                      logging
+ * Nov 03, 2022  8905        lsingh     Check for NaN when converting units.
+ *
+ * </pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author mschenke
  */
 
@@ -242,7 +276,16 @@ public class MPEFieldResource
 
             // Due to data mapping, this ensures we are never less than original
             // precipValue when converting
+<<<<<<< HEAD
             double testPrecipValue = dataToDisplay.convert(converted);
+=======
+            double testPrecipValue;
+            try {
+                testPrecipValue = dataToDisplay.convert(converted);
+            } catch (NumberFormatException e) {
+                testPrecipValue = Double.NaN;
+            }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if (testPrecipValue < precipValue) {
                 converted += 1.0;
             }
@@ -383,12 +426,21 @@ public class MPEFieldResource
                 boolean isDifference = false;
                 boolean isRatio = false;
 
+<<<<<<< HEAD
                 if (displayField
                         .equals(DisplayFieldData.precipDifferenceField)) {
                     isDifference = true;
 
                 } else if (displayField
                         .equals(DisplayFieldData.precipRatioField)) {
+=======
+                if (DisplayFieldData.precipDifferenceField
+                        .equals(displayField)) {
+                    isDifference = true;
+
+                } else if (DisplayFieldData.precipRatioField
+                        .equals(displayField)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     isRatio = true;
                 }
 
@@ -552,10 +604,22 @@ public class MPEFieldResource
         int length = data.length;
         float[] contourData = new float[length];
         for (int i = 0; i < length; ++i) {
+<<<<<<< HEAD
             contourData[i] = (float) dataToDisplay.convert(data[i]);
         }
         GriddedContourDisplay display = new GriddedContourDisplay(
                 getDescriptor(), gridGeometry, FloatBuffer.wrap(contourData));
+=======
+            try {
+                contourData[i] = (float) dataToDisplay.convert(data[i]);
+            }catch(NumberFormatException e) {
+                contourData[i] = Float.NaN;
+            }
+        }
+        GriddedContourDisplay display = new GriddedContourDisplay(
+                getDescriptor(), getResourceId(new DataTime(frame.getDate())),
+                gridGeometry, FloatBuffer.wrap(contourData));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         display.setPreferences(contourPreferences);
         return display;
     }
@@ -649,8 +713,12 @@ public class MPEFieldResource
             ValuesLabelingPreferences valuePref = new ValuesLabelingPreferences();
             valuePref.setValues(values);
             labelingPreferences
+<<<<<<< HEAD
                     .setValues(new ArrayList<ValuesLabelingPreferences>(
                             Arrays.asList(valuePref)));
+=======
+                    .setValues(new ArrayList<>(Arrays.asList(valuePref)));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             labelingPreferences.setLabelFormat("0.00");
             preferences.setContourLabeling(labelingPreferences);

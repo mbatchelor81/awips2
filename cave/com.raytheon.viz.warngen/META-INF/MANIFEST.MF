@@ -40,7 +40,6 @@ Export-Package: com.raytheon.viz.warngen,
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Import-Package: com.raytheon.uf.common.activetable,
  com.raytheon.uf.common.dataplugin.text.request,
- javax.vecmath,
  org.eclipse.core.expressions,
  com.raytheon.viz.textworkstation,
  com.raytheon.viz.core.mode,

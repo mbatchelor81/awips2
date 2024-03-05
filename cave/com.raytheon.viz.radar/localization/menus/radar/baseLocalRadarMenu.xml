@@ -47,5 +47,12 @@
             fileName="menus/radar/baseRadarSpecWidthAndOther.xml" />
         <contribute xsi:type="subinclude" subMenu="${icao} Data Quality"
             fileName="menus/radar/baseRadarDataQuality.xml" />
+<<<<<<< HEAD
     </contribute>
 </menuTemplate>
+=======
+        <!--  <contribute xsi:type="subinclude" subMenu="${icao} Obsolete Products"
+            fileName="menus/radar/baseRadarObsolete.xml" />  -->
+    </contribute>
+</menuTemplate>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

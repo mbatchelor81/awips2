@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -21,6 +33,10 @@ package com.raytheon.uf.viz.objectiveanalysis.rsc;
 
 import java.util.ArrayList;
 import java.util.List;
+<<<<<<< HEAD
+=======
+import java.util.Objects;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.Set;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -34,6 +50,11 @@ import com.raytheon.uf.common.dataplugin.level.Level;
 import com.raytheon.uf.common.dataplugin.level.LevelFactory;
 import com.raytheon.uf.common.dataplugin.level.MasterLevel;
 import com.raytheon.uf.common.dataplugin.level.mapping.LevelMappingFactory;
+<<<<<<< HEAD
+=======
+import com.raytheon.uf.common.dataplugin.level.util.LevelUtilities;
+import com.raytheon.uf.common.dataplugin.radar.util.RadarUtil;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.style.level.Level.LevelType;
 import com.raytheon.uf.common.style.level.SingleLevel;
 import com.raytheon.uf.common.time.DataTime;
@@ -45,11 +66,19 @@ import com.raytheon.uf.viz.core.rsc.LoadProperties;
 
 /**
  * Resource Data for Objective Analysis
+<<<<<<< HEAD
  * 
  * <pre>
  * 
  * SOFTWARE HISTORY
  * 
+=======
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- -------------------------------------
  * Nov 05, 2009           randerso  Initial creation
@@ -57,9 +86,16 @@ import com.raytheon.uf.viz.core.rsc.LoadProperties;
  * Sep 09, 2014  3356     njensen   Remove CommunicationException
  * May 17, 2018  7294     njensen   Overrode update(...)
  * Nov 01, 2018  7314     bsteffen  Handle Cloud Ceiling Level.
+<<<<<<< HEAD
  * 
  * </pre>
  * 
+=======
+ * Oct 29, 2022  8959     mapeters  Update how data time levels are set
+ *
+ * </pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author randerso
  */
 
@@ -109,6 +145,7 @@ public class OAResourceData extends AbstractRequestableResourceData {
             return false;
         }
         OAResourceData other = (OAResourceData) obj;
+<<<<<<< HEAD
         if (levelKey == null) {
             if (other.levelKey != null) {
                 return false;
@@ -128,6 +165,15 @@ public class OAResourceData extends AbstractRequestableResourceData {
                 return false;
             }
         } else if (!source.equals(other.source)) {
+=======
+        if (!Objects.equals(levelKey, other.levelKey)) {
+            return false;
+        }
+        if (!Objects.equals(parameter, other.parameter)) {
+            return false;
+        }
+        if (!Objects.equals(source, other.source)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return false;
         }
         return true;
@@ -223,6 +269,7 @@ public class OAResourceData extends AbstractRequestableResourceData {
     @Override
     public DataTime[] getAvailableTimes() throws VizException {
         DataTime[] times = super.getAvailableTimes();
+<<<<<<< HEAD
         if (this.levelKey.equals(ALL_TILTS)) {
             LevelFactory factory = LevelFactory.getInstance();
             List<DataTime> timesWithLevels = new ArrayList<>();
@@ -230,6 +277,14 @@ public class OAResourceData extends AbstractRequestableResourceData {
             Set<Level> allLevels = LevelMappingFactory
                     .getInstance(
                             LevelMappingFactory.VOLUMEBROWSER_LEVEL_MAPPING_FILE)
+=======
+        if (ALL_TILTS.equals(this.levelKey)) {
+            LevelFactory factory = LevelFactory.getInstance();
+            List<DataTime> timesWithLevels = new ArrayList<>();
+            MasterLevel ml = factory.getMasterLevel(RadarUtil.TILT);
+            Set<Level> allLevels = LevelMappingFactory.getInstance(
+                    LevelMappingFactory.VOLUMEBROWSER_LEVEL_MAPPING_FILE)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     .getAllLevels();
             List<Level> levels = new ArrayList<>();
             for (Level l : allLevels) {
@@ -238,10 +293,18 @@ public class OAResourceData extends AbstractRequestableResourceData {
                 }
             }
 
+<<<<<<< HEAD
             for (int i = 0; i < times.length; ++i) {
                 for (int j = 0; j < levels.size(); ++j) {
                     DataTime time = times[i].clone();
                     time.setLevelValue(levels.get(j).getLevelonevalue());
+=======
+            for (DataTime time : times) {
+                for (Level level : levels) {
+                    time = time.clone();
+                    LevelUtilities.setDataTimeLevel(time,
+                            level.getLevelonevalue(), level);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     if (time.isSpatial()) {
                         timesWithLevels.add(time);
                     }

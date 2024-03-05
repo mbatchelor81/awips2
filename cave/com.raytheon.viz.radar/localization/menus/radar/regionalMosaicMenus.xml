@@ -34,11 +34,11 @@
 		</contribute>
 		<contribute xsi:type="bundleItem" menuText="Southeast" id="seRegMosiacMenu"
             file="bundles/DefaultRadarMosaic.xml">
-			<substitute key="mosaicIcaoList" value="kohx,kmrx,krax,knqa,khtx,kgsp,kcae,kltx,kgwx,kdgx,kmhx,kffc,klix,kbix,kmob,kbmx,kmxx,keox,kjgx,kclx,kevx,ktlh,kvax,kjax,ktbw,kmlb,kamx,kbyx" />
+			<substitute key="mosaicIcaoList" value="kohx,kmrx,krax,knqa,khdc,khtx,kgsp,kcae,kltx,kgwx,kdgx,kmhx,kffc,klix,kbix,kmob,kbmx,kmxx,keox,kjgx,kclx,kevx,ktlh,kvax,kjax,ktbw,kmlb,kamx,kbyx" />
 		</contribute>
 		<contribute xsi:type="bundleItem" menuText="Gulf Coast" id="gulfRegMosiacMenu"
             file="bundles/DefaultRadarMosaic.xml">
-			<substitute key="mosaicIcaoList" value="kbro,kcrp,kdfx,kewx,kgrk,khgx,kfws,kshv,kpoe,klch,klix,klzk,kdgx,kbix,kgwx,kmob,kbmx,kmxx,keox,kevx,ktlh,kffc,kjgx,kvax,kjax,ktbw,kmlb,kamx,kbyx" />
+			<substitute key="mosaicIcaoList" value="kbro,kcrp,kdfx,kewx,kgrk,khdc,khgx,kfws,kshv,kpoe,klch,klix,klzk,kdgx,kbix,kgwx,kmob,kbmx,kmxx,keox,kevx,ktlh,kffc,kjgx,kvax,kjax,ktbw,kmlb,kamx,kbyx" />
 		</contribute>
 		<contribute xsi:type="bundleItem" menuText="Great Lakes" id="lakesRegMosiacMenu"
             file="bundles/DefaultRadarMosaic.xml">
@@ -54,7 +54,7 @@
 		</contribute>
 		<contribute xsi:type="bundleItem" menuText="Southern Plains" id="srnplainsRegMosiacMenu"
             file="bundles/DefaultRadarMosaic.xml">
-			<substitute key="mosaicIcaoList" value="kpux,kgld,kddc,kict,ktwx,keax,ksgf,klsx,kpah,kfdx,khdx,kepz,kama,klbb,kmaf,ksjt,kdfx,kdyx,kfws,kgrk,kewx,kcrp,kbro,khgx,kfdr,ktlx,kvnx,kinx,ksrx,klzk,kshv,kpoe,klch,knqa,kdgx,klix,kpah" />
+			<substitute key="mosaicIcaoList" value="kpux,kgld,kddc,khdc,kict,ktwx,keax,ksgf,klsx,kpah,kfdx,khdx,kepz,kama,klbb,kmaf,ksjt,kdfx,kdyx,kfws,kgrk,kewx,kcrp,kbro,khgx,kfdr,ktlx,kvnx,kinx,ksrx,klzk,kshv,kpoe,klch,knqa,kdgx,klix,kpah" />
 		</contribute>
 		<contribute xsi:type="bundleItem" menuText="Northwest" id="nwRegMosiacMenu"
             file="bundles/DefaultRadarMosaic.xml">
@@ -66,7 +66,7 @@
 		</contribute>
 		<contribute xsi:type="bundleItem" menuText="National Mosaic" id="natMosiacMenu"
             file="bundles/DefaultRadarMosaic.xml">
-			<substitute key="mosaicIcaoList" value="kabr,kabx,kakq,kama,kamx,kapx,karx,katx,kbbx,kbgm,kbhx,kbis,kblx,kbmx,kbox,kbro,kbuf,kbyx,kcae,kcbw,kcbx,kccx,kcle,kclx,kcrp,kcxx,kcys,kdax,kddc,kdfx,kdgx,kdix,kdlh,kdmx,kdox,kdtx,kdvn,kdyx,keax,kemx,kenx,keox,kepz,kesx,kevx,kewx,keyx,kfcx,kfdr,kfdx,kffc,kfsd,kfsx,kftg,kfws,kggw,kgjx,kgld,kgrb,kgrk,kgrr,kgsp,kgwx,kgyx,khdx,khgx,khnx,khpx,khtx,kict,kicx,kiln,kilx,kind,kinx,kiwa,kiwx,kjan,kjax,kjgx,kjkl,klbb,klch,klgx,klix,klnx,klot,klrx,klsx,kltx,klvx,klwx,klzk,kmaf,kmax,kmbx,kmhx,kmkx,kmlb,kmob,kmpx,kmqt,kmrx,kmsx,kmtx,kmux,kmvx,kmxx,knkx,knqa,koax,kohx,kokx,kotx,kpah,kpbz,kpdt,kpoe,kpux,krax,krgx,kriw,krlx,krtx,ksfx,ksgf,kshv,ksjt,ksox,ksrx,ktbw,ktfx,ktlh,ktlx,ktwx,ktyx,kudx,kuex,kvax,kvbx,kvnx,kvtx,kvwx,kyux,pabc,pacg,paec,pahg,paih,pakc,papd,pgua,phki,phkm,phmo,phwa,tjua,tadw,tatl,tbna,tbos,tbwi,tclt,tcmh,tcvg,tdal,tday,tdca,tden,tdfw,tdtw,tewr,tfll,thou,tiad,tiah,tich,tids,tjfk,tlas,tlve,tmci,tmco,tmdw,tmem,tmia,tmke,tmsp,tmsy,tokc,tord,tpbi,tphl,tphx,tpit,trdu,tsdf,tsju,tslc,tstl,ttpa,ttul" />
+			<substitute key="mosaicIcaoList" value="kabr,kabx,kakq,kama,kamx,kapx,karx,katx,kbbx,kbgm,kbhx,kbis,kblx,kbmx,kbox,kbro,kbuf,kbyx,kcae,kcbw,kcbx,kccx,kcle,kclx,kcrp,kcxx,kcys,kdax,kddc,kdfx,kdgx,kdix,kdlh,kdmx,kdox,kdtx,kdvn,kdyx,keax,kemx,kenx,keox,kepz,kesx,kevx,kewx,keyx,kfcx,kfdr,kfdx,kffc,kfsd,kfsx,kftg,kfws,kggw,kgjx,kgld,kgrb,kgrk,kgrr,kgsp,kgwx,kgyx,khdc,khdx,khgx,khnx,khpx,khtx,kict,kicx,kiln,kilx,kind,kinx,kiwa,kiwx,kjan,kjax,kjgx,kjkl,klbb,klch,klgx,klix,klnx,klot,klrx,klsx,kltx,klvx,klwx,klzk,kmaf,kmax,kmbx,kmhx,kmkx,kmlb,kmob,kmpx,kmqt,kmrx,kmsx,kmtx,kmux,kmvx,kmxx,knkx,knqa,koax,kohx,kokx,kotx,kpah,kpbz,kpdt,kpoe,kpux,krax,krgx,kriw,krlx,krtx,ksfx,ksgf,kshv,ksjt,ksox,ksrx,ktbw,ktfx,ktlh,ktlx,ktwx,ktyx,kudx,kuex,kvax,kvbx,kvnx,kvtx,kvwx,kyux,pabc,pacg,paec,pahg,paih,pakc,papd,pgua,phki,phkm,phmo,phwa,tjua,tadw,tatl,tbna,tbos,tbwi,tclt,tcmh,tcvg,tdal,tday,tdca,tden,tdfw,tdtw,tewr,tfll,thou,tiad,tiah,tich,tids,tjfk,tlas,tlve,tmci,tmco,tmdw,tmem,tmia,tmke,tmsp,tmsy,tokc,tord,tpbi,tphl,tphx,tpit,trdu,tsdf,tsju,tslc,tstl,ttpa,ttul" />
 		</contribute>
 		<contribute xsi:type="bundleItem" menuText="TDWR Mosaic" id="tdwrMosaicMenu"
 		    file="bundles/DefaultRadarMosaic.xml">

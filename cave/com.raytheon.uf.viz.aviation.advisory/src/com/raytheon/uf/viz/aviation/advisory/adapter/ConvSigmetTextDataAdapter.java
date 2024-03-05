@@ -1,27 +1,23 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
- * 
+ *
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
- * 
+ *
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
- * 
+ *
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
 package com.raytheon.uf.viz.aviation.advisory.adapter;
-
-import gov.noaa.nws.ncep.common.dataplugin.convsigmet.ConvSigmetLocation;
-import gov.noaa.nws.ncep.common.dataplugin.convsigmet.ConvSigmetRecord;
-import gov.noaa.nws.ncep.common.dataplugin.convsigmet.ConvSigmetSection;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,6 +30,29 @@ import com.raytheon.uf.viz.aviation.advisory.AdvisoryRecord;
 import com.raytheon.uf.viz.core.IGraphicsTarget.LineStyle;
 import org.locationtech.jts.geom.Coordinate;
 
+import gov.noaa.nws.ncep.common.dataplugin.convsigmet.ConvSigmetLocation;
+import gov.noaa.nws.ncep.common.dataplugin.convsigmet.ConvSigmetRecord;
+import gov.noaa.nws.ncep.common.dataplugin.convsigmet.ConvSigmetSection;
+
+/**
+ *
+ * Aviation data adapter for Conv Sigmet for Now cast and Forecast. This class
+ * adds wx statement text to sigmet polygons in d2d.
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+ * Date          Ticket#  Engineer  Description
+ * ------------- -------- --------- --------------------------------------------
+ * ????    2001  ????     ????      Initial creation
+ * Jul 24, 2020  79536    pbutler   D2D and wx statements to hover over Sigmet polygons.
+ * Oct 06, 2020  83659    tjensen   Fix rendering of text products
+ * Jul 16, 2021  93845    OMoncayo  Eliminate default text to be shown
+ *
+ *
+ * </pre>
+ */
 @XmlAccessorType(XmlAccessType.NONE)
 public class ConvSigmetTextDataAdapter extends AbstractAdvisoryDataAdapter {
 
@@ -46,7 +65,7 @@ public class ConvSigmetTextDataAdapter extends AbstractAdvisoryDataAdapter {
     @Override
     public Collection<AdvisoryRecord> convertRecords(
             Collection<PluginDataObject> records) {
-        Collection<AdvisoryRecord> result = new ArrayList<AdvisoryRecord>();
+        Collection<AdvisoryRecord> result = new ArrayList<>();
         for (PluginDataObject record : records) {
             result.addAll(convertRecord(record));
         }
@@ -55,7 +74,7 @@ public class ConvSigmetTextDataAdapter extends AbstractAdvisoryDataAdapter {
 
     @Override
     public Collection<AdvisoryRecord> convertRecord(PluginDataObject record) {
-        Collection<AdvisoryRecord> result = new ArrayList<AdvisoryRecord>();
+        Collection<AdvisoryRecord> result = new ArrayList<>();
         if (record instanceof ConvSigmetRecord) {
             ConvSigmetRecord sigmetRecord = (ConvSigmetRecord) record;
             if (sigmetRecord.getConvSigmetSection() != null) {
@@ -72,8 +91,7 @@ public class ConvSigmetTextDataAdapter extends AbstractAdvisoryDataAdapter {
     }
 
     private AdvisoryRecord convertSection(ConvSigmetSection section) {
-        if (section.getCloudTop() != null
-                && section.getConvSigmetLocation() != null) {
+        if (section.getConvSigmetLocation() != null) {
             for (ConvSigmetLocation loc : section.getConvSigmetLocation()) {
                 if (loc.getIndex() == 1) {
                     Coordinate coord = new Coordinate(loc.getLongitude(),
@@ -89,7 +107,7 @@ public class ConvSigmetTextDataAdapter extends AbstractAdvisoryDataAdapter {
 
     protected String getText(ConvSigmetSection section) {
         // decode the storm type from the section
-        String stormType = "???? TS";
+        String stormType = "";
         if (section.getSegment().contains("SVR TS")
                 || section.getSegment().contains("SEV TS")) {
             stormType = "SVR TS";
@@ -136,8 +154,11 @@ public class ConvSigmetTextDataAdapter extends AbstractAdvisoryDataAdapter {
 
             }
         }
-        return String.format(FORMAT, sequenceId, intensity, stormType,
-                cloudTop, flightLevel, hailTo, tornadoes, windTo).trim();
+
+        return (flightLevel == -999999) ? ""
+                : String.format(FORMAT, sequenceId, intensity, stormType,
+                        cloudTop, flightLevel, hailTo, tornadoes, windTo)
+                        .trim();
     }
 
     @Override

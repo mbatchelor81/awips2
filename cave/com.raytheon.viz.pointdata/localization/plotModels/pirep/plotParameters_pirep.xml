@@ -45,6 +45,11 @@
    <plotParameterDefinition displayName="temperature" displayType="TEXT" format="%3.0f" param="temperature" sampleValue="75" />
 
    <plotParameterDefinition displayName="windSpeed,windDir (kts)" displayType="BARB" param="windSpeed,windDir" sampleValue="0,1" unit="kts" />
+<<<<<<< HEAD
+=======
+   <plotParameterDefinition displayName="windSpeed,windDir (mph)" displayType="BARB" param="windSpeed,windDir" sampleValue="0,1" unit="mph" />
+   <plotParameterDefinition displayName="windSpeed,windDir (m/s)" displayType="BARB" param="windSpeed,windDir" sampleValue="0,1" unit="m/s" />
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    
    <plotParameterDefinition displayName="windDir" displayType="ARROWUV" param="windSpeed,windDir" sampleValue="0,1" unit="kts" />
 

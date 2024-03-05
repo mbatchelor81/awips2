@@ -25,6 +25,10 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
+<<<<<<< HEAD
+=======
+import org.eclipse.swt.graphics.ImageData;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 
@@ -47,6 +51,12 @@ import com.raytheon.viz.volumebrowser.xml.MenuContribution;
  * Oct 03, 2012  1235     rferrel   Checks for disposed widget.
  * Jul 16, 2020  7597     randerso  Added checkWidget() to ensure widget is not
  *                                  null or dispose.
+<<<<<<< HEAD
+=======
+ * May 04, 2022  8860     randerso  Add transparent image for unavailable items
+ *                                  to work around issue with Eclipse 4.21 not
+ *                                  properly removing images from MenuItems.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -60,6 +70,11 @@ public class MenuContributionItem extends ContributionItem {
 
     protected Image image;
 
+<<<<<<< HEAD
+=======
+    protected Image unavailableImage;
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /**
      * @param contribution
      */
@@ -175,10 +190,19 @@ public class MenuContributionItem extends ContributionItem {
             image.dispose();
             image = null;
         }
+<<<<<<< HEAD
+=======
+
+        if (unavailableImage != null) {
+            unavailableImage.dispose();
+            unavailableImage = null;
+        }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     public void markDataAvailable(boolean available) {
         if (checkWidget()) {
+<<<<<<< HEAD
             if (available) {
                 if (image == null) {
                     createMenuImage();
@@ -191,6 +215,17 @@ public class MenuContributionItem extends ContributionItem {
     }
 
     private void createMenuImage() {
+=======
+            if (image == null || unavailableImage == null) {
+                createMenuImages();
+            }
+
+            widget.setImage(available ? image : unavailableImage);
+        }
+    }
+
+    private void createMenuImages() {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if (checkWidget()) {
             int imgWidth = 10;
             int imgHeight = 10;
@@ -201,6 +236,14 @@ public class MenuContributionItem extends ContributionItem {
             drawImage(gc, imgWidth, imgHeight);
 
             gc.dispose();
+<<<<<<< HEAD
+=======
+
+            /* create a transparent image for unavailable menu items */
+            ImageData imageData = image.getImageData();
+            imageData.alpha = 0;
+            unavailableImage = new Image(widget.getDisplay(), imageData);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 

@@ -40,14 +40,26 @@
 # Apr 11, 2018  7106     dgilling  Fix sentence capitalization in 
 #                                  assembleUntilSubPhrases.
 # Feb 25, 2019  7640     randerso  Fix TypeError in adjustWords.
+<<<<<<< HEAD
+=======
+# Sep 29, 2022  8933     dgilling  Update comparisons in checkTrend for python
+#                                  3.x.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # ----------------------------------------------------------------------------
 
 ##
 # This is a base file that is not intended to be overridden.
 ##
 
+<<<<<<< HEAD
 import types
 import functools
+=======
+import functools
+import math
+import types
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import TimeDescriptor
 import ConfigVariables
 import StringUtils
@@ -2339,6 +2351,11 @@ class PhraseBuilder(ConfigVariables.ConfigVariables,
                 trend = lastMax > max
                 lastMax = max
             else:
+<<<<<<< HEAD
+=======
+                if max is None:
+                    max = -math.inf     
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 # Test for an decreasing trend
                 if trend == 1 and lastMax > max:
                     lastMax = max

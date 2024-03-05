@@ -58,10 +58,16 @@ import com.raytheon.uf.common.time.util.TimeUtil;
 import com.raytheon.uf.viz.monitor.scan.commondialogs.EllipseData.EllipseType;
 import com.raytheon.uf.viz.monitor.scan.config.SCANConfig;
 
+<<<<<<< HEAD
 import si.uom.NonSI;
 import si.uom.SI;
 import systems.uom.common.USCustomary;
 import tec.uom.se.unit.MetricPrefix;
+=======
+import si.uom.SI;
+import systems.uom.common.USCustomary;
+import javax.measure.MetricPrefix;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Composite containing the Time Height Graph canvas that will draw the

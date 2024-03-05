@@ -1,6 +1,8 @@
 <project default="usage" basedir=".">
 	<property name="eclipse.dir" 
 		value="/awips2/eclipse" />
+	<property name="target.dir" 
+		value="/awips2/eclipse" />
 	<property name="build.os"
 		value="linux" />
 	<property name="build.ws"
@@ -66,7 +68,7 @@
 			<arg value="org.eclipse.ant.core.antRunner" />
 			<arg value="-buildfile" />
 			<arg value="${pde.dir}/scripts/productBuild/productBuild.xml" />
-			<arg value="-DbaseLocation=${eclipse.dir}" />
+			<arg value="-DbaseLocation=${target.dir}" />
 			<arg value="-Dbuilder=${basedir}/cave" />
 			<arg value="-DbuildDirectory=${basedir}/cave/tmp" />
 			<arg value="-Dbase=${basedir}/cave" />
@@ -102,7 +104,7 @@
 			<arg value="org.eclipse.ant.core.antRunner" />
 			<arg value="-buildfile" />
 			<arg value="${pde.dir}/scripts/productBuild/productBuild.xml" />
-			<arg value="-DbaseLocation=${eclipse.dir}" />
+			<arg value="-DbaseLocation=${target.dir}" />
 			<arg value="-Dbuilder=${basedir}/alertviz" />
 			<arg value="-DbuildDirectory=${basedir}/alertviz/tmp" />
 			<arg value="-Dbase=${basedir}/alertviz" />

@@ -35,8 +35,9 @@
                     <properties isSystemResource="false"
                         isBlinking="false" isMapLayer="false" isHoverOn="false"
                         isVisible="true" />
-                    <resourceData xsi:type="metarPrecipResourceData"
-                        duration="${duration}" retrieveData="false"
+                    <resourceData xsi:type="plotResourceData"                      
+                        plotSource="${legend}" retrieveData="false"
+                        plotModelFile="${svg}"
                         isUpdatingOnMetadataOnly="false"
                         isRequeryNecessaryOnTimeMatch="true">
                         <binOffset posOffset="${posOffset}"

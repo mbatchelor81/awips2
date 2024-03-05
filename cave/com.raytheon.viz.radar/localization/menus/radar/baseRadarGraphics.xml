@@ -25,8 +25,12 @@
     -->
 <menuTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <contribute xsi:type="bundleItem" file="bundles/DefaultRadarXY.xml"
+<<<<<<< HEAD
         menuText="NEXRAD Unit Status" id="${icao}NexradStatus"
         editorType="com.raytheon.viz.radar.ui.xy.RadarXYEditor">
+=======
+        menuText="NEXRAD Unit Status" id="${icao}NexradStatus">
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="icao" value="${icao}" />
         <substitute key="product" value="2" />
         <substitute key="insetMap" value="false" />
@@ -117,15 +121,23 @@
         <substitute key="elevation" value="0.0--360.0" />
     </contribute>
     <contribute xsi:type="bundleItem" file="bundles/DefaultRadarXY.xml"
+<<<<<<< HEAD
         menuText="VAD Wind Profile (VWP)" id="${icao}VADWindProfile"
         editorType="com.raytheon.viz.radar.ui.xy.RadarXYEditor">
+=======
+        menuText="VAD Wind Profile (VWP)" id="${icao}VADWindProfile">
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="icao" value="${icao}" />
         <substitute key="product" value="48" />
         <substitute key="insetMap" value="false" />
     </contribute>
     <contribute xsi:type="bundleItem" file="bundles/DefaultRadarXY.xml"
+<<<<<<< HEAD
         menuText="Vel Az Display (VAD)" id="${icao}VelAzDisplay"
         editorType="com.raytheon.viz.radar.ui.xy.RadarXYEditor">
+=======
+        menuText="Vel Az Display (VAD)" id="${icao}VelAzDisplay">
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="icao" value="${icao}" />
         <substitute key="product" value="84" />
         <substitute key="insetMap" value="false" />

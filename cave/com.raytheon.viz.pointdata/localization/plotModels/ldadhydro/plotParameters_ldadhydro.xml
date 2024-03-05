@@ -26,6 +26,7 @@
 <plotParameterDefinitions>
    <plugin>ldadhydro</plugin>
 
+<<<<<<< HEAD
    <plotParameterDefinition displayName="lh_precip15min (in)" format="%3.2f" mode="TEXT" param="lh_precip15min" sampleValue="75" unit="in" />
 
    <plotParameterDefinition displayName="Marker" mode="MARKER" param="Marker" sampleValue=" " svgClass="marker" />
@@ -37,4 +38,17 @@
    <plotParameterDefinition displayName="lh_precip3hr (in)" format="%3.2f" mode="TEXT" param="lh_precip3hr" sampleValue="75" unit="in" />
 
    <plotParameterDefinition displayName="lh_precip5min (in)" format="%3.2f" mode="TEXT" param="lh_precip5min" sampleValue="75" unit="in" />
+=======
+   <plotParameterDefinition displayName="lh_precip15min (in)" format="%3.2f" displayType="TEXT" param="lh_precip15min" sampleValue="75" unit="in" />
+
+   <plotParameterDefinition displayName="Marker" displayType="MARKER" param="Marker" sampleValue=" " svgClass="marker" />
+
+   <plotParameterDefinition displayName="lh_precip1hr (in)" format="%3.2f" displayType="TEXT" param="lh_precip1hr" sampleValue="75" unit="in" />
+
+   <plotParameterDefinition displayName="lh_precip30min (in)" format="%3.2f" displayType="TEXT" param="lh_precip30min" sampleValue="75" unit="in" />
+
+   <plotParameterDefinition displayName="lh_precip3hr (in)" format="%3.2f" displayType="TEXT" param="lh_precip3hr" sampleValue="75" unit="in" />
+
+   <plotParameterDefinition displayName="lh_precip5min (in)" format="%3.2f" displayType="TEXT" param="lh_precip5min" sampleValue="75" unit="in" />
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 </plotParameterDefinitions>

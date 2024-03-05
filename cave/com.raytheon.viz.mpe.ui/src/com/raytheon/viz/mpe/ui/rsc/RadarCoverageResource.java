@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -42,6 +54,11 @@ import com.raytheon.uf.common.colormap.prefs.DataMappingPreferences.DataMappingE
 import com.raytheon.uf.common.dataplugin.shef.tables.Colorvalue;
 import com.raytheon.uf.common.geospatial.MapUtil;
 import com.raytheon.uf.common.mpe.util.RadarCoverageFile;
+<<<<<<< HEAD
+=======
+import com.raytheon.uf.common.status.IUFStatusHandler;
+import com.raytheon.uf.common.status.UFStatus;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.xmrg.hrap.HRAP;
 import com.raytheon.uf.common.xmrg.hrap.HRAPCoordinates;
 import com.raytheon.uf.common.xmrg.hrap.HRAPSubGrid;
@@ -73,6 +90,7 @@ import systems.uom.common.USCustomary;
 
 /**
  * Radar Coverage (MISBIN) Resource.
+<<<<<<< HEAD
  * 
  * <pre>
  * 
@@ -91,18 +109,52 @@ import systems.uom.common.USCustomary;
 public class RadarCoverageResource extends
         AbstractVizResource<GenericResourceData, MapDescriptor> implements
         IMpeResource {
+=======
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+ * Date          Ticket#  Engineer  Description
+ * ------------- -------- --------- --------------------------------------------
+ * Aug 10, 2009  2675     mpduff    Initial creation
+ * Nov 05, 2015  5070     randerso  Adjust font sizes for dpi scaling
+ * Dec 06, 2021  8341     randerso  Added use of getResourceId for contour
+ *                                  logging
+ *
+ * </pre>
+ *
+ * @author mpduff
+ */
+
+public class RadarCoverageResource
+        extends AbstractVizResource<GenericResourceData, MapDescriptor>
+        implements IMpeResource {
+    private static final IUFStatusHandler statusHandler = UFStatus
+            .getHandler(RadarCoverageResource.class);
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private static final String RADAR_COVERAGE = "Radar Coverage Map";
 
     private static final String MISSING_DATA = "Missing Data";
 
     /** Radar types */
+<<<<<<< HEAD
     public static enum SingleSiteRadarType {
         RAW_RADAR, RADAR_CLIMATOLOGY, MEAN_FIELD_BIAS_CORRECTED_RADAR, RADAR_COVERAGE_MAP
+=======
+    public enum SingleSiteRadarType {
+        RAW_RADAR,
+        RADAR_CLIMATOLOGY,
+        MEAN_FIELD_BIAS_CORRECTED_RADAR,
+        RADAR_COVERAGE_MAP
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /** The radar coverage file */
     private RadarCoverageFile radCovFile;
 
+<<<<<<< HEAD
     /** The HRAP subgrid */
     private HRAPSubGrid subGrid;
 
@@ -110,6 +162,10 @@ public class RadarCoverageResource extends
 
     private ColorMapParameters parameters;
 
+=======
+    private GriddedImageDisplay gridDisplay;
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private float brightness = 1.0f;
 
     private float contrast = 1.0f;
@@ -155,7 +211,11 @@ public class RadarCoverageResource extends
 
     /**
      * Constructor.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param radCovFile
      *            The DPA File
      * @param colorSet
@@ -180,11 +240,14 @@ public class RadarCoverageResource extends
 
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
      * @see com.raytheon.viz.core.rsc.IVizResource#dispose()
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     protected void disposeInternal() {
         if (gridDisplay != null) {
@@ -202,11 +265,14 @@ public class RadarCoverageResource extends
         }
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
      * @see com.raytheon.viz.core.rsc.IVizResource#getName()
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public String getName() {
         if (radCovFile == null) {
@@ -216,12 +282,15 @@ public class RadarCoverageResource extends
         return radCovFile.getFile().getAbsolutePath();
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
      * @seecom.raytheon.viz.core.rsc.IVizResource#init(com.raytheon.viz.core.
      * IGraphicsTarget)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     protected void initInternal(IGraphicsTarget target) {
         ColorMap colorMap = new ColorMap(colorSet.size());
@@ -231,8 +300,13 @@ public class RadarCoverageResource extends
         int index = 0;
         for (Colorvalue cv : colorSet) {
             RGB rgb = RGBColors.getRGBColor(cv.getColorname().getColorName());
+<<<<<<< HEAD
             colorMap.setColor(index, new Color(rgb.red / 255f,
                     rgb.green / 255f, rgb.blue / 255f));
+=======
+            colorMap.setColor(index, new Color(rgb.red / 255f, rgb.green / 255f,
+                    rgb.blue / 255f));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             DataMappingEntry entry = new DataMappingEntry();
             entry.setPixelValue((double) index);
@@ -247,7 +321,11 @@ public class RadarCoverageResource extends
 
         ColorMapCapability cmc = getCapability(ColorMapCapability.class);
 
+<<<<<<< HEAD
         parameters = cmc.getColorMapParameters();
+=======
+        ColorMapParameters parameters = cmc.getColorMapParameters();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if (parameters == null) {
             parameters = new ColorMapParameters();
             cmc.setColorMapParameters(parameters);
@@ -275,7 +353,11 @@ public class RadarCoverageResource extends
             missingData = false;
             data = radCovFile.getRadCov();
         } catch (Exception e) {
+<<<<<<< HEAD
             System.out.println("Could not load radar coverage file " + e);
+=======
+            statusHandler.warn("Could not load radar coverage file " + e);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             missingData = true;
         }
 
@@ -337,7 +419,12 @@ public class RadarCoverageResource extends
                     return;
                 }
             }
+<<<<<<< HEAD
             subGrid = new HRAPSubGrid(extent);
+=======
+
+            HRAPSubGrid subGrid = new HRAPSubGrid(extent);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             gridGeometry = MapUtil.getGridGeometry(subGrid);
 
@@ -345,6 +432,7 @@ public class RadarCoverageResource extends
 
         } catch (Exception e) {
             radCovFile = null;
+<<<<<<< HEAD
             e.printStackTrace();
         }
     }
@@ -356,6 +444,12 @@ public class RadarCoverageResource extends
      * com.raytheon.viz.core.drawables.IRenderable#paint(com.raytheon.viz.core
      * .IGraphicsTarget, com.raytheon.viz.core.drawables.PaintProperties)
      */
+=======
+            statusHandler.warn(e.getLocalizedMessage(), e);
+        }
+    }
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     protected void paintInternal(IGraphicsTarget target,
             PaintProperties paintProps) throws VizException {
@@ -367,8 +461,14 @@ public class RadarCoverageResource extends
                     gridDisplay = new GriddedImageDisplay(buf, descriptor,
                             gridGeometry);
 
+<<<<<<< HEAD
                     gridDisplay.setColorMapParameters(getCapability(
                             ColorMapCapability.class).getColorMapParameters());
+=======
+                    gridDisplay.setColorMapParameters(
+                            getCapability(ColorMapCapability.class)
+                                    .getColorMapParameters());
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
 
                 GriddedImagePaintProperties giProps = new GriddedImagePaintProperties(
@@ -380,7 +480,11 @@ public class RadarCoverageResource extends
             if (mode.contains(DisplayMode.Contour)) {
                 if (contourDisplay == null) {
                     contourDisplay = new GriddedContourDisplay(descriptor,
+<<<<<<< HEAD
                             gridGeometry, buf);
+=======
+                            getSafeName(), gridGeometry, buf);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                     contourDisplay.setColor(ColorUtil.WHITE);
                     contourDisplay.setLineStyle(LineStyle.SOLID);
@@ -428,7 +532,11 @@ public class RadarCoverageResource extends
 
     /**
      * Update the Xmrg Display.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param reload
      *            Reread the data from the file if true
      */

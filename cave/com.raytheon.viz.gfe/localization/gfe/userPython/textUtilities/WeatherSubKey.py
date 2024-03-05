@@ -42,12 +42,25 @@ from com.raytheon.uf.common.dataplugin.gfe.weather import WeatherSubKey as JavaW
 #                                  methods in Java
 # Dec 08, 2015  5129     dgilling  Remove dependency on DataManager.                                                 
 # Feb 06, 2017  5959     randerso  Removed Java .toString() calls 
+<<<<<<< HEAD
+=======
+# Feb 09, 2024  2036792  smoorthy  Add extra attribute signaling to JUtilHandler to 
+#                                  represent as a String
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 
 class WeatherSubKey:
     def __init__(self, javaSubKey):
         self.__key = javaSubKey
+<<<<<<< HEAD
         
+=======
+
+        # flag telling JUtilHandler to return as String
+        # during conversion to Java.
+        self.pyToJavaStrFlag = None
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def __repr__(self):
         return str(self.__key)
     

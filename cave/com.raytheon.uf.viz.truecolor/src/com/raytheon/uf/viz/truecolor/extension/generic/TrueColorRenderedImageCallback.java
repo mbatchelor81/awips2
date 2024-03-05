@@ -72,6 +72,10 @@ import com.raytheon.uf.viz.truecolor.extension.ITrueColorImagingExtension.ITrueC
  * Apr 06, 2016  5400     bsteffen  Initial creation
  * Apr 15, 2019  7596     lsingh    Upgraded javax.measure to JSR-363. Handled unit
  *                                  conversion.
+<<<<<<< HEAD
+=======
+ * Nov 03, 2022  8905     lsingh    Check for NaN when converting units.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -283,9 +287,19 @@ public class TrueColorRenderedImageCallback implements IRenderedImageCallback {
                         .getColorMapUnit();
                 if (dataUnit != null && colorMapUnit != null
                         && dataUnit.isCompatible(colorMapUnit)) {
+<<<<<<< HEAD
                         value = UnitConv.getConverterToUnchecked(dataUnit, colorMapUnit)
                                 .convert(value);
                     
+=======
+                    try {
+                        value = UnitConv
+                                .getConverterToUnchecked(dataUnit, colorMapUnit)
+                                .convert(value);
+                    } catch (NumberFormatException e) {
+                        value = Double.NaN;
+                    }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
                 double index = Colormapper.getColorMappingIndex(value,
                         image.getColorMapParameters());

@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -75,6 +87,7 @@ import com.raytheon.viz.mpe.ui.dialogs.hourlyradar.RadarDataManager;
 
 import si.uom.SI;
 import systems.uom.common.USCustomary;
+<<<<<<< HEAD
 import tec.uom.se.unit.MetricPrefix;
 
 /**
@@ -94,6 +107,30 @@ import tec.uom.se.unit.MetricPrefix;
  * 
  * </pre>
  * 
+=======
+import javax.measure.MetricPrefix;
+
+/**
+ * The Digital Precipitation Array Resource.
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+ * Date          Ticket#  Engineer  Description
+ * ------------- -------- --------- --------------------------------------------
+ * Jul 28, 2009  2675     mpduff    Initial creation
+ * Aug 13, 2009  2675     mpduff    TIM Changes added
+ * Nov 05, 2015  5070     randerso  Adjust font sizes for dpi scaling
+ * Sep 16, 2016  5631     bkowal    Cleanup. Use {@link DPAConstants}.
+ * Apr 15, 2019  7596     lsingh    Updated units framework to JSR-363. Handled
+ *                                  unit conversion.
+ * Dec 06, 2021  8341     randerso  Added use of getResourceId for contour
+ *                                  logging
+ *
+ * </pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author mpduff
  */
 
@@ -111,6 +148,7 @@ public class DPAResource
     private static final String ALL_ZERO = "Radar Data All Zero";
 
     /** Radar types */
+<<<<<<< HEAD
     public static enum SingleSiteRadarType {
         RAW_SP_RADAR("Raw SP Radar"), RAW_DP_RADAR(
                 "Raw DP Radar"), MEAN_FIELD_BIAS_CORRECTED_SP_RADAR(
@@ -120,12 +158,25 @@ public class DPAResource
         private String text;
 
         private SingleSiteRadarType(String text) {
+=======
+    public enum SingleSiteRadarType {
+        RAW_SP_RADAR("Raw SP Radar"),
+        RAW_DP_RADAR("Raw DP Radar"),
+        MEAN_FIELD_BIAS_CORRECTED_SP_RADAR(
+                "Mean Field Bias Corrected SP Radar"),
+        RADAR_COVERAGE_MAP("Radar Coverage Map");
+
+        private String text;
+
+        SingleSiteRadarType(String text) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             this.text = text;
         }
     }
 
     private DPAFile dpaFile;
 
+<<<<<<< HEAD
     /** The HRAP subgrid */
     private HRAPSubGrid subGrid;
 
@@ -133,6 +184,10 @@ public class DPAResource
 
     private ColorMapParameters parameters;
 
+=======
+    private GriddedImageDisplay gridDisplay;
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private MPEDisplayManager displayMgr;
 
     private GriddedContourDisplay contourDisplay;
@@ -176,7 +231,11 @@ public class DPAResource
 
     /**
      * Constructor.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param dpaFile
      *            The DPA File
      * @param colorSet
@@ -202,11 +261,14 @@ public class DPAResource
                 .setColor(RGBColors.getRGBColor("Yellow"));
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
      * @see com.raytheon.viz.core.rsc.IVizResource#dispose()
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     protected void disposeInternal() {
         if (gridDisplay != null) {
@@ -224,11 +286,14 @@ public class DPAResource
         }
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
      * @see com.raytheon.viz.core.rsc.IVizResource#getName()
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public String getName() {
         if (dpaFile == null) {
@@ -265,7 +330,11 @@ public class DPAResource
 
         ColorMapCapability cmc = getCapability(ColorMapCapability.class);
 
+<<<<<<< HEAD
         parameters = cmc.getColorMapParameters();
+=======
+        ColorMapParameters parameters = cmc.getColorMapParameters();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if (parameters == null) {
             parameters = new ColorMapParameters();
             cmc.setColorMapParameters(parameters);
@@ -403,7 +472,11 @@ public class DPAResource
                     return;
                 }
             }
+<<<<<<< HEAD
             subGrid = new HRAPSubGrid(extent);
+=======
+            HRAPSubGrid subGrid = new HRAPSubGrid(extent);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             gridGeometry = MapUtil.getGridGeometry(subGrid);
 
@@ -465,6 +538,10 @@ public class DPAResource
             if (mode.contains(DisplayMode.Contour)) {
                 if (contourDisplay == null) {
                     contourDisplay = new GriddedContourDisplay(descriptor,
+<<<<<<< HEAD
+=======
+                            getResourceId(paintProps.getDataTime()),
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                             gridGeometry, buf);
 
                     contourDisplay.setColor(ColorUtil.WHITE);
@@ -482,6 +559,7 @@ public class DPAResource
         target.drawStrings(mainString);
 
         Date date = MPEDisplayManager.getCurrent().getCurrentEditDate();
+<<<<<<< HEAD
         if (date.equals(lastDate) == false) {
             // Check for ignored Radar
             if (radarType.equals(SingleSiteRadarType.RAW_SP_RADAR) || radarType
@@ -490,6 +568,17 @@ public class DPAResource
                         date);
                 lastDate = date;
             } else if (radarType.equals(SingleSiteRadarType.RAW_DP_RADAR)) {
+=======
+        if (!date.equals(lastDate)) {
+            // Check for ignored Radar
+            if (SingleSiteRadarType.RAW_SP_RADAR.equals(radarType)
+                    || SingleSiteRadarType.MEAN_FIELD_BIAS_CORRECTED_SP_RADAR
+                            .equals(radarType)) {
+                ignored = RadarDataManager.getInstance().getIgnoreRadarSP(radId,
+                        date);
+                lastDate = date;
+            } else if (SingleSiteRadarType.RAW_DP_RADAR.equals(radarType)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 ignored = RadarDataManager.getInstance().getIgnoreRadarDP(radId,
                         date);
                 lastDate = date;
@@ -538,7 +627,11 @@ public class DPAResource
 
     /**
      * Update the Xmrg Display.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param reload
      *            Reread the data from the file if true
      */

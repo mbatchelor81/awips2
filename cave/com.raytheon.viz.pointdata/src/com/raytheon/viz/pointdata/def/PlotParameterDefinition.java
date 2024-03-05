@@ -42,6 +42,11 @@ import com.raytheon.viz.pointdata.lookup.LookupUtils;
  * ------------ ---------- -----------      --------------------------
  * 10/10/2019   71272       Mark Peters     Initial Creation
  * 01/13/2020   73084       K Sunil         added a new svgClass field, changed mode to displayType.
+<<<<<<< HEAD
+=======
+ * Mar 24, 2020 75529       ksunil          added new isMetarPrcp field
+ * Apr 10, 2020 77336       ksunil          Removed isMetarPrcp. Can use ptype instead
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -88,6 +93,19 @@ public class PlotParameterDefinition {
     @XmlAttribute
     private String functionTable;
 
+<<<<<<< HEAD
+=======
+    @XmlAttribute
+    private int duration;
+
+    /*
+     * "precip" or "iceAccum" (or default null). These keywords line up with the
+     * existing metar data container expectations.
+     */
+    @XmlAttribute
+    private String ptype;
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private S2N ranking;
 
     @XmlAttribute
@@ -96,7 +114,11 @@ public class PlotParameterDefinition {
     @XmlAttribute
     private String sampleValue;
 
+<<<<<<< HEAD
     private PlotParameterDefinition() {
+=======
+    public PlotParameterDefinition() {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     public String getSvgClass() {
@@ -194,6 +216,25 @@ public class PlotParameterDefinition {
         return sampleValue;
     }
 
+<<<<<<< HEAD
+=======
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public String getPtype() {
+        return ptype;
+    }
+
+    public void setPtype(String ptype) {
+        this.ptype = ptype;
+    }
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public String toString() {
         return "PlotParameterDefinition [lock=" + lock + ", param=" + param
@@ -202,7 +243,13 @@ public class PlotParameterDefinition {
                 + ", format=" + format + ", trim=" + trim + ", lookupTable="
                 + lookupTable + ", recursiveLookup=" + recursiveLookup
                 + ", lookup=" + lookup + ", functionTable=" + functionTable
+<<<<<<< HEAD
                 + ", ranking=" + ranking + ", index=" + index + ", sampleValue="
                 + sampleValue + "]";
+=======
+                + ", duration=" + duration + ", ptype=" + ptype + ", ranking="
+                + ranking + ", index=" + index + ", sampleValue=" + sampleValue
+                + "]";
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 }

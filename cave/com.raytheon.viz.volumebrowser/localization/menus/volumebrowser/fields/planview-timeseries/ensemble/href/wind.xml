@@ -27,6 +27,7 @@
     <contribute xsi:type="menuItem" menuText="Prob Wind &gt; 10kts"
         key="WSc5" indentText="false" />
     <contribute xsi:type="menuItem" menuText="Prob Wind &gt; 20kts"
+<<<<<<< HEAD
         key="WSc6" indentText="false" />
     <contribute xsi:type="menuItem" menuText="Prob Wind &gt; 30kts"
         key="WSc7" indentText="false" />
@@ -38,5 +39,19 @@
         key="WSc10" indentText="false" />
     <contribute xsi:type="menuItem" menuText="Prob Wind &gt; 100kts"
         key="WSc11" indentText="false" />
+=======
+        key="WSProb20" indentText="false" />
+    <contribute xsi:type="menuItem" menuText="Prob Wind &gt; 30kts"
+        key="WSc7" indentText="false" />
+    <contribute xsi:type="menuItem" menuText="Prob Wind &gt; 40kts"
+        key="WSProb40" indentText="false" />
+    <contribute xsi:type="menuItem" menuText="Prob Wind &gt; 60kts"
+        key="WSProb60" indentText="false" />
+    <contribute xsi:type="menuItem" menuText="Prob Wind &gt; 80kts"
+        key="WSProb80" indentText="false" />
+    <contribute xsi:type="menuItem" menuText="Prob Wind &gt; 100kts"
+        key="WSProb100" indentText="false" />
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 </menuTemplate>

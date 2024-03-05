@@ -35,6 +35,7 @@
 
    <plotParameterDefinition displayName="pressChange3Hour (daPa)" displayType="TEXT" format="%02.0f" param="pressChange3Hour" sampleValue="018" unit="daPa" />
 
+<<<<<<< HEAD
    <plotParameterDefinition displayName="pressChangeChar" displayType="TABLE" lookupTable="press_change_char_lookup.txt" param="pressChangeChar" sampleValue="KOAX" svgClass="weather" />
 
    <plotParameterDefinition displayName="temperature (°F)" displayType="TEXT" format="%3.0f" param="temperature" sampleValue="75" unit="°F" />
@@ -54,6 +55,41 @@
    <plotParameterDefinition displayName="windDir" displayType="ARROWUV" param="windSpeed,windDir" sampleValue="16,17" unit="kts" />
 
    <plotParameterDefinition displayName="windGust (kts)" displayType="TEXT" param="windGust" sampleValue="8" unit="kts" />
+=======
+   <plotParameterDefinition displayName="pressChangeChar" displayType="TABLE" lookupTable="press_change_char_lookup.txt" param="pressChangeChar" sampleValue="5" svgClass="weather" />
+
+   <plotParameterDefinition displayName="temperature (°F)" displayType="TEXT" format="%3.0f" param="temperature" sampleValue="75" unit="°F" />
+
+   <plotParameterDefinition displayName="temperature (°C)" displayType="TEXT" format="%3.0f" param="temperature" sampleValue="24" unit="°C" />
+
+   <plotParameterDefinition displayName="dewpoint (°F)" displayType="TEXT" format="%3.0f" param="dewpoint" sampleValue="59" unit="°F" />
+
+   <plotParameterDefinition displayName="dewpoint (°C)" displayType="TEXT" format="%3.0f" param="dewpoint" sampleValue="15" unit="°C" />
+
+   <plotParameterDefinition displayName="peakWindSpeed (kts)" displayType="TEXT" format="PK%2.0f" param="peakWindSpeed" sampleValue="59" unit="kts" />
+   <plotParameterDefinition displayName="peakWindSpeed (mph)" displayType="TEXT" format="PK%2.0f" param="peakWindSpeed" sampleValue="59" unit="mph" />
+   <plotParameterDefinition displayName="peakWindSpeed (m/s)" displayType="TEXT" format="PK%2.0f" param="peakWindSpeed" sampleValue="59" unit="m/s" />
+
+   <plotParameterDefinition displayName="seaSurfaceTemp (°F)" displayType="TEXT" format="%3.0f" param="seaSurfaceTemp" sampleValue="75" unit="°F" />
+
+   <plotParameterDefinition displayName="seaSurfaceTemp (°C)" displayType="TEXT" format="%3.0f" param="seaSurfaceTemp" sampleValue="24" unit="°C" />
+
+   <plotParameterDefinition displayName="presWeather" displayType="TABLE" lookupTable="wx_symbol_trans.txt" param="presWeather" recursiveLookup="true" sampleValue="UP" svgClass="weather" />
+
+   <plotParameterDefinition displayName="windSpeed,windDir,windGust (kts)" displayType="BARB" param="windSpeed,windDir,windGust" sampleValue="0,1,2" unit="kts" />
+   <plotParameterDefinition displayName="windSpeed,windDir,windGust (mph)" displayType="BARB" param="windSpeed,windDir,windGust" sampleValue="0,1,2" unit="mph" />
+   <plotParameterDefinition displayName="windSpeed,windDir,windGust (m/s)" displayType="BARB" param="windSpeed,windDir,windGust" sampleValue="0,1,2" unit="m/s" />
+
+   <plotParameterDefinition displayName="windBarb (kts)" displayType="BARB" param="windSpeed,windDir" sampleValue="16,17" unit="kts" />
+   <plotParameterDefinition displayName="windBarb (mph)" displayType="BARB" param="windSpeed,windDir" sampleValue="16,17" unit="mph" />
+   <plotParameterDefinition displayName="windBarb (m/s)" displayType="BARB" param="windSpeed,windDir" sampleValue="16,17" unit="m/s" />
+
+   <plotParameterDefinition displayName="windDir" displayType="ARROWUV" param="windSpeed,windDir" sampleValue="16,17" unit="kts" />
+
+   <plotParameterDefinition displayName="windGust (kts)" displayType="TEXT" param="windGust" format="%02.0f" sampleValue="8" unit="kts" />
+   <plotParameterDefinition displayName="windGust (mph)" displayType="TEXT" param="windGust" format="%02.0f" sampleValue="8" unit="mph" />
+   <plotParameterDefinition displayName="windGust (m/s)" displayType="TEXT" param="windGust" format="%02.0f" sampleValue="8" unit="m/s" />
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
    <plotParameterDefinition displayName="Marker" displayType="MARKER" param="Marker" sampleValue=" " svgClass="marker" />
 

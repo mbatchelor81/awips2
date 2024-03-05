@@ -1,25 +1,41 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
 package com.raytheon.uf.viz.xy.varheight.rsc;
 
 import java.util.Map;
+<<<<<<< HEAD
+=======
+import java.util.Objects;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -53,9 +69,15 @@ import com.raytheon.uf.viz.xy.varheight.adapter.AbstractVarHeightAdapter;
 
 /**
  * Resource data for var height displays
+<<<<<<< HEAD
  * 
  * <pre>
  * 
+=======
+ *
+ * <pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * SOFTWARE HISTORY
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
@@ -64,6 +86,7 @@ import com.raytheon.uf.viz.xy.varheight.adapter.AbstractVarHeightAdapter;
  *                                     with hodo.
  * May 08, 2014 2060       njensen     Constructor sets alert parser
  * Apr 15, 2019 7596       tgurney     Added xml adapter for Coordinate class.
+<<<<<<< HEAD
  * 
  * </pre>
  * 
@@ -71,6 +94,14 @@ import com.raytheon.uf.viz.xy.varheight.adapter.AbstractVarHeightAdapter;
  * @version 1.0
  */
 
+=======
+ * Oct 29, 2022 8959       mapeters    Update how data time levels are set
+ *
+ * </pre>
+ *
+ * @author njensen
+ */
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 @XmlAccessorType(XmlAccessType.NONE)
 public class VarHeightResourceData extends AbstractRequestableResourceData
         implements IPointsToolContainer, ICombinedResourceData {
@@ -105,6 +136,7 @@ public class VarHeightResourceData extends AbstractRequestableResourceData
         this.setAlertParser(new DataCubeAlertMessageParser());
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -113,6 +145,8 @@ public class VarHeightResourceData extends AbstractRequestableResourceData
      * (com.raytheon.uf.viz.core.rsc.LoadProperties,
      * com.raytheon.uf.viz.core.drawables.IDescriptor)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public AbstractVizResource<?, ?> construct(LoadProperties loadProperties,
             IDescriptor descriptor) throws VizException {
@@ -125,6 +159,7 @@ public class VarHeightResourceData extends AbstractRequestableResourceData
         return super.construct(loadProperties, descriptor);
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -132,6 +167,8 @@ public class VarHeightResourceData extends AbstractRequestableResourceData
      * com.raytheon.uf.viz.core.rsc.AbstractRequestableResourceData#update(java
      * .lang.Object)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void update(Object updateData) {
 
@@ -154,8 +191,13 @@ public class VarHeightResourceData extends AbstractRequestableResourceData
                  * This is here to allow more flexibility in bundles, if a
                  * bundle has no point than use the point in the pdo.
                  */
+<<<<<<< HEAD
                 point = ((ISpatialEnabled) pdo).getSpatialObject()
                         .getGeometry().getCoordinate();
+=======
+                point = ((ISpatialEnabled) pdo).getSpatialObject().getGeometry()
+                        .getCoordinate();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
             AbstractVarHeightAdapter<?> adapter = getAdapter(pdo);
             adapter.setResourceData(this);
@@ -200,8 +242,14 @@ public class VarHeightResourceData extends AbstractRequestableResourceData
                     }
                 }
                 if (!useAdapter) {
+<<<<<<< HEAD
                     for (Class<?> clazz = object.getClass(); clazz != PluginDataObject.class; clazz = clazz
                             .getSuperclass()) {
+=======
+                    for (Class<?> clazz = object
+                            .getClass(); clazz != PluginDataObject.class; clazz = clazz
+                                    .getSuperclass()) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         if (clazz.getName().equals(targetClass)) {
                             useAdapter = true;
                             break;
@@ -217,8 +265,13 @@ public class VarHeightResourceData extends AbstractRequestableResourceData
                     if (value == null) {
                         value = "null";
                     }
+<<<<<<< HEAD
                     if (!value.toString().equals(
                             constraint.getAttribute("value"))) {
+=======
+                    if (!value.toString()
+                            .equals(constraint.getAttribute("value"))) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         useAdapter = false;
                         break;
                     }
@@ -252,9 +305,14 @@ public class VarHeightResourceData extends AbstractRequestableResourceData
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
+<<<<<<< HEAD
         result = prime
                 * result
                 + ((combineOperation == null) ? 0 : combineOperation.hashCode());
+=======
+        result = prime * result + ((combineOperation == null) ? 0
+                : combineOperation.hashCode());
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         result = prime * result
                 + ((parameter == null) ? 0 : parameter.hashCode());
         result = prime * result
@@ -262,6 +320,7 @@ public class VarHeightResourceData extends AbstractRequestableResourceData
         result = prime * result + ((point == null) ? 0 : point.hashCode());
         result = prime * result
                 + ((pointLetter == null) ? 0 : pointLetter.hashCode());
+<<<<<<< HEAD
         result = prime
                 * result
                 + ((secondaryResource == null) ? 0 : secondaryResource
@@ -270,12 +329,19 @@ public class VarHeightResourceData extends AbstractRequestableResourceData
                 * result
                 + ((secondaryResourceData == null) ? 0 : secondaryResourceData
                         .hashCode());
+=======
+        result = prime * result + ((secondaryResource == null) ? 0
+                : secondaryResource.hashCode());
+        result = prime * result + ((secondaryResourceData == null) ? 0
+                : secondaryResourceData.hashCode());
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         result = prime * result + ((source == null) ? 0 : source.hashCode());
         return result;
     }
 
     @Override
     public boolean equals(Object obj) {
+<<<<<<< HEAD
         if (this == obj)
             return true;
         if (!super.equals(obj))
@@ -320,6 +386,43 @@ public class VarHeightResourceData extends AbstractRequestableResourceData
                 return false;
         } else if (!source.equals(other.source))
             return false;
+=======
+        if (this == obj) {
+            return true;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        VarHeightResourceData other = (VarHeightResourceData) obj;
+        if (combineOperation != other.combineOperation) {
+            return false;
+        }
+        if (!Objects.equals(parameter, other.parameter)) {
+            return false;
+        }
+        if (!Objects.equals(parameterName, other.parameterName)) {
+            return false;
+        }
+        if (!Objects.equals(point, other.point)) {
+            return false;
+        }
+        if (!Objects.equals(pointLetter, other.pointLetter)) {
+            return false;
+        }
+        if (!Objects.equals(secondaryResource, other.secondaryResource)) {
+            return false;
+        }
+        if (!Objects.equals(secondaryResourceData,
+                other.secondaryResourceData)) {
+            return false;
+        }
+        if (!Objects.equals(source, other.source)) {
+            return false;
+        }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return true;
     }
 
@@ -367,38 +470,48 @@ public class VarHeightResourceData extends AbstractRequestableResourceData
         this.pointLetter = pointLetter;
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
      * @see
      * com.raytheon.viz.core.rsc.ICombinedResourceData#getCombineOperation()
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public CombineOperation getCombineOperation() {
         return this.combineOperation;
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
      * @see com.raytheon.viz.core.rsc.ICombinedResourceData#getSecondaryData()
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public AbstractResourceData getSecondaryData() {
         return secondaryResourceData;
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
      * @see
      * com.raytheon.viz.core.rsc.ICombinedResourceData#getSecondaryResource()
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public AbstractVizResource<?, ?> getSecondaryResource() {
         return secondaryResource;
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -406,12 +519,15 @@ public class VarHeightResourceData extends AbstractRequestableResourceData
      * com.raytheon.viz.core.rsc.ICombinedResourceData#setCombineOperation(com
      * .raytheon.viz.core.rsc.ICombinedResourceData.CombineOperation)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void setCombineOperation(CombineOperation operation) {
         this.combineOperation = operation;
 
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -419,6 +535,8 @@ public class VarHeightResourceData extends AbstractRequestableResourceData
      * com.raytheon.viz.core.rsc.ICombinedResourceData#setSecondaryData(com.
      * raytheon.uf.viz.core.rsc.AbstractResourceData)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void setSecondaryData(AbstractResourceData data) {
         this.secondaryResourceData = data;
@@ -430,7 +548,11 @@ public class VarHeightResourceData extends AbstractRequestableResourceData
     public DataTime[] getAvailableTimes() throws VizException {
         DataTime[] times = super.getAvailableTimes();
         for (DataTime time : times) {
+<<<<<<< HEAD
             time.setLevelValue(null);
+=======
+            time.clearLevel();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         return times;
     }

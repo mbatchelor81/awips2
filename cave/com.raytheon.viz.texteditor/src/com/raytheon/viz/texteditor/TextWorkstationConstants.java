@@ -104,7 +104,11 @@ public class TextWorkstationConstants {
         IPathManager pm = PathManagerFactory.getPathManager();
         ILocalizationFile lf = pm.getLocalizationFile(
                 pm.getContext(LocalizationType.CAVE_STATIC,
+<<<<<<< HEAD
                         LocalizationLevel.SITE),
+=======
+                        LocalizationLevel.WORKSTATION),
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 LocalizationUtil.join("textWs", "textws.prefs"));
 
         return lf;

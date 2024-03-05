@@ -36,6 +36,7 @@
 
    <plotParameterDefinition displayName="precipRain" displayType="TEXT" format="%3.0f" param="precipRain" sampleValue="1" svgClass="text" />
 
+<<<<<<< HEAD
    <plotParameterDefinition displayName="maxTempDay (°F)" displayType="TEXT" format="%3.0f" param="maxTempDay" sampleValue="1" svgClass="text" unit="°F" />
 
    <plotParameterDefinition displayName="minTempNight (°F)" displayType="TEXT" format="%3.0f" param="minTempNight" sampleValue="1" svgClass="text" unit="°F" />
@@ -45,6 +46,23 @@
    <plotParameterDefinition displayName="stdDewpoint (°F)" displayType="TEXT" format="%3.0f" param="stdDewpoint" sampleValue="1" svgClass="text" unit="°F" />
 
    <plotParameterDefinition displayName="presWeather" displayType="TABLE" lookupTable="wx_symbol_trans.txt" param="presWeather" recursiveLookup="true" sampleValue="0" svgClass="weather" />
+=======
+   <plotParameterDefinition displayName="maxTempDay (°F)" displayType="TEXT" format="%3.0f" param="maxTempDay" sampleValue="50" svgClass="text" unit="°F" />
+
+   <plotParameterDefinition displayName="maxTempDay (°C)" displayType="TEXT" format="%3.0f" param="maxTempDay" sampleValue="10" svgClass="text" unit="°C" />
+
+   <plotParameterDefinition displayName="minTempNight (°F)" displayType="TEXT" format="%3.0f" param="minTempNight" sampleValue="50" svgClass="text" unit="°F" />
+
+   <plotParameterDefinition displayName="minTempNight (°C)" displayType="TEXT" format="%3.0f" param="minTempNight" sampleValue="10" svgClass="text" unit="°C" />
+
+   <plotParameterDefinition displayName="stdTemperature (°F)" displayType="TEXT" format="%3.0f" param="stdTemperature" sampleValue="50" svgClass="text" unit="°F" />
+
+   <plotParameterDefinition displayName="stdTemperature (°C)" displayType="TEXT" format="%3.0f" param="stdTemperature" sampleValue="10" svgClass="text" unit="°C" />
+
+   <plotParameterDefinition displayName="stdDewpoint (°F)" displayType="TEXT" format="%3.0f" param="stdDewpoint" sampleValue="1" svgClass="text" unit="°F" />
+
+   <plotParameterDefinition displayName="presWeather" displayType="TABLE" lookupTable="wx_symbol_trans.txt" param="presWeather" recursiveLookup="true" sampleValue="UP" svgClass="weather" />
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
    <plotParameterDefinition displayName="totalSkyCover" displayType="TABLE" lookupTable="bufrmos/mos_clouds_gfsex_s2s.txt" param="totalSkyCover" recursiveLookup="true" sampleValue="1" svgClass="weather" />
 

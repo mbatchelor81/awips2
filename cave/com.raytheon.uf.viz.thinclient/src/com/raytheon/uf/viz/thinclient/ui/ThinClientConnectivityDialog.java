@@ -71,7 +71,7 @@ public class ThinClientConnectivityDialog extends ConnectivityPreferenceDialog {
     private String proxyAddress;
 
     public ThinClientConnectivityDialog(boolean checkAlertViz) {
-        super(checkAlertViz, "Thin Client Connectivity Preferences");
+        super(checkAlertViz);
         IPreferenceStore store = Activator.getDefault().getPreferenceStore();
         dataRefreshMethod = store
                 .getString(ThinClientPreferenceConstants.P_DATA_REFRESH_METHOD);

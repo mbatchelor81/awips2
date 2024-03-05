@@ -26,6 +26,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+<<<<<<< HEAD
+=======
+import org.locationtech.jts.geom.Coordinate;
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.IExtent;
 import com.raytheon.uf.viz.core.IGraphicsTarget;
 import com.raytheon.uf.viz.core.PixelExtent;
@@ -36,11 +41,15 @@ import com.raytheon.uf.viz.core.rsc.LoadProperties;
 import com.raytheon.uf.viz.xy.graph.GraphProperties;
 import com.raytheon.uf.viz.xy.graph.IGraph;
 import com.raytheon.uf.viz.xy.graph.XyGraphDescriptor;
+<<<<<<< HEAD
 import org.locationtech.jts.geom.Coordinate;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * The graph resource is a resource that contains 1-N graphs, lays them out and
  * provides functionality for drawing to them / sampling them
+<<<<<<< HEAD
  * 
  * <pre>
  * 
@@ -61,6 +70,27 @@ import org.locationtech.jts.geom.Coordinate;
 
 public class GraphResource extends
         AbstractVizResource<GraphResourceData, XyGraphDescriptor> {
+=======
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ * Date         Ticket#    Engineer    Description
+ * ------------ ---------- ----------- --------------------------
+ * Sep 29, 2009            mschenke    Initial creation
+ * Mar 04, 2015 4189       nabowle     Copy graphs in paintInternal to prevent
+ *                                     ConcurrentModification in a single thread.
+ * Jul 16, 2015 4220       mapeters    When new graph is added, remove other graphs
+ *                                     if empty, otherwise reconstruct them.
+ * Apr 22, 2022 8791       mapeters    Added setDescriptor
+ *
+ * </pre>
+ *
+ * @author mschenke
+ */
+public class GraphResource
+        extends AbstractVizResource<GraphResourceData, XyGraphDescriptor> {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /** The distance between graphs */
     private static final int GRAPH_DISTANCE = 100;
@@ -81,8 +111,13 @@ public class GraphResource extends
     protected GraphResource(GraphResourceData resourceData,
             LoadProperties loadProperties) {
         super(resourceData, loadProperties);
+<<<<<<< HEAD
         graphs = new ArrayList<IGraph>();
         graphMap = new HashMap<Object, IGraph>();
+=======
+        graphs = new ArrayList<>();
+        graphMap = new HashMap<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override
@@ -96,8 +131,11 @@ public class GraphResource extends
 
     @Override
     protected void initInternal(IGraphicsTarget target) throws VizException {
+<<<<<<< HEAD
         // graphs.add(getDescriptor().constructGraph());
         // newGraphs = true;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override
@@ -105,7 +143,11 @@ public class GraphResource extends
             PaintProperties paintProps) throws VizException {
         GraphProperties props = (GraphProperties) paintProps;
         // TODO Layout graphs in horizontal fashion and paint them
+<<<<<<< HEAD
         if (graphs.size() == 0) {
+=======
+        if (graphs.isEmpty()) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return;
         }
 
@@ -128,8 +170,13 @@ public class GraphResource extends
                 for (int i = graphs.size() - 1; i >= 0; --i) {
                     IGraph graph = graphs.get(i);
                     if (graph.isDisplayed()) {
+<<<<<<< HEAD
                         graph.updateExtent(new PixelExtent(minX, maxX, minY,
                                 maxY));
+=======
+                        graph.updateExtent(
+                                new PixelExtent(minX, maxX, minY, maxY));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         graph.paint(target, paintProps);
                         minY = maxY + GRAPH_DISTANCE;
                         maxY = minY + graphHeight;
@@ -145,8 +192,13 @@ public class GraphResource extends
                 for (int i = graphs.size() - 1; i >= 0; --i) {
                     IGraph graph = graphs.get(i);
                     if (graph.isDisplayed()) {
+<<<<<<< HEAD
                         graph.updateExtent(new PixelExtent(minX, maxX, minY,
                                 maxY));
+=======
+                        graph.updateExtent(
+                                new PixelExtent(minX, maxX, minY, maxY));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         graph.paint(target, paintProps);
                     }
                 }
@@ -158,7 +210,11 @@ public class GraphResource extends
             // copy graphs since graph.paint() can modify graphs.
             List<IGraph> copy = new ArrayList<>(graphs);
             for (IGraph graph : copy) {
+<<<<<<< HEAD
                 if (graph.isDisplayed() == true) {
+=======
+                if (graph.isDisplayed()) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     graph.paint(target, paintProps);
                 }
             }
@@ -170,7 +226,11 @@ public class GraphResource extends
      * Returns the graph associated with this graphable resource, graph will be
      * constructed if doesn't exist, should only be called once by the resource
      * and cached
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param rsc
      * @return the graph associated with this graphable resource
      */
@@ -223,12 +283,20 @@ public class GraphResource extends
 
     /**
      * Returns the closest graph to the grid coordinates
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param gridCoords
      * @return the closest graph to the grid coordinates
      */
     public IGraph getClosestGraph(Coordinate gridCoords) {
+<<<<<<< HEAD
         if (graphs.size() == 0) {
+=======
+        if (graphs.isEmpty()) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return null;
         } else if (graphs.size() == 1) {
             return graphs.get(0);
@@ -254,12 +322,20 @@ public class GraphResource extends
 
     /**
      * Returns the graph furthest from the grid coordinates
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param gridCoords
      * @return the graph furthest from the grid coordinates
      */
     public IGraph getFurthestGraph(Coordinate gridCoords) {
+<<<<<<< HEAD
         if (graphs.size() == 0) {
+=======
+        if (graphs.isEmpty()) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return null;
         } else if (graphs.size() == 1) {
             return graphs.get(0);
@@ -270,8 +346,12 @@ public class GraphResource extends
         IGraph furthest = null;
         double maxDist = Double.MIN_VALUE;
         double yclick = gridCoords.y;
+<<<<<<< HEAD
         for (int i = 0; i < graphs.size(); ++i) {
             IGraph graph = graphs.get(i);
+=======
+        for (IGraph graph : graphs) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if (graph.isDisplayed()) {
                 IExtent extent = graph.getExtent();
                 double dist = Math.min(Math.abs(extent.getMinY() - yclick),
@@ -314,4 +394,18 @@ public class GraphResource extends
         return graphs.size();
     }
 
+<<<<<<< HEAD
+=======
+    @Override
+    public void setDescriptor(XyGraphDescriptor descriptor) {
+        if (descriptor == this.descriptor) {
+            return;
+        }
+        super.setDescriptor(descriptor);
+
+        for (IGraph graph : graphs) {
+            graph.setDescriptor(descriptor);
+        }
+    }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

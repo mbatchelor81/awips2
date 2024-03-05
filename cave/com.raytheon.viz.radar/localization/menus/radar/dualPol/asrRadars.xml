@@ -51,8 +51,12 @@
             <substitute key="elevation" value="0.0--0.0" />
         </contribute>
         <contribute xsi:type="bundleItem" file="bundles/DefaultRadarXY.xml"
+<<<<<<< HEAD
             id="${icao}ASR11UnitStatus" editorType="com.raytheon.viz.radar.ui.xy.RadarXYEditor"
             menuText="ASR-11 Unit Status">
+=======
+            id="${icao}ASR11UnitStatus" menuText="ASR-11 Unit Status">
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="product" value="2" />
             <substitute key="insetMap" value="false" />

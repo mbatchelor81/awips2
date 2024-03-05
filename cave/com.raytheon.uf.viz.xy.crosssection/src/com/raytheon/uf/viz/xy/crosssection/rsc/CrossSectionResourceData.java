@@ -23,6 +23,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+<<<<<<< HEAD
+=======
+import java.util.Objects;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.Set;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -63,6 +67,10 @@ import com.raytheon.uf.viz.xy.crosssection.display.CrossSectionDescriptor;
  * May 08, 2014 2060       njensen     Constructor sets alert parser
  * Mar 28, 2018 6874       dgilling    Return null in constructResource if
  *                                     there's no data.
+<<<<<<< HEAD
+=======
+ * Oct 29, 2022 8959       mapeters    Update how data time levels are set
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -89,6 +97,12 @@ public class CrossSectionResourceData extends AbstractRequestableResourceData {
     @XmlTransient
     private int numLines;
 
+<<<<<<< HEAD
+=======
+    @XmlTransient
+    private String levelType;
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private Set<DataTime> blackListedTimes = new HashSet<>();
 
     public CrossSectionResourceData() {
@@ -99,7 +113,13 @@ public class CrossSectionResourceData extends AbstractRequestableResourceData {
     public AbstractVizResource<?, ?> construct(LoadProperties loadProperties,
             IDescriptor descriptor) throws VizException {
         if (descriptor instanceof CrossSectionDescriptor) {
+<<<<<<< HEAD
             numLines = ((CrossSectionDescriptor) descriptor).getLines().size();
+=======
+            CrossSectionDescriptor csDesc = (CrossSectionDescriptor) descriptor;
+            numLines = csDesc.getLines().size();
+            levelType = csDesc.getLevelType();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         return super.construct(loadProperties, descriptor);
     }
@@ -189,8 +209,14 @@ public class CrossSectionResourceData extends AbstractRequestableResourceData {
                     }
                 }
                 if (!useAdapter) {
+<<<<<<< HEAD
                     for (Class<?> clazz = object.getClass(); clazz != PluginDataObject.class; clazz = clazz
                             .getSuperclass()) {
+=======
+                    for (Class<?> clazz = object
+                            .getClass(); clazz != PluginDataObject.class; clazz = clazz
+                                    .getSuperclass()) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         if (clazz.getName().equals(targetClass)) {
                             useAdapter = true;
                             break;
@@ -206,8 +232,13 @@ public class CrossSectionResourceData extends AbstractRequestableResourceData {
                     if (value == null) {
                         value = "null";
                     }
+<<<<<<< HEAD
                     if (!value.toString().equals(
                             constraint.getAttribute("value"))) {
+=======
+                    if (!value.toString()
+                            .equals(constraint.getAttribute("value"))) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         useAdapter = false;
                         break;
                     }
@@ -233,12 +264,20 @@ public class CrossSectionResourceData extends AbstractRequestableResourceData {
     public DataTime[] getAvailableTimes() throws VizException {
         DataTime[] times = super.getAvailableTimes();
         List<DataTime> newTimes = new ArrayList<>();
+<<<<<<< HEAD
         for (int i = 0; i < times.length; ++i) {
             DataTime time = times[i];
             if (!blackListedTimes.contains(time)) {
                 for (int j = 0; j < numLines; ++j) {
                     DataTime newTime = time.clone();
                     newTime.setLevelValue(new Double(j));
+=======
+        for (DataTime time : times) {
+            if (!blackListedTimes.contains(time)) {
+                for (int j = 0; j < numLines; ++j) {
+                    DataTime newTime = time.clone();
+                    newTime.setLevel((double) j, levelType);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     newTimes.add(newTime);
                 }
             }
@@ -257,7 +296,11 @@ public class CrossSectionResourceData extends AbstractRequestableResourceData {
         for (int i = 0; i < desired.length; ++i) {
             if (desired[i] != null) {
                 stripped[i] = desired[i].clone();
+<<<<<<< HEAD
                 stripped[i].setLevelValue(null);
+=======
+                stripped[i].clearLevel();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         }
 
@@ -265,7 +308,11 @@ public class CrossSectionResourceData extends AbstractRequestableResourceData {
         for (int i = 0; i < current.length; ++i) {
             if (current[i] != null) {
                 sc[i] = current[i].clone();
+<<<<<<< HEAD
                 sc[i].setLevelValue(null);
+=======
+                sc[i].clearLevel();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         }
 
@@ -289,7 +336,11 @@ public class CrossSectionResourceData extends AbstractRequestableResourceData {
 
     public void blackListTime(DataTime time) {
         DataTime cloned = time.clone();
+<<<<<<< HEAD
         cloned.setLevelValue(null);
+=======
+        cloned.clearLevel();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         blackListedTimes.add(cloned);
     }
 
@@ -315,6 +366,7 @@ public class CrossSectionResourceData extends AbstractRequestableResourceData {
             return false;
         }
         CrossSectionResourceData other = (CrossSectionResourceData) obj;
+<<<<<<< HEAD
         if (parameter == null) {
             if (other.parameter != null) {
                 return false;
@@ -327,6 +379,12 @@ public class CrossSectionResourceData extends AbstractRequestableResourceData {
                 return false;
             }
         } else if (!source.equals(other.source)) {
+=======
+        if (!Objects.equals(parameter, other.parameter)) {
+            return false;
+        }
+        if (!Objects.equals(source, other.source)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return false;
         }
         return true;

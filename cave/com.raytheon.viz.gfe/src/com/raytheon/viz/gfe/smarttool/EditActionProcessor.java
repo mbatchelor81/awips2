@@ -58,6 +58,7 @@ import com.raytheon.viz.gfe.dialogs.TimeRangeWarningDialog;
  *
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- --------------------------------------------
+<<<<<<< HEAD
  * May 03, 2010           njensen   Initial creation
  * Nov 07, 2012  1298     rferrel   Keep EmptyEditAreaWarningDialog blocking.
  *                                  Keep TimeRangeWarningdialog blocking.
@@ -67,6 +68,19 @@ import com.raytheon.viz.gfe.dialogs.TimeRangeWarningDialog;
  * Jan 24, 2018  7153     randerso  Changes to allow new GFE config file to be
  *                                  selected when perspective is re-opened.
  * Feb 07, 2018  6882     randerso  Changed to use ReferenceData.isEmpty()
+=======
+ * May 03, 2010           njensen      Initial creation
+ * Nov 07, 2012  1298     rferrel      Keep EmptyEditAreaWarningDialog blocking.
+ *                                     Keep TimeRangeWarningdialog blocking.
+ * Jan 08, 2013  1486     dgilling     Support changes to BaseGfePyController.
+ * Mar 14, 2014  15813    ryu          Fixed default time range used.
+ * Jul 23, 2015  4263     dgilling     Support SmartToolMetadataManager.
+ * Jan 24, 2018  7153     randerso     Changes to allow new GFE config file to be
+ *                                     selected when perspective is re-opened.
+ * Feb 07, 2018  6882     randerso     Changed to use ReferenceData.isEmpty()
+ * Oct 05, 2023  2028154  alockleigh   Fixed NPE occurring in normalCursor() upon shutdown.
+ *                                     (Uncovered after fixing original DR)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -94,7 +108,12 @@ public class EditActionProcessor {
     }
 
     private void busyCursor() {
+<<<<<<< HEAD
         if (PlatformUI.isWorkbenchRunning()) {
+=======
+        if (PlatformUI.isWorkbenchRunning()
+                && !PlatformUI.getWorkbench().isClosing()) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             VizApp.runAsync(new Runnable() {
                 @Override
                 public void run() {
@@ -109,7 +128,12 @@ public class EditActionProcessor {
     }
 
     private void normalCursor() {
+<<<<<<< HEAD
         if (PlatformUI.isWorkbenchRunning()) {
+=======
+        if (PlatformUI.isWorkbenchRunning()
+                && !PlatformUI.getWorkbench().isClosing()) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             VizApp.runAsync(new Runnable() {
                 @Override
                 public void run() {

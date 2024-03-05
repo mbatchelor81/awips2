@@ -25,10 +25,11 @@
 -Dlogback.statusListenerClass=com.raytheon.uf.common.logback.UFLogbackInternalStatusListener
 -Dthrift.stream.maxsize=320
 -Dviz.memory.warn.threshold=10M
+-Dui.thread.monitor.threshold.millis=500
 -Dorg.eclipse.swt.internal.gtk.cairoGraphics=false
 -Dorg.eclipse.swt.internal.gtk.useCairo=false
 -Dhttps.certificate.check=false
--Djava.library.path=/awips2/python/lib/python3.6/site-packages/jep
+-Djava.library.path=/awips2/python/lib/python3.11/site-packages/jep
 -XX:MaxDirectMemorySize=1G
 -XX:+UnlockExperimentalVMOptions
 -XX:G1HeapRegionSize=4M

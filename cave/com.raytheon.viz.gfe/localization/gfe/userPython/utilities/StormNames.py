@@ -6,6 +6,7 @@
 # StormNames
 #
 # Author: swhite
+<<<<<<< HEAD
 # ----------------------------------------------------------------------------
 #
 # SOFTWARE HISTORY
@@ -52,10 +53,56 @@ NameDict = {
                      "Gonzalo", "Hanna", "Isaias", "Josephine", "Kyle", "Laura",
                      "Marco", "Nana", "Omar", "Paulette", "Rene", "Sally", "Teddy",
                      "Vicky", "Wilfred"],
+=======
+# May  8, 2020  22033     tlefebvre   Added WestPac storm names.
+# Aug  5, 2021  22531     pSantos     Fixed typos in a couple of storm names.
+# Aug 24, 2021  22531     tlefebvr    Replace several storm names based on updated list.
+# Sep 26, 2021  8657      randerso    Change lists to tuples for immutablility.
+#                                     Removed Nones from Central Pacific lists 1-3
+# ----------------------------------------------------------------------------
+
+NameDict = {
+            "Atlantic": {
+                #  List 1 - 2021, 2027
+                3: ("None", "Ana", "Bill", "Claudette", "Danny", "Elsa", "Fred", "Grace",
+                     "Henri", "Ida", "Julian", "Kate", "Larry", "Mindy",
+                     "Nicholas", "Odette", "Peter", "Rose", "Sam", "Teresa",
+                     "Victor", "Wanda"),
+
+                #  List 2 - 2022, 2028
+                4: ("None", "Alex", "Bonnie", "Colin", "Danielle", "Earl", "Fiona",
+                     "Gaston", "Hermine", "Ian", "Julia", "Karl", "Lisa", "Martin",
+                     "Nicole", "Owen", "Paula", "Richard", "Shary", "Tobias",
+                     "Virginie", "Walter"),
+
+                #  List 3 - 2023, 2029
+                5: ("None", "Arlene", "Bret", "Cindy", "Don", "Emily", "Franklin", "Gert",
+                     "Harold", "Idalia", "Jose", "Katia", "Lee", "Margot", "Nigel",
+                     "Ophelia", "Philippe", "Rina", "Sean", "Tammy", "Vince",
+                     "Whitney"),
+
+                #  List 4 - 2024, 2030
+                0: ("None", "Alberto", "Beryl", "Chris", "Debby", "Ernesto", "Francine", "Gordon",
+                     "Helene", "Isaac", "Joyce", "Kirk", "Leslie", "Milton", "Nadine",
+                     "Oscar", "Patty", "Rafael", "Sara", "Tony", "Valerie", "William"),
+
+                #  List 5 - 2025, 2031
+                1: ("None", "Andrea", "Barry", "Chantal", "Dexter", "Erin", "Fernand",
+                     "Gabrielle", "Humberto", "Imelda", "Jerry", "Karen",
+                     "Lorenzo", "Melissa", "Nestor", "Olga", "Pablo", "Rebekah",
+                     "Sebastien", "Tanya", "Van", "Wendy"),
+
+                #  List 6 - 2020, 2026
+                2: ("None", "Arthur", "Bertha", "Cristobal", "Dolly", "Edouard", "Fay",
+                     "Gonzalo", "Hanna", "Isaias", "Josephine", "Kyle", "Leah",
+                     "Marco", "Nana", "Omar", "Paulette", "Rene", "Sally", "Teddy",
+                     "Vicky", "Wilfred"),
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             },
 
             "Eastern Pacific": {
+<<<<<<< HEAD
                 
                 #  List 1 - 2025
                 0 : ["Aletta", "Bud", "Carlotta", "Daniel", "Emilia", "Fabio",
@@ -115,6 +162,67 @@ NameDict = {
     
             "Western Pacific" : {
                 0 : ["None", "Damrey", "Haikui", "Kirogi", "Yun-yeung", "Koinu", "Bolaven",
+=======
+
+                #  List 1 - 2024
+                0: ("None", "Aletta", "Bud", "Carlotta", "Daniel", "Emilia", "Fabio",
+                     "Gilma", "Hector", "Ileana", "John", "Kristy", "Lane",
+                     "Miriam", "Norman", "Olivia", "Paul", "Rosa", "Sergio", "Tara",
+                     "Vicente", "Willa", "Xavier", "Yolanda", "Zeke"),
+
+                #  List 2 - 2025
+                1: ("None", "Alvin", "Barbara", "Cosme", "Dalila", "Erick", "Flossie",
+                     "Gil", "Henriette", "Ivo", "Juliette", "Kiko", "Lorena",
+                     "Manuel", "Narda", "Octave", "Priscilla", "Raymond", "Sonia",
+                     "Tico", "Velma", "Wallis", "Xina", "York", "Zelda"),
+
+                #  List 3 - 2026
+                2: ("None", "Amanda", "Boris", "Cristina", "Douglas", "Elida", "Fausto",
+                     "Genevieve", "Hernan", "Iselle", "Julio", "Karina", "Lowell",
+                     "Marie", "Norbert", "Odalys", "Polo", "Rachel", "Simon",
+                     "Trudy", "Vance", "Winnie", "Xavier", "Yolanda", "Zeke"),
+
+                #  List 4 - 2021
+                3: ("None", "Andres", "Blanca", "Carlos", "Dolores", "Enrique", "Felicia",
+                     "Guillermo", "Hilda", "Ignacio", "Jimena", "Kevin", "Linda",
+                     "Marty", "Nora", "Olaf", "Pamela", "Rick", "Sandra", "Terry",
+                     "Vivian", "Waldo", "Xina", "York", "Zelda"),
+
+                #  List 5 - 2022
+                4: ("None", "Agatha", "Blas", "Celia", "Darby", "Estelle", "Frank",
+                     "Georgette", "Howard", "Ivette", "Javier", "Kay", "Lester",
+                     "Madeline", "Newton", "Orlene", "Paine", "Roslyn", "Seymour",
+                     "Tina", "Virgil", "Winifred", "Xavier", "Yolanda", "Zeke"),
+
+                #  List 6 - 2023
+                5: ("None", "Adrian", "Beatriz", "Calvin", "Dora", "Eugene", "Fernanda",
+                     "Greg", "Hilary", "Irwin", "Jova", "Kenneth", "Lidia", "Max",
+                     "Norma", "Otis", "Pilar", "Ramon", "Selma", "Todd", "Veronica",
+                     "Wiley", "Xina", "York", "Zelda"),
+            },
+
+            "Central Pacific": {
+
+                #  List 1 -
+                0: ("None", "Akoni", "Ema", "Hone", "Iona", "Keli", "Lala", "Moke", "Nolo",
+                     "Olana", "Pena", "Ulana", "Wale"),
+
+                #  List 2 -
+                1: ("Aka", "Ekeka", "Hene", "Iolana", "Keoni", "Lino", "Mele",
+                     "Nona", "Oliwa", "Pama", "Upana", "Wene"),
+
+                #  List 3 -
+                2: ("Alika", "Ele", "Huko", "Iopa", "Kika", "Lana", "Maka", "Neki",
+                     "Omeka", "Pewa", "Unala", "Wali"),
+
+                #  List 4 -
+                3: ("Ana", "Ela", "Halola", "Iune", "Kilo", "Loke", "Malia",
+                     "Niala", "Oho", "Pali", "Ulika", "Walaka"),
+            },
+
+            "Western Pacific": {
+                0: ("None", "Damrey", "Haikui", "Kirogi", "Yun-yeung", "Koinu", "Bolaven",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                      "Sanba", "Jelawat", "Ewiniar", "Maliksi", "Gaemi", "Prapiroon", "Maria",
                      "Son-Tinh", "Ampil", "Wukong", "Jongdari", "Shanshan", "Yagi",
                      "Leepi", "Bebinca", "Rumbia", "Soulik", "Cimaron", "Jebi", "Mangkhut",
@@ -134,7 +242,26 @@ NameDict = {
                      "Hinnamnor", "Muifa", "Merbok", "Nanmadol", "Talas", "Noru", "Kulap",
                      "Roke", "Sonca", "Nesat", "Haitang", "Nalgae", "Banyan", "Yamaneko", "Pakhar",
                      "Sanvu", "Mawar", "Guchol", "Talim", "Doksuri", "Khanun", "Lan", "Saola",
+<<<<<<< HEAD
                      ],
                                  }
 
             }
+=======
+                     ),
+                     },
+            "Atlantic_Supplemental": ("Adria", "Braylen", "Caridad", "Deshawn", "Emery", "Foster",
+                                       "Gemma", "Heath", "Isla", "Jacobus", "Kenzie", "Lucio",
+                                       "Makayla", "Nolan", "Orlanda", "Pax", "Ronin", "Sophie",
+                                       "Tayshaun", "Viviana", "Will",
+                                       ),
+
+            "Eastern Pacific_Supplemental": ("Aidan", "Bruna", "Carmelo", "Daniella", "Esteban",
+                                              "Flor", "Gerardo", "Hedda", "Izzy", "Jacinta",
+                                              "Kenito", "Luna", "Marina", "Nancy", "Ovidio", "Pia",
+                                              "Rey", "Skylar", "Teo", "Violeta", "Wilfredo",
+                                              "Xinia", "Yariel", "Zoe",
+                                              )
+
+            }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

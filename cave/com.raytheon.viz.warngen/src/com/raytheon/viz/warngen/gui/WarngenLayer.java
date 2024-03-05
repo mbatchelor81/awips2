@@ -164,7 +164,7 @@ import com.raytheon.viz.warngen.util.FipsUtil;
 
 import si.uom.SI;
 import systems.uom.common.USCustomary;
-import tec.uom.se.unit.MetricPrefix;
+import javax.measure.MetricPrefix;
 
 /**
  * Warngen drawing layer. Need to do EVERYTHING in stereographic over centoid of
@@ -291,6 +291,7 @@ import tec.uom.se.unit.MetricPrefix;
  * 02/06/2019  7728        randerso    Use getInteriorPt instead of getCentroid for placement of W
  * 04/15/2019  7596        lsingh      Updated units framework to JSR-363.
  * 02/10/2020  21856       jkelmer     Allows for fallback to getCentroid if getInteriorPoint fails
+ * 02/15/2023  DR23452     dkingfield  Update WarnGen templates read into getGeospatialDataAcessor()
  *
  * </pre>
  *
@@ -301,7 +302,7 @@ public class WarngenLayer extends AbstractStormTrackResource {
             .getHandler(WarngenLayer.class);
 
     private static final IPerformanceStatusHandler perfLog = PerformanceStatus
-            .getHandler("WG:");
+            .getHandler("WG");
 
     protected static final UnitConverter MILES_TO_METER = USCustomary.MILE
             .getConverterTo(SI.METRE);
@@ -2540,17 +2541,17 @@ public class WarngenLayer extends AbstractStormTrackResource {
         if (gdl == null) {
             // Cause county geospatial data to be loaded
             /*
-             * TODO This code needs to be refactored because 'tornadoWarning'
-             * should not be hard coded. What if the file tornadoWarning does
-             * not exist in the base? The 'tornadoWarning' was originally not
+             * TODO This code needs to be refactored because 'impactTornadoWarning'
+             * should not be hard coded. What if the file impactTornadoWarning does
+             * not exist in the base? The 'impactTornadoWarning' was originally not
              * the filename. What happens in the future if the base file gets
              * changed again? A ticket should be opened for this to be resolved.
              */
             String templateName;
             if (type == GeoFeatureType.COUNTY) {
-                templateName = "tornadoWarning";
+                templateName = "impactTornadoWarning";
             } else if (type == GeoFeatureType.MARINE) {
-                templateName = "specialMarineWarning";
+                templateName = "impactSpecialMarineWarning";
             } else {
                 throw new IllegalArgumentException(
                         "Unsupported geo feature type " + type);
@@ -4328,7 +4329,6 @@ public class WarngenLayer extends AbstractStormTrackResource {
                                     + "Falling back to getCentroid.", e);
                             interiorPt = warningAreaM.getCentroid();
                         }
-                        
                         populatePt = new Coordinate(interiorPt.getX(),
                                 interiorPt.getY());
                         populatePtGeom = PolygonUtil.createPolygonByPoints(gf,

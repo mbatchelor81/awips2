@@ -24,16 +24,23 @@
         of the file.
     -->
 <menuTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
     <contribute xsi:type="bundleItem"
         file="bundles/DefaultRadarCodedMessage.xml" menuText="10km Radar Coded Msg"
         id="10kmRadarCodedMsg">
     </contribute>
     <contribute xsi:type="subinclude" fileName="menus/radar/airportRadars.xml" />
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <contribute xsi:type="titleItem" titleText="------ Mosaic ------"
         id="RadarMosaic" />
     <contribute xsi:type="bundleItem" file="bundles/DefaultRadarMosaic.xml"
         menuText="0.5 Reflectivity" id="Radar05Reflectivity">
+<<<<<<< HEAD
         <substitute key="product" value="19" />
+=======
+        <substitute key="product" value="153" />
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="elevation" value="0.5" />
         <substitute key="name" value="0.5 Reflectivity" />
     </contribute>
@@ -133,4 +140,8 @@
     <contribute xsi:type="separator" id="RadarApplicationsSeparator" />
     <contribute xsi:type="subinclude"
         fileName="menus/radar/baseRadarApplications.xml" />
+<<<<<<< HEAD
 </menuTemplate>
+=======
+</menuTemplate>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

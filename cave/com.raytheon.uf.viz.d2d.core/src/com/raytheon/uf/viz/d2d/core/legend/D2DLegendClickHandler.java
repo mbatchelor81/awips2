@@ -22,7 +22,6 @@ package com.raytheon.uf.viz.d2d.core.legend;
 import com.raytheon.uf.common.status.UFStatus.Priority;
 import com.raytheon.uf.viz.core.IDisplayPane;
 import com.raytheon.uf.viz.core.IDisplayPaneContainer;
-import com.raytheon.uf.viz.core.IExtent;
 import com.raytheon.uf.viz.core.VizApp;
 import com.raytheon.uf.viz.core.drawables.IDescriptor;
 import com.raytheon.uf.viz.core.drawables.IRenderableDisplay;
@@ -56,6 +55,8 @@ import com.raytheon.viz.ui.input.EditableManager;
  *                                      toggle product visibility.
  * Jan 21, 2019  7641      bsteffen     Toggle visibility in other panes only
  *                                      if entire ResourcePair is equal.
+ * Feb 09, 2023  9011      mapeters     Use canvas coords instead of world
+ *                                      coords in some places
  *
  * </pre>
  *
@@ -99,8 +100,8 @@ public class D2DLegendClickHandler extends AbstractD2DLegendInputHandler {
                     .getRenderableDisplay();
             if (display.getDescriptor() == resource.getDescriptor()) {
                 // Verify we are on our own pane
-                mouseDownRsc = resource.checkLabelSpace(
-                        display.getDescriptor(), activePane.getTarget(), x, y);
+                mouseDownRsc = resource.checkLabelSpace(display.getDescriptor(),
+                        activePane.getTarget(), x, y);
                 return mouseDownRsc != null;
             }
         }
@@ -115,8 +116,8 @@ public class D2DLegendClickHandler extends AbstractD2DLegendInputHandler {
             IDisplayPane activePane = container.getActiveDisplayPane();
             IRenderableDisplay display = container.getActiveDisplayPane()
                     .getRenderableDisplay();
-            ResourcePair rsc = resource.checkLabelSpace(
-                    display.getDescriptor(), activePane.getTarget(), x, y);
+            ResourcePair rsc = resource.checkLabelSpace(display.getDescriptor(),
+                    activePane.getTarget(), x, y);
 
             if (rsc != null && rsc == mouseDownRsc) {
                 mouseDownRsc = null;
@@ -124,9 +125,8 @@ public class D2DLegendClickHandler extends AbstractD2DLegendInputHandler {
                 // Get the index of the toggled resource, -1 means
                 // ignore blended-ness
                 int idxOfToggled = -1;
-                if (rsc.getResource() != null
-                        && rsc.getResource().hasCapability(
-                                BlendedCapability.class)) {
+                if (rsc.getResource() != null && rsc.getResource()
+                        .hasCapability(BlendedCapability.class)) {
                     ResourcePair blended = rsc.getResource()
                             .getCapability(BlendedCapability.class)
                             .getBlendableResource();
@@ -145,22 +145,16 @@ public class D2DLegendClickHandler extends AbstractD2DLegendInputHandler {
                     }
                 }
 
-                IExtent extent = descriptor.getRenderableDisplay().getExtent();
-                double ratio = extent.getHeight()
-                        / descriptor.getRenderableDisplay().getBounds().height;
-                double worldY = extent.getMinY() + (y * ratio);
                 for (IDisplayPane pane : container.getDisplayPanes()) {
                     if (pane == activePane) {
                         continue;
                     }
                     if (idxOfToggled > -1) {
                         ResourcePair[] pairs = resource.checkYLabelSpace(
-                                pane.getDescriptor(), pane.getTarget(), worldY,
-                                ratio);
+                                pane.getDescriptor(), pane.getTarget(), y);
                         ResourcePair toCheck = null;
                         for (ResourcePair pair : pairs) {
-                            if (pair != null
-                                    && pair.getResource() != null
+                            if (pair != null && pair.getResource() != null
                                     && pair.getResource().hasCapability(
                                             BlendableCapability.class)) {
                                 toCheck = pair;
@@ -195,69 +189,55 @@ public class D2DLegendClickHandler extends AbstractD2DLegendInputHandler {
             }
         }
 
-        // if (panned) {
-        // panned = false;
-        // }
         mouseDownRsc = null;
 
         final IDisplayPane activePane = container.getActiveDisplayPane();
         if (activePane == null || activePane.getDescriptor() != descriptor) {
             return false;
         }
-        final ResourcePair[] rsc = new ResourcePair[] { null };
-        rsc[0] = resource.checkLabelSpace(descriptor, activePane.getTarget(),
-                x, y);
-        if (rsc[0] != null && rsc[0].getResource() != null) {
+        final ResourcePair rsc = resource.checkLabelSpace(descriptor,
+                activePane.getTarget(), x, y);
+        if (rsc != null && rsc.getResource() != null) {
             if (prefManager.handleClick(EDIT_RESOURCE_PREF, mouseButton)
                     && lastX == x && lastY == y) {
-                if (rsc[0].getResource()
-                        .hasCapability(EditableCapability.class)) {
+                if (rsc.getResource().hasCapability(EditableCapability.class)) {
                     // check / make editable
-                    EditableManager.makeEditable(
-                            rsc[0].getResource(),
-                            !rsc[0].getResource()
+                    EditableManager.makeEditable(rsc.getResource(),
+                            !rsc.getResource()
                                     .getCapability(EditableCapability.class)
                                     .isEditable());
                     container.refresh();
                     return true;
                 }
-                if (rsc[0].getResource() instanceof IMiddleClickCapableResource) {
+                if (rsc.getResource() instanceof IMiddleClickCapableResource) {
                     try {
-                        ((IMiddleClickCapableResource) rsc[0].getResource())
+                        ((IMiddleClickCapableResource) rsc.getResource())
                                 .middleClicked();
                     } catch (VizException e) {
-                        statusHandler
-                                .handle(Priority.PROBLEM,
-                                        "An error occurred while processing the mouse action",
-                                        e);
+                        statusHandler.handle(Priority.PROBLEM,
+                                "An error occurred while processing the mouse action",
+                                e);
                     }
                     return true;
                 }
             } else if (prefManager.handleClick(SHOW_COLOR_EDIT, mouseButton)) {
-                if (rsc[0].getResource()
-                        .hasCapability(ColorMapCapability.class)) {
-                    VizApp.runAsync(new Runnable() {
-                        @Override
-                        public void run() {
-                            ColorEditDialogAction action = new ColorEditDialogAction();
-                            action.setSelectedRsc(rsc[0]);
-                            action.setContainer(container);
-                            action.run();
-                        }
+                if (rsc.getResource().hasCapability(ColorMapCapability.class)) {
+                    VizApp.runAsync(() -> {
+                        ColorEditDialogAction action = new ColorEditDialogAction();
+                        action.setSelectedRsc(rsc);
+                        action.setContainer(container);
+                        action.run();
                     });
                 } else {
-                    VizApp.runAsync(new Runnable() {
-                        @Override
-                        public void run() {
-                            AbstractRightClickAction parent = new AbstractRightClickAction() {
+                    VizApp.runAsync(() -> {
+                        AbstractRightClickAction parent = new AbstractRightClickAction() {
 
-                            };
-                            parent.setSelectedRsc(rsc[0]);
-                            parent.setContainer(container);
-                            ChooseColorAction action = new ChooseColorAction(
-                                    parent);
-                            action.run();
-                        }
+                        };
+                        parent.setSelectedRsc(rsc);
+                        parent.setContainer(container);
+                        ChooseColorAction action = new ChooseColorAction(
+                                parent);
+                        action.run();
                     });
                 }
                 return true;
@@ -274,13 +254,15 @@ public class D2DLegendClickHandler extends AbstractD2DLegendInputHandler {
      * visible. If not visible then make parent and all children visible.
      *
      * @param rp
+     * @return final visibility state of resource
      */
     private boolean toggleVisibility(ResourcePair rp) {
         AbstractVizResource<?, ?> rsc = rp.getResource();
         if (rsc != null) {
             if (rsc.hasCapability(BlendedCapability.class)) {
-                ResourcePair parentRsc = rsc.getCapability(
-                        BlendedCapability.class).getBlendableResource();
+                ResourcePair parentRsc = rsc
+                        .getCapability(BlendedCapability.class)
+                        .getBlendableResource();
                 ResourceList children = parentRsc.getResource()
                         .getCapability(BlendableCapability.class)
                         .getResourceList();
@@ -293,10 +275,10 @@ public class D2DLegendClickHandler extends AbstractD2DLegendInputHandler {
                     // topmost resource is visible, toggle us and other rsc
                     if (!rp.getProperties().isVisible()) {
                         rp.getProperties().setVisible(true);
-                        parentRsc
-                                .getResource()
+                        parentRsc.getResource()
                                 .getCapability(BlendableCapability.class)
-                                .setAlphaStep(BlendableCapability.BLEND_MAX / 2);
+                                .setAlphaStep(
+                                        BlendableCapability.BLEND_MAX / 2);
                     } else {
                         parentRsc.getResource()
                                 .getCapability(BlendableCapability.class)

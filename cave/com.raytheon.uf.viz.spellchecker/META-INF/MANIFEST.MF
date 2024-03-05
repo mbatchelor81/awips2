@@ -10,7 +10,11 @@ Require-Bundle: org.eclipse.ui,
  com.raytheon.uf.common.localization,
  com.raytheon.uf.common.status,
  com.raytheon.uf.viz.core,
+<<<<<<< HEAD
  com.google.guava;bundle-version="30.0.0",
+=======
+ com.google.guava;bundle-version="32.0.0",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  org.eclipse.jdt.ui,
  com.raytheon.viz.ui
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7

@@ -77,6 +77,10 @@ import jep.NamingConventionClassEnquirer;
  *                                  directly using Jep. Code cleanup.
  * Feb 20, 2018  6602     dgilling  Update for new text utilities path.
  * Jan 07, 2019  21019    ryu       Fix issue of gfeclient hanging on exit.
+<<<<<<< HEAD
+=======
+ * Jun  7, 2023  2034261  tgurney   Fixes for Jep 4 upgrade
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -152,10 +156,17 @@ public class GfeClient extends AbstractAWIPSComponent {
                 GfePyIncludeUtil.getProceduresIncludePath(includeUser));
 
         try (PythonEval pythonEval = new PythonEval(new JepConfig()
+<<<<<<< HEAD
                 .setInteractive(false).setIncludePath(includePath)
                 .setClassLoader(GfeClient.class.getClassLoader())
                 .setClassEnquirer(new NamingConventionClassEnquirer())
                 .setRedirectOutputStreams(true))) {
+=======
+                .setIncludePath(includePath)
+                .setClassLoader(GfeClient.class.getClassLoader())
+                .setClassEnquirer(new NamingConventionClassEnquirer())
+                .redirectStdout(System.out).redirectStdErr(System.err))) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             pythonEval.eval("import sys");
             pythonEval.eval("sys.argv = []");

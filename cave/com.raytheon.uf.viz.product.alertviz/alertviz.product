@@ -30,7 +30,11 @@ Developed on the Raytheon Visualization Environment (viz)
 -Dlogback.configurationFile=logback-alertviz.xml
 -Dlogback.statusListenerClass=com.raytheon.uf.common.logback.UFLogbackInternalStatusListener
 -Dthrift.stream.maxsize=320
+<<<<<<< HEAD
 -Djava.library.path=/awips2/python/lib/python3.6/site-packages/jep
+=======
+-Djava.library.path=/awips2/python/lib/python3.11/site-packages/jep
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
       </vmArgs>
    </launcherArgs>
 
