@@ -32,6 +32,11 @@
 #                                     + cleanup and fixes for postgres 9.5.x
 # Aug  6, 2018 7431       tgurney     Bug fixes. Allow starting without a
 #                                     pg_hba.conf on standby server
+<<<<<<< HEAD
+=======
+# Jul  1, 2021 8544       tgurney     Fixes for move to RHEL PostgreSQL 12
+# Aug 25, 2023 2036097    tgurney     Allow pg_ctl output to display on console
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 ##
 
@@ -63,6 +68,7 @@ log_dir=/awips2/database/replication/logs
 keep_logs=5
 log_file="${log_dir}/setup-standby.$(date +%Y%m%d.%H%M%S).log"
 
+<<<<<<< HEAD
 # Location of PostgreSQL install
 pg_dir=/awips2/postgresql
 
@@ -71,6 +77,8 @@ pg_basebackup=${pg_dir}/bin/pg_basebackup
 pg_ctl=${pg_dir}/bin/pg_ctl
 psql=/awips2/psql/bin/psql
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 as_awips='sudo -u awips -i '
 
 log() {
@@ -81,7 +89,11 @@ log() {
 
 
 do_pg_ctl() {
+<<<<<<< HEAD
     ${as_awips} "${pg_ctl}" -o \"--port=${local_port}\" -D "${data_dir}" $* >/dev/null 2>&1
+=======
+    ${as_awips} pg_ctl -o \"--port=${local_port}\" -D "${data_dir}" $*
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     return $?
 }
 
@@ -215,7 +227,11 @@ fi
 make_clean_db_dirs
 
 # SSL connection string parts
+<<<<<<< HEAD
 # needed for basebackup and recovery.conf
+=======
+# needed for basebackup and postgresql.standby.conf
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 sslmode_part="sslmode=verify-ca"
 sslcert_part="sslcert=${master_ssl_dir}/replication.crt"
 sslkey_part="sslkey=${master_ssl_dir}/replication.key"
@@ -224,7 +240,11 @@ ssl_part="${sslmode_part} ${sslcert_part} ${sslkey_part} ${sslrootcert_part}"
 
 log "INFO: Retrieving base backup from ${master_hostname}"
 log "Enter the password for the '${db_rep_user}' role now, if prompted."
+<<<<<<< HEAD
 ${as_awips} "${pg_basebackup}" \
+=======
+${as_awips} pg_basebackup \
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     --host="${master_hostname}" \
     --verbose --progress \
     --username="${db_rep_user}" \
@@ -237,13 +257,18 @@ if [[ "${PIPESTATUS[0]}" != "0" ]]; then
 fi
 
 
+<<<<<<< HEAD
 # Write recovery.conf
+=======
+# Write configuration
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 host_part="host=${master_hostname}"
 port_part="port=${master_port}"
 user_part="user=${db_rep_user}"
 primary_conninfo="${host_part} ${port_part} ${user_part} ${ssl_part}"
 
+<<<<<<< HEAD
 log "INFO: Writing ${data_dir}/recovery.conf"
 rm -f "${data_dir}/recovery.conf"
 ${as_awips} touch "${data_dir}"/recovery.conf
@@ -255,6 +280,16 @@ trigger_file='${data_dir}/promote'
 EOF
 # Remove recovery.done if it exists
 rm -f "${data_dir}/recovery.done"
+=======
+log "INFO: Writing configuration to ${data_dir}/postgresql.standby.conf"
+cat >> "${data_dir}/postgresql.standby.conf" << EOF || cleanup_exit
+primary_conninfo='${primary_conninfo}' 
+EOF
+# Remove recovery.done if it exists
+rm -f "${data_dir}/recovery.done"
+log "INFO: Writing standby.signal"
+touch "${data_dir}"/standby.signal
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 # Install backed up pg_hba.conf
 restore_pg_hba
@@ -264,7 +299,11 @@ log "INFO: Starting PostgreSQL"
 do_pg_ctl start -w || cleanup_exit
 
 log "INFO: Testing read-only connection to standby"
+<<<<<<< HEAD
 is_recovery=$(${as_awips} "${psql}" \
+=======
+is_recovery=$(${as_awips} psql \
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   -U "${db_superuser}" \
   --port=${local_port} \
   --db=metadata \

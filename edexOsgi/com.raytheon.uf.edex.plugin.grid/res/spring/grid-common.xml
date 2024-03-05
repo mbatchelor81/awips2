@@ -24,7 +24,11 @@
         <property name="pathProvider">
             <ref bean="gridPathProvider" />
         </property>
+<<<<<<< HEAD
         <property name="compression" value="LZF" />
+=======
+        <property name="compression" value="GZIP" />
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     </bean>
 
     <bean id="gridRegistered" factory-bean="pluginRegistry" factory-method="register"

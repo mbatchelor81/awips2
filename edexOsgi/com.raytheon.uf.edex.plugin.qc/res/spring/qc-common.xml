@@ -8,7 +8,11 @@
         <property name="pluginFQN" value="com.raytheon.uf.common.dataplugin.qc" />
         <property name="dao" value="com.raytheon.uf.edex.plugin.qc.dao.QCDao" />
         <property name="record" value="com.raytheon.uf.common.dataplugin.qc.QCRecord" />
+<<<<<<< HEAD
         <property name="compression" value="LZF"/>
+=======
+        <property name="compression" value="GZIP"/>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     </bean>
 
     <bean id="qcPluginRegistered" factory-bean="pluginRegistry" factory-method="register">
@@ -26,4 +30,8 @@
         <constructor-arg value="none" />
     </bean>
 
+<<<<<<< HEAD
 </beans>
+=======
+</beans>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

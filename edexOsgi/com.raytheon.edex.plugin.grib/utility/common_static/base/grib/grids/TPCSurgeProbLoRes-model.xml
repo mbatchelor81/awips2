@@ -7,14 +7,21 @@
     <firstGridPointCorner>LowerLeft</firstGridPointCorner>
     <nx>1423</nx>
     <ny>1450</ny>
+<<<<<<< HEAD
     <dx>2539.703</dx>
     <dy>2539.703</dy>
     <spacingUnit>m</spacingUnit>
+=======
+    <dx>2.539703</dx>
+    <dy>2.539703</dy>
+    <spacingUnit>km</spacingUnit>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <minorAxis>6371200</minorAxis>
     <majorAxis>6371200</majorAxis>
     <lov>-95.0</lov>
     <latin1>25.0</latin1>
     <latin2>25.0</latin2>   
+<<<<<<< HEAD
 </lambertConformalGridCoverage>
 <!--<lambertConformalGridCoverage>
     <name>375</name>
@@ -33,3 +40,6 @@
     <latin1>20.191999</latin1>
     <latin2>25.0</latin2>   
 </lambertConformalGridCoverage>-->
+=======
+</lambertConformalGridCoverage>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

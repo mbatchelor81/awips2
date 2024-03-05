@@ -9,7 +9,11 @@ Bundle-ActivationPolicy: lazy
 Require-Bundle: com.raytheon.uf.common.status,
  com.raytheon.uf.edex.database,
  com.raytheon.uf.common.time,
+<<<<<<< HEAD
  com.google.guava;bundle-version="30.0.0",
+=======
+ com.google.guava;bundle-version="32.0.0",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  com.raytheon.uf.common.util,
  org.apache.camel,
  com.raytheon.uf.common.plugin.hpe,

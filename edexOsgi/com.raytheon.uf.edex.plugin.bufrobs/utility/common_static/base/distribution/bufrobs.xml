@@ -27,4 +27,11 @@
 <requestPatterns xmlns:ns2="group">
     <regex>^IS[IMN]</regex>
     <regex>^IOB</regex>
+<<<<<<< HEAD
+=======
+    <regex>^IOWX</regex>
+    <regex>^ISA[AB]2[0-9] KWNB</regex>
+    <regex>^ISS[ABCDEFGHIJKLNSTX]</regex>
+    <regex>^IORC01 KWNB</regex>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 </requestPatterns>

@@ -18,10 +18,37 @@
         See_the_AWIPS_II_Master_Rights_File_("Master_Rights_File.pdf")_for
         further_licensing_information.
     -->
+<<<<<<< HEAD
    <!--
         This is an incremental override file, indicating that the files
         at different localization levels will be combined.
     -->
+=======
+  <!-- TOWRdocs Header
+        Netcdf Grid Imagery style rules.
+   -->
+   <!-- TOWRdocs Description
+        This file sets style for IMERG and other gridded products currently handled with the netcdfGrid plugin.  This file 
+	controls display legends, units and color tables for the GPM IMERG-Early and IMERG-Late precipitation
+	products. It is a new file not included in the 16.2.1 AWIPS baseline. Configuration for CMORPH is also included
+
+	The default display for gridded data in AWIPS 2 is contour.  An updated to FieldDisplayTypes is added in 
+	this collection under /cave_static/../volumebrowser to make the defaults for IMERG (for example) be "IMAGE" displays.
+	With this implementation, the style rules below are activated.
+
+	The color table and increments below currently match those of the GOES-R WFO collection of localization files.
+    Restart CAVE whenever making changes to this file.  The RR/QPE color table points to the default in the Sat/GOESR-L2 directory.
+
+   -->
+   <!-- TOWRdocs Status
+        Update to baseline file to add blended hydro style rules
+        Ensure units for hours is the letter "h"
+        Labels for satellite number
+   -->
+   <!-- TOWRdocs POC
+        Lee Byerle 8/26/2019
+   -->
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 <styleRuleset>
    <!-- Blended Hydro products -->
     <styleRule>
@@ -180,5 +207,66 @@
       </colorbarLabeling>
     </imageStyle>
     </styleRule>
+<<<<<<< HEAD
+=======
+<!--End of blended hydro products -->
+
+<!--Global Multi-sat Geostationary composites -->
+
+ <styleRule>
+    <paramLevelMatches>
+      <parameter>GLOBALCOMPWV</parameter>
+    </paramLevelMatches>
+    <imageStyle>
+      <interpolate>false</interpolate>
+      <displayUnits label="">bit</displayUnits>
+      <range scale="LINEAR">
+        <minValue>0</minValue>
+        <maxValue>255</maxValue>
+      </range>
+      <defaultColormap>Sat/WV/CIMSS_WV</defaultColormap>
+      <colorbarLabeling>
+          <values>0 50 100 150 200 250</values>
+      </colorbarLabeling>
+    </imageStyle>
+  </styleRule>
+
+ <styleRule>
+    <paramLevelMatches>
+      <parameter>GLOBALCOMPVIS</parameter>
+    </paramLevelMatches>
+    <imageStyle>
+      <interpolate>false</interpolate>
+      <displayUnits label="">bit</displayUnits>
+      <range scale="LINEAR">
+        <minValue>0</minValue>
+        <maxValue>255</maxValue>
+      </range>
+      <defaultColormap>Sat/VIS/ZA (Vis Default)</defaultColormap>
+      <colorbarLabeling>
+          <values>0 50 100 150 200 250</values>
+      </colorbarLabeling>
+    </imageStyle>
+  </styleRule>
+
+ <styleRule>
+    <paramLevelMatches>
+      <parameter>GLOBALCOMPLIR</parameter>
+      <!--<parameter>GLOBALCOMPSIR</parameter> -->
+    </paramLevelMatches>
+    <imageStyle>
+      <interpolate>false</interpolate>
+      <displayUnits label="">bit</displayUnits>
+      <range scale="LINEAR">
+        <minValue>0</minValue>
+        <maxValue>255</maxValue>
+      </range>
+      <defaultColormap>Sat/IR/CIRA (IR Default)</defaultColormap>
+      <colorbarLabeling>
+          <values>0 50 100 150 200 250</values>
+      </colorbarLabeling>
+    </imageStyle>
+  </styleRule>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 </styleRuleset>

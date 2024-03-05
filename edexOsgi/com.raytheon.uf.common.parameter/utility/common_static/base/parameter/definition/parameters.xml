@@ -2445,4 +2445,124 @@
         <abbreviation>TOD9064ktWP5</abbreviation>
         <unit>s</unit>
     </parameter>
+        <parameter>
+        <name>Probability of Max or Min Temp. Below -40 F</name>
+        <abbreviation>T233.0K18hr</abbreviation>
+        <unit>%</unit>
+    </parameter>
+    <parameter>
+        <name>Probability of Max or Min Temp. Below -20 F</name>
+        <abbreviation>T244.0K18hr</abbreviation>
+        <unit>%</unit>
+    </parameter>
+    <parameter>
+        <name>Probability of Max or Min Temp. Below 0 F</name>
+        <abbreviation>T255.0K18hr</abbreviation>
+        <unit>%</unit>
+    </parameter>
+    <parameter>
+        <name>Probability of Max or Min Temp. Below 28 F</name>
+        <abbreviation>T270.0K18hr</abbreviation>
+        <unit>%</unit>
+    </parameter>
+    <parameter>
+        <name>Probability of Max or Min Temp. Below 32 F</name>
+        <abbreviation>Tc1</abbreviation>
+        <unit>%</unit>
+    </parameter>
+    <parameter>
+        <name>Probability of Max or Min Temp. Above 80 F</name>
+        <abbreviation>T299.0K18hr</abbreviation>
+        <unit>%</unit>
+    </parameter>
+    <parameter>
+        <name>Probability of Max or Min Temp. Above 90 F</name>
+        <abbreviation>T305.0K18hr</abbreviation>
+        <unit>%</unit>
+    </parameter>
+    <parameter>
+        <name>Probability of Max or Min Temp. Above 100 F</name>
+        <abbreviation>T310.0K18hr</abbreviation>
+        <unit>%</unit>
+    </parameter>
+    <parameter>
+        <name>Probability of Max or Min Temp. Above 110 F</name>
+        <abbreviation>T316.0K18hr</abbreviation>
+        <unit>%</unit>
+    </parameter>
+    <parameter>
+        <name>Probability of Max or Min Temp. Above 120 F</name>
+        <abbreviation>T322.0K18hr</abbreviation>
+        <unit>%</unit>
+    </parameter>
+    <parameter>
+        <name>Standard Deviation of Max or Min Temp</name>
+        <abbreviation>T18hr</abbreviation>
+        <unit>K</unit>
+    </parameter>
+    <parameter>
+        <name>Total cloud cover</name>
+        <abbreviation>TCCsprd</abbreviation>
+        <unit>%</unit>
+    </parameter>
+    <parameter>
+        <name>Wind speed gust</name>
+        <abbreviation>WGSsprd</abbreviation>
+        <unit>m/s</unit>
+    </parameter>
+    <parameter>
+        <name>5th percentile temperature</name>
+        <abbreviation>T5pct18hr</abbreviation>
+        <unit>K</unit>
+    </parameter>
+    <parameter>
+        <name>10th percentile temperature</name>
+        <abbreviation>T10pct18hr</abbreviation>
+        <unit>K</unit>
+    </parameter>
+    <parameter>
+        <name>25th percentile temperature</name>
+        <abbreviation>T25pct18hr</abbreviation>
+        <unit>K</unit>
+    </parameter>
+    <parameter>
+        <name>50th percentile temperature</name>
+        <abbreviation>T50pct18hr</abbreviation>
+        <unit>K</unit>
+    </parameter>
+    <parameter>
+        <name>75th percentile temperature</name>
+        <abbreviation>T75pct18hr</abbreviation>
+        <unit>K</unit>
+    </parameter>
+    <parameter>
+        <name>90th percentile temperature</name>
+        <abbreviation>T90pct18hr</abbreviation>
+        <unit>K</unit>
+    </parameter>
+    <parameter>
+        <name>95th percentile temperature</name>
+        <abbreviation>T95pct18hr</abbreviation>
+        <unit>K</unit>
+    </parameter>    
+    <parameter>
+        <name>Prob Ceiling &lt; 2000 ft</name>
+        <abbreviation>CigProb2k</abbreviation>
+        <unit>%</unit>
+    </parameter>
+    <parameter>
+        <name>Prob Ceiling &lt; 3000 ft</name>
+        <abbreviation>CigProb3k</abbreviation>
+        <unit>%</unit>
+    </parameter>
+    <parameter>
+        <name>Prob Ceiling &lt; 6000 ft</name>
+        <abbreviation>CigProb6k</abbreviation>
+        <unit>%</unit>
+    </parameter>
+    <parameter>
+        <name>Prob Ceiling &lt; 10000 ft</name>
+        <abbreviation>CigProb10k</abbreviation>
+        <unit>%</unit>
+    </parameter>
 </parameterList>

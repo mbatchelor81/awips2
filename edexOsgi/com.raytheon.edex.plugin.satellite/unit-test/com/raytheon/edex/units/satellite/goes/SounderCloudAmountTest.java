@@ -26,7 +26,11 @@ import javax.measure.Unit;
 import junit.framework.TestCase;
 
 import com.raytheon.edex.units.satellite.SatelliteUnits;
+<<<<<<< HEAD
 import tec.uom.se.AbstractUnit;
+=======
+import tech.units.indriya.AbstractUnit;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Tests the implementation of the SounderCloudAmountPixel's converters

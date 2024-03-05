@@ -20,16 +20,23 @@
 
 package com.raytheon.uf.common.dataplugin.satellite.units.goes.convert;
 
+<<<<<<< HEAD
 import java.math.BigDecimal;
 import java.math.MathContext;
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.measure.UnitConverter;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import si.uom.SI;
 import systems.uom.common.USCustomary;
+<<<<<<< HEAD
 import tec.uom.se.AbstractConverter;
+=======
+import tech.units.indriya.function.AbstractConverter;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Converts a cloud height in meters to a pixel value (calculation is done in
@@ -43,6 +50,11 @@ import tec.uom.se.AbstractConverter;
  * Mar 24, 2009     2086      jsanchez Used meterToFoot to convert height.
  * Apr 15, 2019     7596      lsingh   Updated units framework to JSR-363.
  *                                     Overrided additional methods
+<<<<<<< HEAD
+=======
+ * Aug 05, 2022     8905      lsingh   Updated units framework to 2.0.2.
+ *                                     Renamed methods, and overrided additional methods.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -55,6 +67,7 @@ public class CloudHeightToPixelConverter extends AbstractConverter {
     private static UnitConverter meterToFoot = SI.METRE
             .getConverterTo(USCustomary.FOOT);
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -62,13 +75,23 @@ public class CloudHeightToPixelConverter extends AbstractConverter {
      */
     @Override
     public double convert(double aHeight) {
+=======
+    @Override
+    public Number convertWhenNotIdentity(Number height) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         double result = 0.0;
 
         // value is in meters, but below calculates pixel based on value being
         // ft/100 MSL
+<<<<<<< HEAD
         aHeight = meterToFoot.convert(aHeight);
 
         if (aHeight < 1) {
+=======
+        double aHeight = meterToFoot.convert(height.doubleValue());
+
+        if (aHeight < 1.0) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             result = 0;
         } else if (aHeight <= 17.7) {
             result = (aHeight / 17.7) + 75.0;
@@ -97,26 +120,33 @@ public class CloudHeightToPixelConverter extends AbstractConverter {
         return result;
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
      * @see tec.uom.se.AbstractConverter#equals(java.lang.Object)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public boolean equals(Object aConverter) {
         return (aConverter instanceof CloudHeightToPixelConverter);
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
      * @see tec.uom.se.AbstractConverter#hashCode()
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this);
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -132,15 +162,45 @@ public class CloudHeightToPixelConverter extends AbstractConverter {
      * 
      * @see tec.uom.se.AbstractConverter#isLinear()
      */
+=======
+    @Override
+    public AbstractConverter inverseWhenNotIdentity() {
+        return new CloudPixelToHeightConverter();
+    }
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public boolean isLinear() {
         return false;
     }
 
     @Override
+<<<<<<< HEAD
     public BigDecimal convert(BigDecimal value, MathContext ctx)
             throws ArithmeticException {
         return BigDecimal.valueOf(convert(value.doubleValue()));
+=======
+    public boolean isIdentity() {
+        return false;
+    }
+
+    @Override
+    public int compareTo(UnitConverter o) {
+        // This method hasn't been implemented yet since it's unused
+        return 0;
+    }
+
+    @Override
+    protected String transformationLiteral() {
+        // This method hasn't been implemented yet since it's unused
+        return null;
+    }
+
+    @Override
+    protected boolean canReduceWith(AbstractConverter that) {
+        // This method hasn't been implemented yet since it's unused
+        return false;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
 }

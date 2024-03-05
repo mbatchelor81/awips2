@@ -131,7 +131,7 @@ public class GiniSatelliteDecoder {
     private static final int INITIAL_READ = GINI_HEADER_SIZE + 128;
 
     private final IPerformanceStatusHandler perfLog = PerformanceStatus
-            .getHandler("Satellite:");
+            .getHandler("Satellite");
 
     public static final String LOOKUP_LOCALIZATION_DIR = System.getProperty(
             "gini.lookup.table.dir", "satellite/gini/lookuptables");

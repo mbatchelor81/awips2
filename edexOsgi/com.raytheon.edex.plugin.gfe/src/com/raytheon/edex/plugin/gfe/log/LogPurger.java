@@ -19,6 +19,10 @@
  **/
 package com.raytheon.edex.plugin.gfe.log;
 
+<<<<<<< HEAD
+=======
+import java.io.File;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -51,6 +55,7 @@ import com.raytheon.uf.common.util.FileUtil;
  *
  * SOFTWARE HISTORY
  *
+<<<<<<< HEAD
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
  * Jul 26, 2011            bphillip     Initial creation
@@ -61,6 +66,20 @@ import com.raytheon.uf.common.util.FileUtil;
  * May 14, 2019  DCS 21081 dfriedman    Support recursion and compression.
  * Aug 18, 2020  22148     ryu          Fix issue of zip archive not containing
  *                                      log files.
+=======
+ * Date          Ticket#  Engineer   Description
+ * ------------- -------- ---------- -------------------------------------------
+ * Jul 26, 2011           bphillip   Initial creation
+ * Sep 05, 2013  2307     dgilling   Use better PythonScript constructor.
+ * Feb 26, 2015  4128     dgilling   Switch to IFPServer.getActiveSites().
+ * Jul 15, 2016  5747     dgilling   Refactor based on FilePurger.
+ * Feb 16, 2018  6895     tgurney    Move FilePurger to uf.edex.maintenance
+ * May 14, 2019  21081    dfriedman  Support recursion and compression.
+ * Aug 18, 2020  22148    ryu        Fix issue of zip archive not containing log
+ *                                   files.
+ * Mar 24, 2022  8342     randerso   Include top level directory in the zip file
+ *                                   so it is restored when unzipped.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -80,10 +99,19 @@ public class LogPurger {
     private static final String PATTERN_ZIP = "zip";
 
     /** Pattern to match YYYYMMDD and YYYYMMDD.zip names. */
+<<<<<<< HEAD
     private static final Pattern datePathPattern = Pattern.compile(
             "^(?<" + PATTERN_YEAR + ">\\d{4})(?<" + PATTERN_MONTH + ">\\d{2})" +
             "(?<" + PATTERN_DAY + ">\\d{2})(?<" + PATTERN_ZIP + ">\\.zip)?$",
             Pattern.CASE_INSENSITIVE);
+=======
+    private static final Pattern datePathPattern = Pattern
+            .compile(
+                    "^(?<" + PATTERN_YEAR + ">\\d{4})(?<" + PATTERN_MONTH
+                            + ">\\d{2})" + "(?<" + PATTERN_DAY + ">\\d{2})(?<"
+                            + PATTERN_ZIP + ">\\.zip)?$",
+                    Pattern.CASE_INSENSITIVE);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * The top-level directory in which to scan for YYYYMMDD directories. Must
@@ -109,7 +137,10 @@ public class LogPurger {
      */
     private int retainCompressedDays;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public String getTopDir() {
         return topDir;
     }
@@ -145,6 +176,7 @@ public class LogPurger {
     /**
      * Main entry point for the purge process.
      */
+<<<<<<< HEAD
     public void purge()  {
         try {
             Path topPath = topDir != null && !topDir.isEmpty() ? Paths.get(topDir) : null;
@@ -154,10 +186,28 @@ public class LogPurger {
             }
             statusHandler.info(String.format("Purging daily directories %d level(s) deep under %s: Leave directories uncompressed for %d day(s); retain compressed files for %d day(s).",
                     searchDepth, topDir, leaveUncompressedDays, retainCompressedDays));
+=======
+    public void purge() {
+        try {
+            Path topPath = topDir != null && !topDir.isEmpty()
+                    ? Paths.get(topDir)
+                    : null;
+            if (topPath == null || !topPath.isAbsolute()) {
+                statusHandler.error(String.format(
+                        "topDir \"%s\" not set or not an absolute path",
+                        topDir));
+                return;
+            }
+            statusHandler.info(String.format(
+                    "Purging daily directories %d level(s) deep under %s: Leave directories uncompressed for %d day(s); retain compressed files for %d day(s).",
+                    searchDepth, topDir, leaveUncompressedDays,
+                    retainCompressedDays));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             final long today = LocalDate.now().toEpochDay();
             Files.walkFileTree(Paths.get(topDir).normalize(),
                     EnumSet.of(FileVisitOption.FOLLOW_LINKS), searchDepth,
                     new SimpleFileVisitor<Path>() {
+<<<<<<< HEAD
                 @Override
                 public FileVisitResult preVisitDirectory(Path dir,
                         BasicFileAttributes attrs) throws IOException {
@@ -214,6 +264,66 @@ public class LogPurger {
                     return today - fileDate.toEpochDay();
                 }
             });
+=======
+                        @Override
+                        public FileVisitResult preVisitDirectory(Path dir,
+                                BasicFileAttributes attrs) throws IOException {
+                            Matcher m = datePathPattern
+                                    .matcher(dir.getFileName().toString());
+                            if (m.matches() && m.group(PATTERN_ZIP) == null) {
+                                handleDirectory(dir, fileAge(m));
+                                return FileVisitResult.SKIP_SUBTREE;
+                            } else {
+                                return FileVisitResult.CONTINUE;
+                            }
+                        }
+
+                        @Override
+                        public FileVisitResult visitFile(Path file,
+                                BasicFileAttributes attrs) throws IOException {
+                            Matcher m = datePathPattern
+                                    .matcher(file.getFileName().toString());
+                            if (m.matches()) {
+                                long age = fileAge(m);
+                                /*
+                                 * If a directory is at the max search depth it
+                                 * will be passed to this method instead of
+                                 * preVisitDirectory.
+                                 */
+                                if (attrs.isDirectory()
+                                        && m.group(PATTERN_ZIP) == null) {
+                                    handleDirectory(file, age);
+                                } else if (attrs.isRegularFile()
+                                        && m.group(PATTERN_ZIP) != null
+                                        && age > retainCompressedDays) {
+                                    try {
+                                        Files.delete(file);
+                                    } catch (Exception e) {
+                                        statusHandler.error(String.format(
+                                                "Error deleting %s: %s", file,
+                                                e));
+                                    }
+                                }
+                            }
+                            return FileVisitResult.CONTINUE;
+                        }
+
+                        @Override
+                        public FileVisitResult visitFileFailed(Path file,
+                                IOException exc) throws IOException {
+                            logVisitFailed(file, exc);
+                            return FileVisitResult.CONTINUE;
+                        }
+
+                        private long fileAge(Matcher m) {
+                            LocalDate fileDate = LocalDate.of(
+                                    Integer.parseInt(m.group(PATTERN_YEAR)),
+                                    Integer.parseInt(m.group(PATTERN_MONTH)),
+                                    Integer.parseInt(m.group(PATTERN_DAY)));
+                            return today - fileDate.toEpochDay();
+                        }
+                    });
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         } catch (Exception e) {
             statusHandler.error("Error while scanning " + topDir, e);
         }
@@ -271,7 +381,12 @@ public class LogPurger {
                 }
             });
         } catch (IOException e) {
+<<<<<<< HEAD
             statusHandler.error(String.format("Error deleting %s: %s", directory, e));
+=======
+            statusHandler.error(
+                    String.format("Error deleting %s: %s", directory, e));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 
@@ -279,16 +394,26 @@ public class LogPurger {
         try {
             Files.delete(file);
         } catch (Exception e) {
+<<<<<<< HEAD
             statusHandler.error(String.format("Error deleting %s: %s", file, e));
+=======
+            statusHandler
+                    .error(String.format("Error deleting %s: %s", file, e));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 
     /**
      * Compress the given directory into a zip file in the directory's parent.
+<<<<<<< HEAD
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param directory
      * @return true if at least some files were compressed; false otherwise
      */
     private boolean compressDirectory(Path directory) {
+<<<<<<< HEAD
         Path top = directory.normalize();
         Path zipFile = top
                 .resolveSibling(top.getFileName().toString() + ".zip");
@@ -314,6 +439,34 @@ public class LogPurger {
                         ZipEntry entry = getZipEntry(rel.toString() + "/", attrs);
                         zos.putNextEntry(entry);
                     }
+=======
+        Path parent = directory.getParent();
+        Path zipFile = parent
+                .resolve(directory.getFileName().toString() + ".zip");
+
+        // a zip file has already been created
+        if (Files.exists(zipFile)) {
+            if (zipFile.toFile().length() > 1000) {
+                // let the directory be removed
+                return true;
+            } else {
+                // leave the directory alone
+                return false;
+            }
+        }
+
+        boolean[] storedSome = new boolean[1];
+        try (ZipOutputStream zos = new ZipOutputStream(
+                new FileOutputStream(zipFile.toFile()))) {
+            Files.walkFileTree(directory, new SimpleFileVisitor<Path>() {
+                @Override
+                public FileVisitResult preVisitDirectory(Path dir,
+                        BasicFileAttributes attrs) throws IOException {
+                    Path rel = parent.relativize(dir);
+                    ZipEntry entry = getZipEntry(
+                            rel.toString() + File.pathSeparator, attrs);
+                    zos.putNextEntry(entry);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     return FileVisitResult.CONTINUE;
                 }
 
@@ -321,9 +474,16 @@ public class LogPurger {
                 public FileVisitResult visitFile(Path file,
                         BasicFileAttributes attrs) throws IOException {
                     boolean opened = false;
+<<<<<<< HEAD
                     try (FileInputStream ins = new FileInputStream(file.toFile())) {
                         opened = true;
                         Path rel = top.relativize(file);
+=======
+                    try (FileInputStream ins = new FileInputStream(
+                            file.toFile())) {
+                        opened = true;
+                        Path rel = parent.relativize(file);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         ZipEntry entry = getZipEntry(rel.toString(), attrs);
                         zos.putNextEntry(entry);
                         FileUtil.copy(ins, zos);
@@ -352,7 +512,11 @@ public class LogPurger {
             });
         } catch (Exception e) {
             statusHandler.error(String.format("Error compressing %s to %s: %s",
+<<<<<<< HEAD
                     top, zipFile, e), e);
+=======
+                    directory, zipFile, e), e);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if (!storedSome[0]) {
                 delete(zipFile);
                 return false;
@@ -361,7 +525,12 @@ public class LogPurger {
         return true;
     }
 
+<<<<<<< HEAD
     private static ZipEntry getZipEntry(String path, BasicFileAttributes attrs) {
+=======
+    private static ZipEntry getZipEntry(String path,
+            BasicFileAttributes attrs) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         ZipEntry entry = new ZipEntry(path);
         entry.setCreationTime(attrs.creationTime());
         entry.setLastAccessTime(attrs.lastAccessTime());

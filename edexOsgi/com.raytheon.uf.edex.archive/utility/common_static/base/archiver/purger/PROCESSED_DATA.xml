@@ -238,7 +238,11 @@
     <name>Profiles</name>
     <selectedRetentionHours>168</selectedRetentionHours>
     <dataSet>
+<<<<<<< HEAD
       <dirPattern>(acarssounding|bufrua|goessounding|poessounding)/.*-(\d{4})-(\d{2})-(\d{2})-(\d{2})</dirPattern>
+=======
+      <dirPattern>(acarssounding|bufrua|goessounding|poessounding|profiler)/.*-(\d{4})-(\d{2})-(\d{2})-(\d{2})</dirPattern>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
       <displayLabel>{1}</displayLabel>
       <dateGroupIndices>2,3,4,5</dateGroupIndices>
     </dataSet>

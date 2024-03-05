@@ -24,7 +24,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+<<<<<<< HEAD
 import java.util.Collections;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -40,6 +43,7 @@ import javax.xml.ws.WebServiceContext;
 import javax.xml.ws.handler.MessageContext;
 import javax.xml.ws.wsaddressing.W3CEndpointReference;
 
+<<<<<<< HEAD
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.DeliveryInfoType;
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.ExtensibleObjectType;
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.ObjectRefListType;
@@ -51,6 +55,8 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.StringValueType;
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.SubscriptionType;
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.ValueType;
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -63,6 +69,16 @@ import com.raytheon.uf.edex.registry.ebxml.exception.EbxmlRegistryException;
 import com.raytheon.uf.edex.registry.ebxml.services.notification.NotificationDestination;
 import com.raytheon.uf.edex.registry.ebxml.services.notification.RegistrySubscriptionManager;
 
+<<<<<<< HEAD
+=======
+import oasis.names.tc.ebxml.regrep.xsd.rim.v4.DeliveryInfoType;
+import oasis.names.tc.ebxml.regrep.xsd.rim.v4.ObjectRefListType;
+import oasis.names.tc.ebxml.regrep.xsd.rim.v4.ObjectRefType;
+import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryObjectListType;
+import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryObjectType;
+import oasis.names.tc.ebxml.regrep.xsd.rim.v4.SubscriptionType;
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 /**
  * General utility class containing the ebXML object factories.
  * 
@@ -78,13 +94,21 @@ import com.raytheon.uf.edex.registry.ebxml.services.notification.RegistrySubscri
  * 8/1/2013     1693       bphillip     Removed increment version method
  * 11/20/2013   2534       bphillip     Added getNotificationDestinations method
  * 12/2/2013    1829       bphillip     Removed addStringSlot
+<<<<<<< HEAD
+=======
+ * Apr 06, 2020 8054       bsteffen     Move EVENT_SOURCE_SLOT to common and remove dead code.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
  * @author bphillip
+<<<<<<< HEAD
  * @version 1.0
  */
 
+=======
+ */
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 public class EbxmlObjectUtil {
 
     /**
@@ -93,6 +117,7 @@ public class EbxmlObjectUtil {
      */
     public static final String HOME_SLOT_NAME = "urn:oasis:names:tc:ebxml-regrep:rim:RegistryObject:home";
 
+<<<<<<< HEAD
     public static final String EVENT_SOURCE_SLOT = "EventSource";
 
     /** The name of the slot designated to hold the email notification formatter */
@@ -103,6 +128,12 @@ public class EbxmlObjectUtil {
      * ignore using http
      */
     public static final String NON_PROXY_HOSTS = "http.nonProxyHosts";
+=======
+    /**
+     * The name of the slot designated to hold the email notification formatter
+     */
+    public static final String EMAIL_NOTIFICATION_FORMATTER_SLOT = "urn:oasis:names:tc:ebxml-regrep:rim:DeliveryInfo:emailNotificationFormatter";
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Slot name of the slot on the subscription object that holds the last run
@@ -111,6 +142,7 @@ public class EbxmlObjectUtil {
     public static final String SUBSCRIPTION_LAST_RUN_TIME_SLOT_NAME = "SubscriptionLastRunTime";
 
     /**
+<<<<<<< HEAD
      * The lifecycle manager object factory
      */
     public static oasis.names.tc.ebxml.regrep.xsd.lcm.v4.ObjectFactory lcmObjectFactory = new oasis.names.tc.ebxml.regrep.xsd.lcm.v4.ObjectFactory();
@@ -119,21 +151,38 @@ public class EbxmlObjectUtil {
      * The query object factory
      */
     public static oasis.names.tc.ebxml.regrep.xsd.query.v4.ObjectFactory queryObjectFactory = new oasis.names.tc.ebxml.regrep.xsd.query.v4.ObjectFactory();
+=======
+     * The query object factory
+     */
+    public static final oasis.names.tc.ebxml.regrep.xsd.query.v4.ObjectFactory queryObjectFactory = new oasis.names.tc.ebxml.regrep.xsd.query.v4.ObjectFactory();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * The registry information model object factory
      */
+<<<<<<< HEAD
     public static oasis.names.tc.ebxml.regrep.xsd.rim.v4.ObjectFactory rimObjectFactory = new oasis.names.tc.ebxml.regrep.xsd.rim.v4.ObjectFactory();
+=======
+    public static final oasis.names.tc.ebxml.regrep.xsd.rim.v4.ObjectFactory rimObjectFactory = new oasis.names.tc.ebxml.regrep.xsd.rim.v4.ObjectFactory();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * The registry services object factory
      */
+<<<<<<< HEAD
     public static oasis.names.tc.ebxml.regrep.xsd.rs.v4.ObjectFactory rsObjectFactory = new oasis.names.tc.ebxml.regrep.xsd.rs.v4.ObjectFactory();
+=======
+    public static final oasis.names.tc.ebxml.regrep.xsd.rs.v4.ObjectFactory rsObjectFactory = new oasis.names.tc.ebxml.regrep.xsd.rs.v4.ObjectFactory();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * The supporting services object factory
      */
+<<<<<<< HEAD
     public static oasis.names.tc.ebxml.regrep.xsd.spi.v4.ObjectFactory spiObjectFactory = new oasis.names.tc.ebxml.regrep.xsd.spi.v4.ObjectFactory();
+=======
+    public static final oasis.names.tc.ebxml.regrep.xsd.spi.v4.ObjectFactory spiObjectFactory = new oasis.names.tc.ebxml.regrep.xsd.spi.v4.ObjectFactory();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Gets a new random UUID
@@ -188,8 +237,13 @@ public class EbxmlObjectUtil {
                 .createRegistryObjectListType();
         for (Object obj : objCollection) {
             if (obj instanceof RegistryObjectType) {
+<<<<<<< HEAD
                 registryObjectList.getRegistryObject().add(
                         (RegistryObjectType) obj);
+=======
+                registryObjectList.getRegistryObject()
+                        .add((RegistryObjectType) obj);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             } else {
                 throw new IllegalArgumentException(
                         "createRegistryObjectList only excepts collections with RegistryObjectTypes");
@@ -251,12 +305,20 @@ public class EbxmlObjectUtil {
         assert classLoader != null;
         String path = packageName.replace('.', '/');
         Enumeration<URL> resources = classLoader.getResources(path);
+<<<<<<< HEAD
         List<File> dirs = new ArrayList<File>();
+=======
+        List<File> dirs = new ArrayList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         while (resources.hasMoreElements()) {
             URL resource = resources.nextElement();
             dirs.add(new File(resource.getFile()));
         }
+<<<<<<< HEAD
         List<Class<?>> classes = new ArrayList<Class<?>>();
+=======
+        List<Class<?>> classes = new ArrayList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         for (File directory : dirs) {
             classes.addAll(findClasses(directory, packageName));
         }
@@ -274,9 +336,15 @@ public class EbxmlObjectUtil {
      * @return The classes
      * @throws ClassNotFoundException
      */
+<<<<<<< HEAD
     private static List<Class<?>> findClasses(File directory, String packageName)
             throws ClassNotFoundException {
         List<Class<?>> classes = new ArrayList<Class<?>>();
+=======
+    private static List<Class<?>> findClasses(File directory,
+            String packageName) throws ClassNotFoundException {
+        List<Class<?>> classes = new ArrayList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if (!directory.exists()) {
             return classes;
         }
@@ -284,6 +352,7 @@ public class EbxmlObjectUtil {
         for (File file : files) {
             if (file.isDirectory()) {
                 assert !file.getName().contains(".");
+<<<<<<< HEAD
                 classes.addAll(findClasses(file,
                         packageName + "." + file.getName()));
             } else if (file.getName().endsWith(".class")) {
@@ -291,11 +360,19 @@ public class EbxmlObjectUtil {
                         + '.'
                         + file.getName().substring(0,
                                 file.getName().length() - 6)));
+=======
+                classes.addAll(
+                        findClasses(file, packageName + "." + file.getName()));
+            } else if (file.getName().endsWith(".class")) {
+                classes.add(Class.forName(packageName + '.' + file.getName()
+                        .substring(0, file.getName().length() - 6)));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         }
         return classes;
     }
 
+<<<<<<< HEAD
     public static List<String> getIdsFromObjectRefListType(
             ObjectRefListType refList) {
         if (refList == null) {
@@ -357,6 +434,11 @@ public class EbxmlObjectUtil {
     private static List<String> HTTP_HEADERS;
     static {
         HTTP_HEADERS = new ArrayList<String>(5);
+=======
+    private static List<String> HTTP_HEADERS;
+    static {
+        HTTP_HEADERS = new ArrayList<>(5);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         HTTP_HEADERS.add("X-Forwarded-For");
         HTTP_HEADERS.add("Proxy-Client-IP");
         HTTP_HEADERS.add("WL-Proxy-Client-IP");
@@ -386,8 +468,13 @@ public class EbxmlObjectUtil {
                     .get(MessageContext.SERVLET_REQUEST);
 
             for (int i = 0; (i < 5)
+<<<<<<< HEAD
                     && (clientHost == null || clientHost.isEmpty() || "unknown"
                             .equalsIgnoreCase(clientHost)); i++) {
+=======
+                    && (clientHost == null || clientHost.isEmpty()
+                            || "unknown".equalsIgnoreCase(clientHost)); i++) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 clientHost = request.getHeader(HTTP_HEADERS.get(i));
             }
             if (clientHost == null || clientHost.length() == 0
@@ -412,7 +499,11 @@ public class EbxmlObjectUtil {
             final SubscriptionType subscription) throws EbxmlRegistryException {
 
         List<DeliveryInfoType> deliveryInfos = subscription.getDeliveryInfo();
+<<<<<<< HEAD
         List<NotificationDestination> addresses = new ArrayList<NotificationDestination>(
+=======
+        List<NotificationDestination> addresses = new ArrayList<>(
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 deliveryInfos.size());
         try {
             for (DeliveryInfoType deliveryInfo : deliveryInfos) {
@@ -426,17 +517,27 @@ public class EbxmlObjectUtil {
                         RegistrySubscriptionManager.ADDRESS_TAG);
                 Node addressNode = nodes.item(0);
                 String serviceAddress = addressNode.getTextContent().trim();
+<<<<<<< HEAD
                 String endpointType = addressNode
                         .getAttributes()
+=======
+                String endpointType = addressNode.getAttributes()
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         .getNamedItemNS(EbxmlNamespaces.RIM_URI,
                                 RegistrySubscriptionManager.ENDPOINT_TAG)
                         .getNodeValue();
                 final NotificationDestination destination = new NotificationDestination(
                         endpointType, serviceAddress);
                 if (endpointType.equals(DeliveryMethodTypes.EMAIL)) {
+<<<<<<< HEAD
                     destination
                             .setEmailNotificationFormatter((String) deliveryInfo
                                     .getSlotValue(EbxmlObjectUtil.EMAIL_NOTIFICATION_FORMATTER_SLOT));
+=======
+                    destination.setEmailNotificationFormatter(
+                            (String) deliveryInfo.getSlotValue(
+                                    EbxmlObjectUtil.EMAIL_NOTIFICATION_FORMATTER_SLOT));
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
                 addresses.add(destination);
             }

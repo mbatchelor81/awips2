@@ -47,7 +47,11 @@ import traceback
 #    May 25, 2022   DR 23144     aghanava      Modify workstation filter to use the short name.
 #
 
+<<<<<<< HEAD
 from awips import NotificationMessage
+=======
+from ufpy import NotificationMessage
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 class PrintHelpOnErrorParser(ArgumentParser):
     def error(self, message):

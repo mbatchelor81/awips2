@@ -19,8 +19,11 @@
  **/
 package com.raytheon.uf.edex.registry.ebxml.services;
 
+<<<<<<< HEAD
 import java.util.concurrent.atomic.AtomicBoolean;
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,9 +33,13 @@ import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
 import com.raytheon.uf.common.time.util.TimeUtil;
 import com.raytheon.uf.common.util.CollectionUtil;
+<<<<<<< HEAD
 import com.raytheon.uf.edex.registry.ebxml.dao.AuditableEventTypeDao;
 import com.raytheon.uf.edex.registry.ebxml.dao.SlotTypeDao;
 import com.raytheon.uf.edex.registry.ebxml.exception.EbxmlRegistryException;
+=======
+import com.raytheon.uf.edex.registry.ebxml.dao.SlotTypeDao;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.edex.registry.events.DeleteSlotEvent;
 
 /**
@@ -60,6 +67,10 @@ import com.raytheon.uf.edex.registry.events.DeleteSlotEvent;
  * Aug 09, 2016  5771     rjpeter   Allow concurrent event processing
  * Oct 25, 2019  7948     bsteffen  Purge each batch of auditable events in a
  *                                  separate transaction.
+<<<<<<< HEAD
+=======
+ * May 26, 2020  8165     bsteffen  Remove auditableevent.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -72,6 +83,7 @@ public class RegistryGarbageCollector {
     private static final IUFStatusHandler statusHandler = UFStatus
             .getHandler(RegistryGarbageCollector.class);
 
+<<<<<<< HEAD
     /** Sentinel to denote if the garbage collection is currently running */
     private final AtomicBoolean running = new AtomicBoolean(false);
 
@@ -83,6 +95,10 @@ public class RegistryGarbageCollector {
     /** The number of events to delete per batch */
     private static final int DELETE_BATCH_SIZE = 100;
 
+=======
+    private SlotTypeDao slotDao;
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /**
      * Creates a new GarbageCollector object
      */
@@ -97,14 +113,20 @@ public class RegistryGarbageCollector {
      * @param eventDao
      *            The auditable event dao to use
      */
+<<<<<<< HEAD
     public RegistryGarbageCollector(AuditableEventTypeDao eventDao,
             SlotTypeDao slotDao) {
         this();
         this.eventDao = eventDao;
+=======
+    public RegistryGarbageCollector(SlotTypeDao slotDao) {
+        this();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         this.slotDao = slotDao;
 
     }
 
+<<<<<<< HEAD
     /**
      * Cleans up the registry by removing unused and/or orphaned objects
      */
@@ -146,6 +168,8 @@ public class RegistryGarbageCollector {
                 + TimeUtil.prettyDuration(t1 - t0));
     }
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Subscribe
     @AllowConcurrentEvents
     @Transactional

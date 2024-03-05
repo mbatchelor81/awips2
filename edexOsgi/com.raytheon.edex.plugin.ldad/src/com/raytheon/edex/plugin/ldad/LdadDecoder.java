@@ -61,8 +61,13 @@ import com.raytheon.uf.common.serialization.JAXBManager;
 import com.raytheon.uf.common.serialization.SerializationException;
 import com.raytheon.uf.common.time.DataTime;
 
+<<<<<<< HEAD
 import net.sf.cglib.beans.BeanMap;
 import tec.uom.se.format.SimpleUnitFormat;
+=======
+import org.springframework.cglib.beans.BeanMap;
+import tech.units.indriya.format.SimpleUnitFormat;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Decoder implementation for ldadmesonet plugin.
@@ -86,6 +91,10 @@ import tec.uom.se.format.SimpleUnitFormat;
  * May 09, 2018  7288     randerso  Use stationId if available
  * Apr 15, 2019  7596     lsingh    Updated units framework to JSR-363.
  *                                  Handled unit conversion.
+<<<<<<< HEAD
+=======
+ * Apr 21, 2022  8709     tjensen   Remove net.sf.cglib
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *

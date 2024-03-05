@@ -65,8 +65,13 @@ import com.raytheon.uf.edex.ohd.pproc.IPrecipDataCreator;
 import com.raytheon.uf.edex.ohd.pproc.PrecipCreationException;
 
 import si.uom.SI;
+<<<<<<< HEAD
 import tec.uom.se.unit.MetricPrefix;
 import tec.uom.se.unit.Units;
+=======
+import javax.measure.MetricPrefix;
+import tech.units.indriya.unit.Units;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Creates an alternate version of the SATPRE hrap precip grid based on GOES-R

@@ -49,7 +49,14 @@ import java.util.regex.Pattern;
  * Aug 08, 2016 DR18939    MPorricelli Update WMO_HEADER pattern to match spaces at end
  *                                     of WMO header
  * Dec 01, 2016 5970       njensen     Added more groups to header pattern string
+<<<<<<< HEAD
  *                                     
+=======
+ * 
+ * Aug 17, 2023  2035948   lisa.singh  Added support to handle alternative header pattern
+ *                                     for certain cases.
+ * 
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  * 
  * @author jkorman
@@ -58,12 +65,35 @@ public class WMOHeader {
 
     public static final String INGEST_FILE_NAME = "ingestfilename";
 
+<<<<<<< HEAD
     private static final String WMO_HEADER = "([A-Z]{3}[A-Z0-9](?:\\d{0,2}|[A-Z]{0,2}) [A-Z0-9 ]{4} "
             + "(\\d{6})(?: [A-Z]{3})? *[\\r]*\\n)";
 
     public static final Pattern WMO_HEADER_PATTERN = Pattern
             .compile(WMO_HEADER);
 
+=======
+    /**
+     * Default pattern for reading WMO Headers.
+     */
+    private static final String WMO_HEADER = "([A-Z]{3}[A-Z0-9](?:\\d{0,2}|[A-Z]{0,2}) [A-Z0-9 ]{4} "
+            + "(\\d{6})(?: [A-Z]{3})? *[\\r]*\\n)";
+
+    /**
+     * Same pattern as above, but the final \n is optional. This mostly applies
+     * to BUFR files due to the way the ucar plugin trims each line when reading
+     * from file.
+     */
+    private static final String WMO_HEADER_OPTIONAL_ENDLINE = "([A-Z]{3}[A-Z0-9](?:\\d{0,2}|[A-Z]{0,2}) [A-Z0-9 ]{4} "
+            + "(\\d{6})(?: [A-Z]{3})? *[\\r]*[\\n]*)";
+
+    public static final Pattern WMO_HEADER_PATTERN = Pattern
+            .compile(WMO_HEADER);
+
+    public static final Pattern WMO_HEADER_OPTIONAL_ENDLINE_PATTERN = Pattern
+            .compile(WMO_HEADER_OPTIONAL_ENDLINE);
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private static final int CCCCGROUP_SIZE = 4;
 
     private static final int DTGROUP_SIZE = 6;
@@ -112,10 +142,18 @@ public class WMOHeader {
         this(bytes, null);
     }
 
+<<<<<<< HEAD
+=======
+    public WMOHeader(byte[] messageData, String fileName) {
+        this(messageData, fileName, false);
+    }
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /**
      * Construct the header from a wmo message.
      * 
      * @param messageData
+<<<<<<< HEAD
      * @param fileName
      */
     public WMOHeader(byte[] messageData, String fileName) {
@@ -124,6 +162,32 @@ public class WMOHeader {
         if (messageData != null) {
             originalMessage = new String(messageData);
             Matcher m = WMO_HEADER_PATTERN.matcher(originalMessage); // handles
+=======
+     *            the line to read containing the wmo header
+     * @param fileName
+     *            the file name containing the wmo header. Can be null.
+     * @param optionalEndline
+     *            option to ignore the final \n in the regular expression for
+     *            parsing wmo headers. BUFR files need this to be set to true.
+     *            Most other files should be set to false.
+     */
+    public WMOHeader(byte[] messageData, String fileName,
+            boolean optionalEndline) {
+        Pattern pattern;
+
+        // Assume not valid until proven otherwise!
+        isValid = false;
+
+        if (optionalEndline) {
+            pattern = WMO_HEADER_OPTIONAL_ENDLINE_PATTERN;
+        } else {
+            pattern = WMO_HEADER_PATTERN;
+        }
+
+        if (messageData != null) {
+            originalMessage = new String(messageData);
+            Matcher m = pattern.matcher(originalMessage); // handles
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             // the skip
             // ccb
             if (m.find()) {
@@ -175,15 +239,26 @@ public class WMOHeader {
                 YYGGgg = wmoHeader.substring(hdrIndex, hdrIndex + DTGROUP_SIZE);
                 parseDateTime(YYGGgg);
                 headerDate = WMOTimeParser.findDataTime(YYGGgg, fileName);
+<<<<<<< HEAD
                 // At this point headerDate will either be the current time (non-archive) or
                 // a time generated from the WMOHeader and filename dateStamp
                 
+=======
+                // At this point headerDate will either be the current time
+                // (non-archive) or
+                // a time generated from the WMOHeader and filename dateStamp
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 headerYear = headerDate.get(Calendar.YEAR);
                 headerMonth = headerDate.get(Calendar.MONTH) + 1;
                 headerDay = headerDate.get(Calendar.DAY_OF_MONTH);
                 headerHour = headerDate.get(Calendar.HOUR_OF_DAY);
                 headerMinute = headerDate.get(Calendar.MINUTE);
+<<<<<<< HEAD
                 
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 hdrIndex += DTGROUP_SIZE;
 
                 // Everything else goes here for now. Leave it to the client to

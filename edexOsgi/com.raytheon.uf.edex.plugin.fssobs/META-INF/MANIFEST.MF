@@ -13,7 +13,12 @@ Require-Bundle: com.raytheon.uf.edex.cpgsrv,
  com.raytheon.uf.common.localization,
  org.slf4j,
  com.raytheon.uf.common.alertviz,
+<<<<<<< HEAD
  javax.xml.bind
+=======
+ javax.xml.bind,
+ javax.measure
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 Export-Package: com.raytheon.uf.edex.plugin.fssobs,
  com.raytheon.uf.edex.plugin.fssobs.common
 Import-Package: com.raytheon.uf.common.monitor.config,
@@ -25,8 +30,12 @@ Import-Package: com.raytheon.uf.common.monitor.config,
  com.raytheon.uf.common.wxmath,
  com.raytheon.uf.edex.dat.utils,
  com.raytheon.uf.edex.plugin.fssobs,
+<<<<<<< HEAD
  com.raytheon.uf.edex.pointdata,
  javax.measure,
  si.uom,
  systems.uom.common,
  tec.uom.se.unit
+=======
+ com.raytheon.uf.edex.pointdata
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

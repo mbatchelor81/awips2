@@ -18,10 +18,13 @@
 # further licensing information.
 ##
 #
-# Revisions:
-# Date            Ticket#       Engineer       Description
-# ------------    ----------    -----------    -------------------------------
-# 07/15/2015       #4013        randerso       Initial creation
+# SOFTWARE HISTORY
+#
+# Date          Ticket#  Engineer  Description
+# ------------- -------- --------- --------------------------------------------
+# Jul 15, 2015  4013     randerso  Initial creation
+# Jun 30, 2021  8572     randerso  Replace references to CDSHOST and CDSPORT
+#                                  With DEFAULT_HOST and DEFAULT_PORT
 #
 ##
 
@@ -58,12 +61,6 @@ def validateArgs():
                       metavar="site")
     args = parser.parse_args()
     
-    if args.host is  None and "CDSHOST" in os.environ:
-        args.host = os.environ["CDSHOST"]
-
-    if args.port is None and "CDSPORT" in os.environ:
-        args.port = int(os.environ["CDSPORT"])
-
     if args.host is None: 
         args.host = str(os.getenv("DEFAULT_HOST", "localhost"))
 

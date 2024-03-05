@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -34,6 +46,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <pre>
+<<<<<<< HEAD
  * 
  * SOFTWARE HISTORY
  * 
@@ -45,28 +58,59 @@ import org.slf4j.LoggerFactory;
  * 12/14/2015   5166       kbisanz     Update logging to use SLF4J
  * </pre>
  * 
+=======
+ *
+ * SOFTWARE HISTORY
+ *
+ * Date         Ticket#    Engineer    Description
+ * ------------ ---------- ----------- --------------------------
+ * 20071127     382        jkorman     Initial Coding.
+ * 20080214     862        jkorman     BUFRMOS implementation changes.
+ * 9/16/2014    #3628      mapeters    Moved from uf.edex.decodertools plugin.
+ * 12/14/2015   5166       kbisanz     Update logging to use SLF4J
+ * Mar 21, 2022 102643     tjensen     Update Table_D configuration file
+ *
+ * </pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author jkorman
  * @version 1.0
  */
 public class DescriptorFactory {
 
+<<<<<<< HEAD
     private Logger logger = LoggerFactory.getLogger(getClass());
+=======
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private static Pattern DESC_PATTERN = Pattern
             .compile("[0-3] \\d{2} \\d{3}");
 
     private static final String DEFAULT_TABLE_B = "/res/bufrtables/BUFR_Table_B.txt";
 
+<<<<<<< HEAD
     private static final String DEFAULT_TABLE_D = "/res/bufrtables/BUFR_Table_D_1.txt";
 
     // private static DescriptorFactory factoryInstance = null;
 
     private HashMap<Integer, BUFRTableB> tableBEntries = new HashMap<Integer, BUFRTableB>();
+=======
+    private static final String DEFAULT_TABLE_D = "/res/bufrtables/BUFR_Table_D.txt";
+
+    // private static DescriptorFactory factoryInstance = null;
+
+    private final HashMap<Integer, BUFRTableB> tableBEntries = new HashMap<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private HashMap<Integer, BUFRTableD> tableDEntries = null;
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param resourceClassReference
      */
     public DescriptorFactory() {
@@ -74,7 +118,11 @@ public class DescriptorFactory {
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param resourceClassReference
      * @param tableB
      * @param tableD
@@ -88,11 +136,20 @@ public class DescriptorFactory {
     }
 
     /**
+<<<<<<< HEAD
      * 
      * @param resourceClassReference
      * @param tableB
      */
     private void populateTableB(Class<?> resourceClassReference, String tableB) {
+=======
+     *
+     * @param resourceClassReference
+     * @param tableB
+     */
+    private void populateTableB(Class<?> resourceClassReference,
+            String tableB) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         InputStream strm = null;
 
         BufferedReader bf = null;
@@ -164,6 +221,7 @@ public class DescriptorFactory {
     }
 
     /**
+<<<<<<< HEAD
      * 
      * @param resourceClassReference
      * @param tableD
@@ -171,6 +229,16 @@ public class DescriptorFactory {
     private void populateTableD(Class<?> resourceClassReference, String tableD) {
         if (tableDEntries == null) {
             tableDEntries = new HashMap<Integer, BUFRTableD>();
+=======
+     *
+     * @param resourceClassReference
+     * @param tableD
+     */
+    private void populateTableD(Class<?> resourceClassReference,
+            String tableD) {
+        if (tableDEntries == null) {
+            tableDEntries = new HashMap<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         readTableD(resourceClassReference, DEFAULT_TABLE_D, false);
         if (tableD != null) {
@@ -180,7 +248,11 @@ public class DescriptorFactory {
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param resourceClassReference
      * @param tableD
      */
@@ -210,9 +282,15 @@ public class DescriptorFactory {
                                                 + line
                                                 + "] to a defined descriptor");
                                     } else {
+<<<<<<< HEAD
                                         logger.debug("Adding [" + desc
                                                 + "] to [" + tableDInstance
                                                 + "]");
+=======
+                                        logger.debug(
+                                                "Adding [" + desc + "] to ["
+                                                        + tableDInstance + "]");
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                         tableDInstance.addDescriptor(desc);
                                     }
                                 }
@@ -233,8 +311,13 @@ public class DescriptorFactory {
                                 tableDInstance = getDescriptor(s);
                                 if (tableDInstance.isDefined()
                                         && allowOverwrites) {
+<<<<<<< HEAD
                                     tableDInstance
                                             .setSubList(new ArrayList<BUFRDescriptor>());
+=======
+                                    tableDInstance.setSubList(
+                                            new ArrayList<BUFRDescriptor>());
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                 }
                             } else {
                                 logger.debug("Could not create descriptor for ["
@@ -243,7 +326,10 @@ public class DescriptorFactory {
                             break;
                         }
                         default: {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                             break;
                         }
                         }
@@ -252,8 +338,13 @@ public class DescriptorFactory {
 
                 bf.close();
             } else {
+<<<<<<< HEAD
                 logger.error("Reading table D : Could not get stream to "
                         + tableD);
+=======
+                logger.error(
+                        "Reading table D : Could not get stream to " + tableD);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         } catch (IOException ioe) {
             ioe.printStackTrace();
@@ -269,7 +360,11 @@ public class DescriptorFactory {
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param descriptor
      * @return
      */
@@ -305,7 +400,11 @@ public class DescriptorFactory {
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param f
      * @param x
      * @param y
@@ -316,7 +415,11 @@ public class DescriptorFactory {
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param descriptor
      * @return
      */
@@ -326,12 +429,21 @@ public class DescriptorFactory {
             Matcher m = DESC_PATTERN.matcher(descriptor);
             if (m.find()) {
 
+<<<<<<< HEAD
                 int f = Integer.parseInt(descriptor.substring(m.start(),
                         m.start() + 1).trim());
                 int x = Integer.parseInt(descriptor.substring(m.start() + 2,
                         m.start() + 4).trim());
                 int y = Integer.parseInt(descriptor.substring(m.start() + 5,
                         m.start() + 8).trim());
+=======
+                int f = Integer.parseInt(
+                        descriptor.substring(m.start(), m.start() + 1).trim());
+                int x = Integer.parseInt(descriptor
+                        .substring(m.start() + 2, m.start() + 4).trim());
+                int y = Integer.parseInt(descriptor
+                        .substring(m.start() + 5, m.start() + 8).trim());
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                 descInstance = getDescriptor(f, x, y);
             }
@@ -341,7 +453,11 @@ public class DescriptorFactory {
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param descriptor
      * @return
      */
@@ -350,7 +466,11 @@ public class DescriptorFactory {
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param descriptor
      * @return
      */
@@ -359,19 +479,31 @@ public class DescriptorFactory {
     }
 
     public List<BUFRTableB> getTableB() {
+<<<<<<< HEAD
         ArrayList<BUFRTableB> table = new ArrayList<BUFRTableB>();
+=======
+        ArrayList<BUFRTableB> table = new ArrayList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         table.addAll(tableBEntries.values());
         return table;
     }
 
     public List<BUFRTableD> getTableD() {
+<<<<<<< HEAD
         ArrayList<BUFRTableD> table = new ArrayList<BUFRTableD>();
+=======
+        ArrayList<BUFRTableD> table = new ArrayList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         table.addAll(tableDEntries.values());
         return table;
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param descriptor
      * @return
      */
@@ -381,6 +513,7 @@ public class DescriptorFactory {
         return desc;
     }
 
+<<<<<<< HEAD
     // public static synchronized DescriptorFactory getInstance() {
     // if (factoryInstance == null) {
     // factoryInstance = new DescriptorFactory();
@@ -398,6 +531,10 @@ public class DescriptorFactory {
 
     /**
      * 
+=======
+    /**
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param descriptor
      * @param indent
      */
@@ -414,7 +551,11 @@ public class DescriptorFactory {
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public static void display(List<BUFRDescriptor> list, String indent,
             Logger logger) {

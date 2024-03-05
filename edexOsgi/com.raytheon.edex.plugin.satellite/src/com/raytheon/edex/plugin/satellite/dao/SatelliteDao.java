@@ -57,28 +57,35 @@ import com.raytheon.uf.edex.database.query.SpatialDatabaseQuery;
  *
  * SOFTWARE HISTORY
  *
- * Date          Ticket#  Engineer    Description
- * ------------- -------- ----------- --------------------------
- * Feb 11, 2009           bphillip    Initial creation
- * Jul 09, 2012  798      jkorman     Modified datastore population.
- * Mar 25, 2013  1823     dgilling    Modified getSatelliteData() and
- *                                    getSatelliteInventory() to allow optional
- *                                    input arguments.
- * Jun 24, 2013  2044     randerso    Added methods to get data by TimeRange and
- *                                    getInventory with maxRecord limit
- * Nov 14, 2013  2393     bclement    moved interpolation code to parent class
- * Mar 07, 2014  2791     bsteffen    Move Data Source/Destination to numeric
- *                                    plugin.
- * Nov 04, 2014  2714     bclement    removed GINI specific DAOs
- * Apr 15, 2014  4388     bsteffen    Preserve fill value across interpolation levels.
- * Jul 07, 2015  4279     rferrel     Override delete to clean up orphan entries in satellite_spatial table.
- * Aug 11, 2015  4673     rjpeter     Remove use of executeNativeSql.
- * Sep 17, 2015  4279     rferrel     Do not purge the newest satellite_spatial entries.
-*  Apr 29, 2016  ----     mjames      Force 1 interpolationLevels for NEXRCOMP products
- *                                    since def. (5) is pixeled and load time is similar.
- * Feb 20, 2018  7123     bsteffen    Override postPurge() instead of delete().
- * Jun 06, 2018  7310     mapeters    Get only distinct times in getSatelliteInventory() methods
- * Jun 15, 2018  7310     mapeters    Add spatial constraint to queries
+ * Date          Ticket#  Engineer  Description
+ * ------------- -------- --------- --------------------------------------------
+ * Feb 11, 2009           bphillip  Initial creation
+ * Jul 09, 2012  798      jkorman   Modified datastore population.
+ * Mar 25, 2013  1823     dgilling  Modified getSatelliteData() and
+ *                                  getSatelliteInventory() to allow optional
+ *                                  input arguments.
+ * Jun 24, 2013  2044     randerso  Added methods to get data by TimeRange and
+ *                                  getInventory with maxRecord limit
+ * Nov 14, 2013  2393     bclement  moved interpolation code to parent class
+ * Mar 07, 2014  2791     bsteffen  Move Data Source/Destination to numeric
+ *                                  plugin.
+ * Nov 04, 2014  2714     bclement  removed GINI specific DAOs
+ * Apr 15, 2014  4388     bsteffen  Preserve fill value across interpolation
+ *                                  levels.
+ * Jul 07, 2015  4279     rferrel   Override delete to clean up orphan entries
+ *                                  in satellite_spatial table.
+ * Aug 11, 2015  4673     rjpeter   Remove use of executeNativeSql.
+ * Sep 17, 2015  4279     rferrel   Do not purge the newest satellite_spatial
+ *                                  entries.
+ * Apr 29, 2016  ----     mjames    Force 1 interpolationLevels for NEXRCOMP products
+ *                                  since def. (5) is pixeled and load time is similar.
+ * Feb 20, 2018  7123     bsteffen  Override postPurge() instead of delete().
+ * Jun 06, 2018  7310     mapeters  Get only distinct times in
+ *                                  getSatelliteInventory() methods
+ * Jun 15, 2018  7310     mapeters  Add spatial constraint to queries
+ * Feb 10, 2021  20421 mgamazaychikov Add support for centalWaveLength handling
+ * Mar 29, 2021  8374     randerso  Renamed IDataRecord.get/setProperties to
+ *                                  get/setProps
  * Sep 23, 2021  8608     mapeters    Add metadata id handling
  * Jun 22, 2022  8865     mapeters    Update populateDataStore to return boolean
  *
@@ -125,7 +132,7 @@ public class SatelliteDao extends PluginDao {
             props.setCompression(
                     StorageProperties.Compression.valueOf(compression));
         }
-        storageRecord.setProperties(props);
+        storageRecord.setProps(props);
         storageRecord.setCorrelationObject(satRecord);
         final Map<String, Object> attributes = storageRecord
                 .getDataAttributes();
@@ -162,7 +169,7 @@ public class SatelliteDao extends PluginDao {
                         // Set the attributes and properties from the parent
                         // data.
                         dr.setDataAttributes(attributes);
-                        dr.setProperties(props);
+                        dr.setProps(props);
                         dr.setFillValue(fillValue);
                         return dr;
                     }
@@ -235,7 +242,8 @@ public class SatelliteDao extends PluginDao {
      */
     public List<SatelliteRecord> getSatelliteData(String source,
             String creatingEntity, String sectorID, String physicalElement,
-            List<Date> dates, SpatialConstraint spatialConstraint)
+            Float centralWavelength, List<Date> dates,
+            SpatialConstraint spatialConstraint)
             throws DataAccessLayerException {
 
         List<SatelliteRecord> satRecords = new ArrayList<>();
@@ -261,6 +269,9 @@ public class SatelliteDao extends PluginDao {
             if (physicalElement != null) {
                 query.addQueryParam("physicalElement", physicalElement);
             }
+            if (centralWavelength != null) {
+                query.addQueryParam("centralWavelength", centralWavelength);
+            }
             if (spatialConstraint != null) {
                 query.addSpatialConstraint(spatialConstraint);
             }
@@ -279,6 +290,14 @@ public class SatelliteDao extends PluginDao {
             }
         }
         return satRecords;
+    }
+
+    public List<SatelliteRecord> getSatelliteData(String source,
+            String creatingEntity, String sectorID, String physicalElement,
+            List<Date> dates, SpatialConstraint spatialConstraint)
+            throws DataAccessLayerException {
+        return getSatelliteData(source, creatingEntity, sectorID,
+                physicalElement, null, dates, spatialConstraint);
     }
 
     /**
@@ -508,6 +527,40 @@ public class SatelliteDao extends PluginDao {
         query.setDistinct(true);
         query.addOrder("dataTime.refTime", false);
 
+        @SuppressWarnings("unchecked")
+        List<Date> times = (List<Date>) this.queryByCriteria(query);
+        return times;
+    }
+
+    public List<Date> getSatelliteInventory(String source,
+            String creatingEntity, String sectorID, String physicalElement,
+            Float centralWavelength, SpatialConstraint spatialConstraint,
+            int maxRecords) throws DataAccessLayerException {
+        SpatialDatabaseQuery query = new SpatialDatabaseQuery(this.daoClass);
+        if (source != null) {
+            query.addQueryParam("source", source);
+        }
+        if (creatingEntity != null) {
+            query.addQueryParam("creatingEntity", creatingEntity);
+        }
+        if (sectorID != null) {
+            query.addQueryParam("sectorID", sectorID);
+        }
+        if (centralWavelength != null) {
+            query.addQueryParam("centralWavelength", centralWavelength);
+        }
+        if (physicalElement != null) {
+            query.addQueryParam("physicalElement", physicalElement);
+        }
+        if (spatialConstraint != null) {
+            query.addSpatialConstraint(spatialConstraint);
+        }
+        if (maxRecords > 0) {
+            query.setMaxResults(maxRecords);
+        }
+        query.addReturnedField("dataTime.refTime");
+        query.setDistinct(true);
+        query.addOrder("dataTime.refTime", false);
         @SuppressWarnings("unchecked")
         List<Date> times = (List<Date>) this.queryByCriteria(query);
         return times;

@@ -5,6 +5,7 @@
     http://camel.apache.org/schema/spring
     http://camel.apache.org/schema/spring/camel-spring.xsd">
 
+<<<<<<< HEAD
     <!-- redbook -->
     <bean id="redbookNdmMenuListener"
         class="com.raytheon.uf.edex.ndm.dataplugin.subscriber.RedbookNdmMenuSubscriber" />
@@ -57,6 +58,8 @@
         <constructor-arg ref="redbookNdmMappingListener" />
     </bean>
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <!-- modelsounding -->
     <bean id="modelBufrListener" class="com.raytheon.uf.edex.ndm.dataplugin.subscriber.ModelBufrSubscriber" />
 

@@ -40,7 +40,11 @@
     </accumulation>
 
     <accumulation>
+<<<<<<< HEAD
         <model>GFS229|GFS215|GFS217|GFS20-.*|GFS.*</model>
+=======
+        <model>GFS229|GFS215|GFS217|GFS20-.*</model>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <create forecastPeriodHours="3" accumulationParam="TP3hr" minuendParam="TP-GFS" subtrahendParam="TP-GFS" />
         <create forecastPeriodHours="6" accumulationParam="TP6hr" minuendParam="TP-GFS" subtrahendParam="TP-GFS" />
         <create forecastPeriodHours="3" accumulationParam="CP3hr" minuendParam="CP-GFS" subtrahendParam="CP-GFS" />

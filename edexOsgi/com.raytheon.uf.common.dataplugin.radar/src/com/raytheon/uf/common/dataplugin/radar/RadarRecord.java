@@ -29,7 +29,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.measure.Unit;
+<<<<<<< HEAD
 import javax.measure.format.ParserException;
+=======
+import javax.measure.format.MeasurementParseException;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
@@ -103,6 +107,10 @@ import com.raytheon.uf.common.dataplugin.radar.level3.generic.GenericDataParamet
 import com.raytheon.uf.common.dataplugin.radar.units.DigitalVilUnit;
 import com.raytheon.uf.common.dataplugin.radar.util.RadarConstants;
 import com.raytheon.uf.common.dataplugin.radar.util.RadarConstants.MapValues;
+<<<<<<< HEAD
+=======
+import com.raytheon.uf.common.dataplugin.radar.util.RadarUtil;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.geospatial.CRSCache;
 import com.raytheon.uf.common.geospatial.ISpatialEnabled;
 import com.raytheon.uf.common.geospatial.MapUtil;
@@ -111,8 +119,13 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
 import com.raytheon.uf.common.time.DataTime;
 import com.raytheon.uf.common.units.PiecewisePixel;
 
+<<<<<<< HEAD
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.format.SimpleUnitFormat;
+=======
+import tech.units.indriya.AbstractUnit;
+import tech.units.indriya.format.SimpleUnitFormat;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Record implementation for radar plugin
@@ -153,6 +166,12 @@ import tec.uom.se.format.SimpleUnitFormat;
  *                                     cleanup.
  * Jun 20, 2019  7629     mroos        Added expanded product dependent values
  *                                     calls to database (scan type and delta time).
+<<<<<<< HEAD
+=======
+ * Oct 29, 2022  8959     mapeters     Update how data time levels are set
+ * Nov 14, 2022  8973     mapeters     Prevent NPE in setThresholds due to race
+ *                                     condition
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  *
  * @author bphillip
@@ -356,6 +375,12 @@ public class RadarRecord extends PersistablePluginDataObject
     protected Object[] decodedThresholds;
 
     @Transient
+<<<<<<< HEAD
+=======
+    protected final Object thresholdsLock = new Object();
+
+    @Transient
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public double srmSpeed = 0;
 
     @Transient
@@ -754,7 +779,14 @@ public class RadarRecord extends PersistablePluginDataObject
 
     public void setThreshold(int i, short threshold) {
         this.getThresholds()[i] = threshold;
+<<<<<<< HEAD
         this.decodedThresholds[i] = new DataLevelThreshold(threshold).decode();
+=======
+        synchronized (thresholdsLock) {
+            this.decodedThresholds[i] = new DataLevelThreshold(threshold)
+                    .decode();
+        }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     public short[] getThresholds() {
@@ -762,11 +794,18 @@ public class RadarRecord extends PersistablePluginDataObject
     }
 
     public Object[] getDecodedThresholds() {
+<<<<<<< HEAD
         return decodedThresholds;
+=======
+        synchronized (thresholdsLock) {
+            return decodedThresholds;
+        }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     public void setThresholds(short[] thresholds) {
         getStoredData().setThresholds(thresholds);
+<<<<<<< HEAD
         this.decodedThresholds = null;
         if (thresholds != null) {
             this.decodedThresholds = new Object[thresholds.length];
@@ -776,6 +815,19 @@ public class RadarRecord extends PersistablePluginDataObject
                 dl.set(threshold);
                 this.decodedThresholds[i] = dl.decode();
                 i++;
+=======
+        synchronized (thresholdsLock) {
+            this.decodedThresholds = null;
+            if (thresholds != null) {
+                this.decodedThresholds = new Object[thresholds.length];
+                int i = 0;
+                DataLevelThreshold dl = new DataLevelThreshold();
+                for (short threshold : thresholds) {
+                    dl.set(threshold);
+                    this.decodedThresholds[i] = dl.decode();
+                    i++;
+                }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         }
     }
@@ -834,7 +886,11 @@ public class RadarRecord extends PersistablePluginDataObject
                 retVal = SimpleUnitFormat
                         .getInstance(SimpleUnitFormat.Flavor.ASCII)
                         .parseProductUnit(unit, new ParsePosition(0));
+<<<<<<< HEAD
             } catch (IllegalArgumentException | ParserException e) {
+=======
+            } catch (IllegalArgumentException | MeasurementParseException e) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 // Unable to parse unit string
                 logger.warn(String.format(
                         "Unable to parse unit string: \"%s\". Treating as unitless.",
@@ -1490,8 +1546,13 @@ public class RadarRecord extends PersistablePluginDataObject
                     Map<MapValues, String> map = new HashMap<>();
                     for (GenericDataParameter param : packet.getParams()
                             .values()) {
+<<<<<<< HEAD
                         DMDAttributeIDs id = null;
                         id = DMDAttributeIDs.getAttribute(param.getId());
+=======
+                        DMDAttributeIDs id = DMDAttributeIDs
+                                .getAttribute(param.getId());
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         if (id != null) {
                             for (MapValues vals : MapValues.values()) {
                                 if (id.getName().equals(vals.getName())) {
@@ -1534,8 +1595,13 @@ public class RadarRecord extends PersistablePluginDataObject
                     for (GenericDataParameter param : packet.getParams()
                             .values()) {
 
+<<<<<<< HEAD
                         GFMAttributeIDs id = null;
                         id = GFMAttributeIDs.getAttribute(param.getId());
+=======
+                        GFMAttributeIDs id = GFMAttributeIDs
+                                .getAttribute(param.getId());
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                         if (id != null) {
                             for (MapValues vals : MapValues.values()) {
@@ -1721,10 +1787,19 @@ public class RadarRecord extends PersistablePluginDataObject
     @Override
     public DataTime getDataTime() {
         DataTime time = super.getDataTime();
+<<<<<<< HEAD
         if ((time != null) && addSpatial) {
             time.setLevelValue(primaryElevationAngle);
         } else if (!addSpatial) {
             time.setLevelValue(null);
+=======
+        if (time != null) {
+            if (addSpatial) {
+                time.setLevel(primaryElevationAngle, RadarUtil.TILT);
+            } else {
+                time.clearLevel();
+            }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         return time;
     }

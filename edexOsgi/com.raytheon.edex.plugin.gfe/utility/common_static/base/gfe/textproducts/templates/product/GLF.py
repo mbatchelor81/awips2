@@ -1313,7 +1313,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             statDict2 = self.getStatDict(self._sampler, analysis,
                                          trDict["MAFOR"+ repr(j)], editArea)
             wavestats = self.getStats(statDict2, "WaveHeight")
+<<<<<<< HEAD
             if wavestats is "None" or wavestats is None:
+=======
+            if wavestats == "None" or wavestats is None:
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 #mafor = mafor + " " + "MMMMM"
                 wavecode = "MMMM"
                 waveMAFOR.append(wavecode)

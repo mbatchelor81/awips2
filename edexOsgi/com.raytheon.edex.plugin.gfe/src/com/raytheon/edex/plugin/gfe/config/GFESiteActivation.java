@@ -117,12 +117,19 @@ import jep.JepConfig;
  * Jan 29, 2021  8304     randerso  Move PythonEval for loading IPFServerConfig
  *                                  to separate thread to avoid multiple Python
  *                                  sub-interpreters on same thread.
+<<<<<<< HEAD
+=======
+ * Mar 25, 2021  8380     mapeters  Send notifications even when un-initialized
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
  * @author njensen
  */
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 public class GFESiteActivation
         implements ISiteActivationListener, EdexAsyncStartupBean {
     private static final IUFStatusHandler statusHandler = UFStatus
@@ -144,7 +151,11 @@ public class GFESiteActivation
     private static final ExecutorService executor = Executors
             .newCachedThreadPool(factory);
 
+<<<<<<< HEAD
     private volatile boolean intialized;
+=======
+    private volatile boolean initialized;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private final IscServiceProvider iscServices;
 
@@ -164,13 +175,21 @@ public class GFESiteActivation
      *            {@code IscServiceProvider} instance
      */
     public GFESiteActivation(final IscServiceProvider iscServices) {
+<<<<<<< HEAD
         this.intialized = false;
+=======
+        this.initialized = false;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         this.iscServices = iscServices;
     }
 
     @Override
     public void registered() {
+<<<<<<< HEAD
         this.intialized = true;
+=======
+        this.initialized = true;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         for (String siteID : SvcBackupUtil.getPrimarySites(false)) {
             if (!getActiveSites().contains(siteID)) {
                 SiteAwareRegistry.getInstance().activateSite(siteID);
@@ -179,6 +198,7 @@ public class GFESiteActivation
     }
 
     private void sendActivationBeginNotification(String siteID) {
+<<<<<<< HEAD
 
         if (this.intialized) {
             try {
@@ -208,10 +228,35 @@ public class GFESiteActivation
                         "Error sending site activation complete notification message!",
                         e);
             }
+=======
+        try {
+            SiteActivationNotification notification = new SiteActivationNotification(
+                    SiteUtil.getSite(), siteID, "gfe", ACTIVATIONTYPE.ACTIVATE,
+                    ACTIVATIONSTATUS.BEGIN);
+            SendSiteActivationNotifications.send(notification);
+        } catch (EdexException e) {
+            statusHandler.error(
+                    "Error sending site activation begin notification message!",
+                    e);
+        }
+    }
+
+    private void sendActivationCompleteNotification(String siteID) {
+        try {
+            SiteActivationNotification notification = new SiteActivationNotification(
+                    SiteUtil.getSite(), siteID, "gfe", ACTIVATIONTYPE.ACTIVATE,
+                    ACTIVATIONSTATUS.SUCCESS);
+            SendSiteActivationNotifications.send(notification);
+        } catch (EdexException e) {
+            statusHandler.error(
+                    "Error sending site activation complete notification message!",
+                    e);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 
     private void sendActivationFailedNotification(String siteID) {
+<<<<<<< HEAD
         if (this.intialized) {
             try {
                 SiteActivationNotification notification = new SiteActivationNotification(
@@ -223,10 +268,22 @@ public class GFESiteActivation
                         "Error sending site activation failed notification message!",
                         e);
             }
+=======
+        try {
+            SiteActivationNotification notification = new SiteActivationNotification(
+                    SiteUtil.getSite(), siteID, "gfe", ACTIVATIONTYPE.ACTIVATE,
+                    ACTIVATIONSTATUS.FAILURE);
+            SendSiteActivationNotifications.send(notification);
+        } catch (Exception e) {
+            statusHandler.error(
+                    "Error sending site activation failed notification message!",
+                    e);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 
     private void sendDeactivationBeginNotification(String siteID) {
+<<<<<<< HEAD
         if (this.intialized) {
             try {
                 SiteActivationNotification notification = new SiteActivationNotification(
@@ -239,10 +296,22 @@ public class GFESiteActivation
                         e);
             }
 
+=======
+        try {
+            SiteActivationNotification notification = new SiteActivationNotification(
+                    SiteUtil.getSite(), siteID, "gfe",
+                    ACTIVATIONTYPE.DEACTIVATE, ACTIVATIONSTATUS.BEGIN);
+            SendSiteActivationNotifications.send(notification);
+        } catch (Exception e) {
+            statusHandler.error(
+                    "Error sending site deactivation begin notification message!",
+                    e);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 
     private void sendDeactivationCompleteNotification(String siteID) {
+<<<<<<< HEAD
         if (this.intialized) {
             try {
                 SiteActivationNotification notification = new SiteActivationNotification(
@@ -254,10 +323,22 @@ public class GFESiteActivation
                         "Error sending site deactivation complete notification message!",
                         e);
             }
+=======
+        try {
+            SiteActivationNotification notification = new SiteActivationNotification(
+                    SiteUtil.getSite(), siteID, "gfe",
+                    ACTIVATIONTYPE.DEACTIVATE, ACTIVATIONSTATUS.SUCCESS);
+            SendSiteActivationNotifications.send(notification);
+        } catch (Exception e) {
+            statusHandler.error(
+                    "Error sending site deactivation complete notification message!",
+                    e);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 
     private void sendDeactivationFailedNotification(String siteID) {
+<<<<<<< HEAD
         if (this.intialized) {
             try {
                 SiteActivationNotification notification = new SiteActivationNotification(
@@ -269,6 +350,17 @@ public class GFESiteActivation
                         "Error sending site deactivation failed notification message!",
                         e);
             }
+=======
+        try {
+            SiteActivationNotification notification = new SiteActivationNotification(
+                    SiteUtil.getSite(), siteID, "gfe",
+                    ACTIVATIONTYPE.DEACTIVATE, ACTIVATIONSTATUS.FAILURE);
+            SendSiteActivationNotifications.send(notification);
+        } catch (Exception e) {
+            statusHandler.error(
+                    "Error sending site deactivation failed notification message!",
+                    e);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 
@@ -531,6 +623,10 @@ public class GFESiteActivation
 
     @Override
     public boolean isDone() {
+<<<<<<< HEAD
         return intialized;
+=======
+        return initialized;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 }

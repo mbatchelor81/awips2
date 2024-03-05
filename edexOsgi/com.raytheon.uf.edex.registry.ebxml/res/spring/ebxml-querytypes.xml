@@ -48,6 +48,7 @@
         <property name="registryObjectDao" ref="registryObjectDao" />
         <property name="classificationNodeDao" ref="classificationNodeDao" />
     </bean>
+<<<<<<< HEAD
     <bean id="urn:oasis:names:tc:ebxml-regrep:query:GetAuditTrailById"
         class="com.raytheon.uf.edex.registry.ebxml.services.query.plugins.GetAuditTrailById">
         <property name="queryDefinition"
@@ -80,6 +81,8 @@
         <property name="classificationNodeDao" ref="classificationNodeDao" />
         <property name="subscriptionDao" ref="subscriptionTypeDao" />
     </bean>
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <bean id="urn:oasis:names:tc:ebxml-regrep:query:GetChildrenByParentId"
         class="com.raytheon.uf.edex.registry.ebxml.services.query.plugins.GetChildrenByParentId">
         <property name="queryDefinition"

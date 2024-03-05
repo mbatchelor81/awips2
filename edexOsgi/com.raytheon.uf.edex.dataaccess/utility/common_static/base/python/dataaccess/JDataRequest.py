@@ -41,7 +41,11 @@
 
 
 
+<<<<<<< HEAD
 from awips.dataaccess import IDataRequest
+=======
+from ufpy.dataaccess import IDataRequest
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 from com.raytheon.uf.common.dataplugin.level import Level
 import JUtil
 import jep

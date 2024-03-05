@@ -147,7 +147,11 @@ public class StaticTopoData {
     // Initializes the storage properties
     static {
         sp = new StorageProperties();
+<<<<<<< HEAD
         sp.setCompression(Compression.LZF);
+=======
+        sp.setCompression(Compression.GZIP);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         sp.setChunked(true);
     }
 

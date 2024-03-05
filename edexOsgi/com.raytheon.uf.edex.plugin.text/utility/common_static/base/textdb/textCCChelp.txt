@@ -1738,7 +1738,11 @@ HBV Jim Hogg Cnty AP, Hebbronville, TX
 HCA K-Big Spring, TX: M-Le Esperanze, H0
 HCD Hutchinson, MN
 HCO Hallock, MN
+<<<<<<< HEAD
 HDC Hammond Muni, LA
+=======
+HDC Hammond Muni, LA; Hammond, LA WSR-88D
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 HDE Holdrege, NE
 HDG FOUS Header
 HDN Hayden, CO
@@ -2352,7 +2356,11 @@ LIH Lihue, HI
 LIK Licking River
 LIO Ice Outlook
 LIT Little Rock, AR
+<<<<<<< HEAD
 LIX WFO New Orleans/Baton Rouge, Slidell, LA WSR-88D
+=======
+LIX WFO New Orleans/Baton Rouge
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 LIZ Loring AFB, Limestone, ME
 LJF Litchfield, MN
 LJN Lake Jackson, TX

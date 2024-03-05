@@ -58,6 +58,7 @@
             <rim:LocalizedString value="Association.desc"/>
           </rim:Description>
         </rim:ClassificationNode>
+<<<<<<< HEAD
         <rim:ClassificationNode lid="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:AuditableEvent" code="AuditableEvent" id="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:AuditableEvent">
           <rim:Name>
             <rim:LocalizedString value="AuditableEvent"/>
@@ -66,6 +67,8 @@
             <rim:LocalizedString value="AuditableEvent.desc"/>
           </rim:Description>
         </rim:ClassificationNode>
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <rim:ClassificationNode lid="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" code="Classification" id="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification">
           <rim:Name>
             <rim:LocalizedString value="Classification"/>

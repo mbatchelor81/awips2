@@ -4,10 +4,16 @@
     http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="DbInit" class="com.raytheon.uf.edex.registry.ebxml.dao.DbInit">
+<<<<<<< HEAD
         <property name="dao" ref="admin_registryObjectDao" />
         <property name="sessionFactory" ref="metadataSessionFactory" />
         <property name="lcm" ref="lcmServiceImpl" />
         <property name="xacmlPolicyAdmin" ref="XACMLPolicyAdministrator"/>
+=======
+        <constructor-arg ref="admin_registryObjectDao" />
+        <constructor-arg ref="lcmServiceImpl" />
+        <constructor-arg ref="XACMLPolicyAdministrator"/>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     </bean>
 
     <bean id="ebxmlDDQueueDelegate"

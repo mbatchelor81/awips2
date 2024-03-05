@@ -45,11 +45,18 @@ import com.raytheon.uf.edex.core.IContextStateProcessor;
  * Mar 11, 2015  #4128     dgilling     Initial creation
  * Nov 11, 2015  #5110     dgilling     Fixed activation check in activateSite
  *                                      to better match A1.
+<<<<<<< HEAD
+=======
+ * Apr 13, 2022  #8841     dgilling     Correctly handle failover condition.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
  * @author dgilling
+<<<<<<< HEAD
  * @version 1.0
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  */
 
 public final class IscServiceProvider implements IContextStateProcessor {
@@ -88,11 +95,14 @@ public final class IscServiceProvider implements IContextStateProcessor {
         return iscServiceBean;
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
      * @see com.raytheon.uf.edex.core.IContextStateProcessor#preStart()
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void preStart() {
         activeInstance = true;
@@ -107,16 +117,20 @@ public final class IscServiceProvider implements IContextStateProcessor {
         }
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
      * @see com.raytheon.uf.edex.core.IContextStateProcessor#postStart()
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void postStart() {
         // no-op
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -124,17 +138,26 @@ public final class IscServiceProvider implements IContextStateProcessor {
      */
     @Override
     public void preStop() {
+=======
+    @Override
+    public void preStop() {
+        activeInstance = false;
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         irtManager.preStop();
         for (IISCServiceBean iscBean : iscBeans) {
             iscBean.preShutdown();
         }
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
      * @see com.raytheon.uf.edex.core.IContextStateProcessor#postStop()
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void postStop() {
         irtManager.postStop();

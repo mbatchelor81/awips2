@@ -181,7 +181,11 @@ public class GridParmManager {
             .getHandler(GridParmManager.class);
 
     private static final IPerformanceStatusHandler perfLog = PerformanceStatus
+<<<<<<< HEAD
             .getHandler("GFE:");
+=======
+            .getHandler("GFE");
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private static final String SMART_INIT_TASK_NAME = "GridParmManager";
 

@@ -277,6 +277,26 @@
     <versionsToKeep>1</versionsToKeep>
     <modTimeToWait>00-01:00:00</modTimeToWait>
   </rule>
+  <rule>
+    <keyValue>TPCSurgeProb2</keyValue>
+    <versionsToKeep>1</versionsToKeep>
+    <modTimeToWait>00-01:00:00</modTimeToWait>
+  </rule>
+  <rule>
+    <keyValue>TPCSurgeProb-SJU</keyValue>
+    <versionsToKeep>1</versionsToKeep>
+    <modTimeToWait>00-01:00:00</modTimeToWait>
+  </rule>
+  <rule>
+    <keyValue>TPCSurgeProbLoRes</keyValue>
+    <versionsToKeep>3</versionsToKeep>
+    <modTimeToWait>00-01:00:00</modTimeToWait>
+  </rule>
+  <rule>
+    <keyValue>TPCSurgeProbLoRes2</keyValue>
+    <versionsToKeep>3</versionsToKeep>
+    <modTimeToWait>00-01:00:00</modTimeToWait>
+  </rule>
   <!-- Purge rule for the P-ETSS (P-ETSS) model -->
   <rule>
     <keyValue>P-ETSS</keyValue>
@@ -302,44 +322,16 @@
     <versionsToKeep>2</versionsToKeep>
     <modTimeToWait>00-01:00:00</modTimeToWait>
   </rule>
-    <!-- Purge rule for the HiResW-ARW-East (HiResW-ARW-East) model -->
+  <!-- Purge rule for HiResW CONUS -->
   <rule>
-    <keyValue>HiResW-ARW-East</keyValue>
+    <keyValue>HiResW-(?:ARW|FV3)</keyValue>
     <versionsToKeep>2</versionsToKeep>
     <modTimeToWait>00-01:00:00</modTimeToWait>
   </rule>
-    <!-- Purge rule for the HiResW-ARW-West (HiResW-ARW-West) model -->
-    <!-- Purge rule for the HiResW-ARW-AK (HiResW-ARW-AK) model -->
-    <!-- Purge rule for the HiResW-ARW-SJU (HiResW-ARW-SJU) model -->
+  <!-- Purge rule for HiResW-ARW & FV3 OCONUS  -->
   <rule regex="true">
-    <keyValue>HiResW-ARW-(?:West|AK|SJU)</keyValue>
+    <keyValue>HiResW-(?:ARW|FV3)-(?:AK|GU|HI|SJU)</keyValue>
     <versionsToKeep>1</versionsToKeep>
-    <modTimeToWait>00-01:00:00</modTimeToWait>
-  </rule>
-    <!-- Purge rule for the HiResW-ARW-HI (HiResW-ARW-HI) model -->
-  <rule>
-    <keyValue>HiResW-ARW-HI</keyValue>
-    <versionsToKeep>2</versionsToKeep>
-    <modTimeToWait>00-01:00:00</modTimeToWait>
-  </rule>
-    <!-- Purge rule for the HiResW-NMM-East (HiResW-NMM-East) model -->
-  <rule>
-    <keyValue>HiResW-NMM-East</keyValue>
-    <versionsToKeep>2</versionsToKeep>
-    <modTimeToWait>00-01:00:00</modTimeToWait>
-  </rule>
-    <!-- Purge rule for the HiResW-NMM-West (HiResW-NMM-West) model -->
-    <!-- Purge rule for the HiResW-NMM-AK (HiResW-NMM-AK) model -->
-    <!-- Purge rule for the HiResW-NMM-SJU (HiResW-NMM-SJU) model -->
-  <rule regex="true">
-    <keyValue>HiResW-NMM-(?:West|AK|SJU)</keyValue>
-    <versionsToKeep>1</versionsToKeep>
-    <modTimeToWait>00-01:00:00</modTimeToWait>
-  </rule>
-    <!-- Purge rule for the HiResW-NMM-HI (HiResW-NMM-HI) model -->
-  <rule>
-    <keyValue>HiResW-NMM-HI</keyValue>
-    <versionsToKeep>2</versionsToKeep>
     <modTimeToWait>00-01:00:00</modTimeToWait>
   </rule>
   <!-- Purge rule for the SPCGuide (SPCGuide) model -->

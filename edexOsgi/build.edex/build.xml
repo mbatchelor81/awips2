@@ -1,6 +1,8 @@
 <project name="Build EDEX" default="main">
     <property name="uframe.eclipse"
         value="/awips2/eclipse" />
+    <property name="uframe.target" 
+        value="/awips2/eclipse" />
     <property name="build.version"
         value="1.0.0" />
     <property name="build.os"
@@ -63,15 +65,15 @@
         </antcall>
         <antcall target="build">
             <param name="feature"
-                value="com.raytheon.uf.edex.foss.org.eclipse.jetty.feature" />
-        </antcall>
-        <antcall target="build">
-            <param name="feature"
                 value="com.raytheon.uf.edex.foss.org.apache.shiro.feature" />
         </antcall>
         <antcall target="build">
             <param name="feature"
                 value="com.raytheon.uf.edex.foss.javax.servlet.feature" />
+        </antcall>
+        <antcall target="build">
+            <param name="feature"
+                value="com.raytheon.uf.edex.foss.org.eclipse.jetty.feature" />
         </antcall>
         <antcall target="build">
             <param name="feature"
@@ -123,10 +125,6 @@
         </antcall>
         <antcall target="build">
             <param name="feature"
-                value="com.raytheon.uf.edex.foss.org.apache.xalan.feature" />
-        </antcall>
-        <antcall target="build">
-            <param name="feature"
                 value="com.raytheon.uf.edex.foss.org.apache.xml.serializer.feature" />
         </antcall>
         <antcall target="build">
@@ -144,6 +142,10 @@
         <antcall target="build">
             <param name="feature"
                 value="com.raytheon.uf.edex.foss.org.apache.commons.net.feature" />
+        </antcall>
+        <antcall target="build">
+            <param name="feature"
+                value="com.raytheon.uf.edex.foss.org.apache.cxf.feature" />
         </antcall>
         <antcall target="build">
             <param name="feature"
@@ -370,7 +372,7 @@
             <arg value="org.eclipse.ant.core.antRunner" />
             <arg value="-buildfile" />
             <arg value="${pde.dir}/scripts/build.xml" />
-            <arg value="-DbaseLocation=${uframe.eclipse}" />
+            <arg value="-DbaseLocation=${uframe.target}" />
             <arg value="-Dbuilder=${basedir}/${build.product}" />
             <arg value="-DbuildDirectory=${basedir}/${build.product}/tmp" />
             <arg value="-DtopLevelElementId=${feature}" />

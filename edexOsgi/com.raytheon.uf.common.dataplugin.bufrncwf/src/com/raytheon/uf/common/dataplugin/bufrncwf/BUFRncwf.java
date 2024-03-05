@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -21,13 +33,20 @@ package com.raytheon.uf.common.dataplugin.bufrncwf;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+<<<<<<< HEAD
+=======
+import javax.persistence.Index;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
+<<<<<<< HEAD
 import org.hibernate.annotations.Index;
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.dataplugin.PluginDataObject;
 import com.raytheon.uf.common.dataplugin.annotations.DataURI;
 import com.raytheon.uf.common.dataplugin.persist.IPersistable;
@@ -42,9 +61,15 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
 
 /**
  * Record implemtnation for National Convective Weather Forecast
+<<<<<<< HEAD
  * 
  * <pre>
  * 
+=======
+ *
+ * <pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * SOFTWARE HISTORY
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
@@ -58,6 +83,7 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
  * Oct 15, 2013 2361       njensen     Remove XML annotations and IDecoderGettable
  * Jul 23, 2015 4360       rferrel     Add name to unique constraint.
  * Feb 04, 2016 5310       tgurney     Drop dataURI column and update unique constraint.
+<<<<<<< HEAD
  * 
  * </pre>
  * 
@@ -68,15 +94,39 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
 @SequenceGenerator(initialValue = 1, name = PluginDataObject.ID_GEN, sequenceName = "bufrncwfseq")
 @Table(name = "bufrncwf", uniqueConstraints = { @UniqueConstraint(name = "uk_bufrncwf_datauri_fields", columnNames = {
         "refTime", "latitude", "longitude", "stationId" }) })
+=======
+ * Aug 08, 2022 8892       tjensen     Update indexes for Hibernate 5
+ *
+ * </pre>
+ *
+ * @author jkorman
+ */
+
+@Entity
+@SequenceGenerator(initialValue = 1, name = PluginDataObject.ID_GEN, sequenceName = "bufrncwfseq")
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 /*
  * Both refTime and forecastTime are included in the refTimeIndex since
  * forecastTime is unlikely to be used.
  */
+<<<<<<< HEAD
 @org.hibernate.annotations.Table(appliesTo = "bufrncwf", indexes = { @Index(name = "bufrncwf_refTimeIndex", columnNames = {
         "refTime", "forecastTime" }) })
 @DynamicSerialize
 public class BUFRncwf extends PersistablePluginDataObject implements
         ISpatialEnabled, IPointData, IPersistable {
+=======
+@Table(name = "bufrncwf", uniqueConstraints = {
+        @UniqueConstraint(name = "uk_bufrncwf_datauri_fields", columnNames = {
+                "refTime", "latitude", "longitude",
+                "stationId" }) }, indexes = {
+                        @Index(name = "%TABLE%_refTimeIndex", columnList = "refTime, forecastTime"),
+                        @Index(name = "%TABLE%_stationIndex", columnList = "stationId") })
+
+@DynamicSerialize
+public class BUFRncwf extends PersistablePluginDataObject
+        implements ISpatialEnabled, IPointData, IPersistable {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private static final long serialVersionUID = 1L;
 
@@ -118,7 +168,11 @@ public class BUFRncwf extends PersistablePluginDataObject implements
     /**
      * Constructor for DataURI construction through base class. This is used by
      * the notification service.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param uri
      *            A data uri applicable to this class.
      * @param tableDef

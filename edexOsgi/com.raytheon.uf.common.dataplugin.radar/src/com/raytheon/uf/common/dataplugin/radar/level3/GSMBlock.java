@@ -41,7 +41,11 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
  * Jun 04, 2014  3232     bsteffen    Remove ISerializableObject
  * Mar 26, 2018  6711     randerso    Updated GSMMessage.toString(). Code
  *                                    cleanup.
+<<<<<<< HEAD
  *
+=======
+ * Feb 18, 2021  22417    jdynina     Process VMI in GSM. Code cleanup.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  *
  * @author mnash
@@ -530,8 +534,21 @@ public class GSMBlock extends AbstractBlock {
                     RadarConstants.vcpInfoStr);
             vcpInfoString = vcpInfoString.replace("{n}",
                     String.valueOf(getNumSupplementalCuts()));
+<<<<<<< HEAD
             sb.append("VCP Supplemental Info: ").append(vcpInfoString)
                     .append('\n');
+=======
+            String vmiString = "";
+            if (getBuildVersion() >= 210) {
+                if (((short) getVcpInfo() & (1 << 10)) != 0) {
+                    vmiString = ", VMI=1.0 m/s";
+                } else {
+                    vmiString = ", VMI=0.5 m/s";
+                }
+            }
+            sb.append("VCP Supplemental Info: ").append(vcpInfoString)
+                    .append(vmiString).append('\n');
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             sb.append("Base Data: ")
                     .append(RadarUtil.formatBits(getDataTransmissionEnable(),
@@ -638,6 +655,7 @@ public class GSMBlock extends AbstractBlock {
         in.skip(4);
         message.buildVersion = in.readShort();
 
+<<<<<<< HEAD
         // GSM size is increased to 200 bytes since Build 14.0
         if (message.buildVersion >= 140) {
             for (int j = 0; j < 5; j++) {
@@ -657,6 +675,17 @@ public class GSMBlock extends AbstractBlock {
         } else {
             message.supplementalCuts = 0;
         }
+=======
+        for (int j = 0; j < 5; j++) {
+            message.elevation[20 + j] = in.readShort();
+        }
+        message.vcpInfo = in.readShort();
+
+        int lshw = in.readUnsignedShort();
+        int mshw = in.readUnsignedShort();
+        message.numSupplementalCuts = mshw >> 9;
+        message.supplementalCuts = ((mshw & 0x01FF) << 16) | lshw;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override

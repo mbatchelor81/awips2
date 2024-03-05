@@ -287,7 +287,11 @@
         <name>Profiles</name>
         <selectedRetentionHours>12</selectedRetentionHours>
         <dataSet>
+<<<<<<< HEAD
             <dirPattern>(bufrua|goessounding|poessounding|raobs|upperair)/(\d{4})(\d{2})(\d{2})/(\d{2})</dirPattern>
+=======
+            <dirPattern>(bufrua|goessounding|poessounding|raobs|upperair|profiler)/(\d{4})(\d{2})(\d{2})/(\d{2})</dirPattern>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <displayLabel>{1}</displayLabel>
             <dateGroupIndices>2,3,4,5</dateGroupIndices>
         </dataSet>
@@ -302,4 +306,19 @@
             <dateGroupIndices>2,3,4,5</dateGroupIndices>
         </dataSet>
     </category>
+<<<<<<< HEAD
 </archive>
+=======
+    <category>
+        <name>ODIM Radar</name>
+        <selectedRetentionHours>12</selectedRetentionHours>
+        <dataSet>
+            <dirPattern>(odim)/(\d{4})(\d{2})(\d{2})/(\d{2})</dirPattern>
+            <filePattern>.*\.h5</filePattern>
+            <timeType>Date</timeType>
+            <displayLabel>{1}</displayLabel>
+            <dateGroupIndices>2,3,4,5</dateGroupIndices>
+        </dataSet>
+    </category>
+</archive>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

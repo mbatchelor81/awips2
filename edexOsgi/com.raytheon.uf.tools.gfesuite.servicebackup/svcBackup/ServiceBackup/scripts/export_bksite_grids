@@ -24,10 +24,19 @@
 ##
 #
 # SOFTWARE HISTORY
+<<<<<<< HEAD
 # Date         Ticket#    Engineer    Description
 # ------------ ---------- ----------- --------------------------
 # Feb 09, 2015  #4103     dgilling    Refactored to support multiple svcbu 
 #                                     sites.
+=======
+#
+# Date          Ticket#  Engineer  Description
+# ------------- -------- --------- --------------------------------------------
+# Feb 09, 2015  4103     dgilling  Refactored to support multiple svcbu sites.
+# Jun 29, 2021  8572     randerso  Always export full domain. Pass failed site
+#                                  to serviceBackupUtil.sh
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 ##
 
@@ -47,12 +56,20 @@ then
    exit 1
 fi
 
+<<<<<<< HEAD
 . ${AWIPS_HOME}/GFESuite/ServiceBackup/configuration/svcbu.env
 source ${AWIPS_HOME}/GFESuite/ServiceBackup/scripts/serviceBackupUtil.sh
 
 FAILED_SITE=`echo ${1} | tr '[A-Z]' '[a-z]'`
 FAILED_CAPS_SITE=`echo ${1} | tr [a-z] [A-Z]`
 
+=======
+FAILED_SITE=`echo ${1} | tr '[A-Z]' '[a-z]'`
+FAILED_CAPS_SITE=`echo ${1} | tr [a-z] [A-Z]`
+
+source ${AWIPS_HOME}/GFESuite/ServiceBackup/scripts/serviceBackupUtil.sh ${FAILED_CAPS_SITE}
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # Create the log file
 configureLogging "svcbu_export_bksite_grids_central_server" ${FAILED_SITE}
 
@@ -67,6 +84,7 @@ fi
 
 echo "IN_PROGRESS" > ${lock_file}
 
+<<<<<<< HEAD
 #
 # If this is a non-wfo/non-rfc site, they may not have an edit area for clipping - handle it
 #
@@ -76,14 +94,21 @@ else
    SVCBU_MASK="-m $SVCBU_GRIDAREA"
 fi
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 echo "Exporting $FAILED_CAPS_SITE grids to central server"
 
 OUTPUT_DIR=$(getTempDirectory "export_bksite_grids" ${FAILED_SITE})
 
 #Starting ifpnetCDF to pack the grids
 echo "Running ifpnetCDF...(May take awhile)" 
+<<<<<<< HEAD
 echo "${GFESUITE_BIN}/ifpnetCDF -o ${OUTPUT_DIR}/${FAILED_SITE}Grd.netcdf -h $SVCBU_HOST -r $CDSPORT -d ${FAILED_CAPS_SITE}_GRID__Official_00000000_0000 -k -t -c ${SVCBU_MASK}"
 ${GFESUITE_BIN}/ifpnetCDF -o ${OUTPUT_DIR}/${FAILED_SITE}Grd.netcdf -h $SVCBU_HOST -r $CDSPORT -d ${FAILED_CAPS_SITE}_GRID__Official_00000000_0000 -k -t -c ${SVCBU_MASK}
+=======
+echo "${GFESUITE_BIN}/ifpnetCDF -o ${OUTPUT_DIR}/${FAILED_SITE}Grd.netcdf -h $SVCBU_HOST -r $CDSPORT -d ${FAILED_CAPS_SITE}_GRID__Official_00000000_0000 -k -t -c"
+${GFESUITE_BIN}/ifpnetCDF -o ${OUTPUT_DIR}/${FAILED_SITE}Grd.netcdf -h $SVCBU_HOST -r $CDSPORT -d ${FAILED_CAPS_SITE}_GRID__Official_00000000_0000 -k -t -c
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 if [ $? -ne 0 ]; then
     echo "ifpnetCDF process failed to create grids to send to the central server. Exiting..."
     echo "ERROR: ifpnetCDF failed..."

@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -26,6 +38,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 
+<<<<<<< HEAD
 import oasis.names.tc.ebxml.regrep.wsdl.registry.services.v4.MsgRegistryException;
 import oasis.names.tc.ebxml.regrep.xsd.query.v4.QueryRequest;
 import oasis.names.tc.ebxml.regrep.xsd.query.v4.QueryResponse;
@@ -34,6 +47,8 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.QueryType;
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryObjectType;
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryPackageType;
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,6 +57,7 @@ import com.raytheon.uf.common.registry.constants.CanonicalQueryTypes;
 import com.raytheon.uf.common.registry.schemas.ebxml.util.EbxmlNamespaces;
 import com.raytheon.uf.edex.registry.ebxml.dao.RegistryObjectDao;
 import com.raytheon.uf.edex.registry.ebxml.dao.RegistryPackageDao;
+<<<<<<< HEAD
 import com.raytheon.uf.edex.registry.ebxml.exception.EbxmlRegistryException;
 import com.raytheon.uf.edex.registry.ebxml.services.query.QueryConstants;
 import com.raytheon.uf.edex.registry.ebxml.util.EbxmlExceptionUtil;
@@ -64,6 +80,36 @@ import com.raytheon.uf.edex.registry.ebxml.util.EbxmlExceptionUtil;
  * 
  * @author bphillip
  * @version 1.0
+=======
+import com.raytheon.uf.edex.registry.ebxml.services.query.QueryConstants;
+
+import oasis.names.tc.ebxml.regrep.wsdl.registry.services.v4.MsgRegistryException;
+import oasis.names.tc.ebxml.regrep.xsd.query.v4.QueryRequest;
+import oasis.names.tc.ebxml.regrep.xsd.query.v4.QueryResponse;
+import oasis.names.tc.ebxml.regrep.xsd.rim.v4.AssociationType;
+import oasis.names.tc.ebxml.regrep.xsd.rim.v4.QueryType;
+import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryObjectType;
+import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryPackageType;
+
+/**
+ * Query type allowing the client to select registry packages
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+ * Date         Ticket#    Engineer    Description
+ * ------------ ---------- ----------- --------------------------
+ * Jan 18, 2012            bphillip    Initial creation
+ * 3/18/2013    1802       bphillip    Modified to use transaction boundaries and spring dao injection
+ * 4/9/2013     1802       bphillip    Changed abstract method signature, modified return processing, and changed static variables
+ * 10/8/2013    1682       bphillip    Refactored querying
+ * 12/09/2021   7849       mapeters    Remove unreachable catch block
+ *
+ * </pre>
+ *
+ * @author bphillip
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  */
 public class RegistryPackageSelector extends RegistryQueryPlugin {
 
@@ -83,12 +129,18 @@ public class RegistryPackageSelector extends RegistryQueryPlugin {
     @WebResult(name = "QueryResponse", targetNamespace = EbxmlNamespaces.QUERY_URI, partName = "partQueryResponse")
     @Transactional(propagation = Propagation.MANDATORY, readOnly = true)
     public QueryResponse executeQuery(
+<<<<<<< HEAD
             @WebParam(name = "QueryRequest", targetNamespace = EbxmlNamespaces.QUERY_URI, partName = "partQueryRequest") QueryRequest queryRequest)
             throws MsgRegistryException {
+=======
+            @WebParam(name = "QueryRequest", targetNamespace = EbxmlNamespaces.QUERY_URI, partName = "partQueryRequest")
+            QueryRequest queryRequest) throws MsgRegistryException {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         QueryType queryType = queryRequest.getQuery();
         List<String> packageIds = queryType
                 .getSlotValueAsList(QueryConstants.REGISTRY_PACKAGE_IDS);
 
+<<<<<<< HEAD
         List<RegistryObjectType> retVal = new ArrayList<RegistryObjectType>();
 
         List<RegistryPackageType> registryPackages;
@@ -98,6 +150,12 @@ public class RegistryPackageSelector extends RegistryQueryPlugin {
             throw EbxmlExceptionUtil.createMsgRegistryException(
                     "Error getting registry packages by ID!", e);
         }
+=======
+        List<RegistryObjectType> retVal = new ArrayList<>();
+
+        List<RegistryPackageType> registryPackages = registryPackageDao
+                .getById(packageIds);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         for (RegistryPackageType registryPackage : registryPackages) {
             if (registryPackage.getRegistryObjectList() != null) {

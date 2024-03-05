@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -26,6 +38,10 @@ import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+<<<<<<< HEAD
+=======
+import javax.persistence.Index;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -35,8 +51,11 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+<<<<<<< HEAD
 import org.hibernate.annotations.Index;
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.dataplugin.PluginDataObject;
 import com.raytheon.uf.common.dataplugin.annotations.DataURI;
 import com.raytheon.uf.common.dataplugin.persist.IPersistable;
@@ -50,6 +69,7 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerialize;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
 
 /**
+<<<<<<< HEAD
  * 
  * {@link PluginDataObject} implementation for FSSObs.
  * 
@@ -57,21 +77,41 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
  * 
  * SOFTWARE HISTORY
  * 
+=======
+ *
+ * {@link PluginDataObject} implementation for FSSObs.
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#  Engineer    Description
  * ------------- -------- ----------- --------------------------
  * Jun 11, 2014  2061     bsteffen    Remove IDecoderGettable
  * Sep 04, 2014  3220     skorolev    Removed cwa and monitorUse from record.
  * Dec 02, 2015  3873     dhladky     Method naming fixes.
+<<<<<<< HEAD
  * 
  * </pre>
  */
 @Entity
 @SequenceGenerator(initialValue = 1, name = PluginDataObject.ID_GEN, sequenceName = "fssobsseq")
 @Table(name = FSSObsRecord.PLUGIN_NAME, uniqueConstraints = { @UniqueConstraint(name = "uk_fssobs_datauri_fields", columnNames = { "dataURI" }) })
+=======
+ * Aug 08, 2022  8892     tjensen     Update indexes for Hibernate 5
+ *
+ * </pre>
+ */
+
+@Entity
+@SequenceGenerator(initialValue = 1, name = PluginDataObject.ID_GEN, sequenceName = "fssobsseq")
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 /*
  * Both refTime and forecastTime are included in the refTimeIndex since
  * forecastTime is unlikely to be used.
  */
+<<<<<<< HEAD
 @org.hibernate.annotations.Table(appliesTo = FSSObsRecord.PLUGIN_NAME, indexes = { @Index(name = "fssobs_refTimeIndex", columnNames = {
         "refTime", "forecastTime" }) })
 @XmlRootElement
@@ -79,6 +119,19 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
 @DynamicSerialize
 public class FSSObsRecord extends PersistablePluginDataObject implements
         ISpatialEnabled, IPersistable, IPointData {
+=======
+@Table(name = FSSObsRecord.PLUGIN_NAME, uniqueConstraints = {
+        @UniqueConstraint(name = "uk_fssobs_datauri_fields", columnNames = {
+                "dataURI" }) }, indexes = {
+                        @Index(name = "%TABLE%_refTimeIndex", columnList = "refTime, forecastTime"),
+                        @Index(name = "%TABLE%_stationIndex", columnList = "stationId") })
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
+@DynamicSerialize
+public class FSSObsRecord extends PersistablePluginDataObject
+        implements ISpatialEnabled, IPersistable, IPointData {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private static final long serialVersionUID = 1L;
 
@@ -406,7 +459,11 @@ public class FSSObsRecord extends PersistablePluginDataObject implements
 
     /**
      * Gets the geometry latitude.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry latitude.
      */
     public double getLatitude() {
@@ -415,7 +472,11 @@ public class FSSObsRecord extends PersistablePluginDataObject implements
 
     /**
      * Gets the geometry longitude.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry longitude.
      */
     public double getLongitude() {
@@ -424,7 +485,11 @@ public class FSSObsRecord extends PersistablePluginDataObject implements
 
     /**
      * Gets the station identifier for this observation.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return the stationId
      */
     public String getStationId() {
@@ -433,7 +498,11 @@ public class FSSObsRecord extends PersistablePluginDataObject implements
 
     /**
      * Gets the elevation, in meters, of the observing platform or location.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The observation elevation, in meters.
      */
     public Integer getElevation() {
@@ -684,7 +753,11 @@ public class FSSObsRecord extends PersistablePluginDataObject implements
 
     /**
      * Sets station name.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param stnName
      *            the stnName to set
      */
@@ -694,7 +767,11 @@ public class FSSObsRecord extends PersistablePluginDataObject implements
 
     /**
      * Sets report type.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param reportType
      *            the reportType to set
      */
@@ -704,7 +781,11 @@ public class FSSObsRecord extends PersistablePluginDataObject implements
 
     /**
      * Sets location
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param location
      *            the location to set
      */
@@ -1068,13 +1149,22 @@ public class FSSObsRecord extends PersistablePluginDataObject implements
      */
     @Override
     public String toString() {
+<<<<<<< HEAD
         StringBuffer sb = new StringBuffer();
+=======
+        StringBuilder sb = new StringBuilder();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         sb.append("fssObsRec:\n\t");
         if (this != null) {
             sb.append(this.getDataURI() + "\n\t");
             sb.append(this.getLocation().getStationId() + " ===> "
                     + this.getStnName() + "\n\t");
+<<<<<<< HEAD
             sb.append("Latitude = " + this.getLocation().getLatitude() + "\n\t");
+=======
+            sb.append(
+                    "Latitude = " + this.getLocation().getLatitude() + "\n\t");
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             sb.append("Longitude = " + this.getLocation().getLongitude()
                     + "\n\t");
             sb.append(this.getReportType() + "\n\t");
@@ -1099,6 +1189,10 @@ public class FSSObsRecord extends PersistablePluginDataObject implements
 
     /**
      * Is this a moving or stationary platform
+<<<<<<< HEAD
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return
      */
     public boolean isStationary() {
@@ -1107,6 +1201,10 @@ public class FSSObsRecord extends PersistablePluginDataObject implements
 
     /**
      * Set moving or stationary platform
+<<<<<<< HEAD
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param stationary
      */
     public void setStationary(boolean stationary) {

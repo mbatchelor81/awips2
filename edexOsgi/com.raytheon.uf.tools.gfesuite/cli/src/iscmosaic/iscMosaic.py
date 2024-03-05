@@ -28,23 +28,23 @@ from awips.UsageArgumentParser import StoreDatabaseIDAction as StoreDatabaseIDAc
 from awips.UsageArgumentParser import AppendParmNameAndLevelAction as AppendParmNameAndLevelAction
 
 from dynamicserialize.dstypes.com.raytheon.uf.common.dataplugin.gfe.request import ExecuteIscMosaicRequest
-from dynamicserialize.dstypes.com.raytheon.uf.common.message import WsId
 
 
 #
 # Provides a command-line utility to send ISC grids to GFE.
 #  
 #    
-#     SOFTWARE HISTORY
-#    
-#    Date            Ticket#       Engineer       Description
-#    ------------    ----------    -----------    --------------------------
-#    09/20/10                      dgilling       Initial Creation.
-#    03/12/13         1759         dgilling       Re-factor to use a more robust
-#                                                 request object.
-#    08/08/2018      DCS 19452     dfriedman      Add -A and -y options.
-# 
+# SOFTWARE HISTORY
 #
+# Date          Ticket#  Engineer  Description
+# ------------- -------- --------- --------------------------------------------
+# Sep 20, 2010           dgilling  Initial Creation.
+# Mar 12, 2013  1759     dgilling  Re-factor to use a more robust request object.
+# Aug 08, 2018  19452    dfriedman Add -A and -y options.
+# Jun 30, 2021  8572     randerso  Replace references to CDSHOST and CDSPORT
+#                                  With DEFAULT_HOST and DEFAULT_PORT
+# 
+##
 
 
 
@@ -126,17 +126,11 @@ def get_args():
     
     options = parser.parse_args()
     
-    if options.host == None:
-        if "CDSHOST" in os.environ:
-            options.host = os.environ["CDSHOST"]
-        else:
-            parser.error("No server hostname defined.")
+    if options.host is None:
+        options.host = str(os.getenv("DEFAULT_HOST", "localhost"))
         
-    if options.port == None:
-        if "CDSPORT" in os.environ:
-            options.port = int(os.environ["CDSPORT"])
-        else:
-            parser.error("No server port defined.")
+    if options.port is None:
+        options.port = int(os.getenv("DEFAULT_PORT", "9581"))
     
     if len(options.inFiles) > 1 and options.eraseFirst:
         parser.error("Multiple input files [-f switches] and -z switch not compatible.")

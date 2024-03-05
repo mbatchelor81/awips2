@@ -54,6 +54,10 @@ import com.raytheon.uf.edex.database.plugin.PluginDao;
  * ------------- -------- --------- -----------------------
  * Aug 11, 2015  4709     bsteffen  Initial creation
  * Jan 21, 2016  5208     bsteffen  Store scale and offset
+<<<<<<< HEAD
+=======
+ * May 03, 2021  7849     mapeters  Switch from UFStatus to slf4j logging
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Sep 23, 2021  8608     mapeters  Add metadata id handling
  * Jun 22, 2022  8865     mapeters  Update populateDataStore to return boolean
  *

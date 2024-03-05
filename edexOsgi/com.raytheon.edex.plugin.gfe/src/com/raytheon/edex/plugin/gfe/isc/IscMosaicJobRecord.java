@@ -36,9 +36,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  * <pre>
  * SOFTWARE HISTORY
+<<<<<<< HEAD
  * Date        Ticket#     Engineer       Description
  * ----------  ----------  -------------  ----------------------------------
  * 2018-08-08  DCS 19452   dfriedman      Initial creation
+=======
+ * Date         Ticket#    Engineer    Description
+ * ------------ ---------- ----------- --------------------------
+ * Aug 08, 2018 19452      dfriedman    Initial creation
+ * Sep 09, 2022 23257      dgilling     Implement toString.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -95,11 +102,17 @@ public class IscMosaicJobRecord {
      * res/scripts/iscmosaicparm-index.sql.
      */
     @ElementCollection(fetch = FetchType.EAGER)
+<<<<<<< HEAD
     @CollectionTable(name = "iscmosaicparm",
             joinColumns = {
                     @JoinColumn(name = "job_id", nullable = false,
                             referencedColumnName = "id") })
     @Column(name="lockName", nullable = false)
+=======
+    @CollectionTable(name = "iscmosaicparm", joinColumns = {
+            @JoinColumn(name = "job_id", nullable = false, referencedColumnName = "id") })
+    @Column(name = "lockName", nullable = false)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @ForeignKey(name = "fk_iscmosaicparm_to_iscmosaicjob")
     private Set<String> parms;
 
@@ -175,10 +188,26 @@ public class IscMosaicJobRecord {
     }
 
     public Map<String, Object> getArgsMap() throws IOException {
+<<<<<<< HEAD
         return args != null ? new ObjectMapper().readValue(args, HashMap.class) : null;
     }
 
     public void setArgsMap(Map<String, Object> args) throws IOException {
         this.args = args != null ? new ObjectMapper().writeValueAsString(args) : null;
+=======
+        return args != null ? new ObjectMapper().readValue(args, HashMap.class)
+                : null;
+    }
+
+    public void setArgsMap(Map<String, Object> args) throws IOException {
+        this.args = args != null ? new ObjectMapper().writeValueAsString(args)
+                : null;
+    }
+
+    @Override
+    public String toString() {
+        return "IscMosaicJobRecord [site=" + site + ", args=" + args
+                + ", parms=" + parms + "]";
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 }

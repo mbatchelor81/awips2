@@ -14,6 +14,14 @@
 ##        Bookbinder     1/30/2017 SVR/TOR watch capitalization DR 19649           ##
 ##        Bookbinder     3/19/2018 DR 19650 TOR Watch phrasing/location            ##
 ##        Kurimski/Bookbinder  5/18/2020 IBW SVR Tag changes for SWIP DCS 22060    ##
+<<<<<<< HEAD
+=======
+##        Rega           6/16/2021 DR 21460 minor grammar fixes                    ##
+##        Bookbinder     7/29/2021 Fixed DESTRUCTIVE word conflict DR 22809        ##
+##                                 Cleaned up potl duplicate Tornado Watch wording ##
+##        Bookbinder     9/21/2023 Force selection of CTA for && break point       ##
+##                                 DR 2036278                                      ##
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #####################################################################################
 ## Impact Statements for IBW templates are contained in impactStatements.vm
 ################################################################
@@ -42,38 +50,66 @@
 ######################################################
 ## Check to see if the SVR Tornado Tag was selected ##
 ######################################################
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "svrTorTag")})
+=======
+#if($bullets.contains("svrTorTag"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($torTag = "<L>TORNADO...POSSIBLE</L>")
 #end
 #############################################################
 #### CREATE BASIS WORDING ###################################
 #############################################################
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "doppler")})
+=======
+#if($bullets.contains("doppler"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($report = "Doppler radar indicated ${reportType1}")
   #set($reportAuthSVR = "capable of producing")
   #set($source = "Radar indicated.")
 #end
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "trainedSpotters")})
+=======
+#if($bullets.contains("trainedSpotters"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($report = "trained weather spotters reported ${reportType1}")
   #set($reportAuthSVR = "producing") 
   #set($source = "Trained weather spotters.")
 #end
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "lawEnforcement")})
+=======
+#if($bullets.contains("lawEnforcement"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($report = "law enforcement reported ${reportType1}")
   #set($reportAuthSVR = "producing") 
   #set($source = "Law enforcement.")
 #end
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "emergencyMgmt")})
+=======
+#if($bullets.contains("emergencyMgmt"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($report = "emergency management reported ${reportType1}")
   #set($reportAuthSVR = "producing") 
   #set($source = "Emergency management.")
 #end
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "broadcastMedia")})
+=======
+#if($bullets.contains("broadcastMedia"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($report = "broadcast media reported ${reportType1}")
   #set($reportAuthSVR = "producing") 
   #set($source = "Broadcast media.")
 #end
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "public")})
+=======
+#if($bullets.contains("public"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($report = "the public reported ${reportType1}")
   #set($reportAuthSVR = "producing") 
   #set($source = "Public.")
@@ -84,20 +120,34 @@
 #set($windSpeed = 0)
 #set($extensive = "")
 #set($windTag = "<50 MPH")
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "60mphWind")})
+=======
+#if($bullets.contains("60mphWind"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($windThreat = "damaging winds in excess of 60 mph") 
   #set($windHazard = "60 mph wind gusts")
   #set($windSpeed = 60)
   #set($windTag = "60 MPH")
 #end
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "70mphWind")})
   #set($windThreat = "destructive winds in excess of 70 mph")
+=======
+#if($bullets.contains("70mphWind"))
+  #set($windThreat = "considerable damage from winds in excess of 70 mph")
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($windHazard = "70 mph wind gusts")
   #set($windSpeed = 70) 
   #set($windTag = "70 MPH")
 #end
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "80mphWind")})
   #set($windThreat = "Destructive winds in excess of 80 mph")
+=======
+#if($bullets.contains("80mphWind"))
+  #set($windThreat = "destructive winds in excess of 80 mph")
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($windHazard = "80 mph wind gusts")
   #set($windSpeed = 80) 
   #set($windTag = "80 MPH")
@@ -107,7 +157,11 @@
   #set($pdssvr = "This is a very dangerous storm.")
   #end
 #end
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "90mphWind")})
+=======
+#if($bullets.contains("90mphWind"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($windThreat = "extreme damaging winds in excess of 90 mph")
   #set($windHazard = "90 mph wind gusts")
   #set($windSpeed = 90)
@@ -118,7 +172,11 @@
   #set($pdssvr = "This is a very dangerous storm.")
   #end
 #end
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "100mphWind")})
+=======
+#if($bullets.contains("100mphWind"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($windThreat = "extreme damaging winds in excess of 100 mph")
   #set($windHazard = "100 mph wind gusts")
   #set($windSpeed = 100)
@@ -134,7 +192,11 @@
 ###################################################
 #set($hailSize = 0)
 #set($hailTag = "<.75 IN")
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "pennyHail")})
+=======
+#if($bullets.contains("pennyHail"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($hailThreat = "penny size") 
   #set($hailTrail = " hail") 
   #set($hailHazard = "penny size hail")
@@ -142,7 +204,11 @@
   #set($hailSize = 0.75) 
   #set($hailTag = "0.75 IN")
 #end
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "nickelHail")})
+=======
+#if($bullets.contains("nickelHail"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($hailThreat = "nickel size") 
   #set($hailTrail = " hail") 
   #set($hailHazard = "nickel size hail")
@@ -150,7 +216,11 @@
   #set($hailSize = 0.88) 
   #set($hailTag = "0.88 IN")
 #end
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "quarterHail")})
+=======
+#if($bullets.contains("quarterHail"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($hailThreat = "quarter size") 
   #set($hailTrail = " hail") 
   #set($hailHazard = "quarter size hail")
@@ -158,7 +228,11 @@
   #set($hailSize = 1.00)
   #set($hailTag = "1.00 IN")
 #end
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "halfdollarHail")})
+=======
+#if($bullets.contains("halfdollarHail"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($hailThreat = "half dollar size") 
   #set($hailTrail = " hail") 
   #set($hailHazard = "half dollar size hail")
@@ -166,7 +240,11 @@
   #set($hailSize = 1.25)
   #set($hailTag = "1.25 IN")
 #end
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "pingpongHail")})
+=======
+#if($bullets.contains("pingpongHail"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($hailThreat = "ping pong ball size") 
   #set($hailLead = "large hail up to ") 
   #set($hailHazard = "ping pong ball size hail")
@@ -174,7 +252,11 @@
   #set($hailSize = 1.50)  
   #set($hailTag = "1.50 IN")
 #end
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "golfballHail")})
+=======
+#if($bullets.contains("golfballHail"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($hailThreat = "golf ball size") 
   #set($hailLead = "large damaging hail up to ") 
   #set($hailHazard = "golf ball size hail")
@@ -182,7 +264,11 @@
   #set($hailSize = 1.75)
   #set($hailTag = "1.75 IN")
 #end
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "twoinchHail")})
+=======
+#if($bullets.contains("twoinchHail"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($hailThreat = "two inches in diameter") 
   #set($hailLead = "large damaging hail up to ") 
   #set($hailHazard = "two inch hail")
@@ -190,7 +276,11 @@
   #set($hailSize = 2.00)
   #set($hailTag = "2.00 IN")
 #end
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "tennisBallHail")})
+=======
+#if($bullets.contains("tennisBallHail"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($hailThreat = "tennis ball size") 
   #set($hailLead = "large destructive hail up to ") 
   #set($hailTrail = "")
@@ -198,7 +288,11 @@
   #set($hailSize = 2.50)
   #set($hailTag = "2.50 IN")
 #end
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "baseballHail")})
+=======
+#if($bullets.contains("baseballHail"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($hailThreat = "baseball size") 
   #set($hailLead = "large destructive hail up to ") 
   #set($hailHazard = "baseball size hail")
@@ -211,7 +305,11 @@
   #set($pdssvr = "This is a very dangerous storm.")
   #end
 #end
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "threeinchHail")})
+=======
+#if($bullets.contains("threeinchHail"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($hailThreat = "three inches in diameter") 
   #set($hailLead = "large destructive hail up to ") 
   #set($hailHazard = "three inch hail")
@@ -224,7 +322,11 @@
   #set($pdssvr = "This is a very dangerous storm.")
   #end
 #end
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "softballHail")})
+=======
+#if($bullets.contains("softballHail"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($hailThreat = "softball size") 
   #set($hailLead = "large destructive hail up to ") 
   #set($hailHazard = "softball size hail")
@@ -237,7 +339,11 @@
   #set($pdssvr = "This is a very dangerous storm.")
   #end
 #end
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "grapefruitHail")})
+=======
+#if($bullets.contains("grapefruitHail"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($hailThreat = "grapefruit size") 
   #set($hailLead = "large destructive hail up to ") 
   #set($hailHazard = "grapefruit size hail")
@@ -253,10 +359,17 @@
 #####################################
 ## Check for Observed Wind or Hail ##
 #####################################
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "observedHail")})
 	#set($observedHail="OBSERVED")
 #end
 #if(${list.contains(${bullets}, "observedWind")})
+=======
+#if($bullets.contains("observedHail"))
+	#set($observedHail="OBSERVED")
+#end
+#if($bullets.contains("observedWind"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 	#set($observedWind="OBSERVED")
 #end
 #####################################
@@ -295,7 +408,11 @@
   		#set($hailwind = " ${reportAuthSVR} ${windThreat}")
 		#set($hazard = "${windHazard} and ${hailHazard}.")
 		#*
+<<<<<<< HEAD
 		#if(${list.contains(${bullets}, "svrTorTag")})
+=======
+		#if($bullets.contains("svrTorTag"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
           #set($hazard = "${windHazard}, ${hailHazard}, and possible tornado.")
         #end
         *#
@@ -303,7 +420,11 @@
         #set($hailwind = " ${reportAuthSVR} ${windThreat} and ${hailLead}${hailThreat}${hailTrail}")
         #set($hazard = "${windHazard} and ${hailHazard}.")
         #*
+<<<<<<< HEAD
         #if(${list.contains(${bullets}, "svrTorTag")})
+=======
+        #if($bullets.contains("svrTorTag"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
           #set($hazard = "${windHazard}, ${hailHazard}, and possible tornado.")
         #end
         *#    
@@ -311,7 +432,11 @@
   		#set($hailwind = " ${reportAuthSVR} ${hailLead}${hailThreat}${hailTrail} and ${windThreat}")
   		#set($hazard = "${hailHazard} and ${windHazard}.")
   		#*
+<<<<<<< HEAD
   		#if(${list.contains(${bullets}, "svrTorTag")})
+=======
+  		#if($bullets.contains("svrTorTag"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
           #set($hazard = "${hailHazard}, ${windHazard}, and possible tornado.")
         #end
         *#
@@ -322,7 +447,11 @@
   #set($windhailTag = "WIND...HAIL <50MPH ${hailTag}")
   #set($hazard = "${hailHazard}.")
   #*
+<<<<<<< HEAD
   #if(${list.contains(${bullets}, "svrTorTag")})
+=======
+  #if($bullets.contains("svrTorTag"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     #set($hazard = "${hailHazard} and possible tornado.")
   #end
   *#
@@ -331,7 +460,11 @@
   #set($windhailTag = "WIND...HAIL ${windTag} <.75IN")
   #set($hazard = "${windHazard}.")
   #*
+<<<<<<< HEAD
   #if(${list.contains(${bullets}, "svrTorTag")})
+=======
+  #if($bullets.contains("svrTorTag"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     #set($hazard = "${windHazard} and possible tornado.")
   #end
   *#
@@ -388,7 +521,11 @@ THIS IS A TEST MESSAGE. ##
 #############################################
 ######## GENERATE ADDITIONAL REPORTS  #######
 #############################################
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "addlHailWindRpt")})
+=======
+#if($bullets.contains("addlHailWindRpt"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  #set($source = "${source} At !**ENTER TIME, ENTER HAIL/WIND**! was reported !**ENTER LOCATION**!. ")
 #end
 
@@ -400,9 +537,15 @@ THIS IS A TEST MESSAGE. ##
 , ${reportType3} ##
 ##Many of the variables passed below are controlled by config.vm
 #if(${stormType} == "line")
+<<<<<<< HEAD
 #handleClosestPoints(${list}, ${closestPoints}, ${otherClosestPoints}, ${stormType}, ${nearPhrase} , ${maxLandNearDistance}, ${overPhrase}, ${maxLandOverDistance}, ${landDistanceUnits}, ${useSecondReferenceLine})
 #else
 #handleClosestPoints(${list}, ${closestPoints}, ${otherClosestPoints}, ${stormType}, ${nearPhrase} , ${maxLandNearDistance}, ${overPhrase}, ${maxLandOverDistance}, ${landDistanceUnits}, ${useSecondReferenceCell})
+=======
+#handleClosestPoints(${closestPoints}, ${otherClosestPoints}, ${stormType}, ${nearPhrase} , ${maxLandNearDistance}, ${overPhrase}, ${maxLandOverDistance}, ${landDistanceUnits}, ${useSecondReferenceLine})
+#else
+#handleClosestPoints(${closestPoints}, ${otherClosestPoints}, ${stormType}, ${nearPhrase} , ${maxLandNearDistance}, ${overPhrase}, ${maxLandOverDistance}, ${landDistanceUnits}, ${useSecondReferenceCell})
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #end
 #if(${movementSpeed} < ${landStationary} || ${stationary})
 #if(${stormType} == "line")
@@ -441,14 +584,22 @@ THIS IS A TEST MESSAGE. ##
 #set($pathcastLead = "This severe thunderstorm")
 #set($otherLead = "this severe thunderstorm")
 #end
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "pathcast")})
+=======
+#if($bullets.contains("pathcast"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 * ##
 #if(${productClass}=="T")
 THIS IS A TEST MESSAGE. ##
 #end
 #pathCast("#capitalize(${pathcastLead} 'FIRSTONLY') will be near..."${otherLead} ${pathCast} ${otherPoints} ${areas} ${dateUtil} ${timeFormat} 0)
 
+<<<<<<< HEAD
 #elseif(${list.contains(${bullets}, "listofcities")})
+=======
+#elseif($bullets.contains("listofcities"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 * ##
 #if(${productClass}=="T")
 THIS IS A TEST MESSAGE. ##
@@ -467,7 +618,11 @@ THIS IS A TEST MESSAGE. ##
 ##############################################
 ###### SPECIAL VENUE/EVENT CASE ##############
 ##############################################
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "specialEvent")})
+=======
+#if($bullets.contains("specialEvent"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #if(${stormType} == "line")
 Those attending !**EVENT/VENUE NAME OR LOCATION**! are in the path of these storms and should prepare for IMMINENT DANGEROUS WEATHER CONDITIONS. SEEK SHELTER NOW!
 
@@ -491,8 +646,13 @@ Those attending !**EVENT/VENUE NAME OR LOCATION*! are in the path of this storm 
 ##################################
 ##Check to see if we've selected any calls to action. In our .xml file
 ##we ended each CTA bullet ID with "CTA" for this reason as a 'trip'
+<<<<<<< HEAD
 #set($torWatchPhrase = "#inserttorwatches(${watches}, ${list}, ${secondtimezone}, ${dateUtil}, ${timeFormat}, ${watchPhrase})")
 #if(${list.contains(${includedWatches}, "TO.A")} && ${torWatchPhrase.length()} > 10)
+=======
+#set($torWatchPhrase = "#inserttorwatches(${watches}, ${secondtimezone}, ${dateUtil}, ${timeFormat}, ${watchPhrase})")
+#if($includedWatches.contains("TO.A") && ${torWatchPhrase.length()} > 10)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #set($ctaSelected = "YES")
 #else
 #foreach (${bullet} in ${bullets})
@@ -505,6 +665,7 @@ Those attending !**EVENT/VENUE NAME OR LOCATION*! are in the path of this storm 
 #if(${ctaSelected} == "YES") 
 PRECAUTIONARY/PREPAREDNESS ACTIONS...
 
+<<<<<<< HEAD
 #end
 ##
 #if(${list.contains(${includedWatches}, "TO.A")})
@@ -522,26 +683,55 @@ A Tornado Watch remains in effect for the warned area. Tornadoes can develop qui
 #end
 ##
 #if(${list.contains(${bullets}, "torPossibleTagCTA")})
+=======
+#else
+!** YOU DID NOT SELECT A CTA. PLEASE RESTART **!
+
+#end
+##
+#if($bullets.contains("svrTorTag"))
 Remain alert for a possible tornado! Tornadoes can develop quickly from severe thunderstorms. If you spot a tornado go at once into the basement or small central room in a sturdy structure.
 
 #end
 ##
+#if($bullets.contains("torPossibleTagCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
+Remain alert for a possible tornado! Tornadoes can develop quickly from severe thunderstorms. If you spot a tornado go at once into the basement or small central room in a sturdy structure.
+
+#end
+##
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "genericCTA")})
+=======
+#if($bullets.contains("genericCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 For your protection move to an interior room on the lowest floor of a building.
 
 #end
 ##
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "largeHailCTA")})
+=======
+#if($bullets.contains("largeHailCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 Prepare immediately for large hail and deadly cloud to ground lightning. Seek shelter inside a well-built structure. Stay away from windows.
 
 #end
 ##
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "largeHailWindCTA")})
+=======
+#if($bullets.contains("largeHailWindCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 Prepare immediately for large hail and damaging winds. People outside should move immediately to shelter inside a strong building. Stay away from windows.
 
 #end
 ##
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "historyHailCTA")})
+=======
+#if($bullets.contains("historyHailCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #if(${stormType} == "line")
 These storms are producing large hail. SEEK SHELTER NOW inside a sturdy structure and stay away from windows!
 
@@ -551,7 +741,11 @@ This storm is producing large hail. SEEK SHELTER NOW inside a sturdy structure a
 #end
 #end
 ##
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "historyWindCTA")})
+=======
+#if($bullets.contains("historyWindCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #if(${stormType} == "line")
 This is a DANGEROUS SITUATION. These storms are producing widespread wind damage across !** ENTER LOCATION **!. SEEK SHELTER NOW inside a sturdy structure and stay away from windows!
  
@@ -561,17 +755,30 @@ This is a DANGEROUS SITUATION. This storm is producing widespread wind damage ac
 #end
 #end
 ##
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "veryLargeHailCTA")})
 #if(${stormType} == "line")
 These are dangerous storms. Prepare immediately for large destructive hail capable of producing significant damage. People outside should move to shelter inside a strong building,  and stay away from windows.
 
 #else
 This is a dangerous storm. Prepare immediately for large destructive hail capable of producing significant damage. People outside should move to shelter inside a strong building,  and stay away from windows.
+=======
+#if($bullets.contains("veryLargeHailCTA"))
+#if(${stormType} == "line")
+These are dangerous storms. Prepare immediately for large destructive hail capable of producing significant damage. People outside should move to shelter inside a strong building, and stay away from windows.
+
+#else
+This is a dangerous storm. Prepare immediately for large destructive hail capable of producing significant damage. People outside should move to shelter inside a strong building, and stay away from windows.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 #end
 #end
 ##
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "extremeWindsCTA")})
+=======
+#if($bullets.contains("extremeWindsCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #if(${stormType} == "line")
 This is an EXTREMELY DANGEROUS SITUATION with tornado like wind speeds expected. Mobile homes and high profile vehicles are especially susceptible to winds of this magnitude and may be overturned. For your protection move to an interior room on the lowest floor of a building. These storms have the potential to cause serious injury and significant property damage.
 
@@ -581,7 +788,11 @@ This is an EXTREMELY DANGEROUS SITUATION with tornado like wind speeds expected.
 #end
 #end
 ##
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "deadlyStormCTA")})
+=======
+#if($bullets.contains("deadlyStormCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #if(${stormType} == "line")
 These are potentially deadly storms. Seek shelter in an interior room on the lowest floor of a well-built structure. Abandon vehicles in search of a more substantial permanent structure. Stay away from windows.
 
@@ -591,7 +802,11 @@ This is a potentially deadly storm. Seek shelter in an interior room on the lowe
 #end
 #end
 ##
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "widespreadWindCTA")})
+=======
+#if($bullets.contains("widespreadWindCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #if(${stormType} == "line")
 This is an EXTREMELY DANGEROUS SITUATION. These storms are producing widespread wind damage across !** ENTER LOCATION **!. SEEK SHELTER NOW inside a sturdy structure and stay away from windows!
 
@@ -601,7 +816,11 @@ This is an EXTREMELY DANGEROUS SITUATION. This storm is producing widespread win
 #end
 #end
 ##
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "historyWindHailCTA")})
+=======
+#if($bullets.contains("historyWindHailCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #if(${stormType} == "line")
 These storms are producing destructive winds and large damaging hail. SEEK SHELTER NOW inside a sturdy structure and stay away from windows!
  
@@ -611,14 +830,22 @@ This storm is producing destructive winds and large damaging hail. SEEK SHELTER 
 #end
 #end
 ##
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "lawEnforcementCTA")})
+=======
+#if($bullets.contains("lawEnforcementCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 To report severe weather, contact your nearest law enforcement agency. They will send your report to the National Weather Service office in ${officeLoc}.
 
 #end
 ################################
 ## SPECIAL CASE CALLS TO ACTION
 ################################
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "gustFrontOutflowCTA")})
+=======
+#if($bullets.contains("gustFrontOutflowCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #if(${stormType} == "line")
 Wind damage with these storms will occur before any rain or lightning. Do not wait for the sound of thunder before taking cover. SEEK SHELTER IMMEDIATELY inside a sturdy structure and stay away from windows.
 
@@ -628,7 +855,11 @@ Wind damage with this storm will occur before any rain or lightning. Do not wait
 #end
 #end
 ##
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "squallLineCTA")})
+=======
+#if($bullets.contains("squallLineCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #if(${stormType} == "line")
 Intense thunderstorm lines can produce brief tornadoes and widespread significant wind damage. Although a tornado is not immediately likely, it is best to move to an interior room on the lowest floor of a building. These storms may cause serious injury and significant property damage.
 
@@ -638,7 +869,11 @@ Intense thunderstorm lines can produce brief tornadoes and widespread significan
 #end
 #end
 ##
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "superCellsCTA")})
+=======
+#if($bullets.contains("superCellsCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #if(${stormType} == "line")
 These thunderstorms are capable of producing all types of severe weather including extremely large hail, destructive straight line winds and tornadoes. Move quickly to a safe shelter such as an interior room, a bathroom, closet or basement.
 
@@ -648,7 +883,11 @@ This thunderstorm is capable of producing all types of severe weather including 
 #end
 #end
 ##
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "windDrivenHailIndicatedCTA")})
+=======
+#if($bullets.contains("windDrivenHailIndicatedCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #if(${stormType} == "line")
 These are dangerous storms, capable of producing large hail driven by severe winds! SEEK SHELTER NOW inside a sturdy structure and stay away from windows! If you are caught outdoors, cover your head and neck.
 
@@ -658,7 +897,11 @@ This is a dangerous storm, capable of producing large hail driven by severe wind
 #end
 #end
 ##
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "windDrivenHailObservedCTA")})
+=======
+#if($bullets.contains("windDrivenHailObservedCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #if(${stormType} == "line")
 These are dangerous storms, producing large hail driven by severe winds! SEEK SHELTER NOW inside a sturdy structure and stay away from windows! If you are caught outdoors, cover your head and neck.
 
@@ -671,22 +914,39 @@ This is a dangerous storm, producing large hail driven by severe winds! SEEK SHE
 ## MISCELLANEOUS CALLS TO ACTION
 ################################
 ##
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "lightningCTA")})
 #if(${stormType} == "line")
 Large hail and damaging winds and continuous cloud to ground lightning is occurring with these storms. Move indoors immediately. Lightning is one of nature's leading killers. Remember, if you can hear thunder, you are close enough to be struck by lightning.
 
 #else
 Large hail and damaging winds and continuous cloud to ground lightning is occurring with this storm. Move indoors immediately. Lightning is one of nature's leading killers. Remember, if you can hear thunder, you are close enough to be struck by lightning.
+=======
+#if($bullets.contains("lightningCTA"))
+#if(${stormType} == "line")
+Large hail, damaging wind, and continuous cloud to ground lightning are occurring with these storms. Move indoors immediately. Lightning is one of nature's leading killers. Remember, if you can hear thunder, you are close enough to be struck by lightning.
+
+#else
+Large hail, damaging wind, and continuous cloud to ground lightning are occurring with this storm. Move indoors immediately. Lightning is one of nature's leading killers. Remember, if you can hear thunder, you are close enough to be struck by lightning.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 #end
 #end
 ##
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "boatersCTA")})
+=======
+#if($bullets.contains("boatersCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 If on or near !**NAME OF LAKE**!, get away from the water and move indoors or inside a vehicle. Remember, lightning can strike out to 15 miles from the parent thunderstorm. If you can hear thunder, you are close enough to be struck by lightning. Move to safe shelter now!  Do not be caught on the water in a thunderstorm.
 
 #end
 ##
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "torrentialRainfallCTA")})
+=======
+#if($bullets.contains("torrentialRainfallCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #if(${stormType} == "line")
 Torrential rainfall is occurring with these storms, and may lead to flash flooding. Do not drive your vehicle through flooded roadways.
 
@@ -696,9 +956,18 @@ Torrential rainfall is occurring with this storm, and may lead to flash flooding
 #end
 #end
 ##
+<<<<<<< HEAD
 #if(${list.contains(${includedWatches}, "TO.A")})
 ${torWatchPhrase}
 
+=======
+#if($includedWatches.contains("TO.A"))
+${torWatchPhrase}
+
+#elseif($bullets.contains("torWatchRemainsInEffectCTA"))
+A Tornado Watch remains in effect for the warned area. Tornadoes can develop quickly from severe thunderstorms. Although a tornado is not immediately likely, if one is spotted, act quickly and move to a place of safety inside a sturdy structure such as a basement or small interior room.
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #end
 ##
 #if(${ctaSelected} == "YES") 
@@ -711,7 +980,11 @@ THIS IS A TEST MESSAGE. DO NOT TAKE ACTION BASED ON THIS MESSAGE.
 
 #end
 
+<<<<<<< HEAD
 #printcoords(${areaPoly}, ${list})
+=======
+#printcoords(${areaPoly})
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 #tml(${TMLtime}, ${timeFormat}, ${movementDirection}, ${movementInKnots}, ${eventLocation})
 

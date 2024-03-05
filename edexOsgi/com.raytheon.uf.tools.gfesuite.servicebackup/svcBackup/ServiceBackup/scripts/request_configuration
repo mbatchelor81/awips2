@@ -24,11 +24,20 @@
 ##
 #
 # SOFTWARE HISTORY
+<<<<<<< HEAD
 # Date         Ticket#    Engineer    Description
 # ------------ ---------- ----------- --------------------------
 # Feb 09, 2015  #4103     dgilling    Refactored to support multiple svcbu 
 #                                     sites.
 # Feb 25, 2020  #7882     randerso    Change name of exported configuration to xxx3
+=======
+#
+# Date          Ticket#  Engineer  Description
+# ------------- -------- --------- --------------------------------------------
+# Feb 09, 2015  4103     dgilling  Refactored to support multiple svcbu sites.
+# Feb 25, 2020  7882     randerso  Change name of exported configuration to xxx3
+# Jun 29, 2021  8572     randerso  Pass site ID to serviceBackupUtil.sh
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 ##
 
@@ -41,6 +50,11 @@ fi
 
 # $1 = Failed site
 # $2 = enable/disable troubleshooting mode
+<<<<<<< HEAD
+=======
+FAILED_SITE="${1}"
+FAILED_SITE_CAPS=`echo ${1} | tr [a-z] [A-Z]`
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 if [ $# -ne 2 ]
 then
@@ -48,8 +62,13 @@ then
    exit 1
 fi
 
+<<<<<<< HEAD
 . ${AWIPS_HOME}/GFESuite/ServiceBackup/configuration/svcbu.env
 source ${AWIPS_HOME}/GFESuite/ServiceBackup/scripts/serviceBackupUtil.sh
+=======
+# Using AW_SITE_IDENTIFIER here since failed site's configuration is not yet available
+source ${AWIPS_HOME}/GFESuite/ServiceBackup/scripts/serviceBackupUtil.sh ${AW_SITE_IDENTIFIER}
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 FAILED_SITE="${1}"
 

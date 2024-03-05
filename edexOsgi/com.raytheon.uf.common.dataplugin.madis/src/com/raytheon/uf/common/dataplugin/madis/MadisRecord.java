@@ -3,19 +3,19 @@ package com.raytheon.uf.common.dataplugin.madis;
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
- * 
+ *
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
- * 
+ *
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
- * 
+ *
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -35,14 +35,13 @@ import javax.measure.quantity.Temperature;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
-
-import org.hibernate.annotations.Index;
 
 import com.raytheon.uf.common.dataplugin.PluginDataObject;
 import com.raytheon.uf.common.dataplugin.annotations.DataURI;
@@ -58,14 +57,14 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
 import si.uom.NonSI;
 import si.uom.SI;
 import systems.uom.common.USCustomary;
-import tec.uom.se.unit.MetricPrefix;
-import tec.uom.se.unit.Units;
+import javax.measure.MetricPrefix;
+import tech.units.indriya.unit.Units;
 
 /**
  * MadisRecord Record store for MADIS point data
- * 
+ *
  * <pre>
- * 
+ *
  * SOFTWARE HISTORY
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
@@ -84,23 +83,25 @@ import tec.uom.se.unit.Units;
  * Jan 08, 2014  3141      dhladky     Bad index for WFS requests.
  * Jul 21, 2015  4360      rferrel     Named unique constraint.
  *                                     Made provider, subProvider and restriction not nullable.
- * 
+ * Aug 08, 2022 8892       tjensen     Update indexes for Hibernate 5
+ *
  * </pre>
- * 
+ *
  * @author dhladky
- * @version 1.0
  */
 
 @Entity
 @SequenceGenerator(initialValue = 1, name = PluginDataObject.ID_GEN, sequenceName = "madisseq")
-@Table(name = "madis", uniqueConstraints = { @UniqueConstraint(name = "uk_madis_datauri_fields", columnNames = {
-        "latitude", "longitude", "stationid", "reftime", "provider",
-        "subprovider", "restriction" }) })
-@org.hibernate.annotations.Table(appliesTo = "madis", indexes = { @Index(name = "madis_wfsQueryIndex", columnNames = {
-        "insertTime", "location" }), })
+@Table(name = "madis", uniqueConstraints = {
+        @UniqueConstraint(name = "uk_madis_datauri_fields", columnNames = {
+                "latitude", "longitude", "stationid", "reftime", "provider",
+                "subprovider", "restriction" }) }, indexes = {
+                        @Index(name = "%TABLE%_wfsQueryIndex", columnList = "insertTime, location"),
+                        @Index(name = "%TABLE%_stationIndex", columnList = "stationId") })
+
 @DynamicSerialize
-public class MadisRecord extends PersistablePluginDataObject implements
-        ISpatialEnabled, IPointData {
+public class MadisRecord extends PersistablePluginDataObject
+        implements ISpatialEnabled, IPointData {
 
     private static final long serialVersionUID = -2234739310998758367L;
 
@@ -378,7 +379,8 @@ public class MadisRecord extends PersistablePluginDataObject implements
 
     public static final Unit<Angle> LOCATION_UNIT = NonSI.DEGREE_ANGLE;
 
-    public static final Unit<Pressure> PRESSURE_UNIT = MetricPrefix.HECTO(SI.PASCAL);
+    public static final Unit<Pressure> PRESSURE_UNIT = MetricPrefix
+            .HECTO(SI.PASCAL);
 
     public static final Unit<Pressure> ALTIMETER_UNIT = SI.PASCAL;
 
@@ -468,7 +470,7 @@ public class MadisRecord extends PersistablePluginDataObject implements
 
     /**
      * URI constructor
-     * 
+     *
      * @param string
      */
     public MadisRecord(String string) {
@@ -498,17 +500,17 @@ public class MadisRecord extends PersistablePluginDataObject implements
 
     /**
      * Enumeration of Quality types, we know so far
-     * 
+     *
      * <pre>
-     * 
+     *
      * SOFTWARE HISTORY
-     * 
+     *
      * Date         Ticket#    Engineer    Description
      * ------------ ---------- ----------- --------------------------
      * Mar 16, 2013            dhladky     Initial creation
      * Aug 30, 2013 2298       rjpeter     Make getPluginName abstract
      * </pre>
-     * 
+     *
      * @author dhladky
      * @version 1.0
      */
@@ -552,7 +554,7 @@ public class MadisRecord extends PersistablePluginDataObject implements
         private static final Map<String, QCD> valMap;
 
         static {
-            Map<String, QCD> map = new HashMap<String, QCD>();
+            Map<String, QCD> map = new HashMap<>();
             map.put(V, QCD.VERIFIED);
             map.put(S, QCD.SCREENED);
             map.put(Q, QCD.QUESTIONED);
@@ -563,7 +565,7 @@ public class MadisRecord extends PersistablePluginDataObject implements
             map.put(X, QCD.REJECTED);
             qcdMap = Collections.unmodifiableMap(map);
 
-            Map<String, QCD> map2 = new HashMap<String, QCD>();
+            Map<String, QCD> map2 = new HashMap<>();
             map2.put(QCD.VERIFIED.name(), QCD.VERIFIED);
             map2.put(QCD.SCREENED.name(), QCD.SCREENED);
             map2.put(QCD.QUESTIONED.name(), QCD.QUESTIONED);
@@ -955,7 +957,7 @@ public class MadisRecord extends PersistablePluginDataObject implements
 
     /**
      * Get the geometry latitude.
-     * 
+     *
      * @return The geometry latitude.
      */
     public double getLatitude() {
@@ -964,7 +966,7 @@ public class MadisRecord extends PersistablePluginDataObject implements
 
     /**
      * Get the geometry longitude.
-     * 
+     *
      * @return The geometry longitude.
      */
     public double getLongitude() {
@@ -973,7 +975,7 @@ public class MadisRecord extends PersistablePluginDataObject implements
 
     /**
      * Get the elevation, in meters, of the observing platform or location.
-     * 
+     *
      * @return The observation elevation, in meters.
      */
     public Integer getElevation() {
@@ -1070,7 +1072,7 @@ public class MadisRecord extends PersistablePluginDataObject implements
 
     /**
      * Get the station identifier for this observation.
-     * 
+     *
      * @return the stationId
      */
     public String getStationId() {
@@ -1117,7 +1119,7 @@ public class MadisRecord extends PersistablePluginDataObject implements
      * Allow overwrite of MADIS records MADIS records are frequently updated for
      * even the same temporal record. QC value changes will cause record
      * re-submissions.
-     * 
+     *
      * @return
      */
     public boolean getAllowOverWrite() {

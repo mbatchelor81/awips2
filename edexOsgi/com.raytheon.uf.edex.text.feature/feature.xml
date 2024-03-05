@@ -24,6 +24,16 @@
    </requires>
 
    <plugin
+<<<<<<< HEAD
+=======
+         id="com.raytheon.uf.edex.dissemination"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
          id="com.raytheon.uf.edex.plugin.text"
          download-size="0"
          install-size="0"

@@ -24,7 +24,11 @@
 #  Date         Ticket#    Engineer       Description
 #  ------------ ---------- -----------    ------------------------------------
 #  05/17/2019    20782     mgamazaychikov Initial creation.
+<<<<<<< HEAD
 #
+=======
+#  07/17/2021    22260     mgamazaychikov Added NIDS_HEADLINE
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ##
 
 import CivilEmerg
@@ -34,7 +38,11 @@ import string, time, re, os, types, copy
 class TextProduct(CivilEmerg.TextProduct):
     Definition = copy.deepcopy(CivilEmerg.TextProduct.Definition)
     Definition["displayName"] = "CivilEmergency_BLU_<MultiPil> (Law Enforcement Warning)"
+<<<<<<< HEAD
              # for Product Generation Menu
+=======
+    # for Product Generation Menu
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     Definition["outputFile"] = "{prddir}/TEXT/BLU_<MultiPil>.txt"
     ## Edit Areas: Create Combinations file with edit area combinations.
     Definition["showZoneCombiner"] = 1 # 1 to cause zone combiner to display
@@ -48,8 +56,16 @@ class TextProduct(CivilEmerg.TextProduct):
     def __init__(self):
         CivilEmerg.TextProduct.__init__(self)
 
+<<<<<<< HEAD
 
     def _makeProduct(self, fcst, editArea, areaLabel, argDict):
         fcst = fcst + "The following message is transmitted" + \
                " at the request of the " + self._source + "."
         return fcst
+=======
+    def _makeProduct(self, fcst, editArea, areaLabel, argDict):
+        fcst = fcst + CivilEmerg.TextProduct.NIDS_HEADLINE + "The following message is transmitted" + \
+               " at the request of the " + self._source + "."
+        return fcst
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

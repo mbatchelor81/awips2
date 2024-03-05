@@ -42,6 +42,7 @@
     <entry index="57" value="IRPixel" />
     <entry index="60" value="PercentOfNormalTPWPixel" />
     <entry index="64" value="IRPixel" />
+<<<<<<< HEAD
     <entry index="118" value="IRPixel" />
     <entry index="119" value="IRPixel" />
     <entry index="120" value="IRPixel" />
@@ -56,4 +57,6 @@
     <entry index="129" value="IRPixel" />
     <entry index="130" value="IRPixel" />
     <entry index="131" value="IRPixel" />
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 </numericLookupTable>

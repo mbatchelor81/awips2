@@ -41,13 +41,21 @@
         <ConstantField value="-2" />
         <ConstantField value="1" />
     </Method>
+<<<<<<< HEAD
     <Method name="SliceSample" levels="S,FH,MB,TEMP,0.5kmAgl>10kmAgl">
+=======
+    <Method name="SliceSample" levels="S,FH,MB,TEMP,1.5kftAgl>40kftAgl">
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <Field abbreviation="RR" level="3D" />
         <Field abbreviation="P" />
         <ConstantField value="-2" />
         <ConstantField value="1" />
     </Method>
+<<<<<<< HEAD
     <Method models="radar" name="Average" levels="0-4kmAgl">
+=======
+    <Method models="radar-.*" name="Average" levels="0-4kmAgl">
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <Field abbreviation="RR" level="0.5kmAgl" />
         <Field abbreviation="RR" level="1kmAgl" />
         <Field abbreviation="RR" level="1.5kmAgl" />

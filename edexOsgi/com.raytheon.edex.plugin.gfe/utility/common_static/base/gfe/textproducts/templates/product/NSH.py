@@ -1,19 +1,31 @@
 ##
 # This software was developed and / or modified by Raytheon Company,
 # pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
 # 
+=======
+#
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # U.S. EXPORT CONTROLLED TECHNICAL DATA
 # This software product contains export-restricted data whose
 # export/transfer/disclosure is restricted by U.S. law. Dissemination
 # to non-U.S. persons whether in the United States or abroad requires
 # an export license or other authorization.
+<<<<<<< HEAD
 # 
+=======
+#
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # Contractor Name:        Raytheon Company
 # Contractor Address:     6825 Pine Street, Suite 340
 #                         Mail Stop B8
 #                         Omaha, NE 68106
 #                         402.291.0100
+<<<<<<< HEAD
 # 
+=======
+#
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # See the AWIPS II Master Rights File ("Master Rights File.pdf") for
 # further licensing information.
 ##
@@ -61,14 +73,22 @@
 #                      "COZ035_pt".  If no such edit area exists, the system will simply
 #                      use the original edit area.
 #                      Note that Hazards will always be generated for the entire edit area.
+<<<<<<< HEAD
 #  mapNameForCombinations Name of the map background that is used for 
 #                         creating/editing the combinations file.  This must 
 #                         be defined or the GFE zone combiner
 #  database               Source database for product. Can be "Official", 
+=======
+#  mapNameForCombinations Name of the map background that is used for
+#                         creating/editing the combinations file.  This must
+#                         be defined or the GFE zone combiner
+#  database               Source database for product. Can be "Official",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #                         "Fcst" or "ISC"
 #  outputFile             Defines the output location of the finished product
 #                         when saved from the Formatter Launcher.
 #  debug                  If on, debug_print statements will appear.
+<<<<<<< HEAD
 #  textdbPil              Defines the awips product identifier 
 #                         (e.g., DENCCFDEN) that is used to store the product 
 #                         in the AWIPS text database. 
@@ -78,6 +98,17 @@
 #                         (e.g., KBOUCCFDEN) that is used to transmit the 
 #                         product to the AWIPS WAN. 
 #                         This value is also used for the default GUI 
+=======
+#  textdbPil              Defines the awips product identifier
+#                         (e.g., DENCCFDEN) that is used to store the product
+#                         in the AWIPS text database.
+#                         This value is also used for the default GUI entry for
+#                         storage.
+#  awipsWANPil            Defines the AWIPS product identifier
+#                         (e.g., KBOUCCFDEN) that is used to transmit the
+#                         product to the AWIPS WAN.
+#                         This value is also used for the default GUI
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #                         entry for storage.
 #  hazardSamplingThreshold  Defines the percentage coverage or number of
 #                    grid points in a zone that must contain the hazard
@@ -96,11 +127,19 @@
 #       hoursSChcEnds        - specifies hours past the beginning of the first
 #                              first period of the product to stop including 'Slight
 #                               Chance' or 'Isolated' weather types (ERH policy
+<<<<<<< HEAD
 #                               allows values of 1-5 * 12 hour periods)               
 #
 #  Trouble-shooting items
 #    passLimit -- Limit on passes allowed through Narrative Tree
 #    trace     -- Set to 1 to turn on trace through Narrative Tree   
+=======
+#                               allows values of 1-5 * 12 hour periods)
+#
+#  Trouble-shooting items
+#    passLimit -- Limit on passes allowed through Narrative Tree
+#    trace     -- Set to 1 to turn on trace through Narrative Tree
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 # NARRATIVE CUSTOMIZATION POINTS
 #   The phrases in this product can be customized in many ways by overriding
@@ -174,7 +213,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         "outputFile": "{prddir}/TEXT/NSH_<MultiPil>.txt",
         "debug": 0,
         # Name of map background for creating Combinations
+<<<<<<< HEAD
         "mapNameForCombinations": "Marine_Zones_<site>", 
+=======
+        "mapNameForCombinations": "Marine_Zones_<site>",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         ## Edit Areas: Create Combinations file with edit area combinations.
         "showZoneCombiner" : 1, # 1 to cause zone combiner to display
@@ -182,13 +225,21 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         "editAreaSuffix": None,
 
         # product identifiers
+<<<<<<< HEAD
         "productName": "Nearshore Marine Forecast", # product name 
+=======
+        "productName": "Nearshore Marine Forecast", # product name
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         "fullStationID": "<fullStationID>",    # full station identifier (4letter)
         "wmoID": "<wmoID>",          # WMO ID
         "pil": "<pil>",            # Product pil
         "areaName": "<state>",             # Name of state, such as "Georgia"
         "wfoCityState": "<wfoCityState>",   # Location of WFO - city state
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         "textdbPil": "<textdbPil>",       # Product ID for storing to AWIPS text database.
         "awipsWANPil": "<awipsWANPil>",   # Product ID for transmitting to AWIPS WAN.
 
@@ -203,7 +254,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         "useAbbreviations": 0,      # Use marine abbreviations
 
         # Area Dictionary -- Descriptive information about zones
+<<<<<<< HEAD
         "areaDictionary": "AreaDictionary", 
+=======
+        "areaDictionary": "AreaDictionary",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         "useHolidays": 0,            # Set to 1 to use holidays in the time period labels
 
         # Weather-related flags
@@ -274,7 +329,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             ("SW", "S"),
             ## ("T","RW"),
             ]
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def vector_dir_difference_dict(self, tree, node):
         # Direction difference.  If the difference between directions
         # for 2 sub-periods is greater than this value,
@@ -286,6 +345,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             "FreeWind": 60,  # mph
             "Swell":60, # degrees
             "Swell2":60, # degrees
+<<<<<<< HEAD
             }    
     
     def phrase_descriptor_dict(self, tree, node):
@@ -294,19 +354,39 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         dict["around"] = ""
         return dict
     
+=======
+            }
+
+    def phrase_descriptor_dict(self, tree, node):
+        dict = TextRules.TextRules.phrase_descriptor_dict(self, tree, node)
+        dict["Wind"] = "wind"
+        dict["around"] = ""
+        return dict
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def null_nlValue_dict(self, tree, node):
         # Threshold below which values are considered "null" and  not reported.
         # Units depend on the element and product
         dict = TextRules.TextRules.null_nlValue_dict(self, tree, node)
+<<<<<<< HEAD
         dict["Wind"] =  5   
         return dict
        
+=======
+        dict["Wind"] =  5
+        return dict
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def first_null_phrase_dict(self, tree, node):
         # Phrase to use if values THROUGHOUT the period or
         # in the first period are Null (i.e. below threshold OR NoWx)
         # E.g.  LIGHT WINDS.    or    LIGHT WINDS BECOMING N 5 MPH.
         dict = TextRules.TextRules.first_null_phrase_dict(self, tree, node)
+<<<<<<< HEAD
         dict["Wind"] =  "variable winds 10 knots or less" 
+=======
+        dict["Wind"] =  "variable winds 10 knots or less"
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return dict
 
     def null_phrase_dict(self, tree, node):
@@ -314,15 +394,26 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         # Can be an empty string
         #  E.g.  "NORTH 20 to 25 KNOTS BECOMING LIGHT"
         dict = TextRules.TextRules.null_phrase_dict(self, tree, node)
+<<<<<<< HEAD
         dict["Wind"] =  "variable 10 knots or less" 
         dict["Wx"] =  ""  
+=======
+        dict["Wind"] =  "variable 10 knots or less"
+        dict["Wx"] =  ""
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return dict
 
     def marine_wind_flag(self, tree, node):
         # If 1, Wind combining and wording will reflect the
+<<<<<<< HEAD
         # crossing of significant thresholds such as gales 
         return 1
  
+=======
+        # crossing of significant thresholds such as gales
+        return 1
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def marine_wind_combining_flag(self, tree, node):
         # If 1, Wind combining will reflect the
         # crossing of significant thresholds such as gales.
@@ -331,6 +422,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         #  hurricane force winds to 80 knots in the afternoon."
         return 1
 
+<<<<<<< HEAD
     def postProcessPhrases(self, tree, node): 
         words = node.get("words") 
         if words is not None: 
@@ -351,6 +443,28 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             words = words.replace("and chance of", "and a chance of")   
             return self.setWords(node, words) 
   
+=======
+    def postProcessPhrases(self, tree, node):
+        words = node.get("words")
+        if words is not None:
+            words = words.replace("thunderstorms and rain showers",
+                        "showers and thunderstorms")
+            words = words.replace("snow showers and rain showers", "rain and snow showers")
+            words = words.replace("rain showers and snow showers", "rain and snow showers")
+            #print "words = ", words
+            words = words.replace("light rain showers", "rain showers")
+            words = words.replace("rain showers", "showers")
+            #print "words 2= ", words
+            words = words.replace("winds hurricane", "hurricane")
+            words = words.replace("winds gales", "gales")
+            words = words.replace("winds storm", "storm")
+            words = words.replace("to to", "to")
+            words = words.replace("winds 10 knots", "winds around 10 knots")
+            words = words.replace("winds 5 knots", "winds around 5 knots")
+            words = words.replace("and chance of", "and a chance of")
+            return self.setWords(node, words)
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def rounding_method_dict(self, tree, node):
         # Special rounding methods
         #
@@ -376,7 +490,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         # and the max value is 46, the range will be adjusted to at least a 5 degree
         # range e.g. 43-48.  These are the values that are then submitted for phrasing
         # such as:
+<<<<<<< HEAD
         #   HIGHS IN THE MID 40S 
+=======
+        #   HIGHS IN THE MID 40S
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         dict = TextRules.TextRules.minimum_range_nlValue_dict(self, tree, node)
         dict["Wind"] = {
             (0,5) : 0,   # will be reported as "null"
@@ -402,7 +520,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                           self.consolidateSubPhrases,
                           self.assemblePhrases,
                           self.postProcessPhrases,
+<<<<<<< HEAD
                           self.wordWrap,          
+=======
+                          self.wordWrap,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                           ],
             "analysisList": [
                   #("Wind", self.vectorMinMax, [3]),
@@ -410,7 +532,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                   #("WindGust", self.maximum, [3]),
                   ("WindGust", self.maximum, [6]),
                   ("WaveHeight", self.minMax, [3]),
+<<<<<<< HEAD
                   ("Wx", self.rankedWx, [6]),                                  
+=======
+                  ("Wx", self.rankedWx, [6]),
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                   ("T", self.minMax),
                   ("Sky", self.avg, [6]),
                   ("PoP", self._PoP_analysisMethod("NSHFirstPeriod"), [6]),
@@ -440,9 +566,15 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             "type": "phrase",
             "methodList": [
                           self.consolidateSubPhrases,
+<<<<<<< HEAD
                           self.assemblePhrases,   
                           self.postProcessPhrases,
                           self.wordWrap,          
+=======
+                          self.assemblePhrases,
+                          self.postProcessPhrases,
+                          self.wordWrap,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                           ],
             "analysisList": [
                   #("Wind", self.vectorMinMax, [3]),
@@ -450,7 +582,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                   #("WindGust", self.maximum, [3]),
                   ("WindGust", self.maximum, [6]),
                   ("WaveHeight", self.minMax, [3]),
+<<<<<<< HEAD
                   ("Wx", self.rankedWx, [6]),                                  
+=======
+                  ("Wx", self.rankedWx, [6]),
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                   ("T", self.minMax),
                   ("Sky", self.avg, [6]),
                   ("PoP", self._PoP_analysisMethod("NSHPeriod"), [6]),
@@ -475,7 +611,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             "lineLength": 66,
             "runTimeEditArea": "yes",
             }
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def generateForecast(self, argDict):
         # Get variables
         error = self._getVariables(argDict)
@@ -541,7 +681,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
 
         # Make argDict accessible
         self.__argDict = argDict
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return None
 
     def _determineTimeRanges(self, argDict):
@@ -559,14 +703,22 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         else:
             self._definition["methodList"] = [self.assembleChildWords]
         self._definition["priorPeriod"] = 24
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # Calculate current times
         self._ddhhmmTime = self.getCurrentTime(
             argDict, "%d%H%M", shiftToLocal=0, stripLeading=0)
         self._timeLabel = self.getCurrentTime(
             argDict, "%l%M %p %Z %a %b %e %Y", stripLeading=1)
         return None
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def _sampleData(self, argDict):
         # Sample and analyze the data for the narrative
         self._narrativeProcessor = ForecastNarrative.ForecastNarrative()
@@ -585,16 +737,28 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
 
         issuedByString = self.getIssuedByString()
         productName = self.checkTestMode(argDict, productName)
+<<<<<<< HEAD
         
         s = self._wmoID + " " + self._fullStationID + " " + \
                self._ddhhmmTime + "\n" + self._pil + "\n\n"
         fcst = fcst + s.upper()
                
+=======
+
+        s = self._wmoID + " " + self._fullStationID + " " + \
+               self._ddhhmmTime + "\n" + self._pil + "\n\n"
+        fcst = fcst + s.upper()
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         s = productName + "\n" +\
                "National Weather Service " + self._wfoCityState + \
                "\n" + issuedByString + self._timeLabel + "\n\n"
         fcst = fcst + s
+<<<<<<< HEAD
                
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         fcst =  fcst + self._lakeStmt(argDict) + "\n\n"
         fcst = fcst + self._Text1()
         return fcst
@@ -603,7 +767,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         areaHeader = self.makeAreaHeader(
             argDict, areaLabel, self._issueTime, self._expireTime,
             self._areaDictionary, self._defaultEditAreas)
+<<<<<<< HEAD
         fcst = fcst + areaHeader 
+=======
+        fcst = fcst + areaHeader
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # get the hazards text
         self._hazards = argDict['hazards']
@@ -622,12 +790,20 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         # Generate Narrative Forecast for Edit Area
         fcstSegment = self._narrativeProcessor.generateForecast(
             argDict, editArea, areaLabel)
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # Handle abbreviations
         if self._useAbbreviations == 1:
             fcstSegment = self.marine_abbreviateText(fcstSegment)
             fcstSegment = re.sub(r'\n', r' ',fcstSegment)
+<<<<<<< HEAD
             fcstSegment = re.sub(r' (\.[A-Za-z])', r'\n\1',fcstSegment)     
+=======
+            fcstSegment = re.sub(r' (\.[A-Za-z])', r'\n\1',fcstSegment)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             fcstSegment = self.endline(fcstSegment, linelength=self._lineLength)
         fcst = fcst + fcstSegment
         return fcst
@@ -641,7 +817,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         self.setProgressPercentage(100)
         self.progressMessage(0, 100, self._displayName + " Complete")
         return fcst
+<<<<<<< HEAD
      
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     ########################################################################
     # PRODUCT-SPECIFIC METHODS
     ########################################################################
@@ -652,7 +832,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         elif localHour > 8 and localHour <= 13:
             self._productIssuance = "Morning Update"
         elif localHour > 13 and localHour <= 18:
+<<<<<<< HEAD
             self._productIssuance = "430 PM"        
+=======
+            self._productIssuance = "430 PM"
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         else:
             self._productIssuance = "Evening Update"
 
@@ -660,6 +844,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         #  This method sets up configurable issuance times with associated
         #  narrative definitions.  See the Text Product User Guide for documentation.
         narrativeDefAM = [
+<<<<<<< HEAD
             ("NSHFirstPeriod", "period1"), ("NSHPeriod", 12), ("NSHPeriod", 12), ("NSHPeriod", 12), 
 #            ("NSHExtended", 24), ("NSHExtended", 24), ("NSHExtended", 24), 
             ]
@@ -667,6 +852,15 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             ("NSHFirstPeriod", "period1"), ("NSHPeriod", 12), ("NSHPeriod", 12), ("NSHPeriod", 12), 
 #            ("NSHExtended", 24), ("NSHExtended", 24), ("NSHExtended", 24), 
             ]        
+=======
+            ("NSHFirstPeriod", "period1"), ("NSHPeriod", 12), ("NSHPeriod", 12), ("NSHPeriod", 12),
+#            ("NSHExtended", 24), ("NSHExtended", 24), ("NSHExtended", 24),
+            ]
+        narrativeDefPM = [
+            ("NSHFirstPeriod", "period1"), ("NSHPeriod", 12), ("NSHPeriod", 12), ("NSHPeriod", 12),
+#            ("NSHExtended", 24), ("NSHExtended", 24), ("NSHExtended", 24),
+            ]
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return [
             ("430 AM", self.DAY(), self.NIGHT(), 11,
              ".TODAY...", "early in the morning", "late in the afternoon",
@@ -682,7 +876,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
              ".OVERNIGHT...", "toward daybreak", "early in the evening",
              1, narrativeDefPM),
             ]
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def lateDay_descriptor(self, tree, node, timeRange):
         # If time range is in the first period, return period1 descriptor for
@@ -691,7 +889,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             return self._issuanceInfo.period1LateDayPhrase()
         else:
             return "late in the afternoon"
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def lateNight_descriptor(self, tree, node, timeRange):
         # If time range is in the first period, return period1 descriptor for
         #  late night -- default 3am-6am
@@ -730,20 +932,32 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
     ########################################################################
     # OVERRIDING METHODS
     ########################################################################
+<<<<<<< HEAD
      
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def _warnOutlook_phrase(self):
         return {
             "phraseMethods": [
                 self._warnOutlook_words, # phrase.words
             ],
+<<<<<<< HEAD
             }    
+=======
+            }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def _warnOutlook_words(self, tree, phrase):
         # will put an outlook phrase in the text
 
         windStats = tree.stats.get("Wind", phrase.getTimeRange(), mergeMethod="Max")
         if windStats is None:
             return self.setWords(phrase, "")
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         max, dir = windStats
         words = ""
         if max >= 23 and (self._outlookflag != 1):
@@ -762,7 +976,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             words  = ""
             self._outlookflag = 0
         return self.setWords(phrase, words)
+<<<<<<< HEAD
                            
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     # Returns a list of the Hazards allowed for this product in VTEC format.
     # These are sorted in priority order - most important first.
     def allowedHazards(self):
@@ -780,6 +998,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                 ('SR.W',  marineActions, 'Marine'),  # STORM WARNING
                 ('GL.W',  marineActions, 'Marine'),  # GALE WARNING
                 ('SE.W',  marineActions, 'Marine'),  # HAZARDOUS SEAS
+<<<<<<< HEAD
                 ('UP.W', allActions, 'IceAccr'),                    # HEAVY FREEZING SPRAY WARNING
                 ('RB.Y', allActions, 'Marine'),      #ROUGH BAR
                 ('SI.Y', allActions, 'Marine'),      #SMALL CRAFT ADVISORY
@@ -794,4 +1013,17 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                 ('LO.Y', allActions, 'LowWater'),                   # LOW WATER ADVISORY
                 ('TO.A', allActions, 'Convective'),                 # TORNADO WATCH
                 ('SV.A', allActions, 'Convective'),                 # SEVERE THUNDERSTORM WATCH
+=======
+                ('UP.W', allActions, 'IceAccr'),     # HEAVY FREEZING SPRAY WARNING
+                ('SC.Y', allActions, 'Marine'),      # SMALL CRAFT ADVISORY
+                ('BW.Y', allActions, 'Marine'),      # BRISK WIND ADVISORY
+                ('MF.Y', allActions, 'Fog'),         # DENSE FOG ADVISORY
+                ('MS.Y', allActions, 'Smoke'),       # DENSE SMOKE ADVISORY
+                ('UP.Y', allActions, 'IceAccr'),     # HEAVY FREEZING SPRAY ADVISORY
+                ('MH.W', allActions, 'Ashfall'),     # VOLCANIC ASHFALL WARNING
+                ('MH.Y', allActions, 'Ashfall'),     # VOLCANIC ASHFALL ADVISORY
+                ('LO.Y', allActions, 'LowWater'),    # LOW WATER ADVISORY
+                ('TO.A', allActions, 'Convective'),  # TORNADO WATCH
+                ('SV.A', allActions, 'Convective'),  # SEVERE THUNDERSTORM WATCH
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 ]

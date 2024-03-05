@@ -32,13 +32,14 @@ from awips import UsageArgumentParser
 # Provides a command-line utility to purge selected GFE grids.
 #  
 #    
-#     SOFTWARE HISTORY
-#    
-#    Date            Ticket#       Engineer       Description
-#    ------------    ----------    -----------    --------------------------
-#    10/12/10                      dgilling       Initial Creation.
-#    12/08/10        7656          cjeanbap       Moved environment variables to setup.env.
-# 
+# SOFTWARE HISTORY
+#
+# Date          Ticket#  Engineer  Description
+# ------------- -------- --------- --------------------------------------------
+# Oct 12, 2010           dgilling  Initial Creation.
+# Dec 08, 2010  7656     cjeanbap  Moved environment variables to setup.env.
+# Jun 30, 2021  8572     randerso  Replace references to CDSHOST and CDSPORT
+#                                  With DEFAULT_HOST and DEFAULT_PORT
 #
 ## 
 
@@ -81,12 +82,6 @@ def validateArgs():
                       help="name of model to initialize")
     args = parser.parse_args()
     
-    if args.host is  None and "CDSHOST" in os.environ:
-        args.host = os.environ["CDSHOST"]
-
-    if args.port is None and "CDSPORT" in os.environ:
-        args.port = int(os.environ["CDSPORT"])
-
     if args.host is None: 
         args.host = str(os.getenv("DEFAULT_HOST", "localhost"))
 

@@ -43,6 +43,12 @@
 # May 17, 2017  20105    mgamazaychikov  Updated GFESUITE_MHSID assignment
 # Apr 29, 2020  8151     randerso        Use SiteMap.getSite4LetterId()
 # Jan 05, 2022  8726     dgilling        Fix python 3 issue with __baseURL.
+<<<<<<< HEAD
+=======
+# Apr 06, 2022  8839     njensen         Don't use datetime.date.max and datetime.date.min
+# Jul 14, 2023  2035938  dgilling        Update xml.etree.ElementTree calls to remove 
+#                                        functions deprecated in python 3.11
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 ##
 
@@ -72,12 +78,29 @@ class IrtAccess():
         self.__registered = None  #flag to indicate whether we registered
         # If a logger is supplied, set __loggerDate to the maximum value
         # so that __logger will not be replaced in getLogger.
+<<<<<<< HEAD
         if logger is not None:
             self.__logger = logger
             self.__loggerDate = datetime.date.max
         else:
             self.__logger = None
             self.__loggerDate = datetime.date.min
+=======
+        #
+        # We can't use datetime.date.max or datetime.date.min here due to a bug
+        # in Python 3.8 and 3.9 (and possibly earlier versions, but fixed in
+        # 3.10) where those native references can sometimes be incorrectly
+        # freed when using those objects in sub-interpreters and multiple
+        # threads.  Therefore we use our own objects that match max or min
+        # since the memory will be correctly managed with our objects.  For
+        # more information, see comments on Omaha #8839.
+        if logger is not None:
+            self.__logger = logger
+            self.__loggerDate = datetime.date(9999, 12, 31)
+        else:
+            self.__logger = None
+            self.__loggerDate = datetime.date(1, 1, 1)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def logEvent(self, *msg):
         self.getLogger().info(iscUtil.tupleToString(*msg))
@@ -476,8 +499,12 @@ class IrtAccess():
             elif attrE.tag == "site":
                 server['site'] = attrE.text
             elif attrE.tag == "welist":
+<<<<<<< HEAD
                 parmsE = attrE.getchildren()
                 for parmE in parmsE:
+=======
+                for parmE in attrE:
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                    if parms is None:
                        parms = []
                    if parmE.tag not in parms:
@@ -588,7 +615,11 @@ class IrtAccess():
             servers = []  #list of servers for this domain
 
             # decode each server in the domain
+<<<<<<< HEAD
             for addressE in domainE.getchildren():
+=======
+            for addressE in domainE:
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 info = self.decodeXMLAddress(addressE)
                 if info is None:
                     continue  #not address tag

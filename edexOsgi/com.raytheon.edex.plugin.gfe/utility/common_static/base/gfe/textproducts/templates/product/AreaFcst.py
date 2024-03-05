@@ -1,27 +1,48 @@
 ##
 # This software was developed and / or modified by Raytheon Company,
 # pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
 # 
+=======
+#
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # U.S. EXPORT CONTROLLED TECHNICAL DATA
 # This software product contains export-restricted data whose
 # export/transfer/disclosure is restricted by U.S. law. Dissemination
 # to non-U.S. persons whether in the United States or abroad requires
 # an export license or other authorization.
+<<<<<<< HEAD
 # 
+=======
+#
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # Contractor Name:        Raytheon Company
 # Contractor Address:     6825 Pine Street, Suite 340
 #                         Mail Stop B8
 #                         Omaha, NE 68106
 #                         402.291.0100
+<<<<<<< HEAD
 # 
+=======
+#
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # See the AWIPS II Master Rights File ("Master Rights File.pdf") for
 # further licensing information.
 ##
 #
 # SOFTWARE HISTORY
+<<<<<<< HEAD
 # Date            Ticket#        Engineer    Description
 # ------------    ----------     ----------- --------------------------
 # May 01, 2015    17421          ryu         Changed analysis methods for StormTotalSnow
+=======
+#
+# Date          Ticket#  Engineer  Description
+# ------------- -------- --------- --------------------------------------------
+# May 01, 2015  17421    ryu       Changed analysis methods for StormTotalSnow
+# Mar 23, 2021  8397     randerso  Removed FA.W and FA.Y from allowedHazards
+# May 18, 2021  DCS22297 dkingfiel Add CW.Y, XH.A, and XH.W
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 ##
 
@@ -30,8 +51,13 @@
 ##
 
 #-------------------------------------------------------------------------
+<<<<<<< HEAD
 # Description: This product creates a ZFP-type series of text phrases 
 # for consecutive time periods for a list of edit areas. It can be 
+=======
+# Description: This product creates a ZFP-type series of text phrases
+# for consecutive time periods for a list of edit areas. It can be
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # used to create a ZFP or an SAF.
 #-------------------------------------------------------------------------
 # Copying:
@@ -63,14 +89,22 @@
 #
 # Optional Configuration Items
 #
+<<<<<<< HEAD
 #  mapNameForCombinations Name of the map background that is used for 
 #                         creating/editing the combinations file.  This must 
 #                         be defined or the GFE zone combiner
 #  database               Source database for product. Can be "Official", 
+=======
+#  mapNameForCombinations Name of the map background that is used for
+#                         creating/editing the combinations file.  This must
+#                         be defined or the GFE zone combiner
+#  database               Source database for product. Can be "Official",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #                         "Fcst" or "ISC"
 #  outputFile             Defines the output location of the finished product
 #                         when saved from FormatterLauncher.
 #  debug                  If on, debug_print statements will appear.
+<<<<<<< HEAD
 #  textdbPil              Defines the awips product identifier 
 #                         (e.g., DENCCFDEN) that is used to store the product 
 #                         in the AWIPS text database. This value is also used for
@@ -79,6 +113,16 @@
 #                         (e.g., KBOUCCFDEN) that is used to transmit the 
 #                         product to the AWIPS WAN.  
 #                         This value is also used for the default GUI 
+=======
+#  textdbPil              Defines the awips product identifier
+#                         (e.g., DENCCFDEN) that is used to store the product
+#                         in the AWIPS text database. This value is also used for
+#                         the default GUI entry for storage.
+#  awipsWANPil            Defines the awips product identifier
+#                         (e.g., KBOUCCFDEN) that is used to transmit the
+#                         product to the AWIPS WAN.
+#                         This value is also used for the default GUI
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #                         entry for storage.
 #  lineLength          Desired maximum length of each line.
 #
@@ -87,7 +131,11 @@
 #                    in order for it to be considered. Tuple (percent, points)
 
 #  periodCombining     If 1, an attempt will be made to combine components
+<<<<<<< HEAD
 #                      or time periods into one.  Otherwise no period 
+=======
+#                      or time periods into one.  Otherwise no period
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #                      combining will be done.
 #  defaultEditAreas    defines edit areas, default is Combinations
 #  editAreaSuffix      default None. Allows for generating the body of the product for
@@ -99,6 +147,7 @@
 #                      use the original edit area.
 #                      Note that Hazards will always be generated for the entire edit area.
 #  directiveType       10-503 or C11
+<<<<<<< HEAD
 #  arealSkyAnalysis    Set to 1 to include analysis for Sky for 
 #                      areal vs. traditional sky phrasing.  This is made 
 #                      optional since there is a performance cost to 
@@ -106,6 +155,15 @@
 #  useStormTotalSnow   Set to 1 to use StormTotalSnow grids for reporting total snow
 #  includeExtended (applies to C11 only)      Include the extended forecast
 #  extendedLabel (applies to C11 only)        Includes label before extended forecast    
+=======
+#  arealSkyAnalysis    Set to 1 to include analysis for Sky for
+#                      areal vs. traditional sky phrasing.  This is made
+#                      optional since there is a performance cost to
+#                      include this analysis.
+#  useStormTotalSnow   Set to 1 to use StormTotalSnow grids for reporting total snow
+#  includeExtended (applies to C11 only)      Include the extended forecast
+#  extendedLabel (applies to C11 only)        Includes label before extended forecast
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #  includeEveningPeriod (applies to C11 only) Include a 6 hour Evening period on the 3rd day
 #
 #  includeMultipleElementTable
@@ -124,11 +182,19 @@
 #       hoursSChcEnds        - specifies hours past the beginning of the first
 #                              first period of the product to stop including 'Slight
 #                               Chance' or 'Isolated' weather types (ERH policy
+<<<<<<< HEAD
 #                               allows values of 1-5 * 12 hour periods)        
 #
 #  Trouble-shooting items
 #    passLimit -- Limit on passes allowed through Narrative Tree
 #    trace     -- Set to 1 to turn on trace through Narrative Tree   
+=======
+#                               allows values of 1-5 * 12 hour periods)
+#
+#  Trouble-shooting items
+#    passLimit -- Limit on passes allowed through Narrative Tree
+#    trace     -- Set to 1 to turn on trace through Narrative Tree
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 # NARRATIVE CUSTOMIZATION POINTS
 #   The phrases in this product can be customized in many ways by overriding
@@ -151,12 +217,20 @@
 #                  StormTotalSnow
 #    Out to 3 days:
 #        WindGust (opt.) (every 6 hours)
+<<<<<<< HEAD
 # 
+=======
+#
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #   NOTE: If you choose to include a "pre-1st period" for the
 #   Morning or Afternoon issuance, you must have grids in the
 #   pre-1st period or you will not see any data for that element.
 #-------------------------------------------------------------------------
+<<<<<<< HEAD
 # Edit Areas Needed: None 
+=======
+# Edit Areas Needed: None
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #-------------------------------------------------------------------------
 # Associated Utilities Files e.g. Combinations file:
 #   Combinations file
@@ -216,7 +290,11 @@
 #       temp_trends_addToPhrase_flag
 #       windChillTemp_difference
 #       heatIndexTemp_difference
+<<<<<<< HEAD
 #       areal_sky_flag       
+=======
+#       areal_sky_flag
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #     from CombinedPhrases:
 #       useCombinedSkyPopWx
 #     from VectorRelatedPhrases:
@@ -224,7 +302,11 @@
 #       useWindsForGusts_flag
 #     from SampleAnalysis:
 #       stdDev_dict
+<<<<<<< HEAD
 #       
+=======
+#
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #-------------------------------------------------------------------------
 # Example Output:
 #  Refer to the NWS C11 and 10-503 Directives for Public Weather Services.
@@ -234,12 +316,21 @@ import TextRules
 import SampleAnalysis
 import ForecastNarrative
 import TimeRange
+<<<<<<< HEAD
             
+=======
+
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
     VariableList = [
              #  If Flooding is "Yes", the system will insert a statement in the
              #  product when FFA, FLW, or FLS is in effect.
+<<<<<<< HEAD
              #(("Flooding?", "flooding") , "No", "radio", ["Yes","No"]), 
+=======
+             #(("Flooding?", "flooding") , "No", "radio", ["Yes","No"]),
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
              #(("Include Tropical?", "includeTropical") , "No", "radio", ["Yes","No"]),
              ]
 
@@ -253,15 +344,24 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         "outputFile": "{prddir}/TEXT/ZFP_<MultiPil>.txt",
         "debug": 0,
         # Name of map background for creating Combinations
+<<<<<<< HEAD
         "mapNameForCombinations": "Zones_<site>", 
         
+=======
+        "mapNameForCombinations": "Zones_<site>",
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         ## Edit Areas: Create Combinations file with edit area combinations.
         "showZoneCombiner" : 1, # 1 to cause zone combiner to display
         "defaultEditAreas" : "Combinations_ZFP_<site>_<MultiPil>",
         "editAreaSuffix": None,
 
         # product identifiers
+<<<<<<< HEAD
         "productName": "Zone Forecast Product", # product name 
+=======
+        "productName": "Zone Forecast Product", # product name
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         "fullStationID": "<fullStationID>",    # full station identifier (4letter)
         "wmoID": "<wmoID>",                # WMO ID
         "pil": "<pil>",                    # Product pil
@@ -270,7 +370,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
 
         "textdbPil": "<textdbPil>",       # Product ID for storing to AWIPS text database.
         "awipsWANPil": "<awipsWANPil>",   # Product ID for transmitting to AWIPS WAN.
+<<<<<<< HEAD
         "periodCombining" : 0,      # If 1, combine periods, if possible        
+=======
+        "periodCombining" : 0,      # If 1, combine periods, if possible
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         "lineLength": 66,  #product line length
         "fixedExpire": 1, #ensure VTEC actions don't affect segment time
 
@@ -281,7 +385,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         "arealSkyAnalysis":0,
         # Set to 1 to use StormTotalSnow grid
         "useStormTotalSnow": 0,
+<<<<<<< HEAD
         #"directiveType": "C11",        
+=======
+        #"directiveType": "C11",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # Applies to C11 directive only:
         "includeExtended": 1,
         # Set to one if you want an extended label
@@ -289,7 +397,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         # Set to one if you want a 6-hour evening period instead of
         # 18-hour period without lows
         "includeEveningPeriod": 1,
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # Product-specific variables:
         # To include a MultipleElementTable (e.g. Temp Pop Table)
         # for each area in the current Combination:
@@ -306,9 +418,15 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
 
         # Weather-related flags
         "hoursSChcEnds": 24,
+<<<<<<< HEAD
         
         # Area Dictionary -- Descriptive information about zones
         "areaDictionary": "AreaDictionary", 
+=======
+
+        # Area Dictionary -- Descriptive information about zones
+        "areaDictionary": "AreaDictionary",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # Language
         "language": "english",
 
@@ -318,11 +436,17 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         "trace": 0,                  # Set to 1 to turn on trace through
                                      # Narrative Tree for trouble-shooting
 
+<<<<<<< HEAD
 
 
         "hazardSamplingThreshold": (10, None),  #(%cov, #points)
         }
     
+=======
+        "hazardSamplingThreshold": (10, None),  #(%cov, #points)
+        }
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def __init__(self):
         TextRules.TextRules.__init__(self)
         SampleAnalysis.SampleAnalysis.__init__(self)
@@ -357,9 +481,15 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         #   e.g HIGHS AROUND 80
         dict = TextRules.TextRules.range_nlValue_dict(self, tree, node)
         dict["MaxT"] = 5
+<<<<<<< HEAD
         dict["MinT"] =  5
         dict["MinRH"] =  5
         dict["MaxRH"] =  5
+=======
+        dict["MinT"] = 5
+        dict["MinRH"] = 5
+        dict["MaxRH"] = 5
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return dict
 
     # If you are using the C11 format with periodCombining on,
@@ -435,7 +565,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                             (52.0, 200.0): 20,
                             }
         return dict
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     ########################################################################
     # COMPONENT PRODUCT DEFINITIONS
     ########################################################################
@@ -445,8 +579,13 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         return self.stdDevMaxAvg
         #return self.maxMode
         #return self.maximum
+<<<<<<< HEAD
         
     # These Components are named to indicate which period of the forecast 
+=======
+
+    # These Components are named to indicate which period of the forecast
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     # they define.
 
     # Special alterations to analysisList and phraseList for Tropical formatting
@@ -523,15 +662,24 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             #self.windBased_windChill_phrase,
             self.heatIndex_phrase,
             ]
+<<<<<<< HEAD
         
         if self._includeTropical:
             analysisList, phraseList = self.addTropical(analysisList, phraseList)
             
         component =  { 
+=======
+
+        if self._includeTropical:
+            analysisList, phraseList = self.addTropical(analysisList, phraseList)
+
+        component = {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             "type": "component",
             "methodList": [
                           self.orderPhrases,
                           self.consolidateSubPhrases,
+<<<<<<< HEAD
                           self.assemblePhrases,   
                           self.wordWrap,          
                           ],
@@ -548,6 +696,24 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
 ##                   # Areas listed by weather element that will be
 ##                   # intersected with the current area then
 ##                   # sampled and analysed.  
+=======
+                          self.assemblePhrases,
+                          self.wordWrap,
+                          ],
+            "analysisList": analysisList,
+            "phraseList": phraseList,
+##            "additionalAreas": [
+##                   # Areas listed by weather element that will be
+##                   # sampled and analysed.
+##                   # E.g. used for reporting population centers for temperatures.
+##                   ("MaxT", ["City1", "City2"]),
+##                   ("MinT", ["City1", "City2"]),
+##                   ],
+##            "intersectAreas": [
+##                   # Areas listed by weather element that will be
+##                   # intersected with the current area then
+##                   # sampled and analysed.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ##                   # E.g. used in local effects methods.
 ##                   ("MaxT", ["Mountains"]),
 ##                   ("MinT", ["Valleys"]),
@@ -560,11 +726,19 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             index = phraseList.index(self.total_snow_phrase)
             phraseList[index] = self.stormTotalSnow_phrase
             component["phraseList"] = phraseList
+<<<<<<< HEAD
         return component    
                         
     def Period_2_3(self):
         # No Lake Wind phrase
         analysisList =  [
+=======
+        return component
+
+    def Period_2_3(self):
+        # No Lake Wind phrase
+        analysisList = [
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                        #("MinT", self.avg),
                        #("MaxT", self.avg),
                        ("MinT", self.stdDevMinMax),
@@ -610,7 +784,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                    self.windChill_phrase,
                    self.heatIndex_phrase,
                   ]
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if self._includeTropical:
             analysisList, phraseList = self.addTropical(analysisList, phraseList)
 
@@ -619,8 +797,13 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             "methodList": [
                           self.orderPhrases,
                           self.consolidateSubPhrases,
+<<<<<<< HEAD
                           self.assemblePhrases,   
                           self.wordWrap,         
+=======
+                          self.assemblePhrases,
+                          self.wordWrap,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                           ],
             "analysisList": analysisList,
             "phraseList": phraseList,
@@ -633,11 +816,19 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             phraseList[index] = self.stormTotalSnow_phrase
             component["phraseList"] = phraseList
         return component
+<<<<<<< HEAD
         
     def Period_4_5(self):
         # Descriptive snow phrase
 
         analysisList =  [
+=======
+
+    def Period_4_5(self):
+        # Descriptive snow phrase
+
+        analysisList = [
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                        #("MinT", self.avg),
                        #("MaxT", self.avg),
                        ("MinT", self.stdDevMinMax),
@@ -680,7 +871,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                    self.windChill_phrase,
                    self.heatIndex_phrase,
                   ]
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if self._includeTropical:
             analysisList, phraseList = self.addTropical(analysisList, phraseList)
 
@@ -689,8 +884,13 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             "methodList": [
                           self.orderPhrases,
                           self.consolidateSubPhrases,
+<<<<<<< HEAD
                           self.assemblePhrases,  
                           self.wordWrap,         
+=======
+                          self.assemblePhrases,
+                          self.wordWrap,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                           ],
             "analysisList": analysisList,
             "phraseList": phraseList,
@@ -741,13 +941,22 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             analysisList, phraseList = self.addTropical(
                 analysisList, phraseList, includeHazards=False)
 
+<<<<<<< HEAD
         component =  {
+=======
+        component = {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             "type": "component",
             "methodList": [
                           self.orderPhrases,
                           self.consolidateSubPhrases,
+<<<<<<< HEAD
                           self.assemblePhrases,  
                           self.wordWrap,         
+=======
+                          self.assemblePhrases,
+                          self.wordWrap,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                           ],
             "analysisList": analysisList,
             "phraseList": phraseList,
@@ -770,7 +979,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             }
 
     def TotalSnowSampling(self):
+<<<<<<< HEAD
         return { 
+=======
+        return {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             "type": "component",
             "methodList": [self.noWords],
             "analysisList": [
@@ -782,14 +995,23 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
     ###########################################################################
     ### C11 Definitions
     ###########################################################################
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def FirstFcstPeriod(self):
         component = {
             "type": "component",
             "methodList": [
                           self.consolidateSubPhrases,
+<<<<<<< HEAD
                           self.assemblePhrases,   
                           self.wordWrap,          
+=======
+                          self.assemblePhrases,
+                          self.wordWrap,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                           ],
             "analysisList": [
                        #("MinT", self.avg),
@@ -849,8 +1071,13 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             "type": "component",
             "methodList": [
                           self.consolidateSubPhrases,
+<<<<<<< HEAD
                           self.assemblePhrases,   
                           self.wordWrap,          
+=======
+                          self.assemblePhrases,
+                          self.wordWrap,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                           ],
             "analysisList": [
                        #("MinT", self.avg),
@@ -904,12 +1131,21 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         return component
 
     def Evening(self):
+<<<<<<< HEAD
         component =  {
             "type": "component",
             "methodList": [
                           self.consolidateSubPhrases,
                           self.assemblePhrases,   
                           self.wordWrap,          
+=======
+        component = {
+            "type": "component",
+            "methodList": [
+                          self.consolidateSubPhrases,
+                          self.assemblePhrases,
+                          self.wordWrap,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                           ],
             "analysisList": [
                        ("Sky", self.median, [6]),
@@ -931,12 +1167,21 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         return component
 
     def LaterPeriod(self):
+<<<<<<< HEAD
         component =  {
             "type": "component",
             "methodList": [
                           self.consolidateSubPhrases,
                           self.assemblePhrases,   
                           self.wordWrap,          
+=======
+        component = {
+            "type": "component",
+            "methodList": [
+                          self.consolidateSubPhrases,
+                          self.assemblePhrases,
+                          self.wordWrap,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                           ],
             "analysisList": [
                        #("MinT", self.avg),
@@ -970,12 +1215,21 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         return component
 
     def LaterPeriodWithoutLows(self):
+<<<<<<< HEAD
         component =  {
             "type": "component",
             "methodList": [
                           self.consolidateSubPhrases,
                           self.assemblePhrases,   
                           self.wordWrap,          
+=======
+        component = {
+            "type": "component",
+            "methodList": [
+                          self.consolidateSubPhrases,
+                          self.assemblePhrases,
+                          self.wordWrap,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                           ],
             "analysisList": [
                        #("MaxT", self.avg),
@@ -1003,12 +1257,21 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         return component
 
     def C11Extended(self):
+<<<<<<< HEAD
         component =  {
             "type": "component",
             "methodList": [
                           self.consolidateSubPhrases,
                           self.assemblePhrases,   
                           self.wordWrap,          
+=======
+        component = {
+            "type": "component",
+            "methodList": [
+                          self.consolidateSubPhrases,
+                          self.assemblePhrases,
+                          self.wordWrap,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                           ],
             "analysisList": [
                        ("MinT", self.firstAvg),
@@ -1038,11 +1301,19 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         return {
             "type": "component",
             "methodList": [
+<<<<<<< HEAD
                           self.setLabel,           
+=======
+                          self.setLabel,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                           ],
             "analysisList": [],
             "phraseList":[],
             }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def setLabel(self, tree, component):
         component.set("words", "\n.EXTENDED...\n")
         return self.DONE()
@@ -1060,7 +1331,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         self._areaList = self.getAreaList(argDict)
         if len(self._areaList) == 0:
             return "WARNING -- No Edit Areas Specified to Generate Product."
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # Determine time ranges
         error = self._determineTimeRanges(argDict)
         if error is not None:
@@ -1077,13 +1352,21 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
 
         # Generate the product for each edit area in the list
         fraction = 0
+<<<<<<< HEAD
         fractionOne = 1.0/float(len(self._areaList))
+=======
+        fractionOne = 1.0 / float(len(self._areaList))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         percent = 50.0
         self.setProgressPercentage(50)
         for editArea, areaLabel in self._areaList:
             self.progressMessage(fraction, percent, "Making Product for " + areaLabel)
             fcst = self._preProcessArea(fcst, editArea, areaLabel, argDict)
+<<<<<<< HEAD
             fcst  = self._makeProduct(fcst, editArea, areaLabel, argDict)
+=======
+            fcst = self._makeProduct(fcst, editArea, areaLabel, argDict)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             fcst = self._postProcessArea(fcst, editArea, areaLabel, argDict)
             fraction = fractionOne
         fcst = self._postProcessProduct(fcst, argDict)
@@ -1092,7 +1375,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
     def _getVariables(self, argDict):
         # Make argDict accessible
         self.__argDict = argDict
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # Get Definition variables
         self._definition = argDict["forecastDef"]
         for (key, value) in self._definition.items():
@@ -1136,10 +1423,17 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             # Add a "custom" component to sample SnowAmt for 12 hours
             # prior to product start
             productStart = self._issuanceInfo.timeRange().startTime()
+<<<<<<< HEAD
             tr = TimeRange.TimeRange(productStart - 12*3600, productStart)
             self._issuanceInfo.narrativeDef().append(\
                 ("Custom", ("TotalSnowSampling", tr)))
                 
+=======
+            tr = TimeRange.TimeRange(productStart - 12 * 3600, productStart)
+            self._issuanceInfo.narrativeDef().append(\
+                ("Custom", ("TotalSnowSampling", tr)))
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         self._timeRange = self._issuanceInfo.timeRange()
         argDict["productTimeRange"] = self._timeRange
         self._expireTime = self._issuanceInfo.expireTime()
@@ -1179,17 +1473,30 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
              productName = self._productName.strip()
 
         productName = self.checkTestMode(argDict, productName)
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         issuedByString = self.getIssuedByString()
 
         s = self._wmoID + " " + self._fullStationID + " " + \
                self._ddhhmmTime + "\n" + self._pil + "\n\n"
+<<<<<<< HEAD
         fcst = fcst + s.upper()               
                 
         s = productName + "\n" +\
                "National Weather Service " + self._wfoCityState + \
                "\n" + issuedByString + self._timeLabel + "\n\n"
         fcst =  fcst + s
+=======
+        fcst = fcst + s.upper()
+
+        s = productName + "\n" + \
+               "National Weather Service " + self._wfoCityState + \
+               "\n" + issuedByString + self._timeLabel + "\n\n"
+        fcst = fcst + s
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # The following lines insert a statement
         # at the top of the forecast that describes the time periods
@@ -1214,11 +1521,19 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         self._hazards = argDict['hazards']
         self._combinations = argDict["combinations"]
 
+<<<<<<< HEAD
         headlines = self.generateProduct("Hazards", argDict, area = editArea,
                                          areaLabel=areaLabel,
                                          timeRange = self._timeRange)
         fcst = fcst + headlines
             
+=======
+        headlines = self.generateProduct("Hazards", argDict, area=editArea,
+                                         areaLabel=areaLabel,
+                                         timeRange=self._timeRange)
+        fcst = fcst + headlines
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return fcst
 
     def _makeProduct(self, fcst, editArea, areaLabel, argDict):
@@ -1256,21 +1571,34 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             if self._definition["includeEveningPeriod"] == 1:
                 narrativeDefAM = [
                     ("FirstFcstPeriod", "period1"),
+<<<<<<< HEAD
                     ("AreaFcstPeriod", 12), ("AreaFcstPeriod", 12), 
                     ("LaterPeriod", 12), ("LaterPeriod", 12), 
                     ("Evening", 6), 
+=======
+                    ("AreaFcstPeriod", 12), ("AreaFcstPeriod", 12),
+                    ("LaterPeriod", 12), ("LaterPeriod", 12),
+                    ("Evening", 6),
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     ("Custom", ("ExtraSampling", (-24, 12))),
                     ]
                 narrativeDefPM = [
                     ("FirstFcstPeriod", "period1"),
+<<<<<<< HEAD
                     ("AreaFcstPeriod", 12), ("AreaFcstPeriod", 12), 
                     ("LaterPeriod", 12), ("LaterPeriod", 12), ("LaterPeriod", 12), 
                     ("Evening", 6), 
+=======
+                    ("AreaFcstPeriod", 12), ("AreaFcstPeriod", 12),
+                    ("LaterPeriod", 12), ("LaterPeriod", 12), ("LaterPeriod", 12),
+                    ("Evening", 6),
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     ("Custom", ("ExtraSampling", (-24, 24))),
                     ]
             else:
                 narrativeDefAM = [
                     ("FirstFcstPeriod", "period1"),
+<<<<<<< HEAD
                     ("AreaFcstPeriod", 12), ("AreaFcstPeriod", 12), 
                     ("LaterPeriod", 12), ("LaterPeriodWithoutLows", 18),
                     ("Custom", ("ExtraSampling", (-24, 12))),
@@ -1286,6 +1614,23 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                 if self._extendedLabel == 1:
                     narrativeDefAM.append(("ExtendedLabel",0))
                     narrativeDefPM.append(("ExtendedLabel",0))
+=======
+                    ("AreaFcstPeriod", 12), ("AreaFcstPeriod", 12),
+                    ("LaterPeriod", 12), ("LaterPeriodWithoutLows", 18),
+                    ("Custom", ("ExtraSampling", (-24, 12))),
+                    ]
+                narrativeDefPM = [
+                    ("FirstFcstPeriod", "period1"),
+                    ("AreaFcstPeriod", 12), ("AreaFcstPeriod", 12),
+                    ("LaterPeriod", 12), ("LaterPeriod", 12), ("LaterPeriodWithoutLows", 18),
+                    ("Custom", ("ExtraSampling", (-24, 24))),
+                    ]
+            extended = [("C11Extended", 24), ("C11Extended", 24), ("C11Extended", 24), ("C11Extended", 24)]
+            if self._includeExtended == 1:
+                if self._extendedLabel == 1:
+                    narrativeDefAM.append(("ExtendedLabel", 0))
+                    narrativeDefPM.append(("ExtendedLabel", 0))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 narrativeDefAM = narrativeDefAM + extended
                 narrativeDefPM = narrativeDefPM + extended
         except:
@@ -1297,6 +1642,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         return [
             ("Morning", self.DAY(), self.NIGHT(), 16,
              ".TODAY...", "early in the morning", "late in the afternoon",
+<<<<<<< HEAD
              1, narrativeDefAM), 
             ("Morning with Pre-1st Period", self.DAY()-2, self.NIGHT(), 16,
              ".TODAY...", "early in the morning", "late in the afternoon",
@@ -1320,19 +1666,53 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             ("Early Morning Update", "issuanceHour", self.DAY(), 4,
              ".REST OF TONIGHT...", "early in the morning","late in the afternoon",
              0, narrativeDefPM), 
+=======
+             1, narrativeDefAM),
+            ("Morning with Pre-1st Period", self.DAY() - 2, self.NIGHT(), 16,
+             ".TODAY...", "early in the morning", "late in the afternoon",
+             1, narrativeDefAM),
+            ("Morning Update", "issuanceHour", self.NIGHT(), 16,
+             ".REST OF TODAY...", "early in the morning", "late in the afternoon",
+             1, narrativeDefAM),
+            ("Afternoon Update", "issuanceHour", self.NIGHT(), 16,
+             ".REST OF TODAY...", "early in the morning", "late in the afternoon",
+             1, narrativeDefAM),
+            #  End times are tomorrow:
+            ("Afternoon", self.NIGHT(), 24 + self.DAY(), 24 + 4,
+             ".TONIGHT...", "late in the night", "early in the evening",
+             1, narrativeDefPM),
+            ("Afternoon with Pre-1st Period", self.NIGHT() - 2, 24 + self.DAY(), 24 + 4,
+             ".TONIGHT...", "late in the night", "early in the evening",
+             1, narrativeDefPM),
+            ("Evening Update", "issuanceHour", 24 + self.DAY(), 24 + 4,
+             ".REST OF TONIGHT...", "late in the night", "early in the evening",
+             1, narrativeDefPM),
+            ("Early Morning Update", "issuanceHour", self.DAY(), 4,
+             ".REST OF TONIGHT...", "early in the morning", "late in the afternoon",
+             0, narrativeDefPM),
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             ]
 
     def _10_503_issuance_list(self, argDict):
         narrativeDefAM = [
+<<<<<<< HEAD
             ("Period_1", "period1"),            
             ("Period_2_3", 12), ("Period_2_3", 12), 
             ("Period_4_5", 12), ("Period_4_5", 12), 
             ("Period_6_14", 12), ("Period_6_14", 12), ("Period_6_14", 12), ("Period_6_14", 12), 
             ("Period_6_14", 12), ("Period_6_14", 12), ("Period_6_14", 12), ("Period_6_14", 12), 
+=======
+            ("Period_1", "period1"),
+            ("Period_2_3", 12), ("Period_2_3", 12),
+            ("Period_4_5", 12), ("Period_4_5", 12),
+            ("Period_6_14", 12), ("Period_6_14", 12), ("Period_6_14", 12), ("Period_6_14", 12),
+            ("Period_6_14", 12), ("Period_6_14", 12), ("Period_6_14", 12), ("Period_6_14", 12),
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             ("Custom", ("ExtraSampling", (-24, 12))),
             ]
         narrativeDefPM = [
             ("Period_1", "period1"),
+<<<<<<< HEAD
             ("Period_2_3", 12), ("Period_2_3", 12), 
             ("Period_4_5", 12), ("Period_4_5", 12), 
             ("Period_6_14", 12), ("Period_6_14", 12), ("Period_6_14", 12), ("Period_6_14", 12), 
@@ -1363,14 +1743,51 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
              1, narrativeDefPM), 
             ("Evening Update", "issuanceHour", 24 + self.DAY(), 24 + 4,
              ".REST OF TONIGHT...", "early in the morning","early in the evening",
+=======
+            ("Period_2_3", 12), ("Period_2_3", 12),
+            ("Period_4_5", 12), ("Period_4_5", 12),
+            ("Period_6_14", 12), ("Period_6_14", 12), ("Period_6_14", 12), ("Period_6_14", 12),
+            ("Period_6_14", 12), ("Period_6_14", 12), ("Period_6_14", 12), ("Period_6_14", 12),
+            ("Period_6_14", 12),
+            ("Custom", ("ExtraSampling", (-24, 24))),
+            ]
+
+        return [
+            ("Morning", self.DAY(), self.NIGHT(), 16,
+             ".TODAY...", "early in the morning", "late in the afternoon",
+             1, narrativeDefAM),
+            ("Morning with Pre-1st Period", self.DAY() - 2, self.NIGHT(), 16,
+             ".TODAY...", "early in the morning", "late in the afternoon",
+             1, narrativeDefAM),
+            ("Morning Update", "issuanceHour", self.NIGHT(), 16,
+             ".REST OF TODAY...", "early in the morning", "late in the afternoon",
+             1, narrativeDefAM),
+            ("Afternoon Update", "issuanceHour", self.NIGHT(), 16,
+             ".REST OF TODAY...", "early in the morning", "late in the afternoon",
+             1, narrativeDefAM),
+            #  End times are tomorrow:
+            ("Afternoon", self.NIGHT(), 24 + self.DAY(), 24 + 4,
+             ".TONIGHT...", "late in the night", "early in the evening",
+             1, narrativeDefPM),
+            ("Afternoon with Pre-1st Period", self.NIGHT() - 2, 24 + self.DAY(), 24 + 4,
+             ".TONIGHT...", "late in the night", "early in the evening",
+             1, narrativeDefPM),
+            ("Evening Update", "issuanceHour", 24 + self.DAY(), 24 + 4,
+             ".REST OF TONIGHT...", "early in the morning", "early in the evening",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
              1, narrativeDefPM),
             # For the early morning update, this produces:
             # Rest of Tonight:
             # Monday
             # Monday night
             ("Early Morning Update", "issuanceHour", self.DAY(), 4,
+<<<<<<< HEAD
              ".REST OF TONIGHT...", "early in the morning","late in the afternoon",
              0, narrativeDefPM), 
+=======
+             ".REST OF TONIGHT...", "early in the morning", "late in the afternoon",
+             0, narrativeDefPM),
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             # Alternative
             # For the early morning update, this produces:
             # Early this morning:
@@ -1378,10 +1795,17 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             # Tonight
             #("Evening Update", "issuanceHour", 24 + self.DAY(), 4,
             # ".REST OF TONIGHT...", "late in the night", "early in the evening",
+<<<<<<< HEAD
             # 1, narrativeDefPM), 
             #("Early Morning Update", "issuanceHour", self.DAY(), 4,
             # ".EARLY THIS MORNING...", "early in the morning", "late in the afternoon",
             # 1, narrativeDefPM), 
+=======
+            # 1, narrativeDefPM),
+            #("Early Morning Update", "issuanceHour", self.DAY(), 4,
+            # ".EARLY THIS MORNING...", "early in the morning", "late in the afternoon",
+            # 1, narrativeDefPM),
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             ]
 
     def lateDay_descriptor(self, tree, node, timeRange):
@@ -1391,7 +1815,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             return self._issuanceInfo.period1LateDayPhrase()
         else:
             return "late in the afternoon"
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def lateNight_descriptor(self, tree, node, timeRange):
         # If time range is in the first period, return period1 descriptor for
         #  late night -- default 3am-6am
@@ -1399,7 +1827,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             return self._issuanceInfo.period1LateNightPhrase()
         else:
             return "early in the morning"
+<<<<<<< HEAD
                 
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     # Some Western Region offices insert a special statement
     # at the top of the ZFP for the temp/PoP table time periods.
     # This function creates the statement.  Usually this is called
@@ -1409,13 +1841,18 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         #  Determine the number of periods based on what package we're issuing.
         myTimeRanges = self.getMultipleElementTableRanges(
             self._productIssuance, self._singleValueFormat)
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         header = self._temp_pop_statement_header(argDict)
 
         #  Loop through each period
         labels = []
         for myTimeRange, label in myTimeRanges:
             labels.append(label)
+<<<<<<< HEAD
         
         header += self.punctuateList(labels) + "." 
             
@@ -1423,6 +1860,15 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         fcst = fcst + header + "\n\n"
         return fcst
     
+=======
+
+        header += self.punctuateList(labels) + "."
+
+        header = self.endline(header, argDict["lineLength"])
+        fcst = fcst + header + "\n\n"
+        return fcst
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def _temp_pop_statement_header(self, argDict):
         return  "Spot temperatures and probabilities of measurable precipitation are for "
 
@@ -1438,19 +1884,33 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         except:
             self._flooding = "No"
         if self._flooding == "Yes":
+<<<<<<< HEAD
             fcst = fcst + self._flood_statement_wording(argDict)                        
+=======
+            fcst = fcst + self._flood_statement_wording(argDict)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return fcst
 
     def _flood_statement_wording(self, argDict):
         return "...Flood watches and/or warnings have been issued for portions of\n" \
+<<<<<<< HEAD
                         + "the zone forecast area. Please refer to the latest flood bulletin\n" \
                         + "for details...\n\n"
     
+=======
+                        +"the zone forecast area. Please refer to the latest flood bulletin\n" \
+                        +"for details...\n\n"
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     # Returns a list of the Hazards allowed for this product in VTEC format.
     # These are sorted in priority order - most important first.
     def allowedHazards(self):
         allActions = ["NEW", "EXA", "EXB", "EXT", "CAN", "CON", "EXP"]
+<<<<<<< HEAD
         tropicalActions = ["NEW", "EXA","UPG", "CAN", "CON"]
+=======
+        tropicalActions = ["NEW", "EXA", "UPG", "CAN", "CON"]
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return [
             ('HU.W', tropicalActions, 'Tropical'),     # HURRICANE WARNING
             ('SS.W', tropicalActions, 'Surge'),        # Storm Surge WARNING
@@ -1474,8 +1934,16 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             ('DU.Y', allActions, 'Dust'),         # BLOWING DUST ADVISORY
             ('EC.W', allActions, 'Cold'),         # EXTREME COLD WARNING
             ('EC.A', allActions, 'Cold'),         # EXTREME COLD WATCH
+<<<<<<< HEAD
             ('EH.W', allActions, 'Heat'),         # EXCESSIVE HEAT WARNING
             ('EH.A', allActions, 'Heat'),         # EXCESSIVE HEAT WATCH
+=======
+            ('CW.Y', allActions, 'Cold'),         # COLD WEATHER ADVISORY
+            ('EH.W', allActions, 'Heat'),         # EXCESSIVE HEAT WARNING
+            ('EH.A', allActions, 'Heat'),         # EXCESSIVE HEAT WATCH
+            ('XH.W', allActions, 'Heat'),         # EXTREME HEAT WARNING
+            ('XH.A', allActions, 'Heat'),         # EXTREME HEAT WATCH
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             ('HT.Y', allActions, 'Heat'),         # HEAT ADVISORY
             ('FG.Y', allActions, 'Fog'),          # DENSE FOG ADVISORY
             ('HZ.W', allActions, 'FrostFreeze'),  # HARD FREEZE WARNING
@@ -1491,8 +1959,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             ('ZF.Y', allActions, 'FreezeFog'),    # FREEZING FOG ADVISORY
             ('FF.A', allActions, 'Flood'),        # FLASH FLOOD WATCH
             ('FA.A', allActions, 'Flood'),        # FLOOD WATCH
+<<<<<<< HEAD
             ('FA.W', allActions, 'Flood'),        # FLOOD WARNING
             ('FA.Y', allActions, 'Flood'),        # FLOOD ADVISORY    
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             ('CF.W', allActions, 'CoastalFlood'), # COASTAL FLOOD WARNING
             ('LS.W', allActions, 'CoastalFlood'), # LAKESHORE FLOOD WARNING
             ('CF.Y', allActions, 'CoastalFlood'), # COASTAL FLOOD ADVISORY
@@ -1514,5 +1985,9 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             ('SV.A', allActions, 'Convective'),   # SEVERE THUNDERSTORM WATCH
             ('TS.W', allActions, 'Tsunami'),      # TSUNAMI WARNING
             ('TS.Y', allActions, 'Tsunami'),      # TSUNAMI ADVISORY
+<<<<<<< HEAD
             ('TS.A', allActions, 'Tsunami'),      # TSUNAMI WATCH            
+=======
+            ('TS.A', allActions, 'Tsunami'),      # TSUNAMI WATCH
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
              ]

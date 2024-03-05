@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -22,12 +34,15 @@ package oasis.names.tc.ebxml.regrep.xsd.query.v4;
 
 import java.math.BigInteger;
 
+<<<<<<< HEAD
 import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -36,6 +51,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 
+<<<<<<< HEAD
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.QueryType;
 import oasis.names.tc.ebxml.regrep.xsd.rs.v4.RegistryRequestType;
 
@@ -54,6 +70,22 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
  * The following schema fragment specifies the expected content contained within
  * this class.
  * 
+=======
+import com.raytheon.uf.common.serialization.annotations.DynamicSerialize;
+import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
+
+import oasis.names.tc.ebxml.regrep.xsd.rim.v4.QueryType;
+import oasis.names.tc.ebxml.regrep.xsd.rs.v4.RegistryRequestType;
+
+/**
+ * <p>
+ * Java class for anonymous complex type.
+ *
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -74,11 +106,19 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+<<<<<<< HEAD
  * 
  * <pre>
  * 
  * SOFTWARE HISTORY
  * 
+=======
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date         Ticket#     Engineer    Description
  * ------------ ----------  ----------- --------------------------
  * 2012                     bphillip    Initial implementation
@@ -86,18 +126,29 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
  * 10/23/2013    1538       bphillip    Removed unused constructors
  * 12/2/2013     1829       bphillip    Added Hibernate annotations
  * 12/4/2015     4993       bphillip    Added formateResponse option
+<<<<<<< HEAD
  * </pre>
  * 
  * @author bphillip
  * @version 1
+=======
+ * 10/27/2020    8170       ksunil      this is an empty table. Remove all JPA references
+ * </pre>
+ *
+ * @author bphillip
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = { "responseOption", "query" })
 @XmlRootElement(name = "QueryRequest")
 @DynamicSerialize
+<<<<<<< HEAD
 @Entity
 @Cache(region = RegrepUtil.DB_CACHE_REGION, usage = CacheConcurrencyStrategy.TRANSACTIONAL)
 @Table(schema = RegrepUtil.EBXML_SCHEMA, name = "QueryRequest")
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 public class QueryRequest extends RegistryRequestType {
 
     private static final long serialVersionUID = 1069976228999283284L;
@@ -146,18 +197,28 @@ public class QueryRequest extends RegistryRequestType {
 
     public static final Boolean DEFAULT_MATCH_OLDER_VERSIONS = new Boolean(
             false);
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public static final String FORMAT_RESPONSE = "formatResponse";
 
     @XmlElement(name = "ResponseOption", required = true)
     @DynamicSerializeElement
+<<<<<<< HEAD
     @Embedded
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     protected ResponseOptionType responseOption;
 
     @XmlElement(name = "Query", required = true)
     @DynamicSerializeElement
+<<<<<<< HEAD
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "query_id", referencedColumnName = "id")
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     protected QueryType query;
 
     @XmlAttribute
@@ -239,9 +300,15 @@ public class QueryRequest extends RegistryRequestType {
 
     /**
      * Gets the value of the responseOption property.
+<<<<<<< HEAD
      * 
      * @return possible object is {@link ResponseOptionType }
      * 
+=======
+     *
+     * @return possible object is {@link ResponseOptionType }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public ResponseOptionType getResponseOption() {
         return responseOption;
@@ -249,10 +316,17 @@ public class QueryRequest extends RegistryRequestType {
 
     /**
      * Sets the value of the responseOption property.
+<<<<<<< HEAD
      * 
      * @param value
      *            allowed object is {@link ResponseOptionType }
      * 
+=======
+     *
+     * @param value
+     *            allowed object is {@link ResponseOptionType }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public void setResponseOption(ResponseOptionType value) {
         this.responseOption = value;
@@ -260,9 +334,15 @@ public class QueryRequest extends RegistryRequestType {
 
     /**
      * Gets the value of the query property.
+<<<<<<< HEAD
      * 
      * @return possible object is {@link QueryType }
      * 
+=======
+     *
+     * @return possible object is {@link QueryType }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public QueryType getQuery() {
         return query;
@@ -270,10 +350,17 @@ public class QueryRequest extends RegistryRequestType {
 
     /**
      * Sets the value of the query property.
+<<<<<<< HEAD
      * 
      * @param value
      *            allowed object is {@link QueryType }
      * 
+=======
+     *
+     * @param value
+     *            allowed object is {@link QueryType }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public void setQuery(QueryType value) {
         this.query = value;
@@ -281,9 +368,15 @@ public class QueryRequest extends RegistryRequestType {
 
     /**
      * Gets the value of the federated property.
+<<<<<<< HEAD
      * 
      * @return possible object is {@link Boolean }
      * 
+=======
+     *
+     * @return possible object is {@link Boolean }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public boolean isFederated() {
         if (federated == null) {
@@ -295,10 +388,17 @@ public class QueryRequest extends RegistryRequestType {
 
     /**
      * Sets the value of the federated property.
+<<<<<<< HEAD
      * 
      * @param value
      *            allowed object is {@link Boolean }
      * 
+=======
+     *
+     * @param value
+     *            allowed object is {@link Boolean }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public void setFederated(Boolean value) {
         this.federated = value;
@@ -306,9 +406,15 @@ public class QueryRequest extends RegistryRequestType {
 
     /**
      * Gets the value of the federation property.
+<<<<<<< HEAD
      * 
      * @return possible object is {@link String }
      * 
+=======
+     *
+     * @return possible object is {@link String }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public String getFederation() {
         return federation;
@@ -316,10 +422,17 @@ public class QueryRequest extends RegistryRequestType {
 
     /**
      * Sets the value of the federation property.
+<<<<<<< HEAD
      * 
      * @param value
      *            allowed object is {@link String }
      * 
+=======
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public void setFederation(String value) {
         this.federation = value;
@@ -327,9 +440,15 @@ public class QueryRequest extends RegistryRequestType {
 
     /**
      * Gets the value of the format property.
+<<<<<<< HEAD
      * 
      * @return possible object is {@link String }
      * 
+=======
+     *
+     * @return possible object is {@link String }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public String getFormat() {
         if (format == null) {
@@ -341,10 +460,17 @@ public class QueryRequest extends RegistryRequestType {
 
     /**
      * Sets the value of the format property.
+<<<<<<< HEAD
      * 
      * @param value
      *            allowed object is {@link String }
      * 
+=======
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public void setFormat(String value) {
         this.format = value;
@@ -352,9 +478,15 @@ public class QueryRequest extends RegistryRequestType {
 
     /**
      * Gets the value of the lang property.
+<<<<<<< HEAD
      * 
      * @return possible object is {@link String }
      * 
+=======
+     *
+     * @return possible object is {@link String }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public String getLang() {
         return lang;
@@ -362,10 +494,17 @@ public class QueryRequest extends RegistryRequestType {
 
     /**
      * Sets the value of the lang property.
+<<<<<<< HEAD
      * 
      * @param value
      *            allowed object is {@link String }
      * 
+=======
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public void setLang(String value) {
         this.lang = value;
@@ -373,9 +512,15 @@ public class QueryRequest extends RegistryRequestType {
 
     /**
      * Gets the value of the startIndex property.
+<<<<<<< HEAD
      * 
      * @return possible object is {@link BigInteger }
      * 
+=======
+     *
+     * @return possible object is {@link BigInteger }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public BigInteger getStartIndex() {
         if (startIndex == null) {
@@ -387,10 +532,17 @@ public class QueryRequest extends RegistryRequestType {
 
     /**
      * Sets the value of the startIndex property.
+<<<<<<< HEAD
      * 
      * @param value
      *            allowed object is {@link BigInteger }
      * 
+=======
+     *
+     * @param value
+     *            allowed object is {@link BigInteger }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public void setStartIndex(BigInteger value) {
         this.startIndex = value;
@@ -398,9 +550,15 @@ public class QueryRequest extends RegistryRequestType {
 
     /**
      * Gets the value of the maxResults property.
+<<<<<<< HEAD
      * 
      * @return possible object is {@link BigInteger }
      * 
+=======
+     *
+     * @return possible object is {@link BigInteger }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public BigInteger getMaxResults() {
         if (maxResults == null) {
@@ -412,10 +570,17 @@ public class QueryRequest extends RegistryRequestType {
 
     /**
      * Sets the value of the maxResults property.
+<<<<<<< HEAD
      * 
      * @param value
      *            allowed object is {@link BigInteger }
      * 
+=======
+     *
+     * @param value
+     *            allowed object is {@link BigInteger }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public void setMaxResults(BigInteger value) {
         this.maxResults = value;
@@ -423,9 +588,15 @@ public class QueryRequest extends RegistryRequestType {
 
     /**
      * Gets the value of the depth property.
+<<<<<<< HEAD
      * 
      * @return possible object is {@link BigInteger }
      * 
+=======
+     *
+     * @return possible object is {@link BigInteger }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public BigInteger getDepth() {
         if (depth == null) {
@@ -437,10 +608,17 @@ public class QueryRequest extends RegistryRequestType {
 
     /**
      * Sets the value of the depth property.
+<<<<<<< HEAD
      * 
      * @param value
      *            allowed object is {@link BigInteger }
      * 
+=======
+     *
+     * @param value
+     *            allowed object is {@link BigInteger }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public void setDepth(BigInteger value) {
         this.depth = value;
@@ -448,9 +626,15 @@ public class QueryRequest extends RegistryRequestType {
 
     /**
      * Gets the value of the matchOlderVersions property.
+<<<<<<< HEAD
      * 
      * @return possible object is {@link Boolean }
      * 
+=======
+     *
+     * @return possible object is {@link Boolean }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public boolean isMatchOlderVersions() {
         if (matchOlderVersions == null) {
@@ -462,10 +646,17 @@ public class QueryRequest extends RegistryRequestType {
 
     /**
      * Sets the value of the matchOlderVersions property.
+<<<<<<< HEAD
      * 
      * @param value
      *            allowed object is {@link Boolean }
      * 
+=======
+     *
+     * @param value
+     *            allowed object is {@link Boolean }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public void setMatchOlderVersions(Boolean value) {
         this.matchOlderVersions = value;
@@ -482,10 +673,15 @@ public class QueryRequest extends RegistryRequestType {
                 + ((federation == null) ? 0 : federation.hashCode());
         result = prime * result + ((format == null) ? 0 : format.hashCode());
         result = prime * result + ((lang == null) ? 0 : lang.hashCode());
+<<<<<<< HEAD
         result = prime
                 * result
                 + ((matchOlderVersions == null) ? 0 : matchOlderVersions
                         .hashCode());
+=======
+        result = prime * result + ((matchOlderVersions == null) ? 0
+                : matchOlderVersions.hashCode());
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         result = prime * result
                 + ((maxResults == null) ? 0 : maxResults.hashCode());
         result = prime * result + ((query == null) ? 0 : query.hashCode());
@@ -498,6 +694,7 @@ public class QueryRequest extends RegistryRequestType {
 
     @Override
     public boolean equals(Object obj) {
+<<<<<<< HEAD
         if (this == obj)
             return true;
         if (!super.equals(obj))
@@ -555,6 +752,88 @@ public class QueryRequest extends RegistryRequestType {
                 return false;
         } else if (!startIndex.equals(other.startIndex))
             return false;
+=======
+        if (this == obj) {
+            return true;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        QueryRequest other = (QueryRequest) obj;
+        if (depth == null) {
+            if (other.depth != null) {
+                return false;
+            }
+        } else if (!depth.equals(other.depth)) {
+            return false;
+        }
+        if (federated == null) {
+            if (other.federated != null) {
+                return false;
+            }
+        } else if (!federated.equals(other.federated)) {
+            return false;
+        }
+        if (federation == null) {
+            if (other.federation != null) {
+                return false;
+            }
+        } else if (!federation.equals(other.federation)) {
+            return false;
+        }
+        if (format == null) {
+            if (other.format != null) {
+                return false;
+            }
+        } else if (!format.equals(other.format)) {
+            return false;
+        }
+        if (lang == null) {
+            if (other.lang != null) {
+                return false;
+            }
+        } else if (!lang.equals(other.lang)) {
+            return false;
+        }
+        if (matchOlderVersions == null) {
+            if (other.matchOlderVersions != null) {
+                return false;
+            }
+        } else if (!matchOlderVersions.equals(other.matchOlderVersions)) {
+            return false;
+        }
+        if (maxResults == null) {
+            if (other.maxResults != null) {
+                return false;
+            }
+        } else if (!maxResults.equals(other.maxResults)) {
+            return false;
+        }
+        if (query == null) {
+            if (other.query != null) {
+                return false;
+            }
+        } else if (!query.equals(other.query)) {
+            return false;
+        }
+        if (responseOption == null) {
+            if (other.responseOption != null) {
+                return false;
+            }
+        } else if (!responseOption.equals(other.responseOption)) {
+            return false;
+        }
+        if (startIndex == null) {
+            if (other.startIndex != null) {
+                return false;
+            }
+        } else if (!startIndex.equals(other.startIndex)) {
+            return false;
+        }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return true;
     }
 

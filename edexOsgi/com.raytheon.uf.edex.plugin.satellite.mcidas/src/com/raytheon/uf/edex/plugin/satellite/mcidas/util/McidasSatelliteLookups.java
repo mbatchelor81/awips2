@@ -54,7 +54,10 @@ import com.raytheon.uf.common.status.UFStatus;
  * Jul 29, 2011           dfriedma  Initial creation
  * Jul 14, 2016  5744     mapeters  Initial javadoc creation, config files moved
  *                                  from edex_static to common_static
+<<<<<<< HEAD
  * Aug 2018               mjames    Changed area lookup name to sensor source
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -218,8 +221,13 @@ public class McidasSatelliteLookups {
         return creatingEntityLookup.map.get(sensorSource);
     }
 
+<<<<<<< HEAD
     public String getAreaName(int sensorSource) {
         return areaNameLookup.map.get(sensorSource);
+=======
+    public String getAreaName(int areaNumber) {
+        return areaNameLookup.map.get(areaNumber);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     private static McidasSatelliteLookups instance;

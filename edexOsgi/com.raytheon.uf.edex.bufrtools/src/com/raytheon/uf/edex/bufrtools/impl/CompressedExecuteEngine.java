@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -41,6 +53,7 @@ import com.raytheon.uf.edex.bufrtools.packets.DataPacketTypes;
 import com.raytheon.uf.edex.bufrtools.packets.IBUFRDataPacket;
 
 /**
+<<<<<<< HEAD
  * 
  * <pre>
  * 
@@ -57,6 +70,25 @@ import com.raytheon.uf.edex.bufrtools.packets.IBUFRDataPacket;
  * 
  * </pre>
  * 
+=======
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+ * Date          Ticket#     Engineer    Description
+ * ------------- ----------- ----------- ---------------------------------------
+ * 20071127      382         jkorman     Initial Coding.
+ * 20080214      862         jkorman     BUFRMOS implementation changes.
+ * 07/2009       55          T. Lee      Added number of bits to skip for Table C
+ * 04/2010       208         F. J. Yen   Updated arguments for execute in processTableB
+ * 9/16/2014     #3628       mapeters    Moved from uf.edex.decodertools plugin, replaced static imports.
+ * 12/14/2015    5166        kbisanz     Update logging to use SLF4J
+ * Aug 08, 2023  2034216     sharbison   Fix for descriptor error logging and handling.
+ *
+ * </pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author jkorman
  * @version 1.0
  */
@@ -69,7 +101,11 @@ public class CompressedExecuteEngine extends ExecuteEngine {
      * Construct an instance of a BUFR decode engine for data stored in
      * compressed format. After construction, the processBUFR method is called
      * to actually decode the data.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param subList
      *            The list of descriptors to execute.
      * @param repCount
@@ -80,17 +116,29 @@ public class CompressedExecuteEngine extends ExecuteEngine {
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param bitStrm
      *            The bit input stream to read data from.
      * @return The data read from the input stream.
      */
+<<<<<<< HEAD
+=======
+    @Override
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     protected EngineData processBUFR(BUFRBitInputStream bitStrm) {
         bitStream = bitStrm;
 
         EngineData data = new EngineData();
 
+<<<<<<< HEAD
         List<IBUFRDataPacket> packetData = new ArrayList<IBUFRDataPacket>();
+=======
+        List<IBUFRDataPacket> packetData = new ArrayList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         // We need to visit each descriptor, repetitionCount times
         for (BUFRDescriptor descriptor : descriptors) {
@@ -128,6 +176,7 @@ public class CompressedExecuteEngine extends ExecuteEngine {
                     }
                 }
             } catch (BUFRDecoderException bde) {
+<<<<<<< HEAD
                 if (logger.isDebugEnabled()) {
                     logger.debug("Error processing " + descriptor);
                     display(packetData, "", logger);
@@ -138,6 +187,21 @@ public class CompressedExecuteEngine extends ExecuteEngine {
 
         } // for()
           // package all of the data into a SubListPacket
+=======
+                // show warning for descriptor
+                // stop processing this bad descriptor
+                logger.warn(bde.getMessage() + " : descriptor = " + descriptor);
+                if (logger.isDebugEnabled()) {
+                    display(packetData, "", logger);
+                }
+
+                // do not continue processing bad data for this descriptor
+                break;
+            }
+
+        }
+        // package all of the data into a SubListPacket
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         BUFRSublistPacket p = new BUFRSublistPacket(packetData,
                 DataPacketTypes.SubSetList.getPacketType(),
                 new BUFRSublistDescriptor(
@@ -153,7 +217,11 @@ public class CompressedExecuteEngine extends ExecuteEngine {
 
     /**
      * Process a Table B descriptor.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param descriptor
      *            The Table B descriptor to execute.
      * @param packets
@@ -188,7 +256,11 @@ public class CompressedExecuteEngine extends ExecuteEngine {
     /**
      * Process the occurrence of an UNKNOWN descriptor, i.e. 2_06_Y followed by
      * a descriptor not defined in Table B. An
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param descriptor
      *            The descriptor to execute.
      * @param packets
@@ -207,7 +279,11 @@ public class CompressedExecuteEngine extends ExecuteEngine {
 
     /**
      * Process a Table C descriptor.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param descriptor
      *            The Table C descriptors to "execute".
      * @param packets
@@ -272,7 +348,11 @@ public class CompressedExecuteEngine extends ExecuteEngine {
 
     /**
      * Process the replication subList descriptors.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param descriptor
      *            The replication descriptor to execute.
      * @param packets
@@ -283,7 +363,11 @@ public class CompressedExecuteEngine extends ExecuteEngine {
             List<IBUFRDataPacket> packets) {
 
         List<BUFRDescriptor> subList = descriptor.getSubList();
+<<<<<<< HEAD
         List<IBUFRDataPacket> sList = new ArrayList<IBUFRDataPacket>();
+=======
+        List<IBUFRDataPacket> sList = new ArrayList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         for (int i = 0; i < descriptor.getY(); i++) {
             ExecuteEngine engine = new CompressedExecuteEngine(subList,
                     repetitionCount);
@@ -308,7 +392,11 @@ public class CompressedExecuteEngine extends ExecuteEngine {
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param packetData
      * @param receiver
      * @param index
@@ -320,7 +408,11 @@ public class CompressedExecuteEngine extends ExecuteEngine {
         for (IBUFRDataPacket p : packetData) {
             if (p instanceof BUFRSublistPacket) {
 
+<<<<<<< HEAD
                 List<IBUFRDataPacket> nReceiver = new ArrayList<IBUFRDataPacket>();
+=======
+                List<IBUFRDataPacket> nReceiver = new ArrayList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                 // go grab the sublist
                 normalizeList((List<IBUFRDataPacket>) p.getValue(), nReceiver,
@@ -339,7 +431,11 @@ public class CompressedExecuteEngine extends ExecuteEngine {
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param data
      * @return
      */
@@ -351,7 +447,11 @@ public class CompressedExecuteEngine extends ExecuteEngine {
         if (sList != null) {
             for (int i = 0; i < repetitionCount; i++) {
 
+<<<<<<< HEAD
                 List<IBUFRDataPacket> receiver = new ArrayList<IBUFRDataPacket>();
+=======
+                List<IBUFRDataPacket> receiver = new ArrayList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                 normalizeList(sList, receiver, i);
 
@@ -361,7 +461,11 @@ public class CompressedExecuteEngine extends ExecuteEngine {
                     // what does this mean?
                 }
 
+<<<<<<< HEAD
             } // for()
+=======
+            }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         return tdata;
     }

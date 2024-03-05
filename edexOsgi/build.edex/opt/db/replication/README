@@ -1,9 +1,14 @@
 POSTGRESQL REPLICATION
+<<<<<<< HEAD
 ----------------------
+=======
+======================
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 This file contains the procedure for setting up PostgreSQL replication with
 a single master and one or more standby servers.
 
+<<<<<<< HEAD
 
 SETUP - ALL SERVERS
 -------------------
@@ -22,14 +27,68 @@ Also you need to add a SSL certificate and key for the "replication" DB role.
 You have to create these files yourself, except for root.crt which is the
 root certificate for the database--you can copy that one straight from
 /awips2/database/ssl. Put them here:
+=======
+1. Setup - all servers
+2. Setup - master
+3. Setup - standby servers
+4. Failover
+5. Shutting down standbys
+
+
+SETUP - ALL SERVERS
+===================
+
+Two setup steps are necessary on all servers that will replicate or be
+replicated: update pg_hba.conf, and install SSL cert/key files.
+
+Add the following lines to pg_hba.conf to allow replication connections:
+
+local      replication replication                  trust
+hostssl    replication replication ::1/128          cert clientcert=1
+hostssl    replication replication x.x.x.x          cert clientcert=1
+
+Replace x.x.x.x with the NWS WAN block, or add multiple lines that each allow a
+specific server. Every server in the replication cluster must be included in
+this list.
+
+All of the servers need to have the replication.crt and replication.key files
+installed. These are the SSL cert and key that are required for replication
+connections. You have to create these files yourself, except for root.crt which
+must be the same file as /awips2/database/ssl/root.crt. Put them here:
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /awips2/database/ssl/replication/${hostname -s}/replication.crt
 /awips2/database/ssl/replication/${hostname -s}/replication.key
 /awips2/database/ssl/replication/${hostname -s}/root.crt
 
 
+<<<<<<< HEAD
 SETTING UP STANDBYS
 -------------------
+=======
+SETUP - MASTER
+==============
+
+On the master server (the initial server that the others will replicate from),
+run create-replication-role.sh to create the 'replication' database role.
+
+The master also needs additional lines in postgresql.conf. If the server was
+correctly identified as a central registry server at the time the
+awips2-database-server-configuration RPM package was installed, then it should
+not be necessary to manually add these lines, as the config file specific to
+central registry will include them. You should check postgresql.conf anyway to
+make sure they are there.
+
+    max_wal_senders = 5
+    wal_keep_segments = 64
+    promote_trigger_file = '/awips2/database/data/promote'
+    hot_standby = on
+    include_if_exists = 'postgresql.standby.conf'
+
+
+SETUP - STANDBY SERVERS
+=======================
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 You must run "setup-standby.sh" on each server to turn it into a standby.
 
@@ -39,7 +98,11 @@ script.
 
 When you run it, specify the master server as the first argument, e.g.:
 
+<<<<<<< HEAD
   $ ./setup-standby.sh dds1-ancf
+=======
+  $ sudo ./setup-standby.sh dds1-ancf
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 The existing PostgreSQL data directory on the new standby server will be
 destroyed, and it will become a replica of the master. pg_hba.conf will
@@ -50,13 +113,41 @@ replicate directly from the master. This is useful for reducing WAN traffic.
 
 
 FAILOVER
+<<<<<<< HEAD
 --------
+=======
+========
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 To promote a standby to master:
 
   1. Stop PostgreSQL on the master if it is running.
+<<<<<<< HEAD
   2. On the standby, create the file "/awips2/database/data/promote". The
      standby will stop replication and recognize itself as the new master.
   3. On the old master and the other standbys, run setup-standby.sh with the
      hostname of the new master, to re-initialize them and start replicating
      from the new master.
+=======
+  2. On the standby, create the file "/awips2/database/data/promote" as the
+     "awips" user. The standby will stop replication and recognize itself as
+     the new master. Instead of creating the trigger file, it is also
+     possible to trigger promotion by running, as the "awips" user:
+         pg_ctl promote -D /awips2/database/data
+  3. Delete /awips2/database/data/postgresql.standby.conf on the new master so
+     that it does not attempt to replicate from some other server when
+     it is restarted.
+  4. On the old master and the other standbys, run setup-standby.sh with the
+     hostname of the new master, to re-initialize them and start replicating
+     from the new master.
+
+
+SHUTTING DOWN STANDBYS
+======================
+
+Standby servers may not respond to shutdown requests via systemctl while in
+recovery mode (that is, while streaming from the master). In that case the
+server can still be shut down normally using pg_ctl:
+
+    pg_ctl stop -D /awips2/database/data
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

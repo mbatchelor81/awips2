@@ -3,6 +3,7 @@
 ##############################################################################
 # Script to export gridded data to the central server
 #
+<<<<<<< HEAD
 #     SOFTWARE HISTORY
 #    
 #    Date            Ticket#       Engineer       Description
@@ -21,6 +22,30 @@
 #                                                 file.
 #    08/01/2017      6337          randerso       Use more restrictive file permissions
 #
+=======
+# SOFTWARE HISTORY
+#
+# Date          Ticket#  Engineer  Description
+# ------------- -------- --------- --------------------------------------------
+# Apr 29, 2013  1761     dgilling  Remove use of NATIONAL_CENTER, script caller
+#                                  will determine which sites to export.
+# May 16, 2013  2009     dgilling  New backup structure: 
+#                                  PRIMARY_SITES go to exportgrids/primary/
+#                                  and all other go to exportgrids/backup/.
+# Feb 12, 2015  4103     dgilling  Refactored to support multiple service
+#                                  backup sites.
+# Apr 28, 2015  4427     dgilling  Refactored to support subdomains of the
+#                                  primary domains.
+# Oct 24, 2016  5951     dgilling  Error checking for copying of temp file.
+# Aug 01, 2017  6337     randerso  Use more restrictive file permissions
+# Jun 29, 2021  8572     randerso  Always use ISC_Send_Area mask. Pass site ID
+#                                  to serviceBackupUtil.sh
+# Sep 20, 2023  2036191  jkelmer   Restored the mask being set in 
+#                                  svcbu.properties to account for sites that
+#                                  do not use one
+# Oct 06, 2023  2028172  jkelmer   Moved PRI_SITES assignment to 
+#                                  serviceBackupUtil.sh 
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ##############################################################################
 
 if [ ${#AWIPS_HOME} = 0 ]
@@ -38,13 +63,22 @@ fi
 #
 #
 
+<<<<<<< HEAD
 . ${AWIPS_HOME}/GFESuite/ServiceBackup/configuration/svcbu.env
 source ${AWIPS_HOME}/GFESuite/ServiceBackup/scripts/serviceBackupUtil.sh
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 SITE=`echo ${2} | tr '[A-Z]' '[a-z]'`
 CAPS_SITE=`echo ${2} | tr [a-z] [A-Z]`
 export SITE
 
+<<<<<<< HEAD
+=======
+source ${AWIPS_HOME}/GFESuite/ServiceBackup/scripts/serviceBackupUtil.sh ${CAPS_SITE}
+source ${AWIPS_HOME}/edex/bin/setup.env
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # Create the log file
 configureLogging "svcbu_export_grids" ${SITE}
 
@@ -99,6 +133,10 @@ else
    SVCBU_MASK="-m $SVCBU_GRIDAREA"
 fi
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # Need to create the start and end time arguments for ifpnetCDF
 # The start time needs to be 6 hours prior to current time, and end time needs to be 6 hours after the 9th day time.
 starttime=`date -d "24 hours ago" +%Y%m%d`_`date -d "24 hours ago" +%H00`
@@ -117,11 +155,15 @@ fi
 echo "DB_NAME: ${DB_NAME}"
 
 # use PRIMARY_SITES setting to determine NETCDF_PATH
+<<<<<<< HEAD
 IFS=',' read -ra PRI_SITES <<< "${PRIMARY_SITES}"
 if [ ${#PRI_SITES[@]} -eq 0 ] 
 then
    declare -a PRI_SITES=( "${AW_SITE_IDENTIFIER}" )
 fi
+=======
+getPrimarySites
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 EXPORT_FOR_PRIMARY=0
 for primary_site in "${PRI_SITES[@]}"
 do

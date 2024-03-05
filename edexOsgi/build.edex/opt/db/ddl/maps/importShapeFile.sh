@@ -22,6 +22,7 @@
 # SOFTWARE HISTORY
 # Date         Ticket#    Engineer    Description
 # ------------ ---------- ----------- --------------------------
+<<<<<<< HEAD
 # 03/25/2014    #2664     randerso    Added support for importing non-WGS84 shape files
 # 10/23/2014    #3685     randerso    Fixed bug where .prj was not recognized when shape file
 #                                     was in the current directory (no directory specified)
@@ -33,6 +34,22 @@
 #                                     message if extra arguments are present 
 # 04/11/2018    #7140     tgurney     Use a2dbauth
 # 03/25/2021    #8398     randerso    Added PROJ_LIB for PostGIS 2.4
+=======
+# 03/25/2014   2664       randerso    Added support for importing non-WGS84 shape files
+# 10/23/2014   3685       randerso    Fixed bug where .prj was not recognized when shape file
+#                                     was in the current directory (no directory specified)
+# 02/11/2016   5348       randerso    Add code to create a county_names view into the county table
+# 01/23/2017   6097       randerso    Removed unnecessary command line parameters. Use ogr2ogr to 
+#                                     to convert shapefile to WGS84 (EPSG:4326).
+# 08/02/2017   6362       randerso    Add code to create alaska_marine view     
+# 08/28/2017   6097       randerso    Made command line backward compatible with warning 
+#                                     message if extra arguments are present 
+# 04/11/2018   7140       tgurney     Use a2dbauth
+# 03/25/2021   8398       randerso    Added PROJ_LIB for PostGIS 2.4
+# 07/01/2021   8544       tgurney     Remove PGBINDIR and PSQLBINDIR, not
+#                                     needed anymore. Update GDAL and PROJ data
+#                                     paths
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #     
 ##
 
@@ -76,12 +93,19 @@ fi
 
 PGUSER=awipsadmin
 PGPORT=5432
+<<<<<<< HEAD
 PGBINDIR=/awips2/postgresql/bin/
 PSQLBINDIR=/awips2/psql/bin/
 SIMPLEVS=( "0.064" "0.016" "0.004" "0.001" )
 
 psql="a2dbauth ${PSQLBINDIR}psql"
 vacuumdb="a2dbauth ${PGBINDIR}vacuumdb"
+=======
+SIMPLEVS=( "0.064" "0.016" "0.004" "0.001" )
+
+psql="a2dbauth psql"
+vacuumdb="a2dbauth vacuumdb"
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 
 if [ ! -r ${SHP_PATH} ]; then
@@ -99,8 +123,13 @@ fi
 
 echo "  Importing ${SHP_NAME} into mapdata.${TABLE} ..."
 
+<<<<<<< HEAD
 export GDAL_DATA=/awips2/postgresql/share/gdal
 export PROJ_LIB=/awips2/postgresql/share/proj
+=======
+export GDAL_DATA=/awips2/python/share/gdal
+export PROJ_LIB=/awips2/python/share/proj
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 #
 # If updating county table drop the county names view
@@ -124,8 +153,13 @@ ${psql} -d maps -U ${PGUSER} -q -p ${PGPORT} -c "
     DROP TABLE IF EXISTS mapdata.${TABLE}
 "
 TEMPDIR=`mktemp --directory`
+<<<<<<< HEAD
 a2dbauth -f ${PGBINDIR}ogr2ogr -f "ESRI Shapefile" -overwrite ${TEMPDIR} ${SHP_PATH} ${SRC_SRID} -t_srs EPSG:4326
 a2dbauth -f ${PGBINDIR}shp2pgsql -W LATIN1 -s 4326 -g the_geom -I ${TEMPDIR}/${SHP_NAME} mapdata.${TABLE} | ${psql} -d maps -U ${PGUSER} -q -p ${PGPORT} -f -
+=======
+a2dbauth -f ogr2ogr -f "ESRI Shapefile" -overwrite ${TEMPDIR} ${SHP_PATH} ${SRC_SRID} -t_srs EPSG:4326
+a2dbauth -f shp2pgsql -W LATIN1 -s 4326 -g the_geom -I ${TEMPDIR}/${SHP_NAME} mapdata.${TABLE} | ${psql} -d maps -U ${PGUSER} -q -p ${PGPORT} -f -
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ${psql} -d maps -U ${PGUSER} -q -p ${PGPORT} -c "
     INSERT INTO mapdata.map_version (table_name, filename) values ('${TABLE}','${SHP_NAME}');
     SELECT AddGeometryColumn('mapdata','${TABLE}','the_geom_0','4326',(SELECT type FROM public.geometry_columns WHERE f_table_schema='mapdata' and f_table_name='${TABLE}' and f_geometry_column='the_geom'),2);

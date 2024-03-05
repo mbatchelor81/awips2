@@ -17,22 +17,21 @@
 # See the AWIPS II Master Rights File ("Master Rights File.pdf") for
 # further licensing information.
 ##
-
 #
 # Provides a command-line utility to export selected grids to netCDF format.
 #  
 #    
-#     SOFTWARE HISTORY
-#    
-#    Date            Ticket#       Engineer       Description
-#    ------------    ----------    -----------    --------------------------
-#    09/23/10                      dgilling       Initial Creation.
-#    03/07/13         1759         dgilling       Populate siteID field of 
-#                                                 request based on specified 
-#                                                 DatabaseID. 
-#    
-# 
+# SOFTWARE HISTORY
 #
+# Date          Ticket#  Engineer  Description
+# ------------- -------- --------- --------------------------------------------
+# Sep 23, 2010           dgilling  Initial Creation.
+# Mar 07, 2013  1759     dgilling  Populate siteID field of request based on
+#                                  specified DatabaseID. 
+# Jun 30, 2021  8572     randerso  Replace references to CDSHOST and CDSPORT
+#                                  With DEFAULT_HOST and DEFAULT_PORT
+#    
+##
 
 
 import logging
@@ -40,7 +39,6 @@ import os
 import sys
 
 from dynamicserialize.dstypes.com.raytheon.uf.common.dataplugin.gfe.request import ExecuteIfpNetCDFGridRequest
-from dynamicserialize.dstypes.com.raytheon.uf.common.message import WsId
 from awips import ThriftClient
 from awips import UsageArgumentParser
 from awips.UsageArgumentParser import StoreDatabaseIDAction as StoreDatabaseIDAction
@@ -107,18 +105,12 @@ def get_and_check_args():
     
     options = parser.parse_args()
     
-    if options.host == None:
-        if "CDSHOST" in os.environ:
-            options.host = os.environ["CDSHOST"]
-        else:
-            parser.error("You must specify an EDEX server host name.")
+    if options.host is None:
+        options.host = str(os.getenv("DEFAULT_HOST", "localhost"))
         
-    if options.port == None:
-        if "CDSPORT" in os.environ:
-            options.port = int(os.environ["CDSPORT"])
-        else:
-            parser.error("You must specify an EDEX server port number.")
-            
+    if options.port is None:
+        options.port = int(os.getenv("DEFAULT_PORT", "9581"))
+
     # must have trim, if krunch specified
     if options.krunch and not options.trim:
         setattr(options, "krunch", False)

@@ -20,10 +20,17 @@ ${productId}${siteId}
 <L>Fire Warning</L>
 #end
 #set($requestedBy = "!** ENTER REQUESTING AGENCY NAME HERE **!")
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "agency1")})
 #set($requestedBy = "Example Agency 1")
 #end
 #if(${list.contains(${bullets}, "agency2")})
+=======
+#if($bullets.contains("agency1"))
+#set($requestedBy = "Example Agency 1")
+#end
+#if($bullets.contains("agency2"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #set($requestedBy = "Example Agency 2")
 #end
 #set($agencyNameLine = "Requested by ${requestedBy}")
@@ -45,11 +52,19 @@ ${requestedBy}
 ############################
 ### FIRE WEATHER EMERGENCY #
 ############################
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "fireEmergency")})
 This is a Fire Emergency for !** EDIT LOCATION(S) **!. Take immediate safety precautions now.
 
 #end
 #if(${list.contains(${bullets}, "generic")})
+=======
+#if($bullets.contains("fireEmergency"))
+This is a Fire Emergency for !** EDIT LOCATION(S) **!. Take immediate safety precautions now.
+
+#end
+#if($bullets.contains("generic"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 !** TYPE FIRE DETAILS HERE **!.
 
@@ -57,7 +72,11 @@ This is a Fire Emergency for !** EDIT LOCATION(S) **!. Take immediate safety pre
 
 #end
 
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "actual")})
+=======
+#if($bullets.contains("actual"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 A fire was located !** DETAILS **! and could affect !** AREAS **!.
 
@@ -65,7 +84,11 @@ A fire was located !** DETAILS **! and could affect !** AREAS **!.
 
 #end
 
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "racing")})
+=======
+#if($bullets.contains("racing"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 A fire was racing toward !** LOCATIONS **! and could reach there by !** TIME **!.
 
@@ -97,7 +120,11 @@ THIS IS A TEST MESSAGE. DO NOT TAKE ACTION BASED ON THIS MESSAGE.
 
 #end
 ##
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "stayIndoorsCTA")})
+=======
+#if($bullets.contains("stayIndoorsCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 Stay indoors to keep safe from the smoke. Keep windows and doors shut and turn off all ventilation systems. 
 
@@ -105,7 +132,11 @@ Stay indoors to keep safe from the smoke. Keep windows and doors shut and turn o
 
 #end
 
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "followInstructionsCTA")})
+=======
+#if($bullets.contains("followInstructionsCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 Follow safety instructions from local law enforcement officials. 
 
@@ -113,7 +144,11 @@ Follow safety instructions from local law enforcement officials.
 
 #end
 
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "heedEvacuationsCTA")})
+=======
+#if($bullets.contains("heedEvacuationsCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 Heed any evacuation orders and follow all safety precautions.
 
@@ -128,7 +163,11 @@ Heed any evacuation orders and follow all safety precautions.
 ####    (leave double pound signs after the first lock tag and after the #printcoords call 
 ####     to allow for text wrapping and locking to work properly)
 ## <L>##
+<<<<<<< HEAD
 ## #printcoords(${areaPoly}, ${list}) ##
+=======
+## #printcoords(${areaPoly}) ##
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ## </L>
 
 <L>$$</L>

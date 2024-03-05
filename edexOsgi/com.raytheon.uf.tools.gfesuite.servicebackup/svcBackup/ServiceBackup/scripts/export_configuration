@@ -40,10 +40,18 @@
 #                                       backward compatibility between 
 #                                       18.1 -> 17.3.
 # May 17, 2019  20105    mgamazaychikov Append GFESUITE_MHSID to siteConfig.py
+<<<<<<< HEAD
 # Sep 13, 2019  #7882    dgilling       Exclude python 3 cache dir from exported
 #                                       configuration. 
 # Feb 25, 2020  #7882    randerso       Change name of exported configuration to xxx3
 # May 01, 2020  8153     randerso       Removed export of mixedCaseProductIds.txt
+=======
+# Sep 13, 2019  7882     dgilling       Exclude python 3 cache dir from exported
+#                                       configuration. 
+# Feb 25, 2020  7882     randerso       Change name of exported configuration to xxx3
+# May 01, 2020  8153     randerso       Removed export of mixedCaseProductIds.txt
+# Jun 29, 2021  8572     randerso       Pass site ID to serviceBackupUtil.sh
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 ##
 
@@ -56,15 +64,24 @@ then
 fi
 
 # $1 = Site name
+<<<<<<< HEAD
 
 source ${AWIPS_HOME}/edex/bin/setup.env
 source ${AWIPS_HOME}/GFESuite/ServiceBackup/configuration/svcbu.env
 source ${AWIPS_HOME}/GFESuite/ServiceBackup/scripts/serviceBackupUtil.sh
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 SITE=`echo ${1} | tr '[A-Z]' '[a-z]'`
 CAPS_SITE=`echo ${1} | tr [a-z] [A-Z]`
 export SITE
 
+<<<<<<< HEAD
+=======
+source ${AWIPS_HOME}/edex/bin/setup.env
+source ${AWIPS_HOME}/GFESuite/ServiceBackup/scripts/serviceBackupUtil.sh ${CAPS_SITE}
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 configureLogging "svcbu_export_config" ${SITE}
 
 lock_file=$(getLockFile "exportConfig" ${SITE})

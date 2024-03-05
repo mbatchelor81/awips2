@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- 
     This is an absolute override file, indicating that a higher priority 
     version of the file will completely replace a lower priority version
@@ -12,6 +13,16 @@
      Phil Kurimski   09-19-2013 added geospatialConfig.xml
      Mike Rega       05-23-2014 DR 17380 svr wx watch logic OB14.3.1
      Phil Kurimski   01-30-2017 Added additional options to Basis, DCS19347
+=======
+<!--Generic Marine Weather Statement configuration -->
+<!-- Modified by Phil Kurimski WFO DTX 25 January 2012
+                 Phil Kurimski WFO DTX 27 February 2012
+                 Evan Bookbinder 09/11/2012 Added settings for locations shapefile
+                                            Added new areaSource objects
+                 Phil Kurimski   09/19/2013 added geospatialConfig.xml
+                 Mike Rega       05/23/2014 DR17380 svr wx watch logic OB14.3.1
+                 Phil Kurimski   07/27/2022 DR23230 Added ctaline for ctas 
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 -->
 <warngenConfig>
 
@@ -23,6 +34,11 @@ PLACED IN FULL BELOW THE INCLUDE LINE BELOW. -->
 <!-- Include Various geospatial XML files to create their objects. These are *NOT*
 turned on unless the corresponding .vm file is turned on in a given template's .vm file
 -->  
+<<<<<<< HEAD
+=======
+<include file="dssEvents.xml"/>
+<!-- To enable, make sure dssEvents.vm is added/uncommented in the impactSpecialMarineWarning.vm .vm file -->
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 <include file="mileMarkers.xml"/>
 <!-- To enable, make sure mileMarkers.vm is added/uncommented in a WarnGen template's .vm file -->
 <include file="pointMarkers.xml"/>
@@ -120,6 +136,10 @@ turned on unless the corresponding .vm file is turned on in a given template's .
   <bullet bulletName="shower" bulletText="Shower" bulletGroup="group1" parseString="SHOWER"/>
   <bullet bulletName="cloud" bulletText="Cloud" bulletGroup="group1" parseString="CLOUD"/>
   <bullet bulletName="front" bulletText="Front" bulletGroup="group1" parseString="FRONT"/>
+<<<<<<< HEAD
+=======
+  <bullet bulletName="gustFront" bulletText="Gust Front" bulletGroup="group1" parseString="GUST FRONT"/>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   <bullet bulletName="fog" bulletText="Dense Fog" bulletGroup="group1" parseString="DENSE FOG"/>
   <bullet bulletText="" bulletType="title"/>
   <bullet bulletText="  ****HAIL SECTION****(Choose if applicable)... " bulletType="title"/>
@@ -150,7 +170,11 @@ turned on unless the corresponding .vm file is turned on in a given template's .
 <bulletActionGroup action="COR" phen="MA" sig="S">
  <bullets>
   <bullet bulletText="  *****BASIS SECTION*****...(Choose 1) " bulletType="title"/>
+<<<<<<< HEAD
   <bullet bulletName="doppler" bulletText="Doppler radar indicated" bulletGroup="group5" parseString="DOPPLER RADAR INDICATED"/>
+=======
+  <bullet bulletName="doppler" bulletText="Doppler radar indicated" bulletGroup="group5" bulletDefault="true" parseString="DOPPLER RADAR INDICATED"/>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   <bullet bulletName="marineSpotter" bulletText="Marine weather spotters reported" bulletGroup="group5" parseString="MARINE WEATHER SPOTTERS REPORTED"/>
   <bullet bulletName="mariner" bulletText="Mariner reported" bulletGroup="group5" parseString="A MARINER REPORTED"/>
   <bullet bulletName="public" bulletText="Public reported" bulletGroup="group5" parseString="THE PUBLIC REPORTED"/>
@@ -163,10 +187,18 @@ turned on unless the corresponding .vm file is turned on in a given template's .
   <bullet bulletName="pilot" bulletText="Pilot reported" bulletGroup="group5" parseString="A PILOT REPORTED"/>
   <bullet bulletText="" bulletType="title"/>
   <bullet bulletText="  ****EVENT TYPE SECTION****...(Choose 1) " bulletType="title"/>
+<<<<<<< HEAD
   <bullet bulletName="thunderstorm" bulletText="Thunderstorm" bulletGroup="group1" parseString="THUNDERSTORM"/>
   <bullet bulletName="shower" bulletText="Shower" bulletGroup="group1" parseString="SHOWER"/>
   <bullet bulletName="cloud" bulletText="Cloud" bulletGroup="group1" parseString="CLOUD"/>
   <bullet bulletName="front" bulletText="Front" bulletGroup="group1" parseString="FRONT"/>
+=======
+  <bullet bulletName="thunderstorm" bulletText="Thunderstorm" bulletGroup="group1" bulletDefault="true" parseString="THUNDERSTORM"/>
+  <bullet bulletName="shower" bulletText="Shower" bulletGroup="group1" parseString="SHOWER"/>
+  <bullet bulletName="cloud" bulletText="Cloud" bulletGroup="group1" parseString="CLOUD"/>
+  <bullet bulletName="front" bulletText="Front" bulletGroup="group1" parseString="FRONT"/>
+  <bullet bulletName="gustFront" bulletText="Gust Front" bulletGroup="group1" parseString="GUST FRONT"/>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   <bullet bulletName="fog" bulletText="Dense Fog" bulletGroup="group1" parseString="DENSE FOG"/>
   <bullet bulletText="" bulletType="title"/>
   <bullet bulletText="  ****HAIL SECTION****(Choose if applicable)... " bulletType="title"/>
@@ -183,17 +215,30 @@ turned on unless the corresponding .vm file is turned on in a given template's .
   <bullet bulletName="specialEvent" bulletText="Special heads-up for large event/venue" parseString="THOSE ATTENDING"/>
   <bullet bulletText="" bulletType="title"/>
   <bullet bulletText=" *****Call to Action SECTION*****" bulletType="title"/>
+<<<<<<< HEAD
   <bullet bulletName="genericCTA" bulletText="Generic thunderstorm marine call to action" parseString="LOCALLY HIGHER WAVES...AND LIGHTNING STRIKES"/>
+=======
+  <bullet bulletName="genericCTA" bulletText="Generic thunderstorm marine call to action" bulletDefault="true" parseString="LOCALLY HIGHER WAVES...AND LIGHTNING STRIKES"/>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   <bullet bulletName="heavyRainCTA" bulletText="Thunderstorm with heavy rain" parseString="LOCALLY HIGHER WAVES...LIGHTNING STRIKES...AND HEAVY DOWNPOURS"/>
   <bullet bulletName="possibleSmwCTA" bulletText="HEADS-UP - SMW MAY be needed" parseString="SPECIAL MARINE WARNING MAY EVENTUALLY"/>
   <bullet bulletName="likelySmwCTA" bulletText="HEADS-UP - SMW will LIKELY be needed" parseString="SPECIAL MARINE WARNING WILL LIKELY"/>
   <bullet bulletName="lightningCTA" bulletText="Intense lightning" parseString="INTENSE LIGHTNING IS OCCURRING WITH THIS STORM"/>
   <bullet bulletName="reportCTA" bulletText="Report severe weather to coast guard" parseString="REPORT SEVERE WEATHER TO THE COAST GUARD"/>
   <bullet bulletName="fogCTA" bulletText="Dense fog" parseString="DENSE FOG WAS REDUCING VISIBILITIES TO"/>
+<<<<<<< HEAD
   <bullet bulletName="includeTorWatches" bulletText="Include Tornado Watches" parseString=""/>
   <bullet bulletName="includeSvrWatches" bulletText="Include Severe Thunderstorm Watches" parseString=""/> 
+=======
+  <bullet bulletName="includeTorWatches" bulletText="Include Tornado Watches" bulletDefault="true" parseString=""/>
+  <bullet bulletName="includeSvrWatches" bulletText="Include Severe Thunderstorm Watches" bulletDefault="true" parseString=""/> 
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  </bullets>
 </bulletActionGroup>
 </bulletActionGroups>
 
+<<<<<<< HEAD
 </warngenConfig>
+=======
+</warngenConfig>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

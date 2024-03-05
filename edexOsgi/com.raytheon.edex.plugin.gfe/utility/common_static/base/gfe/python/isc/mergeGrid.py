@@ -33,7 +33,13 @@
 # Apr 02, 2020 8125       randerso    Fixed error introduced in Python 3 update
 #                                     that caused received data to wipe out data
 #                                     from other CWAs
-#
+# Nov 04, 2022 23338      dhaines     Added logging so we have a record of 
+#                                     mergeDiscreteGrid actions
+# Mar 08, 2023 23518      dhaines     Grid Deletions Not Reaching ISC-Registered
+#                                     Sites - made tr variable optional in mergeGrid
+#                                     method
+# May 12, 2023 2033890    dhaines     Removed unneeded logging, changed format of 
+#                                     remaining logging
 ##
 
 ##
@@ -41,7 +47,9 @@
 ##
 
 import numpy
-
+import iscUtil
+import copy
+import time
 
 class MergeGrid:
     """ Merges two grids and their histories together.
@@ -67,7 +75,7 @@ class MergeGrid:
     """
 
     def __init__(self, creationTime, siteID, inFillValue, outFillValue,
-      areaMask, gridType, discreteKeys=None):
+      areaMask, gridType, discreteKeys=None, parmName=None):
         """Creates a new MergeGrid instance.
         
         Args:
@@ -89,7 +97,15 @@ class MergeGrid:
         self.__areaMask = areaMask
         self.__gridType = gridType
         self.__discreteKeys = discreteKeys
+        self.__parmName = parmName 
 
+        self.initLogger()
+
+    ## Logging methods ##
+    def initLogger(self):
+        import logging
+        self.logger = iscUtil.getLogger("mergeGrid", logName="mergeGrid.log", logLevel=logging.INFO)
+    
     def __findKey(self, key, keyMap):
         """Finds the index of a weather or discrete key in the list of keys.
         
@@ -137,7 +153,7 @@ class MergeGrid:
             IndexError: If the size of the new weather keys list exceeds 255 
             unique values.
         """ 
-
+        
         # make common key and make data changes in B
         gridB = wxB[0]
         key = wxA[1]
@@ -163,7 +179,7 @@ class MergeGrid:
             format. Returns None if no history entries were present in either
             grid.
         """ 
-
+        
         out = []
 
         # removal any old entry
@@ -305,7 +321,7 @@ class MergeGrid:
         Returns:
             A new grid instance that is the result of merging gridA into gridB.
         """ 
-
+        
         if gridA is None and gridB is None:
             return None
 
@@ -337,7 +353,7 @@ class MergeGrid:
             grid = numpy.where(self.__areaMask, blankGrid, gridB[0])
             return (grid, key)
 
-    def __mergeDiscreteGrid(self, gridA, gridB):
+    def __mergeDiscreteGrid(self, gridA, gridB, tr):
         """Merge the values of two discrete grids together.
         
         The merge is performed by taking the values from gridA that overlap the
@@ -357,39 +373,54 @@ class MergeGrid:
 
         if gridA is None and gridB is None:
             return None
-
+        
         noKey = self.__discreteKeys[0]
 
+        self.logger.debug('***********************************')
+        self.logger.debug('weather element: ' + self.__parmName)
+        if tr is not None:
+            self.logger.debug('time range: ' + tr)
+        else: 
+            self.logger.debug('time range: MISSING') 
+                         
         # merge the grids
         if gridA is not None:
             mask = numpy.not_equal(gridA[0], self.__inFillV)
             numpy.logical_and(mask, self.__areaMask, mask)
-
+            self.logger.debug('incoming DiscreteKeys: ' + ','.join(gridA[1]))
+                
             if gridB is None:   #make an empty grid
                 noKeys = []
                 noGrid = numpy.empty_like(gridA[0])
                 noGrid.fill(self.__findKey(noKey, noKeys))
                 gridB = (noGrid, noKeys)
             else:
+                self.logger.debug('local DiscreteKeys: ' + ','.join(gridB[1]))
+                    
                 # clear out the masked area in gridB and collapse gridB's keys
                 grid, keys = gridB
                 grid[mask] = self.__findKey(noKey, keys)
                 gridB = self.__collapseKey(grid, keys)
+                self.logger.debug('collapsed local DiscreteKeys: ' + ','.join(gridB[1]))
 
             (commonkey, remapG, dbG) = \
               self.__commonizeKey(gridA, gridB)
             mergedGrid = numpy.where(mask, remapG, dbG)
+            self.logger.debug('merged DiscreteKeys: ' + ','.join(commonkey))
+            
             return (mergedGrid, commonkey)
 
         # blank out the data
         else:
+            self.logger.debug('local DiscreteKeys: ' + ','.join(gridB[1]))
+                
             blankGrid = numpy.empty_like(gridB[0])
             blankGrid.fill(self.__findKey(noKey, gridB[1]))
             key = gridB[1]
             grid = numpy.where(self.__areaMask, blankGrid, gridB[0])
             return (grid, key)
 
-    def mergeGrid(self, gridAIn, gridBIn):
+    def mergeGrid(self, gridAIn, gridBIn, tr=None):
         """Merge the values of two grids together.
         
         The merge is performed by taking the values from gridA that overlap the
@@ -437,7 +468,7 @@ class MergeGrid:
             mergedGrid = self.__mergeWeatherGrid(gridA, gridB)
 
         elif self.__gridType == 'DISCRETE':
-            mergedGrid = self.__mergeDiscreteGrid(gridA, gridB)
+            mergedGrid = self.__mergeDiscreteGrid(gridA, gridB, tr)
 
         else:
             mergedGrid = None

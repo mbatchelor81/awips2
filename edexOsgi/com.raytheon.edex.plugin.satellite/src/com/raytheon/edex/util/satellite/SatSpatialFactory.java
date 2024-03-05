@@ -20,8 +20,11 @@
 
 package com.raytheon.edex.util.satellite;
 
+<<<<<<< HEAD
 import java.awt.geom.Rectangle2D;
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.geotools.geometry.DirectPosition2D;
 import org.opengis.referencing.crs.ProjectedCRS;
 import org.opengis.referencing.operation.MathTransform;
@@ -31,8 +34,11 @@ import com.raytheon.edex.plugin.satellite.dao.SatMapCoverageDao;
 import com.raytheon.uf.common.dataplugin.satellite.SatMapCoverage;
 import com.raytheon.uf.common.geospatial.MapUtil;
 import org.locationtech.jts.geom.Envelope;
+<<<<<<< HEAD
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.io.WKTReader;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * 
@@ -51,8 +57,11 @@ import org.locationtech.jts.io.WKTReader;
  * Sep 15, 2014  17303    jgerth      Support for second standard latitude
  * Nov 05, 2014  2714     bclement    replaced DecoderException with SatelliteDecoderException
  * Nov 05, 2014  3788     bsteffen    use getOrCreateCoverage in place of queryByMapId
+<<<<<<< HEAD
  * May 11, 2015           mjames      South polar stereographic support added.
  * May 19, 2015           mjames      Added GVAR native projection support.
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * 
  * </pre>
@@ -68,8 +77,11 @@ public class SatSpatialFactory {
     public static final int PROJ_LAMBERT = 3;
 
     public static final int PROJ_POLAR = 5;
+<<<<<<< HEAD
     
     public static final int PROJ_GVAR = 7585;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     public static final int PROJ_CYLIN_EQUIDISTANT = 7;
 
@@ -217,6 +229,7 @@ public class SatSpatialFactory {
         return getCoverageSingleCorner(crsType, nx, ny, lov, latin, latin, la1, lo1, dx, dy);
     }
 
+<<<<<<< HEAD
     
     public SatMapCoverage getCoverageNative(int crsType, int nx, int ny,
             double reflon, int upperLeftElement, int upperLeftLine, 
@@ -269,6 +282,8 @@ public class SatSpatialFactory {
     }
 
     
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /**
      * 
      * Create a {@link SatMapCoverage} with an area defined by two corners. The
@@ -370,6 +385,7 @@ public class SatSpatialFactory {
     }
 
     /**
+<<<<<<< HEAD
      * Create a SatMapCoverage from native projection
      */
     private static SatMapCoverage createCoverageFromNative(Integer crsType, 
@@ -388,6 +404,8 @@ public class SatSpatialFactory {
     }
 
     /**
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * Create a {@link ProjectedCRS} from a crsType and some parameters.
      * 
      * @param crsType
@@ -414,11 +432,14 @@ public class SatSpatialFactory {
         switch (crsType) {
         case PROJ_MERCATOR:
             return createMercatorCrs(latin, cm);
+<<<<<<< HEAD
         case PROJ_POLAR:
             if (latin >= 0.)
                     return createNorthPolarStereoCrs(lov);
             else
                     return createSouthPolarStereoCrs(latin, lov);
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         case PROJ_LAMBERT:
             return createLambertCrs(latin, latin2, lov);
         case PROJ_CYLIN_EQUIDISTANT:
@@ -448,10 +469,13 @@ public class SatSpatialFactory {
         return MapUtil.constructNorthPolarStereo(MapUtil.AWIPS_EARTH_RADIUS,
                 MapUtil.AWIPS_EARTH_RADIUS, 60, lov);
     }
+<<<<<<< HEAD
     
     private static ProjectedCRS createSouthPolarStereoCrs(double latin, double lov) {
             return MapUtil.constructSouthPolarStereo(MapUtil.AWIPS_EARTH_RADIUS,
                     MapUtil.AWIPS_EARTH_RADIUS, latin, lov);
     }
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 }

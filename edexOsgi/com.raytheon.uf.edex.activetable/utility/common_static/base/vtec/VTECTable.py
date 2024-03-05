@@ -1,19 +1,31 @@
 ##
 # This software was developed and / or modified by Raytheon Company,
 # pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
 # 
+=======
+#
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # U.S. EXPORT CONTROLLED TECHNICAL DATA
 # This software product contains export-restricted data whose
 # export/transfer/disclosure is restricted by U.S. law. Dissemination
 # to non-U.S. persons whether in the United States or abroad requires
 # an export license or other authorization.
+<<<<<<< HEAD
 # 
+=======
+#
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # Contractor Name:        Raytheon Company
 # Contractor Address:     6825 Pine Street, Suite 340
 #                         Mail Stop B8
 #                         Omaha, NE 68106
 #                         402.291.0100
+<<<<<<< HEAD
 # 
+=======
+#
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # See the AWIPS II Master Rights File ("Master Rights File.pdf") for
 # further licensing information.
 
@@ -27,7 +39,11 @@
 ##  Routines that define environmentally related hazards (phen codes)
 
 #this table contains all allowable vtec phenomena and significance
+<<<<<<< HEAD
 #codes. The dictionary contains the VTEC phonomena, significance,
+=======
+#codes. The dictionary contains the VTEC phenomena, significance,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #and associated headline.
 # Updated in OB9.3 to remove HI/TI hazards.
 
@@ -56,9 +72,12 @@ VTECTable = {
     'BW.Y' : {'phen': 'BW',
               'sig': 'Y',
               'hdln': 'Brisk Wind Advisory'},
+<<<<<<< HEAD
     'BZ.A' : {'phen' : 'BZ',
               'sig' : 'A',
               'hdln' : 'Blizzard Watch'},
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     'BZ.W' : {'phen' : 'BZ',
               'sig' : 'W',
               'hdln' : 'Blizzard Warning'},
@@ -74,6 +93,12 @@ VTECTable = {
     'CF.S' : {'phen': 'CF',
               'sig': 'S',
               'hdln': ''},  #No headline for this VTEC
+<<<<<<< HEAD
+=======
+    'CW.Y' : {'phen': 'CW',
+              'sig': 'Y',
+              'hdln': 'Cold Weather Advisory'},
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     'DS.W' : { 'phen': 'DS',
               'sig': 'W',
               'hdln': 'Dust Storm Warning'},
@@ -182,6 +207,7 @@ VTECTable = {
     'IS.W' : {'phen': 'IS',
               'sig': 'W',
               'hdln': 'Ice Storm Warning'},
+<<<<<<< HEAD
     'LE.A' : {'phen': 'LE',
               'sig': 'A',
               'hdln': 'Lake Effect Snow Watch'},
@@ -191,6 +217,11 @@ VTECTable = {
     'LE.Y' : {'phen': 'LE',
               'sig': 'Y',
               'hdln': 'Lake Effect Snow Advisory'},
+=======
+    'LE.W' : {'phen': 'LE',
+              'sig': 'W',
+              'hdln': 'Lake Effect Snow Warning'},
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     'LO.Y' : {'phen': 'LO',
               'sig': 'Y',
               'hdln': 'Low Water Advisory'},
@@ -227,9 +258,12 @@ VTECTable = {
     'MS.Y' : {'phen': 'MS',
               'sig': 'Y',
               'hdln': 'Dense Smoke Advisory'}, # Marine Smoke
+<<<<<<< HEAD
     'RB.Y' : {'phen': 'RB',
               'sig': 'Y',
               'hdln': 'Small Craft Advisory for rough bar'},
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     'RP.S' : {'phen': 'RP',
               'sig' : 'S',
               'hdln': 'High Rip Current Risk'}, #DR 21037 change
@@ -242,9 +276,12 @@ VTECTable = {
     'SE.W' : {'phen': 'SE',
               'sig': 'W',
               'hdln': 'Hazardous Seas Warning'},
+<<<<<<< HEAD
     'SI.Y' : {'phen': 'SI',
               'sig': 'Y',
               'hdln': 'Small Craft Advisory for winds'},
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     'SM.Y' : {'phen': 'SM',
               'sig': 'Y',
               'hdln': 'Dense Smoke Advisory'},
@@ -268,16 +305,23 @@ VTECTable = {
               'hdln': 'High Surf Warning'},
     'SU.Y' : {'phen': 'SU',
               'sig': 'Y',
+<<<<<<< HEAD
               'hdln': 'High Surf Advisory'},             
+=======
+              'hdln': 'High Surf Advisory'},
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     'SV.A' : {'phen': 'SV',
               'sig': 'A',
               'hdln': 'Severe Thunderstorm Watch'},
     'SV.W' : {'phen': 'SV',
               'sig': 'W',
               'hdln': 'Severe Thunderstorm Warning'},
+<<<<<<< HEAD
     'SW.Y' : {'phen': 'SW',
               'sig': 'Y',
               'hdln': 'Small Craft Advisory for hazardous seas'},
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     'TO.A' : {'phen': 'TO',
               'sig': 'A',
               'hdln': 'Tornado Watch'},
@@ -335,6 +379,7 @@ VTECTable = {
     'WW.Y' : {'phen': 'WW',
               'sig': 'Y',
               'hdln': 'Winter Weather Advisory'},
+<<<<<<< HEAD
     'ZF.Y' : {'phen': 'ZF',
               'sig': 'Y',
               'hdln': 'Freezing Fog Advisory'},
@@ -347,10 +392,28 @@ VTECTable = {
 # Upgrade Hazards Dictionary - upgradeHazardsDict is a dictionary of 
 # phen/sig combinations defining upgrades. Each key is the proposed hazard. 
 # The associated list are the hazards which are upgraded by the 
+=======
+    'XH.A' : {'phen': 'XH',
+              'sig': 'A',
+              'hdln': 'Extreme Heat Watch'},
+    'XH.W' : {'phen': 'XH',
+              'sig': 'W',
+              'hdln': 'Extreme Heat Warning'},
+    'ZF.Y' : {'phen': 'ZF',
+              'sig': 'Y',
+              'hdln': 'Freezing Fog Advisory'},
+    }
+
+#
+# Upgrade Hazards Dictionary - upgradeHazardsDict is a dictionary of
+# phen/sig combinations defining upgrades. Each key is the proposed hazard.
+# The associated list are the hazards which are upgraded by the
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # proposed hazard.
 #
 
 upgradeHazardsDict = {
+<<<<<<< HEAD
 'WC.W': ['WC.A', 'WC.Y'], 
 'WC.Y': ['WC.A'],
 'BZ.W': ['WS.W', 'LE.W', 'ZR.Y', 'LE.Y', 'WW.Y',
@@ -366,19 +429,37 @@ upgradeHazardsDict = {
 'WW.Y': ['BZ.A', 'WS.A', 'LE.A'],
 'EH.W': ['EH.A', 'HT.Y'],
 'HT.Y': ['EH.A'],
+=======
+'WC.W': ['WC.A', 'WC.Y'],
+'WC.Y': ['WC.A'],
+'BZ.W': ['WS.W', 'LE.W', 'WW.Y', 'WS.A'],
+'IS.W': ['WS.W', 'LE.W', 'WW.Y', 'WS.A'],
+'LE.W': ['WW.Y', 'WS.A'],
+'WS.W': ['WW.Y', 'WS.A'],
+'WW.Y': ['WS.A'],
+'EH.W': ['EH.A', 'HT.Y'],
+'XH.W': ['XH.A', 'HT.Y'],
+'HT.Y': ['EH.A', 'XH.A'],
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 'FZ.W': ['FZ.A', 'FR.Y', 'HZ.A'],
 'HZ.W': ['FZ.A', 'FR.Y', 'HZ.A'],
 'FR.Y': ['FZ.A', 'HZ.A'],
 'HW.W': ['DU.Y', 'LW.Y', 'WI.Y', 'HW.A'],
 'DU.W': ['DU.Y', 'LW.Y', 'WI.Y', 'HW.A'],
 'WI.Y': ['HW.A'],
+<<<<<<< HEAD
 'EC.W': ['EC.A'],
+=======
+'CW.Y': ['EC.A'],
+'EC.W': ['EC.A', 'CW.Y'],
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 'FW.W': ['FW.A'],
 'CF.W': ['CF.A', 'CF.Y'],
 'CF.Y': ['CF.A'],
 'LS.W': ['LS.A', 'LS.Y'],
 'LS.Y': ['LS.A'],
 'BW.Y': ['GL.A', 'SR.A', 'HF.A', 'SE.A'],
+<<<<<<< HEAD
 'RB.Y': ['GL.A', 'SR.A', 'HF.A', 'SE.A'],
 'SC.Y': ['GL.A', 'SR.A', 'HF.A', 'SE.A'],
 'SI.Y': ['GL.A', 'SR.A', 'HF.A', 'SE.A'],
@@ -388,6 +469,14 @@ upgradeHazardsDict = {
 'SR.W': ['GL.W', 'SC.Y', 'SW.Y', 'BW.Y', 'SI.Y', 'RB.Y', 'GL.A', 'SR.A', 'HF.A', 'SE.A'],
 'GL.W': ['SC.Y', 'SW.Y', 'BW.Y', 'SI.Y', 'RB.Y', 'GL.A', 'SR.A', 'HF.A', 'SE.A'],
 'SE.W': ['SC.Y', 'RB.Y', 'GL.A', 'SR.A', 'HF.A', 'SE.A'],
+=======
+'SC.Y': ['GL.A', 'SR.A', 'HF.A', 'SE.A'],
+'UP.Y': ['UP.A'],
+'HF.W': ['SR.W', 'GL.W', 'SC.Y', 'BW.Y', 'GL.A', 'SR.A', 'HF.A', 'SE.A'],
+'SR.W': ['GL.W', 'SC.Y', 'BW.Y', 'GL.A', 'SR.A', 'HF.A', 'SE.A'],
+'GL.W': ['SC.Y', 'BW.Y', 'GL.A', 'SR.A', 'HF.A', 'SE.A'],
+'SE.W': ['SC.Y', 'GL.A', 'SR.A', 'HF.A', 'SE.A'],
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 'UP.W': ['UP.Y', 'UP.A'],
 'SU.W': ['SU.Y'],
 'SS.W': ['SS.A'],
@@ -399,7 +488,11 @@ upgradeHazardsDict = {
 'AF.W': ['AF.Y'],
 'MH.W': ['MH.Y'],
  }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 # When passed a phen/sig for both the current hazard and the proposed hazard,
 # checkForUpgrade returns a 1 if the proposed hazard is an upgrade, otherwise 0
@@ -417,15 +510,24 @@ def checkForUpgrade(pPhen, pSig, cPhen, cSig):
         return 0
 
 #
+<<<<<<< HEAD
 # Downgrade Hazards Dictionary - downgradeHazardsDict is a dictionary of 
 # phen/sig combinations defining downgrades. Each key is the proposed hazard. 
 # The associated list are the hazards which are downgraded by the 
+=======
+# Downgrade Hazards Dictionary - downgradeHazardsDict is a dictionary of
+# phen/sig combinations defining downgrades. Each key is the proposed hazard.
+# The associated list are the hazards which are downgraded by the
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # proposed hazard.
 #
 
 downgradeHazardsDict = {
+<<<<<<< HEAD
 'ZR.Y': ['BZ.W', 'LE.W', 'IS.W', 'WS.W'],
 'LE.Y': ['BZ.W', 'LE.W', 'IS.W', 'WS.W'],
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 'WW.Y': ['BZ.W', 'LE.W', 'IS.W', 'WS.W'],
 'WC.Y': ['WC.W'],
 'WS.W': ['BZ.W', 'IS.W'],
@@ -433,18 +535,28 @@ downgradeHazardsDict = {
 'DU.Y': ['DU.W', 'HW.W'],
 'LW.Y': ['DU.W', 'HW.W', 'WI.Y'],
 'WI.Y': ['DU.W', 'HW.W'],
+<<<<<<< HEAD
 'HT.Y': ['EH.W'],
+=======
+'HT.Y': ['EH.W', 'XH.W'],
+'CW.Y': ['EC.W'],
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 'FR.Y': ['FZ.W', 'HZ.W'],
 'TR.W': ['HU.W', 'TY.W'],
 'UP.Y': ['UP.W'],
 'SR.W': ['HF.W'],
 'GL.W': ['HF.W', 'SR.W'],
 'SC.Y': ['HF.W', 'SR.W', 'GL.W', 'SE.W'],
+<<<<<<< HEAD
 'SW.Y': ['SE.W'],
 'RB.Y': ['HF.W', 'SR.W', 'GL.W', 'SE.W'],
 'SU.Y': ['SU.W'],
 'BW.Y': ['HF.W', 'SR.W', 'GL.W'],
 'SI.Y': ['HF.W', 'SR.W', 'GL.W'],
+=======
+'SU.Y': ['SU.W'],
+'BW.Y': ['HF.W', 'SR.W', 'GL.W'],
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 'LS.Y': ['LS.W'],
 'CF.Y': ['CF.W'],
 'AF.Y': ['AF.W'],

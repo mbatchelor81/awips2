@@ -22,13 +22,15 @@
 # Provides a command-line utility to purge selected GFE grids.
 #  
 #    
-#     SOFTWARE HISTORY
-#    
-#    Date            Ticket#       Engineer       Description
-#    ------------    ----------    -----------    --------------------------
-#    09/23/10                      dgilling       Initial Creation.
-#    03/07/13         1759         dgilling       Modified to support refactored
-#                                                 PurgeGfeGridsRequest.
+# SOFTWARE HISTORY
+#
+# Date          Ticket#  Engineer  Description
+# ------------- -------- --------- --------------------------------------------
+# Sep 23, 2010           dgilling  Initial Creation.
+# Mar 07, 2013  1759     dgilling  Modified to support refactored 
+#                                  PurgeGfeGridsRequest.
+# Jun 30, 2021  8572     randerso  Replace references to CDSHOST and CDSPORT
+#                                  With DEFAULT_HOST and DEFAULT_PORT
 #
 # 
 #
@@ -85,18 +87,12 @@ def validateArgs():
     
     options = parser.parse_args()
 
-    if options.host == None:
-        if "CDSHOST" in os.environ:
-            options.host = os.environ["CDSHOST"]
-        else:
-            parser.error("No server hostname defined.")
+    if options.host is None:
+        options.host = str(os.getenv("DEFAULT_HOST", "localhost"))
         
-    if options.port == None:
-        if "CDSPORT" in os.environ:
-            options.port = int(os.environ["CDSPORT"])
-        else:
-            parser.error("No server port defined.")
-    
+    if options.port is None:
+        options.port = int(os.getenv("DEFAULT_PORT", "9581"))
+
     return options
     
 

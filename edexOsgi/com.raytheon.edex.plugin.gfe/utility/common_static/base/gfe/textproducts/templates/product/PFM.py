@@ -22,9 +22,19 @@
 #
 # Date          Ticket#  Engineer  Description
 # ------------- -------- --------- --------------------------------------------
+<<<<<<< HEAD
 # Mar 15, 2020  20234    NFTF      Use ApparentT instead of WindChill/HeatIndex.
 # Mar 09, 2022  8812     randerso  Fixed _createObVisRows so it doesn't append
 #                                  the entire forecaset for each value in the row.
+=======
+# Mar 15, 2020  20234    NFTF      Use ApparentT instead of WindChill/HeatIndex
+# Mar 23, 2021  8397     randerso  Removed FA.W and FA.Y from allowedHazards
+# May 18, 2021  DCS22297 dkingfiel Add CW.Y, XH.A, and XH.W
+# Mar 09, 2022  8812     randerso  Fixed _createObVisRows so it doesn't append
+#                                  the entire forecaset for each value in the row.
+# May 11, 2023  2033877  smoorthy  Utilize timezone in offsetTime.py, as opposed to
+#                                  os.environ['TZ'].
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 ##
 ##
@@ -244,6 +254,10 @@ import LogStream
 import SampleAnalysis
 import TextRules
 import TimeRange, AbsTime
+<<<<<<< HEAD
+=======
+import offsetTime
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 
 class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
@@ -408,7 +422,13 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         accessor = ModuleAccessor.ModuleAccessor()
         areaDict = accessor.variable(self._areaDictionary, "AreaDictionary")
         tzDir = {}
+<<<<<<< HEAD
         localTZ = os.environ['TZ']  #current WFO time zone
+=======
+
+        localTZ = offsetTime.getTimeZone() #current WFO time zone
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         localTZid = time.strftime("%Z", time.localtime(argDict['creationTime']))
         for editArea, areaLabel in areaList:
             areas = self.getCurrentAreaNames(argDict, areaLabel)  #get areas
@@ -420,6 +440,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                     area = areaStrings[0]  #1st line is the UGC code
                 try:
                     zoneTZ = areaDict[area]['ugcTimeZone']
+<<<<<<< HEAD
                     prevTZ = os.environ['TZ']
                     os.environ['TZ'] = zoneTZ
                     time.tzset()
@@ -427,6 +448,15 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                       time.localtime(argDict['creationTime']))
                     os.environ['TZ'] = prevTZ
                     time.tzset()
+=======
+                    prevTZ = offsetTime.getTimeZone()
+                    offsetTime.setTimeZone(zoneTZ)
+
+                    tzid = time.strftime("%Z",
+                      time.localtime(argDict['creationTime']))
+
+                    offsetTime.setTimeZone(prevTZ)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 except:
                     zoneTZ = localTZ
                     tzid = localTZid
@@ -529,9 +559,14 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         tzDict = {}
 
         # change the time zone
+<<<<<<< HEAD
         prevTZ = os.environ['TZ']
         os.environ['TZ'] = timeZone
         time.tzset()
+=======
+        prevTZ = offsetTime.getTimeZone()
+        offsetTime.setTimeZone(timeZone)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # determine the optimal time for the zulu-based product columns,
         # that most closely mirror 3AM LT and 3PM LT.  The final baseTime is
@@ -630,8 +665,12 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
            argDict, "%l%M %p %Z %a %b %e %Y", stripLeading=1)
 
         # restore the time zone
+<<<<<<< HEAD
         os.environ['TZ'] = prevTZ
         time.tzset()
+=======
+        offsetTime.setTimeZone(prevTZ)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         return tzDict
 
@@ -712,7 +751,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             if self._productType == "PFM":
                 if len(areaStrings) != 4 and len(areaStrings) != 3:
                     raise SyntaxError("""
+<<<<<<< HEAD
 PFM requires defaultEditArea format of (editAreaName, 
+=======
+PFM requires defaultEditArea format of (editAreaName,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ugcLine\\narea description line\\nll.llN lll.llW\\nElev
 editAreaName is the name of the edit area for sampling
 ugcLine is the ugc code representing the area, and is used for timezone info
@@ -739,7 +782,11 @@ Found description: """ + areaLabel)
                   "???? ft" + "\n"
                 #log "old" format
                 LogStream.logProblem("WARNING: Old defaultEditArea format " + """
+<<<<<<< HEAD
 PFM requires defaultEditArea format of (editAreaName, 
+=======
+PFM requires defaultEditArea format of (editAreaName,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ugcLine\\narea description line\\nll.llN lll.llW\\nElev
 editAreaName is the name of the edit area for sampling
 ugcLine is the ugc code representing the area, and is used for timezone info
@@ -922,9 +969,14 @@ Found description: """ + areaLabel)
         colSpacing12hr = []
 
         # set the time zone
+<<<<<<< HEAD
         prevTZ = os.environ['TZ']
         os.environ['TZ'] = timeZone
         time.tzset()
+=======
+        prevTZ = offsetTime.getTimeZone()
+        offsetTime.setTimeZone(timeZone)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # determine zulu alignment for bottom section, gather all of the
         # possible zulu hours (can't be more than 2 due to 12h intervals)
@@ -960,8 +1012,12 @@ Found description: """ + areaLabel)
                 runningTotal = 0
 
         # reset the time zone
+<<<<<<< HEAD
         os.environ['TZ'] = prevTZ
         time.tzset()
+=======
+        offsetTime.setTimeZone(prevTZ)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # Create statLists for bottom portion
         statList_6hr_snap = self.getStatList(
@@ -1763,9 +1819,14 @@ Found description: """ + areaLabel)
             zulu = self.addColValue(zulu, zuluLabels[x], colWidths[x])
 
         # set the time zone
+<<<<<<< HEAD
         prevTZ = os.environ['TZ']
         os.environ['TZ'] = timeZone
         time.tzset()
+=======
+        prevTZ = offsetTime.getTimeZone()
+        offsetTime.setTimeZone(timeZone)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # date and LT string (beginning)
         dateS = 'Date'.ljust(startPoint)
@@ -1829,8 +1890,12 @@ Found description: """ + areaLabel)
                 dayOfMonthProcessed = dayOfMonth  #mark this date processed
 
         # reset time zone
+<<<<<<< HEAD
         os.environ['TZ'] = prevTZ
         time.tzset()
+=======
+        offsetTime.setTimeZone(prevTZ)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         return (dateS, zulu, lt)
 
@@ -1879,8 +1944,16 @@ Found description: """ + areaLabel)
             ('DU.Y', allActions, 'Dust'),  # BLOWING DUST ADVISORY
             ('EC.W', allActions, 'Cold'),  # EXTREME COLD WARNING
             ('EC.A', allActions, 'Cold'),  # EXTREME COLD WATCH
+<<<<<<< HEAD
             ('EH.W', allActions, 'Heat'),  # EXCESSIVE HEAT WARNING
             ('EH.A', allActions, 'Heat'),  # EXCESSIVE HEAT WATCH
+=======
+            ('CW.Y', allActions, 'Cold'),         # COLD WEATHER ADVISORY
+            ('EH.W', allActions, 'Heat'),  # EXCESSIVE HEAT WARNING
+            ('EH.A', allActions, 'Heat'),  # EXCESSIVE HEAT WATCH
+            ('XH.W', allActions, 'Heat'),         # EXTREME HEAT WARNING
+            ('XH.A', allActions, 'Heat'),         # EXTREME HEAT WATCH
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             ('HT.Y', allActions, 'Heat'),  # HEAT ADVISORY
             ('FG.Y', allActions, 'Fog'),  # DENSE FOG ADVISORY
             ('HZ.W', allActions, 'FrostFreeze'),  # HARD FREEZE WARNING
@@ -1896,8 +1969,11 @@ Found description: """ + areaLabel)
             ('ZF.Y', allActions, 'FreezeFog'),  # FREEZING FOG ADVISORY
             ('FF.A', allActions, 'Flood'),  # FLASH FLOOD WATCH
             ('FA.A', allActions, 'Flood'),  # FLOOD WATCH
+<<<<<<< HEAD
             ('FA.W', allActions, 'Flood'),  # FLOOD WARNING
             ('FA.Y', allActions, 'Flood'),  # FLOOD ADVISORY
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             ('CF.W', allActions, 'CoastalFlood'),  # COASTAL FLOOD WARNING
             ('LS.W', allActions, 'CoastalFlood'),  # LAKESHORE FLOOD WARNING
             ('CF.Y', allActions, 'CoastalFlood'),  # COASTAL FLOOD ADVISORY

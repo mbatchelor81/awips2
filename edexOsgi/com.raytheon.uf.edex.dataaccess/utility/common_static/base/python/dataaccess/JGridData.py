@@ -76,7 +76,7 @@ class JGridData(IGridData, JData.JData):
         ny = self.jobj.getGridGeometry().getGridRange().getSpan(1)
         dest = FloatBufferWrapper(nx, ny)
         if unit:
-            from tec.uom.se.format import SimpleUnitFormat
+            from tech.units.indriya.format import SimpleUnitFormat
             from com.raytheon.uf.common.geospatial.data import UnitConvertingDataFilter
             from com.raytheon.uf.common.numeric.dest import FilteredDataDestination
             from jep import jarray

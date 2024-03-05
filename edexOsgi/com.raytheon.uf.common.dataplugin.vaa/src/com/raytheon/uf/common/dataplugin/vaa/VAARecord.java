@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -27,12 +39,20 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+<<<<<<< HEAD
+=======
+import javax.persistence.Index;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+<<<<<<< HEAD
 import org.hibernate.annotations.Index;
+=======
+import org.locationtech.jts.geom.Geometry;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.uf.common.dataplugin.PluginDataObject;
 import com.raytheon.uf.common.dataplugin.annotations.DataURI;
@@ -41,6 +61,7 @@ import com.raytheon.uf.common.geospatial.ISpatialEnabled;
 import com.raytheon.uf.common.pointdata.spatial.SurfaceObsLocation;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerialize;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
+<<<<<<< HEAD
 import org.locationtech.jts.geom.Geometry;
 
 /**
@@ -50,6 +71,16 @@ import org.locationtech.jts.geom.Geometry;
  * 
  * SOFTWARE HISTORY
  * 
+=======
+
+/**
+ * Record for Volcanic Ash Advisory
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
  * Nov 04, 2009            jkorman     Initial creation
@@ -58,29 +89,54 @@ import org.locationtech.jts.geom.Geometry;
  * Apr 12, 2013 1857       bgonzale    Added SequenceGenerator annotation.
  * May 07, 2013 1869       bsteffen    Remove dataURI column from
  * Aug 30, 2013 2298       rjpeter     Make getPluginName abstract
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *                                     PluginDataObject.
  * Oct 22, 2013 2361       njensen     Remove XML annotations
  * Nov 26, 2013 2582       njensen     Remove dataURI and recordType columns
  * Jul 21, 2015 4360       rferrel     Named unique constraint. Made advisoryNumber not-nullable.
+<<<<<<< HEAD
  * 
  * </pre>
  * 
  * @author jkorman
  * @version 1.0
+=======
+ * Aug 08, 2022 8892       tjensen     Update indexes for Hibernate 5
+ *
+ * </pre>
+ *
+ * @author jkorman
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  */
 
 @Entity
 @SequenceGenerator(initialValue = 1, name = PluginDataObject.ID_GEN, sequenceName = "vaaseq")
+<<<<<<< HEAD
 @Table(name = "vaa", uniqueConstraints = { @UniqueConstraint(name = "uk_vaa_datauri_fields", columnNames = {
         "latitude", "longitude", "stationId", "refTime", "forecastTime",
         "advisoryNumber" }) })
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 /*
  * Both refTime and forecastTime are included in the refTimeIndex since
  * forecastTime is unlikely to be used.
  */
+<<<<<<< HEAD
 @org.hibernate.annotations.Table(appliesTo = "vaa", indexes = { @Index(name = "vaa_refTimeIndex", columnNames = {
         "refTime", "forecastTime" }) })
+=======
+@Table(name = "vaa", uniqueConstraints = {
+        @UniqueConstraint(name = "uk_vaa_datauri_fields", columnNames = {
+                "latitude", "longitude", "stationId", "refTime", "forecastTime",
+                "advisoryNumber" }) }, indexes = {
+                        @Index(name = "%TABLE%_refTimeIndex", columnList = "refTime, forecastTime"),
+                        @Index(name = "%TABLE%_stationIndex", columnList = "stationId") })
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 @DynamicSerialize
 public class VAARecord extends PluginDataObject implements ISpatialEnabled {
 
@@ -107,35 +163,55 @@ public class VAARecord extends PluginDataObject implements ISpatialEnabled {
     private String centerId;
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     @Column(length = 2048)
     @DynamicSerializeElement
     private String message;
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     @Column(length = 512)
     @DynamicSerializeElement
     private String anal00Hr;
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     @Column(length = 512)
     @DynamicSerializeElement
     private String fcst06Hr;
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     @Column(length = 512)
     @DynamicSerializeElement
     private String fcst12Hr;
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     @Column(length = 512)
     @DynamicSerializeElement
@@ -148,7 +224,11 @@ public class VAARecord extends PluginDataObject implements ISpatialEnabled {
 
     @DynamicSerializeElement
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "parentId", fetch = FetchType.EAGER)
+<<<<<<< HEAD
     private Set<VAASubPart> subParts = new HashSet<VAASubPart>();
+=======
+    private Set<VAASubPart> subParts = new HashSet<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Empty default constructor
@@ -158,7 +238,11 @@ public class VAARecord extends PluginDataObject implements ISpatialEnabled {
 
     /**
      * Construct an instance of this class using the supplied datauri.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param dataUri
      */
     public VAARecord(String dataUri) {
@@ -225,7 +309,11 @@ public class VAARecord extends PluginDataObject implements ISpatialEnabled {
 
     /**
      * Get this observation's geometry.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry for this observation.
      */
     public Geometry getGeometry() {
@@ -234,7 +322,11 @@ public class VAARecord extends PluginDataObject implements ISpatialEnabled {
 
     /**
      * Get the geometry latitude.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry latitude.
      */
     public double getLatitude() {
@@ -243,7 +335,11 @@ public class VAARecord extends PluginDataObject implements ISpatialEnabled {
 
     /**
      * Get the geometry longitude.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry longitude.
      */
     public double getLongitude() {
@@ -252,7 +348,11 @@ public class VAARecord extends PluginDataObject implements ISpatialEnabled {
 
     /**
      * Get the station identifier for this observation.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return the stationId
      */
     public String getStationId() {
@@ -261,7 +361,11 @@ public class VAARecord extends PluginDataObject implements ISpatialEnabled {
 
     /**
      * Get the elevation, in meters, of the observing platform or location.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The observation elevation, in meters.
      */
     public Integer getElevation() {
@@ -270,7 +374,11 @@ public class VAARecord extends PluginDataObject implements ISpatialEnabled {
 
     /**
      * Get whether the location for this observation is defined.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return Is this location defined.
      */
     public Boolean getLocationDefined() {
@@ -369,7 +477,11 @@ public class VAARecord extends PluginDataObject implements ISpatialEnabled {
 
     public void addSubPart(VAASubPart part) {
         if (subParts == null) {
+<<<<<<< HEAD
             subParts = new HashSet<VAASubPart>();
+=======
+            subParts = new HashSet<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         part.setParentId(this);
         subParts.add(part);
@@ -394,7 +506,11 @@ public class VAARecord extends PluginDataObject implements ISpatialEnabled {
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     @Override
     public String toString() {
@@ -431,7 +547,11 @@ public class VAARecord extends PluginDataObject implements ISpatialEnabled {
     // "\r\r\nFCST VA CLD +18HR: 05/1100Z" +
     // "\r\r\nRMK: A SPREADING 42 NMI WIDE ASH PLUME MOVING AT" +
     // "\r\r\nA MEASURED 7 KTS EXTENDS AT LEAST 211 NMI TO THE" +
+<<<<<<< HEAD
     // "\r\r\nWEST OF THE VOLCANO, OR TO ABOUT 66W.  NO" +
+=======
+    // "\r\r\nWEST OF THE VOLCANO, OR TO ABOUT 66W. NO" +
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     // "\r\r\nSIGNIFICANT CHANGE IN DIRECTION OR SPEED IS" +
     // "\r\r\nANTICIPATED DURING THE NEXT 12 HOURS. ...BALDWIN" +
     // "\r\r\nNXT ADVISORY: WILL BE ISSUED BY 20091104/2315Z" +

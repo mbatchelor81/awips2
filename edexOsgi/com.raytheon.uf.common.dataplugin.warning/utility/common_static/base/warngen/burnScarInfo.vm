@@ -8,18 +8,30 @@
 ##            Mike Dangelo  23 March 2015  Mixed Case changes
 ########################################################################### 
 #*
+<<<<<<< HEAD
 #if(${list.contains($bullets, "FourMileBurnArea")})
+=======
+#if($bullets.contains("FourMileBurnArea"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     #set($burnScarName = "Four Mile Burn Area")
     #set($burnScarEnd = " over the Four Mile Burn Area")
     #set($emergencyHeadline = "areas in and around the ${burnScarName}")
 #end
+<<<<<<< HEAD
 #if(${list.contains($bullets, "fourmilelowimpact")})
+=======
+#if($bullets.contains("fourmilelowimpact"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($ctaSelected = "YES")
   #set($burnScar = "This is a life threatening situation.  Heavy rainfall will cause extensive and severe flash flooding of creeks...streams...and ditches in the Four Mile burn area.")
   #set($burnDrainage = "Some drainage basins impacted include Four Mile Creek...Gold Run...and Four Mile Canyon Creek.")
   #set($burnCTA = "This is a life-threatening situation.  Heavy rainfall will cause extensive and severe flash flooding of creeks...streams...and ditches in the Four Mile burn area.  Some drainage basins impacted include Four Mile Creek...Gold Run...and Four Mile Canyon Creek.  Severe debris flows can also be anticipated across roads.  Roads and driveways may be washed away in places.  If you encounter flood waters...climb to safety.")
 #end
+<<<<<<< HEAD
 #if(${list.contains($bullets, "fourmilehighimpact")})
+=======
+#if($bullets.contains("fourmilehighimpact"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($ctaSelected = "YES")
   #set($burnScar = "This is a life-threatening situation for people along Boulder Creek in the City of Boulder...in the Four Mile Burn Area...and in Boulder Canyon.  Heavy rainfall will cause extensive and severe flash flooding of creeks and streams from the Four Mile Burn Area downstream through the City of Boulder.")
   #set($burnDrainage = "Some drainage basins impacted include Boulder Creek...Four Mile Creek...Gold Run...Four Mile Canyon Creek...and Wonderland Creek.")

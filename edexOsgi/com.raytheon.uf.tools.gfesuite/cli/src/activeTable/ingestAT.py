@@ -51,7 +51,7 @@ log = logging.getLogger('ingestAT')
 
 
 
-class CaseInsensitiveStringSet(collections.Set):
+class CaseInsensitiveStringSet(collections.abc.Set):
     def __init__(self, iterable):
         self.__internalSet = frozenset(iterable)
         

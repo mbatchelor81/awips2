@@ -44,6 +44,10 @@ import com.raytheon.uf.common.geospatial.MapUtil;
  *                                  dependence on RadarRecord.
  * Mar 26, 2018  6711     randerso  Updated for RPG build 17. Added default
  *                                  value for formatBits. Code cleanup.
+<<<<<<< HEAD
+=======
+ * Oct 29, 2022  8959     mapeters  Added TILT
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -51,6 +55,11 @@ import com.raytheon.uf.common.geospatial.MapUtil;
  */
 public class RadarUtil {
 
+<<<<<<< HEAD
+=======
+    public static final String TILT = "TILT";
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private static final double TWOTOTHE52 = 1L << 52;
 
     private static final int[] table = { 0, 16, 22, 27, 32, 35, 39, 42, 45, 48,
@@ -89,12 +98,19 @@ public class RadarUtil {
                     } else {
                         xn = table[x >> 22] << 7;
                     }
+<<<<<<< HEAD
                 } else {
                     if (x >= 0x4000000) {
                         xn = table[x >> 20] << 6;
                     } else {
                         xn = table[x >> 18] << 5;
                     }
+=======
+                } else if (x >= 0x4000000) {
+                    xn = table[x >> 20] << 6;
+                } else {
+                    xn = table[x >> 18] << 5;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
 
                 xn = (xn + 1 + (x / xn)) >> 1;
@@ -107,18 +123,26 @@ public class RadarUtil {
                     } else {
                         xn = table[x >> 14] << 3;
                     }
+<<<<<<< HEAD
                 } else {
                     if (x >= 0x40000) {
                         xn = table[x >> 12] << 2;
                     } else {
                         xn = table[x >> 10] << 1;
                     }
+=======
+                } else if (x >= 0x40000) {
+                    xn = table[x >> 12] << 2;
+                } else {
+                    xn = table[x >> 10] << 1;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
 
                 xn = (xn + 1 + (x / xn)) >> 1;
 
                 return ((xn * xn) > x) ? xn - 1 : xn;
             }
+<<<<<<< HEAD
         } else {
             if (x >= 0x100) {
                 if (x >= 0x1000) {
@@ -141,6 +165,24 @@ public class RadarUtil {
                     return table[x] >> 4;
                 }
             }
+=======
+        } else if (x >= 0x100) {
+            if (x >= 0x1000) {
+                if (x >= 0x4000) {
+                    xn = (table[x >> 8]) + 1;
+                } else {
+                    xn = (table[x >> 6] >> 1) + 1;
+                }
+            } else if (x >= 0x400) {
+                xn = (table[x >> 4] >> 2) + 1;
+            } else {
+                xn = (table[x >> 2] >> 3) + 1;
+            }
+
+            return ((xn * xn) > x) ? xn - 1 : xn;
+        } else if (x >= 0) {
+            return table[x] >> 4;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         throw new IllegalArgumentException(
@@ -370,7 +412,11 @@ public class RadarUtil {
      */
     public static GridGeometry2D constructGridGeometry(ProjectedCRS crs,
             double maxExtent, int numPoints) {
+<<<<<<< HEAD
         GridGeometry2D gridGeometry2D = null;
+=======
+        GridGeometry2D gridGeometry2D;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         GeneralEnvelope generalEnvelope = new GeneralEnvelope(2);
         generalEnvelope.setCoordinateReferenceSystem(crs);
 

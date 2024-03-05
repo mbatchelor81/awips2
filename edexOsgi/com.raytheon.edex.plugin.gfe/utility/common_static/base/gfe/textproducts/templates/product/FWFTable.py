@@ -24,7 +24,11 @@
 # ------------- -------- --------- --------------------------------------------
 # Feb 22, 2018  7044     randerso  Fix units in _dispersion method
 # May 16, 2018  7292     randerso  Fix letter casing issues
+<<<<<<< HEAD
 #
+=======
+# May 19, 2021 DR22087  kmckellery Fix letter casing for "Rain"
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ##
 
 ##
@@ -1553,6 +1557,12 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             #print "value", value
         if value == "":
             value = "None"
+<<<<<<< HEAD
+=======
+            #Ensure title case
+        else:
+            value = value.title()    
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         #print "Returning ", value
         return value
 

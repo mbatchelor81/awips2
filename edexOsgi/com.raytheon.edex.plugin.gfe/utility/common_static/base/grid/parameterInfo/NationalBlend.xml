@@ -311,7 +311,11 @@
     <uiname>minT</uiname>
     <valid_range>180.0</valid_range>
     <valid_range>330.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>1</n3D>
     <levelsDesc>FHAG 2</levelsDesc>
     <levels>
@@ -327,7 +331,11 @@
     <uiname>MINRH12hr</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>100.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>1</n3D>
     <levelsDesc>FHAG 2</levelsDesc>
     <levels>
@@ -343,7 +351,11 @@
     <uiname>MAXRH12hr</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>100.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>1</n3D>
     <levelsDesc>FHAG 2</levelsDesc>
     <levels>
@@ -358,7 +370,11 @@
     <uiname>QPF</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>1000.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>0</n3D>
     <levelsDesc>SFC</levelsDesc>
     <levels>
@@ -369,7 +385,11 @@
     <short_name>staticSpacing</short_name>
     <long_name>Grid spacing</long_name>
     <units>meters</units>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   </gridParameterInfo>
   <gridParameterInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="parameterInfo">
     <short_name>vis</short_name>
@@ -379,7 +399,11 @@
     <uiname>visibility</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>100000.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>1</n3D>
     <levelsDesc>SFC</levelsDesc>
     <levels>
@@ -394,7 +418,11 @@
     <uiname>cloudCeiling</uiname>
     <valid_range>-2000.0</valid_range>
     <valid_range>30000.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>0</n3D>
     <levelsDesc>CLG CBL</levelsDesc>
     <levels>
@@ -410,13 +438,35 @@
     <uiname>visibility</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>100000.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>1</n3D>
     <levelsDesc>SFC</levelsDesc>
     <levels>
         <level>SFC</level>
     </levels>
   </gridParameterInfo>
+<<<<<<< HEAD
+=======
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>pcpdur12hr</short_name>
+    <long_name>Precipitation Duration 12 hr</long_name>
+    <units>h</units>
+    <udunits>hour</udunits>
+    <uiname>PCPDUR12hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>12.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   <gridParameterInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="parameterInfo">
     <short_name>pop</short_name>
     <long_name>Probability of Precip</long_name>
@@ -425,7 +475,11 @@
     <uiname>PcpProb</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>100.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>0</n3D>
     <levelsDesc>SFC</levelsDesc>
     <levels>
@@ -440,7 +494,11 @@
     <uiname>12hrPcpProb</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>100.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>0</n3D>
     <levelsDesc>SFC</levelsDesc>
     <levels>
@@ -455,7 +513,11 @@
     <uiname>6hrPcpProb</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>100.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>0</n3D>
     <levelsDesc>SFC</levelsDesc>
     <levels>
@@ -470,7 +532,11 @@
     <uiname>1hrPcpProb</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>100.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>0</n3D>
     <levelsDesc>SFC</levelsDesc>
     <levels>
@@ -485,7 +551,11 @@
     <uiname>PPI6hr</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>100.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>0</n3D>
     <levelsDesc>SFC</levelsDesc>
     <levels>
@@ -500,7 +570,11 @@
     <uiname>totalCldCvr</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>100.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>0</n3D>
     <levelsDesc>SFC</levelsDesc>
     <levels>
@@ -515,7 +589,11 @@
     <uiname>12hrTstrmProb</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>100.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>0</n3D>
     <levelsDesc>SFC</levelsDesc>
     <levels>
@@ -530,7 +608,11 @@
     <uiname>rh</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>100.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>1</n3D>
     <levelsDesc>FHAG 2</levelsDesc>
     <levels>
@@ -545,7 +627,11 @@
     <uiname>WD</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>360.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>1</n3D>
     <levelsDesc>FHAG 10, FHAG 0-610</levelsDesc>
     <levels>
@@ -561,7 +647,11 @@
     <uiname>windGustSpeed</uiname>
     <valid_range>-150.0</valid_range>
     <valid_range>150.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>1</n3D>
     <levelsDesc>FHAG 10</levelsDesc>
     <levels>
@@ -576,7 +666,11 @@
     <uiname>maxT</uiname>
     <valid_range>180.0</valid_range>
     <valid_range>330.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>1</n3D>
     <levelsDesc>FHAG 2</levelsDesc>
     <levels>
@@ -591,7 +685,11 @@
     <uiname>6hrTstrmProb</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>100.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>0</n3D>
     <levelsDesc>SFC</levelsDesc>
     <levels>
@@ -602,7 +700,11 @@
     <short_name>staticCoriolis</short_name>
     <long_name>Coriolis parameter</long_name>
     <units>/s</units>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   </gridParameterInfo>
   <gridParameterInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="parameterInfo">
     <short_name>dpt</short_name>
@@ -612,7 +714,11 @@
     <uiname>Td</uiname>
     <valid_range>180.0</valid_range>
     <valid_range>330.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>1</n3D>
     <levelsDesc>FHAG 2 SFC</levelsDesc>
     <levels>
@@ -628,6 +734,7 @@
     <uiname>WS</uiname>
     <valid_range>-150.0</valid_range>
     <valid_range>150.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
     <n3D>1</n3D>
     <levelsDesc>FHAG 10, FHAG 0-610, FHAG 30, FHAG 80</levelsDesc>
@@ -636,6 +743,14 @@
       <level>FHAG0610</level>
       <level>FHAG30</level>
       <level>FHAG80</level>
+=======
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>FHAG 10, FHAG 0-610</levelsDesc>
+    <levels>
+      <level>FHAG10</level>
+      <level>FHAG0610</level>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     </levels>
   </gridParameterInfo>
   <gridParameterInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="parameterInfo">
@@ -646,7 +761,11 @@
     <uiname>1hrtotPrecip</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>1000.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>0</n3D>
     <levelsDesc>SFC</levelsDesc>
     <levels>
@@ -661,7 +780,11 @@
     <uiname>6hrtotPrecip</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>1000.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>0</n3D>
     <levelsDesc>SFC</levelsDesc>
     <levels>
@@ -676,7 +799,11 @@
     <uiname>12hrtotPrecip</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>1000.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>0</n3D>
     <levelsDesc>SFC</levelsDesc>
     <levels>
@@ -691,7 +818,11 @@
     <uiname>3hrTstrmProb</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>100.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>0</n3D>
     <levelsDesc>SFC</levelsDesc>
     <levels>
@@ -706,7 +837,11 @@
     <uiname>T</uiname>
     <valid_range>180.0</valid_range>
     <valid_range>330.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>1</n3D>
     <levelsDesc>FHAG 2</levelsDesc>
     <levels>
@@ -721,7 +856,11 @@
     <uiname>SnowLvl</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>6000.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>0</n3D>
     <levelsDesc>FH 0</levelsDesc>
     <levels>
@@ -736,7 +875,11 @@
        <uiname>Tmean</uiname>
        <valid_range>180.0</valid_range>
        <valid_range>330.0</valid_range>
+<<<<<<< HEAD
        <fillValue>-99999.0</fillValue>
+=======
+       <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        <n3D>0</n3D>
        <levelsDesc>FHAG 2</levelsDesc>
        <levels>
@@ -751,7 +894,11 @@
        <uiname>DpTmean</uiname>
        <valid_range>180.0</valid_range>
        <valid_range>330.0</valid_range>
+<<<<<<< HEAD
        <fillValue>-99999.0</fillValue>
+=======
+       <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        <n3D>0</n3D>
        <levelsDesc>FHAG 2</levelsDesc>
        <levels>
@@ -766,7 +913,11 @@
        <uiname>MaxTW</uiname>
        <valid_range>180.0</valid_range>
        <valid_range>330.0</valid_range>
+<<<<<<< HEAD
        <fillValue>-99999.0</fillValue>
+=======
+       <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        <n3D>0</n3D>
        <levelsDesc>FHAG 610-40000</levelsDesc>
        <levels>
@@ -781,7 +932,11 @@
        <uiname>pTyp</uiname>
        <valid_range>1.0</valid_range>
        <valid_range>5.0</valid_range>
+<<<<<<< HEAD
        <fillValue>-99999.0</fillValue>
+=======
+       <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        <n3D>0</n3D>
        <levelsDesc>SFC</levelsDesc>
        <levels>
@@ -879,6 +1034,7 @@
     </levels>
   </gridParameterInfo>
   <gridParameterInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="parameterInfo">
+<<<<<<< HEAD
     <short_name>pbe</short_name>
     <long_name>Positive Bouyant Energy</long_name>
     <units>J/kg</units>
@@ -909,6 +1065,8 @@
     </levels>
   </gridParameterInfo>
   <gridParameterInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="parameterInfo">
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <short_name>snowratio</short_name>
     <long_name>Snow Ratio</long_name>
     <units>in</units>
@@ -916,21 +1074,33 @@
     <uiname>snowratio</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>40.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>0</n3D>
     <levelsDesc>SFC</levelsDesc>
     <levels>
       <level>SFC</level>
     </levels>
   </gridParameterInfo>
+<<<<<<< HEAD
     <gridParameterInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="parameterInfo">
+=======
+  <gridParameterInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="parameterInfo">
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <short_name>mixht</short_name>
     <long_name>Mixing Height</long_name>
     <units>m</units>
     <udunits>meters</udunits>
     <uiname>MIXHT</uiname>
     <valid_range>0.0</valid_range>
+<<<<<<< HEAD
     <valid_range>3689.0</valid_range>
+=======
+    <valid_range>6096.0</valid_range>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <fillValue>-999999.0</fillValue>
     <n3D>0</n3D>
     <levelsDesc>EA</levelsDesc>
@@ -946,7 +1116,11 @@
     <uiname>TPWDIR</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>360.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>1</n3D>
     <levelsDesc>FHAG 10</levelsDesc>
     <levels>
@@ -976,7 +1150,11 @@
     <uiname>TRWDIR</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>360.0</valid_range>
+<<<<<<< HEAD
     <fillValue>-99999.0</fillValue>
+=======
+    <fillValue>-999999.0</fillValue>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <n3D>1</n3D>
     <levelsDesc>EA</levelsDesc>
     <levels>
@@ -1017,7 +1195,11 @@
     <short_name>hindex6hr</short_name>
     <long_name>Haines Index</long_name>
     <units>index</units>
+<<<<<<< HEAD
     <udunits>index</udunits>>
+=======
+    <udunits>index</udunits>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <uiname>HINDEX6hr</uiname>
     <valid_range>2.0</valid_range>
     <valid_range>6.0</valid_range>
@@ -1028,11 +1210,19 @@
       <level>EA</level>
     </levels>
   </gridParameterInfo>
+<<<<<<< HEAD
     <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <short_name>fosindx6hr</short_name>
     <long_name>Fosberg Fire Weather Index</long_name>
     <units>index</units>
     <udunits>index</udunits>>
+=======
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>fosindx6hr</short_name>
+    <long_name>Fosberg Fire Weather Index</long_name>
+    <units>index</units>
+    <udunits>index</udunits>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <uiname>FOSINDX6hr</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>100.0</valid_range>
@@ -1058,7 +1248,11 @@
       <level>FHAG0610</level>
     </levels>
   </gridParameterInfo>
+<<<<<<< HEAD
     <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+=======
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <short_name>maxref1hr</short_name>
     <long_name>Simulated Maximum Reflectivity</long_name>
     <units>dBZ</units>
@@ -1073,7 +1267,11 @@
       <level>FHAG1000</level>
     </levels>
   </gridParameterInfo>
+<<<<<<< HEAD
     <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+=======
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <short_name>viliq</short_name>
     <long_name>Vertically Integrated Liquid</long_name>
     <units>kg/m^2</units>
@@ -1257,11 +1455,19 @@
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <short_name>ficeac1hr</short_name>
     <long_name>1-h Ice Accumulation</long_name>
+<<<<<<< HEAD
     <units>m</units>
     <udunits>meter</udunits>
     <uiname>FICEAC1hr</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>15</valid_range>
+=======
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+    <uiname>FICEAC1hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>1500</valid_range>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <fillValue>-999999.0</fillValue>
     <n3D>1</n3D>
     <levelsDesc>SFC</levelsDesc>
@@ -1287,11 +1493,19 @@
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <short_name>ficeac6hr</short_name>
     <long_name>6-h Ice Accumulation</long_name>
+<<<<<<< HEAD
     <units>m</units>
     <udunits>meter</udunits>
     <uiname>FICEAC6hr</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>15.0</valid_range>
+=======
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+    <uiname>FICEAC6hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>1500.0</valid_range>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <fillValue>-999999.0</fillValue>
     <n3D>1</n3D>
     <levelsDesc>SFC</levelsDesc>
@@ -1347,8 +1561,13 @@
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <short_name>tp10pct6hr</short_name>
     <long_name>10th percentile 6hr Quant</long_name>
+<<<<<<< HEAD
     <units>millimeter</units>
     <udunits>mm</udunits>
+=======
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <uiname>TP10pct6hr</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>1000.0</valid_range>
@@ -1362,8 +1581,13 @@
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <short_name>tp50pct6hr</short_name>
     <long_name>50th percentile 6hr Quant</long_name>
+<<<<<<< HEAD
     <units>millimeter</units>
     <udunits>mm</udunits>
+=======
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <uiname>TP50pct6hr</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>1000.0</valid_range>
@@ -1377,8 +1601,13 @@
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <short_name>tp90pct6hr</short_name>
     <long_name>90th percentile 6hr Quant</long_name>
+<<<<<<< HEAD
     <units>millimeter</units>
     <udunits>mm</udunits>
+=======
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <uiname>TP90pct6hr</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>1000.0</valid_range>
@@ -1390,11 +1619,19 @@
     </levels>
   </gridParameterInfo>
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
     <short_name>tp10pct24hr</short_name>
     <long_name>10th percentile 24hr Quant</long_name>
     <units>millimeter</units>
     <udunits>mm</udunits>
     <uiname>TP10pct24hr</uiname>
+=======
+    <short_name>tp5pct24hr</short_name>
+    <long_name>5th percentile 24hr Quant</long_name>
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+    <uiname>TP5pct24hr</uiname>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <valid_range>0.0</valid_range>
     <valid_range>1000.0</valid_range>
     <fillValue>-999999.0</fillValue>
@@ -1405,11 +1642,19 @@
     </levels>
   </gridParameterInfo>
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
     <short_name>tp50pct24hr</short_name>
     <long_name>50th percentile 24hr Quant</long_name>
     <units>millimeter</units>
     <udunits>mm</udunits>
     <uiname>TP50pct24hr</uiname>
+=======
+    <short_name>tp10pct24hr</short_name>
+    <long_name>10th percentile 24hr Quant</long_name>
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+    <uiname>TP10pct24hr</uiname>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <valid_range>0.0</valid_range>
     <valid_range>1000.0</valid_range>
     <fillValue>-999999.0</fillValue>
@@ -1420,11 +1665,19 @@
     </levels>
   </gridParameterInfo>
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
     <short_name>tp90pct24hr</short_name>
     <long_name>90th percentile 24hr Quant</long_name>
     <units>millimeter</units>
     <udunits>mm</udunits>
     <uiname>TP90pct24hr</uiname>
+=======
+    <short_name>tp25pct24hr</short_name>
+    <long_name>25th percentile 24hr Quant</long_name>
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+    <uiname>TP25pct24hr</uiname>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <valid_range>0.0</valid_range>
     <valid_range>1000.0</valid_range>
     <fillValue>-999999.0</fillValue>
@@ -1435,6 +1688,7 @@
     </levels>
   </gridParameterInfo>
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
     <short_name>ficeac5pct24hr</short_name>
     <long_name>5th percentile Flat Ice Accumulation 24 hour</long_name>
     <units>m</units>
@@ -1442,6 +1696,15 @@
     <uiname>FICEAC5pct24hr</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>10.0</valid_range>
+=======
+    <short_name>tp50pct24hr</short_name>
+    <long_name>50th percentile 24hr Quant</long_name>
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+    <uiname>TP50pct24hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>1000.0</valid_range>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <fillValue>-999999.0</fillValue>
     <n3D>1</n3D>
     <levelsDesc>SFC</levelsDesc>
@@ -1450,6 +1713,7 @@
     </levels>
   </gridParameterInfo>
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
     <short_name>ficeac10pct24hr</short_name>
     <long_name>10th percentile Flat Ice Accumulation 24 hour</long_name>
     <units>m</units>
@@ -1457,6 +1721,15 @@
     <uiname>FICEAC10pct24hr</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>10.0</valid_range>
+=======
+    <short_name>tp75pct24hr</short_name>
+    <long_name>75th percentile 24hr Quant</long_name>
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+    <uiname>TP75pct24hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>1000.0</valid_range>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <fillValue>-999999.0</fillValue>
     <n3D>1</n3D>
     <levelsDesc>SFC</levelsDesc>
@@ -1465,6 +1738,7 @@
     </levels>
   </gridParameterInfo>
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
     <short_name>ficeac25pct24hr</short_name>
     <long_name>25th percentile Flat Ice Accumulation 24 hour</long_name>
     <units>m</units>
@@ -1472,12 +1746,22 @@
     <uiname>FICEAC25pct24hr</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>10.0</valid_range>
+=======
+    <short_name>tp90pct24hr</short_name>
+    <long_name>90th percentile 24hr Quant</long_name>
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+    <uiname>TP90pct24hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>1000.0</valid_range>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <fillValue>-999999.0</fillValue>
     <n3D>1</n3D>
     <levelsDesc>SFC</levelsDesc>
     <levels>
       <level>SFC</level>
     </levels>
+<<<<<<< HEAD
   </gridParameterInfo>
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <short_name>ficeac50pct24hr</short_name>
@@ -1487,6 +1771,17 @@
     <uiname>FICEAC50pct24hr</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>10.0</valid_range>
+=======
+  </gridParameterInfo>  
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>tp95pct24hr</short_name>
+    <long_name>95th percentile 24hr Quant</long_name>
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+    <uiname>TP95pct24hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>1000.0</valid_range>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <fillValue>-999999.0</fillValue>
     <n3D>1</n3D>
     <levelsDesc>SFC</levelsDesc>
@@ -1495,6 +1790,7 @@
     </levels>
   </gridParameterInfo>
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
     <short_name>ficeac75pct24hr</short_name>
     <long_name>75th percentile Flat Ice Accumulation 24 hour</long_name>
     <units>m</units>
@@ -1517,6 +1813,31 @@
     <uiname>FICEAC90pct24hr</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>10.0</valid_range>
+=======
+    <short_name>dptsprd</short_name>
+    <long_name>Dew Point Temp Sprd</long_name>
+    <units>K</units>
+    <udunits>degree_Kelvin</udunits>
+    <uiname>DpTsprd</uiname>
+    <valid_range>0</valid_range>
+    <valid_range>30.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>FHAG 2 SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+      <level>FHAG2</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>ficeac10pct24hr</short_name>
+    <long_name>10th percentile Flat Ice Accumulation 24 hour</long_name>
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+    <uiname>FICEAC10pct24hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>1000.0</valid_range>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <fillValue>-999999.0</fillValue>
     <n3D>1</n3D>
     <levelsDesc>SFC</levelsDesc>
@@ -1525,6 +1846,7 @@
     </levels>
   </gridParameterInfo>
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
     <short_name>ficeac95pct24hr</short_name>
     <long_name>95th percentile Flat Ice Accumulation 24 hour</long_name>
     <units>m</units>
@@ -1532,6 +1854,15 @@
     <uiname>FICEAC95pct24hr</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>10.0</valid_range>
+=======
+    <short_name>ficeac10pct48hr</short_name>
+    <long_name>10th percentile Flat Ice Accumulation 48 hour</long_name>
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+    <uiname>FICEAC10pct48hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>1000.0</valid_range>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <fillValue>-999999.0</fillValue>
     <n3D>1</n3D>
     <levelsDesc>SFC</levelsDesc>
@@ -1540,6 +1871,7 @@
     </levels>
   </gridParameterInfo>
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
     <short_name>ficeac5pct48hr</short_name>
     <long_name>5th percentile Flat Ice Accumulation 48 hour</long_name>
     <units>m</units>
@@ -1547,6 +1879,15 @@
     <uiname>FICEAC5pct48hr</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>10.0</valid_range>
+=======
+    <short_name>ficeac10pct72hr</short_name>
+    <long_name>10th percentile Flat Ice Accumulation 72 hour</long_name>
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+    <uiname>FICEAC10pct72hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>1000.0</valid_range>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <fillValue>-999999.0</fillValue>
     <n3D>1</n3D>
     <levelsDesc>SFC</levelsDesc>
@@ -1555,6 +1896,7 @@
     </levels>
   </gridParameterInfo>
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
     <short_name>ficeac10pct48hr</short_name>
     <long_name>10th percentile Flat Ice Accumulation 48 hour</long_name>
     <units>m</units>
@@ -1562,6 +1904,15 @@
     <uiname>FICEAC10pct48hr</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>10.0</valid_range>
+=======
+    <short_name>ficeac25pct24hr</short_name>
+    <long_name>25th percentile Flat Ice Accumulation 24 hour</long_name>
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+    <uiname>FICEAC25pct24hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>1000.0</valid_range>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <fillValue>-999999.0</fillValue>
     <n3D>1</n3D>
     <levelsDesc>SFC</levelsDesc>
@@ -1572,11 +1923,19 @@
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <short_name>ficeac25pct48hr</short_name>
     <long_name>25th percentile Flat Ice Accumulation 48 hour</long_name>
+<<<<<<< HEAD
     <units>m</units>
     <udunits>meter</udunits>
     <uiname>FICEAC25pct48hr</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>10.0</valid_range>
+=======
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+    <uiname>FICEAC25pct48hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>1000.0</valid_range>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <fillValue>-999999.0</fillValue>
     <n3D>1</n3D>
     <levelsDesc>SFC</levelsDesc>
@@ -1585,6 +1944,7 @@
     </levels>
   </gridParameterInfo>
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
     <short_name>ficeac50pct48hr</short_name>
     <long_name>50th percentile Flat Ice Accumulation 48 hour</long_name>
     <units>m</units>
@@ -1592,6 +1952,15 @@
     <uiname>FICEAC50pct48hr</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>10.0</valid_range>
+=======
+    <short_name>ficeac25pct72hr</short_name>
+    <long_name>25th percentile Flat Ice Accumulation 72 hour</long_name>
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+    <uiname>FICEAC25pct72hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>1000.0</valid_range>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <fillValue>-999999.0</fillValue>
     <n3D>1</n3D>
     <levelsDesc>SFC</levelsDesc>
@@ -1600,6 +1969,7 @@
     </levels>
   </gridParameterInfo>
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
     <short_name>ficeac75pct48hr</short_name>
     <long_name>75th percentile Flat Ice Accumulation 48 hour</long_name>
     <units>m</units>
@@ -1607,6 +1977,15 @@
     <uiname>FICEAC75pct48hr</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>10.0</valid_range>
+=======
+    <short_name>ficeac50pct24hr</short_name>
+    <long_name>50th percentile Flat Ice Accumulation 24 hour</long_name>
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+    <uiname>FICEAC50pct24hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>1000.0</valid_range>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <fillValue>-999999.0</fillValue>
     <n3D>1</n3D>
     <levelsDesc>SFC</levelsDesc>
@@ -1615,6 +1994,7 @@
     </levels>
   </gridParameterInfo>
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
     <short_name>ficeac90pct48hr</short_name>
     <long_name>90th percentile Flat Ice Accumulation 48 hour</long_name>
     <units>m</units>
@@ -1622,6 +2002,15 @@
     <uiname>FICEAC90pct48hr</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>10.0</valid_range>
+=======
+    <short_name>ficeac50pct48hr</short_name>
+    <long_name>50th percentile Flat Ice Accumulation 48 hour</long_name>
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+    <uiname>FICEAC50pct48hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>1000.0</valid_range>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <fillValue>-999999.0</fillValue>
     <n3D>1</n3D>
     <levelsDesc>SFC</levelsDesc>
@@ -1630,6 +2019,7 @@
     </levels>
   </gridParameterInfo>
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
     <short_name>ficeac95pct48hr</short_name>
     <long_name>95th percentile Flat Ice Accumulation 48 hour</long_name>
     <units>m</units>
@@ -1637,6 +2027,15 @@
     <uiname>FICEAC95pct48hr</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>10.0</valid_range>
+=======
+    <short_name>ficeac50pct72hr</short_name>
+    <long_name>50th percentile Flat Ice Accumulation 72 hour</long_name>
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+    <uiname>FICEAC50pct72hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>1000.0</valid_range>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <fillValue>-999999.0</fillValue>
     <n3D>1</n3D>
     <levelsDesc>SFC</levelsDesc>
@@ -1644,6 +2043,7 @@
       <level>SFC</level>
     </levels>
   </gridParameterInfo>
+<<<<<<< HEAD
 
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <short_name>ficeac5pct72hr</short_name>
@@ -1656,11 +2056,25 @@
     <fillValue>-999999.0</fillValue>
     <n3D>1</n3D>
     <levelsDesc>SFC</levelsDesc>
+=======
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>ficeac5pct24hr</short_name>
+    <long_name>5th percentile Flat Ice Accumulation 24 hour</long_name>
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+    <uiname>FICEAC5pct24hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>1000.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <levels>
       <level>SFC</level>
     </levels>
   </gridParameterInfo>
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
     <short_name>ficeac10pct72hr</short_name>
     <long_name>10th percentile Flat Ice Accumulation 72 hour</long_name>
     <units>m</units>
@@ -1668,6 +2082,14 @@
     <uiname>FICEAC10pct72hr</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>10.0</valid_range>
+=======
+    <short_name>ficeac5pct48hr</short_name>
+    <long_name>5th percentile Flat Ice Accumulation 48 hour</long_name>
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+    <uiname>FICEAC5pct48hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>1000.0</valid_range>
     <fillValue>-999999.0</fillValue>
     <n3D>1</n3D>
     <levelsDesc>SFC</levelsDesc>
@@ -1676,13 +2098,13 @@
     </levels>
   </gridParameterInfo>
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <short_name>ficeac25pct72hr</short_name>
-    <long_name>25th percentile Flat Ice Accumulation 72 hour</long_name>
-    <units>m</units>
-    <udunits>meter</udunits>
-    <uiname>FICEAC25pct72hr</uiname>
+    <short_name>ficeac5pct72hr</short_name>
+    <long_name>5th percentile Flat Ice Accumulation 72 hour</long_name>
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+    <uiname>FICEAC5pct72hr</uiname>
     <valid_range>0.0</valid_range>
-    <valid_range>10.0</valid_range>
+    <valid_range>1000.0</valid_range>
     <fillValue>-999999.0</fillValue>
     <n3D>1</n3D>
     <levelsDesc>SFC</levelsDesc>
@@ -1691,13 +2113,28 @@
     </levels>
   </gridParameterInfo>
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <short_name>ficeac50pct72hr</short_name>
-    <long_name>50th percentile Flat Ice Accumulation 72 hour</long_name>
-    <units>m</units>
-    <udunits>meter</udunits>
-    <uiname>FICEAC50pct72hr</uiname>
+    <short_name>ficeac75pct24hr</short_name>
+    <long_name>75th percentile Flat Ice Accumulation 24 hour</long_name>
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+    <uiname>FICEAC75pct24hr</uiname>
     <valid_range>0.0</valid_range>
-    <valid_range>10.0</valid_range>
+    <valid_range>1000.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>ficeac75pct48hr</short_name>
+    <long_name>75th percentile Flat Ice Accumulation 48 hour</long_name>
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+    <uiname>FICEAC75pct48hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>1000.0</valid_range>
     <fillValue>-999999.0</fillValue>
     <n3D>1</n3D>
     <levelsDesc>SFC</levelsDesc>
@@ -1708,11 +2145,41 @@
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <short_name>ficeac75pct72hr</short_name>
     <long_name>75th percentile Flat Ice Accumulation 72 hour</long_name>
-    <units>m</units>
-    <udunits>meter</udunits>
+    <units>mm</units>
+    <udunits>millimeter</udunits>
     <uiname>FICEAC75pct72hr</uiname>
     <valid_range>0.0</valid_range>
-    <valid_range>10.0</valid_range>
+    <valid_range>1000.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>ficeac90pct24hr</short_name>
+    <long_name>90th percentile Flat Ice Accumulation 24 hour</long_name>
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+    <uiname>FICEAC90pct24hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>1000.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>ficeac90pct48hr</short_name>
+    <long_name>90th percentile Flat Ice Accumulation 48 hour</long_name>
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+    <uiname>FICEAC90pct48hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>1000.0</valid_range>
     <fillValue>-999999.0</fillValue>
     <n3D>1</n3D>
     <levelsDesc>SFC</levelsDesc>
@@ -1723,11 +2190,41 @@
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <short_name>ficeac90pct72hr</short_name>
     <long_name>90th percentile Flat Ice Accumulation 72 hour</long_name>
-    <units>m</units>
-    <udunits>meter</udunits>
+    <units>mm</units>
+    <udunits>millimeter</udunits>
     <uiname>FICEAC90pct72hr</uiname>
     <valid_range>0.0</valid_range>
-    <valid_range>10.0</valid_range>
+    <valid_range>1000.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>ficeac95pct24hr</short_name>
+    <long_name>95th percentile Flat Ice Accumulation 24 hour</long_name>
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+    <uiname>FICEAC95pct24hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>1000.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>ficeac95pct48hr</short_name>
+    <long_name>95th percentile Flat Ice Accumulation 48 hour</long_name>
+    <units>mm</units>
+    <udunits>millimeter</udunits>
+    <uiname>FICEAC95pct48hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>1000.0</valid_range>
     <fillValue>-999999.0</fillValue>
     <n3D>1</n3D>
     <levelsDesc>SFC</levelsDesc>
@@ -1738,11 +2235,11 @@
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <short_name>ficeac95pct72hr</short_name>
     <long_name>95th percentile Flat Ice Accumulation 72 hour</long_name>
-    <units>m</units>
-    <udunits>meter</udunits>
+    <units>mm</units>
+    <udunits>millimeter</udunits>
     <uiname>FICEAC95pct72hr</uiname>
     <valid_range>0.0</valid_range>
-    <valid_range>10.0</valid_range>
+    <valid_range>1000.0</valid_range>
     <fillValue>-999999.0</fillValue>
     <n3D>1</n3D>
     <levelsDesc>SFC</levelsDesc>
@@ -1751,30 +2248,120 @@
     </levels>
   </gridParameterInfo>
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <short_name>pcpdur12hr</short_name>
-    <long_name>Precipitation Duration 12 hr</long_name>
-    <units>inch</units>
-    <udunits>inch</udunits>
-    <uiname>PCPDUR12hr</uiname>
-    <valid_range>0.0</valid_range>
-    <valid_range>12.0</valid_range>
+    <short_name>t10pct18hr</short_name>
+    <long_name>10th percentile Temperature</long_name>
+    <units>K</units>
+    <udunits>degree_Kelvin</udunits>
+    <uiname>T10pct18hr</uiname>
+    <valid_range>180.0</valid_range>
+    <valid_range>330.0</valid_range>
     <fillValue>-999999.0</fillValue>
     <n3D>1</n3D>
-    <levelsDesc>SFC</levelsDesc>
+    <levelsDesc>FHAG 2</levelsDesc>
     <levels>
-      <level>SFC</level>
+      <level>FHAG2</level>
     </levels>
   </gridParameterInfo>
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <short_name>totsn5pct24hr</short_name>
-    <long_name>5th percentile Total snowfall</long_name>
-    <units>m</units>
-    <udunits>meter</udunits>
-    <uiname>Totsn5pct24hr</uiname>
+    <short_name>t25pct18hr</short_name>
+    <long_name>25th percentile Temperature</long_name>
+    <units>K</units>
+    <udunits>degree_Kelvin</udunits>
+    <uiname>T25pct18hr</uiname>
+    <valid_range>180.0</valid_range>
+    <valid_range>330.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>FHAG 2</levelsDesc>
+    <levels>
+      <level>FHAG2</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>t50pct18hr</short_name>
+    <long_name>50th percentile Temperature</long_name>
+    <units>K</units>
+    <udunits>degree_Kelvin</udunits>
+    <uiname>T50pct18hr</uiname>
+    <valid_range>180.0</valid_range>
+    <valid_range>330.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>FHAG 2</levelsDesc>
+    <levels>
+      <level>FHAG2</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>t5pct18hr</short_name>
+    <long_name>5th percentile Temperature</long_name>
+    <units>K</units>
+    <udunits>degree_Kelvin</udunits>
+    <uiname>T5pct18hr</uiname>
+    <valid_range>180.0</valid_range>
+    <valid_range>330.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>FHAG 2</levelsDesc>
+    <levels>
+      <level>FHAG2</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>t75pct18hr</short_name>
+    <long_name>75th percentile Temperature</long_name>
+    <units>K</units>
+    <udunits>degree_Kelvin</udunits>
+    <uiname>T75pct18hr</uiname>
+    <valid_range>180.0</valid_range>
+    <valid_range>330.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>FHAG 2</levelsDesc>
+    <levels>
+      <level>FHAG2</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>t90pct18hr</short_name>
+    <long_name>90th percentile Temperature</long_name>
+    <units>K</units>
+    <udunits>degree_Kelvin</udunits>
+    <uiname>T90pct18hr</uiname>
+    <valid_range>180.0</valid_range>
+    <valid_range>330.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>FHAG 2</levelsDesc>
+    <levels>
+      <level>FHAG2</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>t95pct18hr</short_name>
+    <long_name>95th percentile Temperature</long_name>
+    <units>K</units>
+    <udunits>degree_Kelvin</udunits>
+    <uiname>T95pct18hr</uiname>
+    <valid_range>180.0</valid_range>
+    <valid_range>330.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>FHAG 2</levelsDesc>
+    <levels>
+      <level>FHAG2</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>tccsprd</short_name>
+    <long_name>Total Cloud Cover</long_name>
+    <units>%</units>
+    <udunits>percent</udunits>
+    <uiname>TCCsprd</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>100.0</valid_range>
     <fillValue>-999999.0</fillValue>
-    <n3D>1</n3D>
+    <n3D>0</n3D>
     <levelsDesc>SFC</levelsDesc>
     <levels>
       <level>SFC</level>
@@ -1786,96 +2373,6 @@
     <units>m</units>
     <udunits>meter</udunits>
     <uiname>Totsn10pct24hr</uiname>
-    <valid_range>0.0</valid_range>
-    <valid_range>100.0</valid_range>
-    <fillValue>-999999.0</fillValue>
-    <n3D>1</n3D>
-    <levelsDesc>SFC</levelsDesc>
-    <levels>
-      <level>SFC</level>
-    </levels>
-  </gridParameterInfo>
-  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <short_name>totsn25pct24hr</short_name>
-    <long_name>25th percentile Total snowfall</long_name>
-    <units>m</units>
-    <udunits>meter</udunits>
-    <uiname>Totsn25pct24hr</uiname>
-    <valid_range>0.0</valid_range>
-    <valid_range>100.0</valid_range>
-    <fillValue>-999999.0</fillValue>
-    <n3D>1</n3D>
-    <levelsDesc>SFC</levelsDesc>
-    <levels>
-      <level>SFC</level>
-    </levels>
-  </gridParameterInfo>
-  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <short_name>totsn50pct24hr</short_name>
-    <long_name>50th percentile Total snowfall</long_name>
-    <units>m</units>
-    <udunits>meter</udunits>
-    <uiname>Totsn50pct24hr</uiname>
-    <valid_range>0.0</valid_range>
-    <valid_range>100.0</valid_range>
-    <fillValue>-999999.0</fillValue>
-    <n3D>1</n3D>
-    <levelsDesc>SFC</levelsDesc>
-    <levels>
-      <level>SFC</level>
-    </levels>
-  </gridParameterInfo>
-  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <short_name>totsn75pct24hr</short_name>
-    <long_name>75th percentile Total snowfall</long_name>
-    <units>m</units>
-    <udunits>meter</udunits>
-    <uiname>Totsn75pct24hr</uiname>
-    <valid_range>0.0</valid_range>
-    <valid_range>100.0</valid_range>
-    <fillValue>-999999.0</fillValue>
-    <n3D>1</n3D>
-    <levelsDesc>SFC</levelsDesc>
-    <levels>
-      <level>SFC</level>
-    </levels>
-  </gridParameterInfo>
-  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <short_name>totsn90pct24hr</short_name>
-    <long_name>90th percentile Total snowfall</long_name>
-    <units>m</units>
-    <udunits>meter</udunits>
-    <uiname>Totsn90pct24hr</uiname>
-    <valid_range>0.0</valid_range>
-    <valid_range>100.0</valid_range>
-    <fillValue>-999999.0</fillValue>
-    <n3D>1</n3D>
-    <levelsDesc>SFC</levelsDesc>
-    <levels>
-      <level>SFC</level>
-    </levels>
-  </gridParameterInfo>
-  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <short_name>totsn95pct24hr</short_name>
-    <long_name>95th percentile Total snowfall</long_name>
-    <units>m</units>
-    <udunits>meter</udunits>
-    <uiname>Totsn95pct24hr</uiname>
-    <valid_range>0.0</valid_range>
-    <valid_range>100.0</valid_range>
-    <fillValue>-999999.0</fillValue>
-    <n3D>1</n3D>
-    <levelsDesc>SFC</levelsDesc>
-    <levels>
-      <level>SFC</level>
-    </levels>
-  </gridParameterInfo>
-  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <short_name>totsn5pct48hr</short_name>
-    <long_name>5th percentile Total snowfall</long_name>
-    <units>m</units>
-    <udunits>meter</udunits>
-    <uiname>Totsn5pct48hr</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>100.0</valid_range>
     <fillValue>-999999.0</fillValue>
@@ -1901,102 +2398,86 @@
     </levels>
   </gridParameterInfo>
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <short_name>totsn25pct48hr</short_name>
-    <long_name>25th percentile Total snowfall</long_name>
-    <units>m</units>
-    <udunits>meter</udunits>
-    <uiname>Totsn25pct48hr</uiname>
-    <valid_range>0.0</valid_range>
-    <valid_range>100.0</valid_range>
-    <fillValue>-999999.0</fillValue>
-    <n3D>1</n3D>
-    <levelsDesc>SFC</levelsDesc>
-    <levels>
-      <level>SFC</level>
-    </levels>
-  </gridParameterInfo>
-  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <short_name>totsn50pct48hr</short_name>
-    <long_name>50th percentile Total snowfall</long_name>
-    <units>m</units>
-    <udunits>meter</udunits>
-    <uiname>Totsn50pct48hr</uiname>
-    <valid_range>0.0</valid_range>
-    <valid_range>100.0</valid_range>
-    <fillValue>-999999.0</fillValue>
-    <n3D>1</n3D>
-    <levelsDesc>SFC</levelsDesc>
-    <levels>
-      <level>SFC</level>
-    </levels>
-  </gridParameterInfo>
-  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <short_name>totsn75pct48hr</short_name>
-    <long_name>75th percentile Total snowfall</long_name>
-    <units>m</units>
-    <udunits>meter</udunits>
-    <uiname>Totsn75pct48hr</uiname>
-    <valid_range>0.0</valid_range>
-    <valid_range>100.0</valid_range>
-    <fillValue>-999999.0</fillValue>
-    <n3D>1</n3D>
-    <levelsDesc>SFC</levelsDesc>
-    <levels>
-      <level>SFC</level>
-    </levels>
-  </gridParameterInfo>
-  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <short_name>totsn90pct48hr</short_name>
-    <long_name>90th percentile Total snowfall</long_name>
-    <units>m</units>
-    <udunits>meter</udunits>
-    <uiname>Totsn90pct48hr</uiname>
-    <valid_range>0.0</valid_range>
-    <valid_range>100.0</valid_range>
-    <fillValue>-999999.0</fillValue>
-    <n3D>1</n3D>
-    <levelsDesc>SFC</levelsDesc>
-    <levels>
-      <level>SFC</level>
-    </levels>
-  </gridParameterInfo>
-  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <short_name>totsn95pct48hr</short_name>
-    <long_name>95th percentile Total snowfall</long_name>
-    <units>m</units>
-    <udunits>meter</udunits>
-    <uiname>Totsn95pct48hr</uiname>
-    <valid_range>0.0</valid_range>
-    <valid_range>100.0</valid_range>
-    <fillValue>-999999.0</fillValue>
-    <n3D>1</n3D>
-    <levelsDesc>SFC</levelsDesc>
-    <levels>
-      <level>SFC</level>
-    </levels>
-  </gridParameterInfo>
-
-  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <short_name>totsn5pct72hr</short_name>
-    <long_name>5th percentile Total snowfall</long_name>
-    <units>m</units>
-    <udunits>meter</udunits>
-    <uiname>Totsn5pct72hr</uiname>
-    <valid_range>0.0</valid_range>
-    <valid_range>100.0</valid_range>
-    <fillValue>-999999.0</fillValue>
-    <n3D>1</n3D>
-    <levelsDesc>SFC</levelsDesc>
-    <levels>
-      <level>SFC</level>
-    </levels>
-  </gridParameterInfo>
-  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <short_name>totsn10pct72hr</short_name>
     <long_name>10th percentile Total snowfall</long_name>
     <units>m</units>
     <udunits>meter</udunits>
     <uiname>Totsn10pct72hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>totsn12in24hr</short_name>
+    <long_name>Prob 24hr Total Above 12 inches</long_name>
+    <units>%</units>
+    <udunits>percent</udunits>
+    <uiname>ProbSnowGE12F24</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>totsn18in24hr</short_name>
+    <long_name>Prob 24hr Total Above 18 inches</long_name>
+    <units>%</units>
+    <udunits>percent</udunits>
+    <uiname>ProbSnowGE18F24</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>totsn1in24hr</short_name>
+    <long_name>Prob 24hr Total Above 1 inch</long_name>
+    <units>%</units>
+    <udunits>percent</udunits>
+    <uiname>ProbSnowGE01F24</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>totsn25pct24hr</short_name>
+    <long_name>25th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn25pct24hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>totsn25pct48hr</short_name>
+    <long_name>25th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn25pct48hr</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>100.0</valid_range>
     <fillValue>-999999.0</fillValue>
@@ -2022,6 +2503,76 @@
     </levels>
   </gridParameterInfo>
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>totsn2in24hr</short_name>
+    <long_name>Prob 24hr Total Above 2 inches</long_name>
+    <units>%</units>
+    <udunits>percent</udunits>
+    <uiname>ProbSnowGE02F24</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>totsn4in24hr</short_name>
+    <long_name>Prob 24hr Total Above 4 inches</long_name>
+    <units>%</units>
+    <udunits>percent</udunits>
+    <uiname>ProbSnowGE04F24</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>totsn50pct24hr</short_name>
+    <long_name>50th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn50pct24hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>totsn50pct48hr</short_name>
+    <long_name>50th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn50pct48hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
+    <short_name>ficeac25pct72hr</short_name>
+    <long_name>25th percentile Flat Ice Accumulation 72 hour</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>FICEAC25pct72hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>10.0</valid_range>
+=======
     <short_name>totsn50pct72hr</short_name>
     <long_name>50th percentile Total snowfall</long_name>
     <units>m</units>
@@ -2029,8 +2580,590 @@
     <uiname>Totsn50pct72hr</uiname>
     <valid_range>0.0</valid_range>
     <valid_range>100.0</valid_range>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <fillValue>-999999.0</fillValue>
     <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
+    <short_name>ficeac50pct72hr</short_name>
+    <long_name>50th percentile Flat Ice Accumulation 72 hour</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>FICEAC50pct72hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>10.0</valid_range>
+=======
+    <short_name>totsn5pct24hr</short_name>
+    <long_name>5th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn5pct24hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
+    <short_name>ficeac75pct72hr</short_name>
+    <long_name>75th percentile Flat Ice Accumulation 72 hour</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>FICEAC75pct72hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>10.0</valid_range>
+=======
+    <short_name>totsn5pct48hr</short_name>
+    <long_name>5th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn5pct48hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
+    <short_name>ficeac90pct72hr</short_name>
+    <long_name>90th percentile Flat Ice Accumulation 72 hour</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>FICEAC90pct72hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>10.0</valid_range>
+=======
+    <short_name>totsn5pct72hr</short_name>
+    <long_name>5th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn5pct72hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
+    <short_name>ficeac95pct72hr</short_name>
+    <long_name>95th percentile Flat Ice Accumulation 72 hour</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>FICEAC95pct72hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>10.0</valid_range>
+=======
+    <short_name>totsn6in24hr</short_name>
+    <long_name>Prob 24hr Total Above 6 inches</long_name>
+    <units>%</units>
+    <udunits>percent</udunits>
+    <uiname>ProbSnowGE06F24</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
+    <short_name>pcpdur12hr</short_name>
+    <long_name>Precipitation Duration 12 hr</long_name>
+    <units>inch</units>
+    <udunits>inch</udunits>
+    <uiname>PCPDUR12hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>12.0</valid_range>
+=======
+    <short_name>totsn75pct24hr</short_name>
+    <long_name>75th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn75pct24hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
+    <short_name>totsn5pct24hr</short_name>
+    <long_name>5th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn5pct24hr</uiname>
+=======
+    <short_name>totsn75pct48hr</short_name>
+    <long_name>75th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn75pct48hr</uiname>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
+    <short_name>totsn10pct24hr</short_name>
+    <long_name>10th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn10pct24hr</uiname>
+=======
+    <short_name>totsn75pct72hr</short_name>
+    <long_name>75th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn75pct72hr</uiname>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
+    <short_name>totsn25pct24hr</short_name>
+    <long_name>25th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn25pct24hr</uiname>
+=======
+    <short_name>totsn8in24hr</short_name>
+    <long_name>Prob 24hr Total Above 8 inches</long_name>
+    <units>%</units>
+    <udunits>percent</udunits>
+    <uiname>ProbSnowGE08F24</uiname>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
+    <short_name>totsn50pct24hr</short_name>
+    <long_name>50th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn50pct24hr</uiname>
+=======
+    <short_name>totsn90pct24hr</short_name>
+    <long_name>90th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn90pct24hr</uiname>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
+    <short_name>totsn75pct24hr</short_name>
+    <long_name>75th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn75pct24hr</uiname>
+=======
+    <short_name>totsn90pct48hr</short_name>
+    <long_name>90th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn90pct48hr</uiname>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
+    <short_name>totsn90pct24hr</short_name>
+    <long_name>90th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn90pct24hr</uiname>
+=======
+    <short_name>totsn90pct72hr</short_name>
+    <long_name>90th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn90pct72hr</uiname>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>totsn95pct24hr</short_name>
+    <long_name>95th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn95pct24hr</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
+    <short_name>totsn5pct48hr</short_name>
+    <long_name>5th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn5pct48hr</uiname>
+=======
+    <short_name>totsn95pct48hr</short_name>
+    <long_name>95th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn95pct48hr</uiname>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
+    <short_name>totsn10pct48hr</short_name>
+    <long_name>10th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn10pct48hr</uiname>
+=======
+    <short_name>totsn95pct72hr</short_name>
+    <long_name>95th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn95pct72hr</uiname>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
+    <short_name>totsn25pct48hr</short_name>
+    <long_name>25th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn25pct48hr</uiname>
+=======
+    <short_name>tprobabove100</short_name>
+    <long_name>Prob of Max or Min temperature above 100F</long_name>
+    <units>%</units>
+    <udunits>percent</udunits>
+    <uiname>TprobAbove100</uiname>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+<<<<<<< HEAD
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>totsn50pct48hr</short_name>
+    <long_name>50th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn50pct48hr</uiname>
+=======
+    <levelsDesc>FHAG 2</levelsDesc>
+    <levels>
+      <level>FHAG2</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>tprobabove110</short_name>
+    <long_name>Prob of Max or Min temperature above 110F</long_name>
+    <units>%</units>
+    <udunits>percent</udunits>
+    <uiname>TprobAbove110</uiname>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+<<<<<<< HEAD
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>totsn75pct48hr</short_name>
+    <long_name>75th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn75pct48hr</uiname>
+=======
+    <levelsDesc>FHAG 2</levelsDesc>
+    <levels>
+      <level>FHAG2</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>tprobabove120</short_name>
+    <long_name>Prob of Max or Min temperature above 120F</long_name>
+    <units>%</units>
+    <udunits>percent</udunits>
+    <uiname>TprobAbove120</uiname>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+<<<<<<< HEAD
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>totsn90pct48hr</short_name>
+    <long_name>90th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn90pct48hr</uiname>
+=======
+    <levelsDesc>FHAG 2</levelsDesc>
+    <levels>
+      <level>FHAG2</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>tprobabove80</short_name>
+    <long_name>Prob of Max or Min temperature above 80F</long_name>
+    <units>%</units>
+    <udunits>percent</udunits>
+    <uiname>TprobAbove80</uiname>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+<<<<<<< HEAD
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>totsn95pct48hr</short_name>
+    <long_name>95th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn95pct48hr</uiname>
+=======
+    <levelsDesc>FHAG 2</levelsDesc>
+    <levels>
+      <level>FHAG2</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>tprobabove90</short_name>
+    <long_name>Prob of Max or Min temperature above 90F</long_name>
+    <units>%</units>
+    <udunits>percent</udunits>
+    <uiname>TprobAbove90</uiname>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+<<<<<<< HEAD
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>totsn5pct72hr</short_name>
+    <long_name>5th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn5pct72hr</uiname>
+=======
+    <levelsDesc>FHAG 2</levelsDesc>
+    <levels>
+      <level>FHAG2</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>tprobbelow28</short_name>
+    <long_name>Prob of Max or Min temperature below 28F</long_name>
+    <units>%</units>
+    <udunits>percent</udunits>
+    <uiname>TprobBelow28</uiname>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+<<<<<<< HEAD
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>totsn10pct72hr</short_name>
+    <long_name>10th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn10pct72hr</uiname>
+=======
+    <levelsDesc>FHAG 2</levelsDesc>
+    <levels>
+      <level>FHAG2</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>tprobbelow32</short_name>
+    <long_name>Prob of Max or Min temperature below 32F</long_name>
+    <units>%</units>
+    <udunits>percent</udunits>
+    <uiname>TprobBelow32</uiname>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+<<<<<<< HEAD
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>totsn25pct72hr</short_name>
+    <long_name>25th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn25pct72hr</uiname>
+=======
+    <levelsDesc>FHAG 2</levelsDesc>
+    <levels>
+      <level>FHAG2</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>tprobbelow0</short_name>
+    <long_name>Prob of Max or Min temperature below 0F</long_name>
+    <units>%</units>
+    <udunits>percent</udunits>
+    <uiname>TprobBelow0</uiname>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+<<<<<<< HEAD
+    <levelsDesc>SFC</levelsDesc>
+    <levels>
+      <level>SFC</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>totsn50pct72hr</short_name>
+    <long_name>50th percentile Total snowfall</long_name>
+    <units>m</units>
+    <udunits>meter</udunits>
+    <uiname>Totsn50pct72hr</uiname>
+=======
+    <levelsDesc>FHAG 2</levelsDesc>
+    <levels>
+      <level>FHAG2</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>tprobbelown20</short_name>
+    <long_name>Prob of Max or Min temperature below -20F</long_name>
+    <units>%</units>
+    <udunits>percent</udunits>
+    <uiname>TprobBelowNeg20</uiname>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
+    <valid_range>0.0</valid_range>
+    <valid_range>100.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+<<<<<<< HEAD
     <levelsDesc>SFC</levelsDesc>
     <levels>
       <level>SFC</level>
@@ -2042,10 +3175,24 @@
     <units>m</units>
     <udunits>meter</udunits>
     <uiname>Totsn75pct72hr</uiname>
+=======
+    <levelsDesc>FHAG 2</levelsDesc>
+    <levels>
+      <level>FHAG2</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>tprobbelown40</short_name>
+    <long_name>Prob of Max or Min temperature below -40F</long_name>
+    <units>%</units>
+    <udunits>percent</udunits>
+    <uiname>TprobBelowNeg40</uiname>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <valid_range>0.0</valid_range>
     <valid_range>100.0</valid_range>
     <fillValue>-999999.0</fillValue>
     <n3D>1</n3D>
+<<<<<<< HEAD
     <levelsDesc>SFC</levelsDesc>
     <levels>
       <level>SFC</level>
@@ -2083,6 +3230,74 @@
   </gridParameterInfo>
 
   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+=======
+    <levelsDesc>FHAG 2</levelsDesc>
+    <levels>
+      <level>FHAG2</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>mxtmntsprd</short_name>
+    <long_name>MaxTMinT sprd</long_name>
+    <units>K</units>
+    <udunits>degree_Kelvin</udunits>
+    <uiname>MxTMnTSprd</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>30.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>FHAG 2</levelsDesc>
+    <levels>
+      <level>FHAG2</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>tsprd</short_name>
+    <long_name>Temperature sprd</long_name>
+    <units>K</units>
+    <udunits>degree_Kelvin</udunits>
+    <uiname>Tsprd</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>30.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>FHAG 2</levelsDesc>
+    <levels>
+      <level>FHAG2</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>wgssprd</short_name>
+    <long_name>Wind speed gust</long_name>
+    <units>m/s</units>
+    <udunits>meter/sec</udunits>
+    <uiname>WGSsprd</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>50.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>FHAG 10</levelsDesc>
+    <levels>
+      <level>FHAG10</level>
+    </levels>
+  </gridParameterInfo>
+  <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <short_name>wssprd</short_name>
+    <long_name>Wind Speed spread</long_name>
+    <units>m/s</units>
+    <udunits>meter/sec</udunits>
+    <uiname>WSsprd</uiname>
+    <valid_range>0.0</valid_range>
+    <valid_range>50.0</valid_range>
+    <fillValue>-999999.0</fillValue>
+    <n3D>1</n3D>
+    <levelsDesc>FHAG 10</levelsDesc>
+    <levels>
+      <level>FHAG10</level>
+    </levels>
+  </gridParameterInfo>
+   <gridParameterInfo xsi:type="parameterInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <short_name>dswrf</short_name>
     <long_name>Downward short-wave radiation flux</long_name>
     <units>m</units>
@@ -2127,4 +3342,8 @@
       <level>FHAG10</level>
     </levels>
   </gridParameterInfo>
+<<<<<<< HEAD
 </gridParamInfo>
+=======
+</gridParamInfo>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

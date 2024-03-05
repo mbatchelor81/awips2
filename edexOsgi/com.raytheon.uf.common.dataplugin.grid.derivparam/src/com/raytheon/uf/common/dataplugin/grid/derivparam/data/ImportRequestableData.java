@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -44,21 +56,41 @@ import com.raytheon.uf.common.time.DataTime;
 /**
  * Import from one data source to another. Handles temporal and geolocational
  * interpolation.
+<<<<<<< HEAD
  * 
  * <pre>
  * 
  * SOFTWARE HISTORY
  * 
+=======
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- ----------------------------------------
  * Apr 13, 2010  4473     rjpeter   Initial creation
  * Apr 11, 2016  5439     bsteffen  Move to common.
+<<<<<<< HEAD
  * 
  * </pre>
  * 
  * @author rjpeter
  */
 public class ImportRequestableData extends AliasRequestableData {
+=======
+ * Mar 23, 2023  2031674  mapeters  AliasRequestableData no longer deep clones
+ *                                  by default
+ *
+ * </pre>
+ *
+ * @author rjpeter
+ */
+public class ImportRequestableData extends AliasRequestableData {
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     protected AbstractRequestableData sourceRecord2;
 
     public ImportRequestableData(ImportRequestableData that) {
@@ -80,10 +112,19 @@ public class ImportRequestableData extends AliasRequestableData {
         if (arg instanceof Request) {
             req = (Request) arg;
         }
+<<<<<<< HEAD
         Object rval = getDataAndConvert(sourceRecord, Request.ALL);
 
         if (sourceRecord2 != null) {
             Object interp2 = getDataAndConvert(sourceRecord2, Request.ALL);
+=======
+        // Must deep clone since we modify this data record in place
+        Object rval = getDataAndConvert(sourceRecord, Request.ALL, true);
+
+        if (sourceRecord2 != null) {
+            Object interp2 = getDataAndConvert(sourceRecord2, Request.ALL,
+                    false);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             // do time interpolation
             long millis1 = sourceRecord.getDataTime().getValidTime()
                     .getTimeInMillis();
@@ -95,8 +136,15 @@ public class ImportRequestableData extends AliasRequestableData {
             w1 = 1 - w2;
             if ((rval instanceof FloatDataRecord)
                     && (interp2 instanceof FloatDataRecord)) {
+<<<<<<< HEAD
                 // multiply in place so rval will hold correct value after
                 // calculation
+=======
+                /*
+                 * multiply in place so rval will hold correct value after
+                 * calculation
+                 */
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 interpolate(((FloatDataRecord) rval).getFloatData(),
                         ((FloatDataRecord) interp2).getFloatData(), w2, w1);
             } else if ((rval instanceof FloatDataRecord[])
@@ -104,8 +152,13 @@ public class ImportRequestableData extends AliasRequestableData {
                 FloatDataRecord[] recs = (FloatDataRecord[]) rval;
                 FloatDataRecord[] recs2 = (FloatDataRecord[]) interp2;
                 for (int i = 0; (i < recs.length) && (i < recs2.length); i++) {
+<<<<<<< HEAD
                     interpolate(recs[i].getFloatData(),
                             recs2[i].getFloatData(), w2, w1);
+=======
+                    interpolate(recs[i].getFloatData(), recs2[i].getFloatData(),
+                            w2, w1);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
             } else if (rval instanceof IDataRecord[]) {
                 IDataRecord[] recs = (IDataRecord[]) rval;
@@ -114,8 +167,13 @@ public class ImportRequestableData extends AliasRequestableData {
                     if ((recs[i] instanceof FloatDataRecord)
                             && (recs2[i] instanceof FloatDataRecord)) {
                         interpolate(((FloatDataRecord) recs[i]).getFloatData(),
+<<<<<<< HEAD
                                 ((FloatDataRecord) recs2[i]).getFloatData(),
                                 w2, w1);
+=======
+                                ((FloatDataRecord) recs2[i]).getFloatData(), w2,
+                                w1);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     }
                 }
             }
@@ -131,8 +189,12 @@ public class ImportRequestableData extends AliasRequestableData {
         } else if (rval instanceof FloatDataRecord[]) {
             FloatDataRecord[] recs = (FloatDataRecord[]) rval;
             for (int i = 0; i < recs.length; i++) {
+<<<<<<< HEAD
                 FloatDataRecord fdr = remapGrid(sourceGrid, destGrid,
  recs[i],
+=======
+                FloatDataRecord fdr = remapGrid(sourceGrid, destGrid, recs[i],
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         interpolation);
                 recs[i] = SliceUtil.slice(fdr, req);
             }
@@ -152,7 +214,11 @@ public class ImportRequestableData extends AliasRequestableData {
 
     /**
      * remap gridded data to a new grid coverage
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param sourceGrid
      *            source grid coverage
      * @param destGrid
@@ -175,8 +241,13 @@ public class ImportRequestableData extends AliasRequestableData {
             GridReprojection interp = PrecomputedGridReprojection
                     .getReprojection(sourceGeometry, destGeometry);
 
+<<<<<<< HEAD
             DataSource source = new GeographicDataSource(FloatBuffer.wrap(fdr
                     .getFloatData()), sourceGeometry);
+=======
+            DataSource source = new GeographicDataSource(
+                    FloatBuffer.wrap(fdr.getFloatData()), sourceGeometry);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             FloatBufferWrapper dest = new FloatBufferWrapper(
                     destGeometry.getGridRange2D());
@@ -185,8 +256,13 @@ public class ImportRequestableData extends AliasRequestableData {
 
             FloatDataRecord rval = new FloatDataRecord(fdr.getName(),
                     fdr.getGroup(), dest.getArray(),
+<<<<<<< HEAD
                     destGeometry.getDimension(), new long[] { dest.getNx(),
                             dest.getNy() });
+=======
+                    destGeometry.getDimension(),
+                    new long[] { dest.getNx(), dest.getNy() });
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             return rval;
         } catch (Exception e) {
@@ -197,7 +273,11 @@ public class ImportRequestableData extends AliasRequestableData {
     /**
      * Performs the following calc in place at arr1: arr1 = arr1 * val1 + arr2 *
      * val2
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param arr1
      * @param arr2
      * @param val1
@@ -214,6 +294,7 @@ public class ImportRequestableData extends AliasRequestableData {
         }
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -221,6 +302,8 @@ public class ImportRequestableData extends AliasRequestableData {
      * com.raytheon.uf.viz.derivparam.data.AliasRequestableData#getDependencies
      * ()
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public List<AbstractRequestableData> getDependencies() {
         return Arrays.asList(sourceRecord, sourceRecord2);

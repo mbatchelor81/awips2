@@ -11,7 +11,11 @@
     <camelContext id="clustered-gaff-context" xmlns="http://camel.apache.org/schema/spring"
         errorHandlerRef="errorHandler">
 
+<<<<<<< HEAD
         <endpoint id="gaffCron" uri="clusteredquartz://hydro/gaffScheduled/?cron=${gaff.cron}"/>
+=======
+        <endpoint id="gaffCron" uri="quartz://hydro/gaffScheduled/?cron=${gaff.cron}"/>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         <!-- Run GAFF on a scheduled timer -->
         <route id="gaffScheduled">

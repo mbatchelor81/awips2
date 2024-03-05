@@ -37,15 +37,16 @@ from awips import UsageArgumentParser
 # Provides a command-line utility to break all locks.
 #
 #
-#     SOFTWARE HISTORY
+# SOFTWARE HISTORY
 #
-#    Date            Ticket#       Engineer       Description
-#    ------------    ----------    -----------    --------------------------
-#    04/05/2011      8826          rferrel        Initial Creation.
-#    06/12/2013      2099          dgilling       Code cleanup, improve logging.
+# Date          Ticket#  Engineer  Description
+# ------------- -------- --------- --------------------------------------------
+# Apr 05, 2011  8826     rferrel   Initial Creation.
+# Jun 12, 2013  2099     dgilling  Code cleanup, improve logging.
+# Jun 30, 2021  8572     randerso  Replace references to CDSHOST and CDSPORT
+#                                  With DEFAULT_HOST and DEFAULT_PORT
 #
-#
-#
+##
 
 logging.basicConfig(
     format="%(asctime)s %(name)s %(levelname)s:  %(message)s",
@@ -143,15 +144,11 @@ def validateArgs():
     options = parser.parse_args()
 
     if options.host is None:
-        if "CDSHOST" in os.environ:
-            options.host = os.environ["CDSHOST"]
-        else:
-            parser.error("Error: host is not specified.")
+        options.host = str(os.getenv("DEFAULT_HOST", "localhost"))
+        
     if options.port is None:
-        if "CDSPORT" in os.environ:
-            options.port = int(os.environ["CDSPORT"])
-        else:
-            parser.error("Error: port is not specified.")
+        options.port = int(os.getenv("DEFAULT_PORT", "9581"))
+
     if options.allLocks == False and not options.databaseIDs:
         parser.error("Error: either -a or -d are required.")
     invalidDbIds = []

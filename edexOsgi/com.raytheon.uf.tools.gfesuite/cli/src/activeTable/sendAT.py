@@ -41,8 +41,13 @@ import logging
 import sys
 
 from dynamicserialize.dstypes.com.raytheon.uf.common.activetable.request import SendActiveTableRequest
+<<<<<<< HEAD
 from awips import ThriftClient
 from awips import UsageArgumentParser
+=======
+from ufpy import ThriftClient
+from ufpy import UsageArgumentParser
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 
 logging.basicConfig(format="%(asctime)s %(name)s %(levelname)s:  %(message)s", 

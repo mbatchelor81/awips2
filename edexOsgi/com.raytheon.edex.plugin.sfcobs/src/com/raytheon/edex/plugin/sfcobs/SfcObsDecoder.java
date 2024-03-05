@@ -86,7 +86,11 @@ public class SfcObsDecoder extends AbstractDecoder {
     public static final String PLUGIN_NAME = "sfcobs";
 
     private final IPerformanceStatusHandler perfLog = PerformanceStatus
+<<<<<<< HEAD
             .getHandler("SfcObs:");
+=======
+            .getHandler("SfcObs");
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /** The logger */
     private final Logger logger = LoggerFactory.getLogger(getClass());

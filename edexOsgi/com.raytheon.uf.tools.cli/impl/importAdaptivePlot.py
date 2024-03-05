@@ -111,7 +111,11 @@ if exportFileName is None:
     if idx > -1:
         exportFileName = exportFileName[0:idx]
 
+<<<<<<< HEAD
 from awips.ThriftClient import *
+=======
+from ufpy.ThriftClient import *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 client = ThriftClient(server)
 
 from dynamicserialize.dstypes.com.raytheon.uf.common.pointdata.requests import *

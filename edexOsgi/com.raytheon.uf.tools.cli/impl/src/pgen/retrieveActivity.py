@@ -1,24 +1,36 @@
 #!/awips2/python/bin/python3
 #
-##
+################################################################################
 # This script is used to extract PGEN products from EDEX.
-# It can be run in batch mode by specifying the "-l", "-type", "-tag", "-time", "-d", "-st", "-n",
-# and "-p" options on the command line.  Optionally, users can run it in interactive
-# mode by invoking it with no argument.
+# It can be run in batch mode by specifying the 
+# "-l", "-type", "-tag", "-time", "-d", "-st", "-n", and "-p" options on the 
+# command line.  
+#
+# Optionally, users can run it in interactive mode by invoking it with no 
+# argument.
 #
 # Users can override the default EDEX server and port name by specifying them
 # in the $DEFAULT_HOST and $DEFAULT_PORT shell environment variables.
 #
-# ??/??    R5250    A. Su    PGEN - retrieveActivity command line interface does not work
+################################################################################
 #
-# 03/18    R5801    A. Su    PGEN - retrieveActivity command line interface does not work
+#  SOFTWARE HISTORY
+    
+    
+#  Date         Ticket#     Engineer     Description
+    
+    
+#  ------------ ----------  ------------ --------------------------
+# ??/??         R5250       A. Su        PGEN - retrieveActivity command line
+#                                        interface does not work
+# 03/18         R5801       A. Su        PGEN - retrieveActivity command line
+#                                        interface does not work
+# 07/02         R8536       P. Chowdhuri PGEN - retrieveActivity should grab
+#                                        latest if -d option not provided
+# 03/04/2021    89102       S. Russell   Added support for the database field   
+#                                        metadata.pgen.activitysubtype     
 #
-# 07/02    R8536    P. Chowdhuri
-#                            PGEN - retrieveActivity should grab latest if -d option not provided
-#
-#
-##
-#
+
 
 import logging
 from tkinter import *
@@ -102,6 +114,7 @@ def main():
     logger.info("Starting retrieveActivity.")
     options = __parseCommandLine()
 
+    # GUI Version Of The Program
     if options.interactive :
         # Launch interactive GUI
         logger.info("Running in interactive mode.")
@@ -110,18 +123,24 @@ def main():
         app = RetrieveGui(master=root)
         app.mainloop()
         root.destroy()
+    # Command Line Version Of The Program
     else:
-        # Retrieve all activities and build a map of record using
-        # type(subtype) as key.
+        # Get all records from metadata.PGEN table
+        # store the records using PGEN.activitytype as a key
         mu = ActivityUtil.ActivityUtil()
         activityMap = mu.getActivityMap()
 
-        # Replace a space with the "_" in the type, accepting "CONV SIGMET" & "OUTL SIGMET".
+        # Replace a space with the "_" in the type(activitytype)
         reqtype = None
         if ( options.type != None ):
             reqtype = options.type.replace(" ", "_")
             if ( options.subtype != None ) :
                 reqtype = options.type + "(" + options.subtype + ")"
+
+        # Replace a space with the "_" in the subtype(activitysubtype)
+        subtype = None
+        if(options.subtype != None):
+            subtype = options.subtype.replace(" ","_")
 
         # Form the matching pattern for tag ID
         tagID = None
@@ -134,19 +153,26 @@ def main():
         # R8536 change Most recent time on the data isn't known here
         latestRefTime = None
 
+        # For each type(PGEN.activitytype) 
         for key in activityMap.keys():
+            # Get all of the retrieved records that match the type
             recs = activityMap[key]
+            # For each record that has that type
             for rec in recs:
+                # If the record matches the user entered parameters
+                # Get the latest record that matches the user entered parameters
                 if ( mu.stringMatcher(options.label, rec["activityLabel"]) and
                      mu.stringMatcher(tagID, rec["activityLabel"]) and
                      mu.stringMatcher(reqtype, key ) and
+                     mu.stringMatcher(subtype, rec["activitySubtype"]) and
                      mu.stringMatcher(options.name, rec["activityName"] ) ):
-                    #Remove sec.msec from record's refTime
+
                     dbRefTime = rec["dataTime.refTime"]
                     if (latestRefTime == None):
                         latestRefTime = dbRefTime
                         latestrec.append(rec)
 
+                    #Remove sec.msec from record's refTime
                     dotIndex = dbRefTime.rfind(":")
                     if ( dotIndex > 0 ):
                         shortTime = dbRefTime[:dotIndex]

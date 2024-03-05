@@ -24,6 +24,7 @@
 ##
 #
 # SOFTWARE HISTORY
+<<<<<<< HEAD
 # Date         Ticket#    Engineer    Description
 # ------------ ---------- ----------- --------------------------
 # Feb 09, 2015  #4103     dgilling    Initial Creation.
@@ -46,6 +47,53 @@ then
     . ${SITE_SVCBU_OVERRIDE}
 fi
 
+=======
+#
+# Date          Ticket#  Engineer        Description
+# ------------- -------- ---------       --------------------------------------------
+# Feb 09, 2015  4103     dgilling        Initial Creation.
+# Mar 27, 2015  4103     dgilling        Support new location for svcbu.properties.
+# Apr 28, 2015  4427     dgilling        Add markTask functions.
+# Jul 15, 2016  5747     dgilling        Move edex_static to common_static.
+# Jun 29, 2021  8572     randerso        Use command line argument for site Id if provided
+#                                        Merged svcbu.env into this file.
+#                                        Moved path definitons from svcbu.properties into
+#                                        svcbu_paths.properties since sites should not be
+#                                        overriding them.
+# Jul 27. 2023  2035937  Lisa.Singh      Renamed SITE paramater to prevent conflict
+# Aug 29, 2023  2028172  jkelmer         Added function to set PRI_SITES env variable from
+#                                        svcbu.properties PRIMARY_SITES, or 
+#                                        AW_SITE_IDENTIFIER if unset
+#
+
+AWIPS_HOME=/awips2
+
+if [[ -z "$1" ]]
+then
+    AW_SITE=${AW_SITE_IDENTIFIER}
+else
+    AW_SITE=`echo ${1} | tr [a-z] [A-Z]`
+fi
+
+source ${AWIPS_HOME}/edex/data/utility/common_static/base/gfe/config/svcbu.properties
+SITE_SVCBU_OVERRIDE=${AWIPS_HOME}/edex/data/utility/common_static/site/${AW_SITE}/gfe/config/svcbu.properties
+if [[ -f ${SITE_SVCBU_OVERRIDE} ]]
+then
+    echo "Using svcbu.properties for site ${AW_SITE}"
+    source ${SITE_SVCBU_OVERRIDE}
+fi
+
+source ${AWIPS_HOME}/GFESuite/ServiceBackup/configuration/svcbu_paths.properties
+
+export PATH=$PATH:$GFESUITE_HOME/bin:$GFESUITE_HOME/ServiceBackup/scripts:/awips2/fxa/bin/
+source /etc/profile.d/awips2Python.sh
+
+# Make the directories
+[ ! -d ${SVCBU_HOME} ] && (umask 022;mkdir -p ${SVCBU_HOME})
+[ ! -d ${IFPS_LOG} ] && (umask 022;mkdir -p ${IFPS_LOG})
+[ ! -d ${LOCK_DIR} ] && (umask 022;mkdir -p ${LOCK_DIR})
+[ ! -d ${IFPS_DATA} ] && (umask 022;mkdir -p ${IFPS_DATA})
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 function configureLogging()
 {
@@ -156,4 +204,40 @@ function markTaskInProgress()
 {
     local lock_file="$1"
     markTask ${lock_file} "IN_PROGRESS"
+<<<<<<< HEAD
 }
+=======
+}
+
+
+#
+# Determine local site id(s) using PRIMARY_SITES or AW_SITE_IDENTIFIER
+#
+# Sets/Modifies the PRI_SITE global variable. Sources primary site's
+#  svcbu.properties in a subshell to prevent global variable corruption
+# Must temporarily clear the PRIMARY_SITES to prevent backup site's
+#  configuration from corrupting this check.
+# # TODO: With bash 4.3+, arrays can be returned from functions. This 
+# #       method should be changed if/when we upgrade bash
+#
+function getPrimarySites()
+{
+    PRIMARY_SVCBU_OVERRIDE=${AWIPS_HOME}/edex/data/utility/common_static/site/${AW_SITE_IDENTIFIER}/gfe/config/svcbu.properties
+    AW_PRIMARY_SITES=""
+    TEMP_PRIMARY_SITES=${PRIMARY_SITES}
+    PRIMARY_SITES=
+    echo ${PRIMARY_SVCBU_OVERRIDE}
+    if [[ -f ${PRIMARY_SVCBU_OVERRIDE} ]]
+    then
+        echo "Using svcbu.properties for site ${AW_SITE_IDENTIFIER} to determine PRIMARY_SITES"
+        AW_PRIMARY_SITES=$(source ${PRIMARY_SVCBU_OVERRIDE}; echo ${PRIMARY_SITES})
+    fi
+    IFS=',' read -ra PRI_SITES <<< "${AW_PRIMARY_SITES}"
+    if [ ${#PRI_SITES[@]} -eq 0 ]
+    then
+        PRI_SITES=${AW_SITE_IDENTIFIER}
+    fi
+    PRIMARY_SITES=${TEMP_PRIMARY_SITES}
+}
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

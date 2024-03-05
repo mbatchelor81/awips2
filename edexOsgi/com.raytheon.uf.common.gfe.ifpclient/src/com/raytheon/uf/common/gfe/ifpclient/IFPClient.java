@@ -25,6 +25,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+<<<<<<< HEAD
+=======
+import java.util.Set;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.uf.common.activetable.ActiveTableMode;
 import com.raytheon.uf.common.activetable.ActiveTableRecord;
@@ -43,6 +47,10 @@ import com.raytheon.uf.common.dataplugin.gfe.reference.ReferenceID;
 import com.raytheon.uf.common.dataplugin.gfe.request.AbstractGfeRequest;
 import com.raytheon.uf.common.dataplugin.gfe.request.CommitGridsRequest;
 import com.raytheon.uf.common.dataplugin.gfe.request.CreateNewDbRequest;
+<<<<<<< HEAD
+=======
+import com.raytheon.uf.common.dataplugin.gfe.request.GetActiveSitesRequest;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.dataplugin.gfe.request.GetActiveTableRequest;
 import com.raytheon.uf.common.dataplugin.gfe.request.GetClientsRequest;
 import com.raytheon.uf.common.dataplugin.gfe.request.GetDbInventoryRequest;
@@ -131,6 +139,11 @@ import com.raytheon.uf.common.time.TimeRange;
  * Feb 05, 2018  6493     randerso  Added getProjections() to support
  *                                  implementation of GFE coordinate conversion
  *                                  capability
+<<<<<<< HEAD
+=======
+ * Mar 29, 2021  8380     mapeters  Added {@link #getActiveSites} and
+ *                                  {@link #isIFPServerActive()}
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -1012,6 +1025,32 @@ public class IFPClient {
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Retrieves the set of active IFP servers by site ID.
+     *
+     * @return Status of the request as a {@code ServerResponse}. Payload
+     *         contains the set of active site identifiers.
+     */
+    public ServerResponse<Set<String>> getActiveSites() {
+        GetActiveSitesRequest request = new GetActiveSitesRequest();
+
+        return (ServerResponse<Set<String>>) makeRequest(request);
+    }
+
+    /**
+     * Determines if the IFP server for this client's site ID is active.
+     *
+     * @return true if IFP server is active, false otherwise
+     */
+    public boolean isIFPServerActive() {
+        ServerResponse<Set<String>> activeSitesResponse = getActiveSites();
+        Set<String> activeSites = activeSitesResponse.getPayload();
+        return activeSites != null && activeSites.contains(siteId);
+    }
+
+    /**
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * Retrieves the list of known sites that the server is configured for by
      * site ID.
      *

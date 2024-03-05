@@ -26,7 +26,11 @@
     name="Psurge + Tide [NAVD88] probability &gt; 15 feet" unit="%">
     <!-- This parameter provides a custom legend and parameter name for the cumulative surge that is coming from Psurge + Tide.
          This makes it possible to easily distinguish it from the cumulative surge from PHISH. -->
+<<<<<<< HEAD
     <Method models="TPCSurgeProb TPCSurgeProbLoRes P-ETSS P-ETSS-LoRes" name="Alias" levels="Surface">
+=======
+    <Method models="TPCSurgeProb TPCSurgeProb2 TPCSurgeProbLoRes TPCSurgeProbLoRes2 TPCSurgeProb-SJU P-ETSS P-ETSS-LoRes" name="Alias" levels="Surface">
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <Field abbreviation="PSurge15ftCumul" />
     </Method>
 </DerivedParameter>

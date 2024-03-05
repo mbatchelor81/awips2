@@ -53,6 +53,12 @@ import ucar.nc2.NetcdfFile;
  * Sep 13, 2017  6406      bsteffen     Upgrade ucar
  * Nov 25, 2019  71208     smanoj       Fix to look at international subcategory if the value of
  *                                      local subcategory is less than or equal to '0' .
+<<<<<<< HEAD
+=======
+ * Aug 19, 2022 22942   mgamazaychikov Fix to use international subcategory first and only use
+ *                                      local subcategory if international subcategory 
+ *                                      is less than or equal to '0'.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -120,9 +126,19 @@ public class BufrObsProcessor {
     private CategoryKey getBufrCategory(BufrParser parser)
             throws BufrObsDecodeException {
         int cat = getIntAttribute(parser, BUFR_CAT_ATTRIBUTE);
+<<<<<<< HEAD
         int subcat = getIntAttribute(parser, BUFR_LOCAL_SUBCAT_ATTRIBUTE);
         if (subcat <= 0) {
             subcat = getIntAttribute(parser, BUFR_SUBCAT_ATTRIBUTE);
+=======
+        // the returned CategoryKey should be based first on
+        // international subcategory BUFR_SUBCAT_ATTRIBUTE.
+        // only if it is not available in the message
+        // should local subcategory be used
+        int subcat = getIntAttribute(parser, BUFR_SUBCAT_ATTRIBUTE);
+        if (subcat <= 0) {
+            subcat = getIntAttribute(parser, BUFR_LOCAL_SUBCAT_ATTRIBUTE);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         return new CategoryKey(cat, subcat);
     }

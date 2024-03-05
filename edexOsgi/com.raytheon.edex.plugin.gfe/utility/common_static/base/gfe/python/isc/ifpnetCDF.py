@@ -133,6 +133,10 @@ def logException(*msg):
 def logVerbose(*msg):
     ifpNetcdfLogger.debug(iscUtil.tupleToString(*msg))
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 def logDebug(*msg):
     logVerbose(iscUtil.tupleToString(*msg))
 
@@ -148,6 +152,10 @@ def retrieveData(we, inv, clipArea):
     clipSize = (clipArea[1] - clipArea[0] + 1, clipArea[3] - clipArea[2] + 1)
     gridCount = len(inv)
     logDebug(f"retrieveData(): ParmID [{we.getParmid().getParmId()}], gridCount {gridCount}")
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     t0 = time.perf_counter()
     if gridType == "SCALAR":
         cube = numpy.empty(shape=(gridCount, clipSize[1], clipSize[0]), dtype=numpy.float32)
@@ -160,6 +168,10 @@ def retrieveData(we, inv, clipArea):
         keyList = []
     t1 = time.perf_counter()
     logDebug(f"retrieveData(): Time to create cube: {t1-t0}")
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     t0 = time.perf_counter()
     cubeIdx = 0
     while len(lst):
@@ -264,6 +276,10 @@ def processParmList(argDict, db):
             final.append(p)
     return final
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ###-------------------------------------------------------------------------###
 ### Returns true if the specified time is contained within the timeRange
 def contains(timerange, time):
@@ -271,6 +287,10 @@ def contains(timerange, time):
         return ((time >= timerange[0]) and (time < timerange[1]))
     return time == timerange[0]
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ###-------------------------------------------------------------------------###
 ### Returns intersection time range of two time ranges, if no intersection
 ###  then None is returned.
@@ -288,6 +308,10 @@ def intersection(tr1, tr2):
     else:
         return (startTime, endTime)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ###-------------------------------------------------------------------------###
 def overlaps(tr1, tr2):
     "Returns true if the specified time ranges overlap"
@@ -295,6 +319,10 @@ def overlaps(tr1, tr2):
         return 1
     return 0
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ###-------------------------------------------------------------------------###
 ### Makes an integer from the specified string in seconds since 1-Jan-1970 00Z
 def getIntTime(timeStr):
@@ -309,6 +337,10 @@ def getIntTime(timeStr):
         raise SyntaxError(s)
     return calendar.timegm(timeTuple)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ###-------------------------------------------------------------------------###
 ### Makes a TimeRange from the input string of the form YYYYMMDD_HHMM.
 def makeTimeRange(startString, endString):
@@ -360,6 +392,10 @@ def clipToExtrema(grid, clipArea):
     maxy = clipArea[3]
     return grid[miny:maxy + 1, minx:maxx + 1]
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ###-------------------------------------------------------------------------###
 ### Returns a list of dimension names based on the tuple of integer sizes,
 ### as well as the names of the dimensions.
@@ -372,6 +408,10 @@ def getDims(cdfFile, dimSizes, dimNames):
     dimNames = list(dimNames)
     actDimNames = []
     existingDimList = list(cdfFile.dimensions.keys())
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     for x in range(len(dimList)):
         dimName = "DIM_" + str(dimSizes[x])
         actDimNames.append(dimName)
@@ -381,6 +421,10 @@ def getDims(cdfFile, dimSizes, dimNames):
 
     return tuple(actDimNames)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ###-------------------------------------------------------------------------###
 def getMaskGrid(ifpServer, editAreaName, dbId):
     #make a mask with all bits set (y,x)
@@ -408,6 +452,10 @@ def storeLatLonGrids(ifpServer, cdfFile, krunch, clipArea):
     pDict = gridLoc.getProjection()
 
     latLonGrid = gridLoc.getLatLonGrid()
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     latLonGrid = numpy.reshape(latLonGrid, (2, int(gridLoc.getNy()), int(gridLoc.getNx())), order='F')
 
     # clip them
@@ -447,6 +495,10 @@ def storeLatLonGrids(ifpServer, cdfFile, krunch, clipArea):
     origGridSize = Coordinate(float(gridLoc.getNx()), float(gridLoc.getNy()))
     origOrigin = gridLoc.getOrigin()
     origExtent = gridLoc.getExtent()
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     cellSize = (origExtent.x / (origGridSize.x - 1),
                 origExtent.y / (origGridSize.y - 1))
     clippedExtent = (cellSize[0] * (clipSize[0] - 1),
@@ -521,6 +573,10 @@ def storeTopoGrid(ifpServer, cdfFile, clipArea):
     topoGrid = ifpServer.getTopoData(gridLoc).getPayload().getNDArray()
     topoGrid = clipToExtrema(topoGrid, clipArea)
     topoGrid = numpy.flipud(topoGrid)
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     # clipped size
     clipGridSize = (clipArea[1] - clipArea[0] + 1, clipArea[3] - clipArea[2] + 1)
 
@@ -546,6 +602,10 @@ def storeTopoGrid(ifpServer, cdfFile, clipArea):
     origGridSize = Coordinate(float(str(gridLoc.getNx())), float(str(gridLoc.getNy())))
     origOrigin = gridLoc.getOrigin()
     origExtent = gridLoc.getExtent()
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     cellSize = (origExtent.x / (origGridSize.x - 1),
                 origExtent.y / (origGridSize.y - 1))
     clippedExtent = (cellSize[0] * (clipGridSize[0] - 1),
@@ -601,6 +661,10 @@ def storeGridDataHistory(cdfFile, we, histDict):
     histCube = numpy.zeros(histShape, 'c')
     for slot, hisString in enumerate(histList):
         histCube[slot] = netCDF4.stringtoarr(hisString, histShape[1])
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     # make the history variable anyway.  iscMosaic needs it.
     elemName = we.getParmid().getParmName() + "_" + we.getParmid().getParmLevel()
     dimNames = ["ngrids_" + elemName, "histLen_" + elemName]
@@ -614,6 +678,10 @@ def storeGridDataHistory(cdfFile, we, histDict):
         var[:] = histCube
     return
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ###-------------------------------------------------------------------------###
 ###
 def calcKrunchValues(we):
@@ -731,6 +799,10 @@ def storeWEAttributes(var, we, timeList, databaseID, clipArea, siteIdOverride, e
 
     # Min/Max allowable values
     attrs["minMaxAllowedValues"] = (we.getGpi().getMinValue(), we.getGpi().getMaxValue())
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     # determine correct siteID to write to netCDF file
     # we needed this siteIdOverride incase we're exporting grids from a subdomain
     srcSiteId = we.getParmid().getDbId().getSiteId()
@@ -867,6 +939,10 @@ def storeScalarWE(we, trList, cdfFile, timeRange, databaseID,
 
     return gridCount
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ###-------------------------------------------------------------------------###
 ### Stores the specified Vector WE in the netCDF cdfFile whose grids fall within
 ### the specified timeRange.
@@ -1031,6 +1107,10 @@ def collapseKey(grid, keys):
 
     return (newGrid, newKeys)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ###-------------------------------------------------------------------------###
 # Stores the specified Weather WE in the netCDF file whose grids fall within
 ### the specified timeRange.
@@ -1069,6 +1149,10 @@ def storeWeatherWE(we, trList, cdfFile, timeRange, databaseID, invMask, clipArea
     logDebug(f"storeWeatherWE(): Time to store WE attributes for parm [{varName}]: {t1-t0}")
 
     #  Process the weather keys so we store only what is necessary
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     for g in range(byteCube.shape[0]):
         (byteCube[g], keyList[g]) = collapseKey(byteCube[g], keyList[g])
 
@@ -1102,6 +1186,10 @@ def storeWeatherWE(we, trList, cdfFile, timeRange, databaseID, invMask, clipArea
     dims = getDims(cdfFile, wxShape, dimNames)
     keyVarName = we.getParmid().getParmName() + "_" + we.getParmid().getParmLevel() + "_wxKeys"
     keyVar = cdfFile.createVariable(keyVarName, 'c', dims)
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     chars = numpy.zeros(wxShape, 'c')
 
     # now save the weather keys in the netCDF cdfFile
@@ -1124,6 +1212,10 @@ def storeWeatherWE(we, trList, cdfFile, timeRange, databaseID, invMask, clipArea
 
     return gridCount
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ###-------------------------------------------------------------------------###
 # Stores the specified Discrete WE in the netCDF cdfFile whose grids fall within
 ### the specified timeRange.
@@ -1217,6 +1309,10 @@ def storeDiscreteWE(we, trList, cdfFile, timeRange, databaseID, invMask, clipAre
 
     return gridCount
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ###-------------------------------------------------------------------------###
 ### Store some global attribute to the cdfFile
 def storeGlobalAtts(cdfFile, argDict):
@@ -1242,6 +1338,10 @@ def compressFile(filename, factor):
         factor = 1
     elif factor > 9:
         factor = 9
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     with open(filename, "rb") as fp:
         with gzip.open(filename + ".gz", "wb", factor) as fpout:
             shutil.copyfileobj(fp, fpout)
@@ -1249,6 +1349,10 @@ def compressFile(filename, factor):
     # remove the orginal file
     os.remove(filename)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ###------------
 # getSamplingDefinition - accesses server to retrieve definition,
 # returns None or the sampling definition as Python.
@@ -1297,6 +1401,10 @@ def determineSamplingValues(samplingDef, parmName, inventory, currentTime):
     # we're going to get inventory as a PyJObject (List<TimeRange>, actually),
     # but to best match AWIPS-1 will return a list of their tuple-based
     # time range objects, regardless if we have a valid sample definition or not
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     if samplingDef is None or inventory.size() == 0:
         newInv = []
         for i in range(0, inventory.size()):
@@ -1323,6 +1431,10 @@ def determineSamplingValues(samplingDef, parmName, inventory, currentTime):
             basetime = bt
         else:
             break
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     # now determine the set of possible times
     checkTimes = []
     # lastInvT = inventory[ -1][1]  #ending time for last grid
@@ -1401,6 +1513,10 @@ def main(outputFilename, parmList, databaseID, startTime,
     except:
         logException("Unable to create TimeRange from arguments: startTime= " + str(argDict['startTime']) + ", endTime= " + argDict['endTime'])
         return
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     # See if the databaseID is valid.  An exception will be tossed
     db = IFPDB(argDict['databaseID'])
 
@@ -1411,6 +1527,10 @@ def main(outputFilename, parmList, databaseID, startTime,
     maskGrid = getMaskGrid(ifpServer, argDict['mask'], argDict['databaseID'])
     origGridSize = maskGrid.shape
     clipArea = extremaOfSetBits(maskGrid)
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     maskGrid = clipToExtrema(maskGrid, clipArea)
     clippedGridSize = maskGrid.shape
     validPointCount = float(numpy.count_nonzero(maskGrid))
@@ -1427,21 +1547,37 @@ def main(outputFilename, parmList, databaseID, startTime,
     try:
         # Open the netCDF file
         with netCDF4.Dataset(argDict['outputFilename'], 'w', format='NETCDF3_CLASSIC', diskless=True, persist=True) as cdfFile:
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             totalGrids = 0
             for p in argDict['parmList']:
                 try:
                     we = db.getItem(p)
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     #determine inventory that we want to keep
                     t0 = time.perf_counter()
                     parmTimes = we.getKeys()
                     t1 = time.perf_counter()
                     logDebug(f"main(): Time to retrieve inventory for ParmID [{p}]: {t1-t0}")
                     logDebug(f"main(): ParmID [{p}], len(parmTimes): {len(parmTimes)}")
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     t0 = time.perf_counter()
                     weInv = determineSamplingValues(samplingDef, p, parmTimes, time.time())
                     t1 = time.perf_counter()
                     logDebug(f"main(): Time to call determineSamplingValues for ParmID [{p}]: {t1-t0}")
                     logDebug(f"main(): ParmID [{p}], len(weInv): {len(weInv)}")
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     t0 = time.perf_counter()
                     gridType = str(we.getGpi().getGridType())
                     if gridType == "SCALAR":
@@ -1463,12 +1599,20 @@ def main(outputFilename, parmList, databaseID, startTime,
                           "parm=" + p
                         logProblem(s)
                         raise Exception(s)
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     t1 = time.perf_counter()
                     logDebug(f"main(): Time to store grids for ParmID [{p}]: {t1-t0}")
                     totalGrids = totalGrids + nGrids
                 except:
                     logException("Could not process parm [" + p + "]: ")
                     partial_complete = True
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             # store the topo and lat, lon grids if the -g was present
             if argDict["geoInfo"]:
                 storeTopoGrid(ifpServer, cdfFile, clipArea)

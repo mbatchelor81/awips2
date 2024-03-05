@@ -41,7 +41,11 @@ import com.raytheon.uf.common.time.DataTime;
 import com.raytheon.uf.common.time.util.TimeUtil;
 
 import jep.JepException;
+<<<<<<< HEAD
 import net.sf.cglib.beans.BeanMap;
+=======
+import org.springframework.cglib.beans.BeanMap;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Generic decoder for decoding in python
@@ -59,6 +63,10 @@ import net.sf.cglib.beans.BeanMap;
  *                                    improve error handling.
  * Jul 09, 2019  7879     tgurney     Support casting between boxed integer types
  *                                    and check for over/underflow
+<<<<<<< HEAD
+=======
+ * Apr 21, 2022  8709     tjensen     Remove net.sf.cglib
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *

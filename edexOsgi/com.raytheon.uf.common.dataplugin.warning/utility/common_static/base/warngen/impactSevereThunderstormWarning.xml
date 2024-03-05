@@ -18,6 +18,13 @@
      Phil Kurimski   03-19-2018 corrected parse strings in CTAs so (B) and (E)
         were not selected at the same time when only one was selected DR 20132
      Phil Kurimski   05-12-2020 IBW Svr Tag changes DCS 22060
+<<<<<<< HEAD
+=======
+     Mike Rega       06-16-2021 DR 21460 Minor grammar fixes
+     Evan Bookbinder  7-29-2021 corrected hail wind menu DR 22809
+     Evan Bookbinder  5-11-2023 fixed parse string for wind speeds to avoid picking up 
+                      HAZARD wind for fast storm motion instead of wind tag DR 2034179
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 -->
 <warngenConfig>
 
@@ -112,11 +119,19 @@ turned on unless the corresponding .vm file is turned on in a given template's .
   <bullet bulletName="public" bulletText="Public reported" bulletGroup="toggle1" parseString="SOURCE...PUBLIC"/>
   <bullet bulletText="" bulletType="title"/>
   <bullet bulletText="******* THREAT (CHOOSE UP TO 1 EACH WIND/HAIL) ******" bulletType="title"/>
+<<<<<<< HEAD
   <bullet bulletName="60mphWind" bulletText="60 mph wind" bulletGroup="toggle2" parseString="60 MPH"/>
   <bullet bulletName="70mphWind" bulletText="70 mph wind" bulletGroup="toggle2" parseString="70 MPH"/>
   <bullet bulletName="80mphWind" bulletText="80 mph wind" bulletGroup="toggle2" parseString="80 MPH"/>
   <bullet bulletName="90mphWind" bulletText="90 mph wind" bulletGroup="toggle2" parseString="90 MPH"/>
   <bullet bulletName="100mphWind" bulletText="100 mph wind" bulletGroup="toggle2" parseString="100 MPH"/>
+=======
+  <bullet bulletName="60mphWind" bulletText="60 mph wind" bulletGroup="toggle2" parseString="GUST...60 MPH"/>
+  <bullet bulletName="70mphWind" bulletText="70 mph wind" bulletGroup="toggle2" parseString="GUST...70 MPH"/>
+  <bullet bulletName="80mphWind" bulletText="80 mph wind" bulletGroup="toggle2" parseString="GUST...80 MPH"/>
+  <bullet bulletName="90mphWind" bulletText="90 mph wind" bulletGroup="toggle2" parseString="GUST...90 MPH"/>
+  <bullet bulletName="100mphWind" bulletText="100 mph wind" bulletGroup="toggle2" parseString="GUST...100 MPH"/>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   <bullet bulletName="pennyHail" bulletText="Penny size hail (3/4&quot;)" bulletGroup="toggle3" parseString="0.75 IN"/>
   <bullet bulletName="nickelHail" bulletText="Nickel size hail (7/8&quot;)" bulletGroup="toggle3" parseString="0.88 IN"/>
   <bullet bulletName="quarterHail" bulletText="Quarter size hail (1&quot;)" bulletGroup="toggle3" parseString="1.00 IN"/>
@@ -130,7 +145,12 @@ turned on unless the corresponding .vm file is turned on in a given template's .
   <bullet bulletName="softballHail" bulletText="Softball size hail (4&quot;)" bulletGroup="toggle3" parseString="4.00 IN"/>
   <bullet bulletName="grapefruitHail" bulletText="Grapefruit size hail (4 1/2&quot;)" bulletGroup="toggle3" parseString="4.50 IN"/>
   <bullet bulletText="" bulletType="title"/>
+<<<<<<< HEAD
   <bullet bulletText="******** SELECT FROM BELOW IF EITHER SEVERE HAIL OR WIND OBSERVED ********" bulletType="title"/>
+=======
+  <bullet bulletText="******** SELECT FROM BELOW IF EITHER  ********" bulletType="title"/>
+  <bullet bulletText="******** SEVERE HAIL OR WIND OBSERVED ********" bulletType="title"/>  
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   <bullet bulletName="observedHail" bulletText="Select for Observed Hail" parseString="HAIL THREAT...OBSERVED"/>
   <bullet bulletName="observedWind" bulletText="Select for Observed Wind" parseString="WIND THREAT...OBSERVED"/>
   <bullet bulletText="" bulletType="title"/>
@@ -167,7 +187,11 @@ turned on unless the corresponding .vm file is turned on in a given template's .
   <bullet bulletName="windDrivenHailIndicatedCTA" bulletText="(E) Wind driven hail indicated" bulletGroup="CTAtoggle" parseString="capable of producing large hail driven by severe winds"/>
   <bullet bulletName="windDrivenHailObservedCTA" bulletText="(E) Wind driven hail observed" bulletGroup="CTAtoggle" parseString="&quot;producing large hail driven by severe winds&quot;,&quot;-capable of producing large hail driven by severe winds&quot;"/>
   <bullet bulletText="******** MISCELLANEOUS CALLS TO ACTION **********" bulletType="title"/>
+<<<<<<< HEAD
   <bullet bulletName="lightningCTA" bulletText="Lightning in addition to hail/winds" parseString="CONTINUOUS CLOUD TO GROUND LIGHTNING IS OCCURRING"/>
+=======
+  <bullet bulletName="lightningCTA" bulletText="Lightning in addition to hail/winds" parseString="CONTINUOUS CLOUD TO GROUND LIGHTNING ARE OCCURRING"/>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   <bullet bulletName="boatersCTA" bulletText="Over Lake - Boaters seek shelter" parseString="GET AWAY FROM THE WATER AND MOVE INDOORS"/>
   <bullet bulletName="torrentialRainfallCTA" bulletText="Torrential rainfall" parseString="TORRENTIAL RAINFALL IS OCCURRING"/>
  </bullets>
@@ -183,11 +207,19 @@ turned on unless the corresponding .vm file is turned on in a given template's .
   <bullet bulletName="public" bulletText="Public reported" bulletGroup="toggle1" parseString="SOURCE...PUBLIC"/>
   <bullet bulletText="" bulletType="title"/>
   <bullet bulletText="******* THREAT (CHOOSE UP TO 1 EACH WIND/HAIL) ******" bulletType="title"/>
+<<<<<<< HEAD
   <bullet bulletName="60mphWind" bulletText="60 mph wind" bulletGroup="toggle2" parseString="60 MPH"/>
   <bullet bulletName="70mphWind" bulletText="70 mph wind" bulletGroup="toggle2" parseString="70 MPH"/>
   <bullet bulletName="80mphWind" bulletText="80 mph wind" bulletGroup="toggle2" parseString="80 MPH"/>
   <bullet bulletName="90mphWind" bulletText="90 mph wind" bulletGroup="toggle2" parseString="90 MPH"/>
   <bullet bulletName="100mphWind" bulletText="100 mph wind" bulletGroup="toggle2" parseString="100 MPH"/>
+=======
+  <bullet bulletName="60mphWind" bulletText="60 mph wind" bulletGroup="toggle2" parseString="GUST...60 MPH"/>
+  <bullet bulletName="70mphWind" bulletText="70 mph wind" bulletGroup="toggle2" parseString="GUST...70 MPH"/>
+  <bullet bulletName="80mphWind" bulletText="80 mph wind" bulletGroup="toggle2" parseString="GUST...80 MPH"/>
+  <bullet bulletName="90mphWind" bulletText="90 mph wind" bulletGroup="toggle2" parseString="GUST...90 MPH"/>
+  <bullet bulletName="100mphWind" bulletText="100 mph wind" bulletGroup="toggle2" parseString="GUST...100 MPH"/>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   <bullet bulletName="pennyHail" bulletText="Penny size hail (3/4&quot;)" bulletGroup="toggle3" parseString="0.75 IN"/>
   <bullet bulletName="nickelHail" bulletText="Nickel size hail (7/8&quot;)" bulletGroup="toggle3" parseString="0.88 IN"/>
   <bullet bulletName="quarterHail" bulletText="Quarter size hail (1&quot;)" bulletGroup="toggle3" parseString="1.00 IN"/>
@@ -201,7 +233,12 @@ turned on unless the corresponding .vm file is turned on in a given template's .
   <bullet bulletName="softballHail" bulletText="Softball size hail (4&quot;)" bulletGroup="toggle3" parseString="4.00 IN"/>
   <bullet bulletName="grapefruitHail" bulletText="Grapefruit size hail (4 1/2&quot;)" bulletGroup="toggle3" parseString="4.50 IN"/>
   <bullet bulletText="" bulletType="title"/>
+<<<<<<< HEAD
   <bullet bulletText="******** SELECT FROM BELOW IF EITHER SEVERE HAIL OR WIND OBSERVED ********" bulletType="title"/>
+=======
+  <bullet bulletText="******** SELECT FROM BELOW IF EITHER  ********" bulletType="title"/>
+  <bullet bulletText="******** SEVERE HAIL OR WIND OBSERVED ********" bulletType="title"/>  
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   <bullet bulletName="observedHail" bulletText="Select for Observed Hail" parseString="HAIL THREAT...OBSERVED"/>
   <bullet bulletName="observedWind" bulletText="Select for Observed Wind" parseString="WIND THREAT...OBSERVED"/>
   <bullet bulletText="" bulletType="title"/>
@@ -239,7 +276,11 @@ turned on unless the corresponding .vm file is turned on in a given template's .
   <bullet bulletName="windDrivenHailIndicatedCTA" bulletText="(E) Wind driven hail indicated" bulletGroup="CTAtoggle" parseString="capable of producing large hail driven by severe winds"/>
   <bullet bulletName="windDrivenHailObservedCTA" bulletText="(E) Wind driven hail observed" bulletGroup="CTAtoggle" parseString="&quot;producing large hail driven by severe winds&quot;,&quot;-capable of producing large hail driven by severe winds&quot;"/>
   <bullet bulletText="******** MISCELLANEOUS CALLS TO ACTION **********" bulletType="title"/>
+<<<<<<< HEAD
   <bullet bulletName="lightningCTA" bulletText="Lightning in addition to hail/winds" parseString="CONTINUOUS CLOUD TO GROUND LIGHTNING IS OCCURRING"/>
+=======
+  <bullet bulletName="lightningCTA" bulletText="Lightning in addition to hail/winds" parseString="CONTINUOUS CLOUD TO GROUND LIGHTNING ARE OCCURRING"/>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   <bullet bulletName="boatersCTA" bulletText="Over Lake - Boaters seek shelter" parseString="GET AWAY FROM THE WATER AND MOVE INDOORS"/>
   <bullet bulletName="torrentialRainfallCTA" bulletText="Torrential rainfall" parseString="TORRENTIAL RAINFALL IS OCCURRING"/>
  </bullets>

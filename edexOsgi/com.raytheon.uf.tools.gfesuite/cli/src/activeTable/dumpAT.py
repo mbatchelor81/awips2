@@ -20,7 +20,7 @@
 # dumpAT - outputs the active table
 # dumpAT -w siteid -p phen -s signif -a action -e etn -n tableName
 import getopt, sys
-import logging, time, traceback, gzip
+import logging, os, traceback, gzip
 from dynamicserialize.dstypes.com.raytheon.uf.common.activetable import DumpActiveTableRequest
 from awips import ThriftClient
 
@@ -64,7 +64,7 @@ switches may have multiple entries, e.g., -w KLWX -w KCLE.
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger("dumpAT")
 log.info('*********** dumpAT ****************')
-startT = time.time()
+startT = os.times()
 
 sites = []
 phens = []
@@ -120,7 +120,6 @@ try:
     import gfeConfig
     ourSite = gfeConfig.GFESUITE_SITEID
 except ImportError:
-    import os
     ourSite = os.getenv("GFESUITE_SITEID")
         
 request = DumpActiveTableRequest()
@@ -160,8 +159,10 @@ if response is not None:
         log.info("Number of records (unfiltered): %d", response.unfilteredCount)
         log.info("Number of records (filtered): %d", response.filteredCount)
         log.info("Records: %s", response.dump)
-endT = time.time()
-log.info('Final: wctime:%-0.2f, cputime:%-0.2f', (endT - startT), time.clock())
+endT = os.times()
+elapsed = endT.elapsed - startT.elapsed
+cpu = endT.system + endT.user - startT.system - startT.user
+log.info('Final: wctime:%-0.2f, cputime:%-0.2f', elapsed, cpu)
     
 #--------------------------------------------------------------------
 # read active table, filter the records

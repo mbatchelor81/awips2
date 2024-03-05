@@ -16,12 +16,21 @@
 # Jan 29, 2020  21611    mgamazaychikov  Upgrade to version 3.4;
 #                                        add parameters for command line option-argument
 #                                        pairs for msg_send command
+<<<<<<< HEAD
+=======
+# Jul 09, 2021  22669    oberfield       New release of IWXXM schema from the WMO
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 import os.path
 
 # IWXXM versioning
+<<<<<<< HEAD
 _iwxxm = '3.0'
 _release = '3.0'
+=======
+_iwxxm = '2021-2'
+_release = '2021-2'
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 IWXXM_URI = 'http://icao.int/iwxxm/%s' % _iwxxm
 IWXXM_URL = 'https://schemas.wmo.int/iwxxm/%s/iwxxm.xsd' % _release

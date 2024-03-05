@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -28,6 +40,10 @@ import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+<<<<<<< HEAD
+=======
+import javax.persistence.Index;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -38,7 +54,11 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+<<<<<<< HEAD
 import org.hibernate.annotations.Index;
+=======
+import org.locationtech.jts.geom.Geometry;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.uf.common.dataplugin.NullUtil;
 import com.raytheon.uf.common.dataplugin.PluginDataObject;
@@ -51,6 +71,7 @@ import com.raytheon.uf.common.pointdata.PointDataView;
 import com.raytheon.uf.common.pointdata.spatial.SurfaceObsLocation;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerialize;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
+<<<<<<< HEAD
 import org.locationtech.jts.geom.Geometry;
 
 /**
@@ -58,6 +79,14 @@ import org.locationtech.jts.geom.Geometry;
  * 
  * <pre>
  * 
+=======
+
+/**
+ *
+ *
+ * <pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * SOFTWARE HISTORY
  * Date          Ticket#  Engineer    Description
  * ------------- -------- ----------- --------------------------
@@ -68,6 +97,7 @@ import org.locationtech.jts.geom.Geometry;
  * May 07, 2013  1869     bsteffen    Remove dataURI column from
  *                                    PluginDataObject.
  * Aug 30, 2013  2298     rjpeter     Make getPluginName abstract
+<<<<<<< HEAD
  * Jun 11, 2014  2061     bsteffen    Remove IDecoderGettable 
  * Jul 27, 2015  4360     rferrel     Named unique constraint. Made reportType and corIndicator non-nullable.
  * Apr 20, 2016  DR18361  MPorricelli Added 1-min peak wind, snow depth, lowest pressure
@@ -79,10 +109,23 @@ import org.locationtech.jts.geom.Geometry;
 @Entity
 @SequenceGenerator(initialValue = 1, name = PluginDataObject.ID_GEN, sequenceName = "sfcobsseq")
 @Table(name = "sfcobs", uniqueConstraints = { @UniqueConstraint(name = "uk_sfcobs_datauri_fields", columnNames = { "dataURI" }) })
+=======
+ * Jun 11, 2014  2061     bsteffen    Remove IDecoderGettable
+ * Jul 27, 2015  4360     rferrel     Named unique constraint. Made reportType and corIndicator non-nullable.
+ * Apr 20, 2016  DR18361  MPorricelli Added 1-min peak wind, snow depth, lowest pressure
+ * Aug 08, 2022  8892     tjensen     Update indexes for Hibernate 5
+ * </pre>
+ *
+ * @author jkorman
+ */
+@Entity
+@SequenceGenerator(initialValue = 1, name = PluginDataObject.ID_GEN, sequenceName = "sfcobsseq")
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 /*
  * Both refTime and forecastTime are included in the refTimeIndex since
  * forecastTime is unlikely to be used.
  */
+<<<<<<< HEAD
 @org.hibernate.annotations.Table(appliesTo = "sfcobs", indexes = { @Index(name = "sfcobs_refTimeIndex", columnNames = {
         "refTime", "forecastTime" }) })
 @XmlRootElement
@@ -90,6 +133,20 @@ import org.locationtech.jts.geom.Geometry;
 @DynamicSerialize
 public class ObsCommon extends PersistablePluginDataObject implements
         ISpatialEnabled, IPointData {
+=======
+@Table(name = "sfcobs", uniqueConstraints = {
+        @UniqueConstraint(name = "uk_sfcobs_datauri_fields", columnNames = {
+                "dataURI" }) }, indexes = {
+                        @Index(name = "%TABLE%_refTimeIndex", columnList = "refTime, forecastTime"),
+                        @Index(name = "%TABLE%_stationIndex", columnList = "stationId"),
+                        @Index(name = "reporttype_index", columnList = "reportType") })
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
+@DynamicSerialize
+public class ObsCommon extends PersistablePluginDataObject
+        implements ISpatialEnabled, IPointData {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private static final long serialVersionUID = 1L;
 
@@ -99,7 +156,10 @@ public class ObsCommon extends PersistablePluginDataObject implements
     @Column(nullable = false)
     @XmlAttribute
     @DynamicSerializeElement
+<<<<<<< HEAD
     @Index(name = "reporttype_index")
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private Integer reportType;
 
     // Correction indicator from wmo header
@@ -204,6 +264,10 @@ public class ObsCommon extends PersistablePluginDataObject implements
     @XmlElement
     @DynamicSerializeElement
     private Long peakWindTime = -1L;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     // Direction of the one-minute peak wind observation in angular degrees
     @Transient
     @XmlElement
@@ -470,7 +534,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Construct an instance of this class using the supplied datauri.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param dataUri
      */
     public ObsCommon(String dataUri) {
@@ -673,7 +741,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return the windGust
      */
     public Double getWindGust() {
@@ -681,7 +753,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param windGust
      *            the windGust to set
      */
@@ -691,7 +767,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Get the direction of the peak wind observation.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The direction of the peak wind observation in angular degrees
      */
     public Integer getPeakWindDir() {
@@ -700,7 +780,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Set the direction of the peak wind observation.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param peakWindDir
      *            The direction of the peak wind observation in angular degrees
      */
@@ -710,7 +794,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Get the speed of the peak wind observation.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The speed of the peak wind observation in meters per second.
      */
     public Double getPeakWindSpeed() {
@@ -719,7 +807,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Set the speed of the peak wind observation.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param peakWindSpeed
      *            The speed of the peak wind observation in meters per second.
      */
@@ -729,7 +821,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Set the time of the peak wind observation.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The time of the peak wind observation (msecs from 1-1-1970).
      */
     public Long getPeakWindTime() {
@@ -738,17 +834,30 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Get the time of the peak wind observation.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param peakWindTime
      *            The time of the peak wind observation (msecs from 1-1-1970).
      */
     public void setPeakWindTime(Long peakWindTime) {
         this.peakWindTime = peakWindTime;
     }
+<<<<<<< HEAD
     /**
      * Get the direction of the one-minute peak wind observation.
      *
      * @return The direction of the one-minute peak wind observation in angular degrees
+=======
+
+    /**
+     * Get the direction of the one-minute peak wind observation.
+     *
+     * @return The direction of the one-minute peak wind observation in angular
+     *         degrees
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public Integer getPeakWindDirOneMin() {
         return peakWindDirOneMin;
@@ -767,7 +876,12 @@ public class ObsCommon extends PersistablePluginDataObject implements
     /**
      * Get the speed of the one-minute peak wind observation.
      *
+<<<<<<< HEAD
      * @return The speed of the one-minute peak wind observation in meters per second.
+=======
+     * @return The speed of the one-minute peak wind observation in meters per
+     *         second.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public Double getPeakWindSpeedOneMin() {
         return peakWindSpeedOneMin;
@@ -777,7 +891,12 @@ public class ObsCommon extends PersistablePluginDataObject implements
      * Set the speed of the one-minute peak wind observation.
      *
      * @param peakWindSpeedOneMin
+<<<<<<< HEAD
      *            The speed of the one-minute peak wind observation in meters per second.
+=======
+     *            The speed of the one-minute peak wind observation in meters
+     *            per second.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public void setPeakWindSpeedOneMin(Double peakWindSpeedOneMin) {
         this.peakWindSpeedOneMin = peakWindSpeedOneMin;
@@ -786,7 +905,12 @@ public class ObsCommon extends PersistablePluginDataObject implements
     /**
      * Set the time of the one-minute peak wind observation.
      *
+<<<<<<< HEAD
      * @return The time of the one-minute peak wind observation (msecs from 1-1-1970).
+=======
+     * @return The time of the one-minute peak wind observation (msecs from
+     *         1-1-1970).
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public Long getPeakWindTimeOneMin() {
         return peakWindTimeOneMin;
@@ -796,7 +920,12 @@ public class ObsCommon extends PersistablePluginDataObject implements
      * Get the time of the one-minute peak wind observation.
      *
      * @param peakWindTimeOneMin
+<<<<<<< HEAD
      *            The time of the one-minute peak wind observation (msecs from 1-1-1970).
+=======
+     *            The time of the one-minute peak wind observation (msecs from
+     *            1-1-1970).
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public void setPeakWindTimeOneMin(Long peakWindTimeOneMin) {
         this.peakWindTimeOneMin = peakWindTimeOneMin;
@@ -804,7 +933,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Get the equivilent 10 meter wind speed.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The equivilent 10 meter wind speed in meters per second.
      */
     public Double getWind10mSpeed() {
@@ -813,7 +946,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Set the equivilent 10 meter wind speed.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param windSpeed
      *            The equivilent 20 meter wind speed in meters per second.
      */
@@ -823,7 +960,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Get the equivilent 20 meter wind speed.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The equivilent 20 meter wind speed in meters per second.
      */
     public Double getWind20mSpeed() {
@@ -832,13 +973,21 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Set the equivilent 20 meter wind speed.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param windSpeed
      *            The equivilent 20 meter wind speed in meters per second.
      */
     public void setWind20mSpeed(Double windSpeed) {
         this.wind20mSpeed = windSpeed;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /**
      * Get the lowest pressure of previous hour.
      *
@@ -847,6 +996,10 @@ public class ObsCommon extends PersistablePluginDataObject implements
     public Integer getLowestPressure() {
         return lowestPressure;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /**
      * Set the lowest pressure of previous hour.
      *
@@ -856,6 +1009,10 @@ public class ObsCommon extends PersistablePluginDataObject implements
     public void setLowestPressure(Integer lowestPressure) {
         this.lowestPressure = lowestPressure;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /**
      * Get observation time of the lowest pressure of previous hour.
      *
@@ -864,11 +1021,20 @@ public class ObsCommon extends PersistablePluginDataObject implements
     public Long getLowestPressureTime() {
         return lowestPressureTime;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /**
      * Set the observation time of the lowest pressure.
      *
      * @param lowestPressureTime
+<<<<<<< HEAD
      *            The time of the lowest pressure observation (msecs from 1-1-1970).
+=======
+     *            The time of the lowest pressure observation (msecs from
+     *            1-1-1970).
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public void setLowestPressureTime(Long lowestPressureTime) {
         this.lowestPressureTime = lowestPressureTime;
@@ -876,7 +1042,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Get the altimeter setting.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The altimeter setting in Pascals.
      */
     public Integer getPressureAltimeter() {
@@ -885,7 +1055,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Set the altimeter setting.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param pressure
      *            The altimeter setting in Pascals.
      */
@@ -895,7 +1069,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Get the sea level pressure.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The sea level pressure in Pascals.
      */
     public Integer getPressureSealevel() {
@@ -904,7 +1082,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Set the sea level pressure.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param pressure
      *            The sea level pressure in Pascals.
      */
@@ -914,7 +1096,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Get the station pressure.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The station pressure in Pascals.
      */
     public Integer getPressureStation() {
@@ -923,7 +1109,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Set the station pressure.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param pressure
      *            The station pressure in Pascals.
      */
@@ -933,7 +1123,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Get the three hour pressure change.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The three hour pressure change in Pascals.
      */
     public Double getPressChange3Hr() {
@@ -942,7 +1136,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Set the three hour pressure change.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * <pre>
      *   0 = press same or higher than 3 hrs ago
      *   1 = increasing then steady
@@ -954,7 +1152,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
      *   7 = decreasing
      *   8 = steady or increasing,then decreasing
      * </pre>
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param pressure
      *            The three hour pressure change in Pascals.
      */
@@ -964,7 +1166,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Get the three hour pressure change characteristic.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The three hour pressure change characteristic.
      */
     public Integer getPressChangeChar() {
@@ -973,7 +1179,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Set the three hour pressure change characteristic.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param pressChangeChar
      *            The three hour pressure change characteristic.
      */
@@ -1208,7 +1418,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Set the wind wave height.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param windWaveHeight
      *            The windWaveHeight in meters.
      */
@@ -1218,7 +1432,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Get the wind wave height.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The windWaveHeight in meters.
      */
     public Double getWindWaveHeight() {
@@ -1227,7 +1445,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Set the wind wave period.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param windWavePeriod
      *            The windWavePeriod in seconds.
      */
@@ -1237,7 +1459,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Get the wind wave period.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The windWavePeriod in seconds.
      */
     public Integer getWindWavePeriod() {
@@ -1400,6 +1626,10 @@ public class ObsCommon extends PersistablePluginDataObject implements
     public Double getSnowDepth() {
         return snowDepth;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /**
      * @param snowDepth
      *            the snowDepth to set
@@ -1407,12 +1637,20 @@ public class ObsCommon extends PersistablePluginDataObject implements
     public void setSnowDepth(Double snowDepth) {
         this.snowDepth = snowDepth;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /**
      * @return stateOfGroundWithSnow indicator
      */
     public Integer getStateOfGroundWithSnow() {
         return stateOfGroundWithSnow;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /**
      * @param stateOfGroundWithSnow
      *            the stateOfGroundWithSnow indicator to set
@@ -1420,6 +1658,10 @@ public class ObsCommon extends PersistablePluginDataObject implements
     public void setStateOfGroundWithSnow(Integer stateOfGroundWithSnow) {
         this.stateOfGroundWithSnow = stateOfGroundWithSnow;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /**
      * @return the ancClouds
      */
@@ -1436,12 +1678,20 @@ public class ObsCommon extends PersistablePluginDataObject implements
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param cloud
      */
     public void addCloud(AncCloud cloud) {
         if (ancClouds == null) {
+<<<<<<< HEAD
             ancClouds = new ArrayList<AncCloud>();
+=======
+            ancClouds = new ArrayList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         ancClouds.add(cloud);
     }
@@ -1462,12 +1712,20 @@ public class ObsCommon extends PersistablePluginDataObject implements
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param wave
      */
     public void addWave(AncWave wave) {
         if (ancWaves == null) {
+<<<<<<< HEAD
             ancWaves = new ArrayList<AncWave>();
+=======
+            ancWaves = new ArrayList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         ancWaves.add(wave);
     }
@@ -1488,12 +1746,20 @@ public class ObsCommon extends PersistablePluginDataObject implements
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param temp
      */
     public void addTemp(AncTemp temp) {
         if (ancTemp == null) {
+<<<<<<< HEAD
             ancTemp = new ArrayList<AncTemp>();
+=======
+            ancTemp = new ArrayList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         ancTemp.add(temp);
     }
@@ -1514,12 +1780,20 @@ public class ObsCommon extends PersistablePluginDataObject implements
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param precip
      */
     public void addPrecip(AncPrecip precip) {
         if (ancPrecip == null) {
+<<<<<<< HEAD
             ancPrecip = new ArrayList<AncPrecip>();
+=======
+            ancPrecip = new ArrayList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         ancPrecip.add(precip);
     }
@@ -1540,12 +1814,20 @@ public class ObsCommon extends PersistablePluginDataObject implements
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param wind
      */
     public void addWind(AncWind wind) {
         if (ancWinds == null) {
+<<<<<<< HEAD
             ancWinds = new ArrayList<AncWind>();
+=======
+            ancWinds = new ArrayList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         ancWinds.add(wind);
     }
@@ -1566,12 +1848,20 @@ public class ObsCommon extends PersistablePluginDataObject implements
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param pressure
      */
     public void addPressure(AncPressure pressure) {
         if (ancPressure == null) {
+<<<<<<< HEAD
             ancPressure = new ArrayList<AncPressure>();
+=======
+            ancPressure = new ArrayList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         ancPressure.add(pressure);
     }
@@ -1592,12 +1882,20 @@ public class ObsCommon extends PersistablePluginDataObject implements
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param pressure
      */
     public void addInterWind(InterWinds wind) {
         if (interWinds == null) {
+<<<<<<< HEAD
             interWinds = new ArrayList<InterWinds>();
+=======
+            interWinds = new ArrayList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         interWinds.add(wind);
     }
@@ -1617,7 +1915,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Get this observation's geometry.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry for this observation.
      */
     public Geometry getGeometry() {
@@ -1626,7 +1928,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Get the geometry latitude.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry latitude.
      */
     public double getLatitude() {
@@ -1635,7 +1941,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Get the geometry longitude.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry longitude.
      */
     public double getLongitude() {
@@ -1644,7 +1954,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Get the station identifier for this observation.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return the stationId
      */
     public String getStationId() {
@@ -1653,7 +1967,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Get the elevation, in meters, of the observing platform or location.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The observation elevation, in meters.
      */
     public Integer getElevation() {
@@ -1662,7 +1980,11 @@ public class ObsCommon extends PersistablePluginDataObject implements
 
     /**
      * Get whether the location for this observation is defined.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return Is this location defined.
      */
     public Boolean getLocationDefined() {

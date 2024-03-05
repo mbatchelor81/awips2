@@ -7,6 +7,7 @@
 #
 # SOFTWARE HISTORY
 #
+<<<<<<< HEAD
 # Date          Ticket#  Engineer       Description
 # ------------- -------- -------------- ----------------------------------------
 # Mar 20, 2014  2933     randerso       Changed PRDDIR and LOGDIR to use		
@@ -28,6 +29,35 @@
 #                                       to simplify testing svcbu on a developer 
 #                                       workstation
 # May 01, 2020  8153     randerso       Removed import of mixedCaseProductIds.txt
+=======
+# Date          Ticket#  Engineer  Description
+# ------------- -------- --------- --------------------------------------------
+# Mar 20, 2014  2933     randerso  Changed PRDDIR and LOGDIR to use
+#                                  Backup site's configuration 
+# Jan 30, 2015  17081    lshi      Added backup vtec
+# Feb 13, 2015  4103     dgilling  Consolidated process_configuration and
+#                                  proc_receive_config into 1 script.
+# Mar 23, 2015  4103     dgilling  Save off MHSID of failed site so to fix
+#                                  export_grids_to_failed_site script.
+# Apr 29, 2015  4427     dgilling  Code cleanup.
+# Jun 24, 2015  16831    bhunder   Copy colormaps directory into
+#                                  localization directory.
+# Aug 10, 2015  17443    lshi      Bug in scripts results in 
+#                                  rsync_parms.ccc file not getting used
+# Jul 15, 2016  5747     dgilling  Move edex_static to common_static. 
+# Aug 01, 2017  6337     randerso  Use more restrictive file permissions
+# Feb 20, 2018  6602     dgilling  Update for new text utilities location.
+# Feb 25, 2020  7882     randerso  Change user validation to accept edex user
+#                                  to simplify testing svcbu on a developer 
+#                                  workstation
+# May 01, 2020  8153     randerso  Removed import of mixedCaseProductIds.txt
+# Jun 29, 2021  8572     randerso  Pass site ID to serviceBackupUtil.sh
+# Jul 12, 2021  21994    aghanava  Added a new line prior to 'echo' commands
+#                                  to prevent possible syntax error in 
+#                                  localConfig.py 
+# Aug 29, 2023  2028172  jkelmer   Moved PRI_SITE assignment to 
+#                                  serviceBackupUtil.sh
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 ##############################################################################
 
@@ -38,15 +68,24 @@ then
     export AWIPS_HOME=$(dirname $(dirname $(dirname $(dirname  $path_to_script))))
 fi
 
+<<<<<<< HEAD
 . ${AWIPS_HOME}/GFESuite/ServiceBackup/configuration/svcbu.env
 source ${AWIPS_HOME}/GFESuite/ServiceBackup/scripts/serviceBackupUtil.sh
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # $1 = Path to packaged configuration data from MHS
 # $2 = site ID for the file
 import_file=${1}
 SITE_ID=`echo ${2} | tr '[A-Z]' '[a-z]'`
 SITE_ID_CAPS=`echo ${SITE_ID}|tr [a-z] [A-Z]`
 
+<<<<<<< HEAD
+=======
+source ${AWIPS_HOME}/GFESuite/ServiceBackup/scripts/serviceBackupUtil.sh ${SITE_ID_CAPS}
+source ${AWIPS_HOME}/edex/bin/setup.env
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # Create the log file
 configureLogging "svcbu_receive_configuration" ${SITE_ID}
 
@@ -87,11 +126,15 @@ echo "File Size is: $FILESIZE bytes."
 #
 # determine local site id(s) using PRIMARY_SITES
 #
+<<<<<<< HEAD
 IFS=',' read -ra PRI_SITES <<< "${PRIMARY_SITES}"
 if [ ${#PRI_SITES[@]} -eq 0 ] 
 then
    declare -a PRI_SITES=( "${AW_SITE_IDENTIFIER}" )
 fi
+=======
+getPrimarySites
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 echo "My primary GFE sites are: ${PRI_SITES[@]}"
 
 # Determine which host service backup was run from
@@ -123,7 +166,11 @@ cd ${OUTPUT_DIR}
 tar -xvf svc_bkup_${SITE_ID}.tar
 gunzip -c GFEconfig.${SITE_ID}.tar.gz | tar xf -
 if [ $? -ne 0 ]; then
+<<<<<<< HEAD
     echo "\nERROR: Could not explode GFEconfig.${SITE_ID}.tar.gz..."
+=======
+    echo "ERROR: Could not explode GFEconfig.${SITE_ID}.tar.gz..."
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     echo "FAILED" > ${svcbu_lock_file}
     echo "FAILED" > ${lock_file}
     echo "FAILED" > ${trmode_lock_file}
@@ -228,9 +275,20 @@ fi
 #
 # DR21404 - disable ISC/VTEC for troubleshooting mode
 #
+<<<<<<< HEAD
 if [ -f ${trmode_lock_file} ]; then
   echo "Activating troubleshooting mode..."
   rm -f ${LOCALIZATION_PATH}/common_static/site/${SITE_ID_CAPS}/vtec/localVTECPartners.py*
+=======
+# DR21994 - Added blank 'echo' command to add a new line before 
+#           appending other statements. Did not use 'echo -e' 
+#           as different shells may not support this option.   
+#
+if [ -f ${trmode_lock_file} ]; then
+  echo "Activating troubleshooting mode..."
+  rm -f ${LOCALIZATION_PATH}/common_static/site/${SITE_ID_CAPS}/vtec/localVTECPartners.py*
+  echo >> ${LOCALIZATION_PATH}/common_static/site/${SITE_ID_CAPS}/gfe/config/localConfig.py
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   echo "serverConfig.REQUEST_ISC = 0" >> ${LOCALIZATION_PATH}/common_static/site/${SITE_ID_CAPS}/gfe/config/localConfig.py
   echo "serverConfig.SEND_ISC_ON_SAVE = 0" >> ${LOCALIZATION_PATH}/common_static/site/${SITE_ID_CAPS}/gfe/config/localConfig.py
   echo "serverConfig.SEND_ISC_ON_PUBLISH = 0" >> ${LOCALIZATION_PATH}/common_static/site/${SITE_ID_CAPS}/gfe/config/localConfig.py
@@ -253,12 +311,20 @@ BACKUP_LOGDIR=$(egrep "^GFESUITE_LOGDIR" ${backup_config})
 FAILED_LOGDIR=$(egrep "^GFESUITE_LOGDIR" ${failed_config})
 BACKUP_PRDDIR=$(egrep "^GFESUITE_PRDDIR" ${backup_config})
 FAILED_PRDDIR=$(egrep "^GFESUITE_PRDDIR" ${failed_config})
+<<<<<<< HEAD
+=======
+FAILED_PORT=$(egrep "^GFESUITE_PORT" ${failed_config})
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 sed -i "s/$FAILED_MHSID/$BACKUP_MHSID/" ${failed_config}
 sed -i "s/$FAILED_SERVER/$BACKUP_SERVER/" ${failed_config}
 sed -i "s/$FAILED_LOGDIR/$BACKUP_LOGDIR/" ${failed_config}
 sed -i "s/$FAILED_PRDDIR/$BACKUP_PRDDIR/" ${failed_config}
+<<<<<<< HEAD
 sed -i "s/98000000/$SVCBU_FAILED_SITE_PORT/" ${failed_config}
+=======
+sed -i "s/$FAILED_PORT/GFESUITE_PORT = '98000000'/" ${failed_config}
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 # store originating MHS ID so grids can be correctly sent to failed site upon
 # exiting service backup mode

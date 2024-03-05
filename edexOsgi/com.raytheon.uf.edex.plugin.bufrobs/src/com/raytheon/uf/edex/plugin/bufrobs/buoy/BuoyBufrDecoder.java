@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -31,6 +43,7 @@ import com.raytheon.uf.edex.plugin.bufrobs.BufrObsDecodeException;
 
 /**
  * Buoy decoder for BUFR formatted sea sfc obs.
+<<<<<<< HEAD
  * 
  * <pre>
  * 
@@ -44,6 +57,25 @@ import com.raytheon.uf.edex.plugin.bufrobs.BufrObsDecodeException;
  * 
  * </pre>
  * 
+=======
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+ * Date         Ticket#    Engineer    Description
+ * ------------ ---------- ----------- ---------------------------------
+ * Jun 11, 2014 3229       bclement     Initial creation
+ * Jul 23, 2014 3410       bclement     location changed to floats
+ * Sep 11, 2017 6406       bsteffen     Upgrade ucar
+ * May 02, 2022 100863     smanoj       Add Null check to avoid location
+ *                                      parsing problem.
+ * Sep 15, 2023 2036140    tjensen      Fixed handling of fallback lat/lon
+ *                                      fields.
+ *
+ * </pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author bclement
  */
 public class BuoyBufrDecoder extends AbstractBufrSfcObsDecoder {
@@ -57,9 +89,15 @@ public class BuoyBufrDecoder extends AbstractBufrSfcObsDecoder {
 
     public static final String PRECIP_FIELD = "precip";
 
+<<<<<<< HEAD
     public static final String FALLBACK_LAT_FIELD = "Latitude_high_accuracy";
 
     public static final String FALLBACK_LON_FIELD = "Longitude_high_accuracy";
+=======
+    public static final String FALLBACK_LAT_FIELD = "Latitude_coarse_accuracy";
+
+    public static final String FALLBACK_LON_FIELD = "Longitude_coarse_accuracy";
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     public static final String WMO_SUB_AREA_FIELD = "WMO_Region_sub-area";
 
@@ -83,7 +121,21 @@ public class BuoyBufrDecoder extends AbstractBufrSfcObsDecoder {
         Set<String> baseNames = mapper.lookupBaseNamesOrEmpty(bufrName,
                 BUOY_NAMESPACE);
         if (baseNames.isEmpty()) {
+<<<<<<< HEAD
             log.debug("Skipping unmapped field: " + bufrName);
+=======
+            /*
+             * Fallback fields are not mapped, but we need to read them in as
+             * the parser finds them to avoid reparsing the whole file
+             */
+            if (FALLBACK_LAT_FIELD.equals(bufrName)
+                    || FALLBACK_LON_FIELD.equals(bufrName)) {
+                processFallbackLocationField(record.getLocation(), parser,
+                        bufrName);
+            } else {
+                log.debug("Skipping unmapped field: " + bufrName);
+            }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         for (String baseName : baseNames) {
             if (DEFAULT_LOCATION_FIELDS.contains(baseName)) {
@@ -96,6 +148,44 @@ public class BuoyBufrDecoder extends AbstractBufrSfcObsDecoder {
         }
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * Read in the fallback location fields. If location information has not
+     * already been set by the default fields, set the location information
+     * using the fallback values. If the default location fields are later read
+     * in, they should overwrite these fallback values.
+     *
+     * @param location
+     *                     The record's location information
+     * @param parser
+     *                     BufrParser that contains the field information
+     * @param bufrName
+     *                     Name of the field being parsed
+     * @throws BufrObsDecodeException
+     */
+    private void processFallbackLocationField(SurfaceObsLocation location,
+            BufrParser parser, String bufrName) throws BufrObsDecodeException {
+        /*
+         * If latitude/longitude are already set using the default value, do not
+         * override.
+         */
+        if (FALLBACK_LAT_FIELD.equals(bufrName)
+                && location.getLatitude() == null) {
+            Double lat = (Double) getFieldValue(parser, false);
+            if (lat != null) {
+                location.assignLatitude(lat.floatValue());
+            }
+        } else if (FALLBACK_LON_FIELD.equals(bufrName)
+                && location.getLongitude() == null) {
+            Double lon = (Double) getFieldValue(parser, false);
+            if (lon != null) {
+                location.assignLongitude(lon.floatValue());
+            }
+        }
+    }
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     protected String createStationId(BufrParser parser)
             throws BufrObsDecodeException {
@@ -127,6 +217,12 @@ public class BuoyBufrDecoder extends AbstractBufrSfcObsDecoder {
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Verify location information is present and assure location is set
+     * correctly.
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param parser
      * @param record
      * @throws BufrObsDecodeException
@@ -135,6 +231,7 @@ public class BuoyBufrDecoder extends AbstractBufrSfcObsDecoder {
             throws BufrObsDecodeException {
         SurfaceObsLocation location = record.getLocation();
         if (location.getLocation() == null) {
+<<<<<<< HEAD
             /* Argos not available, fallback to coarse lon/lat */
             BufrDataItem lonData = parser.scanForStructField(FALLBACK_LON_FIELD,
                     false);
@@ -148,6 +245,22 @@ public class BuoyBufrDecoder extends AbstractBufrSfcObsDecoder {
             }
             location.assignLocation(lat.floatValue(), lon.floatValue());
         }
+=======
+            throw new BufrObsDecodeException("BUFR file '" + parser.getFile()
+                    + "' missing location information");
+        }
+        /*
+         * Call assignLocation with the currently set latitude and longitude.
+         * This is to handle the case where fallback lat/lon values were
+         * overwritten by the default values. In those cases,
+         * SurfaceObsLocation.assignLatitude() and assignLongitude() may not
+         * have called assignLocation() with the newer information since
+         * location was not null.
+         */
+        location.assignLocation(location.getLatitude(),
+                location.getLongitude());
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override

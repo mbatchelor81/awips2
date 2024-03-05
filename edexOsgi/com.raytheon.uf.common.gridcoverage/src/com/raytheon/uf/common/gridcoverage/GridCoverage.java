@@ -68,8 +68,13 @@ import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
 
 import si.uom.SI;
+<<<<<<< HEAD
 import tec.uom.se.format.SimpleUnitFormat;
 import tec.uom.se.unit.MetricPrefix;
+=======
+import tech.units.indriya.format.SimpleUnitFormat;
+import javax.measure.MetricPrefix;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Base class for encapsulating grid spatial information

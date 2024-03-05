@@ -1,10 +1,18 @@
 ###########################################################################
 ## $user IS A GLOBAL VARIABLE CONTAINING THE WORKSTATION'S LOGIN USERNAME
 ###########################################################################
+<<<<<<< HEAD
+=======
+#set($user = $user.split('@').get(0))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #if(${user}=="ebookbin")
 TEST
 #elseif(${user}=="hisawipslogin")
 SOMEONEELSESNAME
 #else
 !**NAME/INITIALS**!
+<<<<<<< HEAD
 #end
+=======
+#end
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

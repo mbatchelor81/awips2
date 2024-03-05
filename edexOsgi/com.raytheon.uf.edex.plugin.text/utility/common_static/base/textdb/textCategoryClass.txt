@@ -231,7 +231,10 @@ PRB 12 17
 PRC 13
 PRE 16
 PSH 1
+<<<<<<< HEAD
 PTL 5
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 PTS 12 14
 PWO 1 6 14
 PWS 12 18

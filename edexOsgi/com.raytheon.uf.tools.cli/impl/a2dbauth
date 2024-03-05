@@ -25,6 +25,10 @@
 # Feb 25, 2021   8376     Robert Blum     Add support for pgsqlshp. Note a2dbauth
 #                                         now parses the -u option as username along
 #                                         with -U and --username.
+<<<<<<< HEAD
+=======
+# Apr 12, 2023   2029554  a.rivera        replace deprecated readfp() method with read_file()
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 from configparser import RawConfigParser
 from io import StringIO
@@ -75,7 +79,11 @@ def read_fxa_db_conf():
         c = RawConfigParser()
         # db.config should be mostly compatible enough with ConfigParser
         # syntax, but we need to add a section header.
+<<<<<<< HEAD
         c.readfp(StringIO('[default]\n' + text))
+=======
+        c.read_file(StringIO('[default]\n' + text))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         o = 'db.sslMode'
         if c.has_option('default', o):
             return c.get('default', o)

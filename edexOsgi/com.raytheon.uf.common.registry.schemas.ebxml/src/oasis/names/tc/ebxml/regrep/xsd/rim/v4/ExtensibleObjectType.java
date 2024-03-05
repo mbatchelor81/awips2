@@ -46,10 +46,13 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
+<<<<<<< HEAD
 import oasis.names.tc.ebxml.regrep.xsd.rs.v4.RegistryExceptionType;
 import oasis.names.tc.ebxml.regrep.xsd.rs.v4.RegistryRequestType;
 import oasis.names.tc.ebxml.regrep.xsd.rs.v4.RegistryResponseType;
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -59,6 +62,13 @@ import com.raytheon.uf.common.registry.schemas.ebxml.util.RegrepUtil;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerialize;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
 
+<<<<<<< HEAD
+=======
+import oasis.names.tc.ebxml.regrep.xsd.rs.v4.RegistryExceptionType;
+import oasis.names.tc.ebxml.regrep.xsd.rs.v4.RegistryRequestType;
+import oasis.names.tc.ebxml.regrep.xsd.rs.v4.RegistryResponseType;
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 /**
  * 
  * Common base type for all types need to support extensibility via slots.
@@ -94,6 +104,11 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
  * 12/2/2013     1829       bphillip    Made ExtensibleObjectType persistable, modified persistence annotations, added hashCode and equals
  * 1/15/2014     2613       bphillip    Added batch size Slot field
  * 06/01/2016    5659       dhladky     Changed XML access type
+<<<<<<< HEAD
+=======
+ * 05/26/2020    8165       bsteffen    Remove ActionType
+ * 
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  * 
  * @author bphillip
@@ -103,9 +118,15 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "ExtensibleObjectType", propOrder = { "slot" })
 @XmlSeeAlso({ PostalAddressType.class, TelephoneNumberType.class,
+<<<<<<< HEAD
         ParameterType.class, QueryType.class, ActionType.class,
         DeliveryInfoType.class, PersonNameType.class, ObjectRefType.class,
         SlotType.class, IdentifiableType.class, EmailAddressType.class,
+=======
+        ParameterType.class, QueryType.class, DeliveryInfoType.class,
+        PersonNameType.class, ObjectRefType.class, SlotType.class,
+        IdentifiableType.class, EmailAddressType.class,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         QueryExpressionType.class, RegistryExceptionType.class,
         RegistryResponseType.class, RegistryRequestType.class })
 @DynamicSerialize
@@ -113,8 +134,13 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
 @Table(schema = RegrepUtil.EBXML_SCHEMA, name = "ExtensibleObject")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Cache(region = RegrepUtil.DB_CACHE_REGION, usage = CacheConcurrencyStrategy.TRANSACTIONAL, include = "all")
+<<<<<<< HEAD
 public abstract class ExtensibleObjectType implements Serializable,
         IPersistableDataObject<String> {
+=======
+public abstract class ExtensibleObjectType
+        implements Serializable, IPersistableDataObject<String> {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private static final long serialVersionUID = 785780260533569469L;
 
@@ -173,13 +199,22 @@ public abstract class ExtensibleObjectType implements Serializable,
      * 
      * 
      * <p>
+<<<<<<< HEAD
      * Objects of the following type(s) are allowed in the list {@link SlotType }
+=======
+     * Objects of the following type(s) are allowed in the list {@link SlotType
+     * }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * 
      * 
      */
     public List<SlotType> getSlot() {
         if (slot == null) {
+<<<<<<< HEAD
             slot = new ArrayList<SlotType>();
+=======
+            slot = new ArrayList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         return this.slot;
     }
@@ -202,7 +237,11 @@ public abstract class ExtensibleObjectType implements Serializable,
 
     @SuppressWarnings("unchecked")
     public <T> List<T> getSlotValueAsList(String slotName) {
+<<<<<<< HEAD
         List<T> retVal = new ArrayList<T>();
+=======
+        List<T> retVal = new ArrayList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         for (SlotType slot : getSlot()) {
             if (slot.getName().equals(slotName)) {
                 retVal.add((T) slot.getSlotValue().getValue());
@@ -215,7 +254,11 @@ public abstract class ExtensibleObjectType implements Serializable,
         if (this.getSlot().isEmpty()) {
             return Collections.emptyMap();
         }
+<<<<<<< HEAD
         Map<String, Object> map = new HashMap<String, Object>(slot.size());
+=======
+        Map<String, Object> map = new HashMap<>(slot.size());
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         for (SlotType slot : this.getSlot()) {
             map.put(slot.getName(), slot.getSlotValue().getValue());
         }

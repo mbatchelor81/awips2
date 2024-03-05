@@ -1,5 +1,6 @@
 #!/bin/bash
 ##
+<<<<<<< HEAD
 # This script will be good for migrating from hmdb to climate
 # TODO: This script need to be updated when the hmdb is retired
 # -----------------------------------------------------------------
@@ -7,6 +8,31 @@
 # !
 # ! $1 = psql install directory
 # ! $2 = postgresql install directory
+=======
+# This software was developed and / or modified by Raytheon Company,
+# pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+# 
+# U.S. EXPORT CONTROLLED TECHNICAL DATA
+# This software product contains export-restricted data whose
+# export/transfer/disclosure is restricted by U.S. law. Dissemination
+# to non-U.S. persons whether in the United States or abroad requires
+# an export license or other authorization.
+# 
+# Contractor Name:        Raytheon Company
+# Contractor Address:     6825 Pine Street, Suite 340
+#                         Mail Stop B8
+#                         Omaha, NE 68106
+#                         402.291.0100
+# 
+# See the AWIPS II Master Rights File ("Master Rights File.pdf") for
+# further licensing information.
+##
+# -----------------------------------------------------------------
+# ! script to create the Climate database
+# !
+# ! $1 = ignored (was psql install directory)
+# ! $2 = ignored (was postgresql install directory)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # ! $3 = DB port number
 # ! $4 = username
 # ! $5 = script directory
@@ -15,6 +41,7 @@
 # -----------------------------------------------------------------
 echo ""
 echo "--------------------------------------------------------------------------------"
+<<<<<<< HEAD
 echo "\| Creating Climate Database..."
 echo "--------------------------------------------------------------------------------"
 ${1}/bin/psql -d postgres -U ${4} -q -p ${3} -f ${5}/createClimateDb.sql >> ${6} 2>&1
@@ -26,3 +53,80 @@ ${2}/bin/pg_dump -U ${4} hmdb --clean | ${1}/bin/psql -U ${4} climate >> ${6} 2>
 echo "\| Creating cpg_session and sent_prod_record tables..."
 echo "--------------------------------------------------------------------------------"
 ${1}/bin/psql -d climate -U ${4} -q -p ${3} -f ${5}/createAdditionalTables.sql >> ${6} 2>&1
+=======
+echo "\| Creating Climate Database and Tables..."
+echo "--------------------------------------------------------------------------------"
+psql -d postgres -U ${4} -q -p ${3} -f ${5}/createClimateDb.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/createTables.sql >> ${6} 2>&1
+echo ""
+echo "--------------------------------------------------------------------------------"
+echo "\| Populating Climate Database Tables"
+echo "--------------------------------------------------------------------------------"
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_boolean_values.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_bufr_identifier.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_cat_values.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_categorical_ele.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_cli_asos_daily.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_cli_asos_monthly.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_cli_freezedates.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_cli_mon_season_yr.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_cli_sta_setup.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_climate_day_config.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_climate_period.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_climo_dates.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_contin_int_ele.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_contin_real_ele.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_coordinates_2d.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_daily_climate.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_data_source.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_data_src_version.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_day_climate_extreme.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_day_climate_norm.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_defined_values.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_discrete_ele.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_discrete_values.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_dqd.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_ele_src_version.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_element_relat.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_forecast_backup.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_fss_categ_multi.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_fss_categ_single.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_fss_cloud_layer.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_fss_contin_real.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_fss_report.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_fss_wx_period.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_hydromet_element.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_issuance_type.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_issuing_office.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_map_proj_coords.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_mon_climate_norm.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_mtr_status.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_phys_ele_relat.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_physical_element.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_physical_units.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_prod_list.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_product.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_product_version.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_relat_type.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_rpt.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_sta_agency_codes.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_station_location.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_time_zone.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_units_class.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_units_conversion.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_units_system.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_units_translations.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_weather_category.sql >> ${6} 2>&1
+psql -d climate -U ${4} -q -p ${3} -f ${5}/load_wmo_state_region.sql >> ${6} 2>&1
+echo ""
+echo "--------------------------------------------------------------------------------"
+echo "\| Creating Climate Database Constraints..."
+echo "--------------------------------------------------------------------------------"
+psql -d climate -U ${4} -q -p ${3} -f ${5}/createConstraints.sql >> ${6} 2>&1
+echo ""
+echo "--------------------------------------------------------------------------------"
+echo "\| Creating cpg_session and sent_prod_record tables..."
+echo "--------------------------------------------------------------------------------"
+psql -d climate -U ${4} -q -p ${3} -f ${5}/createAdditionalTables.sql >> ${6} 2>&1
+echo ""
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

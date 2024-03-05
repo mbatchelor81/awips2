@@ -56,7 +56,7 @@ logging.basicConfig(format="%(asctime)s %(name)s %(levelname)s:  %(message)s",
 log = logging.getLogger('MergeVTEC')
 
 
-class CaseInsensitiveStringSet(collections.Set):
+class CaseInsensitiveStringSet(collections.abc.Set):
     def __init__(self, iterable):
         self.__internalSet = frozenset(iterable)
         

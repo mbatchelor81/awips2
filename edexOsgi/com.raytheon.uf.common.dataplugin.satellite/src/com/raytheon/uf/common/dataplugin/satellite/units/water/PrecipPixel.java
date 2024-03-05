@@ -30,8 +30,13 @@ import javax.measure.quantity.Length;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import si.uom.SI;
+<<<<<<< HEAD
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.quantity.QuantityDimension;
+=======
+import tech.units.indriya.AbstractUnit;
+import tech.units.indriya.unit.UnitDimension;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Represents a pixel value on a POES or DMSP satellite precipitation image
@@ -79,6 +84,10 @@ public class PrecipPixel extends AbstractUnit<Length> {
 
     @Override
     public Dimension getDimension() {
+<<<<<<< HEAD
         return QuantityDimension.LENGTH;
+=======
+        return UnitDimension.LENGTH;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 }

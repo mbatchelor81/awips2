@@ -78,6 +78,7 @@
         </rim:RegistryObject>
 
         <!--
+<<<<<<< HEAD
     Parameterized Query to get the sorted list of AuditableEventType instances that form the audit trail for a specified RegistryObject.
     -->
         <rim:RegistryObject xsi:type="rim:QueryDefinitionType" lid="urn:oasis:names:tc:ebxml-regrep:query:GetAuditTrailByLid" id="urn:oasis:names:tc:ebxml-regrep:query:GetAuditTrailByLid">
@@ -178,6 +179,8 @@
         </rim:RegistryObject>
 
         <!--
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     Parameterized Query to get a ClassificationScheme by its id.
     Needed separate from GetRegistryObjectById so it can be implemented as a QueryPlugin.
     -->
@@ -590,6 +593,7 @@
             </rim:Parameter>
         </rim:RegistryObject>
 
+<<<<<<< HEAD
         <rim:RegistryObject xsi:type="rim:QueryDefinitionType" lid="urn:oasis:names:tc:ebxml-regrep:query:GetNotification" id="urn:oasis:names:tc:ebxml-regrep:query:GetNotification">
             <rim:Name>
                 <rim:LocalizedString value="Get Pending Notification"/>
@@ -614,6 +618,8 @@
                 </rim:Description>
             </rim:Parameter>
         </rim:RegistryObject>
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <rim:RegistryObject xsi:type="rim:QueryDefinitionType" lid="urn:oasis:names:tc:ebxml-regrep:query:GetReferencedObject" id="urn:oasis:names:tc:ebxml-regrep:query:GetReferencedObject">
             <rim:Name>
                 <rim:LocalizedString value="Get Referenced Object"/>

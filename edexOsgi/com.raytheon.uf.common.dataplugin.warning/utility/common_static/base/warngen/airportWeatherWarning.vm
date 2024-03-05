@@ -25,7 +25,11 @@
 #######################################################################
 ## Override initial variables if a cancellation is selected
 #######################################################################
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "cancelAWW")})
+=======
+#if($bullets.contains("cancelAWW"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #set ($cancel = " CANCELLED")
 #set ($issue = "cancelled the")
 #end
@@ -34,6 +38,7 @@
 ## Sites can use different airports by modifying the code below
 #######################################################################
 #set ($site = "!** YOU DIDN'T SELECT AN AIRPORT **!")
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "SUM")})
   #set ($site = "Some Airport /SUM/.")
   #set ($awwId = "SUM")
@@ -43,6 +48,17 @@
   #set ($awwId = "ANT")
 #end
 #if(${list.contains(${bullets}, "TST")})
+=======
+#if($bullets.contains("SUM"))
+  #set ($site = "Some Airport /SUM/.")
+  #set ($awwId = "SUM")
+#end
+#if($bullets.contains("ANT"))
+  #set ($site = "Another Airport /ANT/.")
+  #set ($awwId = "ANT")
+#end
+#if($bullets.contains("TST"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set ($site = "Test Airport /TST/.")
   #set ($awwId = "TST")
 #end
@@ -79,7 +95,11 @@ ${site}
 ####################################################
 ## If cancelling the AWW do not output any text
 ####################################################
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "cancelAWW")})
+=======
+#if($bullets.contains("cancelAWW"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 !** GIVE REASON FOR CANCELLATION **!
 #else
 
@@ -93,6 +113,7 @@ The following weather hazards are expected:
 ## Create threats based on selections in the xml file
 ## Sites can add or modify threats by changing the code below
 ###################################################################
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "wind")})
 Wind gusts 30 knots or higher.
 #end
@@ -106,6 +127,21 @@ Hail of 1/2 inch or greater.
 The onset of freezing rain.
 #end
 #if(${list.contains(${bullets}, "sleetSnow")})
+=======
+#if($bullets.contains("wind"))
+Wind gusts 30 knots or higher.
+#end
+#if($bullets.contains("lightning"))
+Cloud to ground lightning within 5 nm of the airport.
+#end
+#if($bullets.contains("hail"))
+Hail of 1/2 inch or greater.
+#end
+#if($bullets.contains("freezingRain"))
+The onset of freezing rain.
+#end
+#if($bullets.contains("sleetSnow"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 The onset of accumulating sleet or snow.
 #end
 
@@ -118,6 +154,7 @@ The onset of accumulating sleet or snow.
 ## If sites do not want watches in their AWW product comment out the
 ## section below
 #######################################################################
+<<<<<<< HEAD
 #if(${list.contains(${includedWatches}, "TO.A")})
 #inserttorwatches(${watches}, ${list}, ${secondtimezone}, ${dateUtil}, ${timeFormat}, ${watchPhrase})
 
@@ -128,6 +165,18 @@ The onset of accumulating sleet or snow.
 #end
 
 #printcoords(${areaPoly}, ${list})
+=======
+#if($includedWatches.contains("TO.A"))
+#inserttorwatches(${watches}, ${secondtimezone}, ${dateUtil}, ${timeFormat}, ${watchPhrase})
+
+#end
+#if($includedWatches.contains("SV.A"))
+#insertsvrwatches(${watches}, ${secondtimezone}, ${dateUtil}, ${timeFormat}, ${watchPhrase})
+
+#end
+
+#printcoords(${areaPoly})
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 $$
 

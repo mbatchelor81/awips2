@@ -84,6 +84,11 @@ import org.locationtech.jts.geom.Coordinate;
  * Apr 04, 2016  5539     randerso  Fixed unsigned byte issues
  * Sep 12, 2016  5861     randerso  Remove references to IFPServerConfigManager
  *                                  which was largely redundant with IFPServer.
+<<<<<<< HEAD
+=======
+ * May 15, 2023  2033890  dhaines   Changed unsigned integer handling to be 
+ *                                  more clear 
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -361,8 +366,13 @@ public class ASCIIGrid {
                             - 1; i >= 0; i--) {
                         for (int j = 0; j < weather.getWeatherGrid()
                                 .getXdim(); j++) {
+<<<<<<< HEAD
                             String key = weather.getKeys()[0xFF
                                     & weather.getWeatherGrid().get(j, i)]
+=======
+                            String key = weather.getKeys()
+                                        [Byte.toUnsignedInt(weather.getWeatherGrid().get(j, i))]
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                             .toString();
                             printStream.println(key);
                         }
@@ -374,8 +384,13 @@ public class ASCIIGrid {
                             - 1; i >= 0; i--) {
                         for (int j = 0; j < discrete.getDiscreteGrid()
                                 .getXdim(); j++) {
+<<<<<<< HEAD
                             String key = discrete.getKeys()[0xFF
                                     & discrete.getDiscreteGrid().get(j, i)]
+=======
+                            String key = discrete.getKeys()
+                                        [Byte.toUnsignedInt(discrete.getDiscreteGrid().get(j, i))]
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                             .toString();
                             printStream.println(key);
                         }

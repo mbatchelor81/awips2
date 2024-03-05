@@ -24,28 +24,53 @@
 ##
 #
 # SOFTWARE HISTORY
+<<<<<<< HEAD
 # Date         Ticket#    Engineer    Description
 # ------------ ---------- ----------- --------------------------
 # Feb 09, 2015  #4103     dgilling    Refactored to support multiple svcbu 
 #                                     sites.
 # Mar 23, 2015  #4103     dgilling    Fix script for dual-domain.
 # Jul 15, 2016  #5747     dgilling    Move edex_static to common_static.
+=======
+#
+# Date          Ticket#  Engineer  Description
+# ------------- -------- --------- --------------------------------------------
+# Feb 09, 2015  4103     dgilling  Refactored to support multiple svcbu sites.
+# Mar 23, 2015  4103     dgilling  Fix script for dual-domain.
+# Jul 15, 2016  5747     dgilling  Move edex_static to common_static.
+# Jun 29, 2021  8572     randerso  Always export full domain. Pass failed site
+#                                  to serviceBackupUtil.sh
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 ##
 
 
 if [ ${#AWIPS_HOME} = 0 ]
 then
+<<<<<<< HEAD
         path_to_script=`readlink -f $0`
 		export AWIPS_HOME=$(dirname $(dirname $(dirname $(dirname  $path_to_script))))
 fi
 
 . ${AWIPS_HOME}/GFESuite/ServiceBackup/configuration/svcbu.env
 source ${AWIPS_HOME}/GFESuite/ServiceBackup/scripts/serviceBackupUtil.sh
+=======
+    path_to_script=`readlink -f $0`
+    export AWIPS_HOME=$(dirname $(dirname $(dirname $(dirname  $path_to_script))))
+fi
+
+# $1 = Failed site
+FAILED_SITE=`echo ${1} | tr '[A-Z]' '[a-z]'`
+FAILED_CAPS_SITE=`echo ${1} | tr [a-z] [A-Z]`
+export FAILED_SITE
+
+source ${AWIPS_HOME}/GFESuite/ServiceBackup/scripts/serviceBackupUtil.sh ${FAILED_CAPS_SITE}
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 if [ $# -ne 1 ]
 then
    echo "Incorrect number of arguments\nCorrect usage: export_grids_to_failed_site failed_site"
+<<<<<<< HEAD
    exit 1
 fi
 
@@ -54,6 +79,11 @@ FAILED_SITE=`echo ${1} | tr '[A-Z]' '[a-z]'`
 FAILED_CAPS_SITE=`echo ${1} | tr [a-z] [A-Z]`
 export FAILED_SITE
 
+=======
+    exit 1
+fi
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # Create the log file
 configureLogging "svcbu_export_bksite_grids" ${FAILED_SITE}
 
@@ -62,12 +92,18 @@ lock_file=$(getLockFile "exportBkSiteGrids" ${FAILED_SITE})
 lock_status=$(isOperationInProgress "exportBkSiteGrids" ${FAILED_SITE})
 if [[ "${lock_status}" = "true" ]]
 then
+<<<<<<< HEAD
 	echo "Cannot export grids back to ${FAILED_SITE}.  Export grids process already in progress!"
 	exit 1
+=======
+    echo "Cannot export grids back to ${FAILED_SITE}.  Export grids process already in progress!"
+    exit 1
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 fi
 
 echo "IN_PROGRESS" > ${lock_file}
 
+<<<<<<< HEAD
 #
 # If this is a non-wfo/non-rfc site, they may not have an edit area for clipping - handle it
 #
@@ -77,13 +113,19 @@ else
    SVCBU_MASK="-m $SVCBU_GRIDAREA"
 fi
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 echo "Starting exporting grids..."
 
 OUTPUT_DIR=$(getTempDirectory "export_grids_to_failed_site" ${FAILED_SITE})
 
 #Starting ifpnetCDF to pack the grids
 echo "Running ifpnetCDF..."
+<<<<<<< HEAD
 ${GFESUITE_BIN}/ifpnetCDF -o ${OUTPUT_DIR}/${FAILED_SITE}Grd.netcdf -h $SVCBU_HOST -r $CDSPORT -d ${FAILED_CAPS_SITE}_GRID__Official_00000000_0000 -k -t -c ${SVCBU_MASK}
+=======
+${GFESUITE_BIN}/ifpnetCDF -o ${OUTPUT_DIR}/${FAILED_SITE}Grd.netcdf -h $SVCBU_HOST -r $CDSPORT -d ${FAILED_CAPS_SITE}_GRID__Official_00000000_0000 -k -t -c
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 if [ $? -ne 0 ]; then
     echo "ERROR: ifpnetCDF failed."
     echo "FAILED" > ${lock_file}

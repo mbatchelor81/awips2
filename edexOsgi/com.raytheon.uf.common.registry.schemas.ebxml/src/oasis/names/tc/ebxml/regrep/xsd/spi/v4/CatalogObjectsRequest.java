@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -23,18 +35,28 @@ package oasis.names.tc.ebxml.regrep.xsd.spi.v4;
 import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< HEAD
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+<<<<<<< HEAD
+=======
+import com.raytheon.uf.common.registry.schemas.ebxml.util.EbxmlNamespaces;
+import com.raytheon.uf.common.serialization.annotations.DynamicSerialize;
+import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.ExtrinsicObjectType;
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.ObjectRefListType;
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.QueryType;
@@ -42,6 +64,7 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryObjectListType;
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.SlotType;
 import oasis.names.tc.ebxml.regrep.xsd.rs.v4.RegistryRequestType;
 
+<<<<<<< HEAD
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -58,6 +81,16 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
  * The following schema fragment specifies the expected content contained within
  * this class.
  * 
+=======
+/**
+ * <p>
+ * Java class for anonymous complex type.
+ *
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -72,15 +105,24 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+<<<<<<< HEAD
  * 
  * <pre>
  * 
  * SOFTWARE HISTORY
  * 
+=======
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date         Ticket#     Engineer    Description
  * ------------ ----------  ----------- --------------------------
  * 2012                     bphillip    Initial implementation
  * 10/17/2013    1682       bphillip    Added software history
+<<<<<<< HEAD
  * 12/2/2013     1829       bphillip    Made ExtensibleObjectType persistable, 
  *                                      modified persistence annotations, added 
  *                                      constructors, hashCode, toString and equals
@@ -88,38 +130,64 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
  * 
  * @author bphillip
  * @version 1
+=======
+ * 12/2/2013     1829       bphillip    Made ExtensibleObjectType persistable,
+ *                                      modified persistence annotations, added
+ *                                      constructors, hashCode, toString and equals
+ * 10/27/2020    8170       ksunil      this is an empty table. Remove all JPA references
+ * </pre>
+ *
+ * @author bphillip
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = { "query", "objectRefList", "originalObjects",
         "invocationControlFile" })
 @XmlRootElement(name = "CatalogObjectsRequest")
 @DynamicSerialize
+<<<<<<< HEAD
 @Entity
 @Cache(region = RegrepUtil.DB_CACHE_REGION, usage = CacheConcurrencyStrategy.TRANSACTIONAL)
 @Table(schema = RegrepUtil.EBXML_SCHEMA, name = "CatalogObjectsRequest")
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 public class CatalogObjectsRequest extends RegistryRequestType {
 
     private static final long serialVersionUID = -1231369260237037178L;
 
     @XmlElement(name = "Query")
     @DynamicSerializeElement
+<<<<<<< HEAD
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "query_id", referencedColumnName = "id")
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     protected QueryType query;
 
     @XmlElement(name = "ObjectRefList", namespace = EbxmlNamespaces.RIM_URI)
     @DynamicSerializeElement
+<<<<<<< HEAD
     @OneToOne(cascade = CascadeType.ALL)
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     protected ObjectRefListType objectRefList;
 
     @XmlElement(name = "OriginalObjects")
     @DynamicSerializeElement
+<<<<<<< HEAD
     @OneToOne(cascade = CascadeType.ALL)
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     protected RegistryObjectListType originalObjects;
 
     @XmlElement(name = "InvocationControlFile")
     @DynamicSerializeElement
+<<<<<<< HEAD
     @Transient
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     protected List<ExtrinsicObjectType> invocationControlFile;
 
     public CatalogObjectsRequest() {
@@ -140,9 +208,15 @@ public class CatalogObjectsRequest extends RegistryRequestType {
 
     /**
      * Gets the value of the query property.
+<<<<<<< HEAD
      * 
      * @return possible object is {@link QueryType }
      * 
+=======
+     *
+     * @return possible object is {@link QueryType }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public QueryType getQuery() {
         return query;
@@ -150,10 +224,17 @@ public class CatalogObjectsRequest extends RegistryRequestType {
 
     /**
      * Sets the value of the query property.
+<<<<<<< HEAD
      * 
      * @param value
      *            allowed object is {@link QueryType }
      * 
+=======
+     *
+     * @param value
+     *            allowed object is {@link QueryType }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public void setQuery(QueryType value) {
         this.query = value;
@@ -161,9 +242,15 @@ public class CatalogObjectsRequest extends RegistryRequestType {
 
     /**
      * Gets the value of the objectRefList property.
+<<<<<<< HEAD
      * 
      * @return possible object is {@link ObjectRefListType }
      * 
+=======
+     *
+     * @return possible object is {@link ObjectRefListType }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public ObjectRefListType getObjectRefList() {
         return objectRefList;
@@ -171,10 +258,17 @@ public class CatalogObjectsRequest extends RegistryRequestType {
 
     /**
      * Sets the value of the objectRefList property.
+<<<<<<< HEAD
      * 
      * @param value
      *            allowed object is {@link ObjectRefListType }
      * 
+=======
+     *
+     * @param value
+     *            allowed object is {@link ObjectRefListType }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public void setObjectRefList(ObjectRefListType value) {
         this.objectRefList = value;
@@ -182,9 +276,15 @@ public class CatalogObjectsRequest extends RegistryRequestType {
 
     /**
      * Gets the value of the originalObjects property.
+<<<<<<< HEAD
      * 
      * @return possible object is {@link RegistryObjectListType }
      * 
+=======
+     *
+     * @return possible object is {@link RegistryObjectListType }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public RegistryObjectListType getOriginalObjects() {
         return originalObjects;
@@ -192,10 +292,17 @@ public class CatalogObjectsRequest extends RegistryRequestType {
 
     /**
      * Sets the value of the originalObjects property.
+<<<<<<< HEAD
      * 
      * @param value
      *            allowed object is {@link RegistryObjectListType }
      * 
+=======
+     *
+     * @param value
+     *            allowed object is {@link RegistryObjectListType }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public void setOriginalObjects(RegistryObjectListType value) {
         this.originalObjects = value;
@@ -203,12 +310,17 @@ public class CatalogObjectsRequest extends RegistryRequestType {
 
     /**
      * Gets the value of the invocationControlFile property.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * <p>
      * This accessor method returns a reference to the live list, not a
      * snapshot. Therefore any modification you make to the returned list will
      * be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the invocationControlFile property.
+<<<<<<< HEAD
      * 
      * <p>
      * For example, to add a new item, do as follows:
@@ -227,6 +339,26 @@ public class CatalogObjectsRequest extends RegistryRequestType {
     public List<ExtrinsicObjectType> getInvocationControlFile() {
         if (invocationControlFile == null) {
             invocationControlFile = new ArrayList<ExtrinsicObjectType>();
+=======
+     *
+     * <p>
+     * For example, to add a new item, do as follows:
+     *
+     * <pre>
+     * getInvocationControlFile().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ExtrinsicObjectType }
+     *
+     *
+     */
+    public List<ExtrinsicObjectType> getInvocationControlFile() {
+        if (invocationControlFile == null) {
+            invocationControlFile = new ArrayList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         return this.invocationControlFile;
     }
@@ -240,10 +372,15 @@ public class CatalogObjectsRequest extends RegistryRequestType {
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
+<<<<<<< HEAD
         result = prime
                 * result
                 + ((invocationControlFile == null) ? 0 : invocationControlFile
                         .hashCode());
+=======
+        result = prime * result + ((invocationControlFile == null) ? 0
+                : invocationControlFile.hashCode());
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         result = prime * result
                 + ((objectRefList == null) ? 0 : objectRefList.hashCode());
         result = prime * result
@@ -254,6 +391,7 @@ public class CatalogObjectsRequest extends RegistryRequestType {
 
     @Override
     public boolean equals(Object obj) {
+<<<<<<< HEAD
         if (this == obj)
             return true;
         if (!super.equals(obj))
@@ -281,6 +419,46 @@ public class CatalogObjectsRequest extends RegistryRequestType {
                 return false;
         } else if (!query.equals(other.query))
             return false;
+=======
+        if (this == obj) {
+            return true;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        CatalogObjectsRequest other = (CatalogObjectsRequest) obj;
+        if (invocationControlFile == null) {
+            if (other.invocationControlFile != null) {
+                return false;
+            }
+        } else if (!invocationControlFile.equals(other.invocationControlFile)) {
+            return false;
+        }
+        if (objectRefList == null) {
+            if (other.objectRefList != null) {
+                return false;
+            }
+        } else if (!objectRefList.equals(other.objectRefList)) {
+            return false;
+        }
+        if (originalObjects == null) {
+            if (other.originalObjects != null) {
+                return false;
+            }
+        } else if (!originalObjects.equals(other.originalObjects)) {
+            return false;
+        }
+        if (query == null) {
+            if (other.query != null) {
+                return false;
+            }
+        } else if (!query.equals(other.query)) {
+            return false;
+        }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return true;
     }
 

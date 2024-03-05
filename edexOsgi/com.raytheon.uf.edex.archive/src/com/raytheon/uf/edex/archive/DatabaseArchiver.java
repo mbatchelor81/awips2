@@ -1,26 +1,41 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
 package com.raytheon.uf.edex.archive;
 
 import java.io.File;
+<<<<<<< HEAD
 import java.text.ParseException;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -36,7 +51,10 @@ import com.raytheon.uf.common.dataplugin.PluginException;
 import com.raytheon.uf.common.dataplugin.PluginProperties;
 import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
+<<<<<<< HEAD
 import com.raytheon.uf.common.status.UFStatus.Priority;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.time.util.TimeUtil;
 import com.raytheon.uf.edex.core.EDEXUtil;
 import com.raytheon.uf.edex.core.dataplugin.PluginRegistry;
@@ -45,18 +63,29 @@ import com.raytheon.uf.edex.database.cluster.ClusterLockUtils;
 import com.raytheon.uf.edex.database.cluster.ClusterLockUtils.LockState;
 import com.raytheon.uf.edex.database.cluster.ClusterTask;
 import com.raytheon.uf.edex.database.cluster.handler.CurrentTimeClusterLockHandler;
+<<<<<<< HEAD
 import com.raytheon.uf.edex.database.cluster.handler.SharedLockHandler;
 import com.raytheon.uf.edex.database.cluster.handler.SharedLockHandler.LockType;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.edex.database.plugin.PluginDao;
 import com.raytheon.uf.edex.database.plugin.PluginFactory;
 
 /**
  * This class handles saving processed data to the archiver directory.
+<<<<<<< HEAD
  * 
  * <pre>
  * 
  * SOFTWARE HISTORY
  * 
+=======
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
  * Nov 17, 2011            rjpeter     Initial creation
@@ -69,8 +98,14 @@ import com.raytheon.uf.edex.database.plugin.PluginFactory;
  * Feb 12, 2014 2784       rjpeter     Fixed clusterLock to not update the time by default.
  * Apr 01, 2014 2862       rferrel     Add exclusive lock at plug-in level.
  * Apr 23, 2014 2726       rjpeter     Added shutdown hook for quicker shutdown while archiver is running.
+<<<<<<< HEAD
  * </pre>
  * 
+=======
+ * Oct 29, 2021 8690       aelgorashi  moved some common code to ArchiveUtil class.
+ * </pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author rjpeter
  * @version 1.0
  */
@@ -78,6 +113,7 @@ public class DatabaseArchiver implements IPluginArchiver {
     private static final transient IUFStatusHandler statusHandler = UFStatus
             .getHandler(DatabaseArchiver.class);
 
+<<<<<<< HEAD
     /** Thread safe date format. */
     private static final ThreadLocal<SimpleDateFormat> TL_DATE_FORMAT = new ThreadLocal<SimpleDateFormat>() {
 
@@ -96,6 +132,8 @@ public class DatabaseArchiver implements IPluginArchiver {
     /** Maximum time increment to archive, note based off of insertTime. */
     private static final long MAX_DURATION_MILLIS = 60 * TimeUtil.MILLIS_PER_MINUTE;
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /** Default batch size for database queries */
     private static final Integer defaultBatchSize = 10000;
 
@@ -103,7 +141,12 @@ public class DatabaseArchiver implements IPluginArchiver {
     private static final String TASK_NAME = "DB Archiver";
 
     /** Cluster time out on lock. */
+<<<<<<< HEAD
     private static final long CLUSTER_LOCK_TIMEOUT = 10 * TimeUtil.MILLIS_PER_MINUTE;
+=======
+    private static final long CLUSTER_LOCK_TIMEOUT = 10
+            * TimeUtil.MILLIS_PER_MINUTE;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /** Mapping for plug-in formatters. */
     private final Map<String, IPluginArchiveFileNameFormatter> pluginArchiveFormatters;
@@ -139,8 +182,13 @@ public class DatabaseArchiver implements IPluginArchiver {
      * The constructor.
      */
     public DatabaseArchiver() {
+<<<<<<< HEAD
         pluginArchiveFormatters = new HashMap<String, IPluginArchiveFileNameFormatter>();
         pluginBatchSize = new HashMap<String, Integer>();
+=======
+        pluginArchiveFormatters = new HashMap<>();
+        pluginBatchSize = new HashMap<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         debugArchiver = Boolean.getBoolean("archive.debug.enable");
         compressDatabaseFiles = Boolean
                 .getBoolean("archive.compression.enable");
@@ -153,6 +201,7 @@ public class DatabaseArchiver implements IPluginArchiver {
         if ((props != null) && (props.getRecord() != null)
                 && (props.getDao() != null)) {
             Class<?> recordClass = props.getRecord();
+<<<<<<< HEAD
             if (recordClass != null) {
                 try {
                     recordClass.asSubclass(PluginDataObject.class);
@@ -207,24 +256,42 @@ public class DatabaseArchiver implements IPluginArchiver {
             if (statusHandler.isPriorityEnabled(Priority.PROBLEM)) {
                 statusHandler.handle(Priority.PROBLEM, String.format(
                         "Unable to unlock: \"%s\"", ct.getId().getDetails()));
+=======
+            if (recordClass != null
+                    && PluginDataObject.class.isAssignableFrom(recordClass)) {
+                archivePluginData(pluginName, archivePath);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         }
     }
 
+<<<<<<< HEAD
     public void archivePluginData(String pluginName, String archivePath) {
+=======
+    private void archivePluginData(String pluginName, String archivePath) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if (EDEXUtil.isShuttingDown()) {
             return;
         }
 
         File archiveDir = new File(archivePath);
         File pluginDir = new File(archiveDir, pluginName);
+<<<<<<< HEAD
         ClusterTask ctPlugin = getWriteLock(pluginDir.getAbsolutePath());
+=======
+        ClusterTask ctPlugin = ArchiveUtil
+                .getWriteLock(pluginDir.getAbsolutePath());
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         if (ctPlugin == null) {
             return;
         }
 
+<<<<<<< HEAD
         SimpleDateFormat dateFormat = TL_DATE_FORMAT.get();
+=======
+        SimpleDateFormat dateFormat = ArchiveUtil.TL_DATE_FORMAT.get();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         // set archive time
         Calendar runTime = TimeUtil.newGmtCalendar();
         runTime.add(Calendar.MINUTE, -30);
@@ -235,7 +302,11 @@ public class DatabaseArchiver implements IPluginArchiver {
         ClusterTask ct = ClusterLockUtils.lock(TASK_NAME, pluginName,
                 lockHandler, false);
         if (!LockState.SUCCESSFUL.equals(ct.getLockState())) {
+<<<<<<< HEAD
             releaseWriteLock(ctPlugin);
+=======
+            ArchiveUtil.releaseWriteLock(ctPlugin);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return;
         }
 
@@ -258,16 +329,26 @@ public class DatabaseArchiver implements IPluginArchiver {
             try {
                 dao = PluginFactory.getInstance().getPluginDao(pluginName);
             } catch (PluginException e) {
+<<<<<<< HEAD
                 statusHandler
                         .error(pluginName
                                 + ": Error getting data access object!  Unable to archive data!",
                                 e);
+=======
+                statusHandler.error(pluginName
+                        + ": Error getting data access object!  Unable to archive data!",
+                        e);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 return;
             }
 
             startTime = determineStartTime(pluginName, ct.getExtraInfo(),
                     runTime, dao);
+<<<<<<< HEAD
             Calendar endTime = determineEndTime(startTime, runTime);
+=======
+            Calendar endTime = ArchiveUtil.getEndTime(startTime, runTime);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             IPluginArchiveFileNameFormatter archiveFormatter = pluginArchiveFormatters
                     .get(pluginName);
@@ -298,7 +379,11 @@ public class DatabaseArchiver implements IPluginArchiver {
                 if (!processor.isFailed()) {
                     recordCount += processor.getRecordsSaved();
                     startTime = endTime;
+<<<<<<< HEAD
                     endTime = determineEndTime(startTime, runTime);
+=======
+                    endTime = ArchiveUtil.getEndTime(startTime, runTime);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                     // update the cluster lock with check point details
                     String extraInfo = dateFormat.format(startTime.getTime());
@@ -309,9 +394,13 @@ public class DatabaseArchiver implements IPluginArchiver {
             }
 
             if (recordCount > 0) {
+<<<<<<< HEAD
                 statusHandler.info(pluginName
                         + ": archived "
                         + recordCount
+=======
+                statusHandler.info(pluginName + ": archived " + recordCount
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         + " records in "
                         + TimeUtil.prettyDuration(System.currentTimeMillis()
                                 - timimgStartMillis));
@@ -337,7 +426,11 @@ public class DatabaseArchiver implements IPluginArchiver {
             }
 
             if (ctPlugin != null) {
+<<<<<<< HEAD
                 releaseWriteLock(ctPlugin);
+=======
+                ArchiveUtil.releaseWriteLock(ctPlugin);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         }
 
@@ -346,7 +439,11 @@ public class DatabaseArchiver implements IPluginArchiver {
 
     /**
      * Get the plug-in's start time for a query.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param pluginName
      * @param extraInfo
      * @param runTime
@@ -354,6 +451,7 @@ public class DatabaseArchiver implements IPluginArchiver {
      * @return startTime
      * @throws DataAccessLayerException
      */
+<<<<<<< HEAD
     protected Calendar determineStartTime(String pluginName, String extraInfo,
             Calendar runTime, PluginDao dao) throws DataAccessLayerException {
         Calendar startTime = null;
@@ -386,6 +484,13 @@ public class DatabaseArchiver implements IPluginArchiver {
             }
         } else {
             // startTime has never been set lookup earliest start time
+=======
+    private Calendar determineStartTime(String pluginName, String extraInfo,
+            Calendar runTime, PluginDao dao) throws DataAccessLayerException {
+        Calendar startTime = ArchiveUtil.getStartTime(pluginName, extraInfo,
+                runTime);
+        if (startTime == null) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             Date minInsert = dao.getMinInsertTime(null);
             if (minInsert != null) {
                 startTime = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
@@ -394,6 +499,7 @@ public class DatabaseArchiver implements IPluginArchiver {
                 // if no data for plugin in db, set startTime to runTime
                 startTime = (Calendar) runTime.clone();
             }
+<<<<<<< HEAD
         }
 
         return startTime;
@@ -424,12 +530,22 @@ public class DatabaseArchiver implements IPluginArchiver {
         }
 
         return endTime;
+=======
+
+        }
+
+        return startTime;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
      * Register archive formatter for a plug-in; and issue a warning if plug-in
      * is already registered.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param pluginName
      * @param archiveFormatter
      * @return databaseArchiver
@@ -449,13 +565,22 @@ public class DatabaseArchiver implements IPluginArchiver {
 
     /**
      * Register batch size for a plug-in.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param pluginName
      * @param batchSize
      *            Batch Size for the plugin. Default is 10000.
      * @return databaseArchiver
      */
+<<<<<<< HEAD
     public Object registerPluginBatchSize(String pluginName, Integer batchSize) {
+=======
+    public Object registerPluginBatchSize(String pluginName,
+            Integer batchSize) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         pluginBatchSize.put(pluginName, batchSize);
         return this;
     }

@@ -43,14 +43,23 @@
 ##############################################################################
 
 import argparse
+<<<<<<< HEAD
+=======
+from lib.Util import time_limit, TimeoutException
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import logging
 import os
 import re
 import sys
 import time
+<<<<<<< HEAD
 from lib.Util import time_limit, TimeoutException
 
 from awips import qpidingest
+=======
+
+from ufpy import qpidingest
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 logging.basicConfig(level=logging.INFO, datefmt='%H:%M:%S',
                         format="[%(process)s] %(asctime)s %(levelname)s: %(message)s")
@@ -78,7 +87,11 @@ class EdexQpidIngest:
             if server == 'ev':
                 server = 'cpv1'
         # Make connection to QPID
+<<<<<<< HEAD
         self.qpidIngest = qpidingest.IngestViaQPID(host="localhost", port=5672, program="qpidNotify")
+=======
+        self.qpidIngest = qpidingest.IngestViaQPID(host=server, port=5672, program="qpidNotify")
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def sendToIngest(self, args):
         size = len(args)

@@ -10,6 +10,10 @@
 ##                                Practice mode                                           ##
 ##        E.Bookbinder 01-30-2019 DR20914 Fix format error caused when no highway         ##
 ##                                mile markers are found                                  ##
+<<<<<<< HEAD
+=======
+##        Bookbinder 9-21-2023 Force selection of CTA for && break point DR 2036278       ##
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ############################################################################################
 ##
 #parse("config.vm")
@@ -26,6 +30,7 @@
 #############################################################
 #### CREATE BASIS WORDING ###################################
 #############################################################
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "meteorologists")})
   #set($reportAuthDSW = "capable of producing")
   #set($source = "Detected by National Weather Service meteorologists.")
@@ -47,6 +52,29 @@
   #set($source = "Emergency Management.")
 #end
 #if(${list.contains(${bullets}, "public")})
+=======
+#if($bullets.contains("meteorologists"))
+  #set($reportAuthDSW = "capable of producing")
+  #set($source = "Detected by National Weather Service meteorologists.")
+#end
+#if($bullets.contains("doppler"))
+  #set($reportAuthDSW = "capable of producing")
+  #set($source = "Doppler radar.")
+#end
+#if($bullets.contains("trainedSpotters"))
+  #set($reportAuthDSW = "producing") 
+  #set($source = "Trained weather spotters.")
+#end
+#if($bullets.contains("lawEnforcement"))
+  #set($reportAuthDSW = "producing") 
+  #set($source = "Law enforcement.")
+#end
+#if($bullets.contains("emergencyMgmt"))
+  #set($reportAuthDSW = "producing") 
+  #set($source = "Emergency Management.")
+#end
+#if($bullets.contains("public"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($reportAuthDSW = "producing") 
   #set($source = "Public.")
 #end
@@ -55,7 +83,11 @@
 ###################################################
 #set($vsbyHazard = "Less than a quarter mile visibility")
 #set($vsbyDist = 100)
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "qtrVis")})
+=======
+#if($bullets.contains("qtrVis"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($vsbyThreat = "Less than a quarter mile") 
   #set($vsbyTrail = "visibility") 
   #set($vsbyLead = "")
@@ -63,7 +95,11 @@
   #set($vsbyTag = "0.25MI")
   #set($vsbyHazard = "Less than a quarter mile visibility")
 #end
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "zeroVis")})
+=======
+#if($bullets.contains("zeroVis"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($vsbyThreat = "Near zero") 
   #set($vsbyTrail = "visibility") 
   #set($vsbyLead = "")
@@ -76,17 +112,29 @@
 ###################################################
 #set($windHazard = "")
 #set($windSpeed = 0)
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "40mphWind")})
+=======
+#if($bullets.contains("40mphWind"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($windSpeed = 40)
   #set($windTag = "40MPH")
   #set($windHazard = " with strong wind in excess of 40 mph")
 #end
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "50mphWind")})
+=======
+#if($bullets.contains("50mphWind"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($windSpeed = 50)
   #set($windTag = "50MPH")
   #set($windHazard = " with strong wind in excess of 50 mph")  
 #end
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "60mphWind")})
+=======
+#if($bullets.contains("60mphWind"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($windSpeed = 60)
   #set($windTag = "60MPH")
   #set($windHazard = " with damaging wind in excess of 60 mph")
@@ -159,9 +207,15 @@ THIS IS A TEST MESSAGE. #### Uncomment below pull in mile marker info
 , ${reportB3} ##
 ##Many of the variables passed below are controlled by config.vm
 #if(${stormType} == "line")
+<<<<<<< HEAD
 #handleClosestPoints(${list}, ${closestPoints}, ${otherClosestPoints}, ${stormType}, ${nearPhrase} , ${maxLandNearDistance}, ${overPhrase}, ${maxLandOverDistance}, ${landDistanceUnits}, ${useSecondReferenceLine})
 #else
 #handleClosestPoints(${list}, ${closestPoints}, ${otherClosestPoints}, ${stormType}, ${nearPhrase} , ${maxLandNearDistance}, ${overPhrase}, ${maxLandOverDistance}, ${landDistanceUnits}, ${useSecondReferenceCell})
+=======
+#handleClosestPoints(${closestPoints}, ${otherClosestPoints}, ${stormType}, ${nearPhrase} , ${maxLandNearDistance}, ${overPhrase}, ${maxLandOverDistance}, ${landDistanceUnits}, ${useSecondReferenceLine})
+#else
+#handleClosestPoints(${closestPoints}, ${otherClosestPoints}, ${stormType}, ${nearPhrase} , ${maxLandNearDistance}, ${overPhrase}, ${maxLandOverDistance}, ${landDistanceUnits}, ${useSecondReferenceCell})
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #end
 #if(${movementSpeed} < ${landStationary} || ${stationary})
 , and is nearly stationary. 
@@ -204,14 +258,22 @@ THIS IS A TEST MESSAGE. #### Uncomment below pull in mile marker info
 #set($pathcastLead = "This dust channel")
 #set($otherLead = "This dust channel")
 #end
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "pathcast")})
+=======
+#if($bullets.contains("pathcast"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 #if(${productClass}=="T")
 THIS IS A TEST MESSAGE. ##
 #end
 #pathCast("${pathcastLead} will be near..."${otherLead} ${pathCast} ${otherPoints} ${areas} ${dateUtil} ${timeFormat} 0)
 
+<<<<<<< HEAD
 #elseif(${list.contains(${bullets}, "listofcities")})
+=======
+#elseif($bullets.contains("listofcities"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 #if(${productClass}=="T")
 THIS IS A TEST MESSAGE. ##
@@ -241,7 +303,11 @@ Locations impacted include...
 ##############################################
 ###### SPECIAL VENUE/EVENT CASE ##############
 ##############################################
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "specialEvent")})
+=======
+#if($bullets.contains("specialEvent"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #if(${stormType} == "line")
 Those attending the !**EVENT/VENUE NAME OR LOCATION**! are in the path of this wall of dust and should prepare for imminent dangerous weather conditions. Seek shelter now!
 
@@ -272,39 +338,72 @@ Those attending the !**EVENT/VENUE NAME OR LOCATION**! are in the path of this d
 #if(${ctaSelected} == "YES") 
 PRECAUTIONARY/PREPAREDNESS ACTIONS...
 
+<<<<<<< HEAD
 #end
 ##
 #if(${list.contains(${bullets}, "healthCTA")})
+=======
+#else
+!** YOU DID NOT SELECT A CTA. PLEASE RESTART **!
+
+#end
+##
+#if($bullets.contains("healthCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 Dust storms are unhealthy and have been known to lead to Valley Fever. Avoid outdoor exposure.
 
 #end
 ##
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "genericCTA")})
+=======
+#if($bullets.contains("genericCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 Dust storms lead to dangerous driving conditions with visibility reduced to near zero. If driving, avoid dust storms if possible. If caught in one, pull off the road, turn off your lights and keep your foot off the brake.
 
 #end
 ##
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "motoristCTA")})
+=======
+#if($bullets.contains("motoristCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 Motorists should not drive into a dust storm. PULL ASIDE STAY ALIVE!
 
 #end
 ##
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "lawEnforcementCTA")})
+=======
+#if($bullets.contains("lawEnforcementCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 To report severe weather, contact the National Weather Service, or your nearest law enforcement agency, who will relay your report to the National Weather Service office in ${officeLoc}.
 
 #end
 ##
+<<<<<<< HEAD
 #if(${list.contains($bullets, "dangerousTravelCTA")})
+=======
+#if($bullets.contains("dangerousTravelCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 There is no safe place on a highway when a dust storm hits. Visibility can be lost immediately, making it difficult or impossible to slow down and avoid stopped vehicles. Delay travel, or safely exit the highway before the dust storm arrives.
 
 #end
 ##
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "boatersCTA")})
+=======
+#if($bullets.contains("boatersCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 If on or near !**NAME OF LAKE**!, get out of the water and move indoors or inside a vehicle. Remember, lightning can strike out to 15 miles from the parent thunderstorm. If you can hear thunder, you are close enough to be struck by lightning. Move to safe shelter now! Do not be caught on the water in a thunderstorm.
 
 #end
 ##
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "ThunderstormCTA")})
+=======
+#if($bullets.contains("ThunderstormCTA"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 Strong to severe thunderstorms are also possible behind ${reportType4}. Keep updated with this quickly evolving situation.
 
 #end
@@ -317,11 +416,19 @@ Strong to severe thunderstorms are also possible behind ${reportType4}. Keep upd
 ## WATCHES ##
 #############
 
+<<<<<<< HEAD
 #if(${list.contains(${includedWatches}, "TO.A")})
 #inserttorwatches(${watches}, ${list}, ${secondtimezone}, ${dateUtil}, ${timeFormat})
 #end
 #if(${list.contains(${includedWatches}, "SV.A")})
 #insertsvrwatches(${watches}, ${list}, ${secondtimezone}, ${dateUtil}, ${timeFormat})
+=======
+#if($includedWatches.contains("TO.A"))
+#inserttorwatches(${watches}, ${secondtimezone}, ${dateUtil}, ${timeFormat})
+#end
+#if($includedWatches.contains("SV.A"))
+#insertsvrwatches(${watches}, ${secondtimezone}, ${dateUtil}, ${timeFormat})
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #end
 ##
 #if(${productClass}=="T")
@@ -329,7 +436,11 @@ THIS IS A TEST MESSAGE. DO NOT TAKE ACTION BASED ON THIS MESSAGE.
 
 #end
 
+<<<<<<< HEAD
 #printcoords(${areaPoly}, ${list})
+=======
+#printcoords(${areaPoly})
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 #tml(${TMLtime}, ${timeFormat}, ${movementDirection}, ${movementInKnots}, ${eventLocation})
 
@@ -337,4 +448,8 @@ THIS IS A TEST MESSAGE. DO NOT TAKE ACTION BASED ON THIS MESSAGE.
 $$
 
 
+<<<<<<< HEAD
 #parse("forecasterName.vm")
+=======
+#parse("forecasterName.vm")
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

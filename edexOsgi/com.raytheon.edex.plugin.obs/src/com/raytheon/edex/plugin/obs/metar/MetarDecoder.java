@@ -52,7 +52,11 @@ import com.raytheon.uf.edex.decodertools.time.TimeTools;
 import com.raytheon.uf.edex.pointdata.spatial.ObStationDao;
 
 import si.uom.SI;
+<<<<<<< HEAD
 import tec.uom.se.unit.MetricPrefix;
+=======
+import javax.measure.MetricPrefix;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Decoder implementation for metar plugin.
@@ -97,11 +101,18 @@ import tec.uom.se.unit.MetricPrefix;
  * Mar 08, 2016 5345        tgurney     Convert sea level pressure from hPa to Pa
  * Mar 23, 2016 5501        tgurney     Handle data from end of previous month
  * Jan 10, 2019 DCS 20579   MPorricelli Decoding of 1-,3-,6-hour ice accumulation
+<<<<<<< HEAD
+=======
+ * Jun 07, 2023 2033981     njensen     Remove non-ascii chars from report (rawMETAR)
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
  * @author bphillip
+<<<<<<< HEAD
  * @version 1
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  */
 
 public class MetarDecoder {
@@ -1004,6 +1015,20 @@ public class MetarDecoder {
                 }
                 record.setWmoHeader(sep.getWMOHeader().getWmoHeader());
 
+<<<<<<< HEAD
+=======
+                /*
+                 * DR 2033981
+                 * 
+                 * We do not want to allow non-ascii characters through cause
+                 * PyPIES as of 21.4.1 is storing ascii strings for rawMETAR and
+                 * not unicode strings. If PyPIES is updated so it can
+                 * successfully store unicode strings, then this can be
+                 * revisited or removed.
+                 */
+                record.setReport(removeNonAsciiChars(record.getReport()));
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 retVal.add(record);
 
             } catch (Exception e) {
@@ -1078,6 +1103,32 @@ public class MetarDecoder {
         return sb.toString();
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * Removes non-ascii characters from the String
+     * 
+     * @param message
+     *            the String to remove the non-ascii characters from
+     * @return the String with non-ascii characters removed
+     */
+    private String removeNonAsciiChars(String message) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < message.length(); i++) {
+            char c = message.charAt(i);
+            int ascii = c;
+            if (ascii >= 0 && ascii < 127) {
+                sb.append(c);
+            } else {
+                logger.warn("Detected and discarding character " + c
+                        + " with unicode value " + ascii + " from String: "
+                        + message);
+            }
+        }
+        return sb.toString();
+    }
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     void setMockInfo(ObStation station) {
         mockInfo = station;
         useMockInfo = (station != null);

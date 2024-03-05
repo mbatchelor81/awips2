@@ -159,7 +159,11 @@
     <upperText productCodes='113'>
         <vcp />
         <resolution />
+<<<<<<< HEAD
         <productDependentDate format="'DATE: 'M/d/yy" dayIndex='4' minuteIndex='5' />
+=======
+        <productDependentDate format="'DATE: 'M/d/yy" dayIndex='4' minuteIndex='3' />
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     </upperText>
 
     <!-- User Selectable precip -->
@@ -202,7 +206,11 @@
     <!-- VAD -->
     <upperText productCodes='84'>
         <vcp />
+<<<<<<< HEAD
         <productDependent format='ALT: %dkft' index='2' />
+=======
+        <productDependentVADHeight />
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <productDependent format='ELEV: %3.1f°' index='5' multiplier='0.1'>
             <flag value='-9999' label='ELEV:   ' />
         </productDependent>
@@ -367,7 +375,11 @@
         <resolution />
         <productDependentRepElev />
     </upperText>
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <!-- hydro class -->
     <upperText productCodes='177'>
         <vcp />
@@ -376,6 +388,17 @@
             <flag value='0' label='' />
         </productDependent>
     </upperText>
+<<<<<<< HEAD
+=======
+
+    <!-- rain rate class -->
+    <upperText productCodes='197'>
+        <vcp />
+        <resolution />
+        <productDependent format='SI Multiplier: %1.1f' index='6' />
+    </upperText>
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <upperText productCodes='164 165'>
         <vcp />
         <resolution />
@@ -384,7 +407,11 @@
         </productDependent>
         <productDependentRepElev />
     </upperText>
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <!-- Dual Pol Precip -->
     <upperText productCodes='169'>
         <vcp />

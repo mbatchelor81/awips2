@@ -17,4 +17,9 @@ Require-Bundle: com.raytheon.uf.common.dataplugin,
  com.raytheon.uf.common.util,
  com.raytheon.uf.edex.core,
  com.raytheon.uf.edex.database,
+<<<<<<< HEAD
  com.raytheon.uf.common.numeric
+=======
+ com.raytheon.uf.common.numeric,
+ org.slf4j
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

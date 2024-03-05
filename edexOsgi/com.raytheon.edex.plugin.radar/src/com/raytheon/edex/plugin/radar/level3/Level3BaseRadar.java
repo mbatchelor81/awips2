@@ -26,7 +26,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+<<<<<<< HEAD
 import java.text.DecimalFormat;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -115,6 +118,11 @@ import com.raytheon.uf.edex.database.DataAccessLayerException;
  * Apr 24, 2018  DCS20681  jdynina      Add MRLE to CPM processing
  * Jun 21, 2019  7629      mroos        Added setting of delta time and scan type
  *                                      for supporting product codes.
+<<<<<<< HEAD
+=======
+ * Jun 17, 2020  DCS22082  jdynina      Removed Product List (product code 8)
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  *
  * @author Bryan Rockwood
@@ -134,8 +142,11 @@ public class Level3BaseRadar {
 
     public static final int PRODUCT_REQUEST_RESPONSE_MESSAGE = 3;
 
+<<<<<<< HEAD
     public static final int PRODUCT_LIST = 8;
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public static final int COMMAND_PARAMETER_MESSAGE = 12;
 
     public static final int RADAR_CODED_MESSAGE = 74;
@@ -298,8 +309,11 @@ public class Level3BaseRadar {
         // Handle the message contents
         if (this.theMessageCode == PRODUCT_REQUEST_RESPONSE_MESSAGE) {
             this.parseRequestResponse();
+<<<<<<< HEAD
         } else if (this.theMessageCode == PRODUCT_LIST) {
             this.parseProductList(headers);
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         } else if (this.theMessageCode == GENERAL_STATUS_MESSAGE) {
             this.parseGeneralStatusMessage();
         } else if (this.theMessageCode == COMMAND_PARAMETER_MESSAGE) {
@@ -846,6 +860,7 @@ public class Level3BaseRadar {
         // If no value for ProductDependentValue[6], then it is a normal cut
     }
 
+<<<<<<< HEAD
     private void parseProductList(Headers headers) throws IOException {
         tabularBlock = new TabularBlock();
         DecimalFormat format = new DecimalFormat("#.#");
@@ -908,6 +923,8 @@ public class Level3BaseRadar {
         }
     }
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /**
      * Stores text from tabular block if AFOS product id is filled.
      *

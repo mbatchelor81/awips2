@@ -7,5 +7,8 @@
 5:5:High Layer Composite Reflectivity (24-60 kft):dBZ:HighLayerCompositeReflectivity
 6:6:Super Layer Composite Reflectivity (33-60 kft):dBZ:SuperLayerCompositeReflectivity
 7:7:Hourly Composite Reflectivity Maximum:dBZ:CompositeReflectivityMaxHourly
+<<<<<<< HEAD
 9:9:ANC Layer Composite Reflectivity:dBZ:ANCLayerCompositeReflectivity
 10:10:Hourly Base Reflectivity Maximum:dBZ:BREFMaxHourly
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

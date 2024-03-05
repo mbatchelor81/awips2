@@ -39,7 +39,7 @@
    <includes
          id="com.raytheon.uf.common.base.feature"
          version="0.0.0"/>
-
+  
    <includes
          id="com.raytheon.uf.edex.foss.org.apache.commons.management.feature"
          version="0.0.0"/>
@@ -109,10 +109,6 @@
          version="0.0.0"/>
 
    <includes
-         id="com.raytheon.uf.edex.foss.org.apache.xalan.feature"
-         version="0.0.0"/>
-
-   <includes
          id="com.raytheon.uf.edex.foss.org.apache.xml.serializer.feature"
          version="0.0.0"/>
 
@@ -126,6 +122,10 @@
 
    <includes
          id="com.raytheon.uf.edex.foss.org.apache.commons.net.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="com.raytheon.uf.edex.foss.org.apache.cxf.feature"
          version="0.0.0"/>
 
    <includes

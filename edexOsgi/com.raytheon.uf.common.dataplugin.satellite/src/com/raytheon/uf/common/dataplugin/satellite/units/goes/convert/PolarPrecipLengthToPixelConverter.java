@@ -20,16 +20,24 @@
 
 package com.raytheon.uf.common.dataplugin.satellite.units.goes.convert;
 
+<<<<<<< HEAD
 import java.math.BigDecimal;
 import java.math.MathContext;
 
+=======
+import javax.measure.MetricPrefix;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.measure.UnitConverter;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import si.uom.SI;
+<<<<<<< HEAD
 import tec.uom.se.AbstractConverter;
 import tec.uom.se.unit.MetricPrefix;
+=======
+import tech.units.indriya.function.AbstractConverter;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Converts meters of total precipitation of water to a pixel value
@@ -41,6 +49,11 @@ import tec.uom.se.unit.MetricPrefix;
  * Mar 25, 2009            njsanchez    Initial creation
  * Apr 15, 2019   7596     lsingh       Updated units framework to JSR-363.
  *                                      Overrided additional methods
+<<<<<<< HEAD
+=======
+ * Aug 05, 2022   8905     lsingh       Updated units framework to 2.0.2.
+ *                                      Renamed methods, and overrided additional methods.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -53,6 +66,7 @@ public class PolarPrecipLengthToPixelConverter extends AbstractConverter {
     private static UnitConverter meterToMillimeter = SI.METRE.getConverterTo(MetricPrefix
             .MILLI(SI.METRE));
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -64,6 +78,14 @@ public class PolarPrecipLengthToPixelConverter extends AbstractConverter {
         // value is in meters, but below calculates pixel based on value being
         // millimeters
         aLength = meterToMillimeter.convert(aLength);
+=======
+    @Override
+    public Number convertWhenNotIdentity(Number length) {
+
+        // value is in meters, but below calculates pixel based on value being
+        // millimeters
+        double aLength = meterToMillimeter.convert(length.doubleValue());
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         double result = 0.0;
 
@@ -86,26 +108,33 @@ public class PolarPrecipLengthToPixelConverter extends AbstractConverter {
         return result;
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
      * @see tec.uom.se.AbstractConverter#equals(java.lang.Object)
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public boolean equals(Object aConverter) {
         return (aConverter instanceof PolarPrecipLengthToPixelConverter);
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
      * @see tec.uom.se.AbstractConverter#hashCode()
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this);
     }
 
+<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
@@ -121,14 +150,46 @@ public class PolarPrecipLengthToPixelConverter extends AbstractConverter {
      * 
      * @see tec.uom.se.AbstractConverter#isLinear()
      */
+=======
+    @Override
+    public AbstractConverter inverseWhenNotIdentity() {
+        return new PolarPrecipPixelToLengthConverter();
+    }
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public boolean isLinear() {
         return true;
     }
 
     @Override
+<<<<<<< HEAD
     public BigDecimal convert(BigDecimal value, MathContext ctx)
             throws ArithmeticException {
         return BigDecimal.valueOf(convert(value.doubleValue()));
     }
+=======
+    public boolean isIdentity() {
+        return false;
+    }
+
+    @Override
+    public int compareTo(UnitConverter o) {
+        // This method hasn't been implemented yet since it's unused
+        return 0;
+    }
+
+    @Override
+    protected String transformationLiteral() {
+        // This method hasn't been implemented yet since it's unused
+        return null;
+    }
+
+    @Override
+    protected boolean canReduceWith(AbstractConverter that) {
+        // This method hasn't been implemented yet since it's unused
+        return false;
+    }
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

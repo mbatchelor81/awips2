@@ -35,7 +35,10 @@ import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TimeZone;
+<<<<<<< HEAD
 import java.util.stream.Collectors;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.edex.plugin.gfe.paraminfo.GridParamInfoLookup;
 import com.raytheon.edex.plugin.gfe.paraminfo.ParameterInfo;
@@ -100,6 +103,10 @@ import com.raytheon.uf.edex.plugin.grid.dao.GridDao;
  * Oct 06, 2021  8608     mapeters    Add special auditing for static records that are only
  *                                    generated in the database or the datastore, not both
  * Feb 16, 2022  8608     mapeters    Handle minor data storage audit refactors
+<<<<<<< HEAD
+=======
+ * Aug 24, 2022  8920     mapeters    Optimizations; Swap key/values for statuses.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -366,12 +373,18 @@ public class StaticDataGenerator {
 
                 String dataPath = HDF5Util.findHDF5Location(gr).getPath();
 
+<<<<<<< HEAD
                 IDataIdentifier dataId = new Hdf5DataIdentifier(gr.getTraceId(),
                         dataPath, group, datasets);
+=======
+                IDataIdentifier dataId = new Hdf5DataIdentifier(dataPath, group,
+                        datasets);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 IMetadataIdentifier metaId = new DataUriMetadataIdentifier(gr,
                         MetadataSpecificity.DATASET);
                 databaseOnlyDataIds.add(new MetadataAndDataId(metaId, dataId));
             }
+<<<<<<< HEAD
             Map<String, DataStatus> dataStatuses = databaseOnlyRecords.keySet()
                     .stream()
                     .collect(Collectors.toMap(t -> t, t -> DataStatus.SUCCESS));
@@ -379,6 +392,16 @@ public class StaticDataGenerator {
             databaseOnlyAuditEvent.setDataIds(
                     databaseOnlyDataIds.toArray(MetadataAndDataId[]::new));
             databaseOnlyAuditEvent.setDataStatuses(dataStatuses);
+=======
+            String[] traceIds = databaseOnlyRecords.keySet()
+                    .toArray(String[]::new);
+            DataStorageAuditEvent databaseOnlyAuditEvent = new DataStorageAuditEvent();
+            databaseOnlyAuditEvent.setDataIds(
+                    databaseOnlyDataIds.toArray(MetadataAndDataId[]::new));
+            databaseOnlyAuditEvent
+                    .setDataStatuses(Map.of(DataStatus.SUCCESS, traceIds));
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             auditer.processEvent(databaseOnlyAuditEvent);
         }
 

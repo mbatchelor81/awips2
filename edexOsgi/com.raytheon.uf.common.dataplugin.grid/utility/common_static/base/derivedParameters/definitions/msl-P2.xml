@@ -32,11 +32,19 @@
     <Method name="Alias" models="ETA ETA207" levels="Surface">
         <Field abbreviation="PMSL" level="Surface" />
     </Method>
+<<<<<<< HEAD
     <Method name="Alias" models="HiResW-ARW-East HiResW-ARW-West HiResW-ARW-AK HiResW-ARW-PR HiResW-ARW-SJU"
         levels="Surface">
         <Field abbreviation="PMSL" level="MSL" />
     </Method>
     <Method name="Alias" models="HiResW-NMM-East HiResW-NMM-West HiResW-NMM-AK HiResW-NMM-PR HiResW-NMM-SJU"
+=======
+    <Method name="Alias" models="HiResW-ARW HiResW-ARW-AK HiResW-ARW-GU HiResW-ARW-HI HiResW-ARW-SJU"
+        levels="Surface">
+        <Field abbreviation="PMSL" level="MSL" />
+    </Method>
+    <Method name="Alias" models="HiResW-FV3 HiResW-FV3-AK HiResW-FV3-GU HiResW-FV3-HI HiResW-FV3-SJU"
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         levels="Surface">
         <Field abbreviation="PMSL" level="MSL" />
     </Method>

@@ -42,7 +42,11 @@ import dynamicserialize
 from dynamicserialize.dstypes.com.raytheon.uf.common.dataplugin.gfe.server.notify import *
 from dynamicserialize.dstypes.com.raytheon.uf.common.activetable import VTECTableChangeNotification
 
+<<<<<<< HEAD
 from awips import QpidSubscriber
+=======
+from ufpy import QpidSubscriber
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 printoutMap = OrderedDict([
     ('L', 'LOCK'),

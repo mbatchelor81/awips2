@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -37,25 +49,42 @@ import com.raytheon.uf.common.registry.schemas.ebxml.util.EbxmlNamespaces;
  * can consist of schema derived interfaces and classes representing the binding
  * of schema type definitions, element declarations and model groups. Factory
  * methods for each of these are provided in this class.
+<<<<<<< HEAD
  * 
  * 
  * <pre>
  * 
  * SOFTWARE HISTORY
  * 
+=======
+ *
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- -----------------------
  * 2012                   bphillip  Initial implementation
  * Oct 17, 2013  1682     bphillip  Added software history
  * Aug 25, 2016  5846     rjpeter   Remove SlotValueType and InternationalStringValueType
+<<<<<<< HEAD
  * 
  * </pre>
  * 
+=======
+ * May 26, 2020  8165     bsteffen  Remove auditableevent and notification.
+ * 10/27/2020    8170     ksunil    Removed references to empty tables
+ * </pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author bphillip
  */
 @XmlRegistry
 public class ObjectFactory {
 
+<<<<<<< HEAD
     private final static QName _IdentifiableList_QNAME = new QName(
             EbxmlNamespaces.RIM_URI, "IdentifiableList");
 
@@ -72,20 +101,43 @@ public class ObjectFactory {
             EbxmlNamespaces.RIM_URI, "RegistryObjectList");
 
     private final static QName _ObjectRef_QNAME = new QName(
+=======
+    private static final QName _IdentifiableList_QNAME = new QName(
+            EbxmlNamespaces.RIM_URI, "IdentifiableList");
+
+    private static final QName _ObjectRefList_QNAME = new QName(
+            EbxmlNamespaces.RIM_URI, "ObjectRefList");
+
+    private static final QName _RegistryObject_QNAME = new QName(
+            EbxmlNamespaces.RIM_URI, "RegistryObject");
+
+    private static final QName _RegistryObjectList_QNAME = new QName(
+            EbxmlNamespaces.RIM_URI, "RegistryObjectList");
+
+    private static final QName _ObjectRef_QNAME = new QName(
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             EbxmlNamespaces.RIM_URI, "ObjectRef");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of
      * schema derived classes for package:
      * oasis.names.tc.ebxml_regrep.xsd.rim._4
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public ObjectFactory() {
     }
 
     /**
      * Create an instance of {@link SubscriptionType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public SubscriptionType createSubscriptionType() {
         return new SubscriptionType();
@@ -93,7 +145,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ServiceType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public ServiceType createServiceType() {
         return new ServiceType();
@@ -101,7 +157,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ExtrinsicObjectType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public ExtrinsicObjectType createExtrinsicObjectType() {
         return new ExtrinsicObjectType();
@@ -109,7 +169,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CommentType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public CommentType createCommentType() {
         return new CommentType();
@@ -117,7 +181,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link DeliveryInfoType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public DeliveryInfoType createDeliveryInfoType() {
         return new DeliveryInfoType();
@@ -125,7 +193,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link DynamicObjectRefType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public DynamicObjectRefType createDynamicObjectRefType() {
         return new DynamicObjectRefType();
@@ -133,7 +205,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ServiceInterfaceType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public ServiceInterfaceType createServiceInterfaceType() {
         return new ServiceInterfaceType();
@@ -141,7 +217,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ExternalIdentifierType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public ExternalIdentifierType createExternalIdentifierType() {
         return new ExternalIdentifierType();
@@ -149,7 +229,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link LocalizedStringType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public LocalizedStringType createLocalizedStringType() {
         return new LocalizedStringType();
@@ -157,7 +241,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link QueryDefinitionType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public QueryDefinitionType createQueryDefinitionType() {
         return new QueryDefinitionType();
@@ -165,7 +253,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link IntegerValueType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public IntegerValueType createIntegerValueType() {
         return new IntegerValueType();
@@ -173,7 +265,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ClassificationNodeType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public ClassificationNodeType createClassificationNodeType() {
         return new ClassificationNodeType();
@@ -181,7 +277,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MapValueType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public MapValueType createMapValueType() {
         return new MapValueType();
@@ -189,7 +289,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RegistryType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public RegistryType createRegistryType() {
         return new RegistryType();
@@ -197,7 +301,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ObjectRefType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public ObjectRefType createObjectRefType() {
         return new ObjectRefType();
@@ -205,7 +313,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link InternationalStringType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public InternationalStringType createInternationalStringType() {
         return new InternationalStringType();
@@ -213,7 +325,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ObjectRefListType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public ObjectRefListType createObjectRefListType() {
         return new ObjectRefListType();
@@ -221,7 +337,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link OrganizationType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public OrganizationType createOrganizationType() {
         return new OrganizationType();
@@ -229,7 +349,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RegistryPackageType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public RegistryPackageType createRegistryPackageType() {
         return new RegistryPackageType();
@@ -237,7 +361,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VocabularyTermType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public VocabularyTermType createVocabularyTermType() {
         return new VocabularyTermType();
@@ -245,7 +373,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link FederationType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public FederationType createFederationType() {
         return new FederationType();
@@ -253,7 +385,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EntryType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public EntryType createEntryType() {
         return new EntryType();
@@ -261,7 +397,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AssociationType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public AssociationType createAssociationType() {
         return new AssociationType();
@@ -269,7 +409,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RegistryObjectListType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public RegistryObjectListType createRegistryObjectListType() {
         return new RegistryObjectListType();
@@ -277,7 +421,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VersionInfoType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public VersionInfoType createVersionInfoType() {
         return new VersionInfoType();
@@ -285,7 +433,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link PostalAddressType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public PostalAddressType createPostalAddressType() {
         return new PostalAddressType();
@@ -293,7 +445,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link FloatValueType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public FloatValueType createFloatValueType() {
         return new FloatValueType();
@@ -301,7 +457,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link XMLQueryExpressionType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public XMLQueryExpressionType createXMLQueryExpressionType() {
         return new XMLQueryExpressionType();
@@ -309,7 +469,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link EmailAddressType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public EmailAddressType createEmailAddressType() {
         return new EmailAddressType();
@@ -317,7 +481,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link VocabularyTermValueType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public VocabularyTermValueType createVocabularyTermValueType() {
         return new VocabularyTermValueType();
@@ -325,7 +493,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ServiceEndpointType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public ServiceEndpointType createServiceEndpointType() {
         return new ServiceEndpointType();
@@ -333,7 +505,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SimpleLinkType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public SimpleLinkType createSimpleLinkType() {
         return new SimpleLinkType();
@@ -341,7 +517,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ClassificationType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public ClassificationType createClassificationType() {
         return new ClassificationType();
@@ -349,7 +529,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RoleType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public RoleType createRoleType() {
         return new RoleType();
@@ -357,7 +541,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RegistryObjectType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public RegistryObjectType createRegistryObjectType() {
         return new RegistryObjectType();
@@ -365,7 +553,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link PersonType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public PersonType createPersonType() {
         return new PersonType();
@@ -373,7 +565,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AnyValueType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public AnyValueType createAnyValueType() {
         return new AnyValueType();
@@ -381,13 +577,18 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TelephoneNumberType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public TelephoneNumberType createTelephoneNumberType() {
         return new TelephoneNumberType();
     }
 
     /**
+<<<<<<< HEAD
      * Create an instance of {@link WorkflowActionType }
      * 
      */
@@ -398,6 +599,10 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link StringValueType }
      * 
+=======
+     * Create an instance of {@link StringValueType }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public StringValueType createStringValueType() {
         return new StringValueType();
@@ -405,7 +610,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MapType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public MapType createMapType() {
         return new MapType();
@@ -413,7 +622,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CollectionValueType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public CollectionValueType createCollectionValueType() {
         return new CollectionValueType();
@@ -421,13 +634,18 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link IdentifiableListType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public IdentifiableListType createIdentifiableListType() {
         return new IdentifiableListType();
     }
 
     /**
+<<<<<<< HEAD
      * Create an instance of {@link ActionType }
      * 
      */
@@ -446,6 +664,10 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link DateTimeValueType }
      * 
+=======
+     * Create an instance of {@link DateTimeValueType }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public DateTimeValueType createDateTimeValueType() {
         return new DateTimeValueType();
@@ -453,7 +675,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link PersonNameType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public PersonNameType createPersonNameType() {
         return new PersonNameType();
@@ -461,7 +687,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link QueryType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public QueryType createQueryType() {
         return new QueryType();
@@ -469,7 +699,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ClassificationSchemeType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public ClassificationSchemeType createClassificationSchemeType() {
         return new ClassificationSchemeType();
@@ -477,7 +711,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link StringQueryExpressionType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public StringQueryExpressionType createStringQueryExpressionType() {
         return new StringQueryExpressionType();
@@ -485,13 +723,18 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ParameterType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public ParameterType createParameterType() {
         return new ParameterType();
     }
 
     /**
+<<<<<<< HEAD
      * Create an instance of {@link NotificationType }
      * 
      */
@@ -502,6 +745,10 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link BooleanValueType }
      * 
+=======
+     * Create an instance of {@link BooleanValueType }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public BooleanValueType createBooleanValueType() {
         return new BooleanValueType();
@@ -509,7 +756,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SlotType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public SlotType createSlotType() {
         return new SlotType();
@@ -517,7 +768,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ExternalLinkType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public ExternalLinkType createExternalLinkType() {
         return new ExternalLinkType();
@@ -525,7 +780,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link DurationValueType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public DurationValueType createDurationValueType() {
         return new DurationValueType();
@@ -533,7 +792,11 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ServiceBindingType }
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public ServiceBindingType createServiceBindingType() {
         return new ServiceBindingType();
@@ -542,7 +805,11 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link JAXBElement }{@code <}
      * {@link IdentifiableListType }{@code >}
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     @XmlElementDecl(namespace = EbxmlNamespaces.RIM_URI, name = "IdentifiableList")
     public JAXBElement<IdentifiableListType> createIdentifiableList(
@@ -554,7 +821,11 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link JAXBElement }{@code <}
      * {@link ObjectRefListType }{@code >}
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     @XmlElementDecl(namespace = EbxmlNamespaces.RIM_URI, name = "ObjectRefList")
     public JAXBElement<ObjectRefListType> createObjectRefList(
@@ -565,6 +836,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}
+<<<<<<< HEAD
      * {@link NotificationType }{@code >}
      * 
      */
@@ -579,6 +851,10 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}
      * {@link RegistryObjectType }{@code >}
      * 
+=======
+     * {@link RegistryObjectType }{@code >}
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     @XmlElementDecl(namespace = EbxmlNamespaces.RIM_URI, name = "RegistryObject")
     public JAXBElement<RegistryObjectType> createRegistryObject(
@@ -590,7 +866,11 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link JAXBElement }{@code <}
      * {@link RegistryObjectListType }{@code >}
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     @XmlElementDecl(namespace = EbxmlNamespaces.RIM_URI, name = "RegistryObjectList")
     public JAXBElement<RegistryObjectListType> createRegistryObjectList(
@@ -602,7 +882,11 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ObjectRefType }
      * {@code >}
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     @XmlElementDecl(namespace = EbxmlNamespaces.RIM_URI, name = "ObjectRef")
     public JAXBElement<ObjectRefType> createObjectRef(ObjectRefType value) {

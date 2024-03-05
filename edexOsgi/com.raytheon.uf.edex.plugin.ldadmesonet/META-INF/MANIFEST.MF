@@ -8,5 +8,10 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: com.raytheon.uf.common.dataplugin.ldad,
  com.raytheon.uf.common.dataplugin.ldadmesonet,
  com.raytheon.edex.common,
+<<<<<<< HEAD
  com.raytheon.uf.edex.pointdata
+=======
+ com.raytheon.uf.edex.pointdata,
+ org.slf4j
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 Import-Package: com.raytheon.uf.common.status

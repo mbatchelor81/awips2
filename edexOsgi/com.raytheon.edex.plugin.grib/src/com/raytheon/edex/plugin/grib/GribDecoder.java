@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -35,10 +47,17 @@ import com.raytheon.uf.common.time.util.TimeUtil;
 
 /**
  * Generic decoder for decoding grib files
+<<<<<<< HEAD
  * 
  * <pre>
  * SOFTWARE HISTORY
  * 
+=======
+ *
+ * <pre>
+ * SOFTWARE HISTORY
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- --------------------------------------------
  * Mat 12, 2010  4758     bphillip  Initial creation
@@ -49,9 +68,16 @@ import com.raytheon.uf.common.time.util.TimeUtil;
  * Oct 07, 2013  2402     bsteffen  Decode GribDecodeMessage instead of files.
  * Sep 14, 2015  4868     rjpeter   Added logging of file being decoded.
  * May 06, 2016  5572     bsteffen  Log errors instead of throwing them
+<<<<<<< HEAD
  * 
  * </pre>
  * 
+=======
+ * Mar 17, 2022  102463   tjensen   Log id overrides
+ *
+ * </pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author njensen
  */
 public class GribDecoder implements Processor {
@@ -71,8 +97,15 @@ public class GribDecoder implements Processor {
         GribDecodeMessage inMessage = (GribDecodeMessage) exchange.getIn()
                 .getBody();
         byte gribEdition = inMessage.getGribEdition();
+<<<<<<< HEAD
         exchange.getIn().setHeader("dataType", "grib" + gribEdition);
         statusHandler.info("Decoding file: " + inMessage.getFileName());
+=======
+        String fileName = inMessage.getFileName();
+
+        exchange.getIn().setHeader("dataType", "grib" + gribEdition);
+        statusHandler.info("Decoding file: " + fileName);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         ITimer timer = TimeUtil.getTimer();
         GridRecord[] records = null;
@@ -87,6 +120,7 @@ public class GribDecoder implements Processor {
                 break;
             default:
                 throw new GribException("Unknown grib version detected ["
+<<<<<<< HEAD
                         + gribEdition + "] in file: ["
                         + inMessage.getFileName() + "]");
             }
@@ -94,6 +128,12 @@ public class GribDecoder implements Processor {
             statusHandler
                     .error("Failed to decode grib file: "
                             + inMessage.getFileName(), e);
+=======
+                        + gribEdition + "] in file: [" + fileName + "]");
+            }
+        } catch (Throwable e) {
+            statusHandler.error("Failed to decode grib file: " + fileName, e);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             records = new GridRecord[0];
         }
 
@@ -103,6 +143,23 @@ public class GribDecoder implements Processor {
 
         if ((secondaryId != null) || (datasetId != null)
                 || (ensembleId != null)) {
+<<<<<<< HEAD
+=======
+            // Log which ids are being overridden
+            StringBuilder msg = new StringBuilder();
+            msg.append("File " + fileName + " matched config id overrides:");
+            if (datasetId != null) {
+                msg.append(" datasetId=" + datasetId);
+            }
+            if (secondaryId != null) {
+                msg.append(" secondaryId=" + secondaryId);
+            }
+            if (ensembleId != null) {
+                msg.append(" ensembleId=" + ensembleId);
+            }
+            statusHandler.info(msg.toString());
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             for (GridRecord record : records) {
                 if (datasetId != null) {
                     record.setDatasetId(datasetId);

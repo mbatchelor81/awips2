@@ -10,6 +10,11 @@
 ##   Evan Bookbinder SEP 18 2013 Implemented config.vm ##
 ##   Phil Kurimski   MAR 24 2015 Mixed Case         ##
 ##   Mike Rega       OCT 29 2015 Mixed Case Updates ##
+<<<<<<< HEAD
+=======
+##   Bookbinder   SEP 21 2023 Required && separator ##
+##                               DR 2036278         ##
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ######################################################
 #parse("config.vm")
 ##########################################
@@ -55,11 +60,19 @@ ${dateUtil.format(${now}, ${timeFormat.header}, ${localtimezone})}
 ## Assume head1 is selected.
 #set($headerType = "volcanic ash")
 #set($eventType = "volcanic ash")
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "lightva")})
 	#set($headerType = "light volcanic ashfall")
 	#set($eventType = "light volcanic ashfall")
 #end
 #if(${list.contains(${bullets}, "verylightva")})
+=======
+#if($bullets.contains("lightva"))
+	#set($headerType = "light volcanic ashfall")
+	#set($eventType = "light volcanic ashfall")
+#end
+#if($bullets.contains("verylightva"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 	#set($headerType = "very light volcanic ashfall")
 	#set($eventType = "very light volcanic ashfall")
 #end
@@ -80,6 +93,7 @@ ${dateUtil.format(${now}, ${timeFormat.header}, ${localtimezone})}
 #######################################################################
 #set($threatType = "reducing visibility to less than 2 nm")
 
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "vis2nm")})
 	#set($threatType = "reducing visibility to less than 2 nm")
 #end
@@ -87,12 +101,22 @@ ${dateUtil.format(${now}, ${timeFormat.header}, ${localtimezone})}
 	#set($threatType = "reducing visibility to less than 3 nm")
 #end
 #if(${list.contains(${bullets}, "visnear5nm")})
+=======
+#if($bullets.contains("vis2nm"))
+	#set($threatType = "reducing visibility to less than 2 nm")
+#end
+#if($bullets.contains("vis3nm"))
+	#set($threatType = "reducing visibility to less than 3 nm")
+#end
+#if($bullets.contains("visnear5nm"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 	#set($threatType = "reducing visibility to near 5 nm")
 #end
 
 ########################################################
 
 #set($headerType1 = "...${headerType} expected over the coastal waters...")
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "ashadv")})
 #	#set($headerType1 = "...Ashfall Advisory in effect for ${headerType}...")
 #end
@@ -100,12 +124,25 @@ ${dateUtil.format(${now}, ${timeFormat.header}, ${localtimezone})}
 #	#set($headerType1 = "...${headerType} approaching the coastal waters...")
 #end
 #if(${list.contains(${bullets}, "overHead")})
+=======
+#if($bullets.contains("ashadv"))
+#	#set($headerType1 = "...Ashfall Advisory in effect for ${headerType}...")
+#end
+#if($bullets.contains("approachHead"))
+#	#set($headerType1 = "...${headerType} approaching the coastal waters...")
+#end
+#if($bullets.contains("overHead"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #	#set($headerType1 = "...${headerType} over the coastal waters...")
 #end
 #######################################################################
 ## Added Hail Section
 #######################################################################
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "smallHail")})
+=======
+#if($bullets.contains("smallHail"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 	#set($hailType = " and small hail")
 #end
 ##${headerType1}
@@ -151,10 +188,17 @@ The areas affected include...
 ## and threat based on selections above. Added Satellite Imagery to basis.
 #######################################################################
 #set($report = "!** YOU DIDN'T SELECT A REPORTER **! ${threatType}")
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "seismic")})
   #set($report = "seismic activity and satellite imagery indicated that !** ENTER VOLCANO NAME HERE **! was erupting, with ${stormline}, ${threatType},")
 #end
 #if(${list.contains(${bullets}, "reports")})
+=======
+#if($bullets.contains("seismic"))
+  #set($report = "seismic activity and satellite imagery indicated that !** ENTER VOLCANO NAME HERE **! was erupting, with ${stormline}, ${threatType},")
+#end
+#if($bullets.contains("reports"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($report = "reports indicated that !** ENTER VOLCANO NAME HERE **! had erupted, with ${stormline}, ${threatType},") 
 #end
 ## Storm current location description
@@ -165,9 +209,15 @@ THIS IS A TEST MESSAGE. ##
 , ${report} ##
 ##Many of the variables passed below are controlled by config.vm
 #if(${stormType} == "line")
+<<<<<<< HEAD
 #handleClosestPoints(${list}, ${closestPoints}, ${otherClosestPoints}, ${stormType}, ${nearPhrase} , ${maxMarineNearDistance}, ${overPhrase}, ${maxMarineOverDistance}, ${marineDistanceUnits}, ${useSecondReferenceLine})
 #else
 #handleClosestPoints(${list}, ${closestPoints}, ${otherClosestPoints}, ${stormType}, ${nearPhrase} , ${maxMarineNearDistance}, ${overPhrase}, ${maxMarineOverDistance}, ${marineDistanceUnits}, ${useSecondReferenceCell})
+=======
+#handleClosestPoints(${closestPoints}, ${otherClosestPoints}, ${stormType}, ${nearPhrase} , ${maxMarineNearDistance}, ${overPhrase}, ${maxMarineOverDistance}, ${marineDistanceUnits}, ${useSecondReferenceLine})
+#else
+#handleClosestPoints(${closestPoints}, ${otherClosestPoints}, ${stormType}, ${nearPhrase} , ${maxMarineNearDistance}, ${overPhrase}, ${maxMarineOverDistance}, ${marineDistanceUnits}, ${useSecondReferenceCell})
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #end
 #if(${movementSpeed} < ${marineStationary} || ${stationary})
 . nearly stationary.
@@ -177,13 +227,21 @@ THIS IS A TEST MESSAGE. ##
 
 #set($phenomena = "${pathheader}") 
 #set($warningType = "STATEMENT") 
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "pathcast")})
+=======
+#if($bullets.contains("pathcast"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #if(${productClass}=="T")
 THIS IS A TEST MESSAGE. ##
 #end
 #pathCast("${phenomena} will be near..." ${phenomena} ${pathCast} ${otherPoints} ${areas} ${dateUtil} ${timeFormat} 1)
 
+<<<<<<< HEAD
 #elseif(${list.contains(${bullets}, "listoflocations")})
+=======
+#elseif($bullets.contains("listoflocations"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #if(${productClass}=="T")
 THIS IS A TEST MESSAGE. ##
 #end
@@ -198,7 +256,11 @@ THIS IS A TEST MESSAGE. ##
 ##############################################
 ###### SPECIAL VENUE/EVENT CASE ##############
 ##############################################
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "specialEvent")})
+=======
+#if($bullets.contains("specialEvent"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #if(${stormType} == "line")
 Those attending the !**EVENT/VENUE NAME OR LOCATION**! are in the path of these storms and should prepare for IMMINENT DANGEROUS WEATHER CONDITIONS. SEEK SHELTER NOW!
 #else
@@ -224,6 +286,7 @@ An ashfall advisory means that the volcano is undergoing a minor eruption and th
 
 #if(${ctaSelected} == "YES")
 PRECAUTIONARY/PREPAREDNESS ACTIONS...
+<<<<<<< HEAD
 #end
 ##
 
@@ -238,15 +301,40 @@ Report severe weather to the Coast Guard. They will relay your report to the Nat
 #if(${ctaSelected} == "YES")
 &&
 #end
+=======
+
+#end
+##
+
+#if($bullets.contains("ashCTA"))
+Ash is an eye and respiratory irritant and is abrasive. Those with respiratory sensitivities should take extra precautions to minimize exposure. Protect electronics and cover air intakes if ashfall is expected or confirmed. Remove ash from surfaces with water if possible to prevent excessive accumulation.
+
+#end
+#if($bullets.contains("reportCTA"))
+Report severe weather to the Coast Guard. They will relay your report to the National Weather Service in ${officeLoc}.
+
+#end
+
+&&
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 #if(${productClass}=="T")
 THIS IS A TEST MESSAGE. DO NOT TAKE ACTION BASED ON THIS MESSAGE.
 
 #end
 
+<<<<<<< HEAD
 #printcoords(${areaPoly}, ${list})
+=======
+#printcoords(${areaPoly})
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 
 $$
 
+<<<<<<< HEAD
 #parse("forecasterName.vm")
+=======
+#parse("forecasterName.vm")
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

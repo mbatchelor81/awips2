@@ -33,6 +33,12 @@
 # Jul 12, 2017  19898    ryu       Include request site's own in VTEC records sent.
 # Dec 02, 2020  8294     randerso  Set pickle protocol=2 for backward
 #                                  compatibility with Python2
+<<<<<<< HEAD
+=======
+# Nov 10, 2021  8698     njensen   Replace timing calls with os.times()
+# Jul 14, 2023  2035938  dgilling  Update xml.etree.ElementTree calls to remove 
+#                                  functions deprecated in python 3.11
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 #
 
@@ -191,7 +197,11 @@ def execute_send_at(myServerHost, myServerPort, myServerProtocol,
             os.remove(xmlIncoming)
             reqTree = ElementTree.ElementTree(ElementTree.XML(xml))
             sourceE = reqTree.find('source')
+<<<<<<< HEAD
             for addressE in sourceE.getchildren():
+=======
+            for addressE in sourceE:
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 destServer = irt.decodeXMLAddress(addressE)
                 if destServer is None:
                     continue
@@ -280,7 +290,11 @@ def runFromJava(myServerHost, myServerPort, myServerProtocol, myServerMHSID,
     init_logging()
     
     logger.info('*********** sendAT ****************')
+<<<<<<< HEAD
     startT = time.time()
+=======
+    startT = os.times()
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     
     try:
         sites = JUtil.javaObjToPyVal(sites)
@@ -299,5 +313,12 @@ def runFromJava(myServerHost, myServerPort, myServerProtocol, myServerMHSID,
     #--------------------------------------------------------------------
     # Finish
     #--------------------------------------------------------------------
+<<<<<<< HEAD
     endT = time.time()
     logger.info("Final: wctime: {0:-6.2f}, cputime: {1:-6.2f}".format(endT - startT, time.clock())) 
+=======
+    endT = os.times()
+    elapsed = endT.elapsed - startT.elapsed
+    cpu = endT.system + endT.user - startT.system - startT.user
+    logger.info("Final: wctime: {0:-6.2f}, cputime: {1:-6.2f}".format(elapsed, cpu)) 
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

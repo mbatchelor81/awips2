@@ -34,7 +34,11 @@ def extractServerInfo(xmlIncoming):
     irt = IrtAccess.IrtAccess("")
     xmlTree = ElementTree.ElementTree(ElementTree.XML(xmlIncoming))
     sourceE = xmlTree.find('source')
+<<<<<<< HEAD
     for addressE in sourceE.getchildren():
+=======
+    for addressE in sourceE:
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         sourceServer = irt.decodeXMLAddress(addressE)
         if sourceServer is None:
             continue

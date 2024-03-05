@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -23,6 +35,7 @@ import java.util.List;
 
 import javax.xml.bind.JAXBException;
 
+<<<<<<< HEAD
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.SubscriptionType;
 
 import org.springframework.transaction.annotation.Propagation;
@@ -50,6 +63,35 @@ import com.raytheon.uf.edex.registry.ebxml.exception.EbxmlRegistryException;
  * 
  * @author bphillip
  * @version 1.0
+=======
+import com.raytheon.uf.common.serialization.JAXBManager;
+import com.raytheon.uf.common.util.CollectionUtil;
+import com.raytheon.uf.edex.database.dao.IDaoConfigFactory;
+import com.raytheon.uf.edex.registry.ebxml.exception.EbxmlRegistryException;
+
+import oasis.names.tc.ebxml.regrep.xsd.rim.v4.SubscriptionType;
+
+/**
+ * Data Access object for interacting with roles in the registry
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+ * Date          Ticket#  Engineer  Description
+ * ------------- -------- --------- ----------------------------------------------------------------
+ * Mar 13, 2013  1082     bphillip  Initial creation
+ * Sep 05, 2013  1538     bphillip  Added eagerLoadAll method
+ * Feb 13, 2014  2769     bphillip  Added read only flags to query methods
+ * Oct 16, 2014  3454     bphillip  Upgrading to Hibernate 4
+ * Oct 27, 2020  8170     ksunil    removed references to empty tables
+ * Apr 14, 2021  7849     mapeters  Refactor to use TransactionTemplate.execute instead of
+ *                                  Transactional annotations
+ *
+ * </pre>
+ *
+ * @author bphillip
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  */
 public class SubscriptionDao extends RegistryObjectTypeDao<SubscriptionType> {
 
@@ -61,23 +103,41 @@ public class SubscriptionDao extends RegistryObjectTypeDao<SubscriptionType> {
     private JAXBManager subscriptionJaxbManager;
 
     /**
+<<<<<<< HEAD
      * Creats a new SubscriptionDao object
      * 
      * @throws JAXBException
      *             If errors occur instantiating the jaxb manager
      */
     public SubscriptionDao() throws JAXBException {
+=======
+     * Creates a new SubscriptionDao object
+     *
+     * @throws JAXBException
+     *             If errors occur instantiating the jaxb manager
+     */
+    public SubscriptionDao(IDaoConfigFactory daoConfigFactory)
+            throws JAXBException {
+        super(daoConfigFactory);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         subscriptionJaxbManager = new JAXBManager(SubscriptionType.class);
     }
 
     /**
      * Eagerly loads all the registry subscriptions
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return All subscriptions in the registry
      * @throws EbxmlRegistryException
      *             If errors occur while querying
      */
+<<<<<<< HEAD
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public List<SubscriptionType> eagerLoadAll() throws EbxmlRegistryException {
         List<SubscriptionType> subs = super.loadAll();
         for (SubscriptionType sub : subs) {
@@ -100,7 +160,11 @@ public class SubscriptionDao extends RegistryObjectTypeDao<SubscriptionType> {
 
     /**
      * Retrieves the fully populated subscription object
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param subscriptionId
      *            The id of the subscription to retrieve
      * @return The fully populate subscription object
@@ -108,7 +172,10 @@ public class SubscriptionDao extends RegistryObjectTypeDao<SubscriptionType> {
      *             If errors occur while eagerly fetching all attributes using
      *             jaxb
      */
+<<<<<<< HEAD
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public SubscriptionType eagerGetById(String subscriptionId)
             throws EbxmlRegistryException {
         List<SubscriptionType> result = this.query(EAGER_LOAD_QUERY, "id",

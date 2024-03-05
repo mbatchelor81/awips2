@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -76,11 +88,19 @@ import systems.uom.common.USCustomary;
 
 /**
  * A data factory for retrieving FFMP data.
+<<<<<<< HEAD
  * 
  * <pre>
  * 
  * SOFTWARE HISTORY
  * 
+=======
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- --------------------------------------------
  * Jan 24, 2013  1552     mpduff    Initial creation
@@ -120,9 +140,17 @@ import systems.uom.common.USCustomary;
  * Sep 12, 2019  7921     rblum     Remove start time adjustment that was throwing off
  *                                  the accumulated value and causing discrepancies between
  *                                  FFMP and the HS FFR.
+<<<<<<< HEAD
  * 
  * </pre>
  * 
+=======
+ * Mar 09, 2021  8154     mapeters  Add "backupWfo" identifier to support requesting data for
+ *                                  backup sites
+ *
+ * </pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author mpduff
  */
 
@@ -137,9 +165,30 @@ public class FFMPGeometryFactory extends AbstractDataPluginFactory {
     /** Data key constant */
     public static final String DATA_KEY = "dataKey";
 
+<<<<<<< HEAD
     /** wfo constant */
     public static final String WFO = "wfo";
 
+=======
+    /**
+     * WFO constant: This should match the WFO value that data values are stored
+     * with in the ffmp DB table. This appears to usually (always?) be the EDEX
+     * site (may be determined by the primary domain in FFMPRunConfig.xml).
+     */
+    public static final String WFO = "wfo";
+
+    /**
+     * Backup WFO constant: This should be the backup WFO area that we want to
+     * get data for, or omitted to get data for the primary {@link #WFO}
+     * identifier. Added to allow Hazard Services' Flash Flood Recommender to
+     * correctly retrieve data when in Service Backup mode.
+     *
+     * Example: If we want data for the GID area, but EDEX is localized as OAX,
+     * then the request should have wfo=OAX and backupWFO=GID.
+     */
+    public static final String BACKUP_WFO = "backupWfo";
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /** plugin constant */
     public static final String PLUGIN_NAME = "ffmp";
 
@@ -158,9 +207,12 @@ public class FFMPGeometryFactory extends AbstractDataPluginFactory {
     public FFMPGeometryFactory() {
     }
 
+<<<<<<< HEAD
     /**
      * {@inheritDoc}
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     protected IGeometryData[] getGeometryData(IDataRequest request,
             DbQueryResponse dbQueryResponse) {
@@ -260,9 +312,12 @@ public class FFMPGeometryFactory extends AbstractDataPluginFactory {
         return geomRecords.toArray(new IGeometryData[0]);
     }
 
+<<<<<<< HEAD
     /**
      * {@inheritDoc}
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     protected Map<String, RequestConstraint> buildConstraintsFromRequest(
             IDataRequest request) {
@@ -271,7 +326,12 @@ public class FFMPGeometryFactory extends AbstractDataPluginFactory {
                 .entrySet()) {
             String key = entry.getKey();
             // exclude these parameters
+<<<<<<< HEAD
             if (!key.equals(ACCUM_HRS) && !key.equals(HUC)) {
+=======
+            if (!ACCUM_HRS.equals(key) && !HUC.equals(key)
+                    && !BACKUP_WFO.equals(key)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 Object value = entry.getValue();
                 RequestConstraint constraint;
                 if (value instanceof RequestConstraint) {
@@ -301,7 +361,11 @@ public class FFMPGeometryFactory extends AbstractDataPluginFactory {
     /**
      * Get an identifier value that must be provided as an instance of the given
      * valueType (or may not be provided at all)
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param request
      * @param key
      * @param valueType
@@ -324,7 +388,11 @@ public class FFMPGeometryFactory extends AbstractDataPluginFactory {
     /**
      * Get the list of site keys that satisfy the identifier constraints on the
      * given request
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param request
      * @param key
      * @return the list of site keys
@@ -346,7 +414,11 @@ public class FFMPGeometryFactory extends AbstractDataPluginFactory {
 
     /**
      * Create the IGeometryData objects.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param sourceName
      * @param request
      * @param start
@@ -362,6 +434,11 @@ public class FFMPGeometryFactory extends AbstractDataPluginFactory {
 
         String cwa = extractIdentifierValue(request, WFO, String.class);
         String huc = extractIdentifierValue(request, HUC, String.class);
+<<<<<<< HEAD
+=======
+        String backupCwa = extractIdentifierValue(request, BACKUP_WFO,
+                String.class);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         FFMPDataCache cache = getCache(cwa);
 
@@ -394,6 +471,7 @@ public class FFMPGeometryFactory extends AbstractDataPluginFactory {
          * logic and calculations in FFMPBasin.getAccumValue I think the problem
          * is that the if (!rate) check in that method should be if (rate) and
          * then this one would not need to be backward.
+<<<<<<< HEAD
          * 
          * The calculation multiples val * factor where factor is time. This
          * implies that val was some quantity/time which is kind of the
@@ -406,6 +484,20 @@ public class FFMPGeometryFactory extends AbstractDataPluginFactory {
          * should be dividing a non-rate value by time to get accumulation. That
          * just doesn't make mathematical sense.
          * 
+=======
+         *
+         * The calculation multiples val * factor where factor is time. This
+         * implies that val was some quantity/time which is kind of the
+         * definition of a rate.
+         *
+         * I see some vaguely similar calculations in FFMPContainer.C in the
+         * accumulate method.
+         *
+         * I don't know how this got messed up but there is no way that you
+         * should be dividing a non-rate value by time to get accumulation. That
+         * just doesn't make mathematical sense.
+         *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
          * I'm thinking his statement below:
          * "values that FFMP stores as RATE==true are actually NOT rates when accumulated"
          * may be telling us that FFMP may be incorrectly storing accumulated
@@ -430,8 +522,14 @@ public class FFMPGeometryFactory extends AbstractDataPluginFactory {
         HucLevelGeometriesFactory geomFactory = HucLevelGeometriesFactory
                 .getInstance();
 
+<<<<<<< HEAD
         Map<Long, Geometry> geomMap = geomFactory
                 .getGeometries(cache.getTemplates(siteKey), siteKey, cwa, huc);
+=======
+        Map<Long, Geometry> geomMap = geomFactory.getGeometries(
+                cache.getTemplates(siteKey), siteKey,
+                backupCwa != null ? backupCwa : cwa, huc);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         List<Long> pfafList = getAvailableLocationPfafs(request);
 
@@ -446,6 +544,12 @@ public class FFMPGeometryFactory extends AbstractDataPluginFactory {
                     attrs.put(DATA_KEY, buildDataKeysString(dataKeys));
                     attrs.put(SITE_KEY, siteKey);
                     attrs.put(WFO, cwa);
+<<<<<<< HEAD
+=======
+                    if (backupCwa != null) {
+                        attrs.put(BACKUP_WFO, backupCwa);
+                    }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     attrs.put(HUC, huc);
                     data.setAttributes(attrs);
                     data.setLocationName(String.valueOf(pfaf));
@@ -529,9 +633,12 @@ public class FFMPGeometryFactory extends AbstractDataPluginFactory {
         return super.getAvailableTimes(request, binOffset);
     }
 
+<<<<<<< HEAD
     /**
      * {@inheritDoc}
      */
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public String[] getAvailableLocationNames(IDataRequest request) {
         // Requires most of required ids to get location pfafs
@@ -550,7 +657,11 @@ public class FFMPGeometryFactory extends AbstractDataPluginFactory {
     /**
      * Gets the available location Pfafs. Note that the request must have been
      * validated to contain all required identifiers before calling this method.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param request
      * @return
      */
@@ -601,7 +712,11 @@ public class FFMPGeometryFactory extends AbstractDataPluginFactory {
 
     @Override
     public String[] getOptionalIdentifiers(IDataRequest request) {
+<<<<<<< HEAD
         return new String[] { DATA_KEY, ACCUM_HRS };
+=======
+        return new String[] { DATA_KEY, ACCUM_HRS, BACKUP_WFO };
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override
@@ -614,7 +729,11 @@ public class FFMPGeometryFactory extends AbstractDataPluginFactory {
             throw new InvalidIdentifiersException(request.getDatatype(), null,
                     Arrays.asList(identifierKey));
         }
+<<<<<<< HEAD
         if (identifierKey.equals(HUC)) {
+=======
+        if (HUC.equals(identifierKey)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             try {
                 FFMPTemplateConfigurationManager templateConfig = FFMPTemplateConfigurationManager
                         .getInstance();
@@ -625,8 +744,17 @@ public class FFMPGeometryFactory extends AbstractDataPluginFactory {
                         "Failed to read available HUC levels from configuration file",
                         e);
             }
+<<<<<<< HEAD
         } else if (identifierKey.equals(ACCUM_HRS)) {
             return getAccumHrsIdentifierValues(request);
+=======
+        } else if (ACCUM_HRS.equals(identifierKey)) {
+            return getAccumHrsIdentifierValues(request);
+        } else if (BACKUP_WFO.equals(identifierKey)) {
+            return FFMPRunConfigurationManager.getInstance().getDomains()
+                    .stream().filter(domain -> !domain.isPrimary())
+                    .map(DomainXML::getCwa).toArray(String[]::new);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         } else {
             return getAvailableValues(request, identifierKey, String.class);
         }
@@ -634,7 +762,11 @@ public class FFMPGeometryFactory extends AbstractDataPluginFactory {
 
     /**
      * Get the FFG Object need to interpolate between sources
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param accumulationTime
      *            if null, default value for given sourceName is retrieved from
      *            the interpolator
@@ -678,7 +810,11 @@ public class FFMPGeometryFactory extends AbstractDataPluginFactory {
 
     /**
      * Get the available accumHrs identifier values
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param request
      * @return the available accumHrs values
      */
@@ -742,7 +878,11 @@ public class FFMPGeometryFactory extends AbstractDataPluginFactory {
 
     /**
      * Return whether the given source is a guidance source
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param source
      * @return true if the source is guidance, otherwise false
      */

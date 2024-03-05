@@ -37,10 +37,16 @@ import com.raytheon.uf.common.dataplugin.shef.util.ShefConstants;
 import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
 
+<<<<<<< HEAD
 import si.uom.NonSI;
 import si.uom.SI;
 import systems.uom.common.USCustomary;
 import tec.uom.se.unit.MetricPrefix;
+=======
+import si.uom.SI;
+import systems.uom.common.USCustomary;
+import javax.measure.MetricPrefix;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Enums that both declare and define the data encoding for various METAR
@@ -55,7 +61,11 @@ import tec.uom.se.unit.MetricPrefix;
  * Jun 01, 2018       6843 mduff       changes to accommodate ObsToSHEFOptions, clean up.
  * Dec  9, 2019       7953 tgurney     Fix spurious error when wind direction is
  *                                     null or VRB
+<<<<<<< HEAD
  *
+=======
+ * Jan 05, 2022       21749 jrohwein   fixed rounding error in celsiusToFahr
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  *
  * @author jkorman
@@ -980,8 +990,12 @@ public enum SHEF_Metar_Codes implements SHEF_Obs_Codes<MetarRecord> {
     }
 
     public static double celsiusToFahr(double temperature) {
+<<<<<<< HEAD
         UnitConverter cvt = SI.CELSIUS.getConverterTo(USCustomary.FAHRENHEIT);
         return cvt.convert(temperature);
+=======
+        return ((temperature * 9.0d) / 5.0d) + 32.0d;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
@@ -1001,3 +1015,7 @@ public enum SHEF_Metar_Codes implements SHEF_Obs_Codes<MetarRecord> {
         return cvt.convert(precip);
     }
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

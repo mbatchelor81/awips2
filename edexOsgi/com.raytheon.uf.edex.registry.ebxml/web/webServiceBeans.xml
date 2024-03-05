@@ -138,10 +138,13 @@
         class="com.raytheon.uf.edex.registry.ebxml.services.query.QueryManagerImplWrapper">
         <constructor-arg ref="queryServiceImpl" />
     </bean>
+<<<<<<< HEAD
     <bean id="NotificationListenerServiceWrapper"
         class="com.raytheon.uf.edex.registry.ebxml.services.notification.NotificationListenerImplWrapper">
         <constructor-arg ref="notificationServiceImpl" />
     </bean>
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <bean id="LifecycleManagerServiceWrapper"
         class="com.raytheon.uf.edex.registry.ebxml.services.lifecycle.LifecycleManagerImplWrapper">
         <constructor-arg ref="lcmServiceImpl" />
@@ -168,6 +171,7 @@
             <ref bean="securityOutInterceptor" />
         </jaxws:outInterceptors>
     </jaxws:server>
+<<<<<<< HEAD
     <jaxws:server id="NotificationListenerService" address="/notificationListener">
         <jaxws:serviceBean>
             <ref bean="NotificationListenerServiceWrapper" />
@@ -180,6 +184,8 @@
             <ref bean="securityOutInterceptor" />
         </jaxws:outInterceptors>
     </jaxws:server>
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <jaxws:server id="LifecycleManagerService" address="/lifecycleManager">
         <jaxws:serviceBean>
             <ref bean="LifecycleManagerServiceWrapper" />

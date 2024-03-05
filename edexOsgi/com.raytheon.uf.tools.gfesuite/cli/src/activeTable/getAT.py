@@ -20,7 +20,11 @@
 import os
 import logging
 from dynamicserialize.dstypes.com.raytheon.uf.common.activetable import GetActiveTableDictRequest
+<<<<<<< HEAD
 from awips import ThriftClient
+=======
+from ufpy import ThriftClient
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 from getVtecAttribute import getVtecAttribute
 
 logging.basicConfig(level=logging.INFO)

@@ -47,7 +47,6 @@ import org.hibernate.type.TimestampType;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
 
-import com.raytheon.edex.db.dao.DefaultPluginDao;
 import com.raytheon.edex.plugin.gfe.server.GridParmManager;
 import com.raytheon.edex.plugin.gfe.server.IFPServer;
 import com.raytheon.edex.plugin.gfe.server.database.GridDatabase;
@@ -70,12 +69,12 @@ import com.raytheon.uf.common.datastorage.DataStoreFactory;
 import com.raytheon.uf.common.datastorage.IDataStore;
 import com.raytheon.uf.common.datastorage.audit.DataStorageAuditUtils;
 import com.raytheon.uf.common.datastorage.audit.MetadataStatus;
-import com.raytheon.uf.common.status.UFStatus.Priority;
 import com.raytheon.uf.common.time.TimeRange;
 import com.raytheon.uf.common.time.util.TimeUtil;
 import com.raytheon.uf.common.util.CollectionUtil;
 import com.raytheon.uf.common.util.Pair;
 import com.raytheon.uf.edex.database.DataAccessLayerException;
+import com.raytheon.uf.edex.database.plugin.PluginDao;
 import com.raytheon.uf.edex.database.purge.PurgeLogger;
 import com.raytheon.uf.edex.database.query.DatabaseQuery;
 
@@ -131,14 +130,15 @@ import com.raytheon.uf.edex.database.query.DatabaseQuery;
  *                                  Databases
  * Aug 21, 2019  6140     dgilling  Upgrading to Hibernate 5.
  * Mar 25, 2020  8103     randerso  Fixed ContraintViolationException handling
+ * May 03, 2021 7849       mapeters    Switch from UFStatus to slf4j logging
  * Sep 23, 2021  8608     mapeters  Audit metadata storage status
  * Jan 18, 2022  8740     randerso  Improve exception handling
  * Feb 16, 2022  8608     mapeters  Use DataStorageAuditUtils
  * Jun 22, 2022  8865     mapeters  Update populateDataStore to return boolean
- *
+ * Aug 24, 2022  8920     mapeters  Extend PluginDao.
  * </pre>
  */
-public class GFEDao extends DefaultPluginDao {
+public class GFEDao extends PluginDao {
     /** Removed DB purge time in days */
     public static final int REMOVED_DB_PURGE_TIME = 7;
 
@@ -954,16 +954,14 @@ public class GFEDao extends DefaultPluginDao {
                 try {
                     dataStore.deleteGroups(groupsToDelete);
 
-                    if (logger.isPriorityEnabled(Priority.DEBUG)) {
-                        logger.handle(Priority.DEBUG,
+                    if (logger.isDebugEnabled()) {
+                        logger.debug(
                                 "Deleted: " + Arrays.toString(groupsToDelete)
                                         + " from " + hdf5File.getName());
                     }
                 } catch (Exception e) {
-                    logger.handle(Priority.WARN,
-                            "Error deleting hdf5 record(s) from file: "
-                                    + hdf5File.getPath(),
-                            e);
+                    logger.warn("Error deleting hdf5 record(s) from file: "
+                            + hdf5File.getPath(), e);
                 }
             }
         } catch (Exception e) {
@@ -1185,9 +1183,8 @@ public class GFEDao extends DefaultPluginDao {
     protected boolean populateDataStore(IDataStore dataStore, IPersistable obj)
             throws Exception {
         /*
-         * Override to prevent auditing that is done in the super method and is
-         * intended for database-only records. GFE records aren't database-only;
-         * the HDF5 storage is just handled differently.
+         * GFE records are stored to hdf5, but the storage is handled
+         * differently.
          */
         return false;
     }

@@ -11,9 +11,13 @@ Require-Bundle: com.raytheon.edex.common,
  javax.persistence,
  com.raytheon.uf.common.dataplugin.satellite,
  com.raytheon.edex.plugin.satellite,
+<<<<<<< HEAD
  org.apache.commons.codec,
  javax.xml.bind,
  ar.com.hjg.pngj
+=======
+ javax.xml.bind
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Import-Package: com.raytheon.uf.common.localization,
  com.raytheon.uf.common.menus,

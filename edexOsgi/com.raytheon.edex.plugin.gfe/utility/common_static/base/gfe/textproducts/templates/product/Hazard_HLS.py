@@ -35,16 +35,27 @@
 #         OB9.3  Shannon White/Tracy Hansen/Matt Belk
 #         OB17.3.1 Shannon White (updated to use InundationMax and remove all references to MSL)
 #
+<<<<<<< HEAD
 # 
+=======
+#
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # Version 6/8/2017
 # ----------------------------------------------------------------------------
 # SOFTWARE HISTORY
 #
 # Date          Ticket#  Engineer  Description
 # ------------- -------- --------- --------------------------------------------
+<<<<<<< HEAD
 # Dec 01, 2020  8293     randerso  Fix refLimit check that never worked 
 #                                  correctly in Python2 and now throws 
 #                                  exceptions in Python3
+=======
+# Dec 01, 2020  8293     randerso  Fix refLimit check that never worked
+#                                  correctly in Python2 and now throws
+#                                  exceptions in Python3
+# May 10, 2021  DCS22297 dkingfiel Remove RB.Y, SI.Y, and SW.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import GenericHazards
 import time, re, os, types, copy, LogStream
@@ -829,6 +840,7 @@ class TextProduct(GenericHazards.TextProduct):
            ('SU.Y', allActions, 'HighSurf'),     # HIGH SURF ADVISORY
            ('RP.S', allActions, 'Rip'),          # HIGH RIP CURRENT RISK
            ('TO.A', allActions, 'Convective'),   # TORNADO WATCH
+<<<<<<< HEAD
            ('SR.W', allActions, 'Marine'),
            ('SR.A', allActions, 'Marine'),
            ('GL.W', allActions, 'Marine'),
@@ -839,6 +851,8 @@ class TextProduct(GenericHazards.TextProduct):
            ('RB.Y', allActions, 'Marine'),
            ('HF.W', allActions, 'Marine'),
            ('HF.A', allActions, 'Marine'),
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
            ]
 
     def _ignoreActions(self):
@@ -1070,7 +1084,11 @@ class TextProduct(GenericHazards.TextProduct):
         s = self._wmoID + " " + self._fullStationID + " " + \
                self._ddhhmmTime + "\n" + self._pil + "\n\n"
         fcst =  fcst + s.upper()
+<<<<<<< HEAD
                
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         s = eas + productName + "\n" +\
                "National Weather Service " + self._wfoCityState + \
                "\n" + issuedByString + self._timeLabel + "\n\n"
@@ -1449,7 +1467,11 @@ class TextProduct(GenericHazards.TextProduct):
         dict["Swell"] = (0, 15)
         dict["InundationMax"] = (0,2)
         return dict
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     # This is a very simple way to round values -- if we need
     # something more sophisticated, we'll add it later.
     def _increment(self, element):
@@ -4336,7 +4358,11 @@ remain in port until this storm passes.
         elif situation=="PreEvent":
             if scenario=="Advancing":
                 t+=self._prob_stmts(info) + "\n"
+<<<<<<< HEAD
             elif scenario=="Peripheral": 
+=======
+            elif scenario=="Peripheral":
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 t+=self._prob_stmts(info, ifWording=True) + "\n"
             else:
                 t+="At this time...the probability of either tropical storm or hurricane conditions cannot be determined until the system becomes an active tropical cyclone.  However...based on the latest outlook...the chance of tropical cyclone formation is "
@@ -5267,7 +5293,11 @@ will likely die.
 
 Coastal communities will likely be devastated, with numerous
 homes and businesses near the shore completely destroyed.
+<<<<<<< HEAD
 Shoreside condominiums and hotels may also be destroyed, 
+=======
+Shoreside condominiums and hotels may also be destroyed,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 Especially those with inadequate structural support. Flood waters
 are likely to extend well inland, further expanding the overall
 threat to life and property. Vehicles of any type will likely be
@@ -5347,7 +5377,11 @@ according to their personal disaster plan will have needlessly
 placed themselves at some measure of risk.
 
 Many homes and businesses along the shoreline, or in flood-prone
+<<<<<<< HEAD
 areas, will likely experience some water entering inside, 
+=======
+areas, will likely experience some water entering inside,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 Especially for those structures not raised or protected by a
 seawall. Higher waves and pounding surf will increase the
 likelihood of property damage near the coast, especially in
@@ -5587,7 +5621,11 @@ in flood-prone areas will likely be closed.
             startTime = startTime - 24*3600
         todayFlag = currentTime.day == startTime.day
         if todayFlag:
+<<<<<<< HEAD
             if partOfDay.find("midnight")>0: 
+=======
+            if partOfDay.find("midnight")>0:
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 todayWord = "Tonight"
             else:
                 todayWord = "This"
@@ -5692,7 +5730,11 @@ in flood-prone areas will likely be closed.
             else:
                 t+= "many "
             t+= "hours"
+<<<<<<< HEAD
         if end is not None: 
+=======
+        if end is not None:
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             t+=end
         return t
 
@@ -6035,7 +6077,11 @@ NNNN
 ##is expected to continue for the next couple of days.
 ##
 ##Maximum sustained winds are near 80 mph...130 km/hr, with higher
+<<<<<<< HEAD
 ##gusts.  Little change in strength is expected tonight and Thursday, 
+=======
+##gusts.  Little change in strength is expected tonight and Thursday,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ##with Linda forecast to weaken Thursday night and Friday.
 ##
 ##Hurricane force winds extend outward up to 25 miles...35 km...from

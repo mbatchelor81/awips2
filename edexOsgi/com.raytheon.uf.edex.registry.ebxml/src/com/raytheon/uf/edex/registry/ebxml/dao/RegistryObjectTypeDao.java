@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -34,6 +46,7 @@ import java.util.Set;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.hibernate.Hibernate;
+<<<<<<< HEAD
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Property;
 import org.slf4j.Logger;
@@ -42,6 +55,14 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.raytheon.uf.common.registry.services.rest.response.RegObjectSubset;
+=======
+import org.hibernate.criterion.Property;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.raytheon.uf.common.registry.services.rest.response.RegObjectSubset;
+import com.raytheon.uf.edex.database.dao.IDaoConfigFactory;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.edex.registry.ebxml.services.query.QueryConstants;
 
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryObjectType;
@@ -49,6 +70,7 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryObjectType;
 /**
  * Data access object used for accessing RegistryObjectType objects from the
  * underlying database.
+<<<<<<< HEAD
  * 
  * <pre>
  * 
@@ -72,20 +94,60 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryObjectType;
  * @author bphillip
  */
 
+=======
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+ * Date          Ticket#  Engineer   Description
+ * ------------- -------- ---------- ---------------------------------------------------------------
+ * Jan 19, 2012  184      bphillip   Initial creation
+ * Apr 09, 2013  1802     bphillip   Removed exception catching.  Added merge method.
+ * Aug 01, 2013  1693     bphillip   Moved the merge method down to RegistryObjectDao
+ * Oct 08, 2013  1682     bphillip   Added like lid method, changed to use criteria queries for
+ *                                   simple operations
+ * Feb 13, 2014  2769     bphillip   Added read only flags to query methods
+ * Oct 16, 2014  3454     bphillip   Upgrading to Hibernate 4
+ * Aug 25, 2016  5846     rjpeter    Remove InternationalString from DB
+ * Jan 14, 2019  7238     skabasele  Added getIdsOwnerUpdateTimeOfType method
+ * Apr 14, 2021  7849     mapeters   Refactor to use TransactionTemplate.execute instead of
+ *                                   Transactional annotations, remove redundant overrides
+ * Sep 09, 2021  8656     rjpeter    Add getByIdFullyInitialized.
+ *
+ * </pre>
+ *
+ * @author bphillip
+ */
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 public abstract class RegistryObjectTypeDao<ENTITY extends RegistryObjectType>
         extends IdentifiableTypeDao<ENTITY> {
 
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
+<<<<<<< HEAD
     /**
      * Creates a new RegistryObjectDao
      */
     public RegistryObjectTypeDao() {
+=======
+    public RegistryObjectTypeDao(IDaoConfigFactory daoConfigFactory) {
+        this(daoConfigFactory, false);
+    }
+
+    public RegistryObjectTypeDao(IDaoConfigFactory daoConfigFactory,
+            boolean admin) {
+        super(daoConfigFactory, admin);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
      * Retrieves registry objects based on lid values
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param <T>
      *            A class type extending RegistryObjectType
      * @param lids
@@ -93,27 +155,43 @@ public abstract class RegistryObjectTypeDao<ENTITY extends RegistryObjectType>
      * @return The list of registry objects;
      */
     @SuppressWarnings("unchecked")
+<<<<<<< HEAD
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     public List<ENTITY> getByLid(List<String> lids) {
         return createCriteria()
                 .add(Property.forName(QueryConstants.LID).in(lids)).list();
+=======
+    public List<ENTITY> getByLid(List<String> lids) {
+        return supplyInTransaction(requiredReadOnlyTransactionDef, () -> {
+            return createCriteria()
+                    .add(Property.forName(QueryConstants.LID).in(lids)).list();
+        });
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
      * Retrieves registry objects based on lid values
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param <T>
      *            A class type extending RegistryObjectType
      * @param lids
      *            The list of lids to query for
      * @return The list of registry objects;
      */
+<<<<<<< HEAD
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public List<ENTITY> getByLid(String... lids) {
         return getByLid(Arrays.asList(lids));
     }
 
     /**
+<<<<<<< HEAD
      * Gets all IdentifiableType objects matching (using like) the given lid.
      * 
      * @param lid
@@ -130,6 +208,10 @@ public abstract class RegistryObjectTypeDao<ENTITY extends RegistryObjectType>
     /**
      * Retrieves registry objects based on objectType values
      * 
+=======
+     * Retrieves registry objects based on objectType values
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param <T>
      *            A class type extending RegistryObjectType
      * @param objTypes
@@ -137,16 +219,29 @@ public abstract class RegistryObjectTypeDao<ENTITY extends RegistryObjectType>
      * @return The list of registry objects;
      */
     @SuppressWarnings("unchecked")
+<<<<<<< HEAD
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     public List<ENTITY> getByObjectType(List<String> objTypes) {
         return createCriteria()
                 .add(Property.forName(QueryConstants.OBJECT_TYPE).in(objTypes))
                 .list();
+=======
+    public List<ENTITY> getByObjectType(List<String> objTypes) {
+        return supplyInTransaction(requiredReadOnlyTransactionDef, () -> {
+            return createCriteria().add(
+                    Property.forName(QueryConstants.OBJECT_TYPE).in(objTypes))
+                    .list();
+        });
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
      * Retrieves registry objects based on status values
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param <T>
      *            A class type extending RegistryObjectType
      * @param status
@@ -154,15 +249,28 @@ public abstract class RegistryObjectTypeDao<ENTITY extends RegistryObjectType>
      * @return The list of registry objects;
      */
     @SuppressWarnings("unchecked")
+<<<<<<< HEAD
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     public List<ENTITY> getByStatus(List<String> status) {
         return createCriteria()
                 .add(Property.forName(QueryConstants.STATUS).in(status)).list();
+=======
+    public List<ENTITY> getByStatus(List<String> status) {
+        return supplyInTransaction(requiredReadOnlyTransactionDef, () -> {
+            return createCriteria()
+                    .add(Property.forName(QueryConstants.STATUS).in(status))
+                    .list();
+        });
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
      * Retrieves registry objects based on owner values
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param <T>
      *            A class type extending RegistryObjectType
      * @param owner
@@ -170,69 +278,118 @@ public abstract class RegistryObjectTypeDao<ENTITY extends RegistryObjectType>
      * @return The list of registry objects;
      */
     @SuppressWarnings("unchecked")
+<<<<<<< HEAD
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     public List<ENTITY> getByOwner(List<String> owner) {
         return createCriteria()
                 .add(Property.forName(QueryConstants.OWNER).in(owner)).list();
+=======
+    public List<ENTITY> getByOwner(List<String> owner) {
+        return supplyInTransaction(requiredReadOnlyTransactionDef, () -> {
+            return createCriteria()
+                    .add(Property.forName(QueryConstants.OWNER).in(owner))
+                    .list();
+        });
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
      * Retrieves registry objects based on owner values
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param <T>
      *            A class type extending RegistryObjectType
      * @param owner
      *            The list of owners to query for
      * @return The list of registry objects;
      */
+<<<<<<< HEAD
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public List<ENTITY> getByOwner(String... owner) {
         return getByOwner(Arrays.asList(owner));
     }
 
     /**
      * Retrieves registry objects based on name values
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param <T>
      *            A class type extending RegistryObjectType
      * @param ids
      *            The list of names to query for
      * @return The list of registry objects;
      */
+<<<<<<< HEAD
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     public List<ENTITY> getByName(List<String> names) {
         StringBuilder str = new StringBuilder(
                 "select obj from RegistryObjectType obj where obj.name in ");
         HqlQueryUtil.assembleInClause(str, "Strings.value", names);
         return this.executeHQLQuery(str.toString());
+=======
+    public List<ENTITY> getByName(List<String> names) {
+        return supplyInTransaction(requiredReadOnlyTransactionDef, () -> {
+            StringBuilder str = new StringBuilder(
+                    "select obj from RegistryObjectType obj where obj.name in ");
+            HqlQueryUtil.assembleInClause(str, "Strings.value", names);
+            return this.executeHQLQuery(str.toString());
+        });
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
      * Retrieves registry objects based on description values
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param <T>
      *            A class type extending RegistryObjectType
      * @param ids
      *            The list of descriptions to query for
      * @return The list of registry objects;
      */
+<<<<<<< HEAD
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     public List<ENTITY> getByDescription(List<String> descriptions) {
         StringBuilder str = new StringBuilder(
                 "select obj from RegistryObjectType obj where obj.description in ");
         HqlQueryUtil.assembleInClause(str, "Strings.value", descriptions);
         return this.executeHQLQuery(str.toString());
+=======
+    public List<ENTITY> getByDescription(List<String> descriptions) {
+        return supplyInTransaction(requiredReadOnlyTransactionDef, () -> {
+            StringBuilder str = new StringBuilder(
+                    "select obj from RegistryObjectType obj where obj.description in ");
+            HqlQueryUtil.assembleInClause(str, "Strings.value", descriptions);
+            return this.executeHQLQuery(str.toString());
+        });
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
      * Retrieves registry objects based on classificationNode values
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param <T>
      *            A class type extending RegistryObjectType
      * @param ids
      *            The list of classificationNodes to query for
      * @return The list of registry objects;
      */
+<<<<<<< HEAD
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     public List<ENTITY> getByClassification(List<String> classifications) {
         StringBuilder str = new StringBuilder(
@@ -241,16 +398,32 @@ public abstract class RegistryObjectTypeDao<ENTITY extends RegistryObjectType>
                 classifications);
 
         return this.executeHQLQuery(str.toString());
+=======
+    public List<ENTITY> getByClassification(List<String> classifications) {
+        return supplyInTransaction(requiredReadOnlyTransactionDef, () -> {
+            StringBuilder str = new StringBuilder(
+                    "select obj from RegistryObjectType obj inner join obj.classification as Classifications where ");
+            HqlQueryUtil.assembleInClause(str,
+                    "Classifications.classificationNode", classifications);
+
+            return this.executeHQLQuery(str.toString());
+        });
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
      * Gets the object ids , owner and updateTime of objects of the given object
      * type
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param objectType
      *            The object type to get the ids for
      * @return The list of object RegObjectSubset of objects of the given type
      */
+<<<<<<< HEAD
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     public List<RegObjectSubset> getIdsOwnerUpdateTimeOfType(
             String objectType) {
@@ -281,17 +454,53 @@ public abstract class RegistryObjectTypeDao<ENTITY extends RegistryObjectType>
 
         return regObSubsetList;
 
+=======
+    public List<RegObjectSubset> getIdsOwnerUpdateTimeOfType(
+            String objectType) {
+        return supplyInTransaction(requiredReadOnlyTransactionDef, () -> {
+            String query = "SELECT regObj.id, regObj.owner, regObj.updateTime FROM RegistryObjectType regObj WHERE regObj.objectType=:objectType";
+
+            List<Object[]> queryResult = this.executeHQLQuery(query,
+                    "objectType", objectType);
+
+            List<RegObjectSubset> regObSubsetList = new ArrayList<>(
+                    queryResult.size());
+            if (!queryResult.isEmpty()) {
+
+                for (Object[] columns : queryResult) {
+                    String id = (String) columns[0];
+                    String owner = (String) columns[1];
+                    Date updateTime = (Date) columns[2];
+
+                    RegObjectSubset regObjSubset = new RegObjectSubset();
+                    regObjSubset.setId(id);
+                    regObjSubset.setOwner(owner);
+                    regObjSubset.setUpdateTime(updateTime);
+                    regObSubsetList.add(regObjSubset);
+
+                }
+
+            }
+
+            return regObSubsetList;
+        });
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
      * Retrieves registry objects based on objectType values
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param <T>
      *            A class type extending RegistryObjectType
      * @param objTypes
      *            The list of objectTypes to query for
      * @return The list of registry objects;
      */
+<<<<<<< HEAD
 
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     public List<ENTITY> getByObjectId(List<String> Ids) {
@@ -300,12 +509,26 @@ public abstract class RegistryObjectTypeDao<ENTITY extends RegistryObjectType>
         HqlQueryUtil.assembleInClause(str, "Strings.value", Ids);
 
         return this.executeHQLQuery(str.toString());
+=======
+    public List<ENTITY> getByObjectId(List<String> Ids) {
+        return supplyInTransaction(requiredReadOnlyTransactionDef, () -> {
+            StringBuilder str = new StringBuilder(
+                    "select obj from RegistryObjectType obj where obj.id in ");
+            HqlQueryUtil.assembleInClause(str, "Strings.value", Ids);
+
+            return this.executeHQLQuery(str.toString());
+        });
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
      * Convenience method used by queries which return a single result. The
      * method takes a list and returns null if the list is empty
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param <T>
      *            Class type extending RegistryObjectType
      * @param result
@@ -322,6 +545,7 @@ public abstract class RegistryObjectTypeDao<ENTITY extends RegistryObjectType>
         }
     }
 
+<<<<<<< HEAD
     @Override
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
@@ -333,6 +557,8 @@ public abstract class RegistryObjectTypeDao<ENTITY extends RegistryObjectType>
         return super.getById(id);
     }
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /**
      * Fully loads an object and all its relations. Should be used when passing
      * data to other threads that will be outside the original transaction.
@@ -340,7 +566,10 @@ public abstract class RegistryObjectTypeDao<ENTITY extends RegistryObjectType>
      * @param id
      * @return
      */
+<<<<<<< HEAD
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public ENTITY getByIdFullyInitialized(String id) {
         ENTITY rval = getById(id);
         recursiveInitialize(rval);
@@ -351,7 +580,11 @@ public abstract class RegistryObjectTypeDao<ENTITY extends RegistryObjectType>
      * Method to walk through nested objects until all data is loaded. Only
      * necessary with objects tagged as lazy fetching so the database session
      * can be closed.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param obj
      */
     protected <T> T recursiveInitialize(T obj) {
@@ -367,9 +600,13 @@ public abstract class RegistryObjectTypeDao<ENTITY extends RegistryObjectType>
         }
 
         // check for circular reference
+<<<<<<< HEAD
         if (dejaVu.contains(obj)) {
             return;
         } else {
+=======
+        if (!dejaVu.contains(obj)) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             dejaVu.add(obj);
 
             if (!Hibernate.isInitialized(obj)) {
@@ -400,7 +637,12 @@ public abstract class RegistryObjectTypeDao<ENTITY extends RegistryObjectType>
                             Object origProp = PropertyUtils.getProperty(obj,
                                     propertyDescriptor.getName());
                             this.recursiveInitialize(origProp, dejaVu);
+<<<<<<< HEAD
                         } catch (IllegalAccessException
+=======
+                        } catch (@SuppressWarnings("squid:S1166")
+                                IllegalAccessException
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                 | InvocationTargetException
                                 | NoSuchMethodException e) {
                             // property wasn't readable, skip

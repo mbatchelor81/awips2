@@ -38,7 +38,11 @@
 #                                                 passed without update. 
 #    02/25/20        21590         ryu            Keep one of the latest issued records (instead of 
 #                                                 the one for the first zone) when an event is squeezed.
+<<<<<<< HEAD
 #
+=======
+#    02/12/21        22104         jkelmer        Removed auto-CAN of UFN events after 2 weeks
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 ##
 # This is a base file that is not intended to be overridden.
@@ -86,6 +90,7 @@ class VTECTableSqueeze:
             LogStream.logDebug("************** ORIGINAL TABLE *********************")
             LogStream.logDebug(self.__printActiveTable(table))
 
+<<<<<<< HEAD
         # modify old UFN events (in case fcstrs didn't CAN them)
         timer.reset()
         timer.start()
@@ -99,6 +104,8 @@ class VTECTableSqueeze:
                 LogStream.logDebug(self.__printActiveTable(t))
                 LogStream.logDebug("    -----------")
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # remove the national center and short fused events 
         timer.reset()
         timer.start()
@@ -300,7 +307,10 @@ class VTECTableSqueeze:
                         for etn in etns:
                             all_hourOld = True
                             all_cancelled = True
+<<<<<<< HEAD
                             all_twoWeeksOld = True
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                             ufn = None
 
                             ids = etns[etn]
@@ -309,6 +319,7 @@ class VTECTableSqueeze:
                                     if ufn is None:
                                         ufn = rec.get('ufn', False)
                                     hourOld = self.__ctime > rec['endTime'] + (1*3600)
+<<<<<<< HEAD
                                     twoWeeksOld = self.__ctime > rec['issueTime'] + (14*86400)
                                     cancelled = rec['act'] in ['CAN','UPG','EXP']
                                     all_hourOld = all_hourOld and hourOld
@@ -321,6 +332,18 @@ class VTECTableSqueeze:
                             # 3. cancelled, from this year, keep only records that are minid
 
                             if ufn and not all_cancelled and not all_twoWeeksOld: # 1
+=======
+                                    cancelled = rec['act'] in ['CAN','UPG','EXP']
+                                    all_hourOld = all_hourOld and hourOld
+                                    all_cancelled = all_cancelled and cancelled
+
+                            # keep records if the event:
+                            # 1. is UFN, not cancelled
+                            # 2. not UFN, and not ended in the last hour
+                            # 3. cancelled, from this year, keep only records that are minid
+
+                            if ufn and not all_cancelled: # 1
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                 for id in ids:
                                     for rec in ids[id]:
                                         saveRec.append(rec)

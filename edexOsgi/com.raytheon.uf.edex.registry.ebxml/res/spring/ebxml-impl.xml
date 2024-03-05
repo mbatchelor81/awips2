@@ -35,7 +35,10 @@
 
     <bean id="RegistryGarbageCollector"
         class="com.raytheon.uf.edex.registry.ebxml.services.RegistryGarbageCollector">
+<<<<<<< HEAD
         <constructor-arg ref="AuditableEventTypeDao" />
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <constructor-arg ref="slotTypeDao"/>
     </bean>
 

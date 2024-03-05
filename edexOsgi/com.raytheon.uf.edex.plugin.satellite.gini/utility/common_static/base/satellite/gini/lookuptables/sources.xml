@@ -26,5 +26,8 @@
     -->
 <numericLookupTable id="sources">
     <entry index="1" value="NESDIS" />
+<<<<<<< HEAD
     <entry index="101" value="UCAR" />
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 </numericLookupTable>

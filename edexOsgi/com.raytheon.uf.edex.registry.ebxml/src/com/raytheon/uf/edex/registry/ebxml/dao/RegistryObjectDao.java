@@ -29,13 +29,20 @@ import org.hibernate.ScrollMode;
 import org.hibernate.ScrollableResults;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+<<<<<<< HEAD
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.uf.common.event.EventBus;
 import com.raytheon.uf.common.time.util.TimeUtil;
 import com.raytheon.uf.edex.database.DataAccessLayerException;
+<<<<<<< HEAD
 import com.raytheon.uf.edex.registry.ebxml.exception.EbxmlRegistryException;
+=======
+import com.raytheon.uf.edex.database.dao.IDaoConfigFactory;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.edex.registry.events.DeleteSlotEvent;
 
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryObjectType;
@@ -47,6 +54,7 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryObjectType;
  *
  * SOFTWARE HISTORY
  *
+<<<<<<< HEAD
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
  * 3/13/2013    1082       bphillip    Initial creation
@@ -65,6 +73,33 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryObjectType;
  *
  * @author bphillip
  * @version 1.0
+=======
+ * Date          Ticket#  Engineer   Description
+ * ------------- -------- ---------- ---------------------------------------------------------------
+ * Mar 13, 2013  1082     bphillip   Initial creation
+ * Apr 09, 2013  1802     bphillip   Removed exception catching
+ * Jun 04, 2013  2022     bphillip   Added delete objects of type method
+ * Jul 29, 2013  2191     bphillip   Added new methods to support registry synchronization
+ * Aug 01, 2013  1693     bphillip   Added methods to facilitate implementation of the
+ *                                   lifecyclemanager according to the 4.0 spec
+ * Feb 13, 2014  2769     bphillip   Added read only flags to query methods
+ * Apr 11, 2014  3011     bphillip   Changed merge to not delete unused slots
+ * Apr 21, 2014  2992     dhladky    General list of Registry server nodes.
+ * Oct 16, 2014  3454     bphillip   Upgrading to Hibernate 4
+ * Jan 29, 2019  7238     skabasele  Removed the unused sloteTypeDao reference
+ * Jul 25, 2019  7890     ksunil     Enhanced logging.
+ * Jul 23, 2019  7839     skabasele  Implement method to retrieve with registryObject's orphaned
+ *                                   slots
+ * May 11, 2020  8161     bsteffen   Change slot id to a long
+ * May 26, 2020  8165     bsteffen   Remove auditableevent and notification.
+ * Oct 30, 2020  8170     ksunil     Removed references to deleted tables
+ * Apr 14, 2021  7849     mapeters   Refactor to use TransactionTemplate.execute instead of
+ *                                   Transactional annotations to support admin/non-admin instances
+ *
+ * </pre>
+ *
+ * @author bphillip
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  */
 public class RegistryObjectDao
         extends RegistryObjectTypeDao<RegistryObjectType> {
@@ -95,6 +130,7 @@ public class RegistryObjectDao
      * List the tables that can have references in the slot table minus the
      * obvious Registryobject and Slot tables
      */
+<<<<<<< HEAD
     private static final String[] validSlotParentTables = { "action",
             "association", "auditableevent", "authenticationexceptiontype",
             "authorizationexceptiontype", "catalogingexceptiontype",
@@ -123,6 +159,23 @@ public class RegistryObjectDao
      * Creates a new RegistryObjectDao
      */
     public RegistryObjectDao() {
+=======
+    private static final String[] validSlotParentTables = { "association",
+            "classification", "classificationnode", "classificationscheme",
+            "comment", "emailaddress", "externalidentifier", "externallink",
+            "extrinsicobject", "federation", "organization", "parameter",
+            "person", "personname", "postaladdress", "query", "querydefinition",
+            "registry", "registrypackage", "role", "subscription",
+            "telephonenumber" };
+
+    public RegistryObjectDao(IDaoConfigFactory daoConfigFactory) {
+        this(daoConfigFactory, false);
+    }
+
+    public RegistryObjectDao(IDaoConfigFactory daoConfigFactory,
+            boolean admin) {
+        super(daoConfigFactory, admin);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
@@ -135,8 +188,15 @@ public class RegistryObjectDao
      */
     public void merge(RegistryObjectType newObject,
             RegistryObjectType existingObject) {
+<<<<<<< HEAD
         newObject.setId(existingObject.getId());
         getCurrentSession().merge(newObject);
+=======
+        runInTransaction(() -> {
+            newObject.setId(existingObject.getId());
+            getCurrentSession().merge(newObject);
+        });
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
@@ -146,6 +206,7 @@ public class RegistryObjectDao
      *            The object to get the next version number for
      * @return The next version number
      */
+<<<<<<< HEAD
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     public String getNextVersion(RegistryObjectType objectToVersion) {
         String lid = objectToVersion.getLid();
@@ -168,6 +229,33 @@ public class RegistryObjectDao
         }
         // Increment the max version and append to current version
         return version + "." + String.valueOf(maxSubVersion + 1);
+=======
+    public String getNextVersion(RegistryObjectType objectToVersion) {
+        return supplyInTransaction(requiredReadOnlyTransactionDef, () -> {
+            String lid = objectToVersion.getLid();
+            String version = objectToVersion.getVersionInfo().getVersionName();
+
+            // Gets all the subversion numbers of this object
+            List<String> queryResult = this.executeHQLQuery(
+                    GET_SUB_VERSION_QUERY, "lid", lid, "version",
+                    version + ".%");
+            int maxSubVersion = 0;
+
+            // Get the maximum of the retrieved versions
+            for (String ver : queryResult) {
+                if (ver.matches(version + "\\.\\d{1,10}")) {
+                    String[] tokens = ver.split("\\.");
+                    int parsedVersion = Integer
+                            .parseInt(tokens[tokens.length - 1]);
+                    if (parsedVersion > maxSubVersion) {
+                        maxSubVersion = parsedVersion;
+                    }
+                }
+            }
+            // Increment the max version and append to current version
+            return version + "." + String.valueOf(maxSubVersion + 1);
+        });
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
@@ -177,7 +265,10 @@ public class RegistryObjectDao
      *            The id to check
      * @return True if the id exists, else false
      */
+<<<<<<< HEAD
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public boolean idExists(String id) {
         return ((Long) this.executeHQLQuery(ID_EXISTS_QUERY, "id", id)
                 .get(0)) != 0;
@@ -188,9 +279,14 @@ public class RegistryObjectDao
      *
      * @param lid
      *            The lid to check
+<<<<<<< HEAD
      * @return Treu if the lid exists, else false
      */
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+=======
+     * @return True if the lid exists, else false
+     */
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public boolean lidExists(String lid) {
         return ((Long) this.executeHQLQuery(LID_EXISTS_QUERY, "lid", lid)
                 .get(0)) != 0;
@@ -203,7 +299,10 @@ public class RegistryObjectDao
      *            The object type to get the ids for
      * @return The list of object ids of objects of the given type
      */
+<<<<<<< HEAD
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public List<String> getRegistryObjectIdsOfType(String objectType) {
         return this.executeHQLQuery(GET_IDS_BY_OBJECT_TYPE, "objectType",
                 objectType);
@@ -217,7 +316,13 @@ public class RegistryObjectDao
      */
     public void deleteWithoutMerge(RegistryObjectType obj) {
         statusHandler.debug("Deleting from getCurrentSession.");
+<<<<<<< HEAD
         getCurrentSession().delete(obj);
+=======
+        runInTransaction(() -> {
+            getCurrentSession().delete(obj);
+        });
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     public void deleteObjectWithoutDeletingChildren(RegistryObjectType obj)
@@ -235,10 +340,14 @@ public class RegistryObjectDao
      * @param <T>
      *            A class type extending RegistryObjectType
      * @return All the registry objects contained in the registry
+<<<<<<< HEAD
      * @throws EbxmlRegistryException
      *             If the HQL query fails
      */
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+=======
+     */
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public List<RegistryObjectType> getAllRegistryObjects() {
         return getAll();
     }
@@ -255,7 +364,10 @@ public class RegistryObjectDao
      * @param objectType
      * @return
      */
+<<<<<<< HEAD
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public List<String> getUniqueRegistries(String objectType) {
         return this.executeHQLQuery(QUERY_UNIQUE_REGISTRIES + " " + objectType);
     }
@@ -263,6 +375,7 @@ public class RegistryObjectDao
     /**
      * Method used to purge all orphaned registry object slots
      */
+<<<<<<< HEAD
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     public synchronized void purgeAllSlotWithoutRegObjParent() {
         statusHandler.info(
@@ -323,16 +436,82 @@ public class RegistryObjectDao
                         + " ms");
 
         scResults.close();
+=======
+    public synchronized void purgeAllSlotWithoutRegObjParent() {
+        statusHandler.info(
+                "Scanning the database for orphaned registry objects slots ....  ");
+        runInTransaction(requiredReadOnlyTransactionDef, () -> {
+            long slotPurgingStart = TimeUtil.currentTimeMillis();
+            int fetchSize = 100_000;
+            Set<String> allValidSlotParentIds = new HashSet<>();
+            Set<Long> validRegObOprhanedSlotIds = new HashSet<>();
+
+            // getting the valid parent ids
+            for (String tablename : validSlotParentTables) {
+                List<String> validSlotParentIds = getIdsFromSpecifiedTable(
+                        tablename);
+                allValidSlotParentIds.addAll(validSlotParentIds);
+
+            }
+
+            ScrollableResults scResults = getCurrentSession().createSQLQuery(
+                    "select id, parent_id from ebxml.slot where parent_id not in (select id from ebxml.registryobject);")
+                    .setReadOnly(true).setFetchSize(fetchSize)
+                    .setCacheable(false).scroll(ScrollMode.FORWARD_ONLY);
+
+            int rowCount = 0;
+            int fetchCount = 0;
+            while (scResults.next()) {
+                Object[] result = scResults.get();
+                Long slotId = (Long) result[0];
+                String parentId = (String) result[1];
+                rowCount++;
+
+                if (rowCount < fetchSize) {
+                    if (!allValidSlotParentIds.contains(parentId)) {
+                        validRegObOprhanedSlotIds.add(slotId);
+                    }
+                } else {
+                    ++fetchCount;
+                    purgeAndPrintLoggingStatements(fetchCount, slotPurgingStart,
+                            validRegObOprhanedSlotIds);
+
+                    if (!validRegObOprhanedSlotIds.isEmpty()) {
+                        validRegObOprhanedSlotIds = new HashSet<>();
+                    }
+
+                    rowCount = 0;
+
+                }
+
+            }
+
+            // last fetch
+            purgeAndPrintLoggingStatements(fetchCount + 1, slotPurgingStart,
+                    validRegObOprhanedSlotIds);
+            statusHandler
+                    .info("Registry object's oprhaned slot purge completed in  "
+                            + (TimeUtil.currentTimeMillis() - slotPurgingStart)
+                            + " ms");
+
+            scResults.close();
+        });
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
      * Method used to process the purge and print logging statements.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param fetchCount
      * @param slotPurgingStart
      * @param validRegObOprhanedSlotIds
      */
     private synchronized void purgeAndPrintLoggingStatements(int fetchCount,
+<<<<<<< HEAD
             long slotPurgingStart, Set<String> validRegObOprhanedSlotIds) {
         statusHandler.info(" Database fetch " + "( " + fetchCount
                 + " ) completed in "
@@ -350,10 +529,33 @@ public class RegistryObjectDao
             deleteSlotsInBatches(validRegObOprhanedSlotIds.stream()
                     .collect(Collectors.toList()));
         }
+=======
+            long slotPurgingStart, Set<Long> validRegObOprhanedSlotIds) {
+        runInTransaction(() -> {
+            statusHandler.info(
+                    " Database fetch " + "( " + fetchCount + " ) completed in "
+                            + (TimeUtil.currentTimeMillis() - slotPurgingStart)
+                            + " ms");
+            if (validRegObOprhanedSlotIds.isEmpty()) {
+
+                statusHandler.info(
+                        " No orphaned registry objects slots  found in fetch "
+                                + "( " + fetchCount + " ) ");
+            } else {
+                statusHandler.info(validRegObOprhanedSlotIds.size()
+                        + " orphaned registry objects slots  found in fetch "
+                        + "( " + fetchCount + " ). Initiating delete... ");
+                validRegObOprhanedSlotIds.remove(null);
+                deleteSlotsInBatches(validRegObOprhanedSlotIds.stream()
+                        .collect(Collectors.toList()));
+            }
+        });
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
      * Method used to process the slot purge in batches
+<<<<<<< HEAD
      * 
      * @param validRegObOprhanedSlotIds
      */
@@ -401,16 +603,73 @@ public class RegistryObjectDao
             sIndex = eIndex;
         }
 
+=======
+     *
+     * @param validRegObOprhanedSlotIds
+     */
+    private synchronized void deleteSlotsInBatches(List<Long> ids) {
+        runInTransaction(() -> {
+            int batches = (int) Math
+                    .ceil(((float) ids.size()) / SYNC_BATCH_SIZE);
+
+            boolean retry = false;
+            int sIndex = 0;
+            int tries = 0;
+            for (int currentBatch = 1; currentBatch <= batches; currentBatch++) {
+                tries = 0;
+                statusHandler.info("Processing slot delete for batch "
+                        + currentBatch + "/" + batches);
+                int eIndex = sIndex + SYNC_BATCH_SIZE;
+                if (eIndex > ids.size()) {
+                    eIndex = ids.size();
+                }
+
+                List<Long> batch = ids.subList(sIndex, eIndex);
+                do {
+                    retry = false;
+                    try {
+
+                        DeleteSlotEvent deleteSlotEvent = new DeleteSlotEvent();
+                        deleteSlotEvent.setSlotsToDelete(batch);
+                        EventBus.publish(deleteSlotEvent);
+
+                    } catch (Exception e) {
+                        if (tries < 1) {
+                            statusHandler.error(
+                                    "Error occurred purging batch for slotIds ["
+                                            + batch.toString()
+                                            + "], retrying...",
+                                    e);
+                            tries++;
+                            retry = true;
+                        } else {
+                            statusHandler.error(
+                                    "Error occurred purging batch for slotsIds ["
+                                            + batch.toString()
+                                            + "], skipping batch...",
+                                    e);
+                        }
+                    }
+                } while (retry);
+                sIndex = eIndex;
+            }
+        });
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
      * Method used to the ids of the specified table name.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param tablename
      * @return
      */
     public synchronized List<String> getIdsFromSpecifiedTable(
             String tablename) {
+<<<<<<< HEAD
 
         String queryString = " select id from ebxml.%s ";
 
@@ -421,6 +680,19 @@ public class RegistryObjectDao
         @SuppressWarnings("unchecked")
         List<String> list = query.list();
         return list;
+=======
+        return supplyInTransaction(() -> {
+            String queryString = " select id from ebxml.%s ";
+
+            queryString = String.format(queryString, tablename);
+
+            SQLQuery query = getCurrentSession().createSQLQuery(queryString);
+            @SuppressWarnings("unchecked")
+            List<String> list = query.list();
+            return list;
+
+        });
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
 }

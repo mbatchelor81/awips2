@@ -42,7 +42,11 @@
         <route id="bufrobsIngestRoute">
             <from uri="bufrobsInboxJmsEndpoint" />
             <setHeader name="pluginName">
+<<<<<<< HEAD
                 <constant>sfcobs</constant>
+=======
+                <constant>bufrobs</constant>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             </setHeader>
             <bean ref="stringToFile" />
             <doTry>

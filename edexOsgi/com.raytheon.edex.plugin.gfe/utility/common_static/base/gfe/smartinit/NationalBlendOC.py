@@ -17,6 +17,10 @@
 #    ------------    ----------    -----------    --------------------------
 #    02/23/2018      #20395        wkwock         Added NBM3.1 elements.
 #    03/10/2020      DCS20781      wkwock         Add NBM 3.2 elements
+<<<<<<< HEAD
+=======
+#    07/22/2021      DR21536       jrohwein       changed database to NationalBlendOC
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 from Init import *
 
@@ -27,7 +31,11 @@ from Init import *
 ##--------------------------------------------------------------------------
 class NationalBlendOCForecaster(Forecaster):
     def __init__(self):
+<<<<<<< HEAD
         Forecaster.__init__(self, "NationalBlendOC", "NationalBlend")
+=======
+        Forecaster.__init__(self, "NationalBlendOC", "NationalBlendOC")
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def calcWGS50pct(self, wgs50pct_FHAG10):
         return wgs50pct_FHAG10
@@ -75,4 +83,8 @@ def main():
     NationalBlendOCForecaster().run()
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     main()
+=======
+    main()
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

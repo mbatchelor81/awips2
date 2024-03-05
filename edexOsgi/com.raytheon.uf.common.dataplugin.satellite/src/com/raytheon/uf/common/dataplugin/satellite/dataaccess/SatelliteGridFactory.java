@@ -29,7 +29,11 @@ import java.util.Map.Entry;
 
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
+<<<<<<< HEAD
 import javax.measure.format.ParserException;
+=======
+import javax.measure.format.MeasurementParseException;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import org.geotools.coverage.grid.GridGeometry2D;
 
@@ -50,8 +54,13 @@ import com.raytheon.uf.common.geospatial.util.SubGridGeometryCalculator;
 import com.raytheon.uf.common.numeric.source.DataSource;
 import com.raytheon.uf.common.units.UnitConv;
 
+<<<<<<< HEAD
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.format.SimpleUnitFormat;
+=======
+import tech.units.indriya.AbstractUnit;
+import tech.units.indriya.format.SimpleUnitFormat;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * A data factory for getting satellite data from the metadata database. There
@@ -132,7 +141,11 @@ public class SatelliteGridFactory extends AbstractGridDataPluginFactory {
             try {
                 unit = SimpleUnitFormat.getInstance(SimpleUnitFormat.Flavor.ASCII).parseSingleUnit(
                         satelliteRecord.getUnits(), new ParsePosition(0));
+<<<<<<< HEAD
             } catch (ParserException e) {
+=======
+            } catch (MeasurementParseException e) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 throw new DataRetrievalException("Failed to parse the Unit: "
                         + satelliteRecord.getUnits(), e);
             }

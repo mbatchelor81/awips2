@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -29,6 +41,10 @@ import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+<<<<<<< HEAD
+=======
+import javax.persistence.Index;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -39,7 +55,11 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+<<<<<<< HEAD
 import org.hibernate.annotations.Index;
+=======
+import org.locationtech.jts.geom.Geometry;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.uf.common.dataplugin.PluginDataObject;
 import com.raytheon.uf.common.dataplugin.annotations.DataURI;
@@ -51,7 +71,10 @@ import com.raytheon.uf.common.pointdata.PointDataView;
 import com.raytheon.uf.common.pointdata.spatial.SurfaceObsLocation;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerialize;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
+<<<<<<< HEAD
 import org.locationtech.jts.geom.Geometry;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * UAObs represents a single vertical upper air observation at a single point in
@@ -59,11 +82,19 @@ import org.locationtech.jts.geom.Geometry;
  * number of levels of data. This class may represent a fixed or mobile
  * location. For mobile stations, the station's movement information may be
  * captured as well as it's location.
+<<<<<<< HEAD
  * 
  * <pre>
  * 
  * SOFTWARE HISTORY
  * 
+=======
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#  Engineer    Description
  * ------------- -------- ----------- --------------------------
  * Nov 27, 2007  382      jkorman     Initial Coding.
@@ -84,6 +115,7 @@ import org.locationtech.jts.geom.Geometry;
  * Aug 30, 2013  2298     rjpeter     Make getPluginName abstract
  * Jun 11, 2014  2061     bsteffen    Remove IDecoderGettable
  * Jul 23, 2015  2360     rferrel     Add name to unique constraint.
+<<<<<<< HEAD
  * 
  * </pre>
  * 
@@ -93,10 +125,22 @@ import org.locationtech.jts.geom.Geometry;
 @Entity
 @SequenceGenerator(initialValue = 1, name = PluginDataObject.ID_GEN, sequenceName = "bufruaseq")
 @Table(name = UAObs.PLUGIN_NAME, uniqueConstraints = { @UniqueConstraint(name = "uk_bufrua_datauri_fields", columnNames = { "dataURI" }) })
+=======
+ * Aug 08, 2022  8892     tjensen     Update indexes for Hibernate 5
+ *
+ * </pre>
+ *
+ * @author jkorman
+ */
+
+@Entity
+@SequenceGenerator(initialValue = 1, name = PluginDataObject.ID_GEN, sequenceName = "bufruaseq")
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 /*
  * Both refTime and forecastTime are included in the refTimeIndex since
  * forecastTime is unlikely to be used.
  */
+<<<<<<< HEAD
 @org.hibernate.annotations.Table(appliesTo = UAObs.PLUGIN_NAME, indexes = { @Index(name = "bufrua_refTimeIndex", columnNames = {
         "refTime", "forecastTime" }) })
 @XmlRootElement
@@ -104,6 +148,19 @@ import org.locationtech.jts.geom.Geometry;
 @DynamicSerialize
 public class UAObs extends PersistablePluginDataObject implements
         ISpatialEnabled, IPointData, IPersistable {
+=======
+@Table(name = UAObs.PLUGIN_NAME, uniqueConstraints = {
+        @UniqueConstraint(name = "uk_bufrua_datauri_fields", columnNames = {
+                "dataURI" }) }, indexes = {
+                        @Index(name = "%TABLE%_refTimeIndex", columnList = "refTime, forecastTime"),
+                        @Index(name = "%TABLE%_stationIndex", columnList = "stationId") })
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
+@DynamicSerialize
+public class UAObs extends PersistablePluginDataObject
+        implements ISpatialEnabled, IPointData, IPersistable {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private static final long serialVersionUID = 1L;
 
@@ -217,7 +274,11 @@ public class UAObs extends PersistablePluginDataObject implements
     /**
      * Constructor for DataURI construction through base class. This is used by
      * the notification service.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param uri
      *            A data uri applicable to this class.
      * @param tableDef
@@ -234,7 +295,11 @@ public class UAObs extends PersistablePluginDataObject implements
 
     /**
      * Get the set of levels for this observation.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The level data.
      */
     public List<UAObsLevel> getLevels() {
@@ -243,7 +308,11 @@ public class UAObs extends PersistablePluginDataObject implements
 
     /**
      * Set the set of levels for this observation.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param levels
      *            the levels to set
      */
@@ -252,12 +321,20 @@ public class UAObs extends PersistablePluginDataObject implements
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param cloud
      */
     public void addLevel(UAObsLevel level) {
         if (levels == null) {
+<<<<<<< HEAD
             levels = new ArrayList<UAObsLevel>();
+=======
+            levels = new ArrayList<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         levels.add(level);
     }
@@ -279,7 +356,11 @@ public class UAObs extends PersistablePluginDataObject implements
 
     /**
      * Get the report correction indicator.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The corIndicator
      */
     public String getCorIndicator() {
@@ -288,7 +369,11 @@ public class UAObs extends PersistablePluginDataObject implements
 
     /**
      * Set the report correction indicator.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param corIndicator
      *            The corIndicator.
      */
@@ -298,7 +383,11 @@ public class UAObs extends PersistablePluginDataObject implements
 
     /**
      * Get the report data for this observation.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The Report data.
      */
     public String getReportData() {
@@ -311,7 +400,11 @@ public class UAObs extends PersistablePluginDataObject implements
 
     /**
      * Set the report data for this observation.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param reportData
      *            The Report data.
      */
@@ -321,7 +414,11 @@ public class UAObs extends PersistablePluginDataObject implements
 
     /**
      * Get this observation's geometry.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry for this observation.
      */
     public Geometry getGeometry() {
@@ -330,7 +427,11 @@ public class UAObs extends PersistablePluginDataObject implements
 
     /**
      * Get the geometry latitude.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry latitude.
      */
     public double getLatitude() {
@@ -339,7 +440,11 @@ public class UAObs extends PersistablePluginDataObject implements
 
     /**
      * Get the geometry longitude.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry longitude.
      */
     public double getLongitude() {
@@ -348,7 +453,11 @@ public class UAObs extends PersistablePluginDataObject implements
 
     /**
      * Get the station identifier for this observation.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return the stationId
      */
     public String getStationId() {
@@ -357,7 +466,11 @@ public class UAObs extends PersistablePluginDataObject implements
 
     /**
      * Get the elevation, in meters, of the observing platform or location.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The observation elevation, in meters.
      */
     public Integer getElevation() {
@@ -366,7 +479,11 @@ public class UAObs extends PersistablePluginDataObject implements
 
     /**
      * Get whether the location for this observation is defined.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return Is this location defined.
      */
     public Boolean getLocationDefined() {
@@ -375,7 +492,11 @@ public class UAObs extends PersistablePluginDataObject implements
 
     /**
      * Get the observation report type.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return the reportType
      */
     public Integer getReportType() {
@@ -384,7 +505,11 @@ public class UAObs extends PersistablePluginDataObject implements
 
     /**
      * Set the observation report type.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param reportType
      *            the reportType to set
      */
@@ -394,7 +519,11 @@ public class UAObs extends PersistablePluginDataObject implements
 
     /**
      * Get the station pressure at the observation site.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return the pressure_station
      */
     public Integer getPressure_station() {
@@ -403,7 +532,11 @@ public class UAObs extends PersistablePluginDataObject implements
 
     /**
      * Set the station pressure at the observation site.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param pressure_station
      *            the pressure_station to set
      */
@@ -413,7 +546,11 @@ public class UAObs extends PersistablePluginDataObject implements
 
     /**
      * Get the total clould cover (n/8s).
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return the totalCloudCover
      */
     public Integer getTotalCloudCover() {
@@ -423,7 +560,11 @@ public class UAObs extends PersistablePluginDataObject implements
     /**
      * Get the direction the platform is moving. (Valid only for mobile
      * observations i.e. TEMPSHIP.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return the platformDirection
      */
     public Integer getPlatformDirection() {
@@ -433,7 +574,11 @@ public class UAObs extends PersistablePluginDataObject implements
     /**
      * Set the direction the platform is moving. (Valid only for mobile
      * observations i.e. TEMPSHIP.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param platformDirection
      *            the platformDirection to set
      */
@@ -443,7 +588,11 @@ public class UAObs extends PersistablePluginDataObject implements
 
     /**
      * Get the movement of the platform in meters per second.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The platform movement in meters per second.
      */
     public Double getPlatformMovement() {
@@ -452,7 +601,11 @@ public class UAObs extends PersistablePluginDataObject implements
 
     /**
      * Set the movement of the platform in meters per second.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param shipMovement
      *            The platform movement in meters per second.
      */
@@ -462,7 +615,11 @@ public class UAObs extends PersistablePluginDataObject implements
 
     /**
      * Set the total clould cover (n/8s).
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param totalCloudCover
      *            the totalCloudCover to set
      */
@@ -486,7 +643,11 @@ public class UAObs extends PersistablePluginDataObject implements
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     @Override
     public PointDataView getPointDataView() {
@@ -494,7 +655,11 @@ public class UAObs extends PersistablePluginDataObject implements
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     @Override
     public void setPointDataView(PointDataView pointDataView) {
@@ -520,7 +685,11 @@ public class UAObs extends PersistablePluginDataObject implements
     /**
      * Returns the hashCode for this object. This implementation returns the
      * hashCode of the generated dataURI.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @see java.lang.Object#hashCode()
      */
     @Override
@@ -535,7 +704,11 @@ public class UAObs extends PersistablePluginDataObject implements
     /**
      * Checks if this record is equal to another by checking the generated
      * dataURI.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param obj
      * @see java.lang.Object#equals(java.lang.Object)
      */
@@ -563,7 +736,11 @@ public class UAObs extends PersistablePluginDataObject implements
 
     /**
      * Returns a
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param obsList
      * @return
      */

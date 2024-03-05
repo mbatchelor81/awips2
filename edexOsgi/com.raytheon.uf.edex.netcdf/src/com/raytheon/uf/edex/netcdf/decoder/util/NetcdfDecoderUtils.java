@@ -45,7 +45,11 @@ import com.raytheon.uf.edex.netcdf.description.field.direct.DimensionDescription
 import com.raytheon.uf.edex.netcdf.description.field.indirect.DelegateFieldDescription;
 import com.raytheon.uf.edex.netcdf.description.field.level.LevelDescription;
 
+<<<<<<< HEAD
 import tec.uom.se.AbstractUnit;
+=======
+import tech.units.indriya.AbstractUnit;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import ucar.ma2.Array;
 import ucar.ma2.DataType;
 import ucar.ma2.InvalidRangeException;

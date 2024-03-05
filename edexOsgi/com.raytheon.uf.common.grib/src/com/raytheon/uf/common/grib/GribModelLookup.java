@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -48,6 +60,7 @@ import com.raytheon.uf.common.status.UFStatus.Priority;
 import com.raytheon.uf.common.util.mapping.MultipleMappingException;
 
 /**
+<<<<<<< HEAD
  * 
  * Lookup a GridModel based off the information in the grib file.
  * 
@@ -55,6 +68,15 @@ import com.raytheon.uf.common.util.mapping.MultipleMappingException;
  * 
  * SOFTWARE HISTORY
  * 
+=======
+ *
+ * Lookup a GridModel based off the information in the grib file.
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- --------------------------------------------
  * Apr 29, 2013  15715    dhuffman  Near line 202; Transposed edex site and base
@@ -73,9 +95,15 @@ import com.raytheon.uf.common.util.mapping.MultipleMappingException;
  * Apr 11, 2016  5564     bsteffen  Move localization files to common_static
  * Apr 19, 2016  5572     bsteffen  Move to common
  * Mar 14, 2018  7052     bsteffen  Remove unnecessary catch
+<<<<<<< HEAD
  * 
  * </pre>
  * 
+=======
+ *
+ * </pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author unknown
  */
 public class GribModelLookup {
@@ -116,7 +144,11 @@ public class GribModelLookup {
 
     /**
      * Get a model based off some fields in the grib file.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param center
      *            the id of the center
      * @param subcenter
@@ -302,7 +334,11 @@ public class GribModelLookup {
                 .listFiles(
                         new LocalizationContext[] { edexStaticBase,
                                 edexStaticSite },
+<<<<<<< HEAD
                         "grib" + IPathManager.SEPARATOR + "models", // Win32
+=======
+                        "grib" + IPathManager.SEPARATOR + "models",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         new String[] { ".xml" }, true, true);
 
         GridModelSet modelSet = new GridModelSet();

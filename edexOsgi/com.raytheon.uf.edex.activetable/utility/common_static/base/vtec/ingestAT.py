@@ -29,6 +29,12 @@
 #    02/13/13        1447          dgilling       Initial Creation.
 #    01/24/14        2504          randerso       change to use iscUtil.getLogger for consistency 
 #    03/04/2015      4129          randerso       Pass active table change logger through to MergeVtec.merge
+<<<<<<< HEAD
+=======
+#    11/10/2021      8698          njensen        Replace timing calls with os.times()
+#    07/14/2023      2035938       dgilling       Update xml.etree.ElementTree calls to remove 
+#                                                 functions deprecated in python 3.11
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 ##
 
@@ -39,12 +45,18 @@
 
 
 import os
+<<<<<<< HEAD
 import time
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import xml.etree.ElementTree as ET
 
 import IrtAccess
 import MergeVTEC
+<<<<<<< HEAD
 import siteConfig
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import iscUtil
 
 logger = None
@@ -61,7 +73,11 @@ def execute_ingest_at(incomingRecords, activeTable, atName, ztime, makeBackups, 
         irt = IrtAccess.IrtAccess("")
         xmlTree = ET.ElementTree(ET.XML(xmlIncoming))
         sourceE = xmlTree.find('source')
+<<<<<<< HEAD
         for addressE in sourceE.getchildren():
+=======
+        for addressE in sourceE:
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             sourceServer = irt.decodeXMLAddress(addressE)
             if sourceServer is None:
                 continue
@@ -80,7 +96,11 @@ def runFromJava(activeTable, activeTableMode, newRecords, drt, makeBackups,
     init_logging()
     
     logger.info('************* ingestAT ************************')
+<<<<<<< HEAD
     startT = time.time()
+=======
+    startT = os.times()
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     
     results = execute_ingest_at(newRecords, activeTable, activeTableMode, drt,
                       makeBackups, xmlIncoming, atChangeLog=atChangeLog)
@@ -88,8 +108,15 @@ def runFromJava(activeTable, activeTableMode, newRecords, drt, makeBackups,
     #--------------------------------------------------------------------
     # Finish
     #--------------------------------------------------------------------
+<<<<<<< HEAD
     endT = time.time()
     logger.info("Final: wctime: {0:-6.2f}, cputime: {1:-6.2f}".format(endT - startT, time.clock()))
+=======
+    endT = os.times()
+    elapsed = endT.elapsed - startT.elapsed
+    cpu = endT.system + endT.user - startT.system - startT.user
+    logger.info("Final: wctime: {0:-6.2f}, cputime: {1:-6.2f}".format(elapsed, cpu))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     
     return results
 

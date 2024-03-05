@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -23,11 +35,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+<<<<<<< HEAD
 import com.raytheon.uf.common.inventory.tree.DataTree;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.dataplugin.level.Level;
 import com.raytheon.uf.common.dataplugin.level.LevelFactory;
 import com.raytheon.uf.common.dataplugin.radar.RadarRecord;
 import com.raytheon.uf.common.dataplugin.radar.request.GetRadarDataTreeRequest;
+<<<<<<< HEAD
+=======
+import com.raytheon.uf.common.dataplugin.radar.util.RadarsInUseUtil;
+import com.raytheon.uf.common.dataquery.db.QueryParam;
+import com.raytheon.uf.common.dataquery.db.QueryParam.QueryOperand;
+import com.raytheon.uf.common.inventory.tree.DataTree;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.serialization.comm.IRequestHandler;
 import com.raytheon.uf.edex.database.dao.CoreDao;
 import com.raytheon.uf.edex.database.dao.DaoConfig;
@@ -35,6 +57,7 @@ import com.raytheon.uf.edex.database.query.DatabaseQuery;
 
 /**
  * Returns the Radar DataTree for a given request.
+<<<<<<< HEAD
  * 
  * <pre>
  * 
@@ -51,13 +74,38 @@ import com.raytheon.uf.edex.database.query.DatabaseQuery;
 
 public class GetRadarDataTreeHandler implements
         IRequestHandler<GetRadarDataTreeRequest> {
+=======
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+ * Date          Ticket#  Engineer  Description
+ * ------------- -------- --------- --------------------------------------------
+ * Mar 26, 2010  4473     rjpeter   Initial creation
+ * Jul 07, 2021  8576     randerso  If siteId is specified and rdaId is not,
+ *                                  return information for all local radars
+ *                                  defined in radarsInUse.txt
+ *
+ * </pre>
+ *
+ * @author rjpeter
+ */
+
+public class GetRadarDataTreeHandler
+        implements IRequestHandler<GetRadarDataTreeRequest> {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private static final String[] RADARFIELDS = { "icao", "productCode",
             "mnemonic", "unit", "primaryElevationAngle" };
 
     /**
      * Returns the Radar DataTree for the given request. Tree layout is icao,
      * productCode, level for primaryElevationAngle
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param request
      *            Request for a data tree.
      */
@@ -74,11 +122,24 @@ public class GetRadarDataTreeHandler implements
             // Decoder sets icao to lowercase rda_id. icao should be indexed so
             // querying on it will be faster than rda_id
             query.addQueryParam("icao", request.getRdaId().toLowerCase());
+<<<<<<< HEAD
+=======
+        } else {
+            List<String> localRadars = RadarsInUseUtil.getSite(
+                    request.getSiteId(), RadarsInUseUtil.LOCAL_CONSTANT);
+            QueryParam queryParam = new QueryParam("icao", localRadars,
+                    QueryOperand.IN);
+            query.addQueryParam(queryParam);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         CoreDao dao = new CoreDao(DaoConfig.forClass(RadarRecord.class));
         List<?> queryResults = dao.queryByCriteria(query);
+<<<<<<< HEAD
         if (queryResults.size() > 0) {
+=======
+        if (!queryResults.isEmpty()) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             LevelFactory lf = LevelFactory.getInstance();
             String source = null;
             Integer dT = new Integer(60);
@@ -89,7 +150,11 @@ public class GetRadarDataTreeHandler implements
 
             for (Object resultRow : queryResults) {
                 if (resultRow.getClass().isArray()) {
+<<<<<<< HEAD
                     ArrayList<Object> resultFields = new ArrayList<Object>(
+=======
+                    List<Object> resultFields = new ArrayList<>(
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                             Arrays.asList((Object[]) resultRow));
                     // need to do level mapping for primary elevation
                     source = resultFields.get(0).toString();

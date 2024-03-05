@@ -22,6 +22,10 @@ package com.raytheon.uf.common.dataplugin.satellite.units.water;
 import java.util.Map;
 
 import javax.measure.Dimension;
+<<<<<<< HEAD
+=======
+import javax.measure.MetricPrefix;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
 import javax.measure.quantity.Length;
@@ -29,10 +33,16 @@ import javax.measure.quantity.Length;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import si.uom.SI;
+<<<<<<< HEAD
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.function.AddConverter;
 import tec.uom.se.quantity.QuantityDimension;
 import tec.uom.se.unit.MetricPrefix;
+=======
+import tech.units.indriya.AbstractUnit;
+import tech.units.indriya.function.AddConverter;
+import tech.units.indriya.unit.UnitDimension;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Represents a pixel value on a satellite blended total precipitable water(TPW)
@@ -60,7 +70,11 @@ public class BlendedTPWPixel extends AbstractUnit<Length> {
 
     @Override
     public boolean equals(Object anObject) {
+<<<<<<< HEAD
         return (anObject instanceof PrecipPixel);
+=======
+        return (anObject instanceof BlendedTPWPixel);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override
@@ -86,6 +100,10 @@ public class BlendedTPWPixel extends AbstractUnit<Length> {
 
     @Override
     public Dimension getDimension() {
+<<<<<<< HEAD
         return QuantityDimension.LENGTH;
+=======
+        return UnitDimension.LENGTH;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 }

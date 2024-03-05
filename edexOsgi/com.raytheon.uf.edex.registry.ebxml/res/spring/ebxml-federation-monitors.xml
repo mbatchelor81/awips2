@@ -11,6 +11,7 @@
 
         <endpoint id="replicationMonitor"
             uri="quartz://registry/replicationMonitor/?cron=0+0+0/1+*+*+?"/>
+<<<<<<< HEAD
             
         <endpoint id="DDProcessObjectsJmsEndpoint" uri="jms-durable:queue:DDProcessObjects"/>
        
@@ -18,12 +19,21 @@
         <route id="updateUptimeRoute">
             <from uri="timer://updateUptimeTimer?fixedRate=true&amp;period=1h" />
             <bean ref="RegistryFederationManager" method="updateUpTime" />
+=======
+
+        <endpoint id="DDProcessObjectsJmsEndpoint" uri="jms-durable:queue:DDProcessObjects"/>
+
+        <route id="checkSynchronizeRoute">
+            <from uri="timer://checkSynchronizeTimer?fixedRate=true&amp;period=1h&amp;delay=1h" />
+            <bean ref="RegistryFederationManager" method="checkSynchronize" />
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         </route>
 
         <route id="purgeExpiredReplicationEventsRoute">
             <from uri="timer://purgeReplicationEventsTimer?fixedRate=true&amp;period=1h&amp;delay=30m"/>
             <bean ref="RegistryFederationManager" method="deleteExpiredEvents"/>
         </route>
+<<<<<<< HEAD
         
         <route id="DDProcessObjectsRoute">
             <from uri="DDProcessObjectsJmsEndpoint" />
@@ -32,6 +42,15 @@
         </route>
         
         
+=======
+
+        <route id="DDProcessObjectsRoute">
+            <from uri="DDProcessObjectsJmsEndpoint" />
+            <bean ref="serializationUtil" method="transformFromThrift" />
+            <bean ref="ebxmlDDQueueDelegate" method="processObjectsQueued" />
+        </route>
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     </camelContext>
 
 </beans>

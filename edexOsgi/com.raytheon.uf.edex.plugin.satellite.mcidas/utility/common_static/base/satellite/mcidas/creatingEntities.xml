@@ -26,6 +26,7 @@
         different localization levels will be combined.
     -->
 <creatingEntities>
+<<<<<<< HEAD
 	<map>
 	  <entry><key>3</key><value>SOUNDER3</value></entry>
 	  <entry><key>9</key><value>COMP9</value></entry>
@@ -61,4 +62,10 @@
 	  <entry><key>71</key><value>UNIWISC</value></entry>
 	  <entry><key>72</key><value>UNIWISC</value></entry>
 	</map>
+=======
+  <map>
+    <entry><key>84</key><value>MTSAT-1R</value></entry>
+    <entry><key>85</key><value>MTSAT-2</value></entry>
+  </map>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 </creatingEntities>

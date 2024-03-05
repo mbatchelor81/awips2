@@ -23,7 +23,11 @@ Require-Bundle: com.raytheon.uf.common.dataplugin.gfe,
  com.raytheon.uf.common.parameter,
  com.raytheon.uf.common.dataplugin.grid,
  com.raytheon.uf.common.util,
+<<<<<<< HEAD
  com.google.guava;bundle-version="30.0.0",
+=======
+ com.google.guava;bundle-version="32.0.0",
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  org.apache.commons.lang3,
  com.raytheon.uf.common.python.concurrent,
  com.raytheon.uf.common.dataplugin.level,

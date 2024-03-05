@@ -16,7 +16,11 @@ Require-Bundle: com.raytheon.uf.edex.core,
  com.raytheon.uf.common.localization,
  com.raytheon.uf.edex.decodertools,
  com.raytheon.uf.common.datastorage,
+<<<<<<< HEAD
  net.sf.cglib,
+=======
+ org.springframework,
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  com.raytheon.uf.common.serialization
 Import-Package: com.raytheon.edex.esb,
  com.raytheon.edex.plugin,

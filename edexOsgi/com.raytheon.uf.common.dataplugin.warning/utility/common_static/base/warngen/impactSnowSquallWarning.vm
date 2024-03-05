@@ -7,6 +7,7 @@
 ##        E. Bookbinder   1-30-2019 DR20914 Fix format error caused when no highway     ##
 ##                                  mile markers are found                              ##
 ##        Mike Rega       9-24-2019 DR21588 change EAS ACTIVATION to IMMEDIATE BROADCAST##
+<<<<<<< HEAD
 ##########################################################################################
 ##
 #parse("config.vm")
@@ -76,6 +77,16 @@
 #end
 #set($hazard = "${vizHazard}${snowHazard}${windHazard}")
 
+=======
+##        Mike Dangelo    Nov 2021 - adding TAGs and format changes                     ##
+##        Mike Dangelo    June 2022 - Added radar+spotter source option DCS22976        ##
+##        Mike Rega       10-06-2022 - Corrected pileup safety CTA DR23326              ##
+##        Mike Dangelo    10-12-2022 - Framing code when no bullet choices made DR23335 ##
+##        Bookbinder     9-21-2023 Force selection of CTA for && break point DR 2036278 ##
+##########################################################################################
+##
+#parse("config.vm")
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ######################################
 ### CREATE WMO/MND HEADER ############
 ######################################
@@ -130,9 +141,15 @@ THIS IS A TEST MESSAGE. ##
 #secondBullet(${dateUtil},${expire},${timeFormat},${localtimezone},${secondtimezone})
 
 
+<<<<<<< HEAD
 ####################################################
 ############# THIRD BULLET (Initial position) ######
 ####################################################
+=======
+#############################################################
+############# THIRD BULLET (Initial position & motion) ######
+#############################################################
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 * ##
 #if(${productClass}=="T")
 THIS IS A TEST MESSAGE. ##
@@ -141,9 +158,15 @@ THIS IS A TEST MESSAGE. ##
 , a dangerous snow squall was located ##
 ##Many of the variables passed below are controlled by config.vm
 #if(${stormType} == "line")
+<<<<<<< HEAD
 #handleClosestPoints(${list}, ${closestPoints}, ${otherClosestPoints}, ${stormType}, ${nearPhrase} , ${maxLandNearDistance}, ${overPhrase}, ${maxLandOverDistance}, ${landDistanceUnits}, ${useSecondReferenceLine})
 #else
 #handleClosestPoints(${list}, ${closestPoints}, ${otherClosestPoints}, ${stormType}, ${nearPhrase} , ${maxLandNearDistance}, ${overPhrase}, ${maxLandOverDistance}, ${landDistanceUnits}, ${useSecondReferenceCell})
+=======
+#handleClosestPoints(${closestPoints}, ${otherClosestPoints}, ${stormType}, ${nearPhrase} , ${maxLandNearDistance}, ${overPhrase}, ${maxLandOverDistance}, ${landDistanceUnits}, ${useSecondReferenceLine})
+#else
+#handleClosestPoints(${closestPoints}, ${otherClosestPoints}, ${stormType}, ${nearPhrase} , ${maxLandNearDistance}, ${overPhrase}, ${maxLandOverDistance}, ${landDistanceUnits}, ${useSecondReferenceCell})
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #end
 #if(${movementSpeed} < ${landStationary} || ${stationary})
 , and is nearly stationary. 
@@ -151,6 +174,7 @@ THIS IS A TEST MESSAGE. ##
 , moving #direction(${movementDirectionRounded}) at ${mathUtil.roundTo5(${movementSpeed})} mph.
 #end
 
+<<<<<<< HEAD
 ##########################################################################
 ## Section to include the IBW info                                      ##
 ##########################################################################
@@ -169,6 +193,97 @@ THIS IS A TEST MESSAGE. ##
 
 #else
 * ${mileMarkers}
+=======
+###################################################
+## CREATE HAZARD WORDING              #############
+###################################################
+###############  GUST AND VIZ CHECKS  #############
+########################### VIZ ###################
+#set($windhazard = "!** NO VISIBILITY SELECTED. PLEASE CANCEL THIS WARNING AND REGENERATE IT WITH A VALID CHOICE **!") 
+#if($bullets.contains("poorV"))
+  #set($windhazard = "Intense bursts of heavy snow. Gusty winds leading to blowing snow and rapidly falling visibility.")
+#end
+#if($bullets.contains("lt1qV"))
+  #set($windhazard = "Intense bursts of heavy snow. Gusty winds leading to blowing snow and visibility rapidly falling to less than one-quarter mile.")
+#end
+#if($bullets.contains("whiteoutV"))
+  #set($windhazard = "Whiteout conditions with near zero visibility associated with intense bursts of heavy snow and gusty winds leading to blowing snow.")
+#end
+########################### GUST ###################
+#set($gusthazard = "!** NO GUST SELECTED. PLEASE CANCEL THIS WARNING AND REGENERATE IT WITH A VALID CHOICE **!") 
+#if($bullets.contains("upto20G"))
+  #set($gusthazard = "Wind gusts up to 20 mph.")
+#end
+#if($bullets.contains("upto35G"))
+  #set($gusthazard = "Wind gusts up to 35 mph.")
+#end
+#if($bullets.contains("gt35G"))
+  #set($gusthazard = "Wind gusts greater than 35 mph.")
+#end
+#if($bullets.contains("gt50G"))
+  #set($gusthazard = "Wind gusts greater than 50 mph could knock down tree limbs and blow around unsecured objects.")
+#end
+#set($hazard = "${windhazard} ${gusthazard}")
+#if($bullets.contains("flashFreezeCTA"))
+  #set($hazard = "Flash freeze on roads. ${hazard}")
+#end
+##############################################################
+#### CREATE SOURCE WORDING ###################################
+##############################################################
+#set($source = "!** NO SOURCE CHOSEN. CANCEL THIS WARNING AND REGENERATE IT WITH A VALID CHOICE **!")
+#set($sourceTag = "!** NO SOURCE CHOSEN. CANCEL THIS WARNING AND REGENERATE IT WITH A VALID CHOICE **!")
+#if($bullets.contains("doppler")) 
+  #set($source = "Radar indicated.")
+  #set($sourceTag = "RADAR INDICATED")
+#end
+#if($bullets.contains("dopplerWebcams"))
+  #set($source = "Radar and webcams.")
+  #set($sourceTag = "OBSERVED")
+#end
+#if($bullets.contains("dopplerSpotter"))
+  #set($source = "Radar and trained spotter.")
+  #set($sourceTag = "OBSERVED")
+#end
+#if($bullets.contains("trainedSpotter"))
+  #set($source = "Trained spotter.")
+  #set($sourceTag = "OBSERVED")
+#end
+#if($bullets.contains("lawEnforcement"))
+  #set($source = "Law enforcement.")
+  #set($sourceTag = "OBSERVED")
+#end
+#if($bullets.contains("emergencyMgmt"))
+  #set($source = "Emergency management.")
+  #set($sourceTag = "OBSERVED")
+#end
+#if($bullets.contains("public"))
+  #set($source = "Public.")
+  #set($sourceTag = "OBSERVED")
+#end
+##############################################################
+#### CREATE IMPACT WORDING ###################################
+##############################################################
+#set($impact = "Travel will become difficult and potentially dangerous within minutes.")
+#if($bullets.contains("significantIBW")) 
+#set($impact = "Dangerous and life-threatening travel conditions are expected to develop rapidly in the warning area.")
+#end
+##############################################################
+
+#wrapText("HAZARD...${hazard}" 2 11)
+
+#wrapText("SOURCE...${source}" 2 11)
+
+#wrapText("IMPACT...${impact}" 2 11)
+
+########## OUTPUT MILE MARKERS/HIGHWAY INFO ###########
+#set($mileMarkers = "")
+#set($mileMarkers = "#parse('mileMarkers.vm')")
+#if(${mileMarkers.length()} <= 10) 
+!**ENTER IN ANY AFFECTED ROAD/HIGHWAY INFORMATION**!
+
+#else
+${mileMarkers}
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 #end
 ###################################################
@@ -176,13 +291,21 @@ THIS IS A TEST MESSAGE. ##
 ###################################################
 #set($pathcastLead = "This snow squall")
 #set($otherLead = "this snow squall")
+<<<<<<< HEAD
 #if(${list.contains(${bullets}, "pathcast")})
+=======
+#if($bullets.contains("pathcast"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #if(${productClass}=="T")
 THIS IS A TEST MESSAGE. ##
 #end
 #pathCast("#capitalize(${pathcastLead} 'FIRSTONLY') will be near..." ${otherLead} ${pathCast} ${otherPoints} ${areas} ${dateUtil} ${timeFormat} 0)
 
+<<<<<<< HEAD
 #elseif(${list.contains(${bullets}, "listofcities")})
+=======
+#elseif($bullets.contains("listofcities"))
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #if(${productClass}=="T")
 THIS IS A TEST MESSAGE. ##
 #end
@@ -201,8 +324,13 @@ Locations impacted include...
 ##################################
 ######### CALLS TO ACTION ########
 ##################################
+<<<<<<< HEAD
 ##Check to see if we've selected any calls to action. In our .xml file
 ##we ended each CTA bullet ID with "CTA" for this reason as a 'trip'
+=======
+## Check to see if we've selected any calls to action. In our .xml file
+## we ended each CTA bullet ID with "CTA" for this reason as a 'trip'
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #foreach (${bullet} in ${bullets})
 #if(${bullet.endsWith("CTA")})
 #set($ctaSelected = "YES")
@@ -212,6 +340,7 @@ Locations impacted include...
 #if(${ctaSelected} == "YES") 
 PRECAUTIONARY/PREPAREDNESS ACTIONS...
 
+<<<<<<< HEAD
 #end
 ########################################### CTAs ##############################
 #if(${list.contains($bullets, "avoidOrDelayTravelCTA")})
@@ -240,6 +369,39 @@ Slow Down! Rapid changes in visibility and road conditions are expected with thi
 #end
 #if(${list.contains($bullets, "flashFreezeCTA")})
 Wet roadways will quickly freeze. Black ice will cause roads, bridges and overpasses to become slick and dangerous. Slow down and be prepared for sudden loss of traction.  
+=======
+#else
+!** YOU DID NOT SELECT A CTA. PLEASE RESTART **!
+
+#end
+########################################### CTAs ##############################
+#if($bullets.contains("flashFreezeCTA"))
+Wet roadways will quickly freeze. Black ice will cause roads, bridges, and overpasses to become slick and dangerous. Slow down and be prepared for a sudden loss of traction.  
+
+#end
+#if($bullets.contains("slowDownCTA"))
+Slow Down! Rapid changes in visibility and road conditions are expected with this dangerous snow squall. Be alert for sudden whiteout conditions.
+
+#end
+#if($bullets.contains("headlightsVizCTA"))
+Reduce speed and turn on headlights! During snow squalls, the visibility may suddenly drop to near zero in whiteout conditions.
+
+#end
+#if($bullets.contains("avoidOrDelayTravelCTA"))
+Consider avoiding or delaying travel until the snow squall passes your location. If you must travel, use extra caution and allow extra time. Rapid changes in visibility and slick road conditions may lead to accidents.
+
+#end
+#if($bullets.contains("exitRoadwayCTA"))
+If traveling on a highway, find the nearest exit or rest area and park safely away from traffic. Allow snow squalls to pass before attempting to resume travel.
+
+#end
+#if($bullets.contains("dangerousTravelCTA"))
+There is no safe place on a highway when a snow squall hits. Visibility and traction are immediately lost in whiteout conditions, making it difficult or impossible to slow down and avoid stopped vehicles. Delay travel or safely exit the highway before the snow squall arrives.
+
+#end
+#if($bullets.contains("pileupSafetyCTA"))
+Serious injuries and deaths may result from people exiting their vehicles during a snow squall. Drivers may not be able to see you or stop! If you have been involved in an accident or pulled to the side of the roadway, quickly exit your vehicle and move as far away from the roadway as possible ONLY when it is safe to do so. Do not stand along or near the roadway, since approaching vehicles may be unable to maintain control.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 #end
 #if(${productClass}=="T")
@@ -253,11 +415,26 @@ THIS IS A TEST MESSAGE. DO NOT TAKE ACTION BASED ON THIS MESSAGE.
 !** YOU DID NOT SELECT ANY CALLS TO ACTION. PLEASE CANCEL THE EDIT WINDOW AND REGENERATE THIS STATEMENT AFTER SELECTING AT LEAST ONE CTA **!.
 
 #end
+<<<<<<< HEAD
 #printcoords(${areaPoly}, ${list})
+=======
+#printcoords(${areaPoly})
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 #tml(${TMLtime}, ${timeFormat}, ${movementDirection}, ${movementInKnots}, ${eventLocation})
 
 
+<<<<<<< HEAD
 $$
 
 #parse("forecasterName.vm")
+=======
+SNOW SQUALL...${sourceTag}
+#if($bullets.contains("significantIBW")) 
+SNOW SQUALL IMPACT...SIGNIFICANT 
+#end
+
+$$
+
+#parse("forecasterName.vm")
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

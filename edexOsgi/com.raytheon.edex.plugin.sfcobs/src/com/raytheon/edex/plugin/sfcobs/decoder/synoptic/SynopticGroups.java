@@ -29,7 +29,11 @@ import com.raytheon.uf.common.time.util.TimeUtil;
 import com.raytheon.uf.edex.decodertools.core.IDecoderConstants;
 
 import si.uom.SI;
+<<<<<<< HEAD
 import tec.uom.se.unit.MetricPrefix;
+=======
+import javax.measure.MetricPrefix;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Various methods for decoding specific common data from the synoptic

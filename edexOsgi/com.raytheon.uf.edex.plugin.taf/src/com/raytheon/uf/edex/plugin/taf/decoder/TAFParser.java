@@ -31,11 +31,16 @@ import com.raytheon.uf.common.dataplugin.taf.TAFParts;
 import com.raytheon.uf.common.dataplugin.taf.TafConstants;
 import com.raytheon.uf.common.dataplugin.taf.TafPeriod;
 import com.raytheon.uf.common.dataplugin.taf.TafRecord;
+<<<<<<< HEAD
 import com.raytheon.uf.common.pointdata.spatial.ObStation;
 import com.raytheon.uf.common.time.util.TimeUtil;
 import com.raytheon.uf.common.wmo.WMOHeader;
 import com.raytheon.uf.edex.database.DataAccessLayerException;
 import com.raytheon.uf.edex.pointdata.spatial.ObStationDao;
+=======
+import com.raytheon.uf.common.time.util.TimeUtil;
+import com.raytheon.uf.common.wmo.WMOHeader;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * The TAF parser accepts a potential TAF report and attempts to parse and
@@ -55,6 +60,10 @@ import com.raytheon.uf.edex.pointdata.spatial.ObStationDao;
  *                                      Refactored Strings to Patterns in TafConstants.
  * Apr 01, 2015 3722        rjpeter     Updated amd/corindicator to boolean flags.
  * Sep 24, 2015 4890        rferrel     Remove ChangeGroup and code cleanup.
+<<<<<<< HEAD
+=======
+ * May 24, 2022 20788       smoorthy    Remove code for setting the location. This is now set in TAFChangeGroupFactory.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  * 
  * @author jkorman
@@ -120,6 +129,7 @@ public class TAFParser {
         if (isCOR) {
             record.setCorIndicator(true);
         }
+<<<<<<< HEAD
 
         ObStation location = null;
         try {
@@ -135,6 +145,8 @@ public class TAFParser {
         } else {
             record.setLocation(location);
         }
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**

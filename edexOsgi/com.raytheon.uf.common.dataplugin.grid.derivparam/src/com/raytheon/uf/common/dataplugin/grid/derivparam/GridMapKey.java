@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -28,6 +40,7 @@ import com.raytheon.uf.common.dataplugin.level.Level;
 import com.raytheon.uf.common.dataquery.requests.RequestConstraint;
 
 /**
+<<<<<<< HEAD
  * 
  * Unique key for grid metadata, useful in caches.
  * 
@@ -42,6 +55,23 @@ import com.raytheon.uf.common.dataquery.requests.RequestConstraint;
  * 
  * </pre>
  * 
+=======
+ *
+ * Unique key for grid metadata, useful in caches.
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+ * Date          Ticket#  Engineer  Description
+ * ------------- -------- --------- -------------------------------------
+ * Sep 20, 2012  189      bsteffen  Initial creation
+ * Mar 03, 2016  5439     bsteffen  Move to common
+ * Jul 26, 2021  8600     randerso  Added toString() to aid in debugging
+ *
+ * </pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author bsteffen
  */
 public class GridMapKey {
@@ -100,7 +130,11 @@ public class GridMapKey {
         if (obj != null) {
             if (obj instanceof RequestConstraint) {
                 obj = ((RequestConstraint) obj).getConstraintValue();
+<<<<<<< HEAD
                 if (obj != null && !obj.toString().equals("null")) {
+=======
+                if (obj != null && !"null".equals(obj.toString())) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     levelone = Double.parseDouble(obj.toString());
                 }
             } else {
@@ -113,7 +147,11 @@ public class GridMapKey {
         if (obj != null) {
             if (obj instanceof RequestConstraint) {
                 obj = ((RequestConstraint) obj).getConstraintValue();
+<<<<<<< HEAD
                 if (obj != null && !obj.toString().equals("null")) {
+=======
+                if (obj != null && !"null".equals(obj.toString())) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     leveltwo = Double.parseDouble(obj.toString());
                 }
             } else {
@@ -143,6 +181,7 @@ public class GridMapKey {
 
     @Override
     public boolean equals(Object obj) {
+<<<<<<< HEAD
         if (this == obj)
             return true;
         if (obj == null)
@@ -174,4 +213,55 @@ public class GridMapKey {
         return true;
     }
 
+=======
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        GridMapKey other = (GridMapKey) obj;
+        if (Double.doubleToLongBits(levelone) != Double
+                .doubleToLongBits(other.levelone)) {
+            return false;
+        }
+        if (Double.doubleToLongBits(leveltwo) != Double
+                .doubleToLongBits(other.leveltwo)) {
+            return false;
+        }
+        if (masterLevel == null) {
+            if (other.masterLevel != null) {
+                return false;
+            }
+        } else if (!masterLevel.equals(other.masterLevel)) {
+            return false;
+        }
+        if (modelName == null) {
+            if (other.modelName != null) {
+                return false;
+            }
+        } else if (!modelName.equals(other.modelName)) {
+            return false;
+        }
+        if (parameter == null) {
+            if (other.parameter != null) {
+                return false;
+            }
+        } else if (!parameter.equals(other.parameter)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "GridMapKey [modelName=" + modelName + ", parameter=" + parameter
+                + ", masterLevel=" + masterLevel + ", levelone=" + levelone
+                + ", leveltwo=" + leveltwo + "]";
+    }
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

@@ -1,5 +1,8 @@
 #Product Discipline 209 - Multi-Radar/Multi-Sensor, Parameter Category 9: Radar Cube Products
 0:0:CONUS Merged Reflectivity:dBZ:CONUSMergedReflectivity
 1:1:CONUS-Plus Merged Reflectivity:dBZ:CONUSPlusMergedReflectivity
+<<<<<<< HEAD
 3:3:CONUS Merged RhoHV::CONUSMergedRHV
 4:4:CONUS Merged ZDR:dB:CONUSMergedZDR
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

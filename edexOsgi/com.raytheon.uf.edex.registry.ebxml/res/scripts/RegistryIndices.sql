@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 CREATE INDEX event_id_idx
   ON ebxml.auditableevent_action
   USING btree
@@ -8,6 +9,8 @@ CREATE INDEX notification_id_idx
   USING btree
   (notification_id);
   
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 CREATE INDEX objectreflist_id_idx
   ON ebxml.objectreflist_objectref
   USING btree
@@ -73,11 +76,14 @@ CREATE INDEX registryobjectlist_id_idx
   USING btree
   (registryobjectlist_id);
   
+<<<<<<< HEAD
 CREATE INDEX service_id_idx
   ON ebxml.service_serviceendpoint
   USING btree
   (service_id);
   
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 CREATE INDEX subscription_id_idx
   ON ebxml.subscription_deliveryinfo
   USING btree
@@ -113,6 +119,7 @@ CREATE INDEX slot_parent_id_idx
   USING btree
   (parent_id COLLATE pg_catalog."default");
   
+<<<<<<< HEAD
 CREATE INDEX action_eventtype_idx
   ON ebxml.action
   USING btree
@@ -123,6 +130,8 @@ CREATE INDEX auditableevent_timestamp_idx
   USING btree
   ("timestamp");
   
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 CREATE INDEX value_id_idx
   ON ebxml.value_value
   USING btree

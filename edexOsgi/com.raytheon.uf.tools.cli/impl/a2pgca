@@ -45,7 +45,17 @@
 # Tom Gurney          2020-12-10   8300 Move qpid stuff to /awips2/qpid/tls
 # Mark Peters         2021-10-28   8608 Setup jms certs on ignite cache servers
 # Mark Peters         2021-10-26   8667 Support ignite certificates
+# Astyak Ghanavatian  2022-01-19   DR 22937 - Fix refresh to copy postgres and qpid certificates
+#                                  to users' home directories.
+# Tom Gurney          2022-01-24   8723 Add passwords.properties for JMS keystore
 # Mark Peters         2022-02-21   8608 Move ignite jms certs under /awips2/ignite
+# Tom Gurney          2022-04-12   8677 Remove passwords.properties handling
+# Lisa Singh          2022-07-28   8723 Remove unused jms_password import
+# John Sebahar        2022-11-11   8962 The NSS key/cert store that is used by RHEL8 has changed formats. 
+#                                       Use key4.db, cert9.db and pkcs11.txt. Removed use of COMMS_PROCESSOR, 
+#                                       replaced with hardcoded values.
+# Tom Gurney          2023-05-10 2033942 Use SHA-256 for certs, not SHA-1.
+# David.Gillingham    2023-09-11 2036175 Fix typo in RHEL8 updates.
 
 
 from fnmatch import fnmatch
@@ -55,7 +65,6 @@ import json
 from os import chmod, chown, environ, geteuid, listdir, makedirs, mkdir, remove, rename, symlink
 from os.path import basename, dirname, exists, isabs, isdir, isfile, join, normpath, splitext
 from pwd import getpwall, getpwnam
-import secrets
 from shutil import copyfile, rmtree
 import subprocess
 import sys
@@ -254,9 +263,6 @@ def cat_files(src_paths, dest_path):
             with open(path, 'rb') as fs:
                 fd.write(fs.read())
 
-def generate_random_password():
-    return secrets.token_urlsafe(32)
-
 def run_impl(*popenargs, **kwargs):
     """Executes a process via subprocess.Popen and its standard output.
 
@@ -381,11 +387,11 @@ def generate_cert(cn, output_prefix, ca_prefix=None, ca=False, pathlen=None):
                     f.write(',pathlen:%d' % (pathlen,))
                 f.write('\n')
 
-        run(['openssl', 'req', '-new', '-nodes', '-subj', g.format_dn(cn),
-            '-out', req_path, '-keyout', key_path])
+        run(['openssl', 'req', '-new', '-nodes', '-sha256',
+            '-subj', g.format_dn(cn), '-out', req_path, '-keyout', key_path])
         chmod(key_path, PRIVATE_FILE_PERM)
-        cmd = ['openssl', 'x509', '-req', '-in', req_path, '-out', crt_path,
-            '-days', str(VALIDITY_DAYS)]
+        cmd = ['openssl', 'x509', '-req', '-sha256', '-in',
+                req_path, '-out', crt_path, '-days', str(VALIDITY_DAYS)]
         if ext_path:
             cmd += ['-extfile', ext_path]
         if ca_prefix:
@@ -687,7 +693,7 @@ class Global(object):
                         location_spec = 'jmsuser:' + host_specs + ':/awips2/edex/conf/jms/auth'
                     elif target.type == 'user':
                         if target.name == 'root' and location_spec == '$DX_SERVERS $PX_SERVERS $LX_WORKSTATIONS $XT_WORKSTATIONS:':
-                            location_spec = '$COMMS_PROCESSORS ' + location_spec
+                            location_spec = 'cpv1 cpv2 ' + location_spec
                         host_specs, path = location_spec.split(':')
                         if path:
                             location_spec = 'dbuser:' + location_spec
@@ -697,7 +703,7 @@ class Global(object):
                         location_spec = 'server:' + location_spec
                     new_specs.append(location_spec)
                 target.location_specs = new_specs
-            s.add_target('user', 'ldm', 'user', ['jmsuser:$COMMS_PROCESSORS:'])
+            s.add_target('user', 'ldm', 'user', ['jmsuser:cpv1:'])
             add_ident_impl('jmsuser','guest')
             for role in ('user', 'admin'):
                 role_idents = [ ident.get_spec() for ident in s.get_role_idents(role) ]
@@ -715,7 +721,7 @@ class Global(object):
         if s.version == 5:
             for target in s.get_targets():
                 if target.type == 'server' and target.name == 'cpv1':
-                    target.location_specs = ['server:$COMMS_PROCESSORS:/awips2/qpid']
+                    target.location_specs = ['server:cpv1:/awips2/qpid']
             s.version = 6
             result = True
         if s.version == 6:
@@ -767,7 +773,7 @@ class Global(object):
 
                 s.add_target('server', 'caches', 'server', ['server:$CACHE_SERVERS:/awips2/ignite/tls'], owner='awips')
 
-                edex_ignite_loc_spec = 'igniteuser:$DX_SERVERS !dv[12]* $COMMS_PROCESSORS:/awips2/edex/conf/ignite/auth'
+                edex_ignite_loc_spec = 'igniteuser:$DX_SERVERS !dv[12]* cpv2:/awips2/edex/conf/ignite/auth'
                 s.add_target('edex_ignite_client', 'edex', 'admin', [edex_ignite_loc_spec], owner='awips')
             s.version = 10
             result = True
@@ -1058,27 +1064,27 @@ def init_site(argv):
         st.add_role('user', ['dbuser:' + u for u in BASELINE_ROLE_DB_USERS['user']] + ['jmsuser:guest', 'igniteuser:guest'])
         st.add_role('admin', ['dbuser:' + u for u in BASELINE_ROLE_DB_USERS['admin']] + ['jmsuser:guest', 'igniteuser:guest'])
         st.add_target('server', 'dv1', 'server', ['server:dv1:/awips2/database/ssl'], owner='awips')
-        st.add_target('server', 'cpv1', 'server', ['server:$COMMS_PROCESSORS:/awips2/qpid/tls'], owner='awips')
+        st.add_target('server', 'cpv1', 'server', ['server:cpv1:/awips2/qpid/tls'], owner='awips')
         st.add_target('server', 'caches', 'server', ['server:$CACHE_SERVERS:/awips2/ignite/tls'], owner='awips')
         if has_rax_db:
             st.add_target('server', 'ax', 'server', ['server:ax:/awips2/database/ssl'], owner='awips')
-        edex_db_loc_spec = 'dbuser:$DX_SERVERS !dv[12]* $PX_SERVERS $COMMS_PROCESSORS:/awips2/edex/conf/db/auth'
-        edex_jms_loc_spec = 'jmsuser:$DX_SERVERS !dv[12]* $PX_SERVERS $COMMS_PROCESSORS:/awips2/edex/conf/jms/auth'
+        edex_db_loc_spec = 'dbuser:$DX_SERVERS !dv[12]* $PX_SERVERS cpv2:/awips2/edex/conf/db/auth'
+        edex_jms_loc_spec = 'jmsuser:$DX_SERVERS !dv[12]* $PX_SERVERS cpv2:/awips2/edex/conf/jms/auth'
         st.add_target('edex', 'edex', 'admin', [edex_db_loc_spec, edex_jms_loc_spec], owner='awips')
-        # ignite is used by most standard edex JVMs (DX_SERVERS) and local registries (COMMS_PROCESSORS)
-        edex_ignite_loc_spec = 'igniteuser:$DX_SERVERS !dv[12]* $COMMS_PROCESSORS:/awips2/edex/conf/ignite/auth'
+        # ignite is used by most standard edex JVMs (DX_SERVERS) and local registries 
+        edex_ignite_loc_spec = 'igniteuser:$DX_SERVERS !dv[12]* cpv2:/awips2/edex/conf/ignite/auth'
         st.add_target('edex_ignite_client', 'edex', 'admin', [edex_ignite_loc_spec], owner='awips')
         st.add_target('ignite_jms_client', 'caches', 'admin', ['jmsuser:$CACHE_SERVERS:/awips2/ignite/conf/jms/auth'], owner='awips')
         st.add_target('user', 'awips', 'admin', [])
         st.add_target('user', 'oper', 'admin', [])
         st.add_target('user', 'ncfuser', 'admin', [])
         st.add_target('user', '@fxalpha', 'user', [])
-        st.add_target('user', 'root', 'admin', [': $COMMS_PROCESSORS ' + most_hosts + ':'])
+        st.add_target('user', 'root', 'admin', [': cpv1 cpv2 ' + most_hosts + ':'])
         # /awips/fxa is not on CPs.
         st.add_target('user', 'awipsusr', 'user', [':' + most_hosts + ':'])
         st.add_target('user', 'fxa', 'admin', [':' + most_hosts + ':'])
         st.add_target('user', 'ldad', 'user', [':$PX_SERVERS:'])
-        st.add_target('user', 'ldm', 'user', ['jmsuser:$COMMS_PROCESSORS:'])
+        st.add_target('user', 'ldm', 'user', ['jmsuser:cpv1:'])
 
         st.backups += [ pfx + '-' + g.get_site_id() for pfx in ('dv1', 'dv2') ]
 
@@ -1437,7 +1443,13 @@ REFRESH_AND_CLEAR_OPTIONS='''
 Options:
   -n      Perform a dry run and show rsync commands that would be run
   -v      Be verbose
-  -N      rsync dry run (pass "-n" to rsync)'''
+  -N      rsync dry run (pass "-n" to rsync)
+  
+A refresh can be performed on select users by specifying them as an 
+option in the format "role:username". If no options are specified, a 
+refresh will be performed on all explicitly registered users displayed 
+by the "user" subcommand, as well as all local users that exist on the 
+system.'''
 
 @subcommand(desc='Install certs/keys to user and application directories')
 @usage('  # [options]' + REFRESH_AND_CLEAR_OPTIONS)
@@ -1535,6 +1547,20 @@ def expand_user_groups(targets, group_member_targets, group_members):
                 result.append(target)
     return result
 
+def add_user_targets_from_site(state):
+    """Add valid users from the current site to the target list. A
+    user is valid if they have a home directory and their user account
+    exists."""	
+    for directory in listdir('/home'):
+        try:
+            user = getpwnam(directory).pw_name
+            if not state.has_target('user', user):
+                state.add_target('user', user, 'user', [])
+        except KeyError:
+            pwrn("directory '%s' does not map to a user" % (directory,))
+            continue
+    return state
+
 def refresh_impl(args, dry_run=False, rsync_dry_run=False,
         clear_files=False, verbose=False):
     """Install/uninstall certificate key files to user and application
@@ -1561,6 +1587,7 @@ def refresh_impl(args, dry_run=False, rsync_dry_run=False,
     g.verify_model('site')
 
     st = g.get_state()
+    st = add_user_targets_from_site(st)
     group_members = get_group_members()
     group_member_targets_to_refresh = set() # lower priority than defined user targets
     if args:
@@ -1658,9 +1685,9 @@ def refresh_impl(args, dry_run=False, rsync_dry_run=False,
                                 run(['certutil', '-N', '--empty-password', '-d', type_dir])
                                 run(['certutil', '-A', '-n', 'root', '-i', dst_path, '-t', 'TC,C,Tw', '-d', type_dir ]);
                                 if is_root:
-                                    chown(join(type_dir, 'cert8.db'), uid, gid)
-                                    chown(join(type_dir, 'key3.db'), uid, gid)
-                                    chown(join(type_dir, 'secmod.db'), uid, gid)
+                                    chown(join(type_dir, 'cert9.db'), uid, gid)
+                                    chown(join(type_dir, 'key4.db'), uid, gid)
+                                    chown(join(type_dir, 'pkcs11.txt'), uid, gid)
                         name = ident.name
                         abs_src_pfx = join(g.get_ident_dir(), ident.type, name)
                         dst_name = name if ident.type != 'server' else 'server'
@@ -1683,28 +1710,6 @@ def refresh_impl(args, dry_run=False, rsync_dry_run=False,
                                 safe_remove(p12_path)
                             if policy.link_awips and ident.type == 'dbuser' and ident.name == 'awips':
                                 symlink('awips' + sfx, join(type_dir, 'postgresql' + sfx))
-                            if policy.link_awips and ident.type == 'jmsuser' and ident.name == 'guest':
-                                symlink('guest' + sfx, join(type_dir, 'client' + sfx))
-                        if ident.type == 'igniteuser' or (ident.type == 'server' and ident.name == 'caches'):
-                            # update passwords.properties for ignite
-                            keystore_password = generate_random_password()
-                            truststore_password = generate_random_password()
-                            # This script is typically run on dv1, where we don't have access to the ignite jars required
-                            # by the below python function. So instead of generating a passwords.properties file here and
-                            # rsyncing it out, directly update the passwords.properties on each host via ssh here.
-                            for itype, host, path in resolve_target_locations(target):
-                                if itype not in ['igniteuser', 'server']:
-                                    continue
-                                dst_path = join(path, 'passwords.properties')
-                                # need full python path since this is run as root, which doesn't have appropriate path vars set
-                                cmd = ['ssh', host, f"/awips2/python/bin/python -c \"from awips import ignite_password; ignite_password.updateIgnitePasswords('{keystore_password}', '{truststore_password}', '{dst_path}')\""]
-                                if not dry_run:
-                                    try:
-                                        run(cmd, echo_stdout=verbose, echo_stderr_filtered=True)
-                                    except Exception as e:
-                                        perr(f"error updating ignite passwords in {host}:{dst_path}: {e}")
-                                else:
-                                    pinf(' '.join(cmd))
 
                 for itype, host, path in resolve_target_locations(target):
                     try:

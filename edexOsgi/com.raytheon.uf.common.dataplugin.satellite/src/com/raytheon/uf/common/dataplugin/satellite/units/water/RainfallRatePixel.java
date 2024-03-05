@@ -23,6 +23,10 @@ package com.raytheon.uf.common.dataplugin.satellite.units.water;
 import java.util.Map;
 
 import javax.measure.Dimension;
+<<<<<<< HEAD
+=======
+import javax.measure.MetricPrefix;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
 import javax.measure.quantity.Speed;
@@ -30,10 +34,16 @@ import javax.measure.quantity.Speed;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import si.uom.SI;
+<<<<<<< HEAD
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.quantity.QuantityDimension;
 import tec.uom.se.unit.MetricPrefix;
 import tec.uom.se.unit.Units;
+=======
+import tech.units.indriya.AbstractUnit;
+import tech.units.indriya.unit.UnitDimension;
+import tech.units.indriya.unit.Units;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Represents a pixel value of a rainfall rate (mm/hr) on a POES or DMSP
@@ -82,6 +92,10 @@ public class RainfallRatePixel extends AbstractUnit<Speed> {
 
     @Override
     public Dimension getDimension() {
+<<<<<<< HEAD
         return QuantityDimension.of(Speed.class);
+=======
+        return UnitDimension.of(Speed.class);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 }

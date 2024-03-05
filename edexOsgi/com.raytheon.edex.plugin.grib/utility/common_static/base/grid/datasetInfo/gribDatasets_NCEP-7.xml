@@ -492,6 +492,7 @@
         <dt>3</dt>
     </info>
     <info>
+<<<<<<< HEAD
         <title>HiResW-ARW-East</title>
         <datasetId>HiResW-ARW-East</datasetId>
         <dt>3</dt>
@@ -499,6 +500,15 @@
     <info>
         <title>HiResW-ARW-West</title>
         <datasetId>HiResW-ARW-West</datasetId>
+=======
+        <title>HiResW-ARW</title>
+        <datasetId>HiResW-ARW</datasetId>
+        <dt>3</dt>
+    </info>
+    <info>
+        <title>HiResW-FV3</title>
+        <datasetId>HiResW-FV3</datasetId>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <dt>3</dt>
     </info>
     <info>
@@ -521,6 +531,7 @@
         <datasetId>HiResW-ARW-GU</datasetId>
         <dt>3</dt>
     </info>
+<<<<<<< HEAD
     <info>
         <title>HiResW-NMM-East</title>
         <datasetId>HiResW-NMM-East</datasetId>
@@ -549,6 +560,26 @@
     <info>
         <title>HiResW-NMM-GU</title>
         <datasetId>HiResW-NMM-GU</datasetId>
+=======
+     <info>
+        <title>HiResW-FV3-AK</title>
+        <datasetId>HiResW-FV3-AK</datasetId>
+        <dt>3</dt>
+    </info>
+    <info>
+        <title>HiResW-FV3-SJU</title>
+        <datasetId>HiResW-FV3-SJU</datasetId>
+        <dt>3</dt>
+    </info>
+    <info>
+        <title>HiResW-FV3-HI</title>
+        <datasetId>HiResW-FV3-HI</datasetId>
+        <dt>3</dt>
+    </info>
+    <info>
+        <title>HiResW-FV3-GU</title>
+        <datasetId>HiResW-FV3-GU</datasetId>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <dt>3</dt>
     </info>
     <info>
@@ -937,6 +968,29 @@
         <dt>6</dt>
     </info>
     <info>
+<<<<<<< HEAD
+=======
+        <title>TPCSurgeProb2</title>
+        <datasetId>TPCSurgeProb2</datasetId>
+        <dt>6</dt>
+    </info>
+    <info>
+        <title>TPCSurgeProbLoRes</title>
+        <datasetId>TPCSurgeProbLoRes</datasetId>
+        <dt>6</dt>
+    </info>
+    <info>
+        <title>TPCSurgeProbLoRes2</title>
+        <datasetId>TPCSurgeProbLoRes2</datasetId>
+        <dt>6</dt>
+    </info>
+    <info>
+        <title>TPCSurgeProb-SJU</title>
+        <datasetId>TPCSurgeProb-SJU</datasetId>
+        <dt>6</dt>
+    </info>
+    <info>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <title>TPCSurgeProb197</title>
         <datasetId>TPCSurgeProb197</datasetId>
         <dt>6</dt>
@@ -991,4 +1045,8 @@
         <datasetId>HREF-HI</datasetId>
         <dt>1</dt>
     </info>
+<<<<<<< HEAD
 </datasetInfoSet>
+=======
+</datasetInfoSet>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

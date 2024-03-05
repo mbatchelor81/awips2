@@ -46,6 +46,10 @@
 # Apr 29, 2020  8151     randerso        Use SiteMap.getSite4LetterId()
 # Dec 02, 2020  8294     randerso        Set pickle protocol=2 for backward
 #                                        compatibility with Python2
+# Nov 09, 2021  8698     njensen         makeISCrequest() now uses
+#                                        IrtAccess.transmitFiles()
+# Jul 14, 2023  2035938  dgilling        Update xml.etree.ElementTree calls to remove 
+#                                        functions deprecated in python 3.11
 #
 ##
 
@@ -438,7 +442,7 @@ def makeISCrequest(xmlRequest, gridDims, gridProj, gridBoundBox, mhs, host, port
     # we need to decode the <destinations> to determine which sites should
     # get this request
     mhsSites = []
-    for destE in requestE.getchildren():
+    for destE in requestE:
         if destE.tag == "destinations":
             for addrE in destE:
                 if addrE.tag != "address":
@@ -457,37 +461,11 @@ def makeISCrequest(xmlRequest, gridDims, gridProj, gridBoundBox, mhs, host, port
             fname = fp.name
             fp.write(ElementTree.tostring(requestE, encoding="utf-8"))
 
-    # Transmit the request -- do string substitution
-    #if XmtScript is not None:
-        # create the required wfmoid
-    if len(ServerMHS) == 4:
-        site4 = ServerMHS
-    elif len(ServerMHS) == 3:
-        site4 = SiteMap.getInstance().getSite4LetterId(ServerMHS)
-    else:
-        site4 = "XXXX"
-
-    wmoid = "TTAA00 " + site4 + " " + time.strftime("%d%H%M", time.gmtime(time.time()))
-
-    cmd = copy.deepcopy(xmtScript)
-    args = cmd.split(" ")  #break down into separate entries
-    for s1, s2 in [("%SUBJECT", "ISCREQUEST"),
-      ("%ADDRESSES", ",".join(mhsSites)), ("%WMOID", wmoid),
-      ("%ATTACHMENTS", fname)]:
-        for x in range(len(args)):
-            args[x] = args[x].replace(s1, s2)
-    logEvent("ISCRequest xml: ", args)
-
-    # start subprocess to actually make the call
-    pid = os.fork()
-    if pid == 0:
-        try:
-            os.execvp(args[0], args)
-        except:
-            pass
-        finally:
-            os.remove(fname)
-            os._exit(0)
+    irt.transmitFiles(subject="ISCREQUEST",
+                      addresses=mhsSites,
+                      sourceWfo=ServerMHS,
+                      attachments=[fname],
+                      xmtScript=xmtScript)
 
 
 def serviceISCRequest(dataFile):

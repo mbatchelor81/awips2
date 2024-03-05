@@ -91,14 +91,40 @@
             <substitute value="PZNK00" key="wmo" />
             <substitute value="0" key="posOff" />
         </contribute>
-<!-- 
-        <contribute xsi:type="bundleItem" useReferenceTime="true"
-            file="bundles/Redbook.xml" menuText="Day 4-8 Composite Severe Outlook"
-            timeQuery="true" id="day4to8CompositeSevereOutlook">
-            <substitute value="PGNM98" key="wmo" />
-            <substitute value="0" key="posOff" />
+        <contribute xsi:type="subMenu"
+            menuText="Day 4-8 Severe Outlook"
+            id="ncepHydro.spc.convectiveOutlooks.severeoutlook">
+            <contribute xsi:type="bundleItem"
+                useReferenceTime="true" file="bundles/Redbook.xml"
+                menuText="Day 4 Total Prob Severe Thunderstorms"
+                timeQuery="true" id="severeThunderstormProbDay4">
+                <substitute value="PGNW49" key="wmo" />
+            </contribute>
+            <contribute xsi:type="bundleItem"
+                useReferenceTime="true" file="bundles/Redbook.xml"
+                menuText="Day 5 Total Prob Severe Thunderstorms"
+                timeQuery="true" id="severeThunderstormProbDay5">
+                <substitute value="PGNW50" key="wmo" />
+            </contribute>
+            <contribute xsi:type="bundleItem"
+                useReferenceTime="true" file="bundles/Redbook.xml"
+                menuText="Day 6 Total Prob Severe Thunderstorms"
+                timeQuery="true" id="severeThunderstormProbDay6">
+                <substitute value="PGNW51" key="wmo" />
+            </contribute>
+            <contribute xsi:type="bundleItem"
+                useReferenceTime="true" file="bundles/Redbook.xml"
+                menuText="Day 7 Total Prob Severe Thunderstorms"
+                timeQuery="true" id="severeThunderstormProbDay7">
+                <substitute value="PGNW52" key="wmo" />
+            </contribute>
+            <contribute xsi:type="bundleItem"
+                useReferenceTime="true" file="bundles/Redbook.xml"
+                menuText="Day 8 Total Prob Severe Thunderstorms"
+                timeQuery="true" id="severeThunderstormProbDay8">
+                <substitute value="PGNW53" key="wmo" />
+            </contribute>
         </contribute>
- -->
         <contribute xsi:type="bundleItem" useReferenceTime="true"
             file="bundles/Redbook.xml" menuText="Active Mesoscale Disc Summary"
             timeQuery="true" id="activeMesoscaleDiscSummary">

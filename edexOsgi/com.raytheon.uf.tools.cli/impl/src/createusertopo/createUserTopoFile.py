@@ -51,7 +51,7 @@ logging.basicConfig(format="%(asctime)s %(name)s %(levelname)s:  %(message)s",
 logger = logging.getLogger('createUserTopoFile')
 
 
-DATA_SET_OPTIONS = { 'shuffle': True, 'compression': 'lzf', 'chunks': (256, 256) }
+DATA_SET_OPTIONS = { 'shuffle': True, 'compression': 'gzip', 'chunks': (256, 256) }
 
 CRS = '''PROJCS["Equidistant_Cylindrical (LO: 0.0, CM: 0.0)", 
              GEOGCS["WGS84(DD)", 

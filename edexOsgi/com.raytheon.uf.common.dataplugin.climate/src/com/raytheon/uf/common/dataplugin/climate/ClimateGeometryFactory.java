@@ -34,6 +34,11 @@ import java.util.Map.Entry;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+<<<<<<< HEAD
+=======
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.uf.common.dataaccess.IDataRequest;
 import com.raytheon.uf.common.dataaccess.exception.IncompatibleRequestException;
@@ -43,11 +48,17 @@ import com.raytheon.uf.common.dataquery.requests.RequestConstraint;
 import com.raytheon.uf.common.time.DataTime;
 import com.raytheon.uf.common.time.TimeRange;
 import com.raytheon.uf.common.time.util.TimeUtil;
+<<<<<<< HEAD
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 
 /**
  * A data factory for retrieving climate data from the hmdb database.
+=======
+
+/**
+ * A data factory for retrieving climate data from the climate database.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * <pre>
  *
@@ -73,6 +84,11 @@ import org.locationtech.jts.geom.GeometryFactory;
  *                                  by one errors in buildDataTimesConstraint.
  * Jan 26, 2017  5981     tgurney   Throw exception if an envelope is given
  * Aug 16, 2017  6388     tgurney   Remove duplicate rows from result
+<<<<<<< HEAD
+=======
+ * Sep 21, 2022  8926     sharbison Fixed climate DAF access
+ * May 02, 2023  2028148  sharbison HMDB has been merged into the Climate DB.
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -81,7 +97,11 @@ import org.locationtech.jts.geom.GeometryFactory;
 
 public class ClimateGeometryFactory extends AbstractGeometryDatabaseFactory {
 
+<<<<<<< HEAD
     private static final String HMDB_DATABASE = "hmdb";
+=======
+    private static final String CLIMATE_DATABASE = "climate";
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private static final String TABLE = "table";
 
@@ -127,7 +147,11 @@ public class ClimateGeometryFactory extends AbstractGeometryDatabaseFactory {
             Arrays.asList(YEAR, MONTH, MONTH_OF_YEAR, DAY_OF_YEAR));
 
     public ClimateGeometryFactory() {
+<<<<<<< HEAD
         super(HMDB_DATABASE, new String[] { TABLE },
+=======
+        super(CLIMATE_DATABASE, new String[] { TABLE },
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 new String[] { COL_NAME_OPTION });
     }
 

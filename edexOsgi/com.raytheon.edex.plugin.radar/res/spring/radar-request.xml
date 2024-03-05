@@ -6,4 +6,13 @@
     <bean id="getRadarDataTreeHandler" class="com.raytheon.edex.plugin.radar.handler.GetRadarDataTreeHandler" />
     <bean id="getRadarDataRecordHandler" class="com.raytheon.edex.plugin.radar.handler.GetRadarDataRecordHandler" />
 
+<<<<<<< HEAD
+=======
+    <bean id="radarVbMenuUtil" class="com.raytheon.edex.plugin.radar.util.RadarVBMenuUtil" />
+    <bean id="radarVbMenus" factory-bean="menuCreationRegistry" factory-method="register">
+        <constructor-arg value="radarVb"/>
+        <constructor-arg ref="radarVbMenuUtil"/>
+    </bean>
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 </beans>

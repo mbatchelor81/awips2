@@ -3,6 +3,7 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+<<<<<<< HEAD
     <bean id="notificationListenerFactory"
         class="com.raytheon.uf.edex.registry.ebxml.services.notification.NotificationListenerFactory">
         <constructor-arg ref="EmailSender" />
@@ -26,6 +27,11 @@
         <property name="subscriptionDao" ref="subscriptionTypeDao" />
         <property name="notificationManager" ref="RegistryNotificationManager" />
         <property name="notificationListenerFactory" ref="notificationListenerFactory" />
+=======
+    <bean name="RegistrySubscriptionManager"
+        class="com.raytheon.uf.edex.registry.ebxml.services.notification.RegistrySubscriptionManager">
+        <property name="subscriptionDao" ref="subscriptionTypeDao" />
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     </bean>
 
 </beans>

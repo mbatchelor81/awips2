@@ -28,7 +28,10 @@
 #    12/08/2014      #4953         randerso       Made for generic allowing specification of LocalizationLevel
 #                                                 Re-exported Java enums for easier use.
 #    Apr 25, 2015     4952         njensen        Updated for new JEP API
+<<<<<<< HEAD
 #    Sep 01, 2022                  srcarter       Remove workstation and region references
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ##
 
 ##
@@ -49,8 +52,15 @@ CAVE_CONFIG = LocalizationType.CAVE_CONFIG
 COMMON_STATIC = LocalizationType.COMMON_STATIC
 
 BASE = LocalizationLevel.BASE
+<<<<<<< HEAD
 CONFIGURED = LocalizationLevel.CONFIGURED
 SITE = LocalizationLevel.SITE
+=======
+REGION = LocalizationLevel.REGION
+CONFIGURED = LocalizationLevel.CONFIGURED
+SITE = LocalizationLevel.SITE
+WORKSTATION = LocalizationLevel.WORKSTATION
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 USER = LocalizationLevel.USER
 
 def getLocalizationFile(loctype, loclevel, contextname, filename):

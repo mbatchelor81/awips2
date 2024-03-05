@@ -109,6 +109,11 @@ import jep.JepException;
  * Jun 21, 2021  8540     randerso  Ensure all sites are checked when handling
  *                                  the national TCV. Allow for intermediate
  *                                  advisory files with an "A" after the number.
+ * Jul 12, 2021  8589     randerso  Changes to support National TCVs for eastern
+ *                                  Pacific basins.
+ * Oct 12, 2022  23322    jkelmer   Removed ThreadLocal python script. loadJSON
+ *                                  and saveJSON methods now instantiate a local
+ *                                  version
  *
  * </pre>
  *
@@ -140,36 +145,35 @@ public final class TPCWatchSrv extends AbstractWatchNotifierSrv {
     private static final Pattern ADVISORY_NUMBER_PATTERN = Pattern
             .compile("([0-9]+)([A-Z]*)");
 
-    private static final Pattern ATLANTIC_XXX = Pattern.compile("AT\\d");
+    private static final Pattern NATIONAL_TCV_XXX = Pattern
+            .compile("(AT|EP)[0-9]");
 
-    private static final Pattern PACIFIC_XXX = Pattern.compile("[CE]P\\d");
+    private static final Pattern LOCAL_TCV_XXX = Pattern.compile("CP[0-9]");
 
-    private static final ThreadLocal<PythonScript> pythonScript = new ThreadLocal<PythonScript>() {
+    /*
+     * Initializes PythonScript for loadJSON and saveJSON
+     */
+    private PythonScript initializePythonScript() {
+        IPathManager pathMgr = PathManagerFactory.getPathManager();
+        LocalizationContext context = pathMgr.getContext(
+                LocalizationType.COMMON_STATIC, LocalizationLevel.BASE);
+        LocalizationFile lf = pathMgr.getLocalizationFile(context,
+                LocalizationUtil.join(GfePyIncludeUtil.COMMON_GFE,
+                        "JsonSupport.py"));
 
-        @Override
-        protected PythonScript initialValue() {
-            IPathManager pathMgr = PathManagerFactory.getPathManager();
-            LocalizationContext context = pathMgr.getContext(
-                    LocalizationType.COMMON_STATIC, LocalizationLevel.BASE);
-            LocalizationFile lf = pathMgr.getLocalizationFile(context,
-                    LocalizationUtil.join(GfePyIncludeUtil.COMMON_GFE,
-                            "JsonSupport.py"));
+        String filePath = lf.getFile().getAbsolutePath();
 
-            String filePath = lf.getFile().getAbsolutePath();
+        String includePath = PyUtil.buildJepIncludePath(true,
+                GfePyIncludeUtil.getCommonGfeIncludePath());
 
-            String includePath = PyUtil.buildJepIncludePath(true,
-                    GfePyIncludeUtil.getCommonGfeIncludePath());
-
-            try {
-                return new PythonScript(filePath, includePath,
-                        this.getClass().getClassLoader());
-            } catch (JepException e) {
-                statusHandler.error(e.getLocalizedMessage(), e);
-            }
-            return null;
+        try {
+            return new PythonScript(filePath, includePath,
+                    this.getClass().getClassLoader());
+        } catch (JepException e) {
+            statusHandler.error(e.getLocalizedMessage(), e);
         }
-
-    };
+        return null;
+    }
 
     /*
      * regex to parse HLS MND header
@@ -247,7 +251,7 @@ public final class TPCWatchSrv extends AbstractWatchNotifierSrv {
         }
 
         // update TCV Advisories
-        Matcher xxxMatcher = ATLANTIC_XXX.matcher(xxxId);
+        Matcher xxxMatcher = NATIONAL_TCV_XXX.matcher(xxxId);
         for (String siteId : getActiveSites()) {
             String site4 = SiteMap.getInstance().getSite4LetterId(siteId);
             if (issuingOffice.equals(site4)) {
@@ -539,7 +543,7 @@ public final class TPCWatchSrv extends AbstractWatchNotifierSrv {
 
     private Map<String, Object> loadJSONDictionary(ILocalizationFile lf) {
         if (lf != null) {
-            PythonScript script = pythonScript.get();
+            PythonScript script = initializePythonScript();
             if (script != null) {
                 Map<String, Object> args = new HashMap<>();
                 args.put("localizationType",
@@ -554,6 +558,15 @@ public final class TPCWatchSrv extends AbstractWatchNotifierSrv {
                 } catch (JepException e) {
                     statusHandler.error("Error loading TCV advisory from " + lf,
                             e);
+                } finally {
+                    if (script != null) {
+                        try {
+                            script.close();
+                        } catch (JepException e) {
+                            statusHandler.error(
+                                    "Error closing PythonScript object", e);
+                        }
+                    }
                 }
             }
         }
@@ -564,7 +577,7 @@ public final class TPCWatchSrv extends AbstractWatchNotifierSrv {
     private boolean saveJSONDictionary(ILocalizationFile lf,
             Map<String, Object> dict) {
         if (lf != null) {
-            PythonScript script = pythonScript.get();
+            PythonScript script = initializePythonScript();
             if (script != null) {
                 Map<String, Object> args = new HashMap<>();
                 args.put("localizationType",
@@ -579,6 +592,15 @@ public final class TPCWatchSrv extends AbstractWatchNotifierSrv {
                     statusHandler.error("Error saving TCV advisory to " + lf,
                             e);
                     return false;
+                } finally {
+                    if (script != null) {
+                        try {
+                            script.close();
+                        } catch (JepException e) {
+                            statusHandler.error(
+                                    "Error closing PythonScript object", e);
+                        }
+                    }
                 }
             }
         }
@@ -615,7 +637,8 @@ public final class TPCWatchSrv extends AbstractWatchNotifierSrv {
 
         String pil = decodedVTEC.get(0).getPil();
         String xxxId = decodedVTEC.get(0).getXxxid();
-        Matcher xxxMatcher = PACIFIC_XXX.matcher(xxxId);
+        Matcher xxxMatcher = LOCAL_TCV_XXX.matcher(xxxId);
+
         if ("PTC".equals(pil)) {
             return String.format(ALERT_TXT, "from NHC");
         } else if ("TCV".equals(pil) && xxxMatcher.matches()) {

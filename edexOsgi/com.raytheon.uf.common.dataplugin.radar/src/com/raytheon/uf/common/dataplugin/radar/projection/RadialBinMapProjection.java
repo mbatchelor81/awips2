@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -21,11 +33,19 @@ package com.raytheon.uf.common.dataplugin.radar.projection;
 
 import java.awt.geom.Point2D;
 import java.util.Arrays;
+<<<<<<< HEAD
+=======
+import java.util.List;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import org.geotools.parameter.DefaultParameterDescriptor;
 import org.geotools.parameter.DefaultParameterDescriptorGroup;
 import org.geotools.referencing.operation.MathTransformProvider;
 import org.geotools.referencing.operation.projection.ProjectionException;
+<<<<<<< HEAD
+=======
+import org.geotools.referencing.operation.transform.AbstractMathTransform;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.opengis.parameter.InvalidParameterNameException;
 import org.opengis.parameter.InvalidParameterValueException;
 import org.opengis.parameter.ParameterDescriptor;
@@ -34,6 +54,10 @@ import org.opengis.parameter.ParameterNotFoundException;
 import org.opengis.parameter.ParameterValueGroup;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.MathTransform;
+<<<<<<< HEAD
+=======
+import org.opengis.referencing.operation.TransformException;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Coordinates in the RadialBinMapProjection represent the radial and bin
@@ -41,12 +65,21 @@ import org.opengis.referencing.operation.MathTransform;
  * the latitude of origin. The x coordinate is the radial index into the
  * angleData, the y coordinate is the bin number, which is computed using the
  * binWidth and the tilt angle.
+<<<<<<< HEAD
  * 
  * 
  * <pre>
  * 
  * SOFTWARE HISTORY
  * 
+=======
+ *
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- --------------------------------------------
  * Jun 06, 2012           bsteffen  Initial creation
@@ -54,9 +87,18 @@ import org.opengis.referencing.operation.MathTransform;
  *                                  and first radial.
  * Jan 24, 2018  6907     bsteffen  Fix inaccuracies when comparing floats and
  *                                  doubles.
+<<<<<<< HEAD
  * 
  * </pre>
  * 
+=======
+ * Mar 14, 2023  9029     mapeters  Support splitting this projection into 2 math
+ *                                  transforms for performance (the results of the
+ *                                  first can often be cached)
+ *
+ * </pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author bsteffen
  */
 public class RadialBinMapProjection extends AzimuthRangeMapProjection {
@@ -120,6 +162,17 @@ public class RadialBinMapProjection extends AzimuthRangeMapProjection {
         tmp = super.transformNormalized(lon, lat, tmp);
         double az = tmp.getX();
         double ran = tmp.getY();
+<<<<<<< HEAD
+=======
+        return transformAzRanToRadialBin(az, ran, dest);
+    }
+
+    Point2D transformAzRanToRadialBin(double az, double ran, Point2D dest) {
+        if (dest == null) {
+            dest = new Point2D.Double();
+        }
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         double bin = ran / flatBinLength;
         double firstAngle = normalAngleData[0];
         double lastAngle = normalAngleData[normalAngleData.length - 1];
@@ -160,6 +213,14 @@ public class RadialBinMapProjection extends AzimuthRangeMapProjection {
         return dest;
     }
 
+<<<<<<< HEAD
+=======
+    private Point2D transformLonLatRadiansToAzRan(double lonRadians,
+            double latRadians, Point2D dest) throws ProjectionException {
+        return super.transformNormalized(lonRadians, latRadians, dest);
+    }
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -193,6 +254,17 @@ public class RadialBinMapProjection extends AzimuthRangeMapProjection {
         return true;
     }
 
+<<<<<<< HEAD
+=======
+    protected int superHashCode() {
+        return super.hashCode();
+    }
+
+    protected boolean superEquals(Object obj) {
+        return super.equals(obj);
+    }
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public static class Provider extends AbstractProvider {
 
         private static final long serialVersionUID = 4990986103949071193L;
@@ -210,11 +282,17 @@ public class RadialBinMapProjection extends AzimuthRangeMapProjection {
                         Double.class, null, true);
 
         public static final ParameterDescriptorGroup PARAMETERS = new DefaultParameterDescriptorGroup(
+<<<<<<< HEAD
                 "Radial_Bin",
                 new ParameterDescriptor[] { SEMI_MAJOR, SEMI_MINOR,
                         CENTRAL_MERIDIAN, LATITUDE_OF_ORIGIN, ANGLE_DATA,
                         TILT_ANGLE, BIN_LENGTH, SCALE_FACTOR, FALSE_EASTING,
                         FALSE_NORTHING });
+=======
+                "Radial_Bin", SEMI_MAJOR, SEMI_MINOR, CENTRAL_MERIDIAN,
+                LATITUDE_OF_ORIGIN, ANGLE_DATA, TILT_ANGLE, BIN_LENGTH,
+                SCALE_FACTOR, FALSE_EASTING, FALSE_NORTHING);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         public Provider() {
             super(PARAMETERS);
@@ -235,4 +313,205 @@ public class RadialBinMapProjection extends AzimuthRangeMapProjection {
 
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * Split this transform into a list of 2 transforms: one that just does the
+     * superclass transformation (lon/lat -> azimuth/range), and a second that
+     * does the transformation in this class (azimuth/range -> radial/bin).
+     *
+     * This is useful for caching transformation results for performance, as the
+     * lon/lat -> azimuth/range transformation is shared among different radar
+     * records and can be cached. The azimuth/range->radial/bin transformation
+     * is typically not shared and can't be cached effectively, due to each
+     * radar record having slightly different angle data.
+     *
+     * The split transforms are not invertible.
+     *
+     * @return a list of the two split transforms that make up this transform.
+     */
+    public List<MathTransform> splitTransform() {
+        return List.of(new LonLatToAzRanTransform(this),
+                new AzRanToRadialBinTransform(this));
+    }
+
+    /**
+     * Abstract math transform class for a portion of the transformation done by
+     * a RadialBinMapProjection.
+     */
+    public static abstract class AbstractRadialBinMapProjectionSplitTransform
+            extends AbstractMathTransform {
+
+        protected final RadialBinMapProjection proj;
+
+        protected AbstractRadialBinMapProjectionSplitTransform(
+                RadialBinMapProjection proj) {
+            this.proj = proj;
+        }
+
+        @Override
+        public abstract Point2D transform(Point2D srcPt, Point2D destPt)
+                throws ProjectionException;
+
+        @Override
+        public void transform(final double[] srcPts, int srcOff,
+                final double[] dstPts, int dstOff, int numPts)
+                throws TransformException {
+            /*
+             * This method is copied from the corresponding MapProjection method
+             */
+            final boolean reverse = (srcPts == dstPts && srcOff < dstOff
+                    && srcOff + (2 * numPts) > dstOff);
+            if (reverse) {
+                srcOff += 2 * numPts;
+                dstOff += 2 * numPts;
+            }
+            final Point2D.Double point = new Point2D.Double();
+            ProjectionException firstException = null;
+            while (--numPts >= 0) {
+                try {
+                    point.x = srcPts[srcOff++];
+                    point.y = srcPts[srcOff++];
+                    transform(point, point);
+                    dstPts[dstOff++] = point.x;
+                    dstPts[dstOff++] = point.y;
+                } catch (ProjectionException exception) {
+                    dstPts[dstOff++] = Double.NaN;
+                    dstPts[dstOff++] = Double.NaN;
+                    if (firstException == null) {
+                        firstException = exception;
+                    }
+                }
+                if (reverse) {
+                    srcOff -= 4;
+                    dstOff -= 4;
+                }
+            }
+            if (firstException != null) {
+                throw firstException;
+            }
+        }
+
+        @Override
+        public int getSourceDimensions() {
+            return 2;
+        }
+
+        @Override
+        public int getTargetDimensions() {
+            return 2;
+        }
+    }
+
+    /**
+     * Math transform class for the first half of a RadialBinMapProjection's
+     * transformation: the lon/lat->azimuth/range transformation done within the
+     * superclasses. This transform can often be shared by different radar
+     * records.
+     */
+    public static class LonLatToAzRanTransform
+            extends AbstractRadialBinMapProjectionSplitTransform {
+
+        protected LonLatToAzRanTransform(RadialBinMapProjection proj) {
+            super(proj);
+        }
+
+        @Override
+        public Point2D transform(Point2D ptSrc, Point2D ptDst)
+                throws ProjectionException {
+            double lon = ptSrc.getX();
+            double lat = ptSrc.getY();
+            /*
+             * This conversion is copied from the corresponding MapProjection
+             * method
+             */
+            lon = proj.centralMeridian != 0
+                    ? rollLongitude(Math.toRadians(lon) - proj.centralMeridian)
+                    : Math.toRadians(lon);
+            lat = Math.toRadians(lat);
+
+            ptDst = proj.transformLonLatRadiansToAzRan(lon, lat, ptDst);
+            return ptDst;
+        }
+
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = super.hashCode();
+            // Only hash things in RadialBinMapProjection's parent classes
+            result = prime * result + proj.superHashCode();
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (!super.equals(obj)) {
+                return false;
+            }
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            LonLatToAzRanTransform other = (LonLatToAzRanTransform) obj;
+            // Only compare things in RadialBinMapProjection's parent classes
+            return proj.superEquals(other.proj);
+        }
+    }
+
+    /**
+     * Math transform class for the second half of a RadialBinMapProjection's
+     * transformation: the azimuth/range->radial/bin transformation done within
+     * the RadialBinMapProjection class itself. This transform is usually
+     * specific to a particular radar record due to records having data at
+     * slightly different angles.
+     */
+    public class AzRanToRadialBinTransform
+            extends AbstractRadialBinMapProjectionSplitTransform {
+
+        protected AzRanToRadialBinTransform(RadialBinMapProjection proj) {
+            super(proj);
+        }
+
+        @Override
+        public Point2D transform(Point2D ptSrc, Point2D ptDst) {
+            double az = ptSrc.getX();
+            double ran = ptSrc.getY();
+            ptDst = proj.transformAzRanToRadialBin(az, ran, ptDst);
+
+            /*
+             * This conversion is copied from the corresponding MapProjection
+             * method
+             */
+            ptDst.setLocation(
+                    proj.globalScale * ptDst.getX() + proj.falseEasting,
+                    proj.globalScale * ptDst.getY() + proj.falseNorthing);
+            return ptDst;
+        }
+
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = super.hashCode();
+            result = prime * result + proj.hashCode();
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (!super.equals(obj)) {
+                return false;
+            }
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            AzRanToRadialBinTransform other = (AzRanToRadialBinTransform) obj;
+            return proj.equals(other.proj);
+        }
+    }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

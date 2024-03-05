@@ -31,8 +31,13 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import com.raytheon.uf.common.dataplugin.satellite.units.goes.convert.CloudPixelToPercentConverter;
 
+<<<<<<< HEAD
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.quantity.QuantityDimension;
+=======
+import tech.units.indriya.AbstractUnit;
+import tech.units.indriya.unit.UnitDimension;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Represents a pixel value on a GOES satellite sounder product of cloud amount
@@ -81,7 +86,11 @@ public class SounderCloudAmountPixel extends AbstractUnit<Dimensionless> {
 
     @Override
     public Dimension getDimension() {
+<<<<<<< HEAD
         return QuantityDimension.NONE;
+=======
+        return UnitDimension.NONE;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
 }

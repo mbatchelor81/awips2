@@ -29,7 +29,11 @@ import org.locationtech.jts.geom.Coordinate;
 
 import si.uom.NonSI;
 import si.uom.SI;
+<<<<<<< HEAD
 import tec.uom.se.unit.MetricPrefix;
+=======
+import javax.measure.MetricPrefix;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * SoundingLayer contains the data for a single layer of upper air data.

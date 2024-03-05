@@ -37,7 +37,11 @@ import traceback
 import dynamicserialize
 from dynamicserialize.dstypes.com.raytheon.uf.common.site.notify import ClusterActivationNotification
 
+<<<<<<< HEAD
 from awips import QpidSubscriber
+=======
+from ufpy import QpidSubscriber
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 class ActivationTopicListener(threading.Thread):
     def __init__(self, host='localHost', port='5762', topic="edex.alerts.siteActivate", program="siteActivation" ):

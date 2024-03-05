@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -25,6 +37,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+<<<<<<< HEAD
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -32,6 +45,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -41,17 +56,25 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
+<<<<<<< HEAD
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.raytheon.uf.common.registry.schemas.ebxml.util.EbxmlNamespaces;
 import com.raytheon.uf.common.registry.schemas.ebxml.util.RegrepUtil;
+=======
+import com.raytheon.uf.common.registry.schemas.ebxml.util.EbxmlNamespaces;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.serialization.annotations.DynamicSerialize;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
 import com.raytheon.uf.common.util.CollectionUtil;
 
 import oasis.names.tc.ebxml.regrep.xsd.query.v4.QueryResponse;
+<<<<<<< HEAD
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.ExtensibleObjectType;
+=======
+import oasis.names.tc.ebxml.regrep.xsd.rim.v4.ExtensibleObjectTypeNonJPA;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.ObjectRefListType;
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.ObjectRefType;
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryObjectListType;
@@ -62,6 +85,7 @@ import oasis.names.tc.ebxml.regrep.xsd.spi.v4.ValidateObjectsResponse;
 
 /**
  * Base type for all ebXML Registry responses
+<<<<<<< HEAD
  * 
  * <p>
  * Java class for RegistryResponseType complex type.
@@ -70,6 +94,16 @@ import oasis.names.tc.ebxml.regrep.xsd.spi.v4.ValidateObjectsResponse;
  * The following schema fragment specifies the expected content contained within
  * this class.
  * 
+=======
+ *
+ * <p>
+ * Java class for RegistryResponseType complex type.
+ *
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * <pre>
  * &lt;complexType name="RegistryResponseType">
  *   &lt;complexContent>
@@ -85,15 +119,24 @@ import oasis.names.tc.ebxml.regrep.xsd.spi.v4.ValidateObjectsResponse;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+<<<<<<< HEAD
  * 
  * <pre>
  * 
  * SOFTWARE HISTORY
  * 
+=======
+ *
+ * <pre>
+ *
+ * SOFTWARE HISTORY
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date         Ticket#     Engineer    Description
  * ------------ ----------  ----------- --------------------------
  * 2012                     bphillip    Initial implementation
  * 10/17/2013    1682       bphillip    Added software history
+<<<<<<< HEAD
  * 12/2/2013     1829       bphillip    Made ExtensibleObjectType persistable, 
  *                                      modified persistence annotations, added 
  *                                      constructors, hashCode, toString and equals
@@ -105,6 +148,19 @@ import oasis.names.tc.ebxml.regrep.xsd.spi.v4.ValidateObjectsResponse;
  * @author bphillip
  * @version 1
  * 
+=======
+ * 12/2/2013     1829       bphillip    Made ExtensibleObjectType persistable,
+ *                                      modified persistence annotations, added
+ *                                      constructors, hashCode, toString and equals
+ * 01/02/2019    7238       skabasele   reduce verbose sonar issues such as in case
+ *                                      of ArrayList<>() instead of ArrayList<Object>()
+ * 10/27/2020    8170       ksunil      Extend a NonJPA version of extensibleObject
+ *
+ * </pre>
+ *
+ * @author bphillip
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  */
 @XmlRootElement(name = "RegistryResponse")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -113,27 +169,42 @@ import oasis.names.tc.ebxml.regrep.xsd.spi.v4.ValidateObjectsResponse;
 @XmlSeeAlso({ ValidateObjectsResponse.class, CatalogObjectsResponse.class,
         FilterObjectsResponse.class, QueryResponse.class })
 @DynamicSerialize
+<<<<<<< HEAD
 @Entity
 @Cache(region = RegrepUtil.DB_CACHE_REGION, usage = CacheConcurrencyStrategy.TRANSACTIONAL)
 @Table(schema = RegrepUtil.EBXML_SCHEMA, name = "RegistryResponse")
 public class RegistryResponseType extends ExtensibleObjectType {
+=======
+
+public class RegistryResponseType extends ExtensibleObjectTypeNonJPA {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private static final long serialVersionUID = 3258800433937559672L;
 
     @XmlElement(name = "Exception")
     @DynamicSerializeElement
+<<<<<<< HEAD
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "exception_id", nullable = false, referencedColumnName = "id")
+=======
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     protected List<RegistryExceptionType> exception;
 
     @XmlElement(name = "RegistryObjectList", namespace = EbxmlNamespaces.RIM_URI)
     @DynamicSerializeElement
+<<<<<<< HEAD
     @OneToOne(cascade = CascadeType.ALL)
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     protected RegistryObjectListType registryObjectList;
 
     @XmlElement(name = "ObjectRefList", namespace = EbxmlNamespaces.RIM_URI)
     @DynamicSerializeElement
+<<<<<<< HEAD
     @OneToOne(cascade = CascadeType.ALL)
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     protected ObjectRefListType objectRefList;
 
     @XmlAttribute(required = true)
@@ -145,9 +216,12 @@ public class RegistryResponseType extends ExtensibleObjectType {
     @DynamicSerializeElement
     protected String requestId;
 
+<<<<<<< HEAD
     
 
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public RegistryResponseType() {
         super();
     }
@@ -163,8 +237,11 @@ public class RegistryResponseType extends ExtensibleObjectType {
         return registryObjectList.getRegistryObject();
     }
 
+<<<<<<< HEAD
     
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public void addRegistryObjects(Collection<RegistryObjectType> regObjs) {
         if (regObjs == null || regObjs.isEmpty()) {
             return;
@@ -175,8 +252,11 @@ public class RegistryResponseType extends ExtensibleObjectType {
         registryObjectList.getRegistryObject().addAll(regObjs);
     }
 
+<<<<<<< HEAD
     
 
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public List<ObjectRefType> getObjectRefs() {
         if (objectRefList == null) {
             return Collections.emptyList();
@@ -203,12 +283,17 @@ public class RegistryResponseType extends ExtensibleObjectType {
 
     /**
      * Gets the value of the exception property.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * <p>
      * This accessor method returns a reference to the live list, not a
      * snapshot. Therefore any modification you make to the returned list will
      * be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the exception property.
+<<<<<<< HEAD
      * 
      * <p>
      * For example, to add a new item, do as follows:
@@ -223,6 +308,22 @@ public class RegistryResponseType extends ExtensibleObjectType {
      * {@link RegistryExceptionType }
      * 
      * 
+=======
+     *
+     * <p>
+     * For example, to add a new item, do as follows:
+     *
+     * <pre>
+     * getException().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link RegistryExceptionType }
+     *
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public List<RegistryExceptionType> getException() {
         if (exception == null) {
@@ -237,9 +338,15 @@ public class RegistryResponseType extends ExtensibleObjectType {
 
     /**
      * Gets the value of the registryObjectList property.
+<<<<<<< HEAD
      * 
      * @return possible object is {@link RegistryObjectListType }
      * 
+=======
+     *
+     * @return possible object is {@link RegistryObjectListType }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public RegistryObjectListType getRegistryObjectList() {
         return registryObjectList;
@@ -247,10 +354,17 @@ public class RegistryResponseType extends ExtensibleObjectType {
 
     /**
      * Sets the value of the registryObjectList property.
+<<<<<<< HEAD
      * 
      * @param value
      *            allowed object is {@link RegistryObjectListType }
      * 
+=======
+     *
+     * @param value
+     *            allowed object is {@link RegistryObjectListType }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public void setRegistryObjectList(RegistryObjectListType value) {
         this.registryObjectList = value;
@@ -258,9 +372,15 @@ public class RegistryResponseType extends ExtensibleObjectType {
 
     /**
      * Gets the value of the objectRefList property.
+<<<<<<< HEAD
      * 
      * @return possible object is {@link ObjectRefListType }
      * 
+=======
+     *
+     * @return possible object is {@link ObjectRefListType }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public ObjectRefListType getObjectRefList() {
         return objectRefList;
@@ -268,10 +388,17 @@ public class RegistryResponseType extends ExtensibleObjectType {
 
     /**
      * Sets the value of the objectRefList property.
+<<<<<<< HEAD
      * 
      * @param value
      *            allowed object is {@link ObjectRefListType }
      * 
+=======
+     *
+     * @param value
+     *            allowed object is {@link ObjectRefListType }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public void setObjectRefList(ObjectRefListType value) {
         this.objectRefList = value;
@@ -279,9 +406,15 @@ public class RegistryResponseType extends ExtensibleObjectType {
 
     /**
      * Gets the value of the status property.
+<<<<<<< HEAD
      * 
      * @return possible object is {@link RegistryResponseStatus }
      * 
+=======
+     *
+     * @return possible object is {@link RegistryResponseStatus }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public RegistryResponseStatus getStatus() {
         return status;
@@ -289,10 +422,17 @@ public class RegistryResponseType extends ExtensibleObjectType {
 
     /**
      * Sets the value of the status property.
+<<<<<<< HEAD
      * 
      * @param value
      *            allowed object is {@link RegistryResponseStatus }
      * 
+=======
+     *
+     * @param value
+     *            allowed object is {@link RegistryResponseStatus }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public void setStatus(RegistryResponseStatus value) {
         this.status = value;
@@ -300,9 +440,15 @@ public class RegistryResponseType extends ExtensibleObjectType {
 
     /**
      * Gets the value of the requestId property.
+<<<<<<< HEAD
      * 
      * @return possible object is {@link String }
      * 
+=======
+     *
+     * @return possible object is {@link String }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public String getRequestId() {
         return requestId;
@@ -310,10 +456,17 @@ public class RegistryResponseType extends ExtensibleObjectType {
 
     /**
      * Sets the value of the requestId property.
+<<<<<<< HEAD
      * 
      * @param value
      *            allowed object is {@link String }
      * 
+=======
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public void setRequestId(String value) {
         this.requestId = value;
@@ -337,6 +490,7 @@ public class RegistryResponseType extends ExtensibleObjectType {
 
     @Override
     public boolean equals(Object obj) {
+<<<<<<< HEAD
         if (this == obj){
             return true;
         }
@@ -344,10 +498,20 @@ public class RegistryResponseType extends ExtensibleObjectType {
             return false;
         }
         if (getClass() != obj.getClass()){
+=======
+        if (this == obj) {
+            return true;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return false;
         }
         RegistryResponseType other = (RegistryResponseType) obj;
         if (exception == null) {
+<<<<<<< HEAD
             if (other.exception != null){
                 return false;
             }
@@ -376,6 +540,36 @@ public class RegistryResponseType extends ExtensibleObjectType {
             return false;
         }
         if (status != other.status){
+=======
+            if (other.exception != null) {
+                return false;
+            }
+        } else if (!exception.equals(other.exception)) {
+            return false;
+        }
+        if (objectRefList == null) {
+            if (other.objectRefList != null) {
+                return false;
+            }
+        } else if (!objectRefList.equals(other.objectRefList)) {
+            return false;
+        }
+        if (registryObjectList == null) {
+            if (other.registryObjectList != null) {
+                return false;
+            }
+        } else if (!registryObjectList.equals(other.registryObjectList)) {
+            return false;
+        }
+        if (requestId == null) {
+            if (other.requestId != null) {
+                return false;
+            }
+        } else if (!requestId.equals(other.requestId)) {
+            return false;
+        }
+        if (status != other.status) {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return false;
         }
         return true;

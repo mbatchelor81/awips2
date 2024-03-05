@@ -2,7 +2,7 @@
 # xmlTafEncoder.py
 #
 # Purpose: Encodes a python dictionary consisting of TAF components into a XML
-#          document according to the IWXXM 3.0 TAF schema.
+#          document according to the IWXXM/IWXXM-US TAF schemas.
 #
 # Author: Mark Oberfield MDL/OSTI/NWS/NOAA
 #
@@ -20,11 +20,20 @@
 #                                        change write method to return command
 #                                        line option-argument pairs for
 #                                        msg_send command
+# Jul 09, 2021  22669    oberfield       fixed flake8 issues; check aerodrome ID
+#                                        before assignment to ICAO ID element
 # Apr 11, 2022  8846     randerso        Fix Python 3 issue and correct bug in
 #                                        XmlTafEncoder.write()
 # Apr 14, 2022  8846     randerso        Additional changes to ensure the xml
 #                                        declaration is written to the file.
+# Apr 15, 2022  103155   m. oberfield    Changed regular expression to allow Pago-Pago TAF to be
+#                                        issued in XML. Changes to writing out XML document with
+#                                        UTF-8 encoding (merge DR 23099)
+# Aug 10, 2022  23225    oberfield       Corrected logging message. Removed
+#                                        unnecessary replace() call
+# Jan 12, 2023  23418    oberfield       Fixed exception handling for NIL TAF
 #
+import calendar
 import io
 import logging
 import os
@@ -33,27 +42,27 @@ import time
 import uuid
 
 import TafDecoder as TD
-import UFStatusHandler
 import XmlTafConfig as des
 import xml.etree.ElementTree as ET
 
-logHandler = UFStatusHandler.UFStatusHandler("com.raytheon.uf.edex.aviation", "EDEX")
-_Logger = logging.getLogger("XmlTafEncoder")
-_Logger.addHandler(logHandler)
+_Logger = logging.getLogger(__name__)
+try:
+    import UFStatusHandler as UFSH
+    _Logger.addHandler(UFSH.UFStatusHandler("com.raytheon.uf.edex.aviation", "EDEX"))
+except ModuleNotFoundError:
+    pass
+
 
 class Encoder:
     """
     Encodes a python dictionary consisting of TAF components into a XML document
-    according to the IWXXM/IWXXM-US 3.0 TAF schemas.
+    according to the IWXXM/IWXXM-US TAF schemas.
     """
 
     def __init__(self, codesFile=des.CodesFilePath):
 
-        self._program_name = 'IWXXM TAF Encoder'
-        self._description = 'To encode Terminal Aerodrome Forecast information in IWXXM %s format.' % des._iwxxm
-        self._version = '3.4'  # Software version, not IWXXM schema version.
-        self._annex3_amd = '78'
-        #
+        self._re_ICAO_ID = re.compile(r'[A-Z]{4}')
+
         self.NameSpaces = {'aixm': 'http://www.aixm.aero/schema/5.1.1',
                            'gml': 'http://www.opengis.net/gml/3.2',
                            '': des.IWXXM_URI,
@@ -111,7 +120,7 @@ class Encoder:
 
         if self.iwxxmUSPrefix:
             self.XMLDocument.set('xsi:schemaLocation', '%s %s %s %s' %
-                (des.IWXXM_URI, des.IWXXM_URL, des.IWXXM_US_URI, des.IWXXM_US_URL))
+                                 (des.IWXXM_URI, des.IWXXM_URL, des.IWXXM_US_URI, des.IWXXM_US_URL))
         else:
             self.XMLDocument.set('xsi:schemaLocation', '%s %s' % (des.IWXXM_URI, des.IWXXM_URL))
 
@@ -142,9 +151,9 @@ class Encoder:
             if self.decodingFailure:
                 return
         #
-        # No valid time for NIL TAF
+        # No valid period allowed for NIL TAF
         except KeyError:
-            self.XMLDocument._children.pop()
+            self.XMLDocument.remove(self.XMLDocument.find('validPeriod'))
         #
         # Set the "base" forecast, which is the initial prevailing condition of the TAF
         try:
@@ -231,15 +240,17 @@ class Encoder:
 
         except KeyError:
             pass
-        #
-        indent4 = ET.SubElement(indent3, 'aixm:locationIndicatorICAO')
-        indent4.text = token['str']
+
+        designator = token['str']
+        if self._re_ICAO_ID.match(designator) is not None:
+            indent4 = ET.SubElement(indent3, 'aixm:locationIndicatorICAO')
+            indent4.text = designator
 
         try:
             indent4 = ET.Element('aixm:ARP')
             indent5 = ET.SubElement(indent4, 'aixm:ElevatedPoint')
             indent6 = ET.SubElement(indent5, 'gml:pos')
-            indent6.text = ' '.join(token['location'].split(' ')[:2])
+            indent6.text = ' '.join(token['location'].split()[:2])
             indent5.set('srsDimension', des.srsDimension)
             indent5.set('srsName', des.srsName)
             indent5.set('axisLabels', 'Lat Long')
@@ -249,7 +260,7 @@ class Encoder:
             if des.srsDimension == '3':
                 try:
                     indent6 = ET.Element('aixm:elevation')
-                    indent6.text = token['location'].split(' ')[2]
+                    indent6.text = token['location'].split()[2]
                     indent6.set('uom', des.elevationUOM)
                     indent5.append(indent6)
 
@@ -285,7 +296,7 @@ class Encoder:
 
     def changeGroup(self, parent, fcsts):
 
-        if type(fcsts) == type({}):
+        if type(fcsts) == dict:
             fcsts = [fcsts]
 
         for token in fcsts:
@@ -508,8 +519,9 @@ class Encoder:
         # Get references to time
         alist = []
         s = limits['str']
-        _TimePhrase = '(AFT|TIL)\s+(\d{6})|(\d{4}/\d{4})'
-        _AmdPat = re.compile(r'AMD\s+NOT\s+SKED(\s+(%s))?|AMD\s+LTD\s+TO(\s+(CLD|VIS|WX|AND|WIND)){1,5}(\s+(%s))?' % (_TimePhrase, _TimePhrase))
+        _TimePhrase = r'(AFT|TIL)\s+(\d{6})|(\d{4}/\d{4})'
+        _AmdPat = re.compile(r'AMD\s+NOT\s+SKED(\s+(%s))?|AMD\s+LTD\s+TO(\s+(CLD|VIS|WX|AND|WIND)){1,5}(\s+(%s))?' %
+                             (_TimePhrase, _TimePhrase))
         tms = list(time.gmtime(self.decodedTaf['vtime']['from']))
 
         m = _AmdPat.match(s)
@@ -581,12 +593,12 @@ class Encoder:
 
         events = 'start', 'start-ns'
         top = None
-        nameSpaces = {'xml':'http://www.w3.org/XML/1998/namespace'}
+        nameSpaces = {'xml': 'http://www.w3.org/XML/1998/namespace'}
         self.codes = {}
         neededNS = ['ldp', 'skos', 'rdf', 'rdfs']
         #
         for event, elem in ET.iterparse(fname, events):
-            if event == 'start' and top == None:
+            if event == 'start' and top is None:
                 top = elem
             elif neededNS and event == 'start-ns':
                 if elem[0] in neededNS:
@@ -620,11 +632,13 @@ class Encoder:
                         self.codes[key] = (uri, text)
                 except AttributeError:
                     pass
+
     #
     # Returns values (in meters) according to Annex 3 Amd 77
+
     def checkVisibility(self, value, uom='m'):
 
-        if type(value) == type(''):
+        if type(value) == str:
 
             def function(x):
                 return str(x)
@@ -656,15 +670,15 @@ class Encoder:
     def fix_date(self, tms):
 
         now = time.time()
-        t = time.mktime(tuple(tms))
-        if t > now + 86400.0: # previous month
+        t = calendar.timegm(tuple(tms))
+        if t > now + 86400.0:  # previous month
             if tms[1] > 1:
                 tms[1] -= 1
             else:
                 tms[1] = 12
                 tms[0] -= 1
 
-        elif t < now - 25 * 86400.0: # next month
+        elif t < now - 25 * 86400.0:  # next month
             if tms[1] < 12:
                 tms[1] += 1
             else:
@@ -689,12 +703,11 @@ class XmlTafEncoder():
         #
         # Regular expression to determine type of issuance:
         #   routine, amended, corrected, or routinely delayed
-        self.prefix = re.compile(r'TAF(\s+([ACR][A-Z]{2}))?\s+[KPT]\w{3}\s+\d{6}Z')
+        self.prefix = re.compile(r'TAF(\s+([ACR][A-Z]{2}))?\s+[KNPT]\w{3}\s+\d{6}Z')
     #
     # Convert TAF TAC to IWXXM XML
 
     def encode(self, tac, ahl, geolocation):
-
         """
         The traditional alphanumeric (TAC) text is converted into IWXXM form and cached for
         later retrieval
@@ -754,7 +767,7 @@ class XmlTafEncoder():
         bulletin.set('xmlns:gml', 'http://www.opengis.net/gml/3.2')
         bulletin.set('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance')
         bulletin.set('xsi:schemaLocation',
-                     'http://def.wmo.int/collect/2014 http://schemas.wmo.int/collect/1.2/collect.xsd')
+                     'http://def.wmo.int/collect/2014 https://schemas.wmo.int/collect/1.2/collect.xsd')
         bulletin.set('gml:id', 'uuid.%s' % uuid.uuid4())
         #
         # For each write() call, a unique AHL IWXXM XML bulletin is made
@@ -775,15 +788,10 @@ class XmlTafEncoder():
         if bbb == '':
             _Logger.info('Sending %d routinely issued TAFs in a MeteorologicalBulletin.', len(self.docs[self.ahl]))
         else:
-            _Logger.info('Sending %d %s (%s) TAFs in a MeteorologicalBulletin',
-                             len(self.docs[self.ahl]),
-                             { 'A': 'amended',
-                               'C': 'corrected',
-                               'R': 'routinely delayed'
-                             }.get(bbb[0]),
-                             bbb
-                         )
-        #
+            _Logger.info('Sending %d %s (%s) TAFs in a MeteorologicalBulletin' %
+                         (len(self.docs[self.ahl]),
+                          {'A': 'amended', 'C': 'corrected', 'R': 'routinely delayed'}.get(bbb[0]),
+                          bbb))
         while True:
             try:
                 iwxxm = self.docs[self.ahl].pop()
@@ -804,14 +812,13 @@ class XmlTafEncoder():
         tree = ET.ElementTree(element=bulletin)
         xmlBytes = io.BytesIO()
         tree.write(xmlBytes, encoding="UTF-8", xml_declaration=True, method="xml", short_empty_elements=True)
-        xmlBytes = xmlBytes.getvalue().replace(' />'.encode("UTF-8"), '/>'.encode("UTF-8"))
         #
         # Write XML document to AWIPS outgoing directory
         filename = os.path.join(des.MHS_OUTPUT_FULL_PATH_DIR, child.text)
         try:
             with open(filename, 'wb') as _fh:
                 _fh.write(f"{self.ahl}\n".encode("UTF-8"))
-                _fh.write(xmlBytes)
+                _fh.write(xmlBytes.getvalue())
 
         except OSError:
             _Logger.exception("Error writing XML TAF document to %s", filename)
@@ -823,7 +830,6 @@ class XmlTafEncoder():
         return JUtil.pyValToJavaObj(mhsArgs)
 
     def getAHL(self):
-
         """Return the unique AHL line"""
 
         return self.ahl

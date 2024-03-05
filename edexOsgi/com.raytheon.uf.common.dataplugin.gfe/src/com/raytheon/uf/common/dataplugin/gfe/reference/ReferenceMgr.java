@@ -42,6 +42,10 @@ import com.raytheon.uf.common.localization.LocalizationUtil;
 import com.raytheon.uf.common.localization.PathManagerFactory;
 import com.raytheon.uf.common.localization.SaveableOutputStream;
 import com.raytheon.uf.common.localization.exception.LocalizationException;
+<<<<<<< HEAD
+=======
+import com.raytheon.uf.common.localization.region.RegionLookup;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.protectedfiles.ProtectedFileLookup;
 import com.raytheon.uf.common.serialization.SerializationException;
 import com.raytheon.uf.common.serialization.SingleTypeJAXBManager;
@@ -73,7 +77,10 @@ import com.raytheon.uf.common.status.UFStatus.Priority;
  * Aug 07, 2017       6379 njensen     Use ProtectedFileLookup
  * Jul 31, 2017       6342 randerso    Added save and delete edit area methods.
  *                                     Code cleanup.
+<<<<<<< HEAD
  * Sep 13, 2022          srcarter@ucar Remove REGION level.
+=======
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -433,6 +440,11 @@ public class ReferenceMgr {
     private LocalizationContext[] getSiteSearchContexts() {
         String siteId = dbGridLocation.getSiteId();
 
+<<<<<<< HEAD
+=======
+        String regionName = RegionLookup.getWfoRegion(siteId);
+
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         IPathManager pm = PathManagerFactory.getPathManager();
         LocalizationContext[] searchContexts = pm
                 .getLocalSearchHierarchy(LocalizationType.COMMON_STATIC);
@@ -445,6 +457,16 @@ public class ReferenceMgr {
             if (((level.equals(LocalizationLevel.SITE))
                     || (level.equals(LocalizationLevel.CONFIGURED)))) {
                 ctx.setContextName(siteId);
+<<<<<<< HEAD
+=======
+            } else if (level.equals(LocalizationLevel.REGION)) {
+                if (regionName == null) {
+                    // Don't include REGION context if no regionName
+                    continue;
+                } else {
+                    ctx.setContextName(regionName);
+                }
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
 
             fixedContexts.add(ctx);

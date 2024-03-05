@@ -1,19 +1,31 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -23,9 +35,14 @@ import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
+<<<<<<< HEAD
 import javax.measure.quantity.Angle;
 import si.uom.NonSI;
 import javax.measure.Unit;
+=======
+import javax.measure.Unit;
+import javax.measure.quantity.Angle;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
@@ -33,12 +50,20 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+<<<<<<< HEAD
+=======
+import javax.persistence.Index;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+<<<<<<< HEAD
 import org.hibernate.annotations.Index;
+=======
+import org.locationtech.jts.geom.Geometry;
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.uf.common.dataplugin.PluginDataObject;
 import com.raytheon.uf.common.dataplugin.annotations.DataURI;
@@ -46,6 +71,7 @@ import com.raytheon.uf.common.geospatial.ISpatialEnabled;
 import com.raytheon.uf.common.pointdata.spatial.SurfaceObsLocation;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerialize;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
+<<<<<<< HEAD
 import org.locationtech.jts.geom.Geometry;
 
 /**
@@ -53,6 +79,16 @@ import org.locationtech.jts.geom.Geometry;
  * 
  * <pre>
  * 
+=======
+
+import si.uom.NonSI;
+
+/**
+ *
+ *
+ * <pre>
+ *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * SOFTWARE HISTORY
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
@@ -66,6 +102,7 @@ import org.locationtech.jts.geom.Geometry;
  * Oct 22, 2013 2361       njensen     Remove XML annotations and IDecoderGettable
  * Feb 27, 2014 2638       njensen     Remove bad dataURI annotation
  * Jul 21, 2015 4360       rferrel     Add name to unique constraint.
+<<<<<<< HEAD
  * 
  * </pre>
  * 
@@ -75,15 +112,38 @@ import org.locationtech.jts.geom.Geometry;
 @Entity
 @SequenceGenerator(initialValue = 1, name = PluginDataObject.ID_GEN, sequenceName = "acarssoundingseq")
 @Table(name = "acarssounding", uniqueConstraints = { @UniqueConstraint(name = "uk_acarssounding_datauri_fields", columnNames = { "dataURI" }) })
+=======
+ * Aug 08, 2022 8892       tjensen     Update indexes for Hibernate 5
+ *
+ * </pre>
+ *
+ * @author jkorman
+ */
+
+@Entity
+@SequenceGenerator(initialValue = 1, name = PluginDataObject.ID_GEN, sequenceName = "acarssoundingseq")
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 /*
  * Both refTime and forecastTime are included in the refTimeIndex since
  * forecastTime is unlikely to be used.
  */
+<<<<<<< HEAD
 @org.hibernate.annotations.Table(appliesTo = "acarssounding", indexes = { @Index(name = "acarssounding_refTimeIndex", columnNames = {
         "refTime", "forecastTime" }) })
 @DynamicSerialize
 public class ACARSSoundingRecord extends PluginDataObject implements
         ISpatialEnabled {
+=======
+@Table(name = "acarssounding", uniqueConstraints = {
+        @UniqueConstraint(name = "uk_acarssounding_datauri_fields", columnNames = {
+                "dataURI" }) }, indexes = {
+                        @Index(name = "%TABLE%_refTimeIndex", columnList = "refTime, forecastTime"),
+                        @Index(name = "%TABLE%_stationIndex", columnList = "stationId") })
+
+@DynamicSerialize
+public class ACARSSoundingRecord extends PluginDataObject
+        implements ISpatialEnabled {
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private static final long serialVersionUID = 1L;
 
@@ -124,7 +184,11 @@ public class ACARSSoundingRecord extends PluginDataObject implements
     private Set<ACARSSoundingLayer> levels;
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public ACARSSoundingRecord() {
     }
@@ -132,7 +196,11 @@ public class ACARSSoundingRecord extends PluginDataObject implements
     /**
      * Constructor for DataURI construction through base class. This is used by
      * the notification service.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param uri
      *            A data uri applicable to this class.
      */
@@ -156,7 +224,11 @@ public class ACARSSoundingRecord extends PluginDataObject implements
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     @Override
     public SurfaceObsLocation getSpatialObject() {
@@ -164,7 +236,11 @@ public class ACARSSoundingRecord extends PluginDataObject implements
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return
      */
     public SurfaceObsLocation getLocation() {
@@ -172,7 +248,11 @@ public class ACARSSoundingRecord extends PluginDataObject implements
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param location
      */
     public void setLocation(SurfaceObsLocation location) {
@@ -181,7 +261,11 @@ public class ACARSSoundingRecord extends PluginDataObject implements
 
     /**
      * Get the airport identifier for this sounding
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The airport identifier.
      */
     public String getStationId() {
@@ -190,7 +274,11 @@ public class ACARSSoundingRecord extends PluginDataObject implements
 
     /**
      * Get this observation's geometry.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry for this observation.
      */
     public Geometry getGeometry() {
@@ -199,7 +287,11 @@ public class ACARSSoundingRecord extends PluginDataObject implements
 
     /**
      * Get the geometry latitude.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry latitude.
      */
     public double getLatitude() {
@@ -208,7 +300,11 @@ public class ACARSSoundingRecord extends PluginDataObject implements
 
     /**
      * Get the geometry longitude.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry longitude.
      */
     public double getLongitude() {
@@ -217,7 +313,11 @@ public class ACARSSoundingRecord extends PluginDataObject implements
 
     /**
      * Is the location for this profile defined?
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return Is the location for this profile defined?
      */
     public Boolean getLocationDefined() {
@@ -286,7 +386,11 @@ public class ACARSSoundingRecord extends PluginDataObject implements
 
     /**
      * Get the set of levels for this observation.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The level data.
      */
     public Set<ACARSSoundingLayer> getLevels() {
@@ -295,7 +399,11 @@ public class ACARSSoundingRecord extends PluginDataObject implements
 
     /**
      * Set the set of levels for this observation.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param levels
      *            the levels to set
      */
@@ -304,14 +412,22 @@ public class ACARSSoundingRecord extends PluginDataObject implements
     }
 
     /**
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param cloud
      */
     public void addLevel(ACARSSoundingLayer level) {
         if (level != null) {
             level.setParent(this);
             if (levels == null) {
+<<<<<<< HEAD
                 levels = new HashSet<ACARSSoundingLayer>();
+=======
+                levels = new HashSet<>();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
             levels.add(level);
             long cTime = level.getTimeObs().getTimeInMillis();

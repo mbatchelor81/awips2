@@ -1,6 +1,12 @@
 <!-- Snow Squall Warning configuration -->
 <!-- Used Template from ImpactSnowSquall Warning
      TOMALAK/DANGELO/BOOKBINDER 1-31-2017 First Go Around; DCS20066
+<<<<<<< HEAD
+=======
+     Mike Dangelo, Nov 2021 - added TAGs and format changes
+     Mike Dangelo, June 2022 - added doppler+spotter source option DCS22976
+     Mike Dangelo, Oct 2022 - minor bullet-title tweak DR23335
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 -->
 <warngenConfig>
 
@@ -28,6 +34,11 @@ turned on unless the corresponding .vm file is turned on in a given template's .
  	The various menu items are also the different maps
  	that can be loaded with each template. -->
  <maps>
+<<<<<<< HEAD
+=======
+   <map>County Names</map>
+   <map>County Warning Areas</map>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  </maps>
 
  <!-- Followups: VTEC actions of allowable followups when this template is selected -->
@@ -71,6 +82,7 @@ turned on unless the corresponding .vm file is turned on in a given template's .
 <bulletActionGroups>
 <bulletActionGroup action="NEW" phen="SQ" sig="W">
  <bullets>
+<<<<<<< HEAD
   <bullet bulletText="*********** SOURCE FOR WARNING (CHOOSE 1) **********" bulletType="title"/>
   <bullet bulletName="doppler" bulletText="Doppler radar" bulletGroup="basis" bulletDefault="true" parseString="SOURCE...RADAR INDICATED."/>
   <bullet bulletName="dopplerwebcams" bulletText="Doppler radar and webcams" bulletGroup="basis" parseString="SOURCE...RADAR AND WEBCAMS."/>
@@ -101,10 +113,43 @@ turned on unless the corresponding .vm file is turned on in a given template's .
   <bullet bulletName="slowDownCTA" bulletText="Generic - Slow Down" parseString="SLOW DOWN! RAPID CHANGES"/>
   <bullet bulletName="flashFreezeCTA" bulletText="Flash Freeze, Black Ice" parseString="WET ROADWAYS WILL QUICKLY FREEZE."/>
   <bullet bulletText="" bulletType=""/>
+=======
+  <bullet bulletText="********* LEVEL OF IMPACT ********" bulletType="title"/>
+  <bullet bulletName="generalIBW" bulletText="General" bulletGroup="ibwtype" bulletDefault="true" parseString="&quot;SNOW SQUALL...&quot;,&quot;-SIGNIFICANT&quot;"/>
+  <bullet bulletName="significantIBW" bulletText="Significant (WEA)" bulletGroup="ibwtype" parseString="IMPACT...SIGNIFICANT"/>
+  <bullet bulletText="*********** SOURCE FOR WARNING (CHOOSE 1) **********" bulletType="title"/>
+  <bullet bulletName="doppler" bulletText="Doppler radar" bulletDefault="true" bulletGroup="source" parseString="SOURCE...RADAR INDICATED."/>
+  <bullet bulletName="dopplerWebcams" bulletText="Doppler radar and webcams" bulletGroup="source" parseString="SOURCE...RADAR AND WEBCAMS."/>
+  <bullet bulletName="dopplerSpotter" bulletText="Doppler radar and Trained Spotter" bulletGroup="source" parseString="SOURCE...RADAR AND TRAINED SPOTTER."/>
+  <bullet bulletName="trainedSpotter" bulletText="Trained Spotter" bulletGroup="source" parseString="SOURCE...TRAINED SPOTTER."/>
+  <bullet bulletName="lawEnforcement" bulletText="Law Enforcement" bulletGroup="source" parseString="SOURCE...LAW ENFORCEMENT."/>
+  <bullet bulletName="emergencyMgmt" bulletText="Emergency Management" bulletGroup="source" parseString="SOURCE...EMERGENCY MANAGEMENT."/>
+  <bullet bulletName="public" bulletText="Public" bulletGroup="source" parseString="SOURCE...PUBLIC."/>
+  <bullet bulletText="******* HAZARDS (CHOOSE 1 EACH: GUSTS AND VISIBILITY) ******" bulletType="title"/>
+  <bullet bulletName="upto20G" bulletText="GUSTS: up to 20 mph" bulletDefault="true" bulletGroup="windz" parseString="GUSTY WINDS"/>
+  <bullet bulletName="upto35G" bulletText="GUSTS: up to 35 mph" bulletGroup="windz" parseString="UP TO 35 MPH"/>
+  <bullet bulletName="gt35G" bulletText="GUSTS: greater than 35 mph" bulletGroup="windz" parseString="GREATER THAN 35 MPH"/>
+  <bullet bulletName="gt50G" bulletText="GUSTS: greater than 50 mph" bulletGroup="windz" parseString="GREATER THAN 50 MPH"/>
+  <bullet bulletName="poorV" bulletText="VIS: Poor Visibility" bulletDefault="true" bulletGroup="viz" parseString="RAPIDLY FALLING VISIBILITY"/>
+  <bullet bulletName="lt1qV" bulletText="VIS: Less Than One Quarter of a Mile" bulletGroup="viz" parseString="LESS THAN ONE-QUARTER"/>
+  <bullet bulletName="whiteoutV" bulletText="VIS: Whiteout" bulletGroup="viz" parseString="WHITEOUT CONDITIONS"/>
+  <bullet bulletName="flashFreezeCTA" bulletText="FLASH FREEZE -- optional" parseString="FLASH FREEZE ON ROADS"/>
+  <bullet bulletText="************ LOCATIONS IMPACTED  **************" bulletType="title"/>
+  <bullet bulletName="pathcast" bulletText="Select for pathcast" bulletGroup="places" parseString="WILL BE NEAR..."/>
+  <bullet bulletName="listofcities" bulletDefault="true" bulletText="Select for a list of cities" bulletGroup="places" parseString="LOCATIONS IMPACTED INCLUDE..."/>
+  <bullet bulletText="******** CALLS TO ACTION (CHOOSE 1 OR MORE) *********" bulletType="title"/>  
+  <bullet bulletName="slowDownCTA" bulletText="Generic - Slow Down" parseString="SLOW DOWN! RAPID CHANGES"/>
+  <bullet bulletName="headlightsVizCTA" bulletText="Reduce Speed &amp; Turn on Headlights" parseString="TURN ON HEADLIGHTS"/>
+  <bullet bulletName="avoidOrDelayTravelCTA" bulletText="Avoid or Delay Travel" parseString="CONSIDER AVOIDING OR DELAYING"/>
+  <bullet bulletName="exitRoadwayCTA" bulletText="Find Nearest Exit" parseString="IF TRAVELING ON A HIGHWAY"/>
+  <bullet bulletName="dangerousTravelCTA" bulletText="Highway Not Safe" parseString="THERE IS NO SAFE PLACE"/>
+  <bullet bulletName="pileupSafetyCTA" bulletText="Pileup Safety" parseString="SERIOUS INJURIES"/>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  </bullets>
 </bulletActionGroup>
 <bulletActionGroup action="COR" phen="SQ" sig="W">
  <bullets>
+<<<<<<< HEAD
   <bullet bulletName="doppler" bulletText="Doppler radar" bulletGroup="basis" parseString="SOURCE...RADAR INDICATED."/>
   <bullet bulletName="dopplerwebcams" bulletText="Doppler radar and webcams" bulletGroup="basis" parseString="SOURCE...RADAR AND WEBCAMS."/>
   <bullet bulletName="lawEnforcement" bulletText="Law Enforcement" bulletGroup="basis" parseString="SOURCE...LAW ENFORCEMENT."/>
@@ -134,8 +179,44 @@ turned on unless the corresponding .vm file is turned on in a given template's .
   <bullet bulletName="slowDownCTA" bulletText="Generic - Slow Down" parseString="SLOW DOWN! RAPID CHANGES"/>
   <bullet bulletName="flashFreezeCTA" bulletText="Flash Freeze, Black Ice" parseString="WET ROADWAYS WILL QUICKLY FREEZE."/>
   <bullet bulletText="" bulletType=""/>
+=======
+  <bullet bulletText="********* LEVEL OF IMPACT ********" bulletType="title"/>
+  <bullet bulletName="generalIBW" bulletText="General" bulletGroup="ibwtype" bulletDefault="true" parseString="&quot;SNOW SQUALL...&quot;,&quot;-SIGNIFICANT&quot;"/>
+  <bullet bulletName="significantIBW" bulletText="Significant (WEA)" bulletGroup="ibwtype" parseString="IMPACT...SIGNIFICANT"/>
+  <bullet bulletText="*********** SOURCE FOR WARNING (CHOOSE 1) **********" bulletType="title"/>
+  <bullet bulletName="doppler" bulletText="Doppler radar" bulletDefault="true" bulletGroup="source" parseString="SOURCE...RADAR INDICATED."/>
+  <bullet bulletName="dopplerWebcams" bulletText="Doppler radar and webcams" bulletGroup="source" parseString="SOURCE...RADAR AND WEBCAMS."/>
+  <bullet bulletName="dopplerSpotter" bulletText="Doppler radar and Trained Spotter" bulletGroup="source" parseString="SOURCE...RADAR AND TRAINED SPOTTER."/>
+  <bullet bulletName="trainedSpotter" bulletText="Trained Spotter" bulletGroup="source" parseString="SOURCE...TRAINED SPOTTER."/>
+  <bullet bulletName="lawEnforcement" bulletText="Law Enforcement" bulletGroup="source" parseString="SOURCE...LAW ENFORCEMENT."/>
+  <bullet bulletName="emergencyMgmt" bulletText="Emergency Management" bulletGroup="source" parseString="SOURCE...EMERGENCY MANAGEMENT."/>
+  <bullet bulletName="public" bulletText="Public" bulletGroup="source" parseString="SOURCE...PUBLIC."/>
+  <bullet bulletText="******* HAZARDS (CHOOSE 1 EACH: GUSTS AND VISIBILITY) ******" bulletType="title"/>
+  <bullet bulletName="upto20G" bulletText="GUSTS: up to 20 mph" bulletDefault="true" bulletGroup="windz" parseString="GUSTY WINDS"/>
+  <bullet bulletName="upto35G" bulletText="GUSTS: up to 35 mph" bulletGroup="windz" parseString="UP TO 35 MPH"/>
+  <bullet bulletName="gt35G" bulletText="GUSTS: greater than 35 mph" bulletGroup="windz" parseString="GREATER THAN 35 MPH"/>
+  <bullet bulletName="gt50G" bulletText="GUSTS: greater than 50 mph" bulletGroup="windz" parseString="GREATER THAN 50 MPH"/>
+  <bullet bulletName="poorV" bulletText="VIS: Poor Visibility" bulletDefault="true" bulletGroup="viz" parseString="RAPIDLY FALLING VISIBILITY"/>
+  <bullet bulletName="lt1qV" bulletText="VIS: Less Than One Quarter of a Mile" bulletGroup="viz" parseString="LESS THAN ONE-QUARTER"/>
+  <bullet bulletName="whiteoutV" bulletText="VIS: Whiteout" bulletGroup="viz" parseString="WHITEOUT CONDITIONS"/>
+  <bullet bulletName="flashFreezeCTA" bulletText="FLASH FREEZE -- optional" parseString="FLASH FREEZE ON ROADS"/>
+  <bullet bulletText="************ LOCATIONS IMPACTED  **************" bulletType="title"/>
+  <bullet bulletName="pathcast" bulletText="Select for pathcast" bulletGroup="places" parseString="WILL BE NEAR..."/>
+  <bullet bulletName="listofcities" bulletDefault="true" bulletText="Select for a list of cities" bulletGroup="places" parseString="LOCATIONS IMPACTED INCLUDE..."/>
+  <bullet bulletText="******** CALLS TO ACTION (CHOOSE 1 OR MORE) *********" bulletType="title"/>  
+  <bullet bulletName="slowDownCTA" bulletText="Generic - Slow Down" parseString="SLOW DOWN! RAPID CHANGES"/>
+  <bullet bulletName="headlightsVizCTA" bulletText="Reduce Speed &amp; Turn on Headlights" parseString="TURN ON HEADLIGHTS"/>
+  <bullet bulletName="avoidOrDelayTravelCTA" bulletText="Avoid or Delay Travel" parseString="CONSIDER AVOIDING OR DELAYING"/>
+  <bullet bulletName="exitRoadwayCTA" bulletText="Find Nearest Exit" parseString="IF TRAVELING ON A HIGHWAY"/>
+  <bullet bulletName="dangerousTravelCTA" bulletText="Highway Not Safe" parseString="THERE IS NO SAFE PLACE"/>
+  <bullet bulletName="pileupSafetyCTA" bulletText="Pileup Safety" parseString="SERIOUS INJURIES"/>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  </bullets>
 </bulletActionGroup>
 </bulletActionGroups>
 
+<<<<<<< HEAD
 </warngenConfig>
+=======
+</warngenConfig>
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

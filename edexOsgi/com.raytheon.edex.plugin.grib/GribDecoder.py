@@ -55,6 +55,10 @@
 # Feb 07, 2018  7213     nabowle     Only allow P-ETSS to create Statistical parameters.
 # Mar 19, 2018  20395    wkwock      Added PDS template 15
 # Jul  3, 2019  7879     tgurney     Python 3 fixes
+<<<<<<< HEAD
+=======
+# Aug 02, 2021  8520     njensen     Switch from matplotlib.mlab.griddata to scipy.interpolate.griddata
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 
 import grib2
@@ -63,7 +67,11 @@ from math import pow
 import logging
 import UFStatusHandler
 import re
+<<<<<<< HEAD
 from matplotlib.mlab import griddata
+=======
+from scipy.interpolate import griddata
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 from java.lang import Float
 from java.lang import Integer

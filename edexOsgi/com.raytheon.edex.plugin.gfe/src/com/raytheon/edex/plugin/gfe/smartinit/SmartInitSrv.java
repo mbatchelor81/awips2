@@ -59,6 +59,11 @@ import jep.JepException;
  * Mar 30, 2017  5937     rjpeter   Use EdexTimerBasedThread logger.
  * Feb 20, 2018  6928     randerso  Added runNow() method.
  * Jun 03, 2019  7852     dgilling  Update code for jep 3.8.
+<<<<<<< HEAD
+=======
+ * May 13, 2021  8463     randerso  Made mode a separate parameter to Init.py
+ *                                  runFromJava
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -146,8 +151,13 @@ public class SmartInitSrv extends EdexTimerBasedThread {
             List<String> sitePathsAdded = new ArrayList<>(2);
 
             String init = record.getSmartInit();
+<<<<<<< HEAD
             String dbName = record.getDbName()
                     + (record.isManual() ? ":1" : ":0");
+=======
+            String dbName = record.getDbName();
+            boolean mode = record.isManual();
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             Date validTime = record.getId().getValidTime();
             if (SmartInitRecord.ALL_TIMES.equals(validTime)) {
                 validTime = null;
@@ -196,6 +206,10 @@ public class SmartInitSrv extends EdexTimerBasedThread {
                     argMap.put("dbName", dbName);
                     argMap.put("model", init);
                     argMap.put("validTime", validTime);
+<<<<<<< HEAD
+=======
+                    argMap.put("mode", mode);
+>>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                     initScript.execute(argMap);
                 } catch (Throwable e) {

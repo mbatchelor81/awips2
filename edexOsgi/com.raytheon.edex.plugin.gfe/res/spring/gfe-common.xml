@@ -11,7 +11,7 @@
         <property name="dao" value="com.raytheon.edex.plugin.gfe.db.dao.GFEDao"/>
         <property name="record" value="com.raytheon.uf.common.dataplugin.gfe.db.objects.GFERecord"/>
         <property name="initializer" value="com.raytheon.edex.plugin.gfe.GfePluginInitializer"/>
-        <property name="compression" value="LZF"/>
+        <property name="compression" value="GZIP"/>
     </bean>
 
     <bean id="gfeDbPluginProperties" class="com.raytheon.uf.edex.database.DatabasePluginProperties">
@@ -35,6 +35,11 @@
     </bean>
 
     <bean id="ifpServer" class="com.raytheon.edex.plugin.gfe.server.IFPServer.Wrapper"/>
+
+    <bean factory-bean="ignitePluginRegistry" factory-method="registerPluginCacheName">
+        <constructor-arg value="gfe" />
+        <constructor-arg value="gfeDataStore" />
+    </bean>
 
     <camelContext id="gfe-common-camel" xmlns="http://camel.apache.org/schema/spring" errorHandlerRef="errorHandler">
 
