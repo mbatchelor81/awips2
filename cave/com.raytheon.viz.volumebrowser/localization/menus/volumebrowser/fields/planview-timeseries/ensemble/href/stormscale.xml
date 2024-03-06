@@ -41,12 +41,9 @@
     <contribute xsi:type="menuItem"
         menuText="Prob-Matched Mean Max Hourly Updraft Helicity" key="MXUPHLpmmn"
         indentText="false" />
-<<<<<<< HEAD
-=======
     <contribute xsi:type="menuItem"
         menuText="3-hour Max Prob-Matched Mean Max Hourly Updr. Heli" key="MaxHrlyUHMax3hr"
         indentText="false" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     <contribute xsi:type="menuItem"
         menuText="Prob Composite Radar Refl &gt; 10.0dB" key="ProbREFC10"
@@ -96,23 +93,15 @@
         menuText="Prob Updraft Helicity &gt; 25 m^2/s^2" key="ProbUPHL25"
         indentText="false" />
     <contribute xsi:type="menuItem"
-<<<<<<< HEAD
-=======
         menuText="Prob Updraft Helicity &gt; 75 m^2/s^2" key="UPHLProb75"
         indentText="false" />
     <contribute xsi:type="menuItem"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         menuText="Prob Updraft Helicity &gt; 100 m^2/s^2" key="ProbUPHL100"
         indentText="false" />
 
     <contribute xsi:type="menuItem"
         menuText="Prob Max Hourly Updraft Helicity &gt; 25 m^2/s^2" key="ProbMXUPHL25"
         indentText="false" />
-<<<<<<< HEAD
-    <contribute xsi:type="menuItem"
-        menuText="Prob Max Hourly Updraft Helicity &gt; 100 m^2/s^2"
-        key="ProbMXUPHL100" indentText="false" />
-=======
    <contribute xsi:type="menuItem"
         menuText="Prob Max Hourly Updraft Helicity &gt; 75 m^2/s^2"
         key="MXUPHL75.0m^2/s^2" indentText="false" />
@@ -122,7 +111,6 @@
     <contribute xsi:type="menuItem"
         menuText="Prob Max Hourly Updraft Helicity &gt; 150 m^2/s^2"
         key="MXUPHL150.0m^2/s^2" indentText="false" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     <contribute xsi:type="menuItem"
         menuText="Prob Max Hourly Updraft Velocity &gt; 1.0 m/s" key="ProbMAXUVV1"

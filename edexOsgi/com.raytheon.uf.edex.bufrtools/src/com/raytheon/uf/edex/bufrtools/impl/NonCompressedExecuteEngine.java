@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -54,24 +42,6 @@ import com.raytheon.uf.edex.bufrtools.packets.DataPacketTypes;
 import com.raytheon.uf.edex.bufrtools.packets.IBUFRDataPacket;
 
 /**
-<<<<<<< HEAD
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * 
- * Date         Ticket#    Engineer    Description
- * ------------ ---------- ----------- --------------------------
- * 20071127            382 jkorman     Initial Coding.
- * 20080214            862 jkorman     BUFRMOS implementation changes.
- * 07/2009      55          T. Lee      Added number of bits to skip for Table C
- * 04/21/2010   208         F. J. Yen   Updated arguments for execute in processTableB
- * 9/16/2014    #3628      mapeters    Moved from uf.edex.decodertools plugin, replaced static imports.
- * 12/14/2015   5166       kbisanz     Update logging to use SLF4J
- * 
- * </pre>
- * 
-=======
  *
  * <pre>
  *
@@ -92,7 +62,6 @@ import com.raytheon.uf.edex.bufrtools.packets.IBUFRDataPacket;
  *
  * </pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author jkorman
  * @version 1.0
  */
@@ -105,40 +74,25 @@ public class NonCompressedExecuteEngine extends ExecuteEngine {
     private int readOverBits = -1;
 
     /**
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param descCount
      *            Number of descriptors to execute.
      * @param repCount
      *            Number of times to execute each set of descCount descriptors.
      */
-<<<<<<< HEAD
-    public NonCompressedExecuteEngine(List<BUFRDescriptor> subList, int repCount) {
-=======
     public NonCompressedExecuteEngine(List<BUFRDescriptor> subList,
             int repCount) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         super(subList, repCount);
     }
 
     /**
      * This executor, decodes non-compressed data.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param descriptorList
      * @param bitStrm
      * @return
      */
-<<<<<<< HEAD
-=======
     @Override
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     protected EngineData processBUFR(BUFRBitInputStream bitStrm) {
         EngineData data = new EngineData();
 
@@ -146,11 +100,7 @@ public class NonCompressedExecuteEngine extends ExecuteEngine {
 
         for (int i = 0; i < repetitionCount; i++) {
 
-<<<<<<< HEAD
-            List<IBUFRDataPacket> packetData = new ArrayList<IBUFRDataPacket>();
-=======
             List<IBUFRDataPacket> packetData = new ArrayList<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             for (BUFRDescriptor descriptor : descriptors) {
                 try {
@@ -184,13 +134,6 @@ public class NonCompressedExecuteEngine extends ExecuteEngine {
                         }
                     }
                 } catch (BUFRDecoderException bde) {
-<<<<<<< HEAD
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("Error processing " + descriptor);
-                        display(packetData, "", logger);
-                    }
-                    throw bde;
-=======
                     // show warning for descriptor
                     // stop processing this bad descriptor
                     logger.warn(
@@ -201,7 +144,6 @@ public class NonCompressedExecuteEngine extends ExecuteEngine {
 
                     // do not continue processing bad data for this descriptor
                     break;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
             }
             BUFRSublistPacket p = new BUFRSublistPacket(packetData,
@@ -216,11 +158,7 @@ public class NonCompressedExecuteEngine extends ExecuteEngine {
 
     /**
      * Process Table B descriptors.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param descriptor
      * @param packets
      *            List to receive the decoded data.
@@ -291,11 +229,7 @@ public class NonCompressedExecuteEngine extends ExecuteEngine {
     }
 
     /**
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param descriptor
      *            The replication descriptor to execute.
      * @param packets
@@ -303,12 +237,8 @@ public class NonCompressedExecuteEngine extends ExecuteEngine {
      * @return
      */
     private List<IBUFRDataPacket> executeReplication(
-<<<<<<< HEAD
-            BUFRReplicationDescriptor descriptor, List<IBUFRDataPacket> packets) {
-=======
             BUFRReplicationDescriptor descriptor,
             List<IBUFRDataPacket> packets) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         List<BUFRDescriptor> subList = descriptor.getSubList();
 
@@ -327,13 +257,8 @@ public class NonCompressedExecuteEngine extends ExecuteEngine {
                     int delayedCount = 0;
                     // Get the delayed count.
                     IBUFRDataPacket packet = descr.execute(bitStream);
-<<<<<<< HEAD
-                    if ((packet != null)
-                            && ("NUMERIC".equals(packet.getUnits()))) {
-=======
                     if (packet != null && packet.getValue() != null
                             && "NUMERIC".equals(packet.getUnits())) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         delayedCount = ((Long) packet.getValue()).intValue();
                     }
                     // If the repetition count is zero, no need to go
@@ -342,11 +267,7 @@ public class NonCompressedExecuteEngine extends ExecuteEngine {
                     // descriptor.
                     if (delayedCount == 0) {
                         // Insert an empty sublist for the missing data.
-<<<<<<< HEAD
-                        List<IBUFRDataPacket> d = new ArrayList<IBUFRDataPacket>();
-=======
                         List<IBUFRDataPacket> d = new ArrayList<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         packets.add(new BUFRSublistPacket(d,
                                 DataPacketTypes.RepSubList.getPacketType(),
                                 descriptor));
@@ -378,17 +299,10 @@ public class NonCompressedExecuteEngine extends ExecuteEngine {
                 }
                 } // switch
             } else {
-<<<<<<< HEAD
-                logger.error("Error - Unexpected delayed descriptor "
-                        + descriptor);
-                throw new RuntimeException("Unexpected delayed descriptor: "
-                        + descriptor);
-=======
                 logger.error(
                         "Error - Unexpected delayed descriptor " + descriptor);
                 throw new RuntimeException(
                         "Unexpected delayed descriptor: " + descriptor);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         } else {
             processReplication(packets, subList, repCount);
@@ -398,23 +312,15 @@ public class NonCompressedExecuteEngine extends ExecuteEngine {
     }
 
     /**
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param packets
      * @param subList
      * @param repCount
      */
     private void processReplication(List<IBUFRDataPacket> packets,
             List<BUFRDescriptor> subList, int repCount) {
-<<<<<<< HEAD
-        ExecuteEngine engine = new NonCompressedExecuteEngine(subList, repCount);
-=======
         ExecuteEngine engine = new NonCompressedExecuteEngine(subList,
                 repCount);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         engine.setDataBitOverride(getDataBitOverride());
         engine.setDataScaleOverride(getDataScaleOverride());

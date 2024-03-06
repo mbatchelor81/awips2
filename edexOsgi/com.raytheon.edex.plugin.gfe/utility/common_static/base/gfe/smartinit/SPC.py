@@ -17,9 +17,6 @@
 # See the AWIPS II Master Rights File ("Master Rights File.pdf") for
 # further licensing information.
 ##
-<<<<<<< HEAD
-
-=======
 # SOFTWARE HISTORY
 #
 # Date          Ticket#   Engineer     Description
@@ -29,7 +26,6 @@
 #                                      PRSIGV (per P. Jendrowski review)
 # Feb 04, 2021  DCS 21298 MPorricelli  Added definitions from NIC v10.0
 #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ##
 # This is a base file that is not intended to be overridden.
 #
@@ -39,10 +35,7 @@
 ##
 
 from Init import *
-<<<<<<< HEAD
-=======
 import numpy as np
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 ##--------------------------------------------------------------------------
 ## Module that calculates surface weather elements from SPC model
@@ -53,11 +46,6 @@ class SPCForecaster(Forecaster):
     def __init__(self):
         Forecaster.__init__(self, "SPC", "SPC")
 
-<<<<<<< HEAD
-##-------------------------------------------------------------------------
-## Returns the SPC Fire Wx grids
-##--------------------------------------------------------------------------
-=======
 
     def calcCnvtvOutlooks(self, srcono_SFC):
         """
@@ -106,7 +94,6 @@ class SPCForecaster(Forecaster):
 ## Returns the SPC Fire Wx grids
 ##--------------------------------------------------------------------------
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def calcSPCDryTstmPrb(self, drytprob_SFC):
         return drytprob_SFC
 

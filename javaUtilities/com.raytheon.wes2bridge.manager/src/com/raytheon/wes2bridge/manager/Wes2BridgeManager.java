@@ -83,11 +83,6 @@ import com.raytheon.wes2bridge.configuration.jaxb.Wes2BridgeJaxbManager;
  *                                     Major code cleanup
  * Jun 01, 2021 8475       dgilling    Have reconfigureQPID use initialConfig.json instead
  *                                     of config.json.
-<<<<<<< HEAD
-=======
- * Dec 19, 2022 23367      zalberts    Added --oldest flag to camel_pid pgrep to prevent it
- *                                     from returning multiple pids
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -385,11 +380,7 @@ public class Wes2BridgeManager {
             final String line1 = "export EDEX_INSTALL=";
             final String line2 = "export DATA_ARCHIVE_ROOT=";
             final String line3 = "CAMELPROCESS=`ps -ef | grep \"aw.site.identifier\"|grep -c \"edex.run.mode=${1} \" `";
-<<<<<<< HEAD
             final String line4 = "_camel_pid=`pgrep -f  -u $EDEXUSER \"java -Dedex.run.mode=${1} \"`";
-=======
-            final String line4 = "_camel_pid=`pgrep -f  -u $EDEXUSER \"java -Dedex.run.mode=${1} \" --oldest`";
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             String line = StringUtils.EMPTY;
             while ((line = br.readLine()) != null) {
@@ -404,11 +395,7 @@ public class Wes2BridgeManager {
                             + "grep -c \"edex.run.mode=${1} \" `";
                 } else if (line.trim().startsWith(line4)) {
                     line = "_camel_pid=`pgrep -f \"java.*-Dedex.run.mode=${1} -Daw.site.identifier=.+ -Dwes2bridge.instance="
-<<<<<<< HEAD
                             + this.wes2BridgeCase.getName() + " \"`";
-=======
-                            + this.wes2BridgeCase.getName() + " \" --oldest`";
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
 
                 bw.write(line + "\n");

@@ -76,11 +76,7 @@ import com.raytheon.uf.viz.core.rsc.capabilities.ImagingCapability;
 import com.raytheon.uf.viz.pointset.image.PointSetDataCallback;
 import com.raytheon.uf.viz.pointset.image.PointSetImagePreferences;
 
-<<<<<<< HEAD
-import tec.uom.se.format.SimpleUnitFormat;
-=======
 import tech.units.indriya.format.SimpleUnitFormat;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Resource for rendering {@link PointSetRecord} data.

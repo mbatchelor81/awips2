@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -40,25 +28,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-<<<<<<< HEAD
-import javax.measure.UnitConverter;
-import si.uom.NonSI;
-import systems.uom.common.USCustomary;
-
-import javax.measure.Unit;
-=======
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.swt.graphics.RGB;
 import org.geotools.coverage.grid.GridGeometry2D;
-<<<<<<< HEAD
-=======
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.opengis.referencing.datum.PixelInCell;
 
@@ -74,11 +51,8 @@ import com.raytheon.uf.common.geospatial.MapUtil;
 import com.raytheon.uf.common.geospatial.ReferencedCoordinate;
 import com.raytheon.uf.common.geospatial.SpatialQueryFactory;
 import com.raytheon.uf.common.geospatial.SpatialQueryResult;
-<<<<<<< HEAD
-=======
 import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.xmrg.hrap.HRAP;
 import com.raytheon.uf.common.xmrg.hrap.HRAPCoordinates;
 import com.raytheon.uf.common.xmrg.hrap.HRAPSubGrid;
@@ -102,25 +76,6 @@ import com.raytheon.viz.mpe.ui.MPEDisplayManager.DisplayMode;
 import com.raytheon.viz.mpe.ui.actions.DrawDQCStations;
 import com.raytheon.viz.mpe.util.CreateMap;
 import com.raytheon.viz.mpe.util.DailyQcUtils;
-<<<<<<< HEAD
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.GeometryFactory;
-
-/**
- * The MPE Gridded Freeze Resource.
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * Date         Ticket#    Engineer    Description
- * ------------ ---------- ----------- --------------------------
- * Jul 09, 2009  2589      snaples     Initial creation
- * Feb 28, 2017  6157      bkowal      No longer alter the data when legend filtering
- *                                     is enabled.
- * 
- * </pre>
- * 
-=======
 
 import systems.uom.common.USCustomary;
 
@@ -141,17 +96,12 @@ import systems.uom.common.USCustomary;
  *
  * </pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author snaples
  */
 
 public class PlotGriddedFreezeResource
         extends AbstractVizResource<AbstractResourceData, MapDescriptor>
         implements IMpeResource {
-<<<<<<< HEAD
-
-    MPEDisplayManager displayMgr = null;
-=======
     private static final IUFStatusHandler statusHandler = UFStatus
             .getHandler(PlotGriddedFreezeResource.class);
 
@@ -162,7 +112,6 @@ public class PlotGriddedFreezeResource
     private static final float contrast = 1.0f;
 
     private MPEDisplayManager displayMgr = null;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private DailyQcUtils dqc = DailyQcUtils.getInstance();
 
@@ -174,40 +123,16 @@ public class PlotGriddedFreezeResource
 
     private GridGeometry2D gridGeometry;
 
-<<<<<<< HEAD
-    private float brightness = 1.0f;
-
-    private float contrast = 1.0f;
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private boolean isInterpolated;
 
     private HRAPSubGrid subGrid;
 
-<<<<<<< HEAD
-    int first = 1;
-
-    int hed;
-
-    int time_pos;
-
-    int display_flag;
-
-    private ColorMapParameters parameters = new ColorMapParameters();
-
-    private static final GeometryFactory gf = new GeometryFactory();
-
-    private List<Colorvalue> colorSet;
-
-=======
     private ColorMapParameters parameters = new ColorMapParameters();
 
     private List<Colorvalue> colorSet;
 
     private FloatBuffer buf;
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public PlotGriddedFreezeResource(MPEDisplayManager displayMgr,
             LoadProperties loadProperties, List<Colorvalue> colorSet) {
         super(new GenericResourceData(), loadProperties);
@@ -215,17 +140,6 @@ public class PlotGriddedFreezeResource
         this.colorSet = colorSet;
     }
 
-<<<<<<< HEAD
-    ColorMap freeze_colormap = ddq.colorMap;
-
-    RGB color = null;
-
-    IGraphicsTarget target;
-
-    FloatBuffer buf;
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public void plot_gridded_freeze(String prefix, int num) {
         boolean wfo_all = dqc.wfo_all;
         int[] wfo_in_use = dqc.wfo_in_use;
@@ -301,11 +215,7 @@ public class PlotGriddedFreezeResource
                     continue;
                 }
 
-<<<<<<< HEAD
-                if (wfo_all != true) {
-=======
                 if (!wfo_all) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                     for (m = 0; m < 20; m++) {
                         if (wfo_in_use[m] == -1) {
@@ -318,11 +228,7 @@ public class PlotGriddedFreezeResource
                     }
                 }
 
-<<<<<<< HEAD
-                Float fg = 0f;
-=======
                 Float fg;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 value = dqc.pcp.value[i][j];
                 if (value <= 0.01 && value >= -0.01) {
                     continue;
@@ -347,12 +253,7 @@ public class PlotGriddedFreezeResource
             try {
                 coord = HRAPCoordinates.getHRAPCoordinates();
             } catch (Exception e) {
-<<<<<<< HEAD
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-=======
                 statusHandler.error(e.getLocalizedMessage(), e);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
             if (extent.width == coord.width && extent.height == coord.height) {
                 extent = coord;
@@ -370,12 +271,7 @@ public class PlotGriddedFreezeResource
             project(gridGeometry.getCoordinateReferenceSystem());
 
         } catch (Exception e) {
-<<<<<<< HEAD
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-=======
             statusHandler.error(e.getLocalizedMessage(), e);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
     }
@@ -398,11 +294,7 @@ public class PlotGriddedFreezeResource
             return null;
         }
 
-<<<<<<< HEAD
-        Map<String, Object> values = new HashMap<String, Object>();
-=======
         Map<String, Object> values = new HashMap<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         try {
             Coordinate gridCell = coord.asGridCell(
@@ -472,11 +364,7 @@ public class PlotGriddedFreezeResource
 
     /**
      * convert Color to RGB
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param color
      * @return
      */
@@ -503,12 +391,7 @@ public class PlotGriddedFreezeResource
 
     @Override
     protected void initInternal(IGraphicsTarget target) throws VizException {
-<<<<<<< HEAD
-        this.target = target;
-        time_pos = ddq.time_pos;
-=======
         int time_pos = ddq.time_pos;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         plot_gridded_freeze(ddq.prefix, time_pos);
 
     }
@@ -516,12 +399,7 @@ public class PlotGriddedFreezeResource
     @Override
     protected void paintInternal(IGraphicsTarget target,
             PaintProperties paintProps) throws VizException {
-<<<<<<< HEAD
-        if (buf == null || dqc.grids_flag != 1
-                || displayMgr.isZflag() != true) {
-=======
         if (buf == null || dqc.grids_flag != 1 || !displayMgr.isZflag()) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return;
         }
 
@@ -546,11 +424,7 @@ public class PlotGriddedFreezeResource
         if (mode.contains(DisplayMode.Contour)) {
             if (contourDisplay == null) {
                 contourDisplay = new GriddedContourDisplay(descriptor,
-<<<<<<< HEAD
-                        gridGeometry, buf);
-=======
                         getSafeName(), gridGeometry, buf);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                 contourDisplay.setColor(ColorUtil.WHITE);
                 contourDisplay.setLineStyle(LineStyle.SOLID);
@@ -558,11 +432,6 @@ public class PlotGriddedFreezeResource
             }
             contourDisplay.paint(target, paintProps);
         }
-<<<<<<< HEAD
-
-        first = 0;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override

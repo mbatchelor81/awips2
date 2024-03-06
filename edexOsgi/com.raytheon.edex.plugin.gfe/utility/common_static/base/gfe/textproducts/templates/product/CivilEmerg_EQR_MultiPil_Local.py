@@ -47,8 +47,6 @@
 # Example Output:
 #  Refer to the NWS 10-518 Directive for further information.
 #-------------------------------------------------------------------------
-<<<<<<< HEAD
-=======
 #
 # SOFTWARE HISTORY
 #  Date         Ticket#    Engineer       Description
@@ -56,7 +54,6 @@
 #  07/17/2021    22260     mgamazaychikov Added NIDS_HEADLINE
 #
 ##
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import copy
 import types
@@ -67,11 +64,7 @@ import CivilEmerg
 class TextProduct(CivilEmerg.TextProduct):
     Definition = copy.deepcopy(CivilEmerg.TextProduct.Definition)
     Definition["displayName"] = "CivilEmergency_EQR_<MultiPil> (Earthquake Report)"
-<<<<<<< HEAD
-             # for Product Generation Menu
-=======
     # for Product Generation Menu
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     Definition["outputFile"] = "{prddir}/TEXT/EQR_<MultiPil>.txt"
     ## Edit Areas: Create Combinations file with edit area combinations.
     Definition["showZoneCombiner"] = 1 # 1 to cause zone combiner to display
@@ -113,11 +106,7 @@ class TextProduct(CivilEmerg.TextProduct):
                 label, variable = key
                 setattr(self, f"_{variable}", value)
 
-<<<<<<< HEAD
-        fcst = fcst + "An earthquake has been felt " + self._felt + " by " +\
-=======
         fcst = fcst + CivilEmerg.TextProduct.NIDS_HEADLINE + "An earthquake has been felt " + self._felt + " by " +\
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
           self._extent + " " + "in the |*enter area*| area. " + \
           self._damage + " damage has been reported. "
 
@@ -134,21 +123,12 @@ class TextProduct(CivilEmerg.TextProduct):
             eqOffice = "West Coast/Alaska Tsunami Warning Center"
         else:
             eqOffice = "Pacific Tsunami Warning Center"
-<<<<<<< HEAD
-            
-        
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if self._issuanceType == "Preliminary":
             fcst = fcst + "Information released in this statement is preliminary. Updates, including Richter scale magnitude, will be provided as more information becomes available from the " + eqOffice + "."
         else:
             fcst = fcst + "The " + eqOffice + " has indicated that an earthquake magnitude *mag* on the Richter scale was centered at *lat*/*lon* or about *miles* *direction* of *city*, *state*.\n\nAny further information will be made available when it is received from the " + eqOffice + "."
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return fcst
 
     def _postProcessProduct(self, fcst, argDict):

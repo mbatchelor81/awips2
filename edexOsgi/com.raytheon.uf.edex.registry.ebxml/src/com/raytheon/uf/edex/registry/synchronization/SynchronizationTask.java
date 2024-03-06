@@ -25,13 +25,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-<<<<<<< HEAD
-import java.util.Set;
-=======
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import org.hibernate.Session;
 import org.slf4j.Logger;
@@ -44,10 +40,7 @@ import com.raytheon.uf.common.registry.services.rest.response.RegObjectSubset;
 import com.raytheon.uf.edex.database.dao.CoreDao;
 import com.raytheon.uf.edex.registry.ebxml.dao.DbInit;
 import com.raytheon.uf.edex.registry.ebxml.dao.RegistryObjectDao;
-<<<<<<< HEAD
-=======
 import com.raytheon.uf.edex.registry.ebxml.exception.EbxmlRegistryException;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.edex.registry.ebxml.services.RegistryRESTServices;
 import com.raytheon.uf.edex.registry.ebxml.services.soap.RegistrySOAPServices;
 import com.raytheon.uf.edex.registry.ebxml.util.RegistryIdUtil;
@@ -56,12 +49,8 @@ import oasis.names.tc.ebxml.regrep.wsdl.registry.services.v4.LifecycleManager;
 import oasis.names.tc.ebxml.regrep.wsdl.registry.services.v4.QueryManager;
 
 /**
-<<<<<<< HEAD
- * Process synchronization events
-=======
  * Process synchronization events. This is only a {@link Callable} to throw an
  * exception, and always returns null.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * <pre>
  *
@@ -69,12 +58,6 @@ import oasis.names.tc.ebxml.regrep.wsdl.registry.services.v4.QueryManager;
  *
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- -----------------------
-<<<<<<< HEAD
- * Apr 29,  2016  5386     tjensen   Initial creation
- * Jun 20,  2017  6186     rjpeter   Fixed batch numbering.
- * Aug 02,  2017  6186     rjpeter   Cache soap service lookup and add retry.
- * Sep 04,  2018  7238     skabasele added logic for automatic update on out of synch objects.
-=======
  * Apr 29, 2016  5386     tjensen   Initial creation
  * Jun 20, 2017  6186     rjpeter   Fixed batch numbering.
  * Aug 02, 2017  6186     rjpeter   Cache soap service lookup and add retry.
@@ -83,28 +66,16 @@ import oasis.names.tc.ebxml.regrep.wsdl.registry.services.v4.QueryManager;
  * Mar 21, 2022  8789     mapeters  Use given initialSync flag to determine if we need to do
  *                                  initial pull of all relevant objects from central,
  *                                  propagate exceptions
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
  * @author tjensen
  */
 @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-<<<<<<< HEAD
-public class SynchronizationTask implements Runnable {
-
-    protected final Logger logger = LoggerFactory.getLogger(getClass());
-
-    /** Batch size for registry synchronization queries */
-    protected static final int SYNC_BATCH_SIZE = Integer
-            .parseInt(System.getProperty("ebxml-notification-batch-size"));
-
-=======
 public class SynchronizationTask implements Callable<Object> {
 
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private final RegistrySOAPServices soapService;
 
     private final String objectType;
@@ -125,41 +96,25 @@ public class SynchronizationTask implements Callable<Object> {
      * This Map is designed to contain the id and updateTime of local
      * RegistryObjects where the owner is the local registry
      */
-<<<<<<< HEAD
-    private HashMap<String, Date> localMapForObjectOwnedByLocalRegistry;
-=======
     private final Map<String, Date> localMapForObjectOwnedByLocalRegistry = new HashMap<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * This Map is designed to contain the id and updateTime of local
      * RegistryObjects where the owner is not the local registry
      */
-<<<<<<< HEAD
-    private HashMap<String, Date> localMapForObjectNotOwnedByLocalRegistry;
-=======
     private final Map<String, Date> localMapForObjectNotOwnedByLocalRegistry = new HashMap<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * This Map is designed to contain the id and updateTime of remote
      * RegistryObjects where the owner is the local registry
      */
-<<<<<<< HEAD
-    private HashMap<String, Date> remoteMapForObjectOwnedByLocalRegistry;
-=======
     private final Map<String, Date> remoteMapForObjectOwnedByLocalRegistry = new HashMap<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * This Map is designed to contain the id and updateTime of remote
      * RegistryObjects where the owner is not the local registry
      */
-<<<<<<< HEAD
-    private HashMap<String, Date> remoteMapForObjectNotOwnedByLocalRegistry;
-=======
     private final Map<String, Date> remoteMapForObjectNotOwnedByLocalRegistry = new HashMap<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Set contains the initial object Ids that are automatically created during
@@ -168,17 +123,6 @@ public class SynchronizationTask implements Callable<Object> {
     private static final Set<String> initialSiteDbOjectIdsSet = DbInit
             .getInitialDbOjectIdsSet();
 
-<<<<<<< HEAD
-    /**
-     * Initial list of the local registryObjects for the current object type.
-     * This list will be used for comparison with the list remote objects for
-     * the same object type
-     */
-    private List<RegObjectSubset> localRegObjectSubsetList;
-
-    private final RegistryRESTServices restClient;
-
-=======
     private final RegistryRESTServices restClient;
 
     private final boolean initialSync;
@@ -199,42 +143,19 @@ public class SynchronizationTask implements Callable<Object> {
      *            initial pull of all objects from central, false if a normal
      *            comparison/sync is needed
      */
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public SynchronizationTask(final String objectType, final String syncUrl,
             final TransactionTemplate txTemplate,
             final RegistrySOAPServices soapService,
             final RegistryRESTServices restClient,
             final RegistryObjectDao registryObjectDao,
-<<<<<<< HEAD
-            final Date synchDelayTime, final CoreDao coreDao) {
-=======
             final Date synchDelayTime, final CoreDao coreDao,
             boolean initialSync) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         this.objectType = objectType;
         this.syncUrl = syncUrl;
         this.txTemplate = txTemplate;
         this.soapService = soapService;
         this.restClient = restClient;
         this.registryObjectDao = registryObjectDao;
-<<<<<<< HEAD
-        this.localRegObjectSubsetList = new ArrayList<>();
-        this.synchDelayTime = synchDelayTime;
-        this.localMapForObjectOwnedByLocalRegistry = new HashMap<>();
-        this.localMapForObjectNotOwnedByLocalRegistry = new HashMap<>();
-        this.remoteMapForObjectOwnedByLocalRegistry = new HashMap<>();
-        this.remoteMapForObjectNotOwnedByLocalRegistry = new HashMap<>();
-        this.localRegObjectSubsetList = new ArrayList<>();
-        this.remoteLifeCycleManager = soapService
-                .getLifecycleManagerServiceForHost(syncUrl);
-        this.coreDao = coreDao;
-
-    }
-
-
-    @Override
-    public void run() {
-=======
         this.synchDelayTime = synchDelayTime;
         this.remoteLifeCycleManager = soapService
                 .getLifecycleManagerServiceForHost(syncUrl);
@@ -244,7 +165,6 @@ public class SynchronizationTask implements Callable<Object> {
 
     @Override
     public Object call() throws EbxmlRegistryException {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         /*
          * Create a new session. Once the thread is done, the session is always
          * closed in the finally block
@@ -274,11 +194,7 @@ public class SynchronizationTask implements Callable<Object> {
             /*
              * local list of ids, owners, updateTimes per ObjectType
              */
-<<<<<<< HEAD
-            localRegObjectSubsetList = registryObjectDao
-=======
             List<RegObjectSubset> localRegObjectSubsetList = registryObjectDao
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     .getIdsOwnerUpdateTimeOfType(objectType);
 
             QueryLocalRegistryHelper queryLocalRegistryHelper = new QueryLocalRegistryHelper(
@@ -312,15 +228,6 @@ public class SynchronizationTask implements Callable<Object> {
                         + "] present on remote registry. Purging the local database of those specific object types");
 
                 /*
-<<<<<<< HEAD
-                 * purging
-                 * 
-                 */
-                // ensure that we do not remove the initial db objects
-                localRegistryObjectSubsetIdsOnly
-                        .removeAll(initialSiteDbOjectIdsSet);
-
-=======
                  * Purge all local registry objects except the initial DB
                  * objects. This generally shouldn't be needed on initial sync
                  * but may be needed if our local registry JVM shut down in the
@@ -328,7 +235,6 @@ public class SynchronizationTask implements Callable<Object> {
                  */
                 localRegistryObjectSubsetIdsOnly
                         .removeAll(initialSiteDbOjectIdsSet);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 synchronizeInBatches
                         .localDelete(localRegistryObjectSubsetIdsOnly);
             } else {
@@ -336,27 +242,6 @@ public class SynchronizationTask implements Callable<Object> {
                 /*
                  * Ensure that an administrator is still able to delete the
                  * ebxml schema tables and re-download objects from central
-<<<<<<< HEAD
-                 * (remote). However, This occurs *only* when the initial ebxml
-                 * schema tables are completely empty or if the ebxml schema
-                 * tables are populated solely by the initial objects
-                 * automatically created in the database
-                 * 
-                 * @see DbInit.java {addToInitialDbOjectIdsSet()}
-                 * 
-                 * Else proceed to synch local and remote by doing all the steps
-                 * ( add, update, delete )
-                 * 
-                 */
-
-                if (localRegObjectSubsetList.isEmpty()
-                        || initialSiteDbOjectIdsSet.containsAll(
-                                localRegistryObjectSubsetIdsOnly)) {
-
-                    logger.info("Downloading "
-                            + remoteRegistryObjectSubsetIdsOnly.size()
-                            + " objects to local ");
-=======
                  * (remote). initialSync should be true in this case.
                  *
                  * Else proceed to synch local and remote by doing all the steps
@@ -385,7 +270,6 @@ public class SynchronizationTask implements Callable<Object> {
                     logger.info("Downloading "
                             + remoteRegistryObjectSubsetIdsOnly.size()
                             + " objects to local");
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                     synchronizeInBatches.localInsertOrUpdate(
                             remoteRegistryObjectSubsetIdsOnly);
@@ -475,41 +359,27 @@ public class SynchronizationTask implements Callable<Object> {
             }
 
             logger.info("***** Successfully synchronized objectType: "
-<<<<<<< HEAD
-                    + objectType + "   ");
-        } catch (Exception e) {
-            logger.error("***** Failed to synchronize objectType: " + objectType
-                    + "  *", e);
-=======
                     + objectType + "  *");
         } catch (Exception e) {
             throw new EbxmlRegistryException(
                     "***** Failed to synchronize objectType: " + objectType
                             + "  *",
                     e);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         } finally {
             // ensuring the session is always closed by the thread
             if (session != null) {
                 session.close();
             }
         }
-<<<<<<< HEAD
-=======
 
         // Only a Callable to throw an exception
         return null;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
      * Helper class used to load the instance map based on ownership by the site
      * or not.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param localRegistryObjectsSubset
      * @param remoteRegistriObjectSubset
      */
@@ -517,12 +387,7 @@ public class SynchronizationTask implements Callable<Object> {
             List<RegObjectSubset> localRegistryObjectsSubset,
             List<RegObjectSubset> remoteRegistriObjectSubset) {
 
-<<<<<<< HEAD
-        for (int i = 0; i < localRegistryObjectsSubset.size(); i++) {
-            RegObjectSubset localSubset = localRegistryObjectsSubset.get(i);
-=======
         for (RegObjectSubset localSubset : localRegistryObjectsSubset) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if (isSiteObjectCreator(localSubset)) {
 
                 this.localMapForObjectOwnedByLocalRegistry
@@ -533,13 +398,7 @@ public class SynchronizationTask implements Callable<Object> {
             }
         }
         if (remoteRegistriObjectSubset != null) {
-<<<<<<< HEAD
-            for (int i = 0; i < remoteRegistriObjectSubset.size(); i++) {
-                RegObjectSubset remoteSubset = remoteRegistriObjectSubset
-                        .get(i);
-=======
             for (RegObjectSubset remoteSubset : remoteRegistriObjectSubset) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if (isSiteObjectCreator(remoteSubset)) {
                     this.remoteMapForObjectOwnedByLocalRegistry.put(
                             remoteSubset.getId(), remoteSubset.getUpdateTime());
@@ -556,23 +415,14 @@ public class SynchronizationTask implements Callable<Object> {
     /**
      * Method used to get the list of Ids corresponding to the list of
      * RegistryObjects
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param RegistryObjectList
      * @return
      */
     private List<String> getIdsList(List<RegObjectSubset> registryObjectList) {
         List<String> list = new ArrayList<>();
-<<<<<<< HEAD
-        for (int i = 0; i < registryObjectList.size(); i++) {
-            list.add(registryObjectList.get(i).getId());
-=======
         for (RegObjectSubset element : registryObjectList) {
             list.add(element.getId());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         return list;
     }
@@ -595,11 +445,7 @@ public class SynchronizationTask implements Callable<Object> {
      * *add* to the *site* registry. This occurs when an object exists in remote
      * registry and not in the site Registry and only if the site Registry is
      * not the creator of the object.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param listRemote
      * @param siteExistingIdsSet
      * @return
@@ -630,11 +476,7 @@ public class SynchronizationTask implements Callable<Object> {
      * registry. This occurs when an object exists in site registry and not in
      * the remote Registry AND only if the site Registry is *not* the creator of
      * the object.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param listSite
      * @param remoteExistingIdsSet
      * @return
@@ -662,11 +504,7 @@ public class SynchronizationTask implements Callable<Object> {
      * *add* to the *remote* registry. This occurs when an object exists in site
      * registry and not in the remote Registry and only if the site Registry is
      * the creator of the object.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param listSite
      * @param remoteExistingIdsSet
      * @return
@@ -723,13 +561,8 @@ public class SynchronizationTask implements Callable<Object> {
      * *update* to the *site* registry. This occurs when an object exists in
      * remote registry and in the site registry AND only if the site Registry is
      * not the creator of the object and the site has an earlier version
-<<<<<<< HEAD
-     * 
-     * 
-=======
      *
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param listRemote
      * @param listSite
      * @return
@@ -767,13 +600,8 @@ public class SynchronizationTask implements Callable<Object> {
      * *update* to the *remote* registry. This occurs when an object exists in
      * remote registry and in the site registry AND only if the site registry is
      * the creator of the object and the site has the latest version
-<<<<<<< HEAD
-     * 
-     * 
-=======
      *
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param listRemote
      * @param listSite
      * @return

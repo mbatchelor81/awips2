@@ -39,11 +39,8 @@
         views="CROSSSECTION TIMEHEIGHT VARVSHGT SOUNDING TIMESERIES" />
     <vbSource key="poessounding" name="PoesBufr" category="Point" subCategory="Column"
         views="CROSSSECTION TIMEHEIGHT VARVSHGT SOUNDING TIMESERIES" />
-<<<<<<< HEAD
-=======
     <vbSource key="profiler" name="Profiler" category="Point" subCategory="Column"
         views="CROSSSECTION TIMEHEIGHT VARVSHGT SOUNDING TIMESERIES" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <vbSource key="bufrua" name="Raob" category="Point" subCategory="Column"
         views="CROSSSECTION TIMEHEIGHT VARVSHGT SOUNDING TIMESERIES" />
     <vbSource key="bufruaOA" name="RaobOA" category="Point" subCategory="Column" />

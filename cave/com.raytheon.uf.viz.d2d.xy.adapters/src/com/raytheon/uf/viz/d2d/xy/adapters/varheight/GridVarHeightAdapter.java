@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -71,15 +59,9 @@ import com.raytheon.viz.core.graphing.xy.XYWindImageData;
 /**
  * Adapter for Grid data that returns the value of a variable at multiple
  * heights.
-<<<<<<< HEAD
- * 
- * <pre>
- * 
-=======
  *
  * <pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * SOFTWARE HISTORY
  * Date          Ticket#  Engineer    Description
  * ------------- -------- ----------- --------------------------
@@ -87,16 +69,10 @@ import com.raytheon.viz.core.graphing.xy.XYWindImageData;
  * Sep  9, 2013  2277     mschenke    Got rid of ScriptCreator references
  * Feb 17, 2014  2661     bsteffen    Use only u,v for vectors.
  * Feb 06, 2018  6829     njensen     Check for wind
-<<<<<<< HEAD
- * 
- * </pre>
- * 
-=======
  * Oct 29, 2022  8959     mapeters    Update how data time levels are set
  *
  * </pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author bsteffen
  */
 
@@ -109,12 +85,7 @@ public class GridVarHeightAdapter extends AbstractVarHeightAdapter<GridRecord> {
     @Override
     public String getParameterName() {
         synchronized (records) {
-<<<<<<< HEAD
-            String name = records.iterator().next()
-                    .getParameter().getName();
-=======
             String name = records.iterator().next().getParameter().getName();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if (name == null || name.isEmpty()) {
                 name = records.iterator().next().getParameter()
                         .getAbbreviation();
@@ -130,12 +101,7 @@ public class GridVarHeightAdapter extends AbstractVarHeightAdapter<GridRecord> {
             if (records == null || records.size() == 0) {
                 return null;
             }
-<<<<<<< HEAD
-            return records.iterator().next().getParameter()
-                    .getUnit();
-=======
             return records.iterator().next().getParameter().getUnit();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         }
     }
@@ -150,12 +116,7 @@ public class GridVarHeightAdapter extends AbstractVarHeightAdapter<GridRecord> {
         for (DataTime key : keys) {
             Set<GridRecord> aRecord = yRecordMap.get(key);
             if (!aRecord.isEmpty()) {
-<<<<<<< HEAD
-                return aRecord.iterator().next().getParameter()
-                        .getUnit();
-=======
                 return aRecord.iterator().next().getParameter().getUnit();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         }
         return null;
@@ -165,12 +126,7 @@ public class GridVarHeightAdapter extends AbstractVarHeightAdapter<GridRecord> {
     public List<XYData> loadData(DataTime currentTime) throws VizException {
         populateYRecords();
 
-<<<<<<< HEAD
-        List<GridRecord> hasData = new ArrayList<>(
-                records.size());
-=======
         List<GridRecord> hasData = new ArrayList<>(records.size());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         Map<Level, GridRecord> xMap = new HashMap<>();
         synchronized (records) {
@@ -214,13 +170,8 @@ public class GridVarHeightAdapter extends AbstractVarHeightAdapter<GridRecord> {
             if (hasData.contains(record)) {
                 continue;
             }
-<<<<<<< HEAD
-            List<PluginDataObject> list = recordsByLocation.get(record
-                    .getLocation());
-=======
             List<PluginDataObject> list = recordsByLocation
                     .get(record.getLocation());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if (list == null) {
                 list = new ArrayList<>(xMap.size() * 2);
                 recordsByLocation.put(record.getLocation(), list);
@@ -232,13 +183,8 @@ public class GridVarHeightAdapter extends AbstractVarHeightAdapter<GridRecord> {
             if (hasData.contains(record)) {
                 continue;
             }
-<<<<<<< HEAD
-            List<PluginDataObject> list = recordsByLocation.get(record
-                    .getLocation());
-=======
             List<PluginDataObject> list = recordsByLocation
                     .get(record.getLocation());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if (list == null) {
                 list = new ArrayList<>(yMap.size());
                 recordsByLocation.put(record.getLocation(), list);
@@ -316,11 +262,7 @@ public class GridVarHeightAdapter extends AbstractVarHeightAdapter<GridRecord> {
     /**
      * Retrive the coordinate in grid space(defined by location) where this
      * adapter is expected to load data.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param location
      * @return
      * @throws VizException
@@ -340,11 +282,7 @@ public class GridVarHeightAdapter extends AbstractVarHeightAdapter<GridRecord> {
      * find the rectangle in grid space(defined by location) where this adapter
      * should request data, the rectangle is formed by adding enough space
      * around the point to perform bilinear interpolation.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param location
      * @return
      * @throws VizException
@@ -353,24 +291,15 @@ public class GridVarHeightAdapter extends AbstractVarHeightAdapter<GridRecord> {
         DirectPosition2D point = getPoint(location);
         Rectangle rectangle = new Rectangle((int) Math.floor(point.x),
                 (int) Math.floor(point.y), 2, 2);
-<<<<<<< HEAD
-        rectangle = rectangle.intersection(new Rectangle(0, 0,
-                location.getNx(), location.getNy()));
-=======
         rectangle = rectangle.intersection(
                 new Rectangle(0, 0, location.getNx(), location.getNy()));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return rectangle;
     }
 
     /**
      * Find the datastore request needed to get data for GridRecords with the
      * provided location.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param location
      * @return
      * @throws VizException
@@ -390,11 +319,7 @@ public class GridVarHeightAdapter extends AbstractVarHeightAdapter<GridRecord> {
     @Override
     public void addRecord(PluginDataObject pdo) {
         DataTime key = pdo.getDataTime().clone();
-<<<<<<< HEAD
-        key.setLevelValue(null);
-=======
         key.clearLevel();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         // clear the y records for this time only
         synchronized (yRecordMap) {
@@ -408,11 +333,7 @@ public class GridVarHeightAdapter extends AbstractVarHeightAdapter<GridRecord> {
     @Override
     public void remove(DataTime time) {
         DataTime key = time.clone();
-<<<<<<< HEAD
-        key.setLevelValue(null);
-=======
         key.clearLevel();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         synchronized (yRecordMap) {
             // remove all from this time
             yRecordMap.remove(key);
@@ -450,13 +371,8 @@ public class GridVarHeightAdapter extends AbstractVarHeightAdapter<GridRecord> {
             }
             for (PluginDataObject pdo : pdos) {
                 GridRecord gRecord = (GridRecord) pdo;
-<<<<<<< HEAD
-                Set<GridRecord> recordSet = yRecordMap.get(gRecord
-                        .getDataTime());
-=======
                 Set<GridRecord> recordSet = yRecordMap
                         .get(gRecord.getDataTime());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if (recordSet != null) {
                     recordSet.add(gRecord);
                 } else {
@@ -470,14 +386,8 @@ public class GridVarHeightAdapter extends AbstractVarHeightAdapter<GridRecord> {
 
     @Override
     public void setHeightScale(HeightScale heightScale) {
-<<<<<<< HEAD
-        if (this.heightScale != null
-                && !this.heightScale.getParameter().equals(
-                        heightScale.getParameter())) {
-=======
         if (this.heightScale != null && !this.heightScale.getParameter()
                 .equals(heightScale.getParameter())) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             synchronized (yRecordMap) {
                 yRecordMap.clear();
             }

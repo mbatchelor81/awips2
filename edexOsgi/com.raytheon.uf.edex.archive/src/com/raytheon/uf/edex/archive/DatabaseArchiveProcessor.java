@@ -30,10 +30,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Writer;
-<<<<<<< HEAD
-import java.nio.file.attribute.PosixFilePermission;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.nio.file.attribute.PosixFilePermissions;
 import java.text.DecimalFormat;
 import java.util.Collections;
@@ -90,10 +86,7 @@ import com.raytheon.uf.edex.database.processor.IDatabaseProcessor;
  * Feb 29, 2016 5420       tgurney     Remove timestampCheck arg from IDataStore.copy()
  * May 05, 2017 6256       tgurney     Restrict file and dir permissions
  * Jun 16, 2017 6256       tgurney     Do not createFile if file already exists
-<<<<<<< HEAD
-=======
  * Mar 10, 2022 8690       lsingh      Replace private static fields(FILE_PERMISSIONS & DIR_PERMISSIOMS) by corresponding fields from AtchiveUtil
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  * 
  * @author rjpeter
@@ -114,23 +107,6 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
     private static final Pattern FILE_COUNT_PATTERN = Pattern
             .compile("^(.*\\.bin\\.)(\\d+)(?:\\.gz)?$");
 
-<<<<<<< HEAD
-    private static final Set<PosixFilePermission> FILE_PERMISSIONS = new HashSet<>();
-
-    private static final Set<PosixFilePermission> DIR_PERMISSIONS = new HashSet<>();
-    static {
-        // in octal: 0640
-        FILE_PERMISSIONS.add(PosixFilePermission.OWNER_READ);
-        FILE_PERMISSIONS.add(PosixFilePermission.OWNER_WRITE);
-        FILE_PERMISSIONS.add(PosixFilePermission.GROUP_READ);
-        // directories have 0750
-        DIR_PERMISSIONS.addAll(FILE_PERMISSIONS);
-        DIR_PERMISSIONS.add(PosixFilePermission.OWNER_EXECUTE);
-        DIR_PERMISSIONS.add(PosixFilePermission.GROUP_EXECUTE);
-    }
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     protected final String archivePath;
 
     protected final String pluginName;
@@ -147,19 +123,11 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
 
     protected int entriesInMemory = 0;
 
-<<<<<<< HEAD
-    protected Set<String> datastoreFilesToArchive = new HashSet<String>();
-
-    protected Map<String, FileStatus> filesCreatedThisSession = new HashMap<String, FileStatus>();
-
-    protected Set<File> dirsToCheckNumbering = new HashSet<File>();
-=======
     protected Set<String> datastoreFilesToArchive = new HashSet<>();
 
     protected Map<String, FileStatus> filesCreatedThisSession = new HashMap<>();
 
     protected Set<File> dirsToCheckNumbering = new HashSet<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     protected int recordsSaved = 0;
 
@@ -186,11 +154,7 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
     public boolean process(T object) throws ShutdownException {
         if (object != null) {
             if (pdosByFile == null) {
-<<<<<<< HEAD
-                pdosByFile = new HashMap<String, List<PersistableDataObject<?>>>(
-=======
                 pdosByFile = new HashMap<>(
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         (int) (fetchSize * 1.3));
             }
 
@@ -202,11 +166,7 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
 
             List<PersistableDataObject<?>> list = pdosByFile.get(path);
             if (list == null) {
-<<<<<<< HEAD
-                list = new LinkedList<PersistableDataObject<?>>();
-=======
                 list = new LinkedList<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 pdosByFile.put(path, list);
             }
 
@@ -223,15 +183,10 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
                     statusHandler.info(pluginName + ": Processed rows " + prev
                             + " to " + recordsSaved);
                 } catch (Exception e) {
-<<<<<<< HEAD
-                    statusHandler.error(pluginName
-                            + ": Error occurred saving data to archive", e);
-=======
                     statusHandler.error(
                             pluginName
                                     + ": Error occurred saving data to archive",
                             e);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     failed = true;
                     return false;
                 }
@@ -256,14 +211,9 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
                 statusHandler.info(pluginName + ": Processed rows " + prev
                         + " to " + recordsSaved);
             } catch (Exception e) {
-<<<<<<< HEAD
-                statusHandler.error(pluginName
-                        + ": Error occurred saving data to archive", e);
-=======
                 statusHandler.error(
                         pluginName + ": Error occurred saving data to archive",
                         e);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 failed = true;
             }
         }
@@ -275,22 +225,13 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
         if (!datastoreFilesToArchive.isEmpty()) {
             statusHandler.info(pluginName + ": archiving "
                     + datastoreFilesToArchive.size() + " hdf5 file(s)");
-<<<<<<< HEAD
-            Compression compRequired = Compression.LZF;
-=======
             Compression compRequired = Compression.GZIP;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             PluginProperties props = PluginRegistry.getInstance()
                     .getRegisteredObject(pluginName);
 
             if ((props != null) && (props.getCompression() != null)) {
-<<<<<<< HEAD
-                if (compRequired.equals(Compression.valueOf(props
-                        .getCompression()))) {
-=======
                 if (compRequired
                         .equals(Compression.valueOf(props.getCompression()))) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     // if plugin is already compressed to the correct level,
                     // no additional compression required
                     compRequired = null;
@@ -299,19 +240,11 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
 
             for (String dataStoreFile : datastoreFilesToArchive) {
                 EDEXUtil.checkShuttingDown();
-<<<<<<< HEAD
-                IDataStore ds = DataStoreFactory.getDataStore(new File(FileUtil
-                        .join(pluginName, dataStoreFile)));
-                // all dataStore files should end with .h5
-                String destDir = (dataStoreFile.endsWith(".h5") ? dataStoreFile
-                        .substring(0, dataStoreFile.length() - 3)
-=======
                 IDataStore ds = DataStoreFactory.getDataStore(
                         new File(FileUtil.join(pluginName, dataStoreFile)));
                 // all dataStore files should end with .h5
                 String destDir = (dataStoreFile.endsWith(".h5")
                         ? dataStoreFile.substring(0, dataStoreFile.length() - 3)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         : dataStoreFile);
 
                 String outputDir = FileUtil.join(archivePath, pluginName,
@@ -319,15 +252,9 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
 
                 try {
                     if (statusHandler.isPriorityEnabled(Priority.DEBUG)) {
-<<<<<<< HEAD
-                        statusHandler.debug(pluginName
-                                + ": Archiving data store file "
-                                + dataStoreFile + " to " + outputDir);
-=======
                         statusHandler.debug(
                                 pluginName + ": Archiving data store file "
                                         + dataStoreFile + " to " + outputDir);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     }
 
                     // copy the changed hdf5 file, does repack if
@@ -430,12 +357,8 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
      * @throws SerializationException
      * @throws IOException
      */
-<<<<<<< HEAD
-    protected void savePdoMap(Map<String, List<PersistableDataObject<?>>> pdoMap)
-=======
     protected void savePdoMap(
             Map<String, List<PersistableDataObject<?>>> pdoMap)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             throws SerializationException, IOException, ShutdownException {
         StringBuilder baseDir = new StringBuilder(160);
         Set<Object> identifierSet = null;
@@ -449,21 +372,12 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
                     .append(entry.getKey()).append(File.separator);
             File dir = new File(baseDir.toString());
 
-<<<<<<< HEAD
-            Files.createDirectories(dir.toPath(),
-                    PosixFilePermissions.asFileAttribute(DIR_PERMISSIONS));
-
-            List<PersistableDataObject<?>> pdos = entry.getValue();
-            if (identifierSet == null) {
-                identifierSet = new HashSet<Object>(pdos.size(), 1);
-=======
             Files.createDirectories(dir.toPath(), PosixFilePermissions
                     .asFileAttribute(ArchiveUtil.DIR_PERMISSIONS));
 
             List<PersistableDataObject<?>> pdos = entry.getValue();
             if (identifierSet == null) {
                 identifierSet = new HashSet<>(pdos.size(), 1);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             } else {
                 identifierSet.clear();
             }
@@ -476,22 +390,13 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
             pdos = dupElimPreviousFiles(fileMap, pdos, identifierSet);
 
             // if any records left in pdos, write to disk
-<<<<<<< HEAD
-            if (pdos.size() > 0) {
-=======
             if (!pdos.isEmpty()) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 int fileCount = 1;
                 if (!fileMap.isEmpty()) {
                     fileCount += fileMap.lastKey();
                 }
-<<<<<<< HEAD
-                File newFile = new File(dir, dir.getName() + BIN_FILE_EXT + "."
-                        + fileCount);
-=======
                 File newFile = new File(dir,
                         dir.getName() + BIN_FILE_EXT + "." + fileCount);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 fileMap.put(fileCount, newFile);
                 writeDataToDisk(newFile, pdos);
                 FileStatus status = new FileStatus();
@@ -502,12 +407,8 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
                 // check if we have added another digit and should add a 0 to
                 // previous numbers
                 String fileCountStr = Integer.toString(fileCount);
-<<<<<<< HEAD
-                if (fileCountStr.startsWith("1") && fileCountStr.endsWith("0")) {
-=======
                 if (fileCountStr.startsWith("1")
                         && fileCountStr.endsWith("0")) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     dirsToCheckNumbering.add(dir);
                 }
             }
@@ -548,15 +449,6 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
                     }
                 }
 
-<<<<<<< HEAD
-                List<PersistableDataObject<?>> pdosFromDisk = readDataFromDisk(dataFile);
-                if (pdosFromDisk.size() > 0) {
-                    if (statusHandler.isPriorityEnabled(Priority.DEBUG)) {
-                        statusHandler.debug(pluginName + ": Checking "
-                                + pdosFromDisk.size()
-                                + " old records from file: "
-                                + dataFile.getAbsolutePath());
-=======
                 List<PersistableDataObject<?>> pdosFromDisk = readDataFromDisk(
                         dataFile);
                 if (!pdosFromDisk.isEmpty()) {
@@ -565,7 +457,6 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
                                 pluginName + ": Checking " + pdosFromDisk.size()
                                         + " old records from file: "
                                         + dataFile.getAbsolutePath());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     }
 
                     Iterator<PersistableDataObject<?>> pdoIter = pdosFromDisk
@@ -627,33 +518,19 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
                         if (!pdosFromDisk.isEmpty()) {
                             writeDataToDisk(dataFile, pdosFromDisk);
                             if (prevFileStatus != null) {
-<<<<<<< HEAD
-                                prevFileStatus.fileFull = pdosFromDisk.size() >= fetchSize;
-=======
                                 prevFileStatus.fileFull = pdosFromDisk
                                         .size() >= fetchSize;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                             }
                         } else {
 
                             dirsToCheckNumbering.add(dataFile.getParentFile());
                             if (dataFile.exists() && !dataFile.delete()) {
-<<<<<<< HEAD
-                                statusHandler
-                                        .error(pluginName
-                                                + ": Failed to delete file ["
-                                                + dataFile.getAbsolutePath()
-                                                + "], all entries have been updated in later files.");
-                                if (!dataFile.renameTo(new File(dataFile
-                                        .getAbsoluteFile() + ".bad"))) {
-=======
                                 statusHandler.error(pluginName
                                         + ": Failed to delete file ["
                                         + dataFile.getAbsolutePath()
                                         + "], all entries have been updated in later files.");
                                 if (!dataFile.renameTo(new File(
                                         dataFile.getAbsoluteFile() + ".bad"))) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                     statusHandler.error(pluginName + ": file ["
                                             + dataFile.getAbsoluteFile()
                                             + "] cannot be renamed to .bad");
@@ -682,25 +559,11 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
     protected List<PersistableDataObject<?>> readDataFromDisk(File file)
             throws IOException, SerializationException {
         if (file.exists()) {
-<<<<<<< HEAD
-            InputStream is = null;
-            boolean successful = false;
-            try {
-                if (file.getName().endsWith(GZIP_FILE_EXT)) {
-                    is = new GZIPInputStream(new FileInputStream(file),
-                            CHUNK_SIZE);
-                } else {
-                    is = new BufferedInputStream(new FileInputStream(file),
-                            CHUNK_SIZE);
-                }
-
-=======
             boolean successful = false;
             try (InputStream is = (file.getName().endsWith(GZIP_FILE_EXT)
                     ? new GZIPInputStream(new FileInputStream(file), CHUNK_SIZE)
                     : new BufferedInputStream(new FileInputStream(file), CHUNK_SIZE))) {
                 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 List<PersistableDataObject<?>> rval = SerializationUtil
                         .transformFromThrift(List.class, is);
                 successful = true;
@@ -708,28 +571,11 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
             } finally {
                 if (!successful) {
                     // couldn't read in file, move it to bad
-<<<<<<< HEAD
-                    if (file.exists()
-                            && !file.renameTo(new File(file.getAbsoluteFile()
-                                    + ".bad"))) {
-                        statusHandler.error(pluginName + ": file ["
-                                + file.getAbsoluteFile()
-                                + "] cannot be renamed to .bad");
-                    }
-                }
-                if (is != null) {
-                    try {
-                        is.close();
-                    } catch (IOException e) {
-                        statusHandler.error(pluginName
-                                + ": Error occurred closing input stream", e);
-=======
                     if (file.exists() && !file.renameTo(
                             new File(file.getAbsoluteFile() + ".bad"))) {
                         statusHandler.error(
                                 pluginName + ": file [" + file.getAbsoluteFile()
                                         + "] cannot be renamed to .bad");
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     }
                 }
             }
@@ -751,13 +597,8 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
      * @throws SerializationException
      */
     protected void writeDataToDisk(File file,
-<<<<<<< HEAD
-            List<PersistableDataObject<?>> pdos) throws IOException,
-            SerializationException {
-=======
             List<PersistableDataObject<?>> pdos)
             throws IOException, SerializationException {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         OutputStream os = null;
 
         File gzipFile = null;
@@ -766,13 +607,8 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
 
         if (fileAbsPath.endsWith(GZIP_FILE_EXT)) {
             gzipFile = file;
-<<<<<<< HEAD
-            baseFile = new File(fileAbsPath.substring(0,
-                    fileAbsPath.length() - 3));
-=======
             baseFile = new File(
                     fileAbsPath.substring(0, fileAbsPath.length() - 3));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         } else {
             baseFile = file;
             gzipFile = new File(fileAbsPath + GZIP_FILE_EXT);
@@ -781,63 +617,37 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
         try {
             if (!file.getParentFile().exists()) {
                 Files.createDirectories(file.getParentFile().toPath(),
-<<<<<<< HEAD
-                        PosixFilePermissions.asFileAttribute(DIR_PERMISSIONS));
-=======
                         PosixFilePermissions
                                 .asFileAttribute(ArchiveUtil.DIR_PERMISSIONS));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
 
             if (compressDatabaseFiles) {
                 if (baseFile.exists()) {
                     if (statusHandler.isPriorityEnabled(Priority.DEBUG)) {
-<<<<<<< HEAD
-                        statusHandler
-                                .debug(pluginName
-                                        + ": Database compression flag changed, deleting uncompressed file "
-                                        + baseFile.getAbsolutePath());
-=======
                         statusHandler.debug(pluginName
                                 + ": Database compression flag changed, deleting uncompressed file "
                                 + baseFile.getAbsolutePath());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     }
                     baseFile.delete();
                 }
                 if (!gzipFile.exists()) {
                     Files.createFile(gzipFile.toPath(), PosixFilePermissions
-<<<<<<< HEAD
-                            .asFileAttribute(FILE_PERMISSIONS));
-=======
                             .asFileAttribute(ArchiveUtil.FILE_PERMISSIONS));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
                 os = new GZIPOutputStream(new FileOutputStream(gzipFile),
                         CHUNK_SIZE);
             } else {
                 if (gzipFile.exists()) {
                     if (statusHandler.isPriorityEnabled(Priority.DEBUG)) {
-<<<<<<< HEAD
-                        statusHandler
-                                .debug(pluginName
-                                        + ": Database compression flag changed, deleting compressed file "
-                                        + gzipFile.getAbsolutePath());
-=======
                         statusHandler.debug(pluginName
                                 + ": Database compression flag changed, deleting compressed file "
                                 + gzipFile.getAbsolutePath());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     }
                     gzipFile.delete();
                 }
                 if (!baseFile.exists()) {
                     Files.createFile(baseFile.toPath(), PosixFilePermissions
-<<<<<<< HEAD
-                            .asFileAttribute(FILE_PERMISSIONS));
-=======
                             .asFileAttribute(ArchiveUtil.FILE_PERMISSIONS));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
                 os = new BufferedOutputStream(new FileOutputStream(baseFile),
                         CHUNK_SIZE);
@@ -856,26 +666,17 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
                 try {
                     os.close();
                 } catch (IOException e) {
-<<<<<<< HEAD
-                    statusHandler.error(pluginName
-                            + ": Error occurred closing output stream", e);
-=======
                     statusHandler.error(
                             pluginName
                                     + ": Error occurred closing output stream",
                             e);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
             }
         }
 
         if (debugArchiver) {
             String debugPath = baseFile.getAbsolutePath() + ".debug";
-<<<<<<< HEAD
-            dumpPdos(debugPath.toString(), pdos);
-=======
             dumpPdos(debugPath, pdos);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 
@@ -885,26 +686,6 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
      * @param basePath
      * @param pdos
      */
-<<<<<<< HEAD
-    private void dumpPdos(String basePath, List<PersistableDataObject<?>> pdos) {
-        Writer writer = null;
-        File dumpFile = null;
-
-        try {
-            int index = 0;
-            do {
-                index++;
-                dumpFile = new File(basePath + "." + index);
-            } while (dumpFile.exists());
-
-            Iterator<PersistableDataObject<?>> pdoIter = pdos.iterator();
-            writer = new BufferedWriter(new FileWriter(dumpFile));
-
-            if (statusHandler.isPriorityEnabled(Priority.INFO)) {
-                statusHandler.info(String.format("%s: Dumping " + pdos.size()
-                        + " records to: %s", pluginName,
-                        dumpFile.getAbsolutePath()));
-=======
     private void dumpPdos(String basePath,
             List<PersistableDataObject<?>> pdos) {
         File dumpFile = null;
@@ -923,7 +704,6 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
                 statusHandler.info(String.format(
                         "%s: Dumping " + pdos.size() + " records to: %s",
                         pluginName, dumpFile.getAbsolutePath()));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
 
             while (pdoIter.hasNext()) {
@@ -945,26 +725,10 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
                 }
             }
         } catch (Exception e) {
-<<<<<<< HEAD
-            statusHandler
-                    .handle(Priority.PROBLEM, pluginName
-                            + ": Unable to dump pdo data to debug file: "
-                            + (dumpFile != null ? dumpFile.getAbsolutePath()
-                                    : null), e);
-        } finally {
-            if (writer != null) {
-                try {
-                    writer.close();
-                } catch (Exception e) {
-                    // Ignore
-                }
-            }
-=======
             statusHandler.handle(Priority.PROBLEM, pluginName
                     + ": Unable to dump pdo data to debug file: "
                     + (dumpFile != null ? dumpFile.getAbsolutePath() : null),
                     e);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 
@@ -977,11 +741,7 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
      */
     protected SortedMap<Integer, File> getArchivedFiles(File baseDir) {
         File[] dirListing = baseDir.listFiles();
-<<<<<<< HEAD
-        SortedMap<Integer, File> fileMap = new TreeMap<Integer, File>();
-=======
         SortedMap<Integer, File> fileMap = new TreeMap<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         if ((dirListing != null) && (dirListing.length > 0)) {
             for (File dataFile : dirListing) {
@@ -1032,21 +792,6 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
                 if ((fileNum > nextFileCount)
                         || (oldCountString.length() != formatString.length())) {
                     // rename file to file count
-<<<<<<< HEAD
-                    String newFileName = m.group(1) + format.format(fileNum);
-                    if (name.endsWith(GZIP_FILE_EXT)) {
-                        newFileName += GZIP_FILE_EXT;
-                    }
-
-                    File newFile = new File(oldFile.getParent(), newFileName);
-                    if (!oldFile.renameTo(newFile)) {
-                        statusHandler
-                                .error("Failed rename file "
-                                        + oldFile.getAbsolutePath()
-                                        + " to "
-                                        + newFile.getAbsolutePath()
-                                        + ".  Stopping file number consistency checking.");
-=======
                     StringBuilder newFileName = new StringBuilder(m.group(1) + format.format(fileNum));
                     if (name.endsWith(GZIP_FILE_EXT)) {
                         newFileName.append(GZIP_FILE_EXT);
@@ -1058,7 +803,6 @@ public class DatabaseArchiveProcessor<T extends PersistableDataObject<?>>
                                 + oldFile.getAbsolutePath() + " to "
                                 + newFile.getAbsolutePath()
                                 + ".  Stopping file number consistency checking.");
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         return;
                     }
                 }

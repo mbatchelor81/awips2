@@ -19,16 +19,8 @@
  **/
 package com.raytheon.viz.gfe.textformatter;
 
-<<<<<<< HEAD
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
-=======
-import java.util.HashMap;
-import java.util.Map;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.uf.common.status.IPerformanceStatusHandler;
 import com.raytheon.uf.common.status.IUFStatusHandler;
@@ -38,10 +30,7 @@ import com.raytheon.uf.common.status.UFStatus.Priority;
 import com.raytheon.uf.common.time.SimulatedTime;
 import com.raytheon.uf.common.time.util.ITimer;
 import com.raytheon.uf.common.time.util.TimeUtil;
-<<<<<<< HEAD
-=======
 import com.raytheon.uf.common.util.SystemUtil;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.viz.gfe.core.DataManager;
 import com.raytheon.viz.gfe.dialogs.formatterlauncher.ConfigData;
 import com.raytheon.viz.gfe.dialogs.formatterlauncher.ConfigData.ProductStateEnum;
@@ -73,10 +62,7 @@ import jep.JepException;
  * Dec 08, 2015  #5129     dgilling    Pass IFPClient to getVarDict.
  * Apr 14, 2016  #5578     dgilling    Remove getVarDict.
  * Jun 03, 2019  7852      dgilling    Update code for jep 3.8.
-<<<<<<< HEAD
-=======
  * Dec 17, 2021  8342      sharbison   Code cleanup.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -91,11 +77,7 @@ public class TextFormatter extends AbstractGfeTask {
             .getHandler(TextFormatter.class);
 
     private final IPerformanceStatusHandler perfLog = PerformanceStatus
-<<<<<<< HEAD
-            .getHandler("GFE:");
-=======
             .getHandler("GFE");
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private TextProductFinishListener listener;
 
@@ -126,15 +108,9 @@ public class TextFormatter extends AbstractGfeTask {
      * @param dataMgr
      *            the {@code DataManager} instance to use.
      */
-<<<<<<< HEAD
-    public TextFormatter(String productName, String vtecMode,
-            String databaseID, String vtecActiveTable, String drtTime,
-            int testMode, TextProductFinishListener finish, DataManager dataMgr) {
-=======
     public TextFormatter(String productName, String vtecMode, String databaseID,
             String vtecActiveTable, String drtTime, int testMode,
             TextProductFinishListener finish, DataManager dataMgr) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         this(productName, vtecMode, databaseID, null, vtecActiveTable, drtTime,
                 testMode, finish, dataMgr);
     }
@@ -163,20 +139,6 @@ public class TextFormatter extends AbstractGfeTask {
      * @param dataMgr
      *            the {@code DataManager} instance to use.
      */
-<<<<<<< HEAD
-    public TextFormatter(String productName, String vtecMode,
-            String databaseID, String varDict, String vtecActiveTable,
-            String drtTime, int testMode, TextProductFinishListener finish,
-            DataManager dataMgr) {
-        super(productName);
-
-        String addr = null;
-        try {
-            addr = InetAddress.getLocalHost().getHostName();
-        } catch (UnknownHostException e) {
-            addr = UUID.randomUUID().toString();
-        }
-=======
     public TextFormatter(String productName, String vtecMode, String databaseID,
             String varDict, String vtecActiveTable, String drtTime,
             int testMode, TextProductFinishListener finish,
@@ -184,7 +146,6 @@ public class TextFormatter extends AbstractGfeTask {
         super(productName);
 
         String addr = SystemUtil.getHostName();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         this.dataMgr = dataMgr;
 
@@ -300,12 +261,7 @@ public class TextFormatter extends AbstractGfeTask {
                 .append('"');
         sb.append(" -d ").append(argMap.get(ArgDictConstants.DATABASE_ID));
         sb.append(" -u \"").append(argMap.get("username")).append('"');
-<<<<<<< HEAD
-        sb.append(" -V \"")
-                .append(argMap.get(ArgDictConstants.CMDLINE_VARDICT))
-=======
         sb.append(" -V \"").append(argMap.get(ArgDictConstants.CMDLINE_VARDICT))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 .append('"');
         sb.append(" -a ")
                 .append(argMap.get(ArgDictConstants.VTEC_ACTIVE_TABLE));

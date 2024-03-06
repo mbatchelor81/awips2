@@ -42,11 +42,8 @@ import java.util.regex.Pattern;
  * Apr 01, 2016  18798    jdynina   Added Backup Comms to rpgAlarmStr
  * May 25, 2016  18795    jdynina   Added CCM error codes
  * Mar 26, 2018  6711     randerso  Updated for RPG build 18. Code cleanup.
-<<<<<<< HEAD
-=======
  * Mar 20, 2020  21909    jdynina   Added expanded vcp supplemental info
  *                                  to GSM
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -464,12 +461,8 @@ public class RadarConstants {
 
     public static final List<String> vcpInfoStr = Collections.unmodifiableList(
             Arrays.asList("AVSET", "SAILSx{n}", "Site-Specific VCP", "RxRN",
-<<<<<<< HEAD
-                    "CBT", "VCP Sequence", "SPRT", "MRLEx{n}"));
-=======
                     "CBT", "VCP Sequence", "SPRT", "MRLEx{n}", "Base-Tilt",
                     "MPDA"));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     public static final String NO_DATA = "NO DATA";
 

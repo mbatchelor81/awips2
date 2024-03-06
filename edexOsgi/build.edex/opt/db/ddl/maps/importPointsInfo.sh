@@ -26,11 +26,7 @@ if [ $# -lt 3 ] ; then
     echo "       table     - database table where the shape file is to be imported"
     echo "       dbUser    - optional database user id"
     echo "       dbPort    - optional database port number"
-<<<<<<< HEAD
-    echo "       installDir- optional directory path to awips installation"
-=======
     echo "       installDir- ignored (exists for backward compatibility only)"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     echo "example: `basename $0` LocalCitiesInfo.txt mapdata localcities awips 5432 /awips2"
     exit -1
 fi
@@ -51,21 +47,9 @@ else
     PGPORT=${5}
 fi
 
-<<<<<<< HEAD
-if [ -z $6 ] ; then
-    PGBINDIR=''
-    PSQLBINDIR=''
-else
-    PGBINDIR=${6}/postgresql/bin/
-    PSQLBINDIR=${6}/psql/bin/
-fi
-
-psql="a2dbauth ${PSQLBINDIR}psql"
-=======
 # $6 is installDir, ignored
 
 psql="a2dbauth psql"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 FILENAME=`basename ${FILEPATH}`
 echo "  Importing ${FILENAME} into ${SCHEMA}.${TABLE} ..."
@@ -88,10 +72,4 @@ ${psql} -d maps -U ${PGUSER} -q -p ${PGPORT} -c "
 sed -e "s/'/''/g;s/\([-\.[:digit:]]*\)[[:blank:]]\{1,\}\([-\.[:digit:]]*\)[[:blank:]]\{1,\}\([[:digit:]]*\)[[:blank:]]\{1,\}\([[:upper:]]*\)[[:blank:]]\{1,\}\([^|]*\)|\([[:digit:]]*\).*/INSERT INTO \"${SCHEMA}\".\"${TABLE}\"(st,name,prog_disc,warngenlev,the_geom) VALUES('\4','\5',\3,\6,ST_GeomFromText('POINT(\2 \1)',4326));/" $FILEPATH | \
     ${psql} -d maps -U ${PGUSER} -q -p ${PGPORT}
     
-<<<<<<< HEAD
-if [ -d ${PGBINDIR} ]; then
-a2dbauth ${PGBINDIR}vacuumdb -d maps -t ${SCHEMA}.${TABLE} -U ${PGUSER} -p ${PGPORT} -qz
-fi
-=======
 a2dbauth vacuumdb -d maps -t ${SCHEMA}.${TABLE} -U ${PGUSER} -p ${PGPORT} -qz
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

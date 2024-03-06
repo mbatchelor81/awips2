@@ -89,7 +89,6 @@
     <entry index="62" value="Polar 3.9u" />
     <entry index="63" value="Polar 3.7u" />
     <entry index="64" value="Polar IR" />
-<<<<<<< HEAD
     <entry index="118" value="OHA" />
     <entry index="119" value="DSP" />
     <entry index="120" value="DTA" />
@@ -104,6 +103,4 @@
     <entry index="129" value="DVL" />
     <entry index="130" value="N1P" />
     <entry index="131" value="NTP" />
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 </numericLookupTable>

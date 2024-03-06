@@ -20,10 +20,7 @@
 package com.raytheon.uf.viz.thinclient.localization;
 
 import java.util.Map;
-<<<<<<< HEAD
-=======
 import java.util.Optional;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import org.apache.commons.collections.map.DefaultedMap;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -69,10 +66,7 @@ import com.raytheon.uf.viz.thinclient.ui.ThinClientConnectivityDialog;
  * Jan 26, 2015  3952       njensen     gzip handled by default
  * Jul 06, 2015  4614       njensen     explicitly enable gzip
  * Feb 08, 2016  5281       tjensen     Replaced disableJms with dataRefreshMethod
-<<<<<<< HEAD
-=======
  * Aug 06, 2021  22528      smoorthy    pass optional proxyAddress to LocalizationManager
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -133,11 +127,7 @@ public class ThinClientLocalizationInitializer extends LocalizationInitializer {
                 }
             }
             LocalizationManager.getInstance().setCurrentServer(servicesProxy,
-<<<<<<< HEAD
-                    false);
-=======
                     false, Optional.of(proxyAddr));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             VizApp.setHttpServer(servicesProxy);
 
             if (ThinClientPreferenceConstants.P_DATA_REFRESH_METHOD_PUSH

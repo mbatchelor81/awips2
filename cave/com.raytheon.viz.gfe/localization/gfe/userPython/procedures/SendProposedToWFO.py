@@ -18,11 +18,7 @@
 #                                     surge event are notified
 # May 16, 2019 21020      tlefebvr    Modified to send Wind hazard messages
 #                                     as well as Storm Surge
-<<<<<<< HEAD
-# May 16, 2019 20464      tlefebvr    Changed interface to support any set of 
-=======
 # May 16, 2019 20464      tlefebvr    Changed interface to support any set of
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #                                     AT* bulletins and added code to run the
 #                                     script to send JSON files t AWIPS WAN.
 # Apr 21, 2020 20464      tlefebvr    Added EP bins to GUI.
@@ -34,19 +30,11 @@
 # May 06, 2020 22033      tlefebvr    Code clean-up.
 # May 12, 2020 22033      psantos     Adjusted code made during vlab down.
 # May 14, 2020 22033      tlefebvr    Modified to use ***Sites methods in WWUTils
-<<<<<<< HEAD
-# May 15, 2020            psantos     Added code to always send json file in case 
-#                                     only coastal hazards being pushed with no guidance grid.
-# May 21, 2020            tlefebvre   Addressed code review comments. 
-# May 30, 2020            tlefebvre   Changed wfoList to all wind and stormSurge
-#                                     sites defined in TropicalUtility. 
-=======
 # May 15, 2020            psantos     Added code to always send json file in case
 #                                     only coastal hazards being pushed with no guidance grid.
 # May 21, 2020            tlefebvre   Addressed code review comments.
 # May 30, 2020            tlefebvre   Changed wfoList to all wind and stormSurge
 #                                     sites defined in TropicalUtility.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # June 1, 2020            tlefebvre   Removed import of Set as it is built-in.
 #
 ################################################################################
@@ -60,10 +48,7 @@ import WindWWUtils
 import TimeRange
 import os
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 class Procedure (TropicalUtility.TropicalUtility):
 
     def __init__(self, dbss):
@@ -142,18 +127,6 @@ class Procedure (TropicalUtility.TropicalUtility):
 
     def sendWindMessageToWFOs(self, stormList, siteID):
         """
-<<<<<<< HEAD
-        Send a message to any WFO that overlaps any of the hazards defined in the 
-        ProposedTropWindWW grid. This alerts forecasters that guidance is available.
-        """
-        if siteID in self._WindWWUtils.NHCSites():
-            wfoList = list(set(self._surgeWfos + self._windWfos))
-        elif siteID in self._WindWWUtils.HFOSites():
-            wfoList = ["HFO"]
-        elif siteID in self._WindWWUtils.GUMSites():
-            wfoList = ["GUM"]
-        #print("WFO list:", wfoList)
-=======
         Send a message to any WFO that overlaps any of the hazards defined in the
         ProposedTropWindWW grid. This alerts forecasters that guidance is available.
         """
@@ -163,16 +136,11 @@ class Procedure (TropicalUtility.TropicalUtility):
             wfoList = ["HFO"]
         elif siteID in self.GUMSites():
             wfoList = ["GUM"]
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # Push the JSON file to the sites
         for storm in stormList:
             mode = " operational"
             if self.gfeOperatingMode() == "PRACTICE":
-<<<<<<< HEAD
-                mode = " practice"               
-=======
                 mode = " practice"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             execStr = "/localapps/runtime/RecommendWindWatchWarning/nhc_pushJsonFile.sh MIAJSN" + storm + mode
             os.system(execStr)
 
@@ -201,11 +169,7 @@ class Procedure (TropicalUtility.TropicalUtility):
             # See if this WFO overlaps with the hazard mask
             overlap = mask & hazMask
 
-<<<<<<< HEAD
-            if not overlap.any(): # skip this WFO if no overlap
-=======
             if not overlap.any():  # skip this WFO if no overlap
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 continue
 
             wfosToSend.append(wfo)
@@ -215,16 +179,6 @@ class Procedure (TropicalUtility.TropicalUtility):
         if not testMode:
             self.sendMessageToWfos(wfosToSend, message, testMode)
             self.statusBarMsg("Procedure completed. Sent pop-up banners to WFOs", "A")
-<<<<<<< HEAD
-            
-        savedElements = ["ProposedTropWWGuidance","ProposedTropWindWW"]
-        self.saveElements(savedElements)
-            
-        return
-
-    def execute(self, varDict):
-        
-=======
 
         savedElements = ["ProposedTropWWGuidance", "ProposedTropWindWW"]
         self.saveElements(savedElements)
@@ -233,26 +187,10 @@ class Procedure (TropicalUtility.TropicalUtility):
 
     def execute(self, varDict):
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # Instantiate the WindWWUtils modules
         self._WindWWUtils = WindWWUtils.WindWWUtils(self._dbss)
 
         variableList = []
-<<<<<<< HEAD
-        
-        siteID = self.getSiteID()
-        basinBins = self._WindWWUtils._basinBins
-        variableList.append(("Hazard Type:", ["Wind Hazards"], "check", ["Storm Surge Hazards", "Wind Hazards"]))
-        title = "Select Hazard Type and Bin"
-        if siteID in self._WindWWUtils.NHCSites():
-            variableList.append(("Select AT Storms:", [], "check", basinBins["Atlantic"]))
-            variableList.append(("Select EP Storms:", [], "check", basinBins["Eastern Pacific"]))
-        elif siteID in self._WindWWUtils.HFOSites():
-            variableList.append(("Select CP Storms:", [], "check", basinBins["Central Pacific"]))
-        elif siteID in self._WindWWUtils.GUMSites():
-            variableList.append(("Select WP Storms:", [], "check", basinBins["Western Pacific"]))
-           
-=======
 
         siteID = self.getSiteID()
         basinBins = self._basinBins
@@ -266,7 +204,6 @@ class Procedure (TropicalUtility.TropicalUtility):
         elif siteID in self.GUMSites():
             variableList.append(("Select WP Storms:", [], "check", basinBins["Western Pacific"]))
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # Display the GUI
         varDict = {}
         processVarList = ProcessVariableList.ProcessVariableList(
@@ -276,26 +213,6 @@ class Procedure (TropicalUtility.TropicalUtility):
             self.cancel()
 
         # Get the Hazard Type
-<<<<<<< HEAD
-        if siteID in self._WindWWUtils.NHCSites():
-            hazTypesToSend = varDict["Hazard Type:"]
-        elif siteID in self._WindWWUtils.HFOSites():
-            hazTypesToSend = "Wind Hazards"
-        elif siteID in self._WindWWUtils.GUMSites():
-            hazTypesToSend = "Wind Hazards"
-            
-        if not hazTypesToSend:
-            self.statusBarMsg("Please select a Hazard type.", "S")
-            return
-        
-        stormList = []
-        if siteID in self._WindWWUtils.NHCSites():
-            stormList += varDict["Select AT Storms:"]
-            stormList += varDict["Select EP Storms:"]
-        elif siteID in self._WindWWUtils.HFOSites():
-            stormList += varDict["Select CP Storms:"]
-        elif siteID in self._WindWWUtils.GUMSites():
-=======
         if siteID in self.NHCSites():
             hazTypesToSend = varDict["Hazard Type:"]
         elif siteID in self.HFOSites():
@@ -314,23 +231,14 @@ class Procedure (TropicalUtility.TropicalUtility):
         elif siteID in self.HFOSites():
             stormList += varDict["Select CP Storms:"]
         elif siteID in self.GUMSites():
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             stormList += varDict["Select WP Storms:"]
         if not stormList:
             self.statusBarMsg("Please select a storm.", "S")
             return
-<<<<<<< HEAD
-                
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if "Storm Surge Hazards" in hazTypesToSend:
             self.sendStormSurgeMessageToWFOs()
         if "Wind Hazards" in hazTypesToSend:
             self.sendWindMessageToWFOs(stormList, siteID)
 
         return
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

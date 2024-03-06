@@ -50,11 +50,7 @@
 #                                  for __warnETNduplication
 # Mar 14, 2022  8816     randreso  Fix __maxSegNumber to return segment number,
 #                                  not entire record.
-<<<<<<< HEAD
-#
-=======
 # May 23, 2022  23092    jkelemr   Replaced "is" when comparing to string literal
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ##
 # This is a base file that is not intended to be overridden.
 ##
@@ -1892,11 +1888,7 @@ class HazardsTable(VTECTableUtil.VTECTableUtil):
                 h['startTime'] = self.__time
 
             # use 00000000 or explicit times for the start time?
-<<<<<<< HEAD
-            if action is 'NEW' or \
-=======
             if action == 'NEW' or \
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
               (action == 'EXT' and h['previousStart'] > self.__time) or \
               (action == 'EXB' and h['previousStart'] > self.__time) or \
               (h['startTime'] > self.__time):

@@ -23,33 +23,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
-<<<<<<< HEAD
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.TransactionCallback;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.edex.db.dao.DefaultPluginDao;
 import com.raytheon.uf.common.dataplugin.PluginException;
 import com.raytheon.uf.common.dataplugin.acarssounding.ACARSSoundingRecord;
-<<<<<<< HEAD
-import com.raytheon.uf.common.status.UFStatus.Priority;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.edex.database.DataAccessLayerException;
 import com.raytheon.uf.edex.plugin.acarssounding.tools.ACARSSoundingTools;
 
 /**
  * DAO for ACARS Sounding records.
-<<<<<<< HEAD
- * 
- * <pre>
- * 
-=======
  *
  * <pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * SOFTWARE HISTORY
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
@@ -57,29 +42,18 @@ import com.raytheon.uf.edex.plugin.acarssounding.tools.ACARSSoundingTools;
  * Aug 18, 2014 3530       bclement    removed warning from executeSoundingQuery()
  * Oct 28, 2014 3454       bphillip    Fix usage of getSession()
  * Aug 09, 2016 5757       nabowle     Code cleanup.
-<<<<<<< HEAD
- * 
- * </pre>
- * 
-=======
  * May 03, 2021 7849       mapeters    Switch from UFStatus to slf4j logging
  *
  * </pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author jkorman
  */
 
 public class ACARSSoundingDao extends DefaultPluginDao {
 
     private static final String QUERY_TIMELIMITS = "from ACARSSoundingRecord a where "
-<<<<<<< HEAD
-            + "(a.tailNumber = '%s') and"
-            + " (%d >= a.oldestTime - " + ACARSSoundingTools.TIMEOFFSET + ") and"
-=======
             + "(a.tailNumber = '%s') and" + " (%d >= a.oldestTime - "
             + ACARSSoundingTools.TIMEOFFSET + ") and"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             + " (%d <= a.newestTime + " + ACARSSoundingTools.TIMEOFFSET + ")";
 
     /**
@@ -112,16 +86,10 @@ public class ACARSSoundingDao extends DefaultPluginDao {
         try {
             obs = queryBySingleCriteria("dataURI", dataURI);
         } catch (DataAccessLayerException e) {
-<<<<<<< HEAD
-            e.printStackTrace();
-        }
-        if ((obs != null) && (obs.size() > 0)) {
-=======
             logger.error("Error retrieving ACARS sounding record: " + dataURI,
                     e);
         }
         if (obs != null && !obs.isEmpty()) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             report = (ACARSSoundingRecord) obs.get(0);
         }
         return report;
@@ -135,22 +103,10 @@ public class ACARSSoundingDao extends DefaultPluginDao {
      * @return The list of objects returned by the query
      */
     public List<?> executeSoundingQuery(final String hqlQuery) {
-<<<<<<< HEAD
-
-        List<?> result = (List<?>) txTemplate
-                .execute(new TransactionCallback<Object>() {
-                    public List<?> doInTransaction(TransactionStatus status) {
-                        Query hibQuery = getCurrentSession()
-                                .createQuery(hqlQuery);
-                        return hibQuery.list();
-                    }
-                });
-=======
         List<?> result = supplyInTransaction(() -> {
             Query hibQuery = getCurrentSession().createQuery(hqlQuery);
             return hibQuery.list();
         });
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return result;
     }
 
@@ -166,11 +122,7 @@ public class ACARSSoundingDao extends DefaultPluginDao {
         String query = String.format(QUERY_TIMELIMITS, tailNumber, startTime,
                 stopTime);
 
-<<<<<<< HEAD
-        if (logger.isPriorityEnabled(Priority.DEBUG)) {
-=======
         if (logger.isDebugEnabled()) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             logger.debug(query);
         }
 

@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -37,10 +25,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-<<<<<<< HEAD
-=======
 import java.util.Map.Entry;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.Set;
 
 import org.geotools.geometry.DirectPosition2D;
@@ -55,10 +40,7 @@ import com.raytheon.uf.common.dataplugin.radar.RadarRecord;
 import com.raytheon.uf.common.dataplugin.radar.RadarStation;
 import com.raytheon.uf.common.dataplugin.radar.request.GetRadarDataTreeRequest;
 import com.raytheon.uf.common.dataplugin.radar.util.RadarUtil;
-<<<<<<< HEAD
-=======
 import com.raytheon.uf.common.dataplugin.radar.util.RadarsInUseUtil;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.dataquery.requests.RequestConstraint;
 import com.raytheon.uf.common.derivparam.library.DerivParamDesc;
 import com.raytheon.uf.common.derivparam.library.DerivParamMethod;
@@ -75,10 +57,7 @@ import com.raytheon.uf.common.inventory.tree.DataTree;
 import com.raytheon.uf.common.inventory.tree.LevelNode;
 import com.raytheon.uf.common.inventory.tree.ParameterNode;
 import com.raytheon.uf.common.inventory.tree.SourceNode;
-<<<<<<< HEAD
-=======
 import com.raytheon.uf.common.localization.LocalizationContext.LocalizationLevel;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
 import com.raytheon.uf.common.status.UFStatus.Priority;
@@ -89,10 +68,7 @@ import com.raytheon.uf.common.style.level.SingleLevel;
 import com.raytheon.uf.common.time.DataTime;
 import com.raytheon.uf.viz.core.catalog.CatalogQuery;
 import com.raytheon.uf.viz.core.exception.VizException;
-<<<<<<< HEAD
-=======
 import com.raytheon.uf.viz.core.localization.LocalizationManager;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.requests.ThriftClient;
 import com.raytheon.viz.grid.data.TopoRequestableData;
 import com.raytheon.viz.radar.util.StationUtils;
@@ -101,15 +77,6 @@ import si.uom.SI;
 
 /**
  * Handles pulling/mapping of radar data to grib parameters.
-<<<<<<< HEAD
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * 
- * Date          Ticket#  Engineer   Description
- * ------------- -------- ---------- ------------------------------------
-=======
  *
  * <pre>
  *
@@ -117,24 +84,12 @@ import si.uom.SI;
  *
  * Date          Ticket#  Engineer   Description
  * ------------- -------- ---------- -------------------------------------------
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Mar 23, 2010  4473     rjpeter    Initial creation
  * Feb 21, 2014  16744    dfriedman  Add getUpdateConstraints
  * Apr 01, 2014  17220    dfriedman  Handle uninitialized grid inventory
  * Sep 09, 2014  3356     njensen    Remove CommunicationException
  * Aug 15, 2017  6332     bsteffen   Move to viz.grid.radar plugin
  * Jan 24, 2018  6907     bsteffen   Increase grid resolution.
-<<<<<<< HEAD
- * Apr 15, 2019  7596     lsingh     Upgraded javax.measure to JSR-363. 
- *                                   Handled unit conversion.
- * 
- * </pre>
- * 
- * @author rjpeter
- */
-public class RadarAdapter {
-    private static final transient IUFStatusHandler statusHandler = UFStatus
-=======
  * Apr 15, 2019  7596     lsingh     Upgraded javax.measure to JSR-363. Handled
  *                                   unit conversion.
  * Jun 07, 2021  8453     randerso   Improve resolution of radar grids
@@ -152,7 +107,6 @@ public class RadarAdapter {
  */
 public class RadarAdapter {
     private static final IUFStatusHandler statusHandler = UFStatus
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             .getHandler(RadarAdapter.class);
 
     public static final String RADAR_SOURCE = "radar";
@@ -169,12 +123,6 @@ public class RadarAdapter {
 
     private static final String RDA_ID_QUERY = "location.rdaId";
 
-<<<<<<< HEAD
-    /**
-     * Number of x/y grid points in radar grid.
-     */
-    private static final int GRID_SIZE = 400;
-=======
     private static final String RADAR_ADAPTER_GRID_SPACING = "RADAR_ADAPTER_GRID_SPACING";
 
     private static final String RADAR_ADAPTER_GRID_SIZE = "RADAR_ADAPTER_GRID_SIZE";
@@ -188,23 +136,10 @@ public class RadarAdapter {
      */
     private static final int GRID_SIZE = getEnvSetting(RADAR_ADAPTER_GRID_SIZE,
             DEFAULT_GRID_SIZE);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Spacing of grid points in meters.
      */
-<<<<<<< HEAD
-    private static final int GRID_SPACING = 2000;
-
-    private static final RadarAdapter instance;
-
-    private RadarStation configuredRadar = null;
-
-    private GridCoverage coverage = null;
-
-    static {
-        instance = new RadarAdapter();
-=======
     private static final int GRID_SPACING = getEnvSetting(
             RADAR_ADAPTER_GRID_SPACING, DEFAULT_GRID_SPACING);
 
@@ -228,7 +163,6 @@ public class RadarAdapter {
             }
         }
         return value;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     public static RadarAdapter getInstance() {
@@ -239,57 +173,6 @@ public class RadarAdapter {
 
     }
 
-<<<<<<< HEAD
-    private boolean checkConfiguredRadar() {
-        boolean status = false;
-        RadarStation station = StationUtils.getInstance().getHomeRadarStation();
-        if (station != null) {
-            if (configuredRadar == null
-                    || !configuredRadar.getRdaId().equals(station.getRdaId())) {
-                configuredRadar = station;
-                RadarUpdater.getInstance().clearCache();
-                ProjectedCRS crs = RadarUtil.constructCRS(station.getLat(),
-                        station.getLon());
-                StereographicGridCoverage coverage = new StereographicGridCoverage();
-                coverage.setNx(GRID_SIZE);
-                coverage.setNy(GRID_SIZE);
-                coverage.setDx(GRID_SPACING);
-                coverage.setDy(GRID_SPACING);
-                coverage.setLov(station.getLon());
-                coverage.setLad(station.getLat());
-                coverage.setSpacingUnit("m");
-                coverage.setName(station.getRdaId() + " Generated Coverage");
-                try {
-                    MathTransform toLatLon = MapUtil.getTransformToLatLon(crs);
-                    int minExtent = -1 * GRID_SPACING * GRID_SIZE / 2;
-                    DirectPosition2D lowerLeft = new DirectPosition2D(minExtent,
-                            minExtent);
-                    toLatLon.transform(lowerLeft, lowerLeft);
-                    coverage.setFirstGridPointCorner(Corner.LowerLeft);
-                    coverage.setLa1(lowerLeft.getY());
-                    coverage.setLo1(lowerLeft.getX());
-                } catch (Exception e) {
-                    // shouldn't occur since parsing well known geometry
-                    statusHandler.debug("Failed to populate radar coverage.",
-                            e);
-                }
-                try {
-                    coverage.initialize();
-                } catch (GridCoverageException e) {
-                    statusHandler.handle(Priority.PROBLEM,
-                            e.getLocalizedMessage(), e);
-                    configuredRadar = null;
-                    return status;
-                }
-                this.coverage = GridCoverageLookup.getInstance()
-                        .getCoverage(coverage, true);
-                CoverageUtils.getInstance().setCoverage(RADAR_SOURCE,
-                        this.coverage);
-                status = true;
-            }
-        } else {
-            configuredRadar = null;
-=======
     private boolean checkConfiguredRadars() {
         Set<String> localRadars = new HashSet<>(RadarsInUseUtil.getSite(
                 LocalizationManager.getContextName(LocalizationLevel.SITE),
@@ -348,7 +231,6 @@ public class RadarAdapter {
                 }
             }
             status = localRadars.equals(configuredRadars.keySet());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         return status;
     }
@@ -358,26 +240,16 @@ public class RadarAdapter {
         if (dataTree == null) {
             return;
         }
-<<<<<<< HEAD
-        checkConfiguredRadar();
-
-        if (configuredRadar == null) {
-=======
         checkConfiguredRadars();
 
         if (configuredRadars.isEmpty()) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return;
         }
 
         DataTree radarTree = null;
         GetRadarDataTreeRequest request = new GetRadarDataTreeRequest();
-<<<<<<< HEAD
-        request.setRdaId(configuredRadar.getRdaId());
-=======
         request.setSiteId(
                 LocalizationManager.getContextName(LocalizationLevel.SITE));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         try {
             Object response = ThriftClient.sendRequest(request);
@@ -386,30 +258,12 @@ public class RadarAdapter {
             }
         } catch (Exception e) {
             statusHandler.handle(Priority.PROBLEM,
-<<<<<<< HEAD
-                    "Unable to retrieve data tree for home radar", e);
-=======
                     "Unable to retrieve data tree for local radars", e);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         String icao = null;
         RadarProductCodeMapping pCodeMapping = RadarProductCodeMapping
                 .getInstance();
-<<<<<<< HEAD
-        SourceNode gridSourceNode = new SourceNode();
-        gridSourceNode.setValue(RADAR_SOURCE);
-        gridSourceNode.setDt(60);
-        initTopoParam(gridSourceNode);
-        dataTree.getSourceNodes().put(RADAR_SOURCE, gridSourceNode);
-
-        // should never have more than one node...
-        for (SourceNode sNode : radarTree.getSourceNodes().values()) {
-            initTopoParam(sNode);
-            if (icao == null) {
-                icao = sNode.getValue();
-            }
-=======
 
         for (Entry<String, SourceNode> entry : radarTree.getSourceNodes()
                 .entrySet()) {
@@ -424,7 +278,6 @@ public class RadarAdapter {
             dataTree.getSourceNodes().put(radarSource, gridSourceNode);
 
             initTopoParam(sNode);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             Set<String> parameterAbbrevs = pCodeMapping.getParameterAbbrevs();
             // Generate the projection information for the radar and set into
@@ -461,11 +314,7 @@ public class RadarAdapter {
                                 DerivParamMethod method = new DerivParamMethod();
                                 method.setName("Supplement");
                                 gridLevelNode = new OrLevelNode(l, desc, method,
-<<<<<<< HEAD
-                                        RADAR_SOURCE,
-=======
                                         radarSource,
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                         new ArrayList<AbstractRequestableNode>(
                                                 productCodes.size()),
                                         false);
@@ -497,11 +346,7 @@ public class RadarAdapter {
 
     /**
      * Add the Topo param to the given node
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param modelNameNode
      * @param level
      */
@@ -517,17 +362,11 @@ public class RadarAdapter {
         topoParam.setParameterUnit("m");
         topoParam.setValue("Topo");
 
-<<<<<<< HEAD
-        TopoRequestableData topoData = new TopoRequestableData(
-                modelNameNode.getValue());
-        topoData.setSpace(getCoverage());
-=======
         String modelName = modelNameNode.getValue();
         TopoRequestableData topoData = new TopoRequestableData(modelName);
         String icao = modelName.startsWith("radar-") ? modelName.substring(6)
                 : modelName;
         topoData.setSpace(getCoverage(icao));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         StaticDataLevelNode topoNode = new StaticDataLevelNode(sfc, topo,
                 topoData, modelNameNode.getValue());
         topoNode.setLevel(sfc);
@@ -542,20 +381,12 @@ public class RadarAdapter {
             return lastTimeQuery;
         }
         Set<DataTime> rval = null;
-<<<<<<< HEAD
-        if (configuredRadar != null) {
-=======
         if (!configuredRadars.isEmpty()) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             Map<String, RequestConstraint> newQuery = new HashMap<>();
             newQuery.put(PLUGIN_NAME_QUERY,
                     new RequestConstraint(RADAR_SOURCE));
             newQuery.put(RDA_ID_QUERY,
-<<<<<<< HEAD
-                    new RequestConstraint(configuredRadar.getRdaId()));
-=======
                     new RequestConstraint(configuredRadars.keySet()));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             DataTime[] times = CatalogQuery.performTimeQuery(newQuery, false,
                     null);
@@ -578,25 +409,15 @@ public class RadarAdapter {
         return GRID_SPACING;
     }
 
-<<<<<<< HEAD
-    public GridCoverage getCoverage() {
-        return coverage;
-=======
     public GridCoverage getCoverage(String icao) {
         return coverages.get(icao);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
      * @return the configuredRadar
      */
-<<<<<<< HEAD
-    public RadarStation getConfiguredRadar() {
-        return configuredRadar;
-=======
     public Set<String> getConfiguredRadars() {
         return configuredRadars.keySet();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     public static ColorMapParameters getColorMap(RadarRecord radar)
@@ -621,12 +442,7 @@ public class RadarAdapter {
     }
 
     public Map<String, RequestConstraint> getUpdateConstraints() {
-<<<<<<< HEAD
-        RadarStation radarStation = getConfiguredRadar();
-        if (radarStation == null) {
-=======
         if (configuredRadars.isEmpty()) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             // Can happen if grid inventory has not been initialized
             return null;
         }
@@ -638,12 +454,7 @@ public class RadarAdapter {
         Map<String, RequestConstraint> rcMap = new HashMap<>();
         rcMap.put(RadarAdapter.PLUGIN_NAME_QUERY,
                 new RequestConstraint(RADAR_SOURCE));
-<<<<<<< HEAD
-        rcMap.put(ICAO_QUERY,
-                new RequestConstraint(radarStation.getRdaId().toLowerCase()));
-=======
         rcMap.put(ICAO_QUERY, new RequestConstraint(configuredRadars.keySet()));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         rcMap.put(PRODUCT_CODE_QUERY,
                 new RequestConstraint(
                         Arrays.toString(

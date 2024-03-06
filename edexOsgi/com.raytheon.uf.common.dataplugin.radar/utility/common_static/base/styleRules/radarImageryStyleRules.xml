@@ -402,8 +402,6 @@
     </styleRule>
     <styleRule>
         <paramLevelMatches>
-<<<<<<< HEAD
-=======
             <parameter>99</parameter>
             <parameter>154</parameter>
             <creatingEntity>SRM8</creatingEntity>
@@ -431,7 +429,6 @@
     </styleRule>
     <styleRule>
         <paramLevelMatches>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <parameter>135</parameter>
         </paramLevelMatches>
         <imageStyle>
@@ -678,8 +675,6 @@
             </dataMapping>
         </imageStyle>
     </styleRule>
-<<<<<<< HEAD
-=======
 
     <styleRule>
         <paramLevelMatches>
@@ -704,7 +699,6 @@
         </imageStyle>
     </styleRule>
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <styleRule>
         <paramLevelMatches>
             <parameter>169</parameter>
@@ -805,8 +799,4 @@
             </dataMapping>
         </imageStyle>
     </styleRule>
-<<<<<<< HEAD
 </styleRuleset>
-=======
-</styleRuleset>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

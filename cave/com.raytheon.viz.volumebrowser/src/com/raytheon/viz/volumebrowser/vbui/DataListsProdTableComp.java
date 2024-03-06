@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -37,10 +25,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-<<<<<<< HEAD
-=======
 import java.util.Map;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -59,10 +44,7 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Monitor;
-<<<<<<< HEAD
-=======
 import org.locationtech.jts.geom.LineString;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.uf.common.menus.vb.VbSourceList;
 import com.raytheon.uf.common.menus.vb.ViewMenu;
@@ -75,11 +57,7 @@ import com.raytheon.uf.viz.core.VizApp;
 import com.raytheon.uf.viz.core.exception.VizException;
 import com.raytheon.uf.viz.points.IPointChangedListener;
 import com.raytheon.uf.viz.points.PointsDataManager;
-<<<<<<< HEAD
-import com.raytheon.viz.awipstools.IToolChangedListener;
-=======
 import com.raytheon.viz.awipstools.IBaselineChangedListener;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.viz.awipstools.ToolsDataManager;
 import com.raytheon.viz.volumebrowser.datacatalog.DataCatalogManager;
 import com.raytheon.viz.volumebrowser.vbui.VBMenuBarItemsMgr.SpaceTimeMenu;
@@ -93,41 +71,6 @@ import net.sf.swtaddons.autocomplete.combo.AutocompleteComboInput;
 /**
  * This class manages the Sources, Fields, and Planes data lists and toolbar
  * menus.
-<<<<<<< HEAD
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * Date          Ticket#  Engineer    Description
- * ------------- -------- ----------- -----------------------------------------
- * May 12, 2009  2161     lvenable    Initial creation
- * Jul 31, 2012  875      rferrel     Now uses markers.
- * Sep 26, 2012  1216     rferrel     Change listener added to update points
- *                                    menu.
- * Jan 14, 2013  1516     rferrel     Remove listeners on dispose and specify
- *                                    Data Selection in Points Tool Action.
- * Dec 06, 2013  2271     mpduff      Save the selected plane points so the
- *                                    menu's are recreated correctly on a
- *                                    pointChange action.
- * Dec 11, 2013  2602     bsteffen    Remove dead catch block.
- * Mar 18, 2014  2874     bsteffen    Move creation of Sources toolbar
- *                                    contributions to VbSourceList
- * Oct 03, 2014  2618     mapeters    Updated pointChangeListener's pointChanged() 
- *                                    implementation to fully remove deleted points,
- *                                    added createUniqueKey(String, String, String).
- * Nov 18, 2015  4894     kbisanz     Call setActiveDataSelection(...)
- *                                    before calling
- *                                    splitToMultipleBars(...) to set data
- *                                    selection correctly and prevent menu
- *                                    items from being referenced on
- *                                    multiple menus.
- * Jan 12, 2016 #5055      randerso   Added support for adjusting split of toolbar menus 
- *                                    when dialog resized.
- * Apr 02, 2018 6765       bsteffen   Send all products to the product table to preserve order.
- * 
- * </pre>
- * 
-=======
  *
  * <pre>
  *
@@ -162,16 +105,11 @@ import net.sf.swtaddons.autocomplete.combo.AutocompleteComboInput;
  *
  * </pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author lvenable
  */
 public class DataListsProdTableComp extends Composite
         implements IDataMenuAction {
-<<<<<<< HEAD
-    private static final transient IUFStatusHandler statusHandler = UFStatus
-=======
     private static final IUFStatusHandler statusHandler = UFStatus
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             .getHandler(DataListsProdTableComp.class);
 
     /**
@@ -188,11 +126,7 @@ public class DataListsProdTableComp extends Composite
      * Listener to trigger reset.
      */
 
-<<<<<<< HEAD
-    private final IToolChangedListener resetToolChangeListener;
-=======
     private final IBaselineChangedListener resetToolChangeListener;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Perform a regular expression find instead of simply completing the input
@@ -473,15 +407,9 @@ public class DataListsProdTableComp extends Composite
     /**
      * Data selection enumeration.
      */
-<<<<<<< HEAD
-    public static enum DataSelection {
-        SOURCES, FIELDS, PLANES;
-    };
-=======
     public enum DataSelection {
         SOURCES, FIELDS, PLANES;
     }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Current data type selected.
@@ -505,11 +433,7 @@ public class DataListsProdTableComp extends Composite
 
     /**
      * Constructor.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param parentComp
      *            Parent composite.
      */
@@ -520,15 +444,9 @@ public class DataListsProdTableComp extends Composite
 
         initializeComponents();
 
-<<<<<<< HEAD
-        resetToolChangeListener = new IToolChangedListener() {
-            @Override
-            public void toolChanged() {
-=======
         resetToolChangeListener = new IBaselineChangedListener() {
             @Override
             public void baselineChanged(String name, LineString baseline) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 VizApp.runAsync(new Runnable() {
                     @Override
                     public void run() {
@@ -702,11 +620,7 @@ public class DataListsProdTableComp extends Composite
 
     /**
      * Create the Sources toolbar menus.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param setting
      *            The selected "setting".
      */
@@ -717,11 +631,7 @@ public class DataListsProdTableComp extends Composite
         MenuItemManager menuItemMgr = MenuItemManager.getInstance();
 
         // Get a list of the Sources from the Sources list control.
-<<<<<<< HEAD
-        HashMap<String, Object> existingKeys = sourceControl.list
-=======
         Map<String, Object> existingKeys = sourceControl.list
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 .getAvailableKeys();
 
         // Clear the Sources map.
@@ -775,11 +685,7 @@ public class DataListsProdTableComp extends Composite
 
     /**
      * Create the Fields toolbar menus.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param setting
      *            The selected "setting".
      * @param spaceTime
@@ -824,11 +730,7 @@ public class DataListsProdTableComp extends Composite
 
     /**
      * Create the Planes toolbar menus.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param setting
      *            The selected "setting".
      * @param spaceTime
@@ -949,11 +851,7 @@ public class DataListsProdTableComp extends Composite
 
     /**
      * Update the Sources, Fields, and Planes toolbar items.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param setting
      *            The selected "setting".
      * @param spaceTime
@@ -1032,11 +930,7 @@ public class DataListsProdTableComp extends Composite
      * Add a menu selection to the active list control (Sources, Fields, or
      * Planes). If there are items selected in the Sources, Fields, and Planes
      * then a product is added to the product table if data is available.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param displayStr
      *            The string to be displayed in the list.
      * @param menuContrib
@@ -1053,11 +947,7 @@ public class DataListsProdTableComp extends Composite
 
     /**
      * Get the active data selection.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The active data selection.
      */
     @Override
@@ -1080,21 +970,12 @@ public class DataListsProdTableComp extends Composite
     /**
      * Get the data items that have been selected in the Sources, Fields, and
      * Planes list boxes.
-<<<<<<< HEAD
-     * 
-     * @return ArrayList of SelectedData which contains a combination of all the
-     *         selected data in the list controls.
-     */
-    private ArrayList<SelectedData> getSelectedData() {
-        ArrayList<SelectedData> selectedData = new ArrayList<>();
-=======
      *
      * @return ArrayList of SelectedData which contains a combination of all the
      *         selected data in the list controls.
      */
     private List<SelectedData> getSelectedData() {
         List<SelectedData> selectedData = new ArrayList<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         SelectedData selData;
         String uniqueKey;
@@ -1107,24 +988,6 @@ public class DataListsProdTableComp extends Composite
          * Loop get the find the products that are not listed in the product
          * table.
          */
-<<<<<<< HEAD
-        for (int i = 0; i < sourcesSelIdx.length; i++) {
-
-            for (int j = 0; j < fieldsSelIdx.length; j++) {
-
-                for (int k = 0; k < planesSelIdx.length; k++) {
-                    uniqueKey = createUniqueKey(sourcesSelIdx[i],
-                            fieldsSelIdx[j], planesSelIdx[k]);
-
-                    selData = new SelectedData(
-                            sourceControl.list.getItemText(sourcesSelIdx[i]),
-                            sourceControl.list.getKey(sourcesSelIdx[i]),
-                            fieldControl.list.getItemText(fieldsSelIdx[j]),
-                            fieldControl.list.getKey(fieldsSelIdx[j]),
-                            planeControl.list.getItemText(planesSelIdx[k]),
-                            planeControl.list.getKey(planesSelIdx[k]),
-                            uniqueKey);
-=======
         for (int element : sourcesSelIdx) {
 
             for (int element2 : fieldsSelIdx) {
@@ -1139,7 +1002,6 @@ public class DataListsProdTableComp extends Composite
                             fieldControl.list.getKey(element2),
                             planeControl.list.getItemText(element3),
                             planeControl.list.getKey(element3), uniqueKey);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                     selectedData.add(selData);
                 }
@@ -1152,11 +1014,7 @@ public class DataListsProdTableComp extends Composite
     /**
      * Create a unique key that will be used to track if a product is in the
      * product table.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param sourceIdx
      *            Index of the selected item in the Sources list control.
      * @param fieldsIdx
@@ -1175,11 +1033,7 @@ public class DataListsProdTableComp extends Composite
     /**
      * Create a unique key that will be used to track if a product is in the
      * product table.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param source
      *            The selected item in the Sources list control.
      * @param field
@@ -1210,11 +1064,7 @@ public class DataListsProdTableComp extends Composite
 
     /**
      * Marks all data as unavailable, executes in the UI thread synchronously
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public void clearAvailableData() {
         final MenuItemManager itemManager = MenuItemManager.getInstance();
@@ -1233,11 +1083,7 @@ public class DataListsProdTableComp extends Composite
     /**
      * auto selects a source, field, or plane if there is only one available,
      * executes in the UI thread synchronously
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public void performAutoSelect() {
         final MenuItemManager itemManager = MenuItemManager.getInstance();
@@ -1264,11 +1110,7 @@ public class DataListsProdTableComp extends Composite
     /**
      * Marks a a data item(key) as available in the control, executes in the UI
      * thread synchronously
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param key
      * @param control
      */
@@ -1293,11 +1135,7 @@ public class DataListsProdTableComp extends Composite
     /**
      * Marks a source as having available data, executes in the UI thread
      * synchronously
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param source
      */
     public void markAvailableSource(String source) {
@@ -1307,11 +1145,7 @@ public class DataListsProdTableComp extends Composite
     /**
      * Marks a field as having available data, executes in the UI thread
      * synchronously
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param source
      */
     public void markAvailableField(String field) {
@@ -1321,11 +1155,7 @@ public class DataListsProdTableComp extends Composite
     /**
      * Marks a plane as having available data, executes in the UI thread
      * synchronously
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param source
      */
     public void markAvailablePlane(String plane) {
@@ -1334,11 +1164,7 @@ public class DataListsProdTableComp extends Composite
 
     /**
      * Obtain the product table.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return prodTable
      */
     public ProductTableComp getProductTable() {

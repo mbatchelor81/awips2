@@ -1,31 +1,19 @@
 ##
 # This software was developed and / or modified by Raytheon Company,
 # pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
-# 
-=======
 #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # U.S. EXPORT CONTROLLED TECHNICAL DATA
 # This software product contains export-restricted data whose
 # export/transfer/disclosure is restricted by U.S. law. Dissemination
 # to non-U.S. persons whether in the United States or abroad requires
 # an export license or other authorization.
-<<<<<<< HEAD
-# 
-=======
 #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # Contractor Name:        Raytheon Company
 # Contractor Address:     6825 Pine Street, Suite 340
 #                         Mail Stop B8
 #                         Omaha, NE 68106
 #                         402.291.0100
-<<<<<<< HEAD
-# 
-=======
 #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # See the AWIPS II Master Rights File ("Master Rights File.pdf") for
 # further licensing information.
 ##
@@ -66,21 +54,11 @@
 # ------------- -------- --------- --------------------------------------------
 # Apr 07, 2015           mbelk     Initial creation
 # Sep 19, 2016  19293    randerso  Initial baseline check in
-<<<<<<< HEAD
-# Oct 31, 2016  25946    randerso  Changed to keep Hazard_TCVNHC from 
-=======
 # Oct 31, 2016  25946    randerso  Changed to keep Hazard_TCVNHC from
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #                                  overwriting Hazard_TCV
 # Nov 11, 2016  19293    randerso  Fix issuing office line
 # Jun 26, 2017  6325     randerso  Remove Breakpoints from product header
 # Aug 28, 2019  21533    ryu       Make the formatter appear for NHA only
-<<<<<<< HEAD
-#
-########################################################################
-
-import time, re, copy, pprint
-=======
 # Sep 14, 2021  8657     randerso  Changes for Eastern Pacific
 # May 24, 2023  2029646  swhite   Eastern Pacific National TCV Update
 #
@@ -89,7 +67,6 @@ import time, re, copy, pprint
 import copy
 import pprint
 import re
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import GenericHazards
 import LogStream
@@ -102,19 +79,11 @@ import TropicalHazards
 class TextProduct(TropicalHazards.TropicalHazards, GenericHazards.TextProduct):
     Definition = copy.deepcopy(GenericHazards.TextProduct.Definition)
 
-<<<<<<< HEAD
-    if "NHA" == "<site>":
-        Definition['displayName'] = "Hazard_<pil>"
-    else:
-        Definition['displayName'] = "None"
-    Definition["outputFile"] =  "{prddir}/TEXT/<pil>.txt"
-=======
     if "<site>" in ("NHA", "NHP"):
         Definition['displayName'] = "Hazard_<pil>"
     else:
         Definition['displayName'] = "None"
     Definition["outputFile"] = "{prddir}/TEXT/<pil>.txt"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     Definition["database"] = "Official"
     Definition["mapNameForCombinations"] = "Zones_<site>"
     Definition["defaultEditAreas"] = "Combinations_<MultiPil>_<site>"
@@ -124,16 +93,6 @@ class TextProduct(TropicalHazards.TropicalHazards, GenericHazards.TextProduct):
     Definition["productName"] = "PROTOTYPE TCV"  # Warning! DO NOT CHANGE.
     # The productName gets substituted later in the formatter!
 
-<<<<<<< HEAD
-    Definition["fullStationID" ]    = "<fullStationID>"
-    Definition["wmoID" ]            = "<wmoID>"
-    Definition["wfoCityState" ]     = "<wfoCityState>"
-    Definition["pil" ]              = "<pil>"
-    Definition["textdbPil" ]        = "<textdbPil>"
-    Definition["awipsWANPil" ]      = "<awipsWANPil>"
-    Definition["site"]              = "<site>"
-    Definition["wfoCity"]           = "<wfoCity>"
-=======
     Definition["fullStationID" ] = "<fullStationID>"
     Definition["wmoID" ] = "<wmoID>"
     Definition["wfoCityState" ] = "<wfoCityState>"
@@ -142,7 +101,6 @@ class TextProduct(TropicalHazards.TropicalHazards, GenericHazards.TextProduct):
     Definition["awipsWANPil" ] = "<awipsWANPil>"
     Definition["site"] = "<site>"
     Definition["wfoCity"] = "<wfoCity>"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     # OPTIONAL CONFIGURATION ITEMS
 
@@ -150,20 +108,6 @@ class TextProduct(TropicalHazards.TropicalHazards, GenericHazards.TextProduct):
     #Definition["displayOutputDialog"] = 0  # If 1 will display results when finished
     #Definition["headlineEditAreaGroup"] = "Zones" # Name of EditAreaGroup for sampling headlines
 
-<<<<<<< HEAD
-    Definition["purgeTime"] = 8        # Maximum hours for expireTime from issueTime
-    Definition["includeCities"] = 0    # Cities included in area header
-    Definition["accurateCities"] = 0   # If 1, cities are based on grids;
-                                       # otherwise full list is included
-    Definition["cityLocation"] = ""    # City lat/lon dictionary to use
-    #Definition["cityDescriptor"] = ""
-    Definition["includeZoneNames"] = 0 # Zone names will be included in the area header
-    Definition["lineLength"] = 68 # line length
-    Definition["easPhrase"] = ""
-    Definition["includeOverviewHeadline"] = 0   #If 1, the overview header is templated
-    Definition["includeOverview"] = 0   #If 1, the overview section is template
-    Definition["bulletProd"] = 0   #If 1, the product will have a bullet format
-=======
     Definition["purgeTime"] = 8  # Maximum hours for expireTime from issueTime
     Definition["includeCities"] = 0  # Cities included in area header
     Definition["accurateCities"] = 0  # If 1, cities are based on grids;
@@ -176,7 +120,6 @@ class TextProduct(TropicalHazards.TropicalHazards, GenericHazards.TextProduct):
     Definition["includeOverviewHeadline"] = 0  #If 1, the overview header is templated
     Definition["includeOverview"] = 0  #If 1, the overview section is template
     Definition["bulletProd"] = 0  #If 1, the product will have a bullet format
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     ### Survey text to insert below the last $$ of the product
     Definition["urlText"] = ""
@@ -184,15 +127,8 @@ class TextProduct(TropicalHazards.TropicalHazards, GenericHazards.TextProduct):
 
 #     Definition["areaDictionary"] = "TropicalAreaDictionary"
 
-<<<<<<< HEAD
-
     Definition["hazardSamplingThreshold"] = (3, None)  #(%cov, #points)
 
-
-=======
-    Definition["hazardSamplingThreshold"] = (3, None)  #(%cov, #points)
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     Definition["debug"] = {"generateForecast": 0,
                            "_preProcessProduct":0,
                            "_makeProduct":0,
@@ -201,27 +137,15 @@ class TextProduct(TropicalHazards.TropicalHazards, GenericHazards.TextProduct):
 #                            "":0,
                            }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     #===========================================================================
     #  Define a variableList to get answers to questions we need
 
 #     VariableList = [(("Storm Name","stormName"),"","radio", stormNames)]
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def __init__(self):
         GenericHazards.TextProduct.__init__(self)
         TropicalHazards.TropicalHazards.__init__(self)
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def generateForecast(self, argDict):
         # Generate Text Phrases for a list of edit areas
 
@@ -272,10 +196,6 @@ class TextProduct(TropicalHazards.TropicalHazards, GenericHazards.TextProduct):
         (self._hazardAreaDict, self._hazardAreaDictKeyList) = \
                      self._constructHazardDict(hazardPhenSig, self._filterETN)
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         #=======================================================================
         #  Make a list of segments we need to process
 
@@ -285,11 +205,7 @@ class TextProduct(TropicalHazards.TropicalHazards, GenericHazards.TextProduct):
         # Generate the product for each segment in the segmentList
         fraction = 0
         if len(segmentList) > 0:
-<<<<<<< HEAD
-            fractionOne = 1.0/float(len(segmentList))
-=======
             fractionOne = 1.0 / len(segmentList)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         percent = 50.0
         self.setProgressPercentage(50)
         for segmentAreas in segmentList:
@@ -346,11 +262,7 @@ class TextProduct(TropicalHazards.TropicalHazards, GenericHazards.TextProduct):
             self.debug_print("body zones =\n%s" % (activeAreas), 1)
 
             #  Make the product body using the segment areas
-<<<<<<< HEAD
-            fcst  = self._makeProduct(fcst, activeAreas, argDict)
-=======
             fcst = self._makeProduct(fcst, activeAreas, argDict)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             #  Finish off the product block using the zones
             fcst = self._postProcessArea(fcst, activeAreas, argDict)
@@ -359,10 +271,6 @@ class TextProduct(TropicalHazards.TropicalHazards, GenericHazards.TextProduct):
         fcst = self._postProcessProduct(fcst, argDict)
         return fcst
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     #
     #  Overridden to produce product header using info for specific storms
     #
@@ -398,25 +306,17 @@ class TextProduct(TropicalHazards.TropicalHazards, GenericHazards.TextProduct):
         stormType = stormDict["stormType"]
         advType = stormDict["advisoryType"]
         advNum = stormDict["advisoryNumber"]
-<<<<<<< HEAD
-=======
         stormID = stormDict["stormID"]
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         #  Ensure the VTEC ETN is correct for a national center
         stormNum = stormDict["stormNumber"]
         self._filterETN = int(stormNum)
         if self._filterETN < 1000:
-<<<<<<< HEAD
-            self._filterETN += 1000
-
-=======
             if "<site>" == "NHA":
                 self._filterETN += 1000
             elif "<site>" == "NHP":
                 self._filterETN += 2000
                 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         self.debug_print("*" * 80, 1)
         self.debug_print("my ETN is: %s" % (self._filterETN), 1)
         self.debug_print("*" * 80, 1)
@@ -440,41 +340,23 @@ class TextProduct(TropicalHazards.TropicalHazards, GenericHazards.TextProduct):
 
             productName = re.sub("(?i)Routine ", "", productName)
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         #  Insert the EAS phrase - if it exists
         if len(self._easPhrase) != 0:
             eas = self._easPhrase + '\n'
         else:
             eas = ''
 
-<<<<<<< HEAD
-        #  Format a storm code for this product
-        stormCode = "AL%02d%4d" % (int(stormNum), time.gmtime().tm_year)
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         #  Set aside a variable to track impacted WFOs
         self._wfoList = []
 
         #  Construct the MND header text
         s = wmoID + " " + self._fullStationID + " " + \
                self._ddhhmmTime + "\n" + "TCV" + pil + "\n\n"
-<<<<<<< HEAD
-        
-        fcst = fcst + s.upper() +\
-               eas + productName + "\n" +\
-               "NWS " + self._wfoCityState + \
-               "     %s\n" % (stormCode) + issuedByString + self._timeLabel + \
-=======
 
         fcst = fcst + s.upper() + \
                eas + productName + "\n" + \
                "NWS " + self._wfoCityState + \
                "     %s\n" % (stormID) + issuedByString + self._timeLabel + \
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                "\n\n"
 
         fcst = fcst + ".%s %s\n\n" % (stormType, stormName)
@@ -540,10 +422,6 @@ grids.
         self.debug_print("\ndisplayList =\n%s" %
                          (pprint.pformat(displayList)), 1)
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         #  Do not include non-UGC codes in mainland USA TCV
         self.debug_print("displayName = '%s'" % (self._displayName), 1)
         if self._displayName.find("Intl") == -1 and displayList != [] and \
@@ -552,10 +430,6 @@ grids.
             self.debug_print("Do not display non-Z codes in USA TCV", 1)
             displayList = []
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         #===================================================================
         #  Look through each zone of this hazard group
 
@@ -576,11 +450,7 @@ grids.
             #  If we have not already constructed the info for the starting
             #  point of this segment, or this is an island point
 
-<<<<<<< HEAD
-            if len(startLine) == 0: # or result > 1:
-=======
             if len(startLine) == 0:  # or result > 1:
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                 #  Construct it now
                 startLine += self._formatTCVline(entry)
@@ -588,11 +458,7 @@ grids.
             #---------------------------------------------------------------
             #  If we need the ending point info
 
-<<<<<<< HEAD
-            elif len(endLine) == 0: # or result == 1:
-=======
             elif len(endLine) == 0:  # or result == 1:
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                 #  Construct it now
                 endLine = self._formatTCVline(entry, "end")
@@ -605,10 +471,6 @@ grids.
 
         return fcst
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     #
     #  Overridden to include affected WFO list
     #
@@ -625,11 +487,7 @@ grids.
         fcst = fcst.replace(r"PRECAUTIONARY/PREPAREDNESS ACTIONS\.\.\.", \
                             r"\nPRECAUTIONARY/PREPAREDNESS ACTIONS\.\.\.\n")
         fcst = fcst.replace(".:", ".")
-<<<<<<< HEAD
-        fcst = fcst.replace("\n ","\n")
-=======
         fcst = fcst.replace("\n ", "\n")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         fcst = fcst.replace("&&", "\n&&\n")
 
         #  Add the impacted WFO list at the bottom of the TCV
@@ -642,18 +500,8 @@ grids.
 
         fcst += "\n" + self.endline(wfoListText) + "\n"
 
-<<<<<<< HEAD
-
         #  Now handle the EAS urgency coding
         urgent = 0
-        followup = 1
-        prodNameKey = ''
-        fullKeyList = []
-        newList = ['NEW', 'EXA', 'EXB']
-=======
-        #  Now handle the EAS urgency coding
-        urgent = 0
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         #  Remove EAS line if not urgent
         if urgent == 0 and len(self._easPhrase):
@@ -697,10 +545,6 @@ grids.
 
         return fcst
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ################################################################################
 #  New common utility methods for tropical hazard formatters
 ################################################################################
@@ -737,10 +581,6 @@ grids.
             lon = entry["endLon"].strip()
             state = entry["endState"].strip()
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         #  Clean up the state so there are no spaces or dashes
         state = re.sub("[ _-]+", "", state)
 

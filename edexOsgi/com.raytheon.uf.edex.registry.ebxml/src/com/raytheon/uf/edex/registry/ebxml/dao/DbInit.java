@@ -41,13 +41,6 @@ import java.util.jar.JarFile;
 import javax.persistence.metamodel.EntityType;
 
 import org.apache.commons.beanutils.PropertyUtils;
-<<<<<<< HEAD
-import org.hibernate.SessionFactory;
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.transaction.annotation.Propagation;
@@ -62,10 +55,7 @@ import com.raytheon.uf.common.registry.schemas.ebxml.util.EbxmlJaxbManager;
 import com.raytheon.uf.common.serialization.SerializationException;
 import com.raytheon.uf.common.util.ReflectionUtil;
 import com.raytheon.uf.edex.core.EDEXUtil;
-<<<<<<< HEAD
-=======
 import com.raytheon.uf.edex.database.dao.SessionManagedDao;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.edex.registry.acp.xacml.XACMLPolicyAdministrator;
 import com.raytheon.uf.edex.registry.ebxml.exception.EbxmlRegistryException;
 import com.raytheon.uf.edex.registry.ebxml.init.RegistryInitializedListener;
@@ -118,23 +108,15 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryObjectType;
  * Sep 24, 2018  7238     skabasele    Store the initial RegistryObjectType Ids in a list
  * Mar 21, 2019  6140     tgurney      Add getDbClasses (Hibernate 5 upgrade)
  * May 14, 2019  6140     tgurney      Replace SessionFactory.getAllClassMetadata() (Hibernate 5)
-<<<<<<< HEAD
-=======
  * Apr 14, 2021  7849     mapeters     Split apart admin and non-admin init pieces
  * Feb 08, 2022  7849     mapeters     Only populate DB when tables are first created
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
  * @author bphillip
  */
-<<<<<<< HEAD
-public class DbInit extends com.raytheon.uf.edex.database.init.DbInit implements
-        ApplicationListener<ContextRefreshedEvent>, ApplicationContextAware {
-=======
 public class DbInit extends com.raytheon.uf.edex.database.init.DbInit
         implements ApplicationListener<ContextRefreshedEvent> {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     @VisibleForTesting
     protected static volatile boolean INITIALIZED = false;
@@ -143,20 +125,9 @@ public class DbInit extends com.raytheon.uf.edex.database.init.DbInit
     private static final String TABLE_CHECK_QUERY = "SELECT schemaname || '.' || tablename FROM pg_tables where schemaname = 'ebxml';";
 
     /** The lifecycle manager instance */
-<<<<<<< HEAD
-    private LifecycleManager lcm;
-
-    /** Hibernate session factory */
-    private SessionFactory sessionFactory;
-
-    private ApplicationContext applicationContext;
-
-    private XACMLPolicyAdministrator xacmlPolicyAdmin;
-=======
     private final LifecycleManager lcm;
 
     private final XACMLPolicyAdministrator xacmlPolicyAdmin;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Set contains the initial object Ids that are automatically created during
@@ -169,16 +140,6 @@ public class DbInit extends com.raytheon.uf.edex.database.init.DbInit
     /**
      * Creates a new instance of DbInit. This constructor should only be called
      * once when loaded by the Spring container.
-<<<<<<< HEAD
-     */
-    public DbInit() {
-        super("ebxml registry");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-=======
      *
      * @param adminDao
      *            the admin DAO for executing DB commands
@@ -194,18 +155,11 @@ public class DbInit extends com.raytheon.uf.edex.database.init.DbInit
         this.xacmlPolicyAdmin = xacmlPolicyAdmin;
     }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     protected void executeAdditionalSql() throws Exception {
         super.executeAdditionalSql();
 
         executeRegistrySql();
-<<<<<<< HEAD
-
-        populateDB();
-        xacmlPolicyAdmin.loadAccessControlPolicies();
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     public static boolean isDbInitialized() {
@@ -222,11 +176,7 @@ public class DbInit extends com.raytheon.uf.edex.database.init.DbInit
      *             If errors occur during the object submission process
      * @throws EbxmlRegistryException
      */
-<<<<<<< HEAD
-    protected void populateDB() throws SerializationException,
-=======
     protected void populateRegRepDb() throws SerializationException,
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             MsgRegistryException, EbxmlRegistryException {
         LocalizationFile[] files = PathManagerFactory.getPathManager()
                 .listStaticFiles("ebxml/minDB", new String[] { ".xml" }, true,
@@ -268,11 +218,7 @@ public class DbInit extends com.raytheon.uf.edex.database.init.DbInit
     /**
      * Executes any additional SQL statements contained in the res/scripts
      * directory of this jar. The purpose of this method is primarily to add
-<<<<<<< HEAD
-     * additional indices that cannot be automaically be generated by Hibernate
-=======
      * additional indices that cannot be automatically be generated by Hibernate
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      *
      * @throws EbxmlRegistryException
      */
@@ -294,11 +240,7 @@ public class DbInit extends com.raytheon.uf.edex.database.init.DbInit
                             buffer.append(line);
                         }
 
-<<<<<<< HEAD
-                        executeWork(connection -> {
-=======
                         adminDao.executeWork(connection -> {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                             try (Statement stmt = connection
                                     .createStatement()) {
                                 stmt.execute(buffer.toString());
@@ -362,13 +304,8 @@ public class DbInit extends com.raytheon.uf.edex.database.init.DbInit
     @Override
     protected Collection<Class<?>> getDbClasses() {
         List<Class<?>> classes = new ArrayList<>();
-<<<<<<< HEAD
-        for (EntityType<?> entityType : sessionFactory.getMetamodel()
-                .getEntities()) {
-=======
         for (EntityType<?> entityType : adminDao.getSessionFactory()
                 .getMetamodel().getEntities()) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             Class<?> clazz = entityType.getJavaType();
             if (clazz.getName().startsWith("oasis")) {
                 classes.add(clazz);
@@ -378,17 +315,6 @@ public class DbInit extends com.raytheon.uf.edex.database.init.DbInit
     }
 
     @Override
-<<<<<<< HEAD
-    @Transactional
-    public void onApplicationEvent(ContextRefreshedEvent event) {
-        if (!INITIALIZED) {
-            // Must reference this bean through the proxy to get proper
-            // transactional semantics, which requires going through the
-            // application context
-            final DbInit myself = applicationContext.getBean(DbInit.class);
-            try {
-                myself.initDb();
-=======
     public void onApplicationEvent(ContextRefreshedEvent event) {
         if (!INITIALIZED) {
             /*
@@ -410,7 +336,6 @@ public class DbInit extends com.raytheon.uf.edex.database.init.DbInit
                     myself.populateDb();
                 }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             } catch (Exception e) {
                 throw new RuntimeException("Error initializing EBXML database",
                         e);
@@ -422,8 +347,6 @@ public class DbInit extends com.raytheon.uf.edex.database.init.DbInit
         }
     }
 
-<<<<<<< HEAD
-=======
     /**
      * Populate the DB with any objects that are necessary for it to be
      * considered initialized. This should only be done when the tables are
@@ -445,7 +368,6 @@ public class DbInit extends com.raytheon.uf.edex.database.init.DbInit
      *
      * Only public for Transactional annotation to work.
      */
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void postInitDb() {
         logger.info("Executing post initialization actions");
@@ -487,42 +409,6 @@ public class DbInit extends com.raytheon.uf.edex.database.init.DbInit
     }
 
     /**
-<<<<<<< HEAD
-     * @param lcm
-     *            the lcm to set
-     */
-    public void setLcm(LifecycleManager lcm) {
-        this.lcm = lcm;
-    }
-
-    /**
-     * @param sessionFactory
-     *            the sessionFactory to set
-     */
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext)
-            throws BeansException {
-        this.applicationContext = applicationContext;
-    }
-
-    /**
-     * @param xacmlPolicyAdmin
-     *            the xacmlPolicyAdmin to set
-     */
-    public void setXacmlPolicyAdmin(XACMLPolicyAdministrator xacmlPolicyAdmin) {
-        this.xacmlPolicyAdmin = xacmlPolicyAdmin;
-    }
-
-    /**
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * Getter used to retrieve the initialObjectIds created in the database from
      * the localization files when the minimum object are created.
      *

@@ -104,11 +104,8 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
  * Oct 29, 2019  6140     lsingh    Replaced deprecated hibernate @Index annotation
  * Oct 20, 2019  6140     tgurney   Move @Index annotations to inside the @Table
  *                                  annotation (Hibernate 5 / JPA fix)
-<<<<<<< HEAD
-=======
  * May 26, 2020  8165     bsteffen  Remove auditableevent and notification.
  * 10/27/2020    8170     ksunil     removed reference to empty table
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  *
  * @author bphillip
@@ -118,17 +115,6 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
 @XmlType(name = "RegistryObjectType", propOrder = { "intStringName",
         "intStringDescription", "versionInfo", "classification",
         "externalIdentifier", "externalLink" })
-<<<<<<< HEAD
-@XmlSeeAlso({ NotificationType.class, ServiceType.class,
-    ServiceInterfaceType.class, RegistryType.class,
-    ExtrinsicObjectType.class, FederationType.class,
-    WorkflowActionType.class, ExternalLinkType.class, AssociationType.class,
-    ExternalIdentifierType.class, ServiceEndpointType.class,
-    ClassificationType.class, TaxonomyElementType.class,
-    RegistryPackageType.class, QueryDefinitionType.class,
-    SubscriptionType.class, AuditableEventType.class,
-    ServiceBindingType.class, PartyType.class, RoleType.class })
-=======
 @XmlSeeAlso({ ServiceType.class, ServiceInterfaceType.class, RegistryType.class,
         ExtrinsicObjectType.class, FederationType.class, ExternalLinkType.class,
         AssociationType.class, ExternalIdentifierType.class,
@@ -136,7 +122,6 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
         TaxonomyElementType.class, RegistryPackageType.class,
         QueryDefinitionType.class, SubscriptionType.class,
         ServiceBindingType.class, PartyType.class, RoleType.class })
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 @DynamicSerialize
 @Entity
 @Cache(region = RegrepUtil.DB_CACHE_REGION, usage = CacheConcurrencyStrategy.TRANSACTIONAL, include = "all")
@@ -144,12 +129,7 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
         @Index(name = "description_idx", columnList = "description"),
         @Index(name = "name_idx", columnList = "name"),
         @Index(name = "LID_Index", columnList = "lid"),
-<<<<<<< HEAD
-        @Index(name = "RegistryObjectType_objectType_idx",
-        columnList = "objectType") })
-=======
         @Index(name = "RegistryObjectType_objectType_idx", columnList = "objectType") })
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 public class RegistryObjectType extends IdentifiableType {
 
     private static final long serialVersionUID = -7436174012584469534L;

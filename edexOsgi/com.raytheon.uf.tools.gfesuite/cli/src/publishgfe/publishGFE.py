@@ -23,13 +23,8 @@
 import logging
 import sys
 
-<<<<<<< HEAD
 from awips import UsageArgumentParser
 from awips.gfe import IFPClient
-=======
-from ufpy import UsageArgumentParser
-from ufpy.gfe import IFPClient
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 from dynamicserialize.dstypes.com.raytheon.uf.common.time import TimeRange
 from dynamicserialize.dstypes.com.raytheon.uf.common.dataplugin.gfe.db.objects import DatabaseID

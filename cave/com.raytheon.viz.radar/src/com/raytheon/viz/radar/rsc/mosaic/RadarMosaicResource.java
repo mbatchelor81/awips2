@@ -73,11 +73,7 @@ import com.raytheon.viz.radar.rsc.MosaicPaintProperties;
 import com.raytheon.viz.radar.rsc.RadarImageResource;
 import com.raytheon.viz.radar.rsc.mosaic.RadarMosaicRendererFactory.IRadarMosaicRenderer;
 
-<<<<<<< HEAD
-import tec.uom.se.format.SimpleUnitFormat;
-=======
 import tech.units.indriya.format.SimpleUnitFormat;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Implements Radar Mosaic display
@@ -98,10 +94,7 @@ import tech.units.indriya.format.SimpleUnitFormat;
  * May 19, 2016  3253     bsteffen     Refactor of extra text.
  * Sep 13, 2016  3239     nabowle      Use the Interrogatable API.
  * Nov 28, 2017  5863     bsteffen     Change dataTimes to a NavigableSet
-<<<<<<< HEAD
-=======
  * Nov 14, 2022  8973     mapeters     Sync access to resources' radar records
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -201,13 +194,7 @@ public class RadarMosaicResource extends
 
     private int getSeverity(ResourcePair rp) {
         int maxSeverity = -1;
-<<<<<<< HEAD
-        if (rp.getResource() == null) {
-            // nothing.
-        } else if (rp.getResource() instanceof BestResResource) {
-=======
         if (rp.getResource() instanceof BestResResource) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             for (ResourcePair rp1 : ((BestResResource) rp.getResource())
                     .getResourceList()) {
                 int severity = getSeverity(rp1);
@@ -216,13 +203,6 @@ public class RadarMosaicResource extends
                 }
             }
         } else if (rp.getResource() instanceof RadarImageResource) {
-<<<<<<< HEAD
-            RadarImageResource<?> rir = (RadarImageResource<?>) rp
-                    .getResource();
-            for (RadarRecord rr : rir.getRadarRecords().values()) {
-                // this will make 8 bit products take precedence over all
-                // 4-bit products
-=======
             int severity = getSeverity(
                     (RadarImageResource<?>) rp.getResource());
             if (severity > maxSeverity) {
@@ -240,19 +220,13 @@ public class RadarMosaicResource extends
                  * this will make 8 bit products take precedence over all 4-bit
                  * products
                  */
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 int severity = rr.getOperationalMode() * rr.getNumLevels();
                 if (severity > maxSeverity) {
                     maxSeverity = severity;
                 }
             }
-<<<<<<< HEAD
-        }
-        return maxSeverity;
-=======
             return maxSeverity;
         });
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override
@@ -334,12 +308,8 @@ public class RadarMosaicResource extends
                                 .setColorMapParameters(params);
                     }
                 }
-<<<<<<< HEAD
-                unitString = SimpleUnitFormat.getInstance(SimpleUnitFormat.Flavor.ASCII)
-=======
                 unitString = SimpleUnitFormat
                         .getInstance(SimpleUnitFormat.Flavor.ASCII)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         .format(params.getDisplayUnit());
                 initColorMap = true;
             }
@@ -579,12 +549,7 @@ public class RadarMosaicResource extends
             // Now loop through and find highest value
             for (AbstractRadarResource<?> rr : rscInspectMap.keySet()) {
                 InterrogateMap valMap = rscInspectMap.get(rr);
-<<<<<<< HEAD
-                Quantity<?> num = valMap
-                        .get(Interrogator.VALUE);
-=======
                 Quantity<?> num = valMap.get(Interrogator.VALUE);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if (num != null) {
                     Double d = num.getValue().doubleValue();
                     if (d > highestVal) {

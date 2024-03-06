@@ -23,14 +23,8 @@ package com.raytheon.uf.common.dataplugin.taf;
 import java.util.Date;
 
 import javax.persistence.Column;
-<<<<<<< HEAD
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-=======
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -40,11 +34,7 @@ import org.hibernate.annotations.Index;
 import com.raytheon.uf.common.dataplugin.PluginDataObject;
 import com.raytheon.uf.common.dataplugin.annotations.DataURI;
 import com.raytheon.uf.common.geospatial.ISpatialEnabled;
-<<<<<<< HEAD
-import com.raytheon.uf.common.pointdata.spatial.ObStation;
-=======
 import com.raytheon.uf.common.pointdata.spatial.SurfaceObsLocation;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.serialization.annotations.DynamicSerialize;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
 
@@ -73,10 +63,7 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
  * Oct 10, 2014 3722        mapeters    Removed dataURI column.
  * Apr 01, 2015 3722        rjpeter     Made dataURI fields required, changed amd and corIndicator to boolean.
  * Sep 21, 2015 4890        rferrel     Removal of Change Group.
-<<<<<<< HEAD
-=======
  * May 24, 2022 20788       smoorthy    Adjust TafRecord to use embeddable SurfaceObsLocation.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  * 
  * @author bphillip
@@ -84,11 +71,6 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
  */
 @Entity
 @SequenceGenerator(initialValue = 1, name = PluginDataObject.ID_GEN, sequenceName = "tafseq")
-<<<<<<< HEAD
-// TODO: remove issue_time/issue_timeString from table, same as reftime in
-// different format
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 @Table(name = TafRecord.PLUGIN_NAME, uniqueConstraints = { @UniqueConstraint(name = "uk_taf_datauri_fields", columnNames = {
         "reftime", "stationid", "corindicator", "amdindicator",
         "issue_timestring" }) })
@@ -108,15 +90,6 @@ public class TafRecord extends PluginDataObject implements ISpatialEnabled {
     @Column(length = 1024)
     private String tafText;
 
-<<<<<<< HEAD
-    // Station Identifier for the data
-    @DynamicSerializeElement
-    @Column(nullable = false)
-    @Index(name = "taf_stationIndex")
-    @DataURI(position = 1)
-    private String stationId;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     @DynamicSerializeElement
     @DataURI(position = 2)
@@ -149,14 +122,6 @@ public class TafRecord extends PluginDataObject implements ISpatialEnabled {
     @Column
     private String remarks;
 
-<<<<<<< HEAD
-    @ManyToOne
-    @PrimaryKeyJoinColumn
-    @DynamicSerializeElement
-    protected ObStation location;
-
-    public TafRecord() {
-=======
     @Embedded
     @DataURI(position = 1, embedded = true)
     @DynamicSerializeElement
@@ -164,7 +129,6 @@ public class TafRecord extends PluginDataObject implements ISpatialEnabled {
 
     public TafRecord() {
         location = new SurfaceObsLocation();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
@@ -222,11 +186,7 @@ public class TafRecord extends PluginDataObject implements ISpatialEnabled {
      * @return
      */
     public String getStationId() {
-<<<<<<< HEAD
-        return stationId;
-=======
         return location.getStationId();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
@@ -234,11 +194,7 @@ public class TafRecord extends PluginDataObject implements ISpatialEnabled {
      * @param stationID
      */
     public void setStationId(String stationID) {
-<<<<<<< HEAD
-        stationId = stationID;
-=======
         location.setStationId(stationID);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
@@ -338,17 +294,6 @@ public class TafRecord extends PluginDataObject implements ISpatialEnabled {
     }
 
     @Override
-<<<<<<< HEAD
-    public ObStation getSpatialObject() {
-        return location;
-    }
-
-    public ObStation getLocation() {
-        return location;
-    }
-
-    public void setLocation(ObStation location) {
-=======
     public SurfaceObsLocation getSpatialObject() {
         return location;
     }
@@ -358,7 +303,6 @@ public class TafRecord extends PluginDataObject implements ISpatialEnabled {
     }
 
     public void setLocation(SurfaceObsLocation location) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         this.location = location;
     }
 

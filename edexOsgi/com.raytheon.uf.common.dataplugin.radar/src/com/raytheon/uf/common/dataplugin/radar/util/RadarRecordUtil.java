@@ -31,10 +31,7 @@ import org.geotools.coverage.grid.GeneralGridEnvelope;
 import org.geotools.coverage.grid.GeneralGridGeometry;
 import org.geotools.geometry.GeneralEnvelope;
 import org.geotools.referencing.GeodeticCalculator;
-<<<<<<< HEAD
-=======
 import org.locationtech.jts.geom.Coordinate;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.TransformException;
 
@@ -60,10 +57,6 @@ import com.raytheon.uf.common.geospatial.ReferencedObject.Type;
 import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
 import com.raytheon.uf.common.status.UFStatus.Priority;
-<<<<<<< HEAD
-import org.locationtech.jts.geom.Coordinate;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Functions on radar record for retrieval and manipulation of data
@@ -84,24 +77,14 @@ import org.locationtech.jts.geom.Coordinate;
  * Aug 31, 2016 2671       tgurney     Make rectifyCoordinate public. Extract
  *                                     new method getRadarGridGeometry from
  *                                     buildMeltingLayerCoordinates
-<<<<<<< HEAD
-=======
  * Feb 22, 2023 9021       mapeters    Add SRM constant, remove unused
  *                                     setSRMData method
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  *
  * @author mnash
  */
 
 public class RadarRecordUtil {
-<<<<<<< HEAD
-    private static final String NO_STORMS_DETECTED = "NO STORMS DETECTED";
-
-    private static final transient IUFStatusHandler statusHandler = UFStatus
-            .getHandler(RadarRecordUtil.class);
-
-=======
 
     private static final IUFStatusHandler statusHandler = UFStatus
             .getHandler(RadarRecordUtil.class);
@@ -116,7 +99,6 @@ public class RadarRecordUtil {
     private RadarRecordUtil() {
     }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public static Map<String, Map<GraphicBlockValues, String>> parseGraphicBlock(
             RadarRecord record) {
 
@@ -377,14 +359,8 @@ public class RadarRecordUtil {
                 if (record.srmSpeed != 0) {
                     // Get the delta value for the current radial
                     delta = record.srmSpeed
-<<<<<<< HEAD
-                            * Math.cos(Math.PI / 180
-                                    * (record.srmDirection
-                                            - record.getAngleData()[currRadial]))
-=======
                             * Math.cos(Math.PI / 180 * (record.srmDirection
                                     - record.getAngleData()[currRadial]))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                             / 1.944;
 
                     if (!record.isExpandedMode()) {
@@ -448,31 +424,12 @@ public class RadarRecordUtil {
      * record is 8-bit Velocity that is the basis for it.
      */
     public static void setSRMData(RadarRecord record, double direction,
-<<<<<<< HEAD
-            double speed) {
-        record.srmSpeed = speed;
-        record.srmDirection = direction;
-
-        RadarRecordUtil.calculateSRM8(record);
-    }
-
-    /**
-     * Sets the wind vector for 8-bit SRM and creates the product if the current
-     * record is 8-bit Velocity that is the basis for it.
-     */
-    public static void setSRMData(RadarRecord record, double direction,
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             double speed, Date movement, String sourceName) {
         record.srmSpeed = speed;
         record.srmDirection = direction;
         record.srmMovement = movement;
         record.srmSourceName = sourceName;
-<<<<<<< HEAD
-        record.setMnemonic("SRM");
-=======
         record.setMnemonic(SRM);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         RadarRecordUtil.calculateSRM8(record);
     }
 
@@ -483,12 +440,8 @@ public class RadarRecordUtil {
         }
 
         return record.srmData != null
-<<<<<<< HEAD
-                ? record.srmData[radial * record.getNumBins() + bin] : 0;
-=======
                 ? record.srmData[radial * record.getNumBins() + bin]
                 : 0;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     public static boolean hasSRM(RadarRecord record) {
@@ -518,17 +471,11 @@ public class RadarRecordUtil {
         String text = null;
         SymbologyBlock sb = record.getSymbologyBlock();
         if (sb != null) {
-<<<<<<< HEAD
-            // According to the ICD the alphanumeric data for DHR can be found
-            // in the second layer of the symbology block in a TextSymbolPacketn
-            // with code 1.
-=======
             /*
              * According to the ICD the alphanumeric data for DHR can be found
              * in the second layer of the symbology block in a TextSymbolPacketn
              * with code 1.
              */
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             for (Layer layer : sb.getLayers()) {
                 for (SymbologyPacket packet : layer.getPackets()) {
                     if (packet instanceof TextSymbolPacket) {
@@ -557,21 +504,6 @@ public class RadarRecordUtil {
 
         vi = 0;
         while (vi < nv) {
-<<<<<<< HEAD
-            String s = v[vi++];
-            if (s.equals("PSM ( 6)")) {
-                precipCat = (int) parseDHRValue(v[vi + 4]);
-                map.put(DHRValues.PRECIPCAT, (double) precipCat);
-                vi += 6;
-            } else if (s.equals("ADAP(32)")) {
-                for (DHRValues element : ADAP32_VALUES) {
-                    map.put(element, parseDHRValue(v[vi++]));
-                }
-                biasApplied = map.get(DHRValues.BIASAPPLIEDFLAG) > 0;
-                while (vi < nv) {
-                    s = v[vi++];
-                    if (s.equals("SUPL(15)")) {
-=======
             String s = v[vi];
             ++vi;
             if ("PSM ( 6)".equals(s)) {
@@ -588,7 +520,6 @@ public class RadarRecordUtil {
                     s = v[vi];
                     ++vi;
                     if ("SUPL(15)".equals(s)) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         /*
                          * // average scan date/time are never used...
                          * map.put(DHRValues.AVGSCANDATE, parseDHRValue(text, vi
@@ -597,53 +528,25 @@ public class RadarRecordUtil {
                          */
                         flagZeroHybrid = (int) parseDHRValue(v[vi + 2]);
                         if (flagZeroHybrid != 0 && flagZeroHybrid != 1) {
-<<<<<<< HEAD
-                            flagZeroHybrid = 0; // should print warning
-                        }
-                        vi += 15;
-                    } else if (s.equals("BIAS(11)")) {
-=======
                             // should print warning
                             flagZeroHybrid = 0;
                         }
                         vi += 15;
                     } else if ("BIAS(11)".equals(s)) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         biasCalculated = parseDHRValue(v[vi + 8]);
                         vi += 11;
                     }
                 }
-<<<<<<< HEAD
-            } else if (s.equals("ADAP(38)")) {
-                // Don't have documentation for older formats, so copying logic
-                // from A1 decodeDHR.C.
-=======
             } else if ("ADAP(38)".equals(s)) {
                 /*
                  * Don't have documentation for older formats, so copying logic
                  * from A1 decodeDHR.C.
                  */
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 map.put(DHRValues.ZRMULTCOEFF, parseDHRValue(v[vi + 9]));
                 map.put(DHRValues.ZRPOWERCOEFF, parseDHRValue(v[vi + 10]));
                 map.put(DHRValues.MAXPRECIPRATEALLOW,
                         parseDHRValue(v[vi + 25]));
                 map.put(DHRValues.BIASAPPLIEDFLAG, parseDHRValue(v[vi + 37]));
-<<<<<<< HEAD
-                biasApplied = map.get(DHRValues.BIASAPPLIEDFLAG) > 0;// DR 13083
-                s = v[46];
-                if (s.equals("SUPL(15)")) {
-                    biasCalculated = parseDHRValue(v[71]);
-                    flagZeroHybrid = (int) parseDHRValue(v[49]);
-                    if (flagZeroHybrid != 0 && flagZeroHybrid != 1) {
-                        flagZeroHybrid = 0; // should print warning
-                    }
-                } else if (s.equals("SUPL(13)")) {
-                    biasCalculated = parseDHRValue(v[69]);
-                }
-                vi = nv;
-            } else if (s.equals("ADAP(46)")) {
-=======
                 biasApplied = map.get(DHRValues.BIASAPPLIEDFLAG) > 0;
                 s = v[46];
                 if ("SUPL(15)".equals(s)) {
@@ -658,23 +561,11 @@ public class RadarRecordUtil {
                 }
                 vi = nv;
             } else if ("ADAP(46)".equals(s)) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 map.put(DHRValues.ZRMULTCOEFF, parseDHRValue(v[vi + 9]));
                 map.put(DHRValues.ZRPOWERCOEFF, parseDHRValue(v[vi + 10]));
                 map.put(DHRValues.MAXPRECIPRATEALLOW,
                         parseDHRValue(v[vi + 25]));
                 s = v[68];
-<<<<<<< HEAD
-                if (s.equals("BIAS(11)")) {
-                    map.put(DHRValues.BIASAPPLIEDFLAG, parseDHRValue(v[53]));
-                    biasApplied = map.get(DHRValues.BIASAPPLIEDFLAG) > 0;// DR
-                                                                         // 13083
-                    biasCalculated = parseDHRValue(v[77]);
-                } else if (s.equals("BIAS( 9)")) {
-                    map.put(DHRValues.BIASAPPLIEDFLAG, parseDHRValue(v[53]));
-                    biasApplied = map.get(DHRValues.BIASAPPLIEDFLAG) > 0;// DR
-                                                                         // 13083
-=======
                 if ("BIAS(11)".equals(s)) {
                     map.put(DHRValues.BIASAPPLIEDFLAG, parseDHRValue(v[53]));
                     biasApplied = map.get(DHRValues.BIASAPPLIEDFLAG) > 0;
@@ -682,7 +573,6 @@ public class RadarRecordUtil {
                 } else if ("BIAS( 9)".equals(s)) {
                     map.put(DHRValues.BIASAPPLIEDFLAG, parseDHRValue(v[53]));
                     biasApplied = map.get(DHRValues.BIASAPPLIEDFLAG) > 0;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     biasCalculated = parseDHRValue(v[73]);
                 }
                 vi = nv;
@@ -697,11 +587,7 @@ public class RadarRecordUtil {
             if (biasCalculated < 0.01 || biasCalculated > 100.0) {
                 biasCalculated = 1.0;
             }
-<<<<<<< HEAD
-        } // DR 13083
-=======
         }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         map.put(DHRValues.BIAS, biasCalculated);
 
         // Also include logic from A1 FFMPContainer::read(), FFMP_ORPG case
@@ -719,15 +605,9 @@ public class RadarRecordUtil {
 
     private static double parseDHRValue(String text) {
         String s = text.trim();
-<<<<<<< HEAD
-        if (s.equals("T")) {
-            return 1;
-        } else if (s.equals("F")) {
-=======
         if ("T".equals(s)) {
             return 1;
         } else if ("F".equals(s)) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return 0;
         } else {
             return Double.parseDouble(s);
@@ -810,13 +690,7 @@ public class RadarRecordUtil {
                         for (int l = 0; l < coords.length - 1; l++) {
                             if (!coordinates
                                     .containsKey(vector.get(l).getTheColor())) {
-<<<<<<< HEAD
-                                coordinates.put(
-                                        Integer.valueOf(
-                                                vector.get(l).getTheColor()),
-=======
                                 coordinates.put(vector.get(l).getTheColor(),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                         coords);
                             }
 
@@ -853,13 +727,8 @@ public class RadarRecordUtil {
         GeneralEnvelope generalEnvelope = new GeneralEnvelope(2);
         // Per section 3.3.3
         generalEnvelope.setCoordinateReferenceSystem(radarRecord.getCRS());
-<<<<<<< HEAD
-        generalEnvelope.setRange(0, -256000 * 2, 256000 * 2);
-        generalEnvelope.setRange(1, -256000 * 2, 256000 * 2);
-=======
         generalEnvelope.setRange(0, -256_000 * 2, 256_000 * 2);
         generalEnvelope.setRange(1, -256_000 * 2, 256_000 * 2);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         // [-2048, 2048] == range of 4095 (inclusive 0), plus 1
         // because GGR is exclusive (?)
         GeneralGridGeometry rval = new GeneralGridGeometry(

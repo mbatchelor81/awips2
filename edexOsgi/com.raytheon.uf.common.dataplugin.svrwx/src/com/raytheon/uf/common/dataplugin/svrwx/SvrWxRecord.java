@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
  * 
-=======
- *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
  * 
-=======
- *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
  * 
-=======
- *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -36,20 +24,12 @@ import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-<<<<<<< HEAD
-=======
-import javax.persistence.Index;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
-<<<<<<< HEAD
 import org.hibernate.annotations.Index;
-=======
-import org.locationtech.jts.geom.Geometry;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.uf.common.dataplugin.PluginDataObject;
 import com.raytheon.uf.common.dataplugin.annotations.DataURI;
@@ -61,7 +41,6 @@ import com.raytheon.uf.common.pointdata.PointDataView;
 import com.raytheon.uf.common.pointdata.spatial.SurfaceObsLocation;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerialize;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
-<<<<<<< HEAD
 import org.locationtech.jts.geom.Geometry;
 
 /**
@@ -69,14 +48,6 @@ import org.locationtech.jts.geom.Geometry;
  * 
  * <pre>
  * 
-=======
-
-/**
- * Pointdata for severe weather
- *
- * <pre>
- *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * SOFTWARE HISTORY
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
@@ -90,7 +61,6 @@ import org.locationtech.jts.geom.Geometry;
  * Oct 14, 2013 2361       njensen     Remove XML annotations
  * Jul 28, 2015 4360       rferrel     Named unique constraint. Made reportType non-nullable.
  * Jan 14, 2016 5253       tgurney     Dropped dataUri column and updated unique constraint.
-<<<<<<< HEAD
  * 
  * </pre>
  * 
@@ -101,38 +71,15 @@ import org.locationtech.jts.geom.Geometry;
 @SequenceGenerator(initialValue = 1, name = PluginDataObject.ID_GEN, sequenceName = "svrwxseq")
 @Table(name = "svrwx", uniqueConstraints = { @UniqueConstraint(name = "uk_svrwx_datauri_fields", columnNames = {
         "refTime", "reportType", "stationId", "latitude", "longitude" }) })
-=======
- * Aug 08, 2022 8892       tjensen     Update indexes for Hibernate 5
- *
- * </pre>
- *
- * @author jsanchez
- */
-@Entity
-@SequenceGenerator(initialValue = 1, name = PluginDataObject.ID_GEN, sequenceName = "svrwxseq")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 /*
  * Both refTime and forecastTime are included in the refTimeIndex since
  * forecastTime is unlikely to be used.
  */
-<<<<<<< HEAD
 @org.hibernate.annotations.Table(appliesTo = "svrwx", indexes = { @Index(name = "svrwx_refTimeIndex", columnNames = {
         "refTime", "forecastTime" }) })
 @DynamicSerialize
 public class SvrWxRecord extends PersistablePluginDataObject implements
         ISpatialEnabled, IPointData {
-=======
-@Table(name = "svrwx", uniqueConstraints = {
-        @UniqueConstraint(name = "uk_svrwx_datauri_fields", columnNames = {
-                "refTime", "reportType", "stationId", "latitude",
-                "longitude" }) }, indexes = {
-                        @Index(name = "%TABLE%_refTimeIndex", columnList = "refTime, forecastTime"),
-                        @Index(name = "%TABLE%_stationIndex", columnList = "stationId") })
-
-@DynamicSerialize
-public class SvrWxRecord extends PersistablePluginDataObject
-        implements ISpatialEnabled, IPointData {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private static final long serialVersionUID = 1L;
 
@@ -176,11 +123,7 @@ public class SvrWxRecord extends PersistablePluginDataObject
 
     /**
      * Construct an instance of this class using the supplied datauri.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param dataUri
      */
     public SvrWxRecord(String dataUri) {
@@ -249,11 +192,7 @@ public class SvrWxRecord extends PersistablePluginDataObject
 
     /**
      * Get this observation's geometry.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry for this observation.
      */
     public Geometry getGeometry() {
@@ -262,11 +201,7 @@ public class SvrWxRecord extends PersistablePluginDataObject
 
     /**
      * Get the geometry latitude.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry latitude.
      */
     public double getLatitude() {
@@ -275,11 +210,7 @@ public class SvrWxRecord extends PersistablePluginDataObject
 
     /**
      * Get the geometry longitude.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry longitude.
      */
     public double getLongitude() {
@@ -288,11 +219,7 @@ public class SvrWxRecord extends PersistablePluginDataObject
 
     /**
      * Get the station identifier for this observation.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return the stationId
      */
     public String getStationId() {
@@ -301,11 +228,7 @@ public class SvrWxRecord extends PersistablePluginDataObject
 
     /**
      * Get the elevation, in meters, of the observing platform or location.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The observation elevation, in meters.
      */
     public Integer getElevation() {
@@ -314,11 +237,7 @@ public class SvrWxRecord extends PersistablePluginDataObject
 
     /**
      * Get whether the location for this observation is defined.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return Is this location defined.
      */
     public Boolean getLocationDefined() {

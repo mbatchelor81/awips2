@@ -66,10 +66,7 @@ import com.raytheon.uf.common.util.FileUtil;
  *                                  gfe/python
  * Feb 20, 2018  6602     dgilling  Updated for consolidated text utilities.
  * May 05, 2020  8151     randerso  Include EDEX site in getCommonGfeIncludePath
-<<<<<<< HEAD
  * Sep 01, 2022           srcarter  Change for Workstation and Region removal
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -430,11 +427,6 @@ public class GfePyIncludeUtil extends PythonIncludePathUtil {
     }
 
     public static String getVCModUtilsIncludePath() {
-<<<<<<< HEAD
         return buildIncludePath(LocalizationType.COMMON_STATIC, VCMOD_UTILS, true);
-=======
-        return getPath(PATH_MANAGER.getContext(LocalizationType.COMMON_STATIC,
-                LocalizationLevel.BASE), VCMOD_UTILS);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 }

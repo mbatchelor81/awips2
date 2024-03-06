@@ -27,12 +27,7 @@
     <contribute xsi:type="subMenu" menuText="${icao} Data Quality"
         id="${icao}TerminalDataQuality">
         <contribute xsi:type="bundleItem" file="bundles/DefaultRadarXY.xml"
-<<<<<<< HEAD
-            menuText="TDWR SPG Unit Status" id="${icao}TerminalTDWRSPGUnitStatus"
-            editorType="com.raytheon.viz.radar.ui.xy.RadarXYEditor">
-=======
             menuText="TDWR SPG Unit Status" id="${icao}TerminalTDWRSPGUnitStatus">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="product" value="2" />
             <substitute key="insetMap" value="false" />

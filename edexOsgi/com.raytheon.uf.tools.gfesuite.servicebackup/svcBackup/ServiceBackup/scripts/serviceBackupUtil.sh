@@ -24,30 +24,6 @@
 ##
 #
 # SOFTWARE HISTORY
-<<<<<<< HEAD
-# Date         Ticket#    Engineer    Description
-# ------------ ---------- ----------- --------------------------
-# Feb 09, 2015  #4103     dgilling    Initial Creation.
-# Mar 27, 2015  #4103     dgilling    Support new location for svcbu.properties.
-# Apr 28, 2015  #4427     dgilling    Add markTask functions.
-# Jul 15, 2016  #5747     dgilling    Move edex_static to common_static.
-#
-##
-
-if [[ -z "${AWIPS_HOME}" ]]
-then
-    path_to_script=`readlink -f $0`
-    AWIPS_HOME=$(dirname $(dirname $(dirname $(dirname  $path_to_script))))
-fi
-
-. ${AWIPS_HOME}/edex/data/utility/common_static/base/gfe/config/svcbu.properties
-SITE_SVCBU_OVERRIDE=${AWIPS_HOME}/edex/data/utility/common_static/site/${AW_SITE_IDENTIFIER}/gfe/config/svcbu.properties
-if [[ -f ${SITE_SVCBU_OVERRIDE} ]]
-then
-    . ${SITE_SVCBU_OVERRIDE}
-fi
-
-=======
 #
 # Date          Ticket#  Engineer        Description
 # ------------- -------- ---------       --------------------------------------------
@@ -93,7 +69,6 @@ source /etc/profile.d/awips2Python.sh
 [ ! -d ${IFPS_LOG} ] && (umask 022;mkdir -p ${IFPS_LOG})
 [ ! -d ${LOCK_DIR} ] && (umask 022;mkdir -p ${LOCK_DIR})
 [ ! -d ${IFPS_DATA} ] && (umask 022;mkdir -p ${IFPS_DATA})
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 function configureLogging()
 {
@@ -204,9 +179,6 @@ function markTaskInProgress()
 {
     local lock_file="$1"
     markTask ${lock_file} "IN_PROGRESS"
-<<<<<<< HEAD
-}
-=======
 }
 
 
@@ -240,4 +212,3 @@ function getPrimarySites()
     PRIMARY_SITES=${TEMP_PRIMARY_SITES}
 }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

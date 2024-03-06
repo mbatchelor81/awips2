@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -66,11 +54,7 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeTypeAdap
 /**
  * Object used to identify an hdf5 grid "database".<br>
  * This is a port from original DatabaseID found in AWIPS I
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * <pre>
  * SOFTWARE HISTORY
  * Date         Ticket#    Engineer    Description
@@ -85,11 +69,6 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeTypeAdap
  * 06/13/13     2044       randerso    Code cleanup
  * 07/31/13     2057       randerso    Added removedDate
  * 10/08/14     #3684      randerso    Added sameModel()
-<<<<<<< HEAD
- * 
- * </pre>
- * 
-=======
  * 08/20/21     21543      zalberts    Modified equals() to align with compareTo()
  * 02/03/23     9013       njensen     Brought back the fast implementation of equals()
  *                                     due to performance regression and since 21543
@@ -97,19 +76,13 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeTypeAdap
  *
  * </pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author bphillip
  * @version 1.0
  */
 @Entity
-<<<<<<< HEAD
-@Table(name = "gfe_dbid", uniqueConstraints = { @UniqueConstraint(columnNames = {
-        "siteId", "modelName", "modelTime", "dbType" }) })
-=======
 @Table(name = "gfe_dbid", uniqueConstraints = {
         @UniqueConstraint(columnNames = { "siteId", "modelName", "modelTime",
                 "dbType" }) })
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 @DynamicSerialize
 @DynamicSerializeTypeAdapter(factory = DatabaseIDAdapter.class)
 public class DatabaseID implements Comparable<DatabaseID> {
@@ -144,11 +117,7 @@ public class DatabaseID implements Comparable<DatabaseID> {
 
         /** Normal GRID database */
         GRID
-<<<<<<< HEAD
-    };
-=======
     }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Auto-generated surrogate key
@@ -205,12 +174,8 @@ public class DatabaseID implements Comparable<DatabaseID> {
      * parmIds when the databaseId is deleted. These should not be loaded by or
      * referenced normally from code from this object.
      */
-<<<<<<< HEAD
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "dbId", cascade = { CascadeType.REMOVE })
-=======
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "dbId", cascade = {
             CascadeType.REMOVE })
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<ParmID> parmIds;
 
@@ -223,11 +188,7 @@ public class DatabaseID implements Comparable<DatabaseID> {
 
     /**
      * Constructor taking database identifier
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param dbIdentifier
      */
     public DatabaseID(String dbIdentifier) {
@@ -245,11 +206,7 @@ public class DatabaseID implements Comparable<DatabaseID> {
 
     /**
      * Constructor taking the individual components of the db ID
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param siteId
      *            The site ID
      * @param format
@@ -263,22 +220,13 @@ public class DatabaseID implements Comparable<DatabaseID> {
      */
     public DatabaseID(String siteId, DataType format, String dbType,
             String modelName, Date modelTime) {
-<<<<<<< HEAD
-        this(siteId, format, dbType, modelName, dateFormat.get().format(
-                modelTime));
-=======
         this(siteId, format, dbType, modelName,
                 dateFormat.get().format(modelTime));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
      * Constructor taking the individual components of the db ID
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param siteId
      *            The site ID
      * @param format
@@ -302,11 +250,7 @@ public class DatabaseID implements Comparable<DatabaseID> {
     /**
      * Constructor taking the individual components of the db ID. The model time
      * is not specified. (This is for a rolling database)
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param siteId
      *            The site ID
      * @param format
@@ -323,11 +267,7 @@ public class DatabaseID implements Comparable<DatabaseID> {
 
     /**
      * Returns the id field, auto-generated surrogate key.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return the id
      */
     public int getId() {
@@ -338,11 +278,7 @@ public class DatabaseID implements Comparable<DatabaseID> {
      * The less than operator. Ordering is by site, format, type, model, and
      * modeltime. <br>
      * Note that more current times are treated as less than.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param dbId
      *            The database ID to compare to
      * @return True if "less than"
@@ -371,11 +307,7 @@ public class DatabaseID implements Comparable<DatabaseID> {
 
     /**
      * Returns true if this is a valid database identifier
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return True if this is a valid database identifier
      */
 
@@ -385,11 +317,7 @@ public class DatabaseID implements Comparable<DatabaseID> {
 
     /**
      * Returns the format type as a string. Returns NONE,GRID
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param dataType
      *            The datatype
      * @return The string representation of the datatype
@@ -408,11 +336,7 @@ public class DatabaseID implements Comparable<DatabaseID> {
 
     /**
      * Strips the type off of the ID
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return A database id with type stripped
      */
 
@@ -427,11 +351,7 @@ public class DatabaseID implements Comparable<DatabaseID> {
 
     /**
      * Strips off model time
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return A new database ID with no model time
      */
 
@@ -442,11 +362,7 @@ public class DatabaseID implements Comparable<DatabaseID> {
     /**
      * Decodes a string representation of a database ID into its component parts
      * and assigns them accordingly
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param dbIdentifier
      *            The string representation of a databaseID
      */
@@ -616,40 +532,20 @@ public class DatabaseID implements Comparable<DatabaseID> {
         return shortModelId;
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#hashCode()
-     */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = (prime * result) + (dbType == null ? 0 : dbType.hashCode());
         result = (prime * result) + (format == null ? 0 : format.hashCode());
-<<<<<<< HEAD
-        String localModelId = getModelId();
-        result = (prime * result)
-                + (localModelId == null ? 0 : localModelId.hashCode());
-=======
         result = (prime * result)
                 + (modelName == null ? 0 : modelName.hashCode());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         result = (prime * result)
                 + (modelTime == null ? 0 : modelTime.hashCode());
         result = (prime * result) + (siteId == null ? 0 : siteId.hashCode());
         return result;
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#equals(java.lang.Object)
-=======
     /**
      * Compares the Object against this to see if they are equal. This method
      * needs to be implemented to be very, very fast as a single GFE session may
@@ -657,7 +553,6 @@ public class DatabaseID implements Comparable<DatabaseID> {
      * system does stuff like if(listOfParmIDs.contains(ParmID)) which will
      * cause DatabaseID.equals() to be called a significant number of times for
      * a contains() call.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     @Override
     public boolean equals(Object obj) {
@@ -667,10 +562,7 @@ public class DatabaseID implements Comparable<DatabaseID> {
         if (obj == null) {
             return false;
         }
-<<<<<<< HEAD
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         // == is a safe comparison since we interned the modelId
         return this.toString() == obj.toString();
     }
@@ -705,12 +597,8 @@ public class DatabaseID implements Comparable<DatabaseID> {
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
 
         cal.set(Calendar.YEAR, Integer.parseInt(modelTime.substring(0, 4)));
-<<<<<<< HEAD
-        cal.set(Calendar.MONTH, Integer.parseInt(modelTime.substring(4, 6)) - 1);
-=======
         cal.set(Calendar.MONTH,
                 Integer.parseInt(modelTime.substring(4, 6)) - 1);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         cal.set(Calendar.DAY_OF_MONTH,
                 Integer.parseInt(modelTime.substring(6, 8)));
         cal.set(Calendar.HOUR_OF_DAY,
@@ -738,14 +626,6 @@ public class DatabaseID implements Comparable<DatabaseID> {
         return this.modelName.equals(other.getModelName());
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Comparable#compareTo(java.lang.Object)
-     */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public int compareTo(DatabaseID other) {
 
@@ -775,12 +655,8 @@ public class DatabaseID implements Comparable<DatabaseID> {
         long thisTime = (thisDate == null ? 0 : thisDate.getTime());
         long otherTime = (otherDate == null ? 0 : otherDate.getTime());
 
-<<<<<<< HEAD
-        int time = (thisTime < otherTime ? 1 : (thisTime == otherTime ? 0 : -1));
-=======
         int time = (thisTime < otherTime ? 1
                 : (thisTime == otherTime ? 0 : -1));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return time;
     }
 }

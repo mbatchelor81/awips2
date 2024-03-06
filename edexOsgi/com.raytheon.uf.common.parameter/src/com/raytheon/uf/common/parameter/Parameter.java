@@ -24,11 +24,7 @@ import javax.measure.IncommensurableException;
 import javax.measure.UnconvertibleException;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
-<<<<<<< HEAD
-import javax.measure.format.ParserException;
-=======
 import javax.measure.format.MeasurementParseException;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -44,15 +40,9 @@ import com.raytheon.uf.common.serialization.ISerializableObject;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerialize;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
 
-<<<<<<< HEAD
-import tec.uom.se.AbstractConverter;
-import tec.uom.se.AbstractUnit;
-import tec.uom.se.format.SimpleUnitFormat;
-=======
 import tech.units.indriya.function.AbstractConverter;
 import tech.units.indriya.AbstractUnit;
 import tech.units.indriya.format.SimpleUnitFormat;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * 
@@ -161,11 +151,7 @@ public class Parameter extends PersistableDataObject implements
                 try {
                     unit = (Unit<?>) SimpleUnitFormat.getInstance(SimpleUnitFormat.Flavor.ASCII).parse(
                             unitString);
-<<<<<<< HEAD
-                } catch (ParserException e) {
-=======
                 } catch (MeasurementParseException e) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     unit = AbstractUnit.ONE;
                 }
             } else {

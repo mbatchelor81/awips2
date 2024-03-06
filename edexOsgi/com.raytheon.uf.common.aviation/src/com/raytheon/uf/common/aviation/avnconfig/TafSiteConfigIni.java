@@ -72,10 +72,7 @@ import com.raytheon.uf.common.status.UFStatus;
  * Mar 22, 2017 6183       tgurney     Move localization files to common_static
  * Feb 02, 2018 7114       tgurney     deleteProduct config file null check
  * May 15, 2019 20693   mgamazaychikov Refactor to move to common
-<<<<<<< HEAD
-=======
  * Mar 10, 2021 20842      jrohwein    change Delimiter Parsing for saving and getting products
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -220,10 +217,6 @@ public class TafSiteConfigIni implements ITafSiteConfig {
         List<String> siteList = new ArrayList<>();
         HierarchicalINIConfiguration config = getProductConfig(product);
         if (config != null) {
-<<<<<<< HEAD
-            config.setDelimiterParsingDisabled(true);
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             String[] sites = config.getStringArray("sites.idents");
             if (sites != null && sites.length > 0) {
                 for (String site : sites) {
@@ -312,31 +305,17 @@ public class TafSiteConfigIni implements ITafSiteConfig {
             }
 
             config.setDelimiterParsingDisabled(true);
-<<<<<<< HEAD
-            String prepend = "";
-            StringBuilder idents = new StringBuilder();
-            for (String site : siteList) {
-                idents.append(prepend).append(site);
-                prepend = ", ";
-            }
-
-            config.setProperty("sites.idents", idents.toString());
-=======
             String idents = String.join(", ", siteList);
             config.setProperty("sites.idents", idents);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             config.setProperty("sites.workpil", workPil);
             config.setProperty("sites.collective", collectivePil);
             try (SaveableOutputStream sos = lFile.openOutputStream()) {
                 config.save(sos);
                 sos.save();
-<<<<<<< HEAD
-=======
                 config.setDelimiterParsingDisabled(false);
                 config.setProperty("sites.idents", idents);
                 config.setProperty("sites.workpil", workPil);
                 config.setProperty("sites.collective", collectivePil);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 configMaps.put(newProduct, config);
             }
         } catch (LocalizationException | IOException e) {
@@ -723,10 +702,6 @@ public class TafSiteConfigIni implements ITafSiteConfig {
                     LocalizationType.COMMON_STATIC, LocalizationLevel.SITE);
             ILocalizationFile lFile = pm.getLocalizationFile(context, filepath);
             HierarchicalINIConfiguration config = new HierarchicalINIConfiguration();
-<<<<<<< HEAD
-            config.setDelimiterParsingDisabled(true);
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             try (InputStream is = lFile.openInputStream()) {
                 config.load(is);
                 this.idsConfig = config;

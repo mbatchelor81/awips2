@@ -11,11 +11,7 @@ stormReports.xml
 #set ($dbTable = [${lsr_severe}])
 #if ($dbTable)
 #foreach($table in $dbTable)
-<<<<<<< HEAD
-#set($size = ${list.size($table)})
-=======
 #set($size = $table.size())
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #if ($size > 0)
 !** Recent Local Storm Reports:
 (COPY AND PASTE VALID REPORTS INTO 3RD BULLET THEN DELETE THIS SECTION)

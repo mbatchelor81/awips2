@@ -1,31 +1,19 @@
 ##
 # This software was developed and / or modified by Raytheon Company,
 # pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
-# 
-=======
 #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # U.S. EXPORT CONTROLLED TECHNICAL DATA
 # This software product contains export-restricted data whose
 # export/transfer/disclosure is restricted by U.S. law. Dissemination
 # to non-U.S. persons whether in the United States or abroad requires
 # an export license or other authorization.
-<<<<<<< HEAD
-# 
-=======
 #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # Contractor Name:        Raytheon Company
 # Contractor Address:     6825 Pine Street, Suite 340
 #                         Mail Stop B8
 #                         Omaha, NE 68106
 #                         402.291.0100
-<<<<<<< HEAD
-# 
-=======
 #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # See the AWIPS II Master Rights File ("Master Rights File.pdf") for
 # further licensing information.
 ##
@@ -36,11 +24,8 @@
 # Oct 20, 2014    #3685          randerso    Changed to support mixed case
 # Aug 01, 2018    #7380          dgilling    Remove duplicate Tsunami phensigs
 #                                            in allowedHazards.
-<<<<<<< HEAD
-=======
 # May 10, 2021    DCS22297       dkingfiel   Remove RB.Y, SI.Y, and SW.Y
 # May 18, 2021    DCS22297       dkingfiel   Add CW.Y, XH.A, and XH.W
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 ##
 
@@ -99,20 +84,12 @@
 #                         when saved from FormatterLauncher.
 #  textdbPil              Defines the awips product identifier
 #                         (e.g., DENCCFDEN) that is used to store the product
-<<<<<<< HEAD
-#                         in the AWIPS text database. 
-=======
 #                         in the AWIPS text database.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #                         This value is also used for the default GUI entry for
 #                         storage.
 #   awipsWANPil           Defines the awips product identifier
 #                         (e.g., KBOUCCFDEN) that is used to transmit the
-<<<<<<< HEAD
-#                         product to the AWIPS WAN. 
-=======
 #                         product to the AWIPS WAN.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #                         This value is also used for the default GUI
 #                         entry for storage.
 
@@ -234,11 +211,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         "outputFile": "{prddir}/TEXT/AFD_<MultiPil>.txt",
         "debug": 0,
 
-<<<<<<< HEAD
-        "productName": "Area Forecast Discussion", 
-=======
         "productName": "Area Forecast Discussion",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         "fullStationID" : "<fullStationID>",    # 4 letter station ID
         "wmoID" : "<wmoID>",                    # WMO code
         "wfoCityState" : "<wfoCityState>",      # Location of WFO
@@ -260,16 +233,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         "longTermForecasters":  ["99","01","02","03"],
         "aviationForecasters":  ["99","01","02","03"],
         "useZoneNames": 0,
-<<<<<<< HEAD
-        "abbreviateUGCs": 1,           
-
-        "topicDividers" : [
-               # topicName,   topicDivider,   alwaysInclude, includeInGUI
-        
-               ("Update",     ".UPDATE...",          0,          1),
-               ("Synopsis",   ".SYNOPSIS...",        0,          1),
-               
-=======
         "abbreviateUGCs": 1,
 
         "topicDividers" : [
@@ -278,27 +241,18 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                ("Update",     ".UPDATE...",          0,          1),
                ("Synopsis",   ".SYNOPSIS...",        0,          1),
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                # EITHER Discussion OR ShortTerm/LongTerm should always be included.
                ("Discussion", ".DISCUSSION...",      0,          0),
                ("ShortTerm",  ".SHORT TERM...",      1,          0),
                ("LongTerm",   ".LONG TERM...",       1,          0),
-<<<<<<< HEAD
-               
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                # Optional dividers
                ("Aviation",   ".AVIATION...",        0,          1),
                ("Marine",     ".MARINE...",          0,          1),
                ("FireWeather",".FIRE WEATHER...",    0,          1),
                ("Hydro",      ".HYDROLOGY...",       0,          1),
                ("Climate",    ".CLIMATE...",         0,          1),
-<<<<<<< HEAD
-                              
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                # Controlled by "includePreviousAFD"
                ("PrevDisc",   ".PREV DISCUSSION...", 0,          0),
 
@@ -366,11 +320,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                 continue
             if includeInGUI:
                 self._options.append(topicDivider)
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         varList = []
         varList.append((("Product Issuance", "productIssuance"), "Morning", "radio",
          ["Morning","Afternoon"]))
@@ -385,11 +335,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         varList.append((("Aviation\nForecaster","aviationFcstrNumber"), "", "radio",
          self._aviationForecasters))
         return self._callProcessVariableList("AFD Values", varList, varDict={})
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def _callProcessVariableList(self, title, varList, varDict):
         processVarList = ProcessVariableList.ProcessVariableList(
             title, varList, varDict={})
@@ -397,11 +343,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         if not self._selectionStatus == "OK":
             return None   # User Cancelled
         return processVarList.varDict()
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ####################################################################
 #   _getVariables:
 #   Retrieves variables and definitions.
@@ -429,11 +371,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         # TODO uncomment following line?
         self._hazards = argDict['hazards']
         self._combinations = argDict["combinations"]
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # Check for state id: ST indicating that the user needs to
         # set up the list of state id's
         if len(self._state_IDs) == 1 and self._state_IDs[0] == "ST":
@@ -458,11 +396,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         self._timeLabel = self.getCurrentTime(
            argDict, "%l%M %p %Z %a %b %e %Y", stripLeading=1)
         self._issueTime = AbsTime.current()
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # If generating temp/pop table, determine time ranges
         if len(self._pointEditAreas) > 0:
             # numPeriods is the number of forecast periods used for the
@@ -515,21 +449,12 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
 
     def _addTopicDividers(self, fcst, argDict):
         # Flag for adding the aviation forecaster number later
-<<<<<<< HEAD
-        self._addedAviation = 0  
-        pad = "\n\n\n&&\n\n"
-        #print "\naddTopicDividers: user options", self._optionalTopics
-        
-        for topicName, topicDivider, alwaysInclude, includeInGUI in self._topicDividers:
-            
-=======
         self._addedAviation = 0
         pad = "\n\n\n&&\n\n"
         #print "\naddTopicDividers: user options", self._optionalTopics
 
         for topicName, topicDivider, alwaysInclude, includeInGUI in self._topicDividers:
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             # Handle PrevDisc and Prelim in the order specified in the topicDividers list.
             if topicName == "PrevDisc" and self._includePreviousAFD == "YES":
                 fcst = self._getPreviousAFD(fcst, argDict, divider=1) + "&&\n\n"
@@ -537,11 +462,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             if topicName == "Prelim":
                 fcst = self._makePrelimNumberBlock(fcst, argDict)
                 continue
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             # See if we need to add this divider
             addDivider = 0
             # If alwaysInclude OR the user chose this divider from the GUI
@@ -555,11 +476,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                 addDivider = 1
             if not addDivider:
                 continue
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             # Add padding
             #print "Adding divider", topicName, topicDivider
             # Check for Aviation so we can later add the aviationFcstrNumber
@@ -578,11 +495,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             if topicName == topic:
                 return topicDivider
         return ""
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ####################################################################
 #   _getPreviousAFD:
 #   Gets the previous AFD.  Strips the leading MND header and the
@@ -606,13 +519,8 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
 
         # Place newlines back at the end of each element in list prevAFD:
         # ADDED 12/7/04 bc
-<<<<<<< HEAD
-        for index in range(start_index, end_index): 
-            prevAFD[index] = prevAFD[index] + "\n" 
-=======
         for index in range(start_index, end_index):
             prevAFD[index] = prevAFD[index] + "\n"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # Make a copy of prevAFD to modify
         oldAFD = prevAFD
@@ -699,11 +607,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             if type(editArea) is tuple:
                 lat, lon, dim = editArea
                 editArea = self.createLatLonArea(lat, lon, dim)
-<<<<<<< HEAD
-            self._areaList.append((editArea, areaLabel))                        
-=======
             self._areaList.append((editArea, areaLabel))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # Append the prelim numbers divider:
         fcst = fcst + self._getTopicDivider("Prelim") + "\n"
@@ -717,11 +621,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             fcst = self._makeFirstGuess(fcst, editArea, areaLabel, argDict)
         fcst = fcst + "\n&&\n\n"
         return fcst
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ####################################################################
 #   _preProcessProduct:
 #   Creates the MND header for the AFD.  Checks to see if this is
@@ -733,20 +633,12 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         s = self._wmoID + " " + self._fullStationID + " " + \
                self._ddhhmmTime + "\n" + \
                self._pil + "\n\n"
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         fcst += s.upper()
 
         issuedByString = self.getIssuedByString()
 
-<<<<<<< HEAD
-        productName = self.checkTestMode(argDict, self._productName) 
-=======
         productName = self.checkTestMode(argDict, self._productName)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         s = productName + "\n" + \
             "National Weather Service " + \
@@ -799,11 +691,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
 #   marineNameDict
 #   Used in the makeHazardBlock to determine the defined names
 #   for the marine zones.  This function can be overridden to change
-<<<<<<< HEAD
-#   the names of the marine areas.  
-=======
 #   the names of the marine areas.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ####################################################################
     def marineNameDict(self):
         # dictionary for marine zone identifiers
@@ -815,11 +703,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         #  'LC': 'Lake St Clair', 'LM': 'Lake Michigan', 'LS': 'Lake Superior',
         #  'PZ': 'Pacific coastal waters', 'PK': 'Alaskan coastal waters',
         #  'PH': 'Hawaiian coastal waters', 'PM': 'Marianas waters',
-<<<<<<< HEAD
-        #  'AN': 'Atlantic coastal waters', 
-=======
         #  'AN': 'Atlantic coastal waters',
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         #  'PS': 'American Samoa coastal waters', 'SL': 'St Lawrence River'}
 
 ####################################################################
@@ -836,22 +720,14 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         areaDict = accessor.variable(self._areaDictionary, "AreaDictionary")
 
         # get combinations file used, which contains extra info which will
-<<<<<<< HEAD
-        # tell us which zones are marine, firewx and public    
-=======
         # tell us which zones are marine, firewx and public
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         combo = self._defaultEditAreas
         fireWxPhenSig = [("FW","W"), ("FW","A")]
         fireWxZones = []
         otherZones = []
         if type(combo) is str:
             try:
-<<<<<<< HEAD
-                m = __import__(combo)                
-=======
                 m = __import__(combo)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 for map in m.EASourceMap:
                     if "FireWx" in map:
                         fireWxZones = m.EASourceMap[map]
@@ -896,13 +772,8 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                     hcopy['id'] = sd[state]
                     stateDict[state] = [hcopy]
 
-<<<<<<< HEAD
-                
-        
-=======
 
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         #
         # For every state we are responsible for, check for hazards
         #
@@ -912,19 +783,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                 stateHazardList = stateDict[eachState]
             else:
                 stateHazardList = []
-<<<<<<< HEAD
-            
-            # add the state identifier (only if multiple states)
-            if len(self._state_IDs) > 1:
-                #marine zone
-                if eachState in marine:     
-=======
 
             # add the state identifier (only if multiple states)
             if len(self._state_IDs) > 1:
                 #marine zone
                 if eachState in marine:
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     fcst = fcst + marine[eachState] + "..."
                 else:
                     fcst = fcst + eachState + "..."
@@ -955,11 +818,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                     eachHazard['id'] = otherzones   #eliminated firewx
                     stateHazardList[i] = eachHazard
 
-<<<<<<< HEAD
-                         
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                 # hazard name
                 hazName = self.hazardName(eachHazard['hdln'], argDict, False)
@@ -979,11 +838,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                 ids.sort()
                 idString = "-".join(ids)
                 if self._useZoneNames == 0 and self._abbreviateUGCs == 1:
-<<<<<<< HEAD
-                    idString = self.makeUGCString(ids)                    
-=======
                     idString = self.makeUGCString(ids)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                 # hazard phrase
                 phrase = hazName + ' ' + timing + ' for ' + idString + '.'
@@ -1010,11 +865,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                         fcst = fcst + "     " + phrase + '\n'
                 else:
                     fcst = fcst + phrase + '\n'   #never ident - only 1 state
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         fcst = fcst + "&&\n\n"
         return fcst
 
@@ -1181,11 +1032,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
 ### Removed inland tropical hazards in OB9.3
     def allowedHazards(self):
         allActions = ["NEW", "EXA", "EXB", "EXT", "CAN", "CON", "EXP"]
-<<<<<<< HEAD
-        tropicalActions = ["NEW", "EXA", "EXB", "EXT", "UPG", "CAN", 
-=======
         tropicalActions = ["NEW", "EXA", "EXB", "EXT", "UPG", "CAN",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
           "CON", "EXP"]
         marineActions = ["NEW", "EXA", "EXB", "EXT", "CON"]
         return [
@@ -1207,16 +1054,8 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             ('UP.W', allActions, 'IceAccr1'),    # HEAVY FREEZING SPRAY WARNING
             ('UP.Y', allActions, 'IceAccr2'),    # FREEZING SPRAY ADVISORY
             ('SC.Y', allActions, 'Marine8'),       # SMALL CRAFT ADVISORY
-<<<<<<< HEAD
-            ('SW.Y', allActions, 'Marine9'),       # SMALL CRAFT ADVISORY
-            ('RB.Y', allActions, 'Marine10'),       # SMALL CRAFT ADVISORY
-            ('SI.Y', allActions, 'Marine11'),       # SMALL CRAFT ADVISORY
-            ('BW.Y', allActions, 'Marine12'),       # BRISK WIND ADVISORY
-            ('MH.W', allActions, 'Marine16'),       # VOLCANIC ASHFALL WARNING            
-=======
             ('BW.Y', allActions, 'Marine12'),       # BRISK WIND ADVISORY
             ('MH.W', allActions, 'Marine16'),       # VOLCANIC ASHFALL WARNING
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             ('MF.Y', allActions, 'Marine13'),       # DENSE FOG ADVISORY
             ('MS.Y', allActions, 'Marine14'),       # DENSE SMOKE ADVISORY
             ('MH.Y', allActions, 'Marine15'),       # VOLCANIC ASHFALL ADVISORY
@@ -1232,18 +1071,12 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             ('DU.W', allActions, 'Dust'),         # BLOWING DUST WARNING
             ('DU.Y', allActions, 'Dust1'),         # BLOWING DUST ADVISORY
             ('EC.W', allActions, 'Cold'),         # EXTREME COLD WARNING
-<<<<<<< HEAD
-            ('EC.A', allActions, 'Cold2'),         # EXTREME COLD WATCH
-            ('EH.W', allActions, 'Heat'),         # EXCESSIVE HEAT WARNING
-            ('EH.A', allActions, 'Heat1'),         # EXCESSIVE HEAT WATCH
-=======
             ('EC.A', allActions, 'Cold1'),         # EXTREME COLD WATCH
             ('CW.Y', allActions, 'Cold2'),         # COLD WEATHER ADVISORY
             ('EH.W', allActions, 'Heat'),         # EXCESSIVE HEAT WARNING
             ('EH.A', allActions, 'Heat1'),         # EXCESSIVE HEAT WATCH
             ('XH.W', allActions, 'Heat'),         # EXTREME HEAT WARNING
             ('XH.A', allActions, 'Heat1'),         # EXTREME HEAT WATCH
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             ('HT.Y', allActions, 'Heat2'),         # HEAT ADVISORY
             ('FG.Y', allActions, 'Fog'),          # DENSE FOG ADVISORY
             ('ZF.Y', allActions, 'Fog2'),          # FREEZING FOG ADVISORY
@@ -1274,17 +1107,9 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             ('AF.W', allActions, 'Ashfall2'),      # VOLCANIC ASHFALL WARNING
             ('AF.Y', allActions, 'Ashfall'),      # VOLCANIC ASHFALL ADVISORY
             ('FW.W', allActions, 'FireWx'),       # RED FLAG WARNING
-<<<<<<< HEAD
-            ('FW.A', allActions, 'FireWx1'),       # FIRE WEATHER WATCH           
-            ('LO.Y', marineActions, 'LowWater'),   # LOW WATER ADVISORY
-            ('TS.W', allActions, 'Tsunami'),      # TSUNAMI WARNING
-            ('TS.Y', allActions, 'Tsunami'),      # TSUNAMI ADVISORY
-            ('TS.A', allActions, 'Tsunami'),      # TSUNAMI WATCH                        
-=======
             ('FW.A', allActions, 'FireWx1'),       # FIRE WEATHER WATCH
             ('LO.Y', marineActions, 'LowWater'),   # LOW WATER ADVISORY
             ('TS.W', allActions, 'Tsunami'),      # TSUNAMI WARNING
             ('TS.Y', allActions, 'Tsunami'),      # TSUNAMI ADVISORY
             ('TS.A', allActions, 'Tsunami'),      # TSUNAMI WATCH
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             ]

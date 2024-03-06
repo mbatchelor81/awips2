@@ -22,18 +22,12 @@
 #  12/01/2020 8293       randerso        Fix refLimit check that never worked correctly in Python2
 #                                        and now throws exceptions in Python3
 #  12/01/2020 8293       randerso        Fix handling of Nones in decidingField logic
-<<<<<<< HEAD
-#  06/28/2021 DR22698    mbelk           Fixed problem with HLS failing for intermediate advisories 
-#
-# Version 2020.10.08-0
-=======
 #  05/14/2021 DR22323    jrohwein        Bug fix, added _sampleMostSignificantDiscreteValue 
 #                                        to StormSurgeThreat Section so it correctly populates
 #  06/28/2021 DR22698    mbelk           Fixed problem with HLS failing for intermediate advisories
 #  06/02/2023 2029646    swhite          Add required options for SGX and LOX to run HLS
 #
 # Version 2023.06.02-0
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 from com.raytheon.uf.common.dataplugin.gfe.grid import Grid2DBit as JavaGrid2DBit
 from com.raytheon.uf.common.dataplugin.gfe.reference import ReferenceData, ReferenceID
@@ -360,8 +354,6 @@ class TextProduct(HLSTCV_Common.TextProduct):
 
     def _cwa_descriptor(self):
         return ""  # "South Florida"
-<<<<<<< HEAD
-=======
     
     def _includedImpacts(self):
         return [
@@ -375,7 +367,6 @@ class TextProduct(HLSTCV_Common.TextProduct):
     def _includedImpacts_defaults(self):
         return ["Wind", "Surge", "Flooding Rain", "Tornadoes"]
          
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def _localReferencePoints(self):
         # Give the name and lat/lon for each local reference point
@@ -2193,12 +2184,8 @@ class TextProduct(HLSTCV_Common.TextProduct):
                     "current stormSurge statDict = %s" % (self._pp.pformat(statDict)), 1
                 )
                 self._sampleRankedDiscreteValue("StormSurgeThreat", statDict)
-<<<<<<< HEAD
-
-=======
                 self._sampleMostSignificantDiscreteValue("StormSurgeThreat", statDict)
                 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 inundationMax = self._getStatValue(statDict, "InundationMax", "Max")
                 decidingField = self._samplingDict["StormSurgeThreat"]["decidingField"]
                 if decidingField is None or (inundationMax is not None and inundationMax > decidingField):
@@ -3396,11 +3383,8 @@ class TextProduct(HLSTCV_Common.TextProduct):
     def _overview_list(self):
         if self._site == "HFO":
             stormInfoOptions = ["TCPCP1", "TCPCP2", "TCPCP3", "TCPCP4", "TCPCP5"]
-<<<<<<< HEAD
-=======
         elif self._site in ["SGX", "LOX"]:
             stormInfoOptions = ["TCPEP1", "TCPEP2", "TCPEP3", "TCPEP4", "TCPEP5"]
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         else:
             stormInfoOptions = ["TCPAT1", "TCPAT2", "TCPAT3", "TCPAT4", "TCPAT5"]
 
@@ -3435,19 +3419,8 @@ class TextProduct(HLSTCV_Common.TextProduct):
                 "name": "IncludedImpacts",
                 "label": "Step 3. Potential Impacts to Include and Order",
                 "optionType": "check",
-<<<<<<< HEAD
-                "options": [
-                    ("Wind", "windSection"),
-                    ("Surge", "surgeSection"),
-                    ("Flooding Rain", "floodingRainSection"),
-                    ("Tornadoes", "tornadoSection"),
-                    ("Other Coastal Hazards", "coastalHazardsSection"),
-                ],
-                "default": ["Wind", "Surge", "Flooding Rain", "Tornadoes"],
-=======
                 "options": self._includedImpacts(),
                 "default": self._includedImpacts_defaults(),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             },
             {
                 "name": "LocalReferencePoints",
@@ -4479,7 +4452,4 @@ class LegacyFormatter:
             text += newtext
 
         return text
-<<<<<<< HEAD
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

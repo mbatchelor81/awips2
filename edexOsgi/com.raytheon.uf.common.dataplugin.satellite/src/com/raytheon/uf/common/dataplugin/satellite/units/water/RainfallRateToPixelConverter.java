@@ -20,29 +20,16 @@
 
 package com.raytheon.uf.common.dataplugin.satellite.units.water;
 
-<<<<<<< HEAD
-import java.math.BigDecimal;
-import java.math.MathContext;
-
-=======
 import javax.measure.MetricPrefix;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.measure.UnitConverter;
 import javax.measure.quantity.Speed;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import si.uom.SI;
-<<<<<<< HEAD
-import tec.uom.se.AbstractConverter;
-import tec.uom.se.unit.MetricPrefix;
-import tec.uom.se.unit.ProductUnit;
-import tec.uom.se.unit.Units;
-=======
 import tech.units.indriya.function.AbstractConverter;
 import tech.units.indriya.unit.ProductUnit;
 import tech.units.indriya.unit.Units;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Converts a rainfall rate of mm/hr to a pixel value
@@ -55,11 +42,8 @@ import tech.units.indriya.unit.Units;
  * Mar 25, 2009     2086        jsanchez    Added UnitConverter.
  * Apr 15, 2019     7596        lsingh      Updated units framework to JSR-363.
  *                                          Overrided additional methods
-<<<<<<< HEAD
-=======
  * Aug 05, 2022     8905        lsingh      Updated units framework to 2.0.2.
  *                                          Renamed methods, and overrided additional methods.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -73,21 +57,10 @@ public class RainfallRateToPixelConverter extends AbstractConverter {
             new ProductUnit<Speed>((SI.METRE).divide(SI.SECOND))
                     .getConverterTo(new ProductUnit<Speed>((MetricPrefix.MILLI(SI.METRE)).divide(Units.HOUR)) );
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see tec.uom.se.AbstractConverter#convert(double)
-     */
-    @Override
-    public double convert(double aRate) {
-        double result = 0.0;
-=======
     @Override
     public Number convertWhenNotIdentity(Number rate) {
         double result = 0.0;
         double aRate = rate.doubleValue();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         aRate = mtrPerSecToMilimtrPerHr.convert(aRate);
         if (aRate == 0) {
@@ -109,66 +82,25 @@ public class RainfallRateToPixelConverter extends AbstractConverter {
         return result;
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see tec.uom.se.AbstractConverter#equals(java.lang.Object)
-     */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public boolean equals(Object aConverter) {
         return (aConverter instanceof RainfallRateToPixelConverter);
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see tec.uom.se.AbstractConverter#hashCode()
-     */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this);
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see tec.uom.se.AbstractConverter#inverse()
-     */
-    @Override
-    public AbstractConverter inverse() {
-        return new RainfallPixelToRateConverter();
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see tec.uom.se.AbstractConverter#isLinear()
-     */
-=======
     @Override
     public AbstractConverter inverseWhenNotIdentity() {
         return new RainfallPixelToRateConverter();
     }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public boolean isLinear() {
         return false;
     }
-<<<<<<< HEAD
-    
-    @Override
-    public BigDecimal convert(BigDecimal value, MathContext ctx)
-            throws ArithmeticException {
-        return BigDecimal.valueOf(convert(value.doubleValue()));
-=======
 
     @Override
     public boolean isIdentity() {
@@ -191,7 +123,6 @@ public class RainfallRateToPixelConverter extends AbstractConverter {
     protected boolean canReduceWith(AbstractConverter that) {
      // This method hasn't been implemented yet since it's unused
         return false;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
 }

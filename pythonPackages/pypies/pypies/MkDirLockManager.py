@@ -31,17 +31,11 @@
 #    Jun 25, 2019    7885          tgurney        Python 3 fixes
 #    Jun 08, 2021    8729          rjpeter        Utilize RAM Drive
 #    Jan 17, 2022    8729          rjpeter        Add cleanUp to handle empty directories
-<<<<<<< HEAD
-#
-
-import time, os, logging
-=======
 #    Aug 15, 2022    8889          lsingh         Imported errno since os.errno no longer exists 
 #                                                 in python 3.7
 #
 
 import time, os, logging, errno
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 from pypies import logger
 from pypies import timeMap
 
@@ -251,11 +245,7 @@ def cleanUp(basePath):
                     deletedCount += 1
 
                 except OSError as e:
-<<<<<<< HEAD
-                    if (e.errno != os.errno.ENOTEMPTY and e.errno != os.errno.ENOENT):
-=======
                     if (e.errno != errno.ENOTEMPTY and e.errno != errno.ENOENT):
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         logger.warn('Unable to remove empty lock directory ' + fullpath + ': ' + str(e))
     endTime = time.time()
     logger.info('Deleted {} empty lock directories in {:.3f} ms'.format(deletedCount, (endTime-startTime) * 1000))

@@ -59,23 +59,13 @@
     <contribute xsi:type="titleItem" titleText="------ Cross Section ------"
         id="${icao}CrossSection" />
     <contribute xsi:type="bundleItem" file="bundles/DefaultRadarXY.xml"
-<<<<<<< HEAD
-        menuText="Reflectivity (RCS)" id="${icao}ReflectivityRCS"
-        editorType="com.raytheon.viz.radar.ui.xy.RadarXYEditor">
-=======
         menuText="Reflectivity (RCS)" id="${icao}ReflectivityRCS">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="icao" value="${icao}" />
         <substitute key="product" value="50" />
         <substitute key="insetMap" value="true" />
     </contribute>
     <contribute xsi:type="bundleItem" file="bundles/DefaultRadarXY.xml"
-<<<<<<< HEAD
-        menuText="Velocity (VCS)" id="${icao}VelocityVCS"
-        editorType="com.raytheon.viz.radar.ui.xy.RadarXYEditor">
-=======
         menuText="Velocity (VCS)" id="${icao}VelocityVCS">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="icao" value="${icao}" />
         <substitute key="product" value="51" />
         <substitute key="insetMap" value="true" />

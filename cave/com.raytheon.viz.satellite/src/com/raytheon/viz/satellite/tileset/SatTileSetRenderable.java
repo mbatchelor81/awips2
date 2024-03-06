@@ -57,11 +57,7 @@ import com.raytheon.uf.viz.core.tile.RecordTileSetRenderable;
 import com.raytheon.uf.viz.core.tile.Tile;
 import com.raytheon.uf.viz.core.tile.TileLevel;
 
-<<<<<<< HEAD
-import tec.uom.se.format.SimpleUnitFormat;
-=======
 import tech.units.indriya.format.SimpleUnitFormat;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Satellite tile set renderable, uses {@link SatDataRetriever} for {@link Tile}
@@ -80,10 +76,7 @@ import tech.units.indriya.format.SimpleUnitFormat;
  * May 04, 2015  4426     bsteffen    Fix unsigned interrogation.
  * Apr 15, 2019  7596     lsingh      Updated units framework to JSR-363.
  *                                    Handled unit conversion
-<<<<<<< HEAD
-=======
  * Oct 24, 2022  8905     lsingh      Check for NaN before converting units.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -277,18 +270,6 @@ public class SatTileSetRenderable extends RecordTileSetRenderable {
 
         /** Reconcile any unit discrepencies. */
         if (resultUnit != null && dataUnit != null
-<<<<<<< HEAD
-                && dataUnit.equals(resultUnit) == false) {
-            if (resultUnit.isCompatible(dataUnit)) {
-                dataValue = UnitConv
-                        .getConverterToUnchecked(dataUnit, resultUnit)
-                        .convert(dataValue);
-            } else {
-                UnitFormat uf = SimpleUnitFormat.getInstance(SimpleUnitFormat.Flavor.ASCII);
-                String message = String
-                        .format("Unable to interrogate tile set.  Desired unit (%s) is not compatible with data unit (%s).",
-                                uf.format(resultUnit), uf.format(dataUnit));
-=======
                 && !dataUnit.equals(resultUnit)) {
             if (resultUnit.isCompatible(dataUnit)) {
                 if (!Double.isNaN(dataValue)) {
@@ -302,7 +283,6 @@ public class SatTileSetRenderable extends RecordTileSetRenderable {
                 String message = String.format(
                         "Unable to interrogate tile set.  Desired unit (%s) is not compatible with data unit (%s).",
                         uf.format(resultUnit), uf.format(dataUnit));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 throw new IllegalArgumentException(message);
             }
         }

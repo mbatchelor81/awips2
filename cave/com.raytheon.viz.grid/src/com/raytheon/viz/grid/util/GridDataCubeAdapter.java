@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -88,19 +76,11 @@ import com.raytheon.viz.grid.record.RequestableDataRecord;
 /**
  * DataCubeAdapter for Grid, the primary role is to link the grid datatype into
  * derived parameters.
-<<<<<<< HEAD
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * 
-=======
  *
  * <pre>
  *
  * SOFTWARE HISTORY
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- --------------------------------------------
  * Mar 16, 2009  2149     brockwoo  Initial creation
@@ -111,16 +91,10 @@ import com.raytheon.viz.grid.record.RequestableDataRecord;
  * Nov 08, 2016  5976     bsteffen  Remove VizDataCubeException
  * Apr 20, 2017  6046     bsteffen  Avoid using messageData for temporary
  *                                  internal storage.
-<<<<<<< HEAD
- * 
- * </pre>
- * 
-=======
  * Jan 26, 2022  8741     njensen   Renamed call to setDataValue to cacheDataValue
  *
  * </pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author brockwoo
  */
 public class GridDataCubeAdapter extends AbstractDataCubeAdapter {
@@ -347,11 +321,7 @@ public class GridDataCubeAdapter extends AbstractDataCubeAdapter {
 
     /**
      * Attempts to travel through all the derived levels and prefetch all the
-<<<<<<< HEAD
-     * grib records since a single bulk hdf5 read should be faster than lots of
-=======
      * grid records since a single bulk hdf5 read should be faster than lots of
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * little reads.
      */
     private Map<PluginDataObject, IDataRecord[]> getRecordsAsMap(
@@ -429,11 +399,7 @@ public class GridDataCubeAdapter extends AbstractDataCubeAdapter {
                             IDataRecord[] value = new IDataRecord[] {
                                     records[i] };
                             references.add(value);
-<<<<<<< HEAD
-                            data.setDataValue(request, value);
-=======
                             data.cacheDataValue(request, value);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         }
                     } catch (Exception e) {
                         throw new DataCubeException(e);

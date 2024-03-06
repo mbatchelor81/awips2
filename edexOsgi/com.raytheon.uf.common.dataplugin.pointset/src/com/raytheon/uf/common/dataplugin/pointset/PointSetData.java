@@ -27,17 +27,10 @@ import java.nio.ShortBuffer;
 
 import javax.measure.UnitConverter;
 
-<<<<<<< HEAD
-import tec.uom.se.AbstractConverter;
-import tec.uom.se.function.AddConverter;
-import tec.uom.se.function.MultiplyConverter;
-import tec.uom.se.function.RationalConverter;
-=======
 import tech.units.indriya.function.AbstractConverter;
 import tech.units.indriya.function.AddConverter;
 import tech.units.indriya.function.MultiplyConverter;
 import tech.units.indriya.function.RationalConverter;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * 
@@ -50,16 +43,10 @@ import tech.units.indriya.function.RationalConverter;
  * 
  * SOFTWARE HISTORY
  * 
-<<<<<<< HEAD
- * Date          Ticket#  Engineer  Description
- * ------------- -------- --------- --------------------------
- * Jan 20, 2016  5208     bsteffen  Initial creation
-=======
  * Date          Ticket#  Engineer    Description
  * ------------- -------- ---------   --------------------------
  * Jan 20, 2016  5208     bsteffen    Initial creation
  * Aug 18, 2023  2036078  lisa.singh  Check for NaNs when converting units.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -164,9 +151,6 @@ public class PointSetData {
                 }
             }
             for (int i = 0; i < buffer.capacity(); i += 1) {
-<<<<<<< HEAD
-                buffer.put(i, (float) converter.convert(buffer.get(i)));
-=======
                 float convertedValue;
                 try {
                     convertedValue = (float) converter.convert(buffer.get(i));
@@ -174,7 +158,6 @@ public class PointSetData {
                     convertedValue = Float.NaN;
                 }
                 buffer.put(i, convertedValue);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
             this.scale = null;
             this.offset = null;

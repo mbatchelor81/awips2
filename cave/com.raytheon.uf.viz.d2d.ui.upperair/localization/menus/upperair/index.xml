@@ -25,10 +25,7 @@
 <menuContributionFile>
     <include installTo="menu:upperAir?before=RADAR" fileName="menus/upperair/baseUpperAir.xml" />
     <include installTo="menu:upperAir?after=RADAR" fileName="menus/upperair/baseRadar.xml" />
-<<<<<<< HEAD
-=======
     <include installTo="menu:upperAir?after=AIRCRAFT" fileName="menus/upperair/baseTafPlots.xml" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <include subMenu="PIREP plots" installTo="menu:upperAir?after=AIRCRAFT"
         fileName="menus/upperair/basePirep.xml" />
     <include subMenu="MDCRS plots" installTo="menu:upperAir?before=AircraftMenuEnd"

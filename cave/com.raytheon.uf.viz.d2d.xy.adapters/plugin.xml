@@ -24,14 +24,11 @@
             name="GOESSounding Cross Section Adapter">
       </crossSectionAdapter>
       <crossSectionAdapter
-<<<<<<< HEAD
-=======
             adapter="com.raytheon.uf.viz.d2d.xy.adapters.crosssection.PointCSAdapter"
             class="com.raytheon.uf.common.dataplugin.profiler.ProfilerObs"
             name="Profiler Cross Section Adapter">
       </crossSectionAdapter>
       <crossSectionAdapter
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             adapter="com.raytheon.uf.viz.d2d.xy.adapters.crosssection.DmdCSAdapter"
             class="com.raytheon.uf.common.dataplugin.radar.RadarRecord"
             name="DMD Cross Section Adapter">
@@ -82,14 +79,11 @@
       </timeSeriesAdapter>
       <timeSeriesAdapter
             adapter="com.raytheon.uf.viz.d2d.xy.adapters.timeseries.PointDataTimeSeriesAdapter"
-<<<<<<< HEAD
-=======
             class="com.raytheon.uf.common.dataplugin.profiler.ProfilerObs"
             name="Profiler Time Series Adapter">
       </timeSeriesAdapter>
       <timeSeriesAdapter
             adapter="com.raytheon.uf.viz.d2d.xy.adapters.timeseries.PointDataTimeSeriesAdapter"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             class="com.raytheon.uf.common.dataplugin.goessounding.GOESSounding"
             name="GOESSounding Time Series Adapter">
       </timeSeriesAdapter>
@@ -142,14 +136,11 @@
             name="GOESSounding Var Height Adapter">
       </varHeightAdapter>
       <varHeightAdapter
-<<<<<<< HEAD
-=======
             adapter="com.raytheon.uf.viz.d2d.xy.adapters.varheight.PointDataVarHeightAdapter"
             class="com.raytheon.uf.common.dataplugin.profiler.ProfilerObs"
             name="Profiler Var Height Adapter">
       </varHeightAdapter>
       <varHeightAdapter
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             adapter="com.raytheon.uf.viz.d2d.xy.adapters.varheight.DmdVarHeightAdapter"
             class="com.raytheon.uf.common.dataplugin.radar.RadarRecord"
             name="DMD Var Height Adapter">

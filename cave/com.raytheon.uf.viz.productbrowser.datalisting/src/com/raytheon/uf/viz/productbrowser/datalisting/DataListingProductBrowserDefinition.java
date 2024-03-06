@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -40,12 +28,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-<<<<<<< HEAD
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IWorkbenchWindow;
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.datalisting.DataListing;
 import com.raytheon.uf.common.dataplugin.PluginDataObject;
 import com.raytheon.uf.common.dataquery.requests.DbQueryRequest;
@@ -77,24 +59,6 @@ import com.raytheon.uf.viz.productbrowser.pref.PreferenceBasedDataDefinition;
 import com.raytheon.uf.viz.productbrowser.pref.ProductBrowserPreferenceConstants;
 import com.raytheon.uf.viz.productbrowser.pref.ProductBrowserPreferenceListener;
 import com.raytheon.viz.ui.BundleProductLoader;
-<<<<<<< HEAD
-import com.raytheon.viz.ui.EditorUtil;
-import com.raytheon.viz.ui.UiUtil;
-import com.raytheon.viz.ui.VizWorkbenchManager;
-import com.raytheon.viz.ui.editor.AbstractEditor;
-import com.raytheon.viz.ui.perspectives.AbstractVizPerspectiveManager;
-import com.raytheon.viz.ui.perspectives.VizPerspectiveListener;
-
-/**
- * 
- * {@link ProductBrowserDataDefinition} which uses a {@link DataListing} to
- * format and dispaly items in the {@link ProductBrowserView}.
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * 
-=======
 import com.raytheon.viz.ui.EditorTypeInfo;
 import com.raytheon.viz.ui.UiUtil;
 import com.raytheon.viz.ui.editor.AbstractEditor;
@@ -108,21 +72,10 @@ import com.raytheon.viz.ui.editor.AbstractEditor;
  *
  * SOFTWARE HISTORY
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- --------------------------
  * Jun 04, 2015  4153     bsteffen  Initial creation
  * Nov 03, 2015  5030     mapeters  Quietly handle CAVE & EDEX plugins being out of sync
-<<<<<<< HEAD
- * 
- * </pre>
- * 
- * @author bsteffen
- * @version 1.0
- */
-public abstract class DataListingProductBrowserDefinition implements
-        PreferenceBasedDataDefinition {
-=======
  * Apr 22, 2022  8791     mapeters  Update determination of editor type to load to
  * Oct 19, 2022  8956     mapeters  Handle UiUtil.createOrOpenEditor signature
  *                                  change
@@ -133,7 +86,6 @@ public abstract class DataListingProductBrowserDefinition implements
  */
 public abstract class DataListingProductBrowserDefinition
         implements PreferenceBasedDataDefinition {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private static final transient IUFStatusHandler logger = UFStatus
             .getHandler(DataListingProductBrowserDefinition.class);
@@ -193,12 +145,8 @@ public abstract class DataListingProductBrowserDefinition
         this.formatPreference = ProductBrowserPreferenceConstants
                 .createFormatPreference();
         this.orderPreference = ProductBrowserPreferenceConstants
-<<<<<<< HEAD
-                .createOrderPreference(listing.getKeys().toArray(new String[0]));
-=======
                 .createOrderPreference(
                         listing.getKeys().toArray(new String[0]));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         new ProductBrowserPreferenceListener(displayName, enabledPreference);
         new ProductBrowserPreferenceListener(displayName, formatPreference);
@@ -219,16 +167,10 @@ public abstract class DataListingProductBrowserDefinition
 
         try {
             RecordFactory.getInstance().getPluginClass(listing.getPluginName());
-<<<<<<< HEAD
-        } catch (NoPluginException e) {
-            String msg = "Unable to display "
-                    + displayName
-=======
         } catch (@SuppressWarnings("squid:S1166")
         NoPluginException e) {
             // This is intentionally handled quietly per RODO 5030/SS 18550
             String msg = "Unable to display " + displayName
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     + " data in Product Browser because the server does not support the "
                     + listing.getPluginName() + " plugin";
             logger.debug(msg);
@@ -236,13 +178,8 @@ public abstract class DataListingProductBrowserDefinition
         }
 
         DbQueryRequest request = new DbQueryRequest();
-<<<<<<< HEAD
-        request.setConstraints(listing.getRequestConstraints(Collections
-                .<String, String> emptyMap()));
-=======
         request.setConstraints(listing.getRequestConstraints(
                 Collections.<String, String> emptyMap()));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         request.setLimit(1);
         try {
             DbQueryResponse response = (DbQueryResponse) RequestRouter
@@ -267,25 +204,15 @@ public abstract class DataListingProductBrowserDefinition
         String nextKey = getOrderedKeys()[keyVals.size()];
         try {
             if (isFormatted()) {
-<<<<<<< HEAD
-                Map<String, String> formattedMap = listing.getFormattedValues(
-                        nextKey, keyVals);
-=======
                 Map<String, String> formattedMap = listing
                         .getFormattedValues(nextKey, keyVals);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 List<ProductBrowserLabel> labels = new ArrayList<>(
                         formattedMap.size());
                 for (Entry<String, String> entry : formattedMap.entrySet()) {
                     ProductBrowserLabel label = new ProductBrowserLabel(
                             entry.getValue(), entry.getKey());
-<<<<<<< HEAD
-                    label.setProduct(selection.length >= listing.getKeys()
-                            .size());
-=======
                     label.setProduct(
                             selection.length >= listing.getKeys().size());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     labels.add(label);
                 }
                 return labels;
@@ -296,13 +223,8 @@ public abstract class DataListingProductBrowserDefinition
                 for (String value : values) {
                     ProductBrowserLabel label = new ProductBrowserLabel(value,
                             value);
-<<<<<<< HEAD
-                    label.setProduct(selection.length >= listing.getKeys()
-                            .size());
-=======
                     label.setProduct(
                             selection.length >= listing.getKeys().size());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     labels.add(label);
                 }
                 return labels;
@@ -344,12 +266,8 @@ public abstract class DataListingProductBrowserDefinition
         ResourcePair resourcePair = createResourcePair(resourceData,
                 displayType);
         try {
-<<<<<<< HEAD
-            AbstractRenderableDisplay display = createRenderableDisplay(resourcePair);
-=======
             AbstractRenderableDisplay display = createRenderableDisplay(
                     resourcePair);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             AbstractEditor editor = createOrOpenEditor(display);
             Bundle b = new Bundle();
             b.setDisplays(new AbstractRenderableDisplay[] { display });
@@ -361,53 +279,6 @@ public abstract class DataListingProductBrowserDefinition
     }
 
     /**
-<<<<<<< HEAD
-     * This method is very similar to
-     * {@link UiUtil#createOrOpenEditor(String, IRenderableDisplay...)}. The
-     * main differences are that it only works for a single display, it
-     * determines the editor type from the descriptor in the display, and it
-     * allows the perspective manager to open new editors.
-     * 
-     * The reason this is necessary is because when a new editor is opened with
-     * the default {@link MapRenderableDisplay} then it is not very useful. When
-     * the perspective manager loads a new map editor it will include some base
-     * maps and set the map projection to something that is user friendly.
-     * 
-     * If the perspective manager does not load the correct type of editor then
-     * this will fall back to using UiUtil.
-     */
-    protected AbstractEditor createOrOpenEditor(IRenderableDisplay display) {
-        String editorId = DescriptorMap.getEditorId(display.getDescriptor()
-                .getClass().getName());
-        IEditorPart editorPart = EditorUtil.getActiveEditor();
-        if (editorPart != null
-                && editorId.equals(editorPart.getEditorSite().getId())) {
-            return (AbstractEditor) editorPart;
-        }
-        editorPart = EditorUtil.findEditor(editorId);
-        if (editorPart != null) {
-            return (AbstractEditor) editorPart;
-        }
-        IWorkbenchWindow window = VizWorkbenchManager.getInstance()
-                .getCurrentWindow();
-        /*
-         * This part allows the perspective manager to make an editor which may
-         * have some customizations.
-         */
-        AbstractVizPerspectiveManager mgr = VizPerspectiveListener.getInstance(
-                window).getActivePerspectiveManager();
-        if (mgr != null) {
-            AbstractEditor editor = mgr.openNewEditor();
-            if (editor == null) {
-                return null;
-            } else if (editorId.equals(editor.getEditorSite().getId())) {
-                return editor;
-            } else {
-                window.getActivePage().closeEditor(editor, false);
-            }
-        }
-        return UiUtil.createOrOpenEditor(editorId, display);
-=======
      * Create or open an editor for loading the given display to.
      *
      * @param display
@@ -418,19 +289,13 @@ public abstract class DataListingProductBrowserDefinition
         String editorId = DescriptorMap.getEditorId(display);
         EditorTypeInfo editorTypeInfo = new EditorTypeInfo(editorId, false);
         return UiUtil.createOrOpenEditor(editorTypeInfo, true, display);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     protected abstract AbstractResourceData createResourceData(
             Map<String, String> keyVals);
 
-<<<<<<< HEAD
-    protected ResourcePair createResourcePair(
-            AbstractResourceData resourceData, DisplayType displayType) {
-=======
     protected ResourcePair createResourcePair(AbstractResourceData resourceData,
             DisplayType displayType) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         ResourcePair pair = new ResourcePair();
         pair.setResourceData(resourceData);
         LoadProperties loadProperties = new LoadProperties();

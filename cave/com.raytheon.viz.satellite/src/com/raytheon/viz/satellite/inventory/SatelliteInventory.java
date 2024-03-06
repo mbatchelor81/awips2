@@ -1,42 +1,24 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
 package com.raytheon.viz.satellite.inventory;
 
-<<<<<<< HEAD
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Deque;
-import java.util.HashMap;
-=======
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -44,32 +26,22 @@ import java.util.Date;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-<<<<<<< HEAD
-=======
 import java.util.TreeSet;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.uf.common.dataplugin.PluginDataObject;
 import com.raytheon.uf.common.dataplugin.level.Level;
 import com.raytheon.uf.common.dataplugin.level.LevelFactory;
 import com.raytheon.uf.common.dataplugin.satellite.SatelliteRecord;
 import com.raytheon.uf.common.dataquery.requests.DbQueryRequest;
-<<<<<<< HEAD
-import com.raytheon.uf.common.dataquery.requests.RequestConstraint;
-import com.raytheon.uf.common.dataquery.requests.TimeQueryRequest;
-import com.raytheon.uf.common.dataquery.responses.DbQueryResponse;
-=======
 import com.raytheon.uf.common.dataquery.requests.DbQueryRequestSet;
 import com.raytheon.uf.common.dataquery.requests.RequestConstraint;
 import com.raytheon.uf.common.dataquery.requests.TimeQueryRequest;
 import com.raytheon.uf.common.dataquery.responses.DbQueryResponse;
 import com.raytheon.uf.common.dataquery.responses.DbQueryResponseSet;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.derivparam.inv.AbstractInventory;
 import com.raytheon.uf.common.derivparam.library.DerivParamDesc;
 import com.raytheon.uf.common.derivparam.library.DerivParamField;
@@ -88,13 +60,9 @@ import com.raytheon.uf.common.serialization.comm.RequestRouter;
 import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
 import com.raytheon.uf.common.status.UFStatus.Priority;
-<<<<<<< HEAD
-import com.raytheon.uf.common.time.DataTime;
-=======
 import com.raytheon.uf.common.time.BinOffset;
 import com.raytheon.uf.common.time.DataTime;
 import com.raytheon.uf.common.time.SimulatedTime;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.alerts.AlertMessage;
 import com.raytheon.viz.alerts.IAlertObserver;
 import com.raytheon.viz.alerts.observers.ProductAlertObserver;
@@ -102,19 +70,11 @@ import com.raytheon.viz.alerts.observers.ProductAlertObserver;
 /**
  * Inventory of available satellite data. sectorID is used for source and
  * physicalElement for parameter, the level is always the entire atmosphere.
-<<<<<<< HEAD
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * 
-=======
  *
  * <pre>
  *
  * SOFTWARE HISTORY
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#  Engineer    Description
  * ------------- -------- ----------- --------------------------
  * Apr 09, 2014  2947     bsteffen    Initial creation
@@ -122,12 +82,6 @@ import com.raytheon.viz.alerts.observers.ProductAlertObserver;
  * Sep 09, 2014  3356     njensen     Remove CommunicationException
  * Apr 06, 2014  #17215   D. Friedman Use ReentrantLock
  * Jul 17, 2017  6345     bsteffen    Add support for latitude, longitude, validTime
-<<<<<<< HEAD
- * 
- * 
- * </pre>
- * 
-=======
  * Feb 10, 2021 20421  mgamazaychikov Add support for centalWaveLength handling
  * Oct 29, 2022  8959     mapeters    Update how data time levels are set
  * Mar 16, 2023 23414  mgamazaychikov Fix evaluateRequestConstraints for
@@ -135,7 +89,6 @@ import com.raytheon.viz.alerts.observers.ProductAlertObserver;
  * 
  * </pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author bsteffen
  */
 public class SatelliteInventory extends AbstractInventory
@@ -152,15 +105,12 @@ public class SatelliteInventory extends AbstractInventory
 
     public static final String GID = "coverage.gid";
 
-<<<<<<< HEAD
-=======
     private static final String DATA_TIME_FIELD = "dataTime";
 
     private static final String LATEST_DATA_TIME_FIELD = "dataTime.refTime";
 
     public static final String CENTRAL_WAVELENGTH_FIELD = "centralWavelength";
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private SatelliteCoverageCache coverages;
 
     private Level level;
@@ -300,10 +250,7 @@ public class SatelliteInventory extends AbstractInventory
             Map<String, RequestConstraint> constraints) {
         Collection<String> sources = getAllSources();
         RequestConstraint sectorLimiter = constraints.get(SECTOR_ID);
-<<<<<<< HEAD
-=======
         boolean derive = true;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if (sectorLimiter != null) {
             Iterator<String> it = sources.iterator();
             while (it.hasNext()) {
@@ -321,8 +268,6 @@ public class SatelliteInventory extends AbstractInventory
                     it.remove();
                 }
             }
-<<<<<<< HEAD
-=======
         } else {
             derive = false;
             Map<String, RequestConstraint> newConstraints = new HashMap<>(constraints);
@@ -366,16 +311,11 @@ public class SatelliteInventory extends AbstractInventory
                     }
                 }
             }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         Collection<Level> levels = Collections.singleton(level);
         try {
             List<AbstractRequestableNode> result = walkTree(null, sources,
-<<<<<<< HEAD
-                    parameters, levels, true, true, null);
-=======
                     parameters, levels, derive, true, null);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return result;
         } catch (InterruptedException e) {
             statusHandler.handle(Priority.PROBLEM, e.getLocalizedMessage(), e);
@@ -406,8 +346,6 @@ public class SatelliteInventory extends AbstractInventory
             }
         }
     }
-<<<<<<< HEAD
-=======
 
     public List<List<DataTime>> timeQuery(List<TimeQueryRequest> requests)
             throws DataCubeException {
@@ -489,5 +427,4 @@ public class SatelliteInventory extends AbstractInventory
         request.setDistinct(true);
         return request;
     }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

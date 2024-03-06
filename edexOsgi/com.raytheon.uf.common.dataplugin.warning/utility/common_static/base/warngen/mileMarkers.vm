@@ -6,11 +6,7 @@
 ##set ($mm3 = [${EAX_i35momm},${EAX_i35mommid},'INTERSTATE 70 IN KANSAS','MILE MARKER',true])
 ##set ($varList = [$mm1,$mm2,$mm3])
 #foreach ($var in $varList)
-<<<<<<< HEAD
-#set ($checker = "#mmarkers(${list.get(${var},0)},${list.get(${var},1)},${list.get(${var},2)},${list.get(${var},3)},${list.get(${var},4)})")
-=======
 #set ($checker = "#mmarkers($var.get(0),$var.get(1),$var.get(2),$var.get(3),$var.get(4))")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #if ($checker.length() > 0)
 #set ($hits = $hits + 1)
 #set ($bigList = "$bigList $checker")

@@ -36,23 +36,14 @@
 #    07/30/15        1574          nabowle        Handle DeleteOrphansRequest
 #    11/15/16        5992          bsteffen       Log size
 #    Jun 25, 2019    7885          tgurney        Python 3 fixes
-<<<<<<< HEAD
-=======
 #    07/25/21        8530          mrichardson    Upgrade werkzeug to 1.0.1
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #    Sep 28, 2021    8608          mapeters       Add special handling for certain error types
 #
 #
 
-<<<<<<< HEAD
-from werkzeug import Request, Response
-import errno
-import time, logging
-=======
 from werkzeug.wrappers import Request, Response
 import time, logging
 import errno
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import pypies
 from pypies import IDataStore
 import dynamicserialize

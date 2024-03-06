@@ -20,10 +20,6 @@
 package com.raytheon.viz.pointdata.thread;
 
 import java.awt.image.BufferedImage;
-<<<<<<< HEAD
-import java.awt.image.RenderedImage;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.Map;
 
 import org.apache.commons.collections.map.LRUMap;
@@ -35,10 +31,6 @@ import com.raytheon.uf.viz.core.IGraphicsTarget;
 import com.raytheon.uf.viz.core.data.IRenderedImageCallback;
 import com.raytheon.uf.viz.core.drawables.IImage;
 import com.raytheon.uf.viz.core.drawables.ext.ISingleColorImageExtension;
-<<<<<<< HEAD
-import com.raytheon.uf.viz.core.exception.VizException;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.viz.pointdata.IPlotModelFactory;
 import com.raytheon.viz.pointdata.IPlotModelGeneratorCaller;
 import com.raytheon.viz.pointdata.PlotInfo;
@@ -50,16 +42,6 @@ import com.raytheon.viz.pointdata.PlotInfo;
  *
  * SOFTWARE HISTORY
  *
-<<<<<<< HEAD
- * Date          Ticket#    Engineer    Description
- * ------------- -------- ----------- --------------------------
- * Apr 22, 2011           njensen     Initial creation
- * Mar 21, 2014  2868     njensen     Major refactor
- * Jun 06, 2014  2061     bsteffen    Remove old PlotResource
- * Jun 12, 2017  6303     bsteffen    Provide color when creating image.
- * Nov 01, 2019  71272    ksunil      tweaks to accommodate new plot
- *                                     customization changes
-=======
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- --------------------------------------------
  * Apr 22, 2011           njensen   Initial creation
@@ -70,7 +52,6 @@ import com.raytheon.viz.pointdata.PlotInfo;
  *                                  changes
  * Dec 07, 2021  8341     randerso  Move plot performance logging into perf log.
  *                                  Add additional info to performance logging.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -94,15 +75,6 @@ public class PlotModelGeneratorJob extends AbstractPlotCreationJob {
         this.target = target;
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     *
-     * @see org.eclipse.core.runtime.jobs.Job#run(org.eclipse.core.runtime.
-     * IProgressMonitor)
-     */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     protected IStatus run(IProgressMonitor monitor) {
         long t0 = System.currentTimeMillis();
@@ -111,11 +83,7 @@ public class PlotModelGeneratorJob extends AbstractPlotCreationJob {
             try {
                 PlotInfo[] infos = overseer.imageCreationQueue.poll();
                 if (infos == null) {
-<<<<<<< HEAD
-                    // possibility another thread got it first
-=======
                     /* possibility another thread got it first */
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     continue;
                 }
                 final BufferedImage bImage = plotCreator.getStationPlot(
@@ -132,36 +100,15 @@ public class PlotModelGeneratorJob extends AbstractPlotCreationJob {
                     }
                     if (image == null) {
                         if (!plotCreator.isSingleColor()) {
-<<<<<<< HEAD
-                            IRenderedImageCallback callback = new IRenderedImageCallback() {
-                                @Override
-                                public RenderedImage getImage()
-                                        throws VizException {
-                                    return bImage;
-                                }
-                            };
-=======
                             IRenderedImageCallback callback = () -> bImage;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                             image = target.initializeRaster(callback);
 
                         } else {
                             image = target
                                     .getExtension(
                                             ISingleColorImageExtension.class)
-<<<<<<< HEAD
-                                    .constructImage(
-                                            new IRenderedImageCallback() {
-                                                @Override
-                                                public RenderedImage getImage()
-                                                        throws VizException {
-                                                    return bImage;
-                                                }
-                                            }, plotCreator.getColor());
-=======
                                     .constructImage(() -> bImage,
                                             plotCreator.getColor());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                         }
                         if (plotCreator.isCachingImages()) {
@@ -190,27 +137,18 @@ public class PlotModelGeneratorJob extends AbstractPlotCreationJob {
              * if count is zero it means by the time this job was scheduled and
              * run, a different job took care of everything on the queue
              */
-<<<<<<< HEAD
-            System.out.println("Time spent creating " + count + " plots: "
-                    + (System.currentTimeMillis() - t0));
-=======
 
             perfLog.logDuration(
                     String.format("Creating [%d] plots for [%s] [%s]", count,
                             plotCreator.getPlugin(),
                             plotCreator.getPlotModelFilename()),
                     (System.currentTimeMillis() - t0));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         return Status.OK_STATUS;
     }
 
     protected void clearImageCache() {
-<<<<<<< HEAD
-        // We weren't disposing before...shouldn't we?
-=======
         /* We weren't disposing before...shouldn't we? */
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         imageCache.values().forEach(IImage::dispose);
         imageCache.clear();
     }

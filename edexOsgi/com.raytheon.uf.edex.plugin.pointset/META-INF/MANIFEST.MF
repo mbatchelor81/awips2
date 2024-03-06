@@ -10,9 +10,5 @@ Require-Bundle: com.raytheon.uf.common.dataplugin,
  com.raytheon.uf.common.datastorage,
  com.raytheon.uf.edex.database,
  javax.measure,
-<<<<<<< HEAD
- com.raytheon.uf.common.status
-=======
  com.raytheon.uf.common.status,
  org.slf4j
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

@@ -19,13 +19,6 @@
  **/
 package com.raytheon.viz.satellite.rsc;
 
-<<<<<<< HEAD
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-=======
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,25 +28,18 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-<<<<<<< HEAD
-=======
 import java.util.concurrent.CopyOnWriteArraySet;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
 import com.raytheon.uf.common.dataplugin.PluginDataObject;
-<<<<<<< HEAD
-=======
 import com.raytheon.uf.common.dataplugin.level.Level;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.dataplugin.satellite.SatelliteRecord;
 import com.raytheon.uf.common.dataquery.requests.DbQueryRequest;
 import com.raytheon.uf.common.dataquery.requests.RequestConstraint;
@@ -65,11 +51,8 @@ import com.raytheon.uf.common.time.BinOffset;
 import com.raytheon.uf.common.time.DataTime;
 import com.raytheon.uf.common.util.Pair;
 import com.raytheon.uf.viz.core.RecordFactory;
-<<<<<<< HEAD
-=======
 import com.raytheon.uf.viz.core.alerts.AbstractAlertMessageParser;
 import com.raytheon.uf.viz.core.alerts.AlertMessage;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.exception.VizException;
 import com.raytheon.uf.viz.core.requests.ThriftClient;
 import com.raytheon.uf.viz.core.rsc.AbstractRequestableResourceData;
@@ -77,10 +60,7 @@ import com.raytheon.uf.viz.core.rsc.AbstractVizResource;
 import com.raytheon.uf.viz.core.rsc.IResourceDataChanged.ChangeType;
 import com.raytheon.uf.viz.core.rsc.LoadProperties;
 import com.raytheon.viz.satellite.inventory.SatelliteDataCubeAdapter;
-<<<<<<< HEAD
-=======
 import com.raytheon.viz.satellite.inventory.SatelliteInventory;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Resource data for satellite data
@@ -98,9 +78,6 @@ import com.raytheon.viz.satellite.inventory.SatelliteInventory;
  *                                    frames
  * Dec 11, 2017  DCS19856 jburks      Add boolean to track if product support incomplete frames toggling and fixed
  *                                    incomplete frames issue.
-<<<<<<< HEAD
- * May 27, 2021  22589    jkelmer     Added caching to getAvailableTimes()
-=======
  * Feb 10, 2021  20421 mgamazaychikov Add support for centalWaveLength handling
  * May 27, 2021  22589    jkelmer     Added caching to getAvailableTimes()
  * Mar 21, 2022  23043    smoorthy    Utilize latest DataTime when deciding to use the cache.
@@ -111,18 +88,11 @@ import com.raytheon.viz.satellite.inventory.SatelliteInventory;
  * Mar 09, 2023  23414 mgamazaychikov Fix the handling of centalWaveLength functionality
  * Jul 13, 2023 2035927 mgamazaychikov Fix setting the time level value of pdos in update, and
  *                                     provide level type in setLevel method
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
  * @author njensen
-<<<<<<< HEAD
- * @version 1.0
  */
-
-=======
- */
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 @XmlAccessorType(XmlAccessType.NONE)
 public class SatResourceData extends AbstractRequestableResourceData {
     private static final transient IUFStatusHandler statusHandler = UFStatus
@@ -141,8 +111,6 @@ public class SatResourceData extends AbstractRequestableResourceData {
 
     private static long DEFAULT_CACHE_EXPIRATION = 60000;
 
-<<<<<<< HEAD
-=======
     private DataTime latestDataTime;
 
     /**
@@ -155,7 +123,6 @@ public class SatResourceData extends AbstractRequestableResourceData {
      */
     protected Set<SatResource> satResources = new CopyOnWriteArraySet<>();
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /*
      * (non-Javadoc)
      *
@@ -167,10 +134,6 @@ public class SatResourceData extends AbstractRequestableResourceData {
     protected AbstractVizResource<?, ?> constructResource(
             LoadProperties loadProperties, PluginDataObject[] objects) {
         records = new SatelliteRecord[objects.length];
-<<<<<<< HEAD
-        for (int i = 0; i < objects.length; i++) {
-            records[i] = (SatelliteRecord) objects[i];
-=======
         boolean cwf = metadataMap.containsKey(SatelliteInventory.CENTRAL_WAVELENGTH_FIELD);
         // only augment record's DataTime field for this special case
         for (int i = 0; i < objects.length; i++) {
@@ -180,32 +143,12 @@ public class SatResourceData extends AbstractRequestableResourceData {
                     records[i].setDataTime(levelAugmentedDataTime(records[i]));
                 }
             }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         return new SatResource(this, loadProperties);
     }
 
     @Override
     public void update(Object updateData) {
-<<<<<<< HEAD
-
-        if (updateData instanceof PluginDataObject[]) {
-            /*
-             * This is here because derived updates will send us records that we
-             * don't want, so filter them.
-             */
-            PluginDataObject[] pdos = (PluginDataObject[]) updateData;
-            Set<DataTime> invalidTimes = new HashSet<>();
-            for (PluginDataObject pdo : (PluginDataObject[]) updateData) {
-                try {
-                    Map<String, Object> pdoMap = RecordFactory.getInstance()
-                            .loadMapFromUri(pdo.getDataURI());
-                    for (Entry<String, RequestConstraint> entry : metadataMap
-                            .entrySet()) {
-                        if (entry.getKey()
-                                .equals(SatelliteDataCubeAdapter.DERIVED)) {
-                            continue;
-=======
         boolean issueAnUpdate = true;
         if (updateData instanceof PluginDataObject[]) {
             /*
@@ -237,27 +180,15 @@ public class SatResourceData extends AbstractRequestableResourceData {
                                 pdo.setDataTime(dtAugmented);
                                 continue;
                             }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         }
                         Object pdoItem = pdoMap.get(entry.getKey());
                         RequestConstraint rc = entry.getValue();
                         /*
-<<<<<<< HEAD
-                         * Record Factory automatically replaces space with
-                         * underscore, but some derived parameters have
-                         * underscore in them
-                         */
-                        String pdoItemStr = pdoItem.toString().replace(" ",
-                                "_");
-                        if (!(rc.evaluate(pdoItem)
-                                || rc.evaluate(pdoItemStr))) {
-=======
                          * Record Factory automatically replaces space with underscore, but some derived
                          * parameters have underscore in them
                          */
                         String pdoItemStr = pdoItem.toString().replace(" ", "_");
                         if (!(rc.evaluate(pdoItem) || rc.evaluate(pdoItemStr))) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                             DataTime time = pdo.getDataTime();
                             if (binOffset != null) {
                                 time = binOffset.getNormalizedTime(time);
@@ -267,12 +198,6 @@ public class SatResourceData extends AbstractRequestableResourceData {
                         }
                     }
                 } catch (VizException e) {
-<<<<<<< HEAD
-                    statusHandler.handle(Priority.PROBLEM,
-                            e.getLocalizedMessage(), e);
-                }
-            }
-=======
                     statusHandler.handle(Priority.PROBLEM, e.getLocalizedMessage(), e);
                 }
             }
@@ -285,26 +210,11 @@ public class SatResourceData extends AbstractRequestableResourceData {
                 }
             }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if (!invalidTimes.isEmpty()) {
 
                 /* Next time query should requery */
                 super.invalidateAvailableTimesCache();
                 /*
-<<<<<<< HEAD
-                 * Remove times from resources where three is new derived data.
-                 */
-                for (DataTime time : invalidTimes) {
-                    fireChangeListeners(ChangeType.DATA_REMOVE, time);
-                }
-                /*
-                 * Don't send updates for PDO's with invalidTimes, the time
-                 * matcher will pull in all the records including derived
-                 * records.
-                 */
-                List<PluginDataObject> pdoList = new ArrayList<>(
-                        Arrays.asList(pdos));
-=======
                  * Remove times from resources where there is new derived data.
                  */
                 for (DataTime time : invalidTimes) {
@@ -318,7 +228,6 @@ public class SatResourceData extends AbstractRequestableResourceData {
                  * all the records including derived records.
                  */
                 List<PluginDataObject> pdoList = new ArrayList<>(Arrays.asList(pdos));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 Iterator<PluginDataObject> it = pdoList.iterator();
                 while (it.hasNext()) {
                     DataTime t = it.next().getDataTime();
@@ -338,62 +247,6 @@ public class SatResourceData extends AbstractRequestableResourceData {
                 }
             }
         }
-<<<<<<< HEAD
-        if (!isShowIncompleteFrames() && (updateData instanceof PluginDataObject
-                || updateData instanceof PluginDataObject[])) {
-
-            if (previousTimes != null) {
-                List<DataTime> oldTimes = Arrays
-                        .asList(previousTimes.toArray(new DataTime[0]));
-                try {
-                    super.invalidateAvailableTimesCache();
-                    List<DataTime> newTimes = new ArrayList<>(Arrays
-                            .asList(getAvailableTimes(metadataMap, binOffset)));
-
-                    newTimes.removeAll(oldTimes);
-                    if (newTimes.size() > 0) {
-                        PluginDataObject[] objs = requestPluginDataObjects(
-                                newTimes);
-                        List<PluginDataObject> newArray = new ArrayList<>();
-                        if (objs != null && objs.length > 0) {
-                            newArray.addAll(Arrays.asList(objs));
-                        }
-
-                        if (updateData instanceof PluginDataObject) {
-                            newArray.add((PluginDataObject) updateData);
-                            updateData = newArray
-                                    .toArray(new PluginDataObject[0]);
-                        } else if (updateData instanceof PluginDataObject[]) {
-                            newArray.addAll(Arrays
-                                    .asList((PluginDataObject[]) updateData));
-                            updateData = newArray
-                                    .toArray(new PluginDataObject[0]);
-                        }
-                        invalidateAvailableTimesCache();
-                    }
-
-                } catch (VizException e) {
-                    statusHandler.error("Problem recalulating new frames", e);
-                }
-            }
-        }
-        Set<Integer> gids = new HashSet();
-        for (SatelliteRecord record : records) {
-            gids.add(record.getCoverage().getGid());
-        }
-        if (updateData instanceof SatelliteRecord) {
-            gids.add(((SatelliteRecord) updateData).getCoverage().getGid());
-        } else if (updateData instanceof PluginDataObject[]) {
-            for (PluginDataObject obj : (PluginDataObject[]) updateData) {
-                gids.add(((SatelliteRecord) obj).getCoverage().getGid());
-            }
-        }
-        if (gids.size() > 1) {
-            isIncompleteFrameSelectableProduct = true;
-        }
-        super.update(updateData);
-
-=======
         if (issueAnUpdate) {
             if (!isShowIncompleteFrames()
                     && (updateData instanceof PluginDataObject || updateData instanceof PluginDataObject[])) {
@@ -475,7 +328,6 @@ public class SatResourceData extends AbstractRequestableResourceData {
         Set<PluginDataObject> updateDataSet = new LinkedHashSet<>(Arrays.asList(updateData));
         updateDataSet.removeAll(pdosToFilterOutSet);
         return updateDataSet.toArray(new PluginDataObject[0]);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
@@ -493,28 +345,15 @@ public class SatResourceData extends AbstractRequestableResourceData {
         this.records = records;
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
-<<<<<<< HEAD
-        // under some circumstances obj might consider itself equal to this, so
-        // just let it decide.
-=======
         /*
          * under some circumstances obj might consider itself equal to this, so
          * just let it decide.
          */
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if (obj instanceof SatBestResResourceData) {
             return obj.equals(this);
         }
@@ -537,8 +376,6 @@ public class SatResourceData extends AbstractRequestableResourceData {
             timeCache = new Pair<>(0l, new DataTime[0]);
         }
 
-<<<<<<< HEAD
-=======
         //extra flag to determine whether or not to use the cache
         boolean useCache = false;
 
@@ -554,16 +391,11 @@ public class SatResourceData extends AbstractRequestableResourceData {
             useCache = !(latestDataTime.getRefTime().after(latestCacheTime.getRefTime()));
         }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if (timeCache.getFirst() != 0l && System.currentTimeMillis()
                 - timeCache.getFirst() > DEFAULT_CACHE_EXPIRATION) {
             invalidateAvailableTimesCache();
         } else if (!(timeCache.getFirst() == 0l) && (timeCache != null)
-<<<<<<< HEAD
-                && (timeCache.getSecond() != null)) {
-=======
                 && (timeCache.getSecond() != null) && useCache) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return timeCache.getSecond();
         }
 
@@ -578,13 +410,6 @@ public class SatResourceData extends AbstractRequestableResourceData {
              */
             request.addRequestField("coverage.gid");
             request.setDistinct(true);
-<<<<<<< HEAD
-            DbQueryResponse response = (DbQueryResponse) ThriftClient
-                    .sendRequest(request);
-            Map<DataTime, Integer> gidCounts = new HashMap<>();
-            DataTime[] times = response.getFieldObjects(
-                    PluginDataObject.DATATIME_ID, DataTime.class);
-=======
             // augment datatime request for central wavelength requests
             if (constraintMap.containsKey(SatelliteInventory.CENTRAL_WAVELENGTH_FIELD)) {
                 request.addRequestField(SatelliteInventory.CENTRAL_WAVELENGTH_FIELD);
@@ -610,7 +435,6 @@ public class SatResourceData extends AbstractRequestableResourceData {
                 times = response.getFieldObjects(PluginDataObject.DATATIME_ID, DataTime.class);
             }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             int max = 1;
             for (DataTime time : times) {
                 Integer gidCount = gidCounts.get(time);
@@ -655,10 +479,6 @@ public class SatResourceData extends AbstractRequestableResourceData {
             return timeCache.getSecond();
         }
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public boolean isShowIncompleteFrames() {
         return showIncompleteFrames;
     }
@@ -683,8 +503,6 @@ public class SatResourceData extends AbstractRequestableResourceData {
         return isIncompleteFrameSelectableProduct;
     }
 
-<<<<<<< HEAD
-=======
     public PluginDataObject[] getLatestPluginDataObjects(DataTime[] desired,
             DataTime[] current) throws VizException {
         PluginDataObject[] pdos = super.getLatestPluginDataObjects(desired, current);
@@ -731,7 +549,6 @@ public class SatResourceData extends AbstractRequestableResourceData {
         return dt;
     }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     protected void invalidateAvailableTimesCache() {
         synchronized (satelliteTimeCache) {
@@ -744,8 +561,6 @@ public class SatResourceData extends AbstractRequestableResourceData {
         synchronized (timeCache) {
             timeCache = new Pair<>(0l, new DataTime[0]);
         }
-<<<<<<< HEAD
-=======
 
     }
 
@@ -802,7 +617,6 @@ public class SatResourceData extends AbstractRequestableResourceData {
      */
     public void removeSatResource(SatResource res) {
         satResources.remove(res);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
 }

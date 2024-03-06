@@ -22,10 +22,7 @@ package com.raytheon.uf.viz.preciprate;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-<<<<<<< HEAD
-=======
 import java.util.List;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.Map;
 
 import javax.measure.Unit;
@@ -71,11 +68,7 @@ import com.raytheon.viz.radar.interrogators.IRadarInterrogator;
 import com.raytheon.viz.radar.rsc.image.RadarRadialResource;
 
 import systems.uom.common.USCustomary;
-<<<<<<< HEAD
-import tec.uom.se.unit.Units;
-=======
 import tech.units.indriya.unit.Units;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Displays {@link PrecipRateRecord}s as an image.
@@ -90,10 +83,7 @@ import tech.units.indriya.unit.Units;
  * May 19, 2016  3253     bsteffen  Refactor of extra text.
  * Apr 15, 2019  7596     lsingh    Updated units framework to JSR-363.
  *                                  Handled unit conversion.
-<<<<<<< HEAD
-=======
  * Oct 25, 2022  8905     lsingh    Check for NaN before converting units.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * 
  * </pre>
@@ -177,11 +167,7 @@ public class PrecipRateResource extends RadarRadialResource implements
             cfgMXL = JAXB.unmarshal(path, SCANConfigPrecipRateXML.class);
 
         } catch (Exception e) {
-<<<<<<< HEAD
-            e.printStackTrace();
-=======
             throw e;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 
@@ -282,11 +268,7 @@ public class PrecipRateResource extends RadarRadialResource implements
         if (precipRecord == null) {
             return null;
         }
-<<<<<<< HEAD
-        ArrayList<String> array = new ArrayList<String>();
-=======
         List<String> array = new ArrayList<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         StringBuilder sb;
         Double value = null;
 
@@ -313,11 +295,7 @@ public class PrecipRateResource extends RadarRadialResource implements
         // Loop over the precip rates from the xml.
         for (PrecipRateXML precipRate : prArray) {
             // If the DHR line is not suppose to be displayed the then continue.
-<<<<<<< HEAD
-            if (precipRate.isDisplayed() == false) {
-=======
             if (!precipRate.isDisplayed()) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 continue;
             }
 
@@ -386,16 +364,12 @@ public class PrecipRateResource extends RadarRadialResource implements
 
         ColorMapParameters params = getCapability(ColorMapCapability.class)
                 .getColorMapParameters();
-<<<<<<< HEAD
-        double val = params.getDataToDisplayConverter().convert(dataVal.doubleValue());
-=======
         double val;
         try{
             val = params.getDataToDisplayConverter().convert(dataVal.doubleValue());
         } catch (NumberFormatException e ) {
             val = Double.NaN;
         }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         if (val >= ScanUtils.MM_TO_INCH * precipRecord.getHailcap()
                 || Double.isNaN(val)) {
@@ -420,27 +394,17 @@ public class PrecipRateResource extends RadarRadialResource implements
             RadarRecord record) {
 
         UnitConverter dataToImage = params.getDataToImageConverter();
-<<<<<<< HEAD
-        
-        Unit<?> dataUnit = params.getDataUnit();
-=======
 
         Unit<?> dataUnit = params.getDataUnit();
         UnitConverter unitConverter = UnitConv.getConverterToUnchecked(dataUnit,
                 params.getDisplayUnit());
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         // precompute the converted value for every possible value in the
         // record.
         byte[] table = new byte[record.getNumLevels()];
         for (int i = 0; i < record.getNumLevels(); i++) {
             double image = dataToImage.convert(i);
             if (Double.isNaN(image)) {
-<<<<<<< HEAD
-                double d = UnitConv.getConverterToUnchecked(dataUnit, params.getDisplayUnit())
-                            .convert(i);
-                
-=======
                 double d;
                 try {
                     d = unitConverter.convert(i);
@@ -448,7 +412,6 @@ public class PrecipRateResource extends RadarRadialResource implements
                     d = Double.NaN;
                 }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if (Double.isNaN(d)) {
                     // This means that the data is a non-numeric value, most
                     // likely a flag of some sort
@@ -480,14 +443,6 @@ public class PrecipRateResource extends RadarRadialResource implements
                     if (image2disp == null) {
                         continue;
                     }
-<<<<<<< HEAD
-                    for (int j = 0; j < 256; j++) {
-                        double disp = image2disp.convert(j);
-                        if (Double.isNaN(disp)) {
-                            continue;
-                        }
-                        if (d < disp) {
-=======
 
                     for (int j = 0; j < 256; j++) {
                         double disp;
@@ -500,7 +455,6 @@ public class PrecipRateResource extends RadarRadialResource implements
                          }
 
                          if (d < disp) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                             // Map data values smaller than the colormap min to
                             // 0, which should be no data.
                             // table[i] = (byte) 0;

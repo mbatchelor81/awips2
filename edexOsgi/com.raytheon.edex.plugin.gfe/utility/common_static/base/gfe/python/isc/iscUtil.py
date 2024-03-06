@@ -39,11 +39,8 @@
 #    06/06/2017      19967         bwhunder       Correct deleteEditArea() to delete file via Localization
 #    07/31/2017      6342          randerso       Use ReferenceMgr to load/save/delete edit areas
 #    08/18/2020      22148         ryu            Release file handles to log files.
-<<<<<<< HEAD
-=======
 #    07/14/2023      2035938       dgilling       Update xml.etree.ElementTree calls to remove 
 #                                                 functions deprecated in python 3.11
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 
 ##
@@ -192,11 +189,7 @@ def createDomainDict(xml):
                 if site is None:
                     LogStream.logProblem('Malformed domain site XML')
                     continue
-<<<<<<< HEAD
-                for addressE in domainE.getchildren():
-=======
                 for addressE in domainE:
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     info = irt.decodeXMLAddress(addressE)
                     if site not in domains:
                         domains[site] = []
@@ -209,11 +202,7 @@ def createDomainDict(xml):
                     domains[site] = list
 
             elif domainE.tag == "welist":
-<<<<<<< HEAD
-                for parmE in domainE.getchildren():
-=======
                 for parmE in domainE:
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     welist.append(parmE.text)
                 welist.sort()
 

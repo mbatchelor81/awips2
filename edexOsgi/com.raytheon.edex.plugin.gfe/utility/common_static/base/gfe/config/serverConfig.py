@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-##
-=======
 # #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # This software was developed and / or modified by Raytheon Company,
 # pursuant to Contract DG133W-05-CQ-1067 with the US Government.
 #
@@ -20,11 +16,7 @@
 #
 # See the AWIPS II Master Rights File ("Master Rights File.pdf") for
 # further licensing information.
-<<<<<<< HEAD
-##
-=======
 # #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # serverConfig -- base GFE server configuration file
 #
 # NOTE: THIS FILE SHOULD NOT BE USER-MODIFIED.  INSTEAD REFER TO THE
@@ -44,11 +36,7 @@
 # Oct 03, 2013  2424     randerso       Change localTC to use dateutil instead
 #                                       of pytz to get correct offsets for Alaska
 # Jan 17, 2014  2719     randerso       Added NHA domain
-<<<<<<< HEAD
-# Feb 20, 2014  2824     randerso       Added log message when local override 
-=======
 # Feb 20, 2014  2824     randerso       Added log message when local override
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #                                       files are not found
 # Mar 11, 2014  2897     dgilling       Add new MHWM databases to default
 #                                       configuration.
@@ -71,11 +59,7 @@
 #                                       only for Great Lakes sites..
 # Jan 19, 2015  4014     dgilling       Added ETSS.
 # Feb 24, 2015  16692    byin           Added RTMA. Removed gfsLR and GWW233
-<<<<<<< HEAD
-# Mar 19, 2015  4300     randerso       Remove GUMa as it is obsolete 
-=======
 # Mar 19, 2015  4300     randerso       Remove GUMa as it is obsolete
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #                                       (per Shannon White)
 # Mar 30, 2015  17288    bhunder        Added Guam-RTMA to D2D models
 # Mar 30, 2015  17206    yteng          Changed some parameters that are not
@@ -93,11 +77,7 @@
 # May 12, 2015  17144    bhunder        Added RTMA model
 # May 29, 2015  17496    ryu            Changed parm definitions for Wave1-10
 #                                       and Period1-10.
-<<<<<<< HEAD
-# May 29, 2015  17144    bhunder        Added weather Params for URMA and 
-=======
 # May 29, 2015  17144    bhunder        Added weather Params for URMA and
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #                                       OCONUS RTMA
 # Sep 02, 2015  4819     rferrel        Added HWRF.
 # Sep 09, 2015  16287    amoore         Additional validation of user
@@ -105,11 +85,7 @@
 # Oct 07, 2015  4958     dgilling       Added support for NationalBlend D2D data
 # Oct 13, 2015  4961     randerso       Updated NewTerrain/BaseTerrain database
 #                                       definitions
-<<<<<<< HEAD
-# Oct 30, 2015  17940    jendrowski     Responded to Code Review. Mostly 
-=======
 # Oct 30, 2015  17940    jendrowski     Responded to Code Review. Mostly
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #                                       syntactical changes.
 # Nov 05, 2015  18182    ryu            Change D2DDBVERSIONS value for HPCERP
 #                                       to 24
@@ -118,25 +94,15 @@
 #                                       3-hrly timesteps
 # Feb 09, 2016  5283     nabowle        Remove NGM support.
 # Feb 22, 2016  18161    wkwock         Add NationalBlend model for AK, PR, HW
-<<<<<<< HEAD
-# Feb 23, 2016  14845    jwatson        Changed NamDNG5 to NamDNG for all 
-=======
 # Feb 23, 2016  14845    jwatson        Changed NamDNG5 to NamDNG for all
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #                                       sources and params.
 #                                       Changed D2DModels for CONUS and Alaska to
 #                                       namdng25 and AK-NamDNG3
 # Apr 01, 2016  18777    ryu            Replace NCF ip addresses.
 # Apr 22, 2016  18896    wkwock         Add more nationalBlend Model
-<<<<<<< HEAD
-# Jun 01, 2016           JCM            removed tc3ng from officialdbs for 
-#                                       wave/period elements;
-#                                       removed Wave_XX and Period_XX; 
-=======
 # Jun 01, 2016           JCM            removed tc3ng from officialdbs for
 #                                       wave/period elements;
 #                                       removed Wave_XX and Period_XX;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #                                       removed Wave10, Period10;
 #                                       added databases for all sites to baseline
 # Aug 08, 2016  5747     randerso       Support removal of wrapper.py
@@ -144,15 +110,9 @@
 #                                       weather elements
 # Dec 12, 2016  19596    bhunder        Added "tp" to NationalBlend model
 #                                       D2DAccumulativeElements
-<<<<<<< HEAD
-# Feb 20, 2017  18966    mdavis/pjendr  NIC adjustment: 
-#                                       name changes and removal of obsolete
-#                                       smart inits(DCS 19490). 
-=======
 # Feb 20, 2017  18966    mdavis/pjendr  NIC adjustment:
 #                                       name changes and removal of obsolete
 #                                       smart inits(DCS 19490).
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #                                       Fixed addOptionalParms.
 # Mar 17, 2017  19673    jmaloney       Added Rip Current Probabilities
 #                                       (RipProb)
@@ -172,11 +132,7 @@
 # Feb 23, 2018  20395    wkwock         Added NBM3.1 elements.
 # Feb 27, 2018  7083     randerso       Added default configuration for
 #                                       HiResW-xxx-GU
-<<<<<<< HEAD
-# Feb 27, 2018  7041     randerso       Added Atlantic_ESTOFS_SITES and 
-=======
 # Feb 27, 2018  7041     randerso       Added Atlantic_ESTOFS_SITES and
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #                                       Eastern_Pacific_ESTOFS_SITES.
 #                                       Configure ESTOFS for only marine WFOs.
 #                                       SonarQube cleanup.
@@ -193,11 +149,7 @@
 #                                       and the smart init for the model.
 # Jun 19, 2018  20689    ryu            Add TPCSurgeProbLoRes and PETSSLoRes
 #                                       models for NHA
-<<<<<<< HEAD
-# Jul 20, 2018  7310     mapeters       Keep legacy GOES east parms, 
-=======
 # Jul 20, 2018  7310     mapeters       Keep legacy GOES east parms,
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #                                       add GOES-R west
 # Sep 04, 2018  20874    wkwock         Haines and Fosberg are 6 hours
 #                                       accumulative
@@ -206,11 +158,7 @@
 #                                       jfwprb
 # May 14, 2019  21081    dfriedman      Removed log purging configuration.
 # May 16, 2019  21020    tlefebvre      Add TCVhazardKeys, ProposedTropWindWW,
-<<<<<<< HEAD
-#                                       ProposedTropWWGuidance for Tropical 
-=======
 #                                       ProposedTropWWGuidance for Tropical
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #                                       Wind WW Recommender
 # May 17, 2017  20105    mgamazaychikov Updated GFESUITE_MHSID assignment
 # Jan 30, 2020  7911     tgurney        Replace imp with importlib
@@ -222,12 +170,6 @@
 #                                       NHP, NHZ
 # Dec 14, 2020  8306     randerso       Improve error logging in siteImport,
 #                                       and printServerConfig
-<<<<<<< HEAD
-#
-####################################################################################################
-
-##
-=======
 # Feb 04, 2021  21298    mporricelli    Add SPC definitions from NIC v10.0
 # Feb 09, 2021  8328     randerso       Updated GFE domains for ONA and ONP to
 #                                       match the operational sites.
@@ -245,7 +187,6 @@
 ####################################################################################################
 
 # #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # This is an incremental override file, indicating that the files at different
 # localization levels will be combined. Incremental overrides are achieved by
 # creating a localConfig file at a higher priority localization level that
@@ -253,11 +194,7 @@
 #
 # See the Configuration Guides->Server Configuration->Syntax for localConfig.py
 # section of the GFE Online Help for more information.
-<<<<<<< HEAD
-##
-=======
 # #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 #----------------------------------------------------------------------------
 # USEFUL DEFINES
@@ -278,11 +215,7 @@ import siteConfig, importlib
 BASELINE = getattr(siteConfig, 'BASELINE', 0)
 
 
-<<<<<<< HEAD
-#D scfp=open('/localapps/logs/scdebug.log','w')
-=======
 # D scfp=open('/localapps/logs/scdebug.log','w')
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 class dbConfig(object):
     """Class to create GFE databases from modelDict"""
 
@@ -559,11 +492,7 @@ def changeParmTC(modelDict, pname, newTC, modelList=None):
     for m in sorted(modelList):
         if m not in modelDict or 'Parms' not in modelDict[m]:
             continue
-<<<<<<< HEAD
-#d        print m,"checkForParm=",checkForParm(modelDict[m]['Parms'],pname)
-=======
 # d        print m,"checkForParm=",checkForParm(modelDict[m]['Parms'],pname)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if not checkForParm(modelDict[m]['Parms'], pname):
             continue
 
@@ -574,20 +503,6 @@ def changeParmTC(modelDict, pname, newTC, modelList=None):
             # this is needed because we are changing the list in place.
             theParms = list(pList)
             matchParm = next((p for p in theParms if p[0] == pname), None)
-<<<<<<< HEAD
-#d            print m,matchParm,tc,newTC,len(theParms)
-            if matchParm:
-                theParms.remove(matchParm)
-                newpt.append(([matchParm], newTC))
-#d                print "Added",matchParm,newTC
-            if theParms:
-#d                print "restored",theParms," to",tc
-                newpt.append((theParms, tc))
-        if newpt != modelDict[m]['Parms']:
-#d            print 'Updated model',m
-            modelDict[m]['Parms'] = newpt
-#d            print modelDict[m]['Parms'],'\n'
-=======
 # d            print m,matchParm,tc,newTC,len(theParms)
             if matchParm:
                 theParms.remove(matchParm)
@@ -600,7 +515,6 @@ def changeParmTC(modelDict, pname, newTC, modelList=None):
 # d            print 'Updated model',m
             modelDict[m]['Parms'] = newpt
 # d            print modelDict[m]['Parms'],'\n'
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 
 def checkForParm(parmDef, pname):
@@ -901,11 +815,7 @@ def localTC(start, repeat, duration, dst):
     offset = delta.days * 86400 + delta.seconds
     start = start - offset
     if dst == 1:
-<<<<<<< HEAD
-        start = start - 3600  #daylight savings flag
-=======
         start = start - 3600  # daylight savings flag
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     if start >= 3600 * 24:
         start = start - 3600 * 24
     elif start < 0:
@@ -923,11 +833,7 @@ def siteImport(modName):
         globals()[modName] = importlib.import_module(modName)
     except ModuleNotFoundError as e:
         if (e.name == modName):
-<<<<<<< HEAD
-            LogStream.logEvent(f"No {modName} file found, using baseline settings.")
-=======
             LogStream.logEvent("No {modName} file found, using baseline settings.")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return 0
         else:
             raise
@@ -1009,21 +915,12 @@ GFESUITE_MHSID = os.environ['SITE_IDENTIFIER'].upper()
 GFESUITE_SERVER = siteConfig.GFESUITE_SERVER
 GFESUITE_HOME = siteConfig.GFESUITE_HOME
 GFESUITE_PORT = int(siteConfig.GFESUITE_PORT)
-<<<<<<< HEAD
-#GFESUITE_DATDIR = siteConfig.GFESUITE_DATDIR
-GFESUITE_LOGDIR = siteConfig.GFESUITE_LOGDIR
-GFESUITE_PRDDIR = siteConfig.GFESUITE_PRDDIR
-#GFESUITE_SHPDIR = siteConfig.GFESUITE_SHPDIR
-#GFESUITE_TOPODIR = siteConfig.GFESUITE_TOPODIR
-#GFESUITE_VTECDIR = siteConfig.GFESUITE_VTECDIR
-=======
 # GFESUITE_DATDIR = siteConfig.GFESUITE_DATDIR
 GFESUITE_LOGDIR = siteConfig.GFESUITE_LOGDIR
 GFESUITE_PRDDIR = siteConfig.GFESUITE_PRDDIR
 # GFESUITE_SHPDIR = siteConfig.GFESUITE_SHPDIR
 # GFESUITE_TOPODIR = siteConfig.GFESUITE_TOPODIR
 # GFESUITE_VTECDIR = siteConfig.GFESUITE_VTECDIR
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 SID = GFESUITE_SITEID
 
@@ -1107,15 +1004,6 @@ groups['winterProbs'] = [
             'AKQ', 'ALY', 'BGM', 'BOX', 'BTV', 'BUF', 'CAE', 'CAR', 'CHS', 'CLE',
             'CTP', 'GSP', 'GYX', 'ILM', 'ILN', 'LWX', 'MHX', 'OKX', 'PBZ', 'PHI',
             'RAH', 'RLX', 'RNK',
-<<<<<<< HEAD
-            #CR sites
-            'ABR', 'BIS', 'BOU', 'CYS', 'DDC', 'DMX', 'FGF', 'FSD', 'GLD', 'GRB',
-            'ICT', 'IND', 'IWX', 'JKL', 'LMK', 'LOT', 'MKX', 'MPX', 'MQT', 'OAX',
-            'PAH', 'PUB', 'SGF', 'GJT',
-            #SR sites
-            'FFC', 'LUB', 'MRX', 'OUN', 'TSA',
-            #WR sites
-=======
             # CR sites
             'ABR', 'BIS', 'BOU', 'CYS', 'DDC', 'DMX', 'FGF', 'FSD', 'GLD', 'GRB',
             'ICT', 'IND', 'IWX', 'JKL', 'LMK', 'LOT', 'MKX', 'MPX', 'MQT', 'OAX',
@@ -1123,7 +1011,6 @@ groups['winterProbs'] = [
             # SR sites
             'FFC', 'LUB', 'MRX', 'OUN', 'TSA',
             # WR sites
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             'FGZ', 'GGW', 'HNX', 'LKN', 'MFR', 'MSO', 'OTX', 'PDT', 'REV', 'SEW',
             'SGX', 'SLC', 'STO'
            ]
@@ -1143,19 +1030,11 @@ DISCRETE = 'Discrete'
 YES = 1
 NO = 0
 
-<<<<<<< HEAD
-#SCALAR, VECTOR
-# name/type/units/description/max/min/precision/rateParm/
-#WEATHER
-# name/WEATHER/units/description/
-#DISCRETE
-=======
 # SCALAR, VECTOR
 # name/type/units/description/max/min/precision/rateParm/
 # WEATHER
 # name/WEATHER/units/description/
 # DISCRETE
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # keyDef = [(keySym, keyDesc), (keySym, keyDesc)]
 # name/DISCRETE/units/description/overlapCapable/keyDef/
 
@@ -1203,11 +1082,7 @@ SnowAmt6hr = ("SnowAmt6hr", SCALAR, "in", "6 hr Snowfall", 30.0, 0.0, 1, YES)
 
 # Cobb SnowTool included.
 SnowRatio = ('SnowRatio', SCALAR, 'none', 'Snow Ratio', 40.0, 0.0, 1, NO)
-<<<<<<< HEAD
-#totalVV = ('totalVV', SCALAR, 'ubar/s', 'Total VV', 400.0, 0.0, 0, YES)
-=======
 # totalVV = ('totalVV', SCALAR, 'ubar/s', 'Total VV', 400.0, 0.0, 0, YES)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 cape = ("cape", SCALAR, "1unit", "CAPE", 8000.0, 0.0, 1, NO)
 ApparentT = ("ApparentT", SCALAR, "F", "Apparent Temperature", maxTempVal, -120.0, 0, NO)
 LkSfcT = ("LkSfcT", SCALAR, "C", "Lake Surface T", 40.0, -2.0, 1, NO)
@@ -1248,11 +1123,7 @@ Radar = ("Radar", SCALAR, "dbz", "Radar Reflectivity", 80.0, -20.0, 0, NO)
 # RTMA parms
 QPE = ("QPE", SCALAR, "in", "QPE", maxQpfVal, 0.0, 2, YES)
 QPE01 = ("QPE01", SCALAR, "in", "QPE01", maxQpfVal, 0.0, 2, YES)
-<<<<<<< HEAD
-#if SID in groups['ALASKA_SITES']: - not sure if this needs to be like that
-=======
 # if SID in groups['ALASKA_SITES']: - not sure if this needs to be like that
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 if SID in groups['OCONUS_SITES']:
     TUnc = ("TUnc", SCALAR, "F", "Temperature Anl Uncertainty", 20.0, 0.0, 0, NO)
     TdUnc = ("TdUnc", SCALAR, "F", "Dewpoint Anl Uncertainty", 25.0, 0.0, 0, NO)
@@ -1399,20 +1270,6 @@ QPFtoFFGRatio = ("QPFtoFFGRatio", SCALAR, "1", "QPF to FFG Ratio", 1000.0, 0.0, 
 
 # Hazards
 HazardKeys = []
-<<<<<<< HEAD
-HazardKeys.append(("<None>", ""))  #1st one must be None
-for k in sorted(VTECTable.VTECTable.keys()):
-    HazardKeys.append((k, VTECTable.VTECTable[k]['hdln']))
-
-#H-VTEC keys - will someday add these back in
-#("hydroER", "Hydro - Excessive Rainfall"),
-#("hydroSM", "Hydro - Snow melt"),
-#("hydroRS", "Rain and Snow melt"),
-#("hydroDM", "Dam or Levee Failure"),
-#("hydroGO", "Glacier-Dammed Lake Outburst"),
-#("hydroIJ", "Ice Jam"),
-#("hydroIC", "Rain and/or Snow melt and/or Ice Jam"),
-=======
 HazardKeys.append(("<None>", ""))  # 1st one must be None
 for k in sorted(VTECTable.VTECTable.keys()):
     HazardKeys.append((k, VTECTable.VTECTable[k]['hdln']))
@@ -1425,7 +1282,6 @@ for k in sorted(VTECTable.VTECTable.keys()):
 # ("hydroGO", "Glacier-Dammed Lake Outburst"),
 # ("hydroIJ", "Ice Jam"),
 # ("hydroIC", "Rain and/or Snow melt and/or Ice Jam"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 Hazards = ("Hazards", DISCRETE, "wwa", "Hazards", YES, HazardKeys, 4)
 
@@ -1445,11 +1301,6 @@ CigHgt = ("CigHgt", SCALAR, "ft", "Ceiling Height", 25000.0, -100.0, 0, NO)
 
 # Parms for NationalBlend
 QPF1 = ("QPF1", SCALAR, "in", "1HR QPF", maxQpfVal, 0.0, 2, YES)
-<<<<<<< HEAD
-PositiveEnergyAloft = ("PositiveEnergyAloft" , SCALAR, "j/kg", "Positive energy aloft" , 500.0, 0.0, 1, NO)
-NegativeEnergyLowLevel = ("NegativeEnergyLowLevel" , SCALAR, "j/kg", "Negative energy in the low levels" , 0.0, -500.0, 1, NO)
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 SnowAmt01 = ("SnowAmt01", SCALAR, "in", "1-h Snow Accumulation", 20.0, 0.0, 1, YES)
 IceAccum01 = ("IceAccum01", SCALAR, "inch", "1-h Ice Accumulation", maxIceVal, 0.0, 3, NO)
 IceAccum = ("IceAccum", SCALAR, "inch", "6-h Ice Accumulation", 13.0, 0.0, 3, NO)
@@ -1465,55 +1316,6 @@ PMSL10pct = ("PMSL10pct", SCALAR, "mb", "10th percentile Mean Sea Level Pressure
 PMSL50pct = ("PMSL50pct", SCALAR, "mb", "50th percentile Mean Sea Level Pressure", 1100.0, 900.0, 1, NO)
 PMSL90pct = ("PMSL90pct", SCALAR, "mb", "90th percentile Mean Sea Level Pressure", 1100.0, 900.0, 1, NO)
 FosBerg = ("FosBerg", SCALAR, "none", "Fosberg Fire Weather Index", 100.0, 0.0, 0, NO)
-<<<<<<< HEAD
-#new naitonalblend 3.2
-IceAccum05PrcntlF24hr = ("IceAccum05PrcntlF24hr", SCALAR, "inch", "5th percentile 24hr Flat Ice Accumulation", 4.0, 0.0, 0, NO)
-IceAccum10PrcntlF24hr = ("IceAccum10PrcntlF24hr", SCALAR, "inch", "10th percentile 24hr Flat Ice Accumulation", 4.0, 0.0, 0, NO)
-IceAccum25PrcntlF24hr = ("IceAccum25PrcntlF24hr", SCALAR, "inch", "25th percentile 24hr Flat Ice Accumulation", 4.0, 0.0, 0, NO)
-IceAccum50PrcntlF24hr = ("IceAccum50PrcntlF24hr", SCALAR, "inch", "50th percentile 24hr Flat Ice Accumulation", 4.0, 0.0, 0, NO)
-IceAccum75PrcntlF24hr = ("IceAccum75PrcntlF24hr", SCALAR, "inch", "75th percentile 24hr Flat Ice Accumulation", 4.0, 0.0, 0, NO)
-IceAccum90PrcntlF24hr = ("IceAccum90PrcntlF24hr", SCALAR, "inch", "90th percentile 24hr Flat Ice Accumulation", 4.0, 0.0, 0, NO)
-IceAccum95PrcntlF24hr = ("IceAccum95PrcntlF24hr", SCALAR, "inch", "95th percentile 24hr Flat Ice Accumulation", 4.0, 0.0, 0, NO)
-IceAccum05PrcntlF48hr = ("IceAccum05PrcntlF48hr", SCALAR, "inch", "5th percentile 48hr Flat Ice Accumulation", 8.0, 0.0, 0, NO)
-IceAccum10PrcntlF48hr = ("IceAccum10PrcntlF48hr", SCALAR, "inch", "10th percentile 48hr Flat Ice Accumulation", 8.0, 0.0, 0, NO)
-IceAccum25PrcntlF48hr = ("IceAccum25PrcntlF48hr", SCALAR, "inch", "25th percentile 48hr Flat Ice Accumulation", 8.0, 0.0, 0, NO)
-IceAccum50PrcntlF48hr = ("IceAccum50PrcntlF48hr", SCALAR, "inch", "50th percentile 48hr Flat Ice Accumulation", 8.0, 0.0, 0, NO)
-IceAccum75PrcntlF48hr = ("IceAccum75PrcntlF48hr", SCALAR, "inch", "75th percentile 48hr Flat Ice Accumulation", 8.0, 0.0, 0, NO)
-IceAccum90PrcntlF48hr = ("IceAccum90PrcntlF48hr", SCALAR, "inch", "90th percentile 48hr Flat Ice Accumulation", 8.0, 0.0, 0, NO)
-IceAccum95PrcntlF48hr = ("IceAccum95PrcntlF48hr", SCALAR, "inch", "95th percentile 48hr Flat Ice Accumulation", 8.0, 0.0, 0, NO)
-IceAccum05PrcntlF72hr = ("IceAccum05PrcntlF72hr", SCALAR, "inch", "5th percentile 72hr Flat Ice Accumulation", 10.0, 0.0, 0, NO)
-IceAccum10PrcntlF72hr = ("IceAccum10PrcntlF72hr", SCALAR, "inch", "10th percentile 72hr Flat Ice Accumulation", 10.0, 0.0, 0, NO)
-IceAccum25PrcntlF72hr = ("IceAccum25PrcntlF72hr", SCALAR, "inch", "25th percentile 72hr Flat Ice Accumulation", 10.0, 0.0, 0, NO)
-IceAccum50PrcntlF72hr = ("IceAccum50PrcntlF72hr", SCALAR, "inch", "50th percentile 72hr Flat Ice Accumulation", 10.0, 0.0, 0, NO)
-IceAccum75PrcntlF72hr = ("IceAccum75PrcntlF72hr", SCALAR, "inch", "75th percentile 72hr Flat Ice Accumulation", 10.0, 0.0, 0, NO)
-IceAccum90PrcntlF72hr = ("IceAccum90PrcntlF72hr", SCALAR, "inch", "90th percentile 72hr Flat Ice Accumulation", 10.0, 0.0, 0, NO)
-IceAccum95PrcntlF72hr = ("IceAccum95PrcntlF72hr", SCALAR, "inch", "95th percentile 72hr Flat Ice Accumulation", 10.0, 0.0, 0, NO)
-TstmPrb6 = ("TstmPrb6", SCALAR, "%", "6hr Thunderstorm probability", 100.0, 0.0, 0, NO)
-QPF10Prcntl24hr = ("QPF10Prcntl24hr", SCALAR, "inch", "10th percentile 24hr Total precipitation", 15.0, 0.0, 0, NO)
-QPF50Prcntl24hr = ("QPF50Prcntl24hr", SCALAR, "inch", "50th percentile 24hr Total precipitation", 15.0, 0.0, 0, NO)
-QPF90Prcntl24hr = ("QPF90Prcntl24hr", SCALAR, "inch", "90th percentile 24hr Total precipitation", 15.0, 0.0, 0, NO)
-SnowAmt05PrcntlF24hr = ("SnowAmt05PrcntlF24hr", SCALAR, "inch", "5th percentile 24hr Total snowfall", 36.0, 0.0, 0, NO)
-SnowAmt10PrcntlF24hr = ("SnowAmt10PrcntlF24hr", SCALAR, "inch", "10th percentile 24hr Total snowfall", 36.0, 0.0, 0, NO)
-SnowAmt25PrcntlF24hr = ("SnowAmt25PrcntlF24hr", SCALAR, "inch", "25th percentile 24hr Total snowfall", 36.0, 0.0, 0, NO)
-SnowAmt50PrcntlF24hr = ("SnowAmt50PrcntlF24hr", SCALAR, "inch", "50th percentile 24hr Total snowfall", 36.0, 0.0, 0, NO)
-SnowAmt75PrcntlF24hr = ("SnowAmt75PrcntlF24hr", SCALAR, "inch", "75th percentile 24hr Total snowfall", 36.0, 0.0, 0, NO)
-SnowAmt90PrcntlF24hr = ("SnowAmt90PrcntlF24hr", SCALAR, "inch", "90th percentile 24hr Total snowfall", 36.0, 0.0, 0, NO)
-SnowAmt95PrcntlF24hr = ("SnowAmt95PrcntlF24hr", SCALAR, "inch", "99th percentile 24hr Total snowfall", 36.0, 0.0, 0, NO)
-SnowAmt05PrcntlF48hr = ("SnowAmt05PrcntlF48hr", SCALAR, "inch", "5th percentile 48hr Total snowfall", 72.0, 0.0, 0, NO)
-SnowAmt10PrcntlF48hr = ("SnowAmt10PrcntlF48hr", SCALAR, "inch", "10th percentile 48hr Total snowfall", 72.0, 0.0, 0, NO)
-SnowAmt25PrcntlF48hr = ("SnowAmt25PrcntlF48hr", SCALAR, "inch", "25th percentile 48hr Total snowfall", 72.0, 0.0, 0, NO)
-SnowAmt50PrcntlF48hr = ("SnowAmt50PrcntlF48hr", SCALAR, "inch", "50th percentile 48hr Total snowfall", 72.0, 0.0, 0, NO)
-SnowAmt75PrcntlF48hr = ("SnowAmt75PrcntlF48hr", SCALAR, "inch", "75th percentile 48hr Total snowfall", 72.0, 0.0, 0, NO)
-SnowAmt90PrcntlF48hr = ("SnowAmt90PrcntlF48hr", SCALAR, "inch", "90th percentile 48hr Total snowfall", 72.0, 0.0, 0, NO)
-SnowAmt95PrcntlF48hr = ("SnowAmt95PrcntlF48hr", SCALAR, "inch", "95th percentile 48hr Total snowfall", 72.0, 0.0, 0, NO)
-SnowAmt05PrcntlF72hr = ("SnowAmt05PrcntlF72hr", SCALAR, "inch", "5th percentile 72hr Total snowfall", 100.0, 0.0, 0, NO)
-SnowAmt10PrcntlF72hr = ("SnowAmt10PrcntlF72hr", SCALAR, "inch", "10th percentile 72hr Total snowfall", 100.0, 0.0, 0, NO)
-SnowAmt25PrcntlF72hr = ("SnowAmt25PrcntlF72hr", SCALAR, "inch", "25th percentile 72hr Total snowfall", 100.0, 0.0, 0, NO)
-SnowAmt50PrcntlF72hr = ("SnowAmt50PrcntlF72hr", SCALAR, "inch", "50th percentile 72hr Total snowfall", 100.0, 0.0, 0, NO)
-SnowAmt75PrcntlF72hr = ("SnowAmt75PrcntlF72hr", SCALAR, "inch", "75th percentile 72hr Total snowfall", 100.0, 0.0, 0, NO)
-SnowAmt90PrcntlF72hr = ("SnowAmt90PrcntlF72hr", SCALAR, "inch", "90th percentile 72hr Total snowfall", 100.0, 0.0, 0, NO)
-SnowAmt95PrcntlF72hr = ("SnowAmt95PrcntlF72hr", SCALAR, "inch", "95th percentile 72hr Total snowfall", 100.0, 0.0, 0, NO)
-=======
 # new naitonalblend 3.2
 IceAccum05PrcntlF24 = ("IceAccum05PrcntlF24", SCALAR, "inch", "5th percentile 24hr Flat Ice Accumulation", 4.0, 0.0, 2, NO)
 IceAccum10PrcntlF24 = ("IceAccum10PrcntlF24", SCALAR, "inch", "10th percentile 24hr Flat Ice Accumulation", 4.0, 0.0, 2, NO)
@@ -1565,13 +1367,10 @@ SnowAmt50PrcntlF72 = ("SnowAmt50PrcntlF72", SCALAR, "inch", "50th percentile 72h
 SnowAmt75PrcntlF72 = ("SnowAmt75PrcntlF72", SCALAR, "inch", "75th percentile 72hr Total snowfall", 100.0, 0.0, 0, NO)
 SnowAmt90PrcntlF72 = ("SnowAmt90PrcntlF72", SCALAR, "inch", "90th percentile 72hr Total snowfall", 100.0, 0.0, 0, NO)
 SnowAmt95PrcntlF72 = ("SnowAmt95PrcntlF72", SCALAR, "inch", "95th percentile 72hr Total snowfall", 100.0, 0.0, 0, NO)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 Dswrf = ("Dswrf", SCALAR, "W/(m^2)", "Downward short-wave radiation flux", 600.0, 0.0, 0, NO)
 FreezingSpray = ("FreezingSpray", SCALAR, "1", "Freezing Spray", 3.0, 0.0, 0, NO)
 WGS = ("WGS", SCALAR, "wm-2", "Wind speed gust", 600.0, 0.0, 0, NO)
 Ws90pct = ("Ws90pct", SCALAR, "m/s", "90th percentile Wind speed", 42.181, 0.0, 0, NO)
-<<<<<<< HEAD
-=======
 # nbm4.0
 ProbSnowGE01F24 = ("ProbSnowGE01F24", SCALAR, "%", "Prob. snow >= 1 inch24hr", 100.0, 0.0, 0, NO)
 ProbSnowGE02F24 = ("ProbSnowGE02F24", SCALAR, "%", "Prob. snow >= 2 inches24hr", 100.0, 0.0, 0, NO)
@@ -1592,17 +1391,13 @@ MxMnTprobAbove110 = ("MxMnTprobAbove110", SCALAR, "%", "Max or Min Temperature P
 MxMnTprobAbove120 = ("MxMnTprobAbove120", SCALAR, "%", "Max or Min Temperature Probability Above 120 F", 100.0, 0.0, 0, NO)
 MxMnTSprd = ("MxMnTSprd", SCALAR, "F", "Max or Min Spread in F", 30.0, 0.0, 2, NO)
 WaveHeight = ("WaveHeight", SCALAR, "ft", "Total Wave Height", 100.0, 0.0, 0, NO)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 # Parms for SPC
 SPCDryTstmPrb = ("SPCDryTstmPrb", SCALAR, "%", "Prob. of Dry Thunderstorm", 100.0, 0.0, 0, NO)
 FireWxProb = ("FireWxProb", SCALAR, "%", "Prob. of High Winds, Low RH, Warm Temps", 100.0, 0.0, 0, NO)
-<<<<<<< HEAD
-=======
 CnvtvOutlooks = ('CnvtvOutlooks', DISCRETE, 'cat', 'Convective Outlooks', NO,
                 [('NONE', '0'), ('TSTM', '1'), ('MRGL', '2'), ('SLGT', '3'), ('ENH', '4'),
                 ('MOD', '5'), ('HIGH', '6'), ],)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 # Parms for NWPS v1.3
 TwlWaves = ("TwlWaves", SCALAR, "ft", "TWL Due to Tides, Wind, and Waves (MSL)", 30.0, -12.0, 0, NO)
@@ -1612,8 +1407,6 @@ Swash = ("Swash", SCALAR, "ft", "TWL Time-Varying Increase Due to Waves", 30.0, 
 TwlDT = ("TwlDT", SCALAR, "ft", "TWL Above Dune Toe", 30.0, -12.0, 0, NO)
 TwlDC = ("TwlDC", SCALAR, "ft", "TWL Above Dune Crest", 30.0, 0.0, 0, NO)
 
-<<<<<<< HEAD
-=======
 # Parms for HREF
 VisProb4 = ("VisProb4", SCALAR, "%", "Probability of Visibility 4", 100.0, 0.0, 0, NO)
 VisProb2 = ("VisProb2", SCALAR, "%", "Probability of Visibility 2", 100.0, 0.0, 0, NO)
@@ -1624,7 +1417,6 @@ CigProb10 = ("CigProb10", SCALAR, "%", "Probability of Ceiling 10", 100.0, 0.0, 
 CigProb20 = ("CigProb20", SCALAR, "%", "Probability of Ceiling 20", 100.0, 0.0, 0, NO)
 CigProb30 = ("CigProb30", SCALAR, "%", "Probability of Ceiling 30", 100.0, 0.0, 0, NO)
 NPoP = ("NPoP", SCALAR, "%", "N Prob of Precip", 100.0, 0.0, 0, NO)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #---------------------------------------------------------------------------
 #
 #  Weather configuration section
@@ -2067,11 +1859,7 @@ Vsby = ('Vsby', SCALAR, 'mi', 'Visibility', 10.0, 0.0, 2, NO)
 WG1 = ('WG1', SCALAR, 'none', 'WorkGrid1', 100.0, -100.0, 0, NO)
 WinterWx = ('WinterWx', DISCRETE, 'cat', 'Winter Weather', NO, ThreatKeys)
 
-<<<<<<< HEAD
-#** Parameter sets for specific functionality
-=======
 # ** Parameter sets for specific functionality
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 optionalParmsDict = {}
 
 # Marine Weather Elements
@@ -2098,11 +1886,7 @@ optionalParmsDict['marine'] = {
     'SwanSwell' : ("SwanSwell", SCALAR, "ft", "Total Significant Swell Height", 40.0, 0.0, 2, NO),
     'SST' : ("SST", SCALAR, "F", "Sea Sfc Temp", 100.0, 25.0, 0, NO),
     'StormTide' : ('StormTide', SCALAR, 'ft', 'Storm Tide', 30.0, -8.0, 1, NO),
-<<<<<<< HEAD
-    #Fcst Grids - for partitioned wave groups
-=======
     # Fcst Grids - for partitioned wave groups
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     'Wave1' : ("Wave1", VECTOR, "ft", "WAVE1", 50.0, 0.0, 0, NO),
     'Wave2' : ("Wave2", VECTOR, "ft", "WAVE2", 50.0, 0.0, 0, NO),
     'Wave3' : ("Wave3", VECTOR, "ft", "WAVE3", 50.0, 0.0, 0, NO),
@@ -2112,11 +1896,7 @@ optionalParmsDict['marine'] = {
     'Wave7' : ("Wave7", VECTOR, "ft", "Wave7", 50.0, 0.0, 0, NO),
     'Wave8' : ("Wave8", VECTOR, "ft", "Wave8", 50.0, 0.0, 0, NO),
     'Wave9' : ("Wave9", VECTOR, "ft", "Wave9", 50.0, 0.0, 0, NO),
-<<<<<<< HEAD
-    #Fcst Grids - for partitioned wave groups
-=======
     # Fcst Grids - for partitioned wave groups
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     'Period1' : ("Period1", SCALAR, "sec", "Period1", 30.0, 0.0, 0, NO),
     'Period2' : ("Period2", SCALAR, "sec", "Period2", 30.0, 0.0, 0, NO),
     'Period3' : ("Period3", SCALAR, "sec", "Period3", 30.0, 0.0, 0, NO),
@@ -2461,11 +2241,7 @@ allProjections = [Grid201, Grid202, Grid203, Grid204, Grid205, Grid206,
 #         [xdim, ydim] / (origin) /( extent)  / TimeZone / Projection / OfficeType
 
 SITES = {
-<<<<<<< HEAD
-#WFOs
-=======
 # WFOs
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     # Experimental combined AFC site
     'AFC' : ([1057, 449], (1.0, 19.00), (66.0, 28.0), 'America/Anchorage', Grid214AK, "wfo"),
     'ABQ' : ([145, 145], (36.00, 22.00), (9.0, 9.0), 'MST7MDT', Grid211, "wfo"),
@@ -2594,11 +2370,7 @@ SITES = {
     'TWC' : ([145, 145], (29.00, 20.00), (9.0, 9.0), 'US/Arizona', Grid211, "wfo"),
     'UNR' : ([145, 145], (40.00, 34.00), (9.0, 9.0), 'MST7MDT', Grid211, "wfo"),
     'VEF' : ([145, 145], (26.00, 25.00), (9.0, 9.0), 'PST8PDT', Grid211, "wfo"),
-<<<<<<< HEAD
-#RFCs
-=======
 # RFCs
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     'ACR' : ([565, 415], (26.0, 19.0), (60.0, 44.0), 'America/Anchorage', Grid214AK, "rfc"),
     'ALR' : ([299, 278], (59.0, 11.0), (17.0, 19.0), 'CST6CDT', Grid211, "rfc"),
     'FWR' : ([362, 334], (36.0, 11.0), (20.0, 20.0), 'CST6CDT', Grid211, "rfc"),
@@ -2613,27 +2385,11 @@ SITES = {
     'TIR' : ([220, 171], (59.0, 25.0), (13.0, 12.0), 'EST5EDT', Grid211, "rfc"),
     'TUA' : ([281, 168], (39.0, 22.0), (18.0, 10.0), 'CST6CDT', Grid211, "rfc"),
 
-<<<<<<< HEAD
-#Special Sites - Added Hawaiian High Seas domain
-=======
 # Special Sites - Added Hawaiian High Seas domain
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     'US' : ([267, 159], (18.0, 9.5), (67.0, 40.0), 'EDT5EDT', Grid211, "other"),
     'FSL' : ([161, 145], (38.50, 27.00), (10.0, 9.0), 'MST7MDT', Grid211, "other"),
     'NH1' : ([838, 577], (887.0, 121.0), (837.0, 576.0), 'EST5EDT', NDFD_Oceanic_10K, "wfo"),
     'NH2' : ([1188, 363], (1328.0, 365.0), (1187.0, 362.0), 'EST5EDT', NDFD_Oceanic_10K, "wfo"),
-<<<<<<< HEAD
-    'ONA' : ([244, 383], (68.9375, 19.5625), (15.1875, 23.875), 'EST5EDT', Grid211, "wfo"),
-    'ONP' : ([396, 415], (8.1875, 21.5625), (24.6875, 25.875), 'PST8PDT', Grid211, "wfo"),
-    'HPA' : ([899, 671], (284.0, 30.0), (898.0, 670.0), 'Pacific/Honolulu', NDFD_Oceanic_10K, "wfo"),
-    'WNJ' : ([301, 346], (1000.0, 475.0), (300.0, 345.0), 'CST6CDT', NDFD_Oceanic_10K, "wfo"),
-
-#Aviation Domains for AAWU
-    'AAWU' : ([705, 457], (1.0, 11.0), (88.0, 57.0), 'America/Anchorage', Grid214AK, 'nc'),
-    'AVAK' : ([465, 417], (8.0, 12.0), (29.0, 26.0), 'America/Anchorage', Grid203, 'nc'),
-
-#Regional Offices
-=======
     'ONA' : ([371, 455], (1550.0, 633.0), (185.0, 227.0), 'EST5EDT', NDFD_Oceanic_10K, "wfo"),
     'ONP' : ([359, 567], (1015.0, 645.0), (179.0, 283.0), 'PST8PDT', NDFD_Oceanic_10K, "wfo"),
     'HPA' : ([899, 671], (284.0, 30.0), (898.0, 670.0), 'Pacific/Honolulu', NDFD_Oceanic_10K, "wfo"),
@@ -2644,7 +2400,6 @@ SITES = {
     'AVAK' : ([465, 417], (8.0, 12.0), (29.0, 26.0), 'America/Anchorage', Grid203, 'nc'),
 
 # Regional Offices
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     'VUY' : ([337, 449], (62.00, 19.00), (21.0, 28.0), 'EST5EDT', Grid211, "ro"),
     'BCQ' : ([145, 145], (50.00, 27.00), (9.0, 9.0), 'CST6CDT', Grid211, "ro"),
     'EHU' : ([657, 321], (36.00, 9.50), (41.0, 20.0), 'CST6CDT', Grid211, "ro"),
@@ -2652,15 +2407,6 @@ SITES = {
     'PBP' : ([321, 225], (7.00, 11.00), (10.0, 7.0), 'Pacific/Honolulu', Grid208, "ro"),
     'VRH' : ([1409, 913], (1.0, 11.0), (88.0, 57.0), 'America/Anchorage', Grid214AK, 'nc'),
 
-<<<<<<< HEAD
-#National Centers
-    'HAK' : ([825, 553], (1.0, 1.0), (103.0, 69.0), 'EST5EDT', Grid214AK, "nc"),
-    'HUS' : ([1073, 689], (19.0, 8.0), (67.0, 43.0), 'EST5EDT', Grid211, "nc"),
-    'NHA' : ([1873, 1361], (35.5, 3.5), (58.5, 42.5), 'EST5EDT', Grid211, "nc"),
-    'NHP' : ([289, 321], (21.00, 21.00), (9.0, 10.0), 'PST8PDT', Grid211, "nc"),
-    'NHZ' : ([1411, 1333], (1.0, 1.0), (1411.0, 1333.0), 'EST5EDT' , GridForNHZ, "nc"),
-    'NWC' : ([1073, 689], (19.0, 8.0), (67.0, 43.0), 'CST6CDT', Grid211, "nc"),
-=======
 # National Centers
     'AWC' : ([1873, 1361], (35.5, 3.5), (58.5, 42.5), 'CST6CDT', Grid211, "nc"),
     'HAK' : ([825, 553], (1.0, 1.0), (103.0, 69.0), 'EST5EDT', Grid214AK, "wpc"),
@@ -2669,7 +2415,6 @@ SITES = {
     'NHP' : ([289, 321], (21.00, 21.00), (9.0, 10.0), 'PST8PDT', Grid211, "nc"),
     'NHZ' : ([1411, 1333], (1.0, 1.0), (1411.0, 1333.0), 'EST5EDT' , GridForNHZ, "nc"),
     'NWC' : ([1073, 689], (19.0, 8.0), (67.0, 43.0), 'CST6CDT', Grid211, "nwc"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }
 
 # Get list of valid office types, for validation.
@@ -2726,21 +2471,12 @@ MinRHTC = localTC(3 * HOUR, 24 * HOUR, 18 * HOUR, 0)
 LT3NG = localTC(0 * HOUR, 3 * HOUR, 3 * HOUR, 0)
 LT6NG = localTC(0 * HOUR, 6 * HOUR, 6 * HOUR, 0)
 LT12NG = localTC(6 * HOUR, 12 * HOUR, 12 * HOUR, 0)
-<<<<<<< HEAD
-LTMOS = localTC(6 * HOUR, 12 * HOUR, 12 * HOUR, 0)  #special MOS local time
-MaxTTCMOS = localTC(6 * HOUR, 24 * HOUR, 12 * HOUR, 0)  #special MOS maxT
-MinTTCMOS = localTC(18 * HOUR, 24 * HOUR, 12 * HOUR, 0)  #special MOS minT
-LT24 = localTC(0 * HOUR, 24 * HOUR, 24 * HOUR, 0)
-FireWx1300TC = localTC(13 * HOUR, 24 * HOUR, 1 * HOUR, 0)  #special FireWx 1pm snap
-#DR3511 DeltaMaxTTC  = localTC(7*HOUR, 24*HOUR, 16*HOUR, 0)  # just for HPCdeltaMaxT
-=======
 LTMOS = localTC(6 * HOUR, 12 * HOUR, 12 * HOUR, 0)  # special MOS local time
 MaxTTCMOS = localTC(6 * HOUR, 24 * HOUR, 12 * HOUR, 0)  # special MOS maxT
 MinTTCMOS = localTC(18 * HOUR, 24 * HOUR, 12 * HOUR, 0)  # special MOS minT
 LT24 = localTC(0 * HOUR, 24 * HOUR, 24 * HOUR, 0)
 FireWx1300TC = localTC(13 * HOUR, 24 * HOUR, 1 * HOUR, 0)  # special FireWx 1pm snap
 # DR3511 DeltaMaxTTC  = localTC(7*HOUR, 24*HOUR, 16*HOUR, 0)  # just for HPCdeltaMaxT
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 PWSDTC = localTC(11 * HOUR, 24 * HOUR, 12 * HOUR, 0)
 PWSNTC = localTC(23 * HOUR, 24 * HOUR, 12 * HOUR, 0)
 # Alaska OCONUS
@@ -2832,11 +2568,7 @@ elif SID == "SJU":
 elif SID in ["GUM", "PQE", "PQW", "PPG"]:
     NETCDFDIRS = []
 
-<<<<<<< HEAD
-#CONUS sites
-=======
 # CONUS sites
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 elif SID in groups['CONUS_EAST_SITES']:
     NETCDFDIRS = [('/awips2/edex/data/gfe/climo/PRISM'),
                   ('/awips2/edex/data/gfe/climo/NCDC'),
@@ -2987,10 +2719,7 @@ TRANSMIT_SCRIPT = GFESUITE_HOME + '/bin/gfe_msg_send -s %SUBJECT -a %ADDRESSES -
 EXTRA_ISC_PARMS = [([QPF, FloodingRainThreat], 'rfc'), ([QPF, FloodingRainThreat], 'wfo'), ([ProposedSS, Hazards,
                      InundationMax, InundationTiming, SurgeHtPlusTideMSL, SurgeHtPlusTideMLLW, SurgeHtPlusTideMHHW,
                      SurgeHtPlusTideNAVD, ProposedTropWindWW, ProposedTropWWGuidance], 'nc'),
-<<<<<<< HEAD
-=======
                    ([QPF, SnowAmt, IceAccum, SnowRatio], 'wpc'),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                    ([ProposedSS, Hazards, InundationMax, InundationTiming, SurgeHtPlusTideMSL, SurgeHtPlusTideMLLW,
                      SurgeHtPlusTideMHHW, SurgeHtPlusTideNAVD, ProposedTropWindWW, ProposedTropWWGuidance], 'wfo')]
 
@@ -3000,11 +2729,7 @@ EXTRA_ISC_PARMS = [([QPF, FloodingRainThreat], 'rfc'), ([QPF, FloodingRainThreat
 #
 #---------------------------------------------------------------------------
 # auto configure NotifyTextProd -- set after OB6
-<<<<<<< HEAD
-AUTO_CONFIGURE_NOTIFYTEXTPROD = 1  #0=off,1=on
-=======
 AUTO_CONFIGURE_NOTIFYTEXTPROD = 1  # 0=off,1=on
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 #-----------------------------------
 # DO NOT CHANGE THE FOLLOWING SECTION
@@ -3074,11 +2799,7 @@ OFFICIALDBS = [([Temp, Td, Wind, Weather, Sky, FzLevel, SnowLevel], TC1),
     ([StormTotalSnow], TC1),
         # Tropical parms
     ([prob34, prob50, prob64, pws34, pws50, pws64, ], TC1),
-<<<<<<< HEAD
-    ([TOA1034,TOA5034,TOD5034,TOD9034,TOA1050,TOA5050,TOD5050,TOD9050,TOA1064,TOA5064,TOD5064,TOD9064], TC3NG),
-=======
     ([TOA1034, TOA5034, TOD5034, TOD9034, TOA1050, TOA5050, TOD5050, TOD9050, TOA1064, TOA5064, TOD5064, TOD9064], TC3NG),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     ([InundationMax, SurgeHtPlusTideMSL, SurgeHtPlusTideMLLW, SurgeHtPlusTideMHHW, SurgeHtPlusTideNAVD], TC1),
     ([ProposedSS, DiffSS, tempProposedSS, InitialSS, ProposedTropWindWW, ProposedTropWWGuidance, ], TC1),
     ([WindThreat, StormSurgeThreat, FloodingRainThreat, TornadoThreat], TC1),
@@ -3092,11 +2813,7 @@ OFFICIALDBS = [([Temp, Td, Wind, Weather, Sky, FzLevel, SnowLevel], TC1),
     ([ApparentT, HeatIndex, WindChill, LkSfcT, SnowMap, SnowRatio, StormTotalQPF], TC1),
     ]
 
-<<<<<<< HEAD
-## JCM Change wave and period (and swanswell) to TC1 for all marine sites
-=======
 # # JCM Change wave and period (and swanswell) to TC1 for all marine sites
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 if SID in groups['marineSites'] or SID in groups['GreatLake_SITES']:
     OFFICIALDBS.append(([WaveHeight, PeakWaveDir, WindWaveHeight, SurfHeight, Swell, Swell2, Period, Period2], TC1))
     OFFICIALDBS.append(([SwanSwell, Wave1, Wave2, Wave3, Wave4, Wave5, Wave6, Wave7, Wave8, Wave9,
@@ -3161,8 +2878,6 @@ if type(REQUESTED_ISC_PARMS) is list and not "NewTopo" in REQUESTED_ISC_PARMS:
     REQUESTED_ISC_PARMS.append("NewTopo")
 ISCPARMS.append(([NewTopo], Persistent))
 
-<<<<<<< HEAD
-=======
 # Define HIRESW Parms for All HIRESW Models
 HIRESW_PARMS = [
     ([MaxRH, TdMrn], MaxRHTC),
@@ -3195,7 +2910,6 @@ HIRESW_PARMS = [
     ([CQPF1, PoP6, QPF6], TC6NG),
 ]
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #---------------------------------------------------------------------------
 #
 #  General server configuration section
@@ -3206,11 +2920,7 @@ HIRESW_PARMS = [
 # Server settings     DO NOT CHANGE THESE DEFINITIONS
 #----------------------------------------------------------------------------
 IFPConfigServer = SimpleServerConfig()
-<<<<<<< HEAD
-#IFPConfigServer.allowedNodes             = []
-=======
 # IFPConfigServer.allowedNodes             = []
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 IFPConfigServer.allowTopoBelowZero = 1
 
 #------------------------------------------------------------------------------
@@ -3359,22 +3069,6 @@ modelDict['GlobalWave'] = {
             }
 
 modelDict['HIRESWarw'] = {
-<<<<<<< HEAD
-            'D2DAccumulativeElements': ['tp'],
-            'D2DMODELS': 'HiResW-ARW-West',
-            'DB': ('HIRESWarw', 'GRID', '', NO, NO, 2, 0),
-            'INITMODULES': 'HIRESWarw',
-            'Parms': STD3_MODEL,
-            }
-
-modelDict['HIRESWnmm'] = {
-            'D2DAccumulativeElements': ['tp'],
-            'D2DMODELS': 'HiResW-NMM-West',
-            'DB': ('HIRESWnmm', 'GRID', '', NO, NO, 2, 0),
-            'INITMODULES': 'HIRESWnmm',
-            'Parms': STD3_MODEL,
-            }
-=======
             'D2DAccumulativeElements': ['tp', 'tp1hr',],
             'D2DMODELS': 'HiResW-ARW',
             'DB': ('HIRESWarw', 'GRID', '', NO, NO, 2, 0),
@@ -3389,7 +3083,6 @@ modelDict["HIRESWFV3"] = {
     'INITMODULES': 'HIRESWFV3',
     'Parms': HIRESW_PARMS,
 }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 modelDict['HPCERP'] = {
             'D2DAccumulativeElements': ['tpHPCndfd'],
@@ -3427,8 +3120,6 @@ modelDict['HPCQPF'] = {
                      ],
             }
 
-<<<<<<< HEAD
-=======
 modelDict["HREF"] = {
     "D2DDBVERSIONS": 3,
     "D2DMODELS": "HREF-US",
@@ -3468,7 +3159,6 @@ modelDict["HREF"] = {
     ],
 }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 modelDict['HRRR'] = {
             'D2DAccumulativeElements': ['tp', 'crain', 'csnow', 'cfrzr', 'cicep'],
             'D2DMODELS': 'HRRR',
@@ -3548,35 +3238,17 @@ modelDict['NamDNG'] = {
             }
 
 modelDict['NationalBlend'] = {
-<<<<<<< HEAD
-            'D2DAccumulativeElements': ["pop12hr", "pop", "pop1hr", "pop6hr", "tp",
-                                        "tp1hr", "tp6hr", "thp3hr", "thp6hr", "thp12hr",
-                                        "totsn1hr", "totsn6hr", "ficeac1hr", "ficeac6hr",
-                                        "hindex6hr", "fosindx6hr", "ficeac5pct24hr",
-=======
             'D2DAccumulativeElements': ["pop12hr", "pop", "pop6hr", "tp1hr", "tp6hr",
                                         "thp3hr", "thp6hr", "totsn1hr", "totsn6hr",
                                         "ficeac1hr", "ficeac6hr", "hindex6hr", "pwther",
                                         "tp10pct6hr", "tp50pct6hr", "tp90pct6hr",
                                         "thp12hr", "pop1hr", "pcpdur12hr", "ficeac5pct24hr",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                         "ficeac10pct24hr", "ficeac25pct24hr", "ficeac50pct24hr",
                                         "ficeac75pct24hr", "ficeac90pct24hr", "ficeac95pct24hr",
                                         "ficeac5pct48hr", "ficeac10pct48hr", "ficeac25pct48hr",
                                         "ficeac50pct48hr", "ficeac75pct48hr", "ficeac90pct48hr",
                                         "ficeac95pct48hr", "ficeac5pct72hr", "ficeac10pct72hr",
                                         "ficeac25pct72hr", "ficeac50pct72hr", "ficeac75pct72hr",
-<<<<<<< HEAD
-                                        "ficeac90pct72hr", "ficeac95pct72hr", "totsn5pct24hr",
-                                        "totsn10pct24hr", "totsn25pct24hr", "totsn50pct24hr",
-                                        "totsn75pct24hr", "totsn90pct24hr", "totsn95pct24hr",
-                                        "totsn5pct48hr", "totsn10pct48hr", "totsn25pct48hr",
-                                        "totsn50pct48hr", "totsn75pct48hr", "totsn90pct48hr",
-                                        "totsn95pct48hr", "totsn5pct72hr", "totsn10pct72hr",
-                                        "totsn25pct72hr", "totsn50pct72hr", "totsn75pct72hr",
-                                        "totsn90pct72hr", "totsn95pct72hr", "tp10pct6hr",
-                                        "tp50pct6hr", "tp90pct6hr"],
-=======
                                         "ficeac90pct72hr", "ficeac95pct72hr", "totsn1in24hr",
                                         "totsn2in24hr", "totsn4in24hr", "totsn6in24hr",
                                         "totsn8in24hr", "totsn12in24hr", "totsn18in24hr", 
@@ -3593,40 +3265,10 @@ modelDict['NationalBlend'] = {
                                         "tprobbelown0", "tprobbelow28", "tprobbelow32",
                                         "tprobabove80", "tprobabove90", "tprobabove100",
                                         "tprobabove110", "tprobabove120", "mxtmntsprd"],
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             'D2DMODELS': 'NationalBlend',
             'DB': ('NationalBlend', 'GRID', '', NO, NO, 7, 0),
             'INITMODULES': 'NationalBlend',
             'Parms': [([Temp, Td, RH, Sky, Wind, WindGust, ApparentT], TC1),
-<<<<<<< HEAD
-                     ([PoP01, QPF1, CloudBasePrimary, Ceiling, Visibility], TC1),
-                     ([PoTIP, PoTR, PoTRW, PoTS, PoTSW, PoTZR, ], TC1),
-                     ([SnowLevel, MaxTwAloft, ProbIcePresent, ProbRefreezeSleet, SnowRatio], TC1),
-                     ([PositiveEnergyAloft, NegativeEnergyLowLevel], TC1),
-                     ([MixHgt, TransWind, TropWind, LLWS, VentRate, LLWSHgt, Radar,
-                       SigWaveHgt, Weather, SnowAmt01, IceAccum01, TstmPrb1], TC1),
-                     ([TstmPrb3, DryTstmPrb], TC3NG),
-                     ([TstmPrb6, QPF, PoP6, SnowAmt, IceAccum,
-                       QPF10Prcntl, QPF50Prcntl, QPF90Prcntl, QPF10Prcntl24hr,
-                       QPF50Prcntl24hr, QPF90Prcntl24hr, Haines, FosBerg], TC6NG),
-                     ([MaxT], MaxTTC), ([MinT], MinTTC),
-                     ([MaxRH], MaxRHTC), ([MinRH], MinRHTC), ([PoP, TstmPrb12], TC12NG),
-                     ([FreezingSpray], TC1),
-                     ([PrecipDur], TC12NG),
-                     ([Dswrf, TstmPrb6, WGS], TC6NG),
-                     ([IceAccum05PrcntlF24hr, IceAccum10PrcntlF24hr, IceAccum25PrcntlF24hr, IceAccum50PrcntlF24hr,
-                       IceAccum75PrcntlF24hr, IceAccum90PrcntlF24hr, IceAccum95PrcntlF24hr,
-                       IceAccum05PrcntlF48hr, IceAccum10PrcntlF48hr, IceAccum25PrcntlF48hr, IceAccum50PrcntlF48hr,
-                       IceAccum75PrcntlF48hr, IceAccum90PrcntlF48hr, IceAccum95PrcntlF48hr,
-                       IceAccum05PrcntlF72hr, IceAccum10PrcntlF72hr, IceAccum25PrcntlF72hr, IceAccum50PrcntlF72hr,
-                       IceAccum75PrcntlF72hr, IceAccum90PrcntlF72hr, IceAccum95PrcntlF72hr, ], TC6NG),
-                     ([SnowAmt05PrcntlF24hr, SnowAmt10PrcntlF24hr, SnowAmt25PrcntlF24hr, SnowAmt50PrcntlF24hr,
-                       SnowAmt75PrcntlF24hr, SnowAmt90PrcntlF24hr, SnowAmt95PrcntlF24hr,
-                       SnowAmt05PrcntlF48hr, SnowAmt10PrcntlF48hr, SnowAmt25PrcntlF48hr, SnowAmt50PrcntlF48hr,
-                       SnowAmt75PrcntlF48hr, SnowAmt90PrcntlF48hr, SnowAmt95PrcntlF48hr,
-                       SnowAmt05PrcntlF72hr, SnowAmt10PrcntlF72hr, SnowAmt25PrcntlF72hr, SnowAmt50PrcntlF72hr,
-                       SnowAmt75PrcntlF72hr, SnowAmt90PrcntlF72hr, SnowAmt95PrcntlF72hr], TC6NG)
-=======
                      ([PoP01, QPF1, CloudBasePrimary, Ceiling, Visibility, CloudBaseSecondary], TC1),
                      ([PoTIP, PoTR, PoTRW, PoTS, PoTSW, PoTZR, ], TC1),
                      ([SnowLevel, MaxTwAloft, ProbIcePresent, ProbRefreezeSleet, SnowRatio], TC1),
@@ -3658,17 +3300,12 @@ modelDict['NationalBlend'] = {
                      ([MxMnTprobBelowNeg40, MxMnTprobBelowNeg20, MxMnTprobBelow0, MxMnTprobBelow28,
                        MxMnTprobBelow32, MxMnTprobAbove80, MxMnTprobAbove90, MxMnTprobAbove100,
                        MxMnTprobAbove110, MxMnTprobAbove120, MxMnTSprd], TC12NG6)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                      ],
             }
 
 modelDict['NationalBlendOC'] = {
             'D2DMODELS': 'NationalBlendOC',
-<<<<<<< HEAD
-            'DB': ('NationalBlend', 'GRID', '', NO, NO, 2, 0),
-=======
             'DB': ('NationalBlendOC', 'GRID', '', NO, NO, 2, 0),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             'INITMODULES': 'NationalBlendOC',
             'Parms': [([WGS50pct, WS50Prcntl30m, WS50Prcntl80m, Vis50pct, T50pct,
                        PMSL10pct, PMSL50pct, PMSL90pct, Ws90pct], TC1),
@@ -3714,18 +3351,6 @@ modelDict['SAT'] = {
             }
 
 modelDict['SPC'] = {
-<<<<<<< HEAD
-            'D2DDBVERSIONS': 8, 'D2DMODELS': 'SPCGuide',
-            'D2DAccumulativeElements': ['drytprob',
-                                        'jfwprb',
-                                       ],
-            'DB': ('SPC', 'GRID', '', YES, NO, 1, 72),
-            'INITMODULES': 'SPC',
-            'Parms': [([SPCDryTstmPrb, FireWxProb,
-                       ], SPC24),
-                     ]
-           }
-=======
             'D2DDBVERSIONS': 5, 'D2DMODELS': 'SPCGuide',
             'D2DAccumulativeElements': [
                 'sigtrndprob',
@@ -3749,7 +3374,6 @@ modelDict['SPC'] = {
                      SPCDryTstmPrb, FireWxProb,], SPC24),
                      ],
             }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 modelDict['SREF'] = {
             'D2DMODELS': 'SREF212',
@@ -3853,8 +3477,6 @@ modelDict['TPCSurgeProb'] = {
             ],
         }
 
-<<<<<<< HEAD
-=======
 modelDict['TPCSurgeProb2'] = {
             'D2DMODELS': 'TPCSurgeProb2',
             'D2DAccumulativeElements': [
@@ -3985,7 +3607,6 @@ modelDict['TPCSurgeProb-SJU'] = {
             ],
         }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 modelDict['TPCSurgeProbLoRes'] = {
             'D2DMODELS': 'TPCSurgeProbLoRes',
             'D2DAccumulativeElements': [
@@ -4051,8 +3672,6 @@ modelDict['TPCSurgeProbLoRes'] = {
                 ]
             }
 
-<<<<<<< HEAD
-=======
 modelDict['TPCSurgeProbLoRes2'] = {
             'D2DMODELS': 'TPCSurgeProbLoRes2',
             'D2DAccumulativeElements': [
@@ -4118,7 +3737,6 @@ modelDict['TPCSurgeProbLoRes2'] = {
                 ]
             }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 modelDict['PETSS'] = {
             'D2DMODELS': 'P-ETSS',
             'D2DAccumulativeElements': [
@@ -4310,11 +3928,7 @@ if SID in groups['ALASKA_SITES']:
     updateModelDict(modelDict, 'ETSS', 'D2DMODELS', 'ETSS-AK')
     updateModelDict(modelDict, 'GFS', 'D2DMODELS', 'GFS217')
     updateModelDict(modelDict, 'HIRESWarw', 'D2DMODELS', 'HiResW-ARW-AK')
-<<<<<<< HEAD
-    updateModelDict(modelDict, 'HIRESWnmm', 'D2DMODELS', 'HiResW-NMM-AK')
-=======
     updateModelDict(modelDict, 'HIRESWFV3', 'D2DMODELS', 'HiResW-FV3-AK')
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     updateModelDict(modelDict, 'MOSGuide', 'D2DMODELS', 'MOSGuide-AK')
     updateModelDict(modelDict, 'NAM', 'D2DMODELS', 'ETA242')
     updateModelDict(modelDict, 'NamDNG', 'D2DMODELS', 'AK-NamDNG3')
@@ -4330,11 +3944,7 @@ if SID in groups['ALASKA_SITES']:
     updateModelDict(modelDict, 'PETSS', 'D2DMODELS', 'P-ETSS-AK')
     # Model databases for Alaska
     includeOnly = ['AKwave4', 'AKwave10', 'BaseTerrain', 'ECMWF', 'ESTOFS',
-<<<<<<< HEAD
-                   'ETSS', 'GFS', 'GWW', 'HIRESWarw', 'HIRESWnmm', 'MOSGuide', 'NAM',
-=======
                    'ETSS', 'GFS', 'GWW', 'HIRESWarw', 'HIRESWFV3', 'MOSGuide', 'NAM',
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                    'NamDNG', 'NationalBlend', 'NED', 'NewTerrain', 'RTMA', 'RTOFS-Alaska',
                    'RTOFS-Arctic', 'RTOFS-Bering', 'RTOFS-GulfAlaska', 'SAT', 'SREF', 'URMA',
                    'nwpsCG1AER', 'nwpsCG1AFG', 'nwpsCG1AJK', 'nwpsCG1ALU', 'nwpsTrkngCG0AER',
@@ -4364,11 +3974,7 @@ elif SID == "HFO":
     updateModelDict(modelDict, 'RTMA', 'D2DMODELS', 'HI-RTMA')
     updateModelDict(modelDict, 'NamDNG', 'D2DMODELS', 'HI-NamDNG5')
     updateModelDict(modelDict, 'HIRESWarw', 'D2DMODELS', 'HiResW-ARW-HI')
-<<<<<<< HEAD
-    updateModelDict(modelDict, 'HIRESWnmm', 'D2DMODELS', 'HiResW-NMM-HI')
-=======
     updateModelDict(modelDict, 'HIRESWFV3', 'D2DMODELS', 'HiResW-FV3-HI')
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     updateModelDict(modelDict, 'SPC', 'D2DMODELS', 'SPCGuide')
     updateModelDict(modelDict, 'TPCProb', 'D2DMODELS', 'TPCWindProb')
     updateModelDict(modelDict, 'TPCProbPrelim', 'D2DMODELS', 'TPCWindProb_Prelim')
@@ -4378,11 +3984,7 @@ elif SID == "HFO":
     updateModelDict(modelDict, 'NationalBlend', 'D2DMODELS', 'NationalBlendHI')
     # Model databases for HFO
     includeOnly = ['ECMWF', 'ESTOFS', 'GFS75', 'GWW233', 'GlobalWave',
-<<<<<<< HEAD
-                   'HIRESWarw', 'HIRESWnmm', 'MOSGuide', 'NamDNG', 'NationalBlend',
-=======
                    'HIRESWarw', 'HIRESWFV3', 'MOSGuide', 'NamDNG', 'NationalBlend',
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                    'RTMA', 'RTOFS-Honolulu', 'SPC', 'TPCProb', 'TPCProbPrelim', 'nwpsCG1GUM',
                    'nwpsCG1HFO', 'nwpsTrkngCG0GUM', 'nwpsTrkngCG0HFO',
                   ]
@@ -4399,21 +4001,13 @@ elif SID in ["GUM", "PQE", "PQW"]:
 
     updateModelDict(modelDict, 'GlobalWave', 'D2DMODELS', 'GlobalWave')
     updateModelDict(modelDict, 'HIRESWarw', 'D2DMODELS', 'HiResW-ARW-GU')
-<<<<<<< HEAD
-    updateModelDict(modelDict, 'HIRESWnmm', 'D2DMODELS', 'HiResW-NMM-GU')
-=======
     updateModelDict(modelDict, 'HIRESWFV3', 'D2DMODELS', 'HiResW-FV3-GU')
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     updateModelDict(modelDict, 'TPCProb', 'D2DMODELS', 'TPCWindProb')
     updateModelDict(modelDict, 'TPCProbPrelim', 'D2DMODELS', 'TPCWindProb_Prelim')
     updateModelDict(modelDict, 'RTOFS-Guam', 'D2DMODELS', 'RTOFS-Guam')
     updateModelDict(modelDict, 'RTMA', 'D2DMODELS', 'Guam-RTMA')
     # Model databases for GUM
-<<<<<<< HEAD
-    includeOnly = ['GFS75', 'GlobalWave', 'HIRESWarw', 'HIRESWnmm', 'RTMA', 'RTOFS-Guam', 'TPCProb',
-=======
     includeOnly = ['GFS75', 'GlobalWave', 'HIRESWarw', 'HIRESWFV3', 'RTMA', 'RTOFS-Guam', 'TPCProb',
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                    'TPCProbPrelim', 'nwpsCG1GUM', 'nwpsCG1HFO',
                    'nwpsTrkngCG0GUM', 'nwpsTrkngCG0HFO',
                   ]
@@ -4434,11 +4028,7 @@ elif SID == "SJU":
     updateModelDict(modelDict, 'WNAwave4', 'D2DMODELS', 'WNAwave4')
     updateModelDict(modelDict, 'RTMA', 'D2DMODELS', 'PR-RTMA')
     updateModelDict(modelDict, 'HIRESWarw', 'D2DMODELS', 'HiResW-ARW-SJU')
-<<<<<<< HEAD
-    updateModelDict(modelDict, 'HIRESWnmm', 'D2DMODELS', 'HiResW-NMM-SJU')
-=======
     updateModelDict(modelDict, 'HIRESWFV3', 'D2DMODELS', 'HiResW-FV3-SJU')
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     updateModelDict(modelDict, 'SPC', 'D2DMODELS', 'SPCGuide')
     updateModelDict(modelDict, 'TPCProb', 'D2DMODELS', 'TPCWindProb')
     updateModelDict(modelDict, 'TPCProbPrelim', 'D2DMODELS', 'TPCWindProb_Prelim')
@@ -4449,29 +4039,14 @@ elif SID == "SJU":
     updateModelDict(modelDict, 'NationalBlend', 'D2DMODELS', 'NationalBlendPR')
     # Model databases for SJU
     includeOnly = ['ECMWF', 'ESTOFS', 'GFS', 'GWW233',
-<<<<<<< HEAD
-                   'GlobalWave', 'HIRESWarw', 'HIRESWnmm', 'NAHwave4',
-=======
                    'GlobalWave', 'HIRESWarw', 'HIRESWFV3', 'NAHwave4',
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                    'NationalBlend', 'RTMA', 'RTOFS-Atlantic', 'SPC', 'TPCProb',
                    'TPCProbPrelim', 'WNAwave10', 'WNAwave4',
                    'nwpsCG1JAX', 'nwpsCG1KEY', 'nwpsCG1MFL', 'nwpsCG1MLB', 'nwpsCG1SJU',
                    'nwpsTrkngCG0JAX', 'nwpsTrkngCG0KEY', 'nwpsTrkngCG0MFL',
-<<<<<<< HEAD
-                   'nwpsTrkngCG0MLB', 'nwpsTrkngCG0SJU',
-                  ]
-
-# East CONUS changes from default modelDict
-elif SID in groups['CONUS_EAST_SITES']:
-    updateModelDict(modelDict, 'HIRESWarw', 'D2DMODELS', 'HiResW-ARW-East')
-    updateModelDict(modelDict, 'HIRESWnmm', 'D2DMODELS', 'HiResW-NMM-East')
-
-=======
                    'nwpsTrkngCG0MLB', 'nwpsTrkngCG0SJU', 'TPCSurgeProb-SJU',
                   ]
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 if SID in groups['Atlantic_ESTOFS_SITES']:
     modelDict['ESTOFS'] = {
                 'D2DMODELS': 'estofsUS',
@@ -4541,10 +4116,7 @@ if includeOnly:
         if m not in includeOnly and 'D2DMODELS' in modelDict[m]:
             ignoreDatabases.append(m)
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # END modelDict initial set up
 #------------------------------------------------------------------------------
 # Add in optional parms to Fcst parm def
@@ -4574,21 +4146,13 @@ if not BASELINE and siteImport('localConfig'):
     localISCExtraParms = getattr(localConfig, 'extraISCparms', [])
     localLogFile = getattr(localConfig, 'logFile', '')
     modelDict['Fcst']['Parms'] += localParms
-<<<<<<< HEAD
-    #ensure office type is set properly in localConfig SITES[]
-=======
     # ensure office type is set properly in localConfig SITES[]
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     if len(SITES[GFESUITE_SITEID]) == 5:
         a = list(SITES[GFESUITE_SITEID])
         a.append(myOfficeType)
         SITES[GFESUITE_SITEID] = tuple(a)
     else:
-<<<<<<< HEAD
-        myOfficeType = SITES[GFESUITE_SITEID][5]  #probably from localConfig
-=======
         myOfficeType = SITES[GFESUITE_SITEID][5]  # probably from localConfig
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 # Instantiate settings from modelDict
 db = dbConfig(modelDict)
@@ -4631,11 +4195,7 @@ for wes, officeType in (EXTRA_ISC_PARMS + localISCExtraParms):
             raise ValueError("Office type: " + str(officeType) + " does not match any of the following: [" + (', '.join(VALID_OFFICE_TYPES)) + "]")
     for we in wes:
         wecopy = list(we)
-<<<<<<< HEAD
-        wecopy[0] = wecopy[0] + officeType  #rename the weather element
-=======
         wecopy[0] = wecopy[0] + officeType  # rename the weather element
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         wecopy = tuple(wecopy)
         ISCPARMS.append(([wecopy], TC1))
 
@@ -4648,29 +4208,6 @@ for wes, tc in modelDict['Fcst']['Parms']:
 DATABASES.append((Restore, RESTOREPARMS))
 DATABASES.append((ISC, ISCPARMS))
 
-<<<<<<< HEAD
-#D logfp=open('/localapps/logs/serverConfig2.log','w')
-#D logfp.write('DATABASE names:\n')
-#D for m in sorted(DATABASES):
-#D     logfp.write('%s\n' % m[0][0])
-#D logfp.write('\n\nDATABASES\n')
-#D pprint.pprint(sorted(DATABASES),logfp,width=130)
-#D logfp.write('\n\nINITMODULES\n')
-#D pprint.pprint(INITMODULES,logfp,width=130)
-#D logfp.write('\n\nD2DMODELS\n')
-#D pprint.pprint(D2DMODELS,logfp,width=130)
-#D logfp.close()
-
-doIt()
-
-#D logfp=open('/localapps/logs/SC_MD2.py','w')
-#D modelDict=createModelDict(locals(),DATABASES,D2DMODELS,D2DDBVERSIONS,D2DAccumulativeElements,
-#D                   INITMODULES,INITSKIPS,logfp)
-#D logfp.close()
-if localLogFile:
-    printServerConfig(sys.modules[__name__], vars(localConfig), localLogFile)
-#D scfp.close()
-=======
 # D logfp=open('/localapps/logs/serverConfig2.log','w')
 # D logfp.write('DATABASE names:\n')
 # D for m in sorted(DATABASES):
@@ -4692,4 +4229,3 @@ doIt()
 if localLogFile:
     printServerConfig(sys.modules[__name__], vars(localConfig), localLogFile)
 # D scfp.close()
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

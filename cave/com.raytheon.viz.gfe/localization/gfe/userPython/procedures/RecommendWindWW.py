@@ -5,38 +5,13 @@
 #
 # RecommendWindWW.py
 #
-<<<<<<< HEAD
-# SOFTWARE HISTORY
-=======
 # # SOFTWARE HISTORY
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 # Date         Ticket#    Engineer    Description
 # ------------ ---------- ----------- ------------------------------------------
 # May  9, 2019 21020      tlefebvr    Original version
 # May 16, 2019 21020      tlefebvr    Code review changes
 # Jun  3, 2019 21020      tlefebvr    Limited recommended hazards to inland zones
-<<<<<<< HEAD
-# Jul 31, 2019 21020      tlefebvr    Fixed Recommended hazards over coastal zones
-# Aug  2, 2019 21020      tlefebvr    Code now correctly stores ETNs.
-# Aug  3, 2019 21020      tlefebvr    Fixed issue with Define breakpoint zones not
-#                                     getting initialized.
-# Aug 15, 2019 21020      tlefebvr    Added automatic generation of 
-#                                     WindWWEditAreaCoastalZones. Final clean-up
-#                                     for code review.
-# Aug 20, 2019 21020      tlefebvr    Now plotting all breakpoints for all storms. 
-# Aug 22, 2019 21020      tlefebvr    Code Review changes
-# Aug 23, 2019 21020      tlefebvr    Code Review change - removed one method.
-# Apr  7, 2020 21682      tlefebvr    Added saving of inland zones to the JSON file.
-# Apr  8, 2020 21682      tlefebvr    Old Proposed grids are now purged first. 
-# Apr 22, 2020 21682      tlefebvr    Fixed ETNs so the work for all basins. 
-# May  6, 2020 22033      tlefebvr    Minor changes for Python3. 
-# May 20, 2020 22033      tlefebvr    Addressed code review comments.
-# June 1, 2020 22033      tlefebvr    Addressed code review comment.
-################################################################################
-
-MenuItems = ["Populate"]
-=======
 # Jul  31 2019 21020      tlefebvr    Fixed Recommended hazards over coastal zones
 # Aug  2, 2019 21020      tlefebvr    Code now correctly stores ETNs.
 # Aug  3, 2019 21020      tlefebvr    Fixed issue with Define breakpoint zones not
@@ -90,7 +65,6 @@ MenuItems = ["Populate"]
 ################################################################################
 
 MenuItems = ["None"]
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import AbsTime, TimeRange
 import ProcessVariableList
 import RecommendWindWWConfig
@@ -100,22 +74,11 @@ import ZoneMap
 import copy
 import numpy as np
 
-<<<<<<< HEAD
-class Procedure (TropicalUtility.TropicalUtility):
-
-    def __init__(self, dbss):
-        TropicalUtility.TropicalUtility.__init__(self, dbss)
-        self._dbss = dbss
-        
-        # Make the utility object
-        self._WindWWUtils = WindWWUtils.WindWWUtils(self._dbss)
-=======
 
 class Procedure (WindWWUtils.WindWWUtils):
 
     def __init__(self, dbss):
         WindWWUtils.WindWWUtils.__init__(self, dbss)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # Fetch the zone map. This will create one if it's not there
         self._zoneMap = ZoneMap.ZoneMap(self._dbss)
@@ -133,11 +96,7 @@ class Procedure (WindWWUtils.WindWWUtils):
             self.statusBarMsg("Error! No databases found with modelName: " + modelName, "S")
         return latest
 
-<<<<<<< HEAD
-    def fetchGuidanceGrid(self, dbid, weName, fcstHour, level):
-=======
     def fetchGuidanceGrid(self, dbid, weName, fcstHour, level, hazard):
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         """
         Fetches the specified guidance grid
         """
@@ -148,51 +107,6 @@ class Procedure (WindWWUtils.WindWWUtils):
         gridTime = next(tr for tr in trList if tr.startTime().unixTime() == gridStart)
         if gridTime:
             # Create a small dictionary to make labeling easier
-<<<<<<< HEAD
-            labelDict = {
-                42 : "TRW",
-                48 : "HUW",
-                54 : "TRA",
-                60 : "HUA",
-                }
-
-            grid = self.getGrids(dbid, weName, level, gridTime)
-            # Plot the guidance for testing
-            if "34" in weName:
-                if fcstHour in [42, 54]:
-                    self.createGrid(self.mutableID(), "Guidance" + labelDict[fcstHour], "SCALAR",
-                                    grid, self._timeRange, minAllowedValue=0.0, maxAllowedValue=100.0,
-                                    defaultColorTable="SITE/NHA/TPCWindProb", precision=2)
-            if "64" in weName:
-                if fcstHour in [48, 60]:
-                    self.createGrid(self.mutableID(), "Guidance" + labelDict[fcstHour], "SCALAR",
-                                    grid, self._timeRange, minAllowedValue=0.0, maxAllowedValue=100.0,
-                                    defaultColorTable="SITE/NHA/TPCWindProb", precision=2)
-        return grid
-
-    def fetchNHCZoneMask(self):
-        """
-        Fetch and/or create and store an edit area that represents the set of zones
-        that are the responsibility of NHC. If the edit area is not found, create
-        and store it for faster performance next time.
-        """
-
-        try: # Try to read the nhcZones
-            nhcEA = self.getEditArea("WindWWNHCZones")
-            self._nhcZoneMask = self.encodeEditArea(nhcEA)
-        except: # Make one from scratch
-            self.statusBarMsg("Making NHCZone mask. Stand by.", "R")
-            nhcZoneList = self._WindWWUtils.breakpointZoneList()
-            # Set the mask
-            self._nhcZoneMask = self._zoneMap.maskFromZoneList(nhcZoneList)
-            # Convert to edit area and save
-            nhcEA = self.decodeEditArea(self._nhcZoneMask)
-            self.saveEditArea("WindWWNHCZones", nhcEA)
-            
-        return
-
-
-=======
 
             grid = self.getGrids(dbid, weName, level, gridTime)
             # Plot the guidance for testing
@@ -202,7 +116,6 @@ class Procedure (WindWWUtils.WindWWUtils):
                             defaultColorTable="GFE/TPCprob", precision=2)
         return grid
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def getStormNames(self, stormInfoDicts):
         """
         Gets the current list of storm names from the StormInfo JSON file.
@@ -217,10 +130,6 @@ class Procedure (WindWWUtils.WindWWUtils):
         key = (zoneType + thresholdType, haz)
         return RecommendWindWWConfig.WSPThresholds[key]
 
-<<<<<<< HEAD
- 
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def getFilteredHazardGrid(self, filterKeys):
         """
         Fetch the hazard grid, but filter all hazards to the specified keys.
@@ -228,22 +137,6 @@ class Procedure (WindWWUtils.WindWWUtils):
         # See if we have an Hazards grids. If not, create an empty one.
         weName = "Hazards"
         trList = self.GM_getWEInventory(weName, self.mutableID())
-<<<<<<< HEAD
-        if len(trList) == 0:  # no grids found
-            hazGrid = self.empty(np.int8)
-            hazKeys = self._rankingHazardList
-            self.createGrid(self.mutableID(), weName, "DISCRETE", (hazGrid, hazKeys), self._timeRange,
-                            discreteKeys=hazKeys, discreteOverlap=1, discreteAuxDataLength=5)
-            return hazGrid, hazKeys
-
-        # Otherwise fetch the Hazards grid
-        hazardGrid = self.getGrids(self.mutableID(), weName, "SFC", trList[0])
-        if hazardGrid is None:
-            self.statusBarMsg("ERROR!!! No Hazards grids found.", "S")
-
-        # Filter out all but the specified hazards.
-        filteredHazardGrid = self.filterHazardGrid(hazardGrid, filterKeys)
-=======
         newHazGrid = self.empty(np.int8)
         hazKeys = self._rankingHazardList
         if len(trList) == 0:  # no grids found
@@ -279,7 +172,6 @@ class Procedure (WindWWUtils.WindWWUtils):
 
         # Filter out all but the specified hazards.
         filteredHazardGrid = self.filterHazardGrid((newHazGrid, newHazKeys), filterKeys)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         return filteredHazardGrid
 
@@ -287,21 +179,11 @@ class Procedure (WindWWUtils.WindWWUtils):
         """
         Lookup and return the ETN from the stormName and stormInfo
         """
-<<<<<<< HEAD
-        etnDict = self._WindWWUtils.etnDict()
-        
-        for stormInfo in self._stormInfoDicts:
-            if stormInfo["stormName"] == stormName:
-                stormNumber = stormInfo["stormNumber"]
-                pil = stormInfo["pil"]
-                etnValue = etnDict[pil[0:2]]
-=======
         for stormInfo in self._stormInfoDicts:
             if stormInfo["stormName"] == stormName:
                 stormNumber = stormInfo["stormNumber"]
                 stormID = stormInfo["stormID"]
                 etnValue = self.etnBaseForBasin(stormID[0:2])
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 break
 
         return str(stormNumber + etnValue)
@@ -312,13 +194,8 @@ class Procedure (WindWWUtils.WindWWUtils):
         """
         while ":" in hazKey:
             pos = hazKey.find(":")
-<<<<<<< HEAD
-            if pos >=0:
-                delStr = hazKey[pos:pos+5]
-=======
             if pos >= 0:
                 delStr = hazKey[pos:pos + 5]
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 hazKey = hazKey.replace(delStr, "")
         return hazKey
 
@@ -341,16 +218,6 @@ class Procedure (WindWWUtils.WindWWUtils):
         hazardGrid, hazKeys = initialHazardGrid
         # Initialize the initialHazardGrid to None over the Coastal zone area.
         noneIndex = self.getIndex("<None>", hazKeys)
-<<<<<<< HEAD
-        hazardGrid[self._nhcZoneMask] = noneIndex
-        
-        HUAmask = self.empty(np.bool)
-        TRWmask = self.empty(np.bool)
-
-        # Get the information
-        for stormInfo in self._stormInfoDicts:
-            zoneDict = stormInfo["zoneDict"]
-=======
         hazardGrid[self._coastalMask] = noneIndex
 
         # Get the information
@@ -361,42 +228,19 @@ class Procedure (WindWWUtils.WindWWUtils):
                 zoneDict = stormInfo["zoneDict"]
             else:
                 zoneDict = {}
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             stormName = stormInfo["stormName"]
 
             # These hazards must have ETNs
             etnStr = self.getETN(stormName)
 
-<<<<<<< HEAD
-            comboMask = self.empty(np.bool)
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             # Set the hazard value zone by zone
             for haz, zoneList in zoneDict.items():
                 for zoneName in zoneList:
                     zoneID = self._zoneMap.zoneID(zoneName)
                     mask = self._zoneMapGrid == zoneID
-<<<<<<< HEAD
-                    if haz == "HU.A":
-                        HUAmask = HUAmask | mask
-                    if haz == "TR.W":
-                        TRWmask = TRWmask | mask
-                    
                     hazKeyETN = self.addETNToHazardKey(haz, etnStr)
                     hazIndex = self.getIndex(hazKeyETN, hazKeys)
                     hazardGrid[mask] = hazIndex
-    
-            comboMask = HUAmask & TRWmask
-            TRWkey = self.addETNToHazardKey("TR.W", etnStr)
-            HUAkey = self.addETNToHazardKey("HU.A", etnStr)
-            hazKey = TRWkey + "^" + HUAkey
-            hazIndex = self.getIndex(hazKey, hazKeys)
-            hazardGrid[comboMask] = hazIndex
-=======
-                    hazKeyETN = self.addETNToHazardKey(haz, etnStr)
-                    hazIndex = self.getIndex(hazKeyETN, hazKeys)
-                    hazardGrid[mask] = hazIndex
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         return hazardGrid, hazKeys
 
@@ -413,11 +257,7 @@ class Procedure (WindWWUtils.WindWWUtils):
             return True
         if prevHaz == "TR.A" and propHaz == "<None>":
             return True
-<<<<<<< HEAD
-        if ((prevHaz == "TR.W^HU.A") or (prevHaz == "HU.A^TR.W")) and (propHaz == "TR.W" or propHaz =="<None>"):
-=======
         if ((prevHaz == "TR.W^HU.A") or (prevHaz == "HU.A^TR.W")) and (propHaz == "TR.W" or propHaz == "<None>"):
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return True
 
         return False
@@ -434,23 +274,6 @@ class Procedure (WindWWUtils.WindWWUtils):
 
         return self.empty(np.bool)
 
-<<<<<<< HEAD
-    def makeGuidanceGrid(self, dbID, stormName):
-        """
-        Creates a hazard grid based purely on the wind probability guidance.
-        """
-        hazardGrid = self.empty(np.int8)
-        hazardKeys = self.getDiscreteKeys("ProposedTropWWGuidance")
-
-        maskDict = {}
-        maskDict["Inland"] = self._zoneMapGrid >= 100.0
-        maskDict["Coastal"] = (self._zoneMapGrid > 0.0) & (self._zoneMapGrid < 100.0)
-
-        # Make and/or populate some handy dictionaries per hazard
-        # The _hazardPercentage dict will be used for another algorithm.
-        thresholdDict = {}
-        hazMaskDict = {}
-=======
     def hazardRank(self, hazNoETN):
         if hazNoETN not in self._rankingHazardList:
             return -1
@@ -469,105 +292,54 @@ class Procedure (WindWWUtils.WindWWUtils):
         # Make and/or populate some handy dictionaries per hazard
         # The _hazardPercentage dict will be used for another algorithm.
         thresholdDict = {}
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         for haz in hazardKeys:
             if haz == self._noneHazard:
                 continue
 
-<<<<<<< HEAD
-            self._hazardPercentage[haz] = self.empty()
-            
-            hazMaskDict[haz] = self.empty(np.bool)
-=======
             self._hazardPercentage[haz] = self.empty(np.float)
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             for zoneType in self._zoneTypes:
                 thresholdDict[(haz, zoneType)] = self.getProbWindThreshold(zoneType, "Add", haz)
 
         # Note: for efficiency the guidance grids have already been fetched in self._guideDict[haz]
         etnStr = self.getETN(stormName)
         guidanceHazKeys = ["<None>"]
-<<<<<<< HEAD
-=======
         guidanceZoneDict = {}
         maxHazForZone = {}
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         for hazardKey in hazardKeys:
             if hazardKey == self._noneHazard:
                 continue
 
             hazNoETN = self.stripETN(hazardKey)
-<<<<<<< HEAD
-
-            if self._debug:
-                weName = hazNoETN.replace(".", "") + "guidance"
-                self.createGrid("Fcst", weName, "SCALAR", self._guideDict[hazNoETN], self._timeRange)
-
-=======
             if hazNoETN not in self._hazardPercentage:
                 continue
 
             if self._debug:
                 weName = hazNoETN.replace(".", "") + "guidance"
                 self.createGrid(self.mutableID(), weName, "SCALAR", self._guideDict[hazNoETN], self._timeRange)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             for zoneType in self._zoneTypes:
                 areaThreshold = RecommendWindWWConfig.AreaThresholds[zoneType]
                 if zoneType == "Coastal":
                     zoneTypeMask = self._coastalMask
                 else:
                     zoneTypeMask = ~self._coastalMask
-<<<<<<< HEAD
-                    
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 windProbMask = (self._guideDict[hazNoETN] >= thresholdDict[(hazNoETN, zoneType)]) \
                                 & self._affectedAreaMask & zoneTypeMask
                 zoneIDList = self._zoneMap.getOverlappingZoneIDs(windProbMask)
                 for zoneID in zoneIDList:
                     zoneMask = (self._zoneMapGrid == zoneID)
                     if not zoneMask.any():
-<<<<<<< HEAD
-                        continue
-
-=======
                         print("No mask found for:", self._zoneMap.zoneName(zoneID))
                         continue
 
                     zoneName = self._zoneMap.zoneName(zoneID)
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     # Count the points inside the zoneMask to get the zone percentage
                     probPoints = windProbMask & zoneMask
                     percCoverage = float(probPoints.sum()) / zoneMask.sum() * 100.0
                     # Save this value for later
                     self._hazardPercentage[hazNoETN][zoneMask] = percCoverage
-<<<<<<< HEAD
-
-                    # If the area coverage threshold is met, assign this hazard to the zone 
-                    if percCoverage >= areaThreshold:
-                        # Keep track of each hazard's masks
-                        hazMaskDict[hazNoETN] = hazMaskDict[hazNoETN] | zoneMask
-                        # Set this value over this zone in the hazard grid we will return
-                        hazETN = hazNoETN + ":" + etnStr
-                        hazIndex = self.getIndex(hazETN, guidanceHazKeys)
-                        hazardGrid[zoneMask] = hazIndex
-
-        # Calculate the overlap of HU.A and TR.W and assign the combo key
-        comboMask = hazMaskDict["HU.A"] & hazMaskDict["TR.W"] & self._affectedAreaMask
-        # Take away the points over the HU.W area to make the final mask
-        overlap = comboMask & hazMaskDict["HU.W"]
-        comboMask = comboMask & (comboMask ^ overlap)  # subtract HU.W area from comboMask
-
-        # Assign the TR.W^HU.A combined key
-        if comboMask.any():
-            # Set the value over this mask
-            hazETN = "TR.W" + ":" + etnStr + "^" + "HU.A" + ":" + etnStr
-            comboIndex = self.getIndex(hazETN, guidanceHazKeys)
-            hazardGrid[comboMask] = comboIndex
-=======
                     update = True
                     # If the area coverage threshold is met, assign this hazard to the zone
                     if percCoverage >= areaThreshold:
@@ -602,19 +374,11 @@ class Procedure (WindWWUtils.WindWWUtils):
         for stormInfo in self._stormInfoDicts:
             if stormInfo["stormName"] == self._stormName:
                 stormInfo["guidanceZoneDict"] = guidanceZoneDict
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # Dump the percentage for each zone
         if self._debug:
             for haz in self._hazardPercentage:
                 weName = "PercAbvThres" + haz.replace(".", "")
-<<<<<<< HEAD
-                self.createGrid("Fcst", weName, "SCALAR", self._hazardPercentage[haz], self._timeRange)
-
-        return hazardGrid, guidanceHazKeys
-
-    def makeRecommendedGrid(self, guidanceHazGrid, stormName):
-=======
                 self.createGrid(self.mutableID(), weName, "SCALAR", self._hazardPercentage[haz], self._timeRange)
 
         return hazardGrid, guidanceHazKeys
@@ -630,80 +394,24 @@ class Procedure (WindWWUtils.WindWWUtils):
         return "<None>"
 
     def makeRecommendedGrid(self, guidanceHazGrid):
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         """
         Creates the recommended hazard grid based on a complex algorithm
         """
 
         guidanceGrid, guidanceKeys = guidanceHazGrid
-<<<<<<< HEAD
-        hazardKeys = guidanceKeys  # make a copy as we want them identical
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         keys = ["<None>"] + self._windHazards
         filteredHazGrid, filteredHazardKeys = self.getFilteredHazardGrid(keys)  # hazard grid from the previous forecast
 
         if self._debug:
-<<<<<<< HEAD
-            self.createGrid("Fcst", "FilteredHazards", "DISCRETE", (filteredHazGrid, filteredHazardKeys), self._timeRange,
-                                discreteKeys=self._rankingHazardList, discreteOverlap=1,
-                                discreteAuxDataLength=5)
-            self.createGrid("Fcst", "GuidanceHazards", "DISCRETE", (guidanceGrid, guidanceKeys), self._timeRange,
-=======
             self.createGrid(self.mutableID(), "FilteredHazards", "DISCRETE", (filteredHazGrid, filteredHazardKeys), self._timeRange,
                                 discreteKeys=self._rankingHazardList, discreteOverlap=1,
                                 discreteAuxDataLength=5)
             self.createGrid(self.mutableID(), "GuidanceHazards", "DISCRETE", (guidanceGrid, guidanceKeys), self._timeRange,
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                 discreteKeys=self._rankingHazardList, discreteOverlap=1,
                                 discreteAuxDataLength=5)
 
         copyOfFilteredKeys = copy.copy(filteredHazardKeys)
         diffGrid = self.makeDiffGrid(guidanceHazGrid, (filteredHazGrid, copyOfFilteredKeys))
-<<<<<<< HEAD
-        
-        noChangeMask = diffGrid == 0
-        changeMask = ~noChangeMask
-
-        if self._debug:
-            self.createGrid("Fcst", "ChangeMask", "SCALAR", changeMask.astype(np.float32), self._timeRange, minAllowedValue=-1.0, maxAllowedValue=1.0,
-                                        defaultColorTable="SITE/NHA/DiffWW")
-            self.createGrid("Fcst", "NoChangeMask", "SCALAR", noChangeMask.astype(np.float32), self._timeRange, minAllowedValue=-1.0, maxAllowedValue=1.0,
-                                        defaultColorTable="SITE/NHA/DiffWW")
-
-        weName = "ProposedTropWindWW"
-
-        hazKeys = []
-        byteGrid = self.empty(np.int8)
-        # Pre-fill hazKeys with all keys from both the filtered and guidance grids
-        for key in filteredHazardKeys:
-            if key not in hazKeys:
-                i = self.getIndex(key, hazKeys)
-        for key in guidanceKeys:
-            if key not in hazKeys:
-                i = self.getIndex(key, hazKeys)
-
-        # First add the noChange hazards
-        for hazKey in hazKeys:
-            hazIndex = self.getIndex(hazKey, hazKeys)
-            filterIndex = self.getIndex(hazKey, filteredHazardKeys)
-            mask = noChangeMask & (filteredHazGrid == filterIndex)
-            if mask.any():
-                byteGrid[mask] = hazIndex
-
-        for hazKey in hazKeys:
-            hazIndex = self.getIndex(hazKey, hazKeys)
-            guideIndex = self.getIndex(hazKey, guidanceKeys)
-            mask = changeMask & (guidanceGrid == guideIndex)
-            if mask.any():
-                byteGrid[mask] = hazIndex
-
-        # Overlay the Breakpoint hazards on this grids as they are not to be modified.
-        # Note we are purposely ignoring the self._affected area
-        hazardGrid, hazardKeys = self.insertBreakpointHazards((byteGrid, hazKeys))
-
-        return hazardGrid, hazardKeys
-=======
 
         noChangeMask = (diffGrid == 0)
         changeMask = ~noChangeMask & self._affectedAreaMask
@@ -762,7 +470,6 @@ class Procedure (WindWWUtils.WindWWUtils):
                 byteGrid[hazMask] = hazIndex
 
         return byteGrid, hazKeys
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def makeDifferenceGrids(self, guidanceGrid, recommendedGrid):
         """
@@ -783,22 +490,6 @@ class Procedure (WindWWUtils.WindWWUtils):
 
         return
 
-<<<<<<< HEAD
-    def calculateAffectedArea(self, editArea):
-        """
-        Calculates the area that will ultimately be affected by the tool.
-        If the edit area is not empty, use that. Otherwise calculate the 
-        union of the guidance area and the area covered by any hazards.
-        """
-        mask = self.empty(np.bool)
-        # See if any area is selected and if so, return its mask
-        mask = self.encodeEditArea(editArea)
-        if mask.any():
-            return mask
-        # Fetch the guidance for TR.A which is the largest area
-        guideGrid = self._guideDict["TR.A"]
-        guideMask = guideGrid > 0.0  # any positive values
-=======
     def snapMaskToZones(self, mask):
         zoneList = self._zoneMap.getOverlappingZoneNames(mask)
         zoneMask = self._zoneMap.maskFromZoneList(zoneList)
@@ -821,7 +512,6 @@ class Procedure (WindWWUtils.WindWWUtils):
             mask = self.snapMaskToZones(mask)
             self.setActiveEditArea(self.decodeEditArea(mask))
             return mask
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # Fetch the Hazards and see what is defined there
         level = "SFC"
@@ -831,17 +521,10 @@ class Procedure (WindWWUtils.WindWWUtils):
         hazInv = self.GM_getWEInventory(weName, dbid, level)
         hazMask = self.empty(np.bool)
 
-<<<<<<< HEAD
-        if len(hazInv) > 0: # Fetch the grid and determine the hazMask
-            hazGrid = self.getGrids(dbid, weName, level, allTimes)
-
-            if isinstance(hazGrid, list):     # there should only be one grid
-=======
         if len(hazInv) > 0:  # Fetch the grid and determine the hazMask
             hazGrid = self.getGrids(dbid, weName, level, allTimes)
 
             if isinstance(hazGrid, list):  # there should only be one grid
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 hazGrid = hazGrid[0]
             # Get the areas where there are some Hazards defined
             byteGrid, keys = hazGrid
@@ -871,11 +554,7 @@ class Procedure (WindWWUtils.WindWWUtils):
                 weName = "prob64"
 
             fcstHour = RecommendWindWWConfig.WSPThresholds[("FcstTime", haz)]
-<<<<<<< HEAD
-            grid = self.fetchGuidanceGrid(dbid, weName, fcstHour, WIND_PROB_LEVEL)
-=======
             grid = self.fetchGuidanceGrid(dbid, weName, fcstHour, WIND_PROB_LEVEL, haz)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             guidanceDict[haz] = grid
 
         return guidanceDict
@@ -890,8 +569,6 @@ class Procedure (WindWWUtils.WindWWUtils):
 
         return timeRange
 
-<<<<<<< HEAD
-=======
     def fetchGrid(self, weName):
         trList = self.GM_getWEInventory(weName)
         grid = None
@@ -899,7 +576,6 @@ class Procedure (WindWWUtils.WindWWUtils):
             grid = self.getGrids(self.mutableID(), weName, "SFC", trList[-1])
         return grid
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def hazardRankGrid(self, hazardGrid):
         """
         Converts the specified hazardGrid to a scalar ranking based on the order
@@ -950,11 +626,7 @@ class Procedure (WindWWUtils.WindWWUtils):
 
         # Set the area thresholds
         self._downgradeCov = self.empty(np.float32)
-<<<<<<< HEAD
-        self._downgradeCov[self._coastalMask] = 100 - RecommendWindWWConfig.AreaThresholds["Coastal"] 
-=======
         self._downgradeCov[self._coastalMask] = 100 - RecommendWindWWConfig.AreaThresholds["Coastal"]
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         self._downgradeCov[~self._coastalMask] = 100 - RecommendWindWWConfig.AreaThresholds["Inland"]
 
         return
@@ -997,11 +669,7 @@ class Procedure (WindWWUtils.WindWWUtils):
         hazRank = self.hazardRankGrid(hazardGrid)
         diffGrid = guideRank - hazRank
 
-<<<<<<< HEAD
-        signGrid =  np.sign(diffGrid)
-=======
         signGrid = np.sign(diffGrid)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         signGrid[diffGrid < 0] = 0
 
         # Adjust the signGrid by applying the downgrade criteria
@@ -1014,21 +682,10 @@ class Procedure (WindWWUtils.WindWWUtils):
 
         for prevHaz in previousHazardKeys:
             combinedKey = "^" in prevHaz  # it's a combinedKey. Process this differently
-<<<<<<< HEAD
-            if combinedKey: # Initializes the downgradePercentage grid
-                self._downgradePercentage[prevHaz] = self.empty() # Add the combinedKey for this dict
-            # Calculate areas where this hazards exists in the hazard grid.
-            hazardArea = self.hazardMask(hazardGrid, prevHaz)  # mask where this hazard exists
-            if prevHaz == "<None>":
-                maskName = "None"
-            else:
-                maskName = prevHaz[0:2]+prevHaz[-1]
-=======
             if combinedKey:  # Initializes the downgradePercentage grid
                 self._downgradePercentage[prevHaz] = self.empty()  # Add the combinedKey for this dict
             # Calculate areas where this hazards exists in the hazard grid.
             hazardArea = self.hazardMask(hazardGrid, prevHaz)  # mask where this hazard exists
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             for propHaz in proposedHazardKeys:
                 # See if this combination is allowed by policy/rules
@@ -1037,135 +694,29 @@ class Procedure (WindWWUtils.WindWWUtils):
 
                 # Make a sensible wename
                 if "^" in prevHaz:
-<<<<<<< HEAD
-                    weName = prevHaz[0:2]+prevHaz[3] + prevHaz[5:7]+prevHaz[-1]
-                else:
-                    weName = prevHaz[0:2]+prevHaz[-1]
-=======
                     weName = prevHaz[0:2] + prevHaz[3] + prevHaz[5:7] + prevHaz[-1]
                 else:
                     weName = prevHaz[0:2] + prevHaz[-1]
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                 # Calculate areas where the Wind speed prob is below the threshold
                 # These are potential areas for downgrade
                 if combinedKey:
-<<<<<<< HEAD
-                    downgradeMask = self.downgradeMaskForCombined(prevHaz, hazardGrid) & hazardArea
-                else:  # simple key
-                    downgradeMask = (self._guideDict[prevHaz] <= self._downgradeWSPGrids[prevHaz]) & hazMask & hazardArea
-=======
                     downgradeMask = self.downgradeMaskForCombined(prevHaz, hazardGrid) & hazardArea & self._affectedAreaMask
                 else:  # simple key
                     downgradeMask = (self._guideDict[prevHaz] <= self._downgradeWSPGrids[prevHaz]) & hazMask & hazardArea \
                                      & self._affectedAreaMask
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                 # Get the zones over this area and calculate areal coverage over each zone
                 zoneIDList = self._zoneMap.getOverlappingZoneIDs(downgradeMask)
                 for zoneType in self._zoneTypes:
-<<<<<<< HEAD
-                    if zoneType == "Coastal":
-                        zoneTypeMask = self._coastalMask
-                    else:
-                        zoneTypeMask = ~self._coastalMask
-
-                    for zoneID in zoneIDList:
-                        zoneMask = (self._zoneMapGrid == zoneID)
-=======
                     for zoneID in zoneIDList:
                         zoneMask = (self._zoneMapGrid == zoneID) & self._affectedAreaMask
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         # Calc the points inside the zoneMask
                         probPoints = downgradeMask & zoneMask
                         percCoverage = float(probPoints.sum()) / zoneMask.sum() * 100.0
                         # Save this value for later
                         self._downgradePercentage[prevHaz][zoneMask] = percCoverage
                 if self._debug:
-<<<<<<< HEAD
-                    self.createGrid("Fcst", "DowngradeCoverage" + weName, "SCALAR", self._downgradePercentage[prevHaz], self._timeRange)
-                    self.createGrid("Fcst", "DowngradeArealCoverage" + weName, "SCALAR", self._downgradeCov, self._timeRange)
-
-                downgradeMask = self._downgradePercentage[prevHaz] >= self._downgradeCov
-
-                signGrid[downgradeMask] = -1  # Set the grid to indicate a downgrade should be done
-
-        self.createGrid("Fcst", "FinalDiff", "SCALAR", signGrid, self._timeRange, minAllowedValue=-1.0, maxAllowedValue=1.0,
-                                    defaultColorTable="SITE/NHA/DiffWW")
-
-        return signGrid
-
-    def getInlandZones(self, wwHazardGrid):
-        """
-        Fetches the set of inland zones based on the specified Hazard grid.
-        Only zones where a hazard is defined are returned.
-        """
-        zoneDict = {}
-        
-        hazardGrid, hazardKeys = wwHazardGrid
-        # Calculate the areas where hazards exist
-        for hazard in hazardKeys:
-            if hazard == "<None>":
-                continue
-            hazIndex = self.getIndex(hazard, hazardKeys)  
-            hazMask = (hazardGrid == hazIndex)
-            # Remove any coastal zone areas
-            hazMask[self._nhcZoneMask] = 0  # Turn off the coastal zones 
-        
-            # Use ZoneMap to find the list of zones
-            inlandZones = self._zoneMap.getOverlappingZoneNames(hazMask)
-            zoneDict[hazard] = inlandZones
-            
-        return zoneDict
-    
-    def saveZonesToJSONFile(self, hazardGrid):
-        """ Appends any inland zones to the current set of zones in the json
-            file and re-saves the file.
-        """
-        for stormInfo in self._stormInfoDicts:
-            if stormInfo["stormName"] == self._stormName:
-                if "zoneDict" not in stormInfo:
-                    stormInfo["zoneDict"] = []
-                # Get all of the inland zones that have a hazard
-                zoneDict = self.getInlandZones(hazardGrid)
-                for hazard in zoneDict:
-                    
-                    haz = self.stripETN(hazard)
-                    if haz == "HU.A^TR.W":
-                        haz = "TR.W^HU.A"
-                    if haz not in stormInfo["zoneDict"]:
-                        stormInfo["zoneDict"][haz] = []
-                    # Add the inland zones to the stormInfo
-                    stormInfo["zoneDict"][haz] += zoneDict[hazard]
-                
-                self._saveAdvisory(stormInfo["pil"], stormInfo)
-                return
-        print("Error...stormName:", self._stormName, "not found when saving inland zones.")
-        return
-    
-    def removedOldPropGrids(self):
-        """
-        Removes all previous Proposed grids.
-        """
-        timeRange = TimeRange.allTimes()
-        weList = ["ProposedTropWWGuidance", "ProposedTropWindWW"]
-        for weName in weList:
-            self.deleteGrid(self.mutableID(), weName, "SFC", timeRange)
-            
-        return 
-
-    # Main method called when the tool is envoked.
-    def execute(self, editArea):
-
-        ###########################   GUI Section  #################################
-
-        # Get the stormInfos and extract the stormNames for the GUI
-        self._stormInfoDicts = self._WindWWUtils.getStormInfoDicts()
-        stormNames = self.getStormNames(self._stormInfoDicts)
-
-        modelNames = ["TPCProb", "TPCProbPrelim"]
-        editAreaChoices = ["Current Edit Area", "Hazards and Guidance"]
-=======
                     self.createGrid(self.mutableID(), "DowngradeCoverage" + weName, "SCALAR", self._downgradePercentage[prevHaz], self._timeRange)
                     self.createGrid(self.mutableID(), "DowngradeArealCoverage" + weName, "SCALAR", self._downgradeCov, self._timeRange)
 
@@ -1290,34 +841,20 @@ class Procedure (WindWWUtils.WindWWUtils):
         stormNames = self.getStormNames(self._stormInfoDicts)
 
         modelNames = ["TPCProb", "TPCProbPrelim"]
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         variableList = []
         variableList.append(("StormName:", stormNames[0], "radio", stormNames))
         variableList.append(("Database Source:", modelNames[0], "radio", modelNames))
-<<<<<<< HEAD
-        variableList.append(("Restrict Watches/Warnings to:", editAreaChoices[0], "radio", editAreaChoices))
-
-        varDict = {}
-        processVarList = ProcessVariableList.ProcessVariableList("Continue?", variableList, varDict) 
-        status = processVarList.status()
-        if status.upper() != "OK": 
-=======
 
         varDict = {}
         processVarList = ProcessVariableList.ProcessVariableList("Continue?", variableList, varDict)
         status = processVarList.status()
         if status.upper() != "OK":
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             self.cancel()
             return
 
         # Initialize a few variable global to this tool.
-<<<<<<< HEAD
-        self._debug = False #True
-=======
         self._debug = False  # True
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         self._noneHazard = "<None>"
         self._hazardPercentage = {}
         self._downgradePercentage = {}
@@ -1326,10 +863,6 @@ class Procedure (WindWWUtils.WindWWUtils):
         # Fetch the GUI choices
         stormNameChoice = varDict["StormName:"]
         databaseChoice = varDict["Database Source:"]
-<<<<<<< HEAD
-        editAreaChoice = varDict["Restrict Watches/Warnings to:"]
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         self._stormName = stormNameChoice
 
@@ -1337,32 +870,18 @@ class Procedure (WindWWUtils.WindWWUtils):
 
         self._windHazards = ["TR.A", "HU.A", "TR.W", "HU.W"]
         self._rankingHazardList = ["<None>", "TR.A", "HU.A", "TR.W", "HU.A^TR.W", "TR.W^HU.A", "HU.W"]
-<<<<<<< HEAD
-
-        self._dbid = self.getLatestProbWindDBID(databaseChoice)
-        if self._debug:
-            print("Using databaseID:", self._dbid)
-=======
         self._comboHazards = ["TR.W", "HU.A"]
 
         self._dbid = self.getLatestProbWindDBID(databaseChoice)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # Make a timeRange when all grids will be defined
         self._timeRange = self.makeTimeRange(48)
 
         # Fetch the Coastal zone mask
-<<<<<<< HEAD
-        self._coastalMask = self._zoneMap.coastalZonesMask()
-        # Abort the tool if this edit area is missing.
-        if self._coastalMask is None:
-            return 
-=======
         self._coastalMask = self._zoneMap.fetchNHCZonesMask()
         # Abort the tool if this edit area is missing.
         if self._coastalMask is None:
             return
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # Plot the wind thresholds as a grid
         grid = self.empty()
@@ -1374,44 +893,12 @@ class Procedure (WindWWUtils.WindWWUtils):
                     mask = ~self._coastalMask
                 grid[mask] = self.getProbWindThreshold(zoneType, "Add", haz)
 
-<<<<<<< HEAD
-        # Fetch and/or create some masks that will be used throughout the process.
-        self.fetchNHCZoneMask()
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # Fetch all the guidance grids we'll need. Other methods will use these
         self._guideDict = self.getAllGuidanceGrids(self._dbid)
 
         # Calculate the area over which the tool will run
         self._affectedAreaMask = self.calculateAffectedArea(editArea)
 
-<<<<<<< HEAD
-        self.removedOldPropGrids()
-        # Make the guidance hazard grid
-        guidanceHazardGrid = self.makeGuidanceGrid(self._dbid, stormNameChoice)
-        self.createGrid("Fcst", "ProposedTropWWGuidance", "DISCRETE", guidanceHazardGrid, self._timeRange,
-                        defaultColorTable="SITE/NHA/ProposedWind")
-
-        # Make the Recommended guidance grid
-        recommendedHazardGrid = self.makeRecommendedGrid(guidanceHazardGrid, stormNameChoice)
-        self.createGrid("Fcst", "ProposedTropWindWW", "DISCRETE", recommendedHazardGrid, self._timeRange,
-                        defaultColorTable="SITE/NHA/ProposedWind")
-
-        # Remove any old grids
-        endTime = self._timeRange.startTime().unixTime()
-        startTime = endTime - (12 * 3600) # 12 hours earlier
-        deleteTR = TimeRange.TimeRange(AbsTime.AbsTime(startTime), AbsTime.AbsTime(endTime))
-        for weName in ["ProposedTropWWGuidance", "ProposedTropWindWW", "Hazards"]:
-            self.deleteGrid(self.mutableID(), weName, "SFC", deleteTR)
-
-        if self._debug:
-            self.makeDifferenceGrids(guidanceHazardGrid, recommendedHazardGrid)
-            
-        self.saveZonesToJSONFile(guidanceHazardGrid)
-
-        return
-=======
         self._conflictMask = self.empty(np.bool)
 
         tempWEs = ["ConflictsWithGuidanceAndHazards", "ConflictsWithProposedAndHazards", "ConflictsWithProposedAndJSON"]
@@ -1455,4 +942,3 @@ class Procedure (WindWWUtils.WindWWUtils):
             self.makeDifferenceGrids(guidanceHazardGrid, recommendedHazardGrid)
 
         return
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

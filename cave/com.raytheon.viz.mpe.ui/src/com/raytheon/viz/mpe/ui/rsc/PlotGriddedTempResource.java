@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -63,11 +51,8 @@ import com.raytheon.uf.common.geospatial.MapUtil;
 import com.raytheon.uf.common.geospatial.ReferencedCoordinate;
 import com.raytheon.uf.common.geospatial.SpatialQueryFactory;
 import com.raytheon.uf.common.geospatial.SpatialQueryResult;
-<<<<<<< HEAD
-=======
 import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.xmrg.hrap.HRAP;
 import com.raytheon.uf.common.xmrg.hrap.HRAPCoordinates;
 import com.raytheon.uf.common.xmrg.hrap.HRAPSubGrid;
@@ -96,23 +81,6 @@ import systems.uom.common.USCustomary;
 
 /**
  * The MPE Gridded Temperature Resource.
-<<<<<<< HEAD
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * Date         Ticket#    Engineer    Description
- * ------------ ---------- ----------- --------------------------
- * Jun 30, 2009  2524      snaples     Initial creation
- * Feb 29  2010  9909      lbousaidi   changed the for loop for getting 
- *                                     the HRAP grid bin
- * Apr 17, 2012	 9602      mgamazaychikmChanged the HRAP grid j index for loop
- * Nov 02, 2012  1302      djohnson    Remove target.setUseBuiltinColorbar().
- * Feb 28, 2017  6157      bkowal      No longer alter the data when legend filtering
- *                                     is enabled.
- * </pre>
- * 
-=======
  *
  * <pre>
  *
@@ -133,7 +101,6 @@ import systems.uom.common.USCustomary;
  *
  * </pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author snaples
  */
 
@@ -141,8 +108,6 @@ public class PlotGriddedTempResource
         extends AbstractVizResource<AbstractResourceData, MapDescriptor>
         implements IMpeResource {
 
-<<<<<<< HEAD
-=======
     private static final IUFStatusHandler statusHandler = UFStatus
             .getHandler(PlotGriddedTempResource.class);
 
@@ -152,16 +117,11 @@ public class PlotGriddedTempResource
 
     private static final float contrast = 1.0f;
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private DailyQcUtils dqc = DailyQcUtils.getInstance();
 
     private DrawDQCStations ddq = DrawDQCStations.getInstance();
 
-<<<<<<< HEAD
-    MPEDisplayManager displayMgr = null;
-=======
     private MPEDisplayManager displayMgr = null;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private GriddedImageDisplay2 gridDisplay;
 
@@ -169,33 +129,10 @@ public class PlotGriddedTempResource
 
     private GridGeometry2D gridGeometry;
 
-<<<<<<< HEAD
-    private final float brightness = 1.0f;
-
-    private final float contrast = 1.0f;
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private boolean isInterpolated;
 
     private HRAPSubGrid subGrid;
 
-<<<<<<< HEAD
-    int first = 1;
-
-    int hed;
-
-    int time_pos;
-
-    int display_flag;
-
-    private ColorMapParameters parameters = new ColorMapParameters();
-
-    private static final GeometryFactory gf = new GeometryFactory();
-
-    private final List<Colorvalue> colorSet;
-
-=======
     private ColorMapParameters parameters = new ColorMapParameters();
 
     private final List<Colorvalue> colorSet;
@@ -208,7 +145,6 @@ public class PlotGriddedTempResource
      * @param loadProperties
      * @param colorSet
      */
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public PlotGriddedTempResource(MPEDisplayManager displayMgr,
             LoadProperties loadProperties, List<Colorvalue> colorSet) {
         super(new XmrgResourceData(), loadProperties);
@@ -216,22 +152,11 @@ public class PlotGriddedTempResource
         this.colorSet = colorSet;
     }
 
-<<<<<<< HEAD
-    ColorMap precip_colormap = ddq.colorMap;
-
-    RGB color = null;
-
-    IGraphicsTarget target;
-
-    FloatBuffer buf;
-
-=======
     /**
      *
      * @param prefix
      * @param num
      */
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public void plot_gridded_temp(String prefix, int num) {
         int pcpn_time_step = MPEDisplayManager.pcpn_time_step;
         boolean wfo_all = dqc.wfo_all;
@@ -314,11 +239,7 @@ public class PlotGriddedTempResource
                     continue;
                 }
 
-<<<<<<< HEAD
-                if (wfo_all != true) {
-=======
                 if (!wfo_all) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                     for (m = 0; m < 20; m++) {
                         if (wfo_in_use[m] == -1) {
@@ -358,12 +279,7 @@ public class PlotGriddedTempResource
             try {
                 coord = HRAPCoordinates.getHRAPCoordinates();
             } catch (Exception e) {
-<<<<<<< HEAD
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-=======
                 statusHandler.error(e.getLocalizedMessage(), e);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
             if (extent.width == coord.width && extent.height == coord.height) {
                 extent = coord;
@@ -381,12 +297,7 @@ public class PlotGriddedTempResource
             project(gridGeometry.getCoordinateReferenceSystem());
 
         } catch (Exception e) {
-<<<<<<< HEAD
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-=======
             statusHandler.error(e.getLocalizedMessage(), e);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
     }
@@ -409,11 +320,7 @@ public class PlotGriddedTempResource
             return null;
         }
 
-<<<<<<< HEAD
-        Map<String, Object> values = new HashMap<String, Object>();
-=======
         Map<String, Object> values = new HashMap<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         try {
             Coordinate gridCell = coord.asGridCell(
@@ -437,16 +344,12 @@ public class PlotGriddedTempResource
 
                 short s = (short) dqc.pcp.value[x][y];
 
-<<<<<<< HEAD
-                double d = parameters.getDataToDisplayConverter().convert(s);
-=======
                 double d;
                 try {
                     d = parameters.getDataToDisplayConverter().convert(s);
                 } catch (NumberFormatException e) {
                     d = Double.NaN;
                 }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                 DecimalFormat df = new DecimalFormat(
                         parameters.getFormatString());
@@ -492,15 +395,9 @@ public class PlotGriddedTempResource
 
     /**
      * convert Color to RGB
-<<<<<<< HEAD
-     * 
-     * @param color
-     * @return
-=======
      *
      * @param color
      * @return RGB
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public static RGB convertC(Color color) {
         int blue = (int) (color.getBlue() * 255f);
@@ -525,12 +422,7 @@ public class PlotGriddedTempResource
 
     @Override
     protected void initInternal(IGraphicsTarget target) throws VizException {
-<<<<<<< HEAD
-        this.target = target;
-        time_pos = ddq.time_pos;
-=======
         int time_pos = ddq.time_pos;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         plot_gridded_temp(ddq.prefix, time_pos);
     }
 
@@ -538,12 +430,7 @@ public class PlotGriddedTempResource
     protected void paintInternal(IGraphicsTarget target,
             PaintProperties paintProps) throws VizException {
 
-<<<<<<< HEAD
-        if (buf == null || dqc.grids_flag != 1
-                || displayMgr.isMaxmin() != true) {
-=======
         if (buf == null || dqc.grids_flag != 1 || !displayMgr.isMaxmin()) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return;
         }
 
@@ -563,11 +450,7 @@ public class PlotGriddedTempResource
         if (mode.contains(DisplayMode.Contour)) {
             if (contourDisplay == null) {
                 contourDisplay = new GriddedContourDisplay(descriptor,
-<<<<<<< HEAD
-                        gridGeometry, buf);
-=======
                         getSafeName(), gridGeometry, buf);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                 contourDisplay.setColor(ColorUtil.WHITE);
                 contourDisplay.setLineStyle(LineStyle.SOLID);
@@ -575,11 +458,6 @@ public class PlotGriddedTempResource
             }
             contourDisplay.paint(target, paintProps);
         }
-<<<<<<< HEAD
-
-        first = 0;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override

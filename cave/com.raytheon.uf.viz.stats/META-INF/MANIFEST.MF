@@ -11,11 +11,7 @@ Require-Bundle: org.eclipse.ui,
  com.raytheon.uf.common.stats,
  com.raytheon.uf.common.time,
  com.raytheon.uf.common.util,
-<<<<<<< HEAD
- com.google.guava;bundle-version="30.0.0",
-=======
  com.google.guava;bundle-version="32.0.0",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  com.raytheon.uf.common.units,
  com.raytheon.uf.common.event
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7

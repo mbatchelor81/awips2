@@ -27,14 +27,9 @@
 # SOFTWARE HISTORY
 # Date         Ticket#    Engineer     Description
 # ------------ ---------- -----------  --------------------------
-<<<<<<< HEAD
-# Jan 16, 2015  4006      njensen       create _getUniqueKeys() mask with dtype bool      
-# 06/08/16      19096     ryu           Change mask to boolean data type
-=======
 # Jan 16, 2015  4006      njensen       create _getUniqueKeys() mask with dtype bool
 # Jun 08, 2016  19096     ryu           Change mask to boolean data type
 # Dec 17, 2021  8342      sharbison     Changes for Performance Logging.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 # ----------------------------------------------------------------------------
 
@@ -45,10 +40,6 @@
 import SmartScript
 import time
 import VTECTable
-<<<<<<< HEAD
-import LogStream
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import numpy
 from AbsTime import AbsTime
 from AbsTime import current
@@ -57,11 +48,7 @@ from java.util import Date
 from java.util import ArrayList
 import jep
 from JUtil import JavaWrapperClass
-<<<<<<< HEAD
-
-=======
 from PerformanceStatusHandler import PerformanceStatusHandler
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 def LOCK_HOURS():
     return 192
@@ -81,11 +68,7 @@ FAIL_LOCK = -1
 class HazardUtils(SmartScript.SmartScript):
     def __init__(self, dbss, eaMgr, mdMode=None, toolType="numeric"):
         SmartScript.SmartScript.__init__(self, dbss)
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # self.setUp(eaMgr, mdMode, toolType)
 
     ##
@@ -230,11 +213,7 @@ class HazardUtils(SmartScript.SmartScript):
         later = now + 10 * 24 * 3600  # 10 days from now
         timeRange = TimeRange(yesterday, later).toJavaObj()
         try:
-<<<<<<< HEAD
-            gridInfo = self.getGridInfo(MODEL, weName, LEVEL, timeRange)
-=======
             self.getGridInfo(MODEL, weName, LEVEL, timeRange)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         except:  # this means the WE does not exist, so make a grid
             if len(trList) <= 0:
                 return
@@ -255,21 +234,13 @@ class HazardUtils(SmartScript.SmartScript):
             end = tr.endTime().unixTime()
             if end > unix_now:
                 # parm.splitTR() will split timeRanges with non-zero minutes
-<<<<<<< HEAD
-                # to the next hour.  So, truncate start and end times to the 
-=======
                 # to the next hour.  So, truncate start and end times to the
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 # previous hour and then split
                 start = tr.startTime().unixTime()
                 start = int(start / 3600) * 3600
                 end = int(end / 3600) * 3600
                 roundedTR =  TimeRange(AbsTime(start), AbsTime(end)).toJavaObj()
-<<<<<<< HEAD
-                parm = self.getParm(MODEL, weName, LEVEL)
-=======
                 self.getParm(MODEL, weName, LEVEL)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 self.splitCmd([weName], roundedTR)
 
         return
@@ -871,11 +842,7 @@ class HazardUtils(SmartScript.SmartScript):
         "Let other users edit the hazards parm. Return True for success."
         hazParm = self.getParm(MODEL, ELEMENT, LEVEL)
         return hazParm.endParmEdit()
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     ##
     # Make temporary hazard grids for each hazard subkey.
     # Hazards are "being edited" until they are merged again.
@@ -884,19 +851,12 @@ class HazardUtils(SmartScript.SmartScript):
     #
     def _separateHazardGrids(self):
         "Make temporary hazard grids for each hazard subkey."
-<<<<<<< HEAD
-=======
         perfLog = PerformanceStatusHandler("GFE")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # if any temp hazard grids are loaded, don't separate again
         if self._tempWELoaded():
             return FAIL_REDUNDANT  #already separated
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         hazParm, gridData = self._lockHazards()
         if hazParm is None:
             return FAIL_LOCK # unavailable
@@ -932,10 +892,7 @@ class HazardUtils(SmartScript.SmartScript):
                 # split the current key into its subkeys
                 subKeys = self._getSubKeys(uKey)
                 for subKey in subKeys:
-<<<<<<< HEAD
-=======
                     t0 = time.perf_counter()
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     # make the temporary name
                     weName = self._makeTempWEName(subKey)
 
@@ -947,15 +904,7 @@ class HazardUtils(SmartScript.SmartScript):
 
                     # make the grid
                     self._addHazard(weName, tr, subKey, mask)
-<<<<<<< HEAD
-                    pytr = TimeRange(tr)
-                    logmsg = " ".join(["Separate", weName,
-                      self._printTime(pytr.startTime().unixTime()),
-                      self._printTime(pytr.endTime().unixTime()), subKey])
-                    LogStream.logEvent(logmsg)
-=======
                     perfLog.logDuration("Separating hazard grids for " + weName + ", " + str(subKey), time.perf_counter() - t0)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                     # save the weNames for later
                     weNameSet.add(weName)
@@ -989,25 +938,14 @@ class HazardUtils(SmartScript.SmartScript):
             pyTimeRange = TimeRange(timeRange)
         # refuse to make new grids that are more than one hour in the past
         if pyTimeRange.endTime().unixTime() < current().unixTime() - HOUR_SECONDS():
-<<<<<<< HEAD
-            msg = "skipped time range creation: %s < %s" % (pyTimeRange.endTime().string(), current().string())
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return
 
         # set up the inventory first
         self._setupHazardsInventory(weName, [timeRange])
-<<<<<<< HEAD
-        
-        # get the inventory
-        trList = self._getWEInventory(weName, timeRange, asJava=True)
-        
-=======
 
         # get the inventory
         trList = self._getWEInventory(weName, timeRange, asJava=True)
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # coerce mask into a boolean array if it isn't already
         if not (isinstance(mask, numpy.ndarray) and mask.dtype==numpy.bool):
             mask = numpy.array(mask, dtype=numpy.bool)

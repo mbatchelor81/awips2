@@ -20,23 +20,13 @@
 
 package com.raytheon.uf.common.dataplugin.satellite.units.goes.convert;
 
-<<<<<<< HEAD
-import java.math.BigDecimal;
-import java.math.MathContext;
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.measure.UnitConverter;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import si.uom.SI;
 import systems.uom.common.USCustomary;
-<<<<<<< HEAD
-import tec.uom.se.AbstractConverter;
-=======
 import tech.units.indriya.function.AbstractConverter;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Converts a pixel value representing cloud height to a height above MSL in
@@ -50,11 +40,8 @@ import tech.units.indriya.function.AbstractConverter;
  * Mar 24, 2009       2086     jsanchez Used footToMeter to convert height.
  * Apr 15, 2019       7596     lsingh   Updated units framework to JSR-363.
  *                                      Overrided additional methods
-<<<<<<< HEAD
-=======
  * Aug 05, 2022       8905     lsingh   Updated units framework to 2.0.2.
  *                                      Renamed methods, and overrided additional methods.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -67,24 +54,12 @@ public class CloudPixelToHeightConverter extends AbstractConverter {
     private static UnitConverter footToMeter = (USCustomary.FOOT)
             .getConverterTo(SI.METRE);
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see tec.uom.se.AbstractConverter#convert(double)
-     */
-    @Override
-    public double convert(double aPixel) {
-        double result = 0.0;
-
-=======
     @Override
     public Number convertWhenNotIdentity(Number pixel) {
         double result = 0.0;
 
         double aPixel = pixel.doubleValue();
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if (aPixel <= 75) {
             result = 0.0;
         } else if (aPixel <= 76) {
@@ -112,51 +87,16 @@ public class CloudPixelToHeightConverter extends AbstractConverter {
         return result;
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see tec.uom.se.AbstractConverter#equals(java.lang.Object)
-     */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public boolean equals(Object aConverter) {
         return (aConverter instanceof CloudPixelToHeightConverter);
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see tec.uom.se.AbstractConverter#hashCode()
-     */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this);
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see tec.uom.se.AbstractConverter#inverse()
-     */
-    @Override
-    public AbstractConverter inverse() {
-        return new CloudHeightToPixelConverter();
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see tec.uom.se.AbstractConverter#isLinear()
-     */
-    @Override
-    public boolean isLinear() {
-=======
     @Override
     public AbstractConverter inverseWhenNotIdentity() {
         return new CloudHeightToPixelConverter();
@@ -165,16 +105,10 @@ public class CloudPixelToHeightConverter extends AbstractConverter {
     @Override
     public boolean isLinear() {
         // This method hasn't been implemented yet since it's unused
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return false;
     }
 
     @Override
-<<<<<<< HEAD
-    public BigDecimal convert(BigDecimal value, MathContext ctx)
-            throws ArithmeticException {
-        return BigDecimal.valueOf(convert(value.doubleValue()));
-=======
     public boolean isIdentity() {
         return false;
     }
@@ -195,7 +129,6 @@ public class CloudPixelToHeightConverter extends AbstractConverter {
     protected boolean canReduceWith(AbstractConverter that) {
         // This method hasn't been implemented yet since it's unused
         return false;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
 }

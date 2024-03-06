@@ -20,10 +20,6 @@
 package com.raytheon.uf.common.monitor.data;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
-import java.util.List;
-
-=======
 import java.util.Collections;
 import java.util.List;
 
@@ -31,7 +27,6 @@ import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.io.ParseException;
 import org.locationtech.jts.io.WKBReader;
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.geospatial.ISpatialQuery;
 import com.raytheon.uf.common.geospatial.SpatialException;
 import com.raytheon.uf.common.geospatial.SpatialQueryFactory;
@@ -49,12 +44,6 @@ import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
 import com.raytheon.uf.common.status.UFStatus.Priority;
 import com.raytheon.uf.common.util.StringUtil;
-<<<<<<< HEAD
-import org.locationtech.jts.geom.Geometry;
-import org.locationtech.jts.io.ParseException;
-import org.locationtech.jts.io.WKBReader;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Data Access Manager for the allAdjacentWOFs.xml file.
@@ -69,10 +58,7 @@ import org.locationtech.jts.io.WKBReader;
  * Oct 02, 2013   2361     njensen     Use JAXBManager for XML
  * May 23, 2014   3086     skorolev    Cleaned code.
  * Nov 11, 2014   3741     skorolev    Corrected Exceptions.
-<<<<<<< HEAD
-=======
  * May 25, 2021   8225     reblum      Fix potential null pointers.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -113,13 +99,8 @@ public class AdjacentWfoMgr {
      *            The current site
      */
     public AdjacentWfoMgr(String currentSite) {
-<<<<<<< HEAD
-        statusHandler.debug("****AdjacentWfoMgr instantiated with "
-                + currentSite);
-=======
         statusHandler
                 .debug("****AdjacentWfoMgr instantiated with " + currentSite);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         this.currentSite = currentSite;
         readAdjXml();
     }
@@ -130,14 +111,8 @@ public class AdjacentWfoMgr {
     private void readAdjXml() {
         adjXML = null;
         IPathManager pm = PathManagerFactory.getPathManager();
-<<<<<<< HEAD
-        String path = pm.getFile(
-                pm.getContext(LocalizationType.COMMON_STATIC,
-                        LocalizationLevel.BASE), fileName).getAbsolutePath();
-=======
         String path = pm.getFile(pm.getContext(LocalizationType.COMMON_STATIC,
                 LocalizationLevel.BASE), fileName).getAbsolutePath();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         statusHandler.debug("**** path = " + path);
         try {
             adjXML = jaxb.unmarshalFromXmlFile(path);
@@ -145,12 +120,6 @@ public class AdjacentWfoMgr {
             for (CwaXML cx : list) {
                 if (cx.getId().equals(currentSite)) {
                     idList = cx.getAdjIdList();
-<<<<<<< HEAD
-
-                    // Get the areas for each adjacent CWA
-                    adjZones = MonitorAreaUtils.getAdjacentZones(idList
-                            .toArray(new String[idList.size()]));
-=======
                     if (idList == null) {
                         idList = Collections.emptyList();
                         adjZones = Collections.emptyList();
@@ -159,20 +128,14 @@ public class AdjacentWfoMgr {
                         adjZones = MonitorAreaUtils.getAdjacentZones(
                                 idList.toArray(new String[idList.size()]));
                     }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
             }
         } catch (SerializationException e) {
             statusHandler.handle(Priority.PROBLEM,
                     "Unable to serialize adjacent XML", e);
         } catch (SpatialException e) {
-<<<<<<< HEAD
-            statusHandler.handle(Priority.PROBLEM,
-                    "Error to read adjacent XML", e);
-=======
             statusHandler.handle(Priority.PROBLEM, "Error to read adjacent XML",
                     e);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 
@@ -200,13 +163,8 @@ public class AdjacentWfoMgr {
      * 
      * @return the adjZones
      */
-<<<<<<< HEAD
-    public ArrayList<String> getAdjZones() {
-        ArrayList<String> copiedList = new ArrayList<String>();
-=======
     public List<String> getAdjZones() {
         ArrayList<String> copiedList = new ArrayList<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         for (String str : adjZones) {
             copiedList.add(str);
@@ -233,16 +191,10 @@ public class AdjacentWfoMgr {
      * @throws SpatialException
      *             if problem with wfo geometry
      */
-<<<<<<< HEAD
-    public static Geometry getAdjacentAreas(String wfo) throws SpatialException {
-        boolean invalidGeom = false;
-        List<String> areaList = new ArrayList<String>();
-=======
     public static Geometry getAdjacentAreas(String wfo)
             throws SpatialException {
         boolean invalidGeom = false;
         List<String> areaList = new ArrayList<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         Geometry adjAreaGeometry = getCwaGeomtry(wfo);
         if (adjAreaGeometry == null) {
@@ -310,13 +262,8 @@ public class AdjacentWfoMgr {
                 }
             }
         } catch (SpatialException e) {
-<<<<<<< HEAD
-            UFStatus.getHandler(AdjacentWfoMgr.class).error(
-                    "Error getting CWA Geometry", e);
-=======
             UFStatus.getHandler(AdjacentWfoMgr.class)
                     .error("Error getting CWA Geometry", e);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         } catch (ParseException e) {
             statusHandler.handle(Priority.PROBLEM,
                     "Failed to parse the geometry.", e);

@@ -28,11 +28,7 @@
 
    <plotParameterDefinition displayName="description,category,timeObs" displayType="TEXT" param="description,category,timeObs" sampleValue="0,1,2" svgClass="text" />
 
-<<<<<<< HEAD
-   <plotParameterDefinition displayName="description_id" displayType="TABLE" lookupTable="mPing_trans.txt" param="description_id" sampleValue="0" svgClass="mping" />
-=======
    <plotParameterDefinition displayName="description_id" displayType="TABLE" lookupTable="mPing_trans.txt" param="description_id" sampleValue="1" svgClass="mping" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
    <plotParameterDefinition displayName="Marker" displayType="MARKER" param="Marker" sampleValue=" " svgClass="marker" />
 </plotParameterDefinitions>

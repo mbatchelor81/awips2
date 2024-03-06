@@ -36,15 +36,9 @@ import com.raytheon.uf.edex.bufrtools.packets.IBUFRDataPacket;
 
 import si.uom.NonSI;
 import si.uom.SI;
-<<<<<<< HEAD
-import tec.uom.se.AbstractUnit;
-import tec.uom.se.unit.MetricPrefix;
-import tec.uom.se.unit.Units;
-=======
 import tech.units.indriya.AbstractUnit;
 import javax.measure.MetricPrefix;
 import tech.units.indriya.unit.Units;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * 

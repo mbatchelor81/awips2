@@ -8,12 +8,8 @@ Require-Bundle: org.eclipse.ui,
  com.raytheon.uf.viz.core,
  com.raytheon.uf.viz.core.point,
  com.raytheon.uf.common.geospatial,
-<<<<<<< HEAD
- javax.xml.bind
-=======
  javax.xml.bind,
  javax.measure
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-ActivationPolicy: lazy
 Import-Package: com.raytheon.uf.common.dataplugin,
@@ -29,14 +25,6 @@ Import-Package: com.raytheon.uf.common.dataplugin,
  com.raytheon.uf.viz.core.rsc,
  com.raytheon.uf.viz.core.rsc.capabilities,
  com.raytheon.viz.pointdata,
-<<<<<<< HEAD
- javax.measure,
- org.eclipse.swt.graphics,
- si.uom,
- systems.uom.common,
- tec.uom.se.unit
-=======
  org.eclipse.swt.graphics
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 Export-Package: com.raytheon.uf.viz.tcs.rsc
 Bundle-ClassPath: com.raytheon.uf.viz.tcs.jar

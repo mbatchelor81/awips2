@@ -31,12 +31,7 @@
 #    03/12/13                      bkowal         Initial Creation.
 #    02/17/14        2712          bkowal         Provide a default value for localization site.
 #    03/19/14        2929          bkowal         'REGION' is now recognized as a valid localization level.
-<<<<<<< HEAD
 #    02/04/19                      mjames@ucar    Removed REGION.
-=======
-#
-#
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 
 #
@@ -47,11 +42,7 @@
 import os, tempfile, shutil
 import numpy
 import PythonOverriderCore
-<<<<<<< HEAD
 from awips import ThriftClient
-=======
-from ufpy import ThriftClient
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 from dynamicserialize.dstypes.com.raytheon.uf.common.auth.resp import SuccessfulExecution
 from dynamicserialize.dstypes.com.raytheon.uf.common.localization import LocalizationContext
 from dynamicserialize.dstypes.com.raytheon.uf.common.localization.msgs import ListUtilityCommand
@@ -61,11 +52,7 @@ from dynamicserialize.dstypes.com.raytheon.uf.common.localization import Localiz
 from dynamicserialize.dstypes.com.raytheon.uf.common.localization.stream import LocalizationStreamGetRequest
 
 BUFFER_SIZE = 512 * 1024
-<<<<<<< HEAD
 availableLevels = ['BASE', 'CONFIGURED', 'SITE', 'USER']
-=======
-availableLevels = ['BASE', 'REGION', 'CONFIGURED', 'SITE', 'USER']
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 def importModule(name, localizationHost, localizationPort, localizedSite=None, localizationUser=None, 
                  loctype='COMMON_STATIC', level=None):

@@ -147,6 +147,7 @@ public class AdvisoryResource
     protected void addRecord(PluginDataObject obj) {
         Collection<AdvisoryRecord> parsedRecords = resourceData.getDataAdapter()
                 .convertRecord(obj);
+
         if (parsedRecords != null && !parsedRecords.isEmpty()) {
             clearShapes();
             DataTime dataTime = obj.getDataTime();
@@ -441,6 +442,7 @@ public class AdvisoryResource
             return "";
         }
         try {
+
             GeometryFactory factory = new GeometryFactory();
 
             for (AdvisoryRecord record : curRecords) {
@@ -452,6 +454,7 @@ public class AdvisoryResource
                 if (polygon.contains(point)) {
                     return record.getInspectString();
                 }
+
             }
         } catch (Exception e) {
             throw new VizException("Error inspecting aviation advisory data",

@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -41,11 +29,8 @@ import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.MessageBox;
-<<<<<<< HEAD
-=======
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.TransformException;
 
@@ -70,22 +55,6 @@ import com.raytheon.uf.viz.points.data.Point;
 import com.raytheon.uf.viz.points.data.PointFieldState;
 import com.raytheon.uf.viz.points.data.PointNameChangeException;
 import com.raytheon.uf.viz.points.ui.dialog.PointEditDialog;
-<<<<<<< HEAD
-import com.raytheon.viz.ui.cmenu.AbstractRightClickAction;
-import com.raytheon.viz.ui.cmenu.IContextMenuContributor;
-import com.raytheon.viz.ui.dialogs.ICloseCallback;
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.GeometryFactory;
-
-/**
- * Implements the points bearing functionality.
- * 
- * 
- * <pre>
- * 
- *  SOFTWARE HISTORY
- * 
-=======
 import com.raytheon.viz.ui.UiUtil;
 import com.raytheon.viz.ui.cmenu.AbstractRightClickAction;
 import com.raytheon.viz.ui.cmenu.IContextMenuContributor;
@@ -99,7 +68,6 @@ import com.raytheon.viz.ui.dialogs.ICloseCallback;
  *
  *  SOFTWARE HISTORY
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *  Date         Ticket#     Engineer    Description
  *  ------------ ----------  ----------- --------------------------
  *  Oct032007    #463        ebabin      Initial Creation.
@@ -120,20 +88,12 @@ import com.raytheon.viz.ui.dialogs.ICloseCallback;
  *  07-28-2014   #3430       mapeters    Updated move function to prevent errors
  *                                       when MB3 clicking off the map with
  *                                       tool in editable mode.
-<<<<<<< HEAD
- * 
- * </pre>
- * 
- * @author ebabin
- * @version 1
-=======
  * Sep 13, 2022  8792        mapeters    Only handle input events in the pane this
  *                                       layer is in
  *
  * </pre>
  *
  * @author ebabin
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  */
 public class PointsToolLayer extends AbstractMovableToolLayer<Point> implements
         IContextMenuContributor, IPointChangedListener, IResourceDataChanged {
@@ -150,19 +110,11 @@ public class PointsToolLayer extends AbstractMovableToolLayer<Point> implements
 
     private AbstractRightClickAction createElementAction;
 
-<<<<<<< HEAD
-    private PointsDataManager dataManager;
-
-    private static GeometryFactory gf = new GeometryFactory();
-
-    Map<Integer, IFont> fonts;
-=======
     private final PointsDataManager dataManager;
 
     private static final GeometryFactory gf = new GeometryFactory();
 
     private final Map<Integer, IFont> fonts;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     public PointsToolLayer(
             GenericToolsResourceData<PointsToolLayer> resourceData,
@@ -211,11 +163,7 @@ public class PointsToolLayer extends AbstractMovableToolLayer<Point> implements
 
         this.rightClickMovesToCoord = true;
         this.resourceData.addChangeListener(this);
-<<<<<<< HEAD
-        this.fonts = new HashMap<Integer, IFont>();
-=======
         this.fonts = new HashMap<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override
@@ -242,11 +190,7 @@ public class PointsToolLayer extends AbstractMovableToolLayer<Point> implements
             selectedLabel = selectedObject.getName();
         }
         Point selectedPoint = null;
-<<<<<<< HEAD
-        Collection<Point> points = new ArrayList<Point>();
-=======
         Collection<Point> points = new ArrayList<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         for (String name : dataManager.getVisiblePointNames()) {
             Point point = dataManager.getPoint(name);
             points.add(point);
@@ -272,13 +216,8 @@ public class PointsToolLayer extends AbstractMovableToolLayer<Point> implements
         double radius = (MAGIC_CIRCLE_RADIUS * paintProps.getZoomLevel());
         String label = point.getName();
         Coordinate coordinate = point.getCoordinate();
-<<<<<<< HEAD
-        double[] center = descriptor.worldToPixel(new double[] { coordinate.x,
-                coordinate.y });
-=======
         double[] center = descriptor
                 .worldToPixel(new double[] { coordinate.x, coordinate.y });
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         // Outer unfilled circle
         DrawableCircle dc = new DrawableCircle();
@@ -311,13 +250,8 @@ public class PointsToolLayer extends AbstractMovableToolLayer<Point> implements
         IFont font = fonts.get(fontKey);
 
         if (font == null) {
-<<<<<<< HEAD
-            font = target.getDefaultFont().deriveWithSize(
-                    (float) (fontSize * magnification));
-=======
             font = target.getDefaultFont()
                     .deriveWithSize((float) (fontSize * magnification));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             fonts.put(fontKey, font);
         }
 
@@ -332,22 +266,9 @@ public class PointsToolLayer extends AbstractMovableToolLayer<Point> implements
         return DEFAULT_NAME;
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.raytheon.viz.ui.cmenu.IContextMenuContributor#addContextMenuItems
-     * (org.eclipse.jface.action.IMenuManager, int, int)
-     */
-    @Override
-    public void addContextMenuItems(IMenuManager menuManager, int x, int y) {
-        if (isEditable()) {
-=======
     @Override
     public void addContextMenuItems(IMenuManager menuManager, int x, int y) {
         if (isInteractive()) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             selectedObject = null;
             selectObjectAtMouse(x, y, -1);
             if (selectedObject != null) {
@@ -363,27 +284,6 @@ public class PointsToolLayer extends AbstractMovableToolLayer<Point> implements
         }
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.raytheon.uf.viz.core.rsc.AbstractVizResource#inspect(com.raytheon
-     * .uf.common.geospatial.ReferencedCoordinate)
-     */
-    @Override
-    public String inspect(ReferencedCoordinate coord) throws VizException {
-        if (isEditable()) {
-            Coordinate point = null;
-            IDisplayPaneContainer container = getResourceContainer();
-            try {
-                double[] pixelLoc = container.translateInverseClick(coord
-                        .asLatLon());
-                point = new Coordinate(pixelLoc[0], pixelLoc[1]);
-            } catch (TransformException e) {
-                throw new VizException(e.getMessage());
-            } catch (FactoryException e) {
-=======
     @Override
     public String inspect(ReferencedCoordinate coord) throws VizException {
         if (isEditable() && UiUtil.isDescriptorActive(descriptor,
@@ -395,7 +295,6 @@ public class PointsToolLayer extends AbstractMovableToolLayer<Point> implements
                         .translateInverseClick(coord.asLatLon());
                 point = new Coordinate(pixelLoc[0], pixelLoc[1]);
             } catch (TransformException | FactoryException e) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 throw new VizException(e.getMessage());
             }
             for (Point object : objects) {
@@ -414,28 +313,12 @@ public class PointsToolLayer extends AbstractMovableToolLayer<Point> implements
         issueRefresh();
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.raytheon.viz.awipstools.ui.layer.AbstractMovableToolLayer#isClicked
-     * (com.raytheon.uf.viz.core.IDisplayPaneContainer,
-     * org.locationtech.jts.geom.Coordinate, java.lang.Object)
-     */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     protected boolean isClicked(IDisplayPaneContainer container,
             Coordinate mouseLoc, Point point) {
         endpointClicked = false;
-<<<<<<< HEAD
-        double[] pixelLoc = container.translateInverseClick(point
-                .getCoordinate());
-=======
         double[] pixelLoc = container
                 .translateInverseClick(point.getCoordinate());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         org.locationtech.jts.geom.Point pixelPoint = gf
                 .createPoint(new Coordinate(pixelLoc[0], pixelLoc[1]));
         org.locationtech.jts.geom.Point clickPoint = gf.createPoint(mouseLoc);
@@ -457,14 +340,9 @@ public class PointsToolLayer extends AbstractMovableToolLayer<Point> implements
             Point point) {
         if (point.getMovable() == PointFieldState.TRUE) {
             if (clickLoc == null) {
-<<<<<<< HEAD
-                clickLoc = (lastClickedCoordinate == null) ? this.dataManager
-                        .getCoordinate(point.getName()) : lastClickedCoordinate;
-=======
                 clickLoc = (lastClickedCoordinate == null)
                         ? this.dataManager.getCoordinate(point.getName())
                         : lastClickedCoordinate;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
 
             Point newPoint = new Point(point);
@@ -510,27 +388,17 @@ public class PointsToolLayer extends AbstractMovableToolLayer<Point> implements
     public boolean deletePoint(Point point) {
         boolean state = false;
         if (point != null) {
-<<<<<<< HEAD
-            MessageBox d = new MessageBox(getResourceContainer()
-                    .getActiveDisplayPane().getDisplay().getActiveShell(),
-=======
             MessageBox d = new MessageBox(
                     getResourceContainer().getActiveDisplayPane().getDisplay()
                             .getActiveShell(),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     SWT.ICON_QUESTION | SWT.OK | SWT.CANCEL);
             if (point.isGroup()) {
                 d.setMessage("Click OK to delete the group:\n"
                         + point.getGroup()
                         + "\nand all points and sub-groups\nit contains.");
             } else {
-<<<<<<< HEAD
-                d.setMessage("Click OK to delete point " + point.getName()
-                        + "?");
-=======
                 d.setMessage(
                         "Click OK to delete point " + point.getName() + "?");
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
             int status = d.open();
             if (status == SWT.OK) {
@@ -542,21 +410,10 @@ public class PointsToolLayer extends AbstractMovableToolLayer<Point> implements
     }
 
     private void editPoint(final Point point) {
-<<<<<<< HEAD
-        ICloseCallback cb = new ICloseCallback() {
-
-            @Override
-            public void dialogClosed(Object returnValue) {
-                if (returnValue instanceof Point) {
-                    Point em = (Point) returnValue;
-                    dataManager.updatePoint(point, em);
-                }
-=======
         ICloseCallback cb = returnValue -> {
             if (returnValue instanceof Point) {
                 Point em = (Point) returnValue;
                 dataManager.updatePoint(point, em);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         };
         PointEditDialog.editPointViaDialog(this, point, cb);
@@ -564,25 +421,12 @@ public class PointsToolLayer extends AbstractMovableToolLayer<Point> implements
 
     private void createPoint() {
         Point point = new Point("", lastMouseLoc.y, lastMouseLoc.x,
-<<<<<<< HEAD
-                PointFieldState.FALSE, PointFieldState.TRUE, false, new RGB(0,
-                        0, 0), "");
-        ICloseCallback cb = new ICloseCallback() {
-
-            @Override
-            public void dialogClosed(Object returnValue) {
-                if (returnValue instanceof Point) {
-                    Point em = (Point) returnValue;
-                    dataManager.addPoint(em);
-                }
-=======
                 PointFieldState.FALSE, PointFieldState.TRUE, false,
                 new RGB(0, 0, 0), "");
         ICloseCallback cb = returnValue -> {
             if (returnValue instanceof Point) {
                 Point em = (Point) returnValue;
                 dataManager.addPoint(em);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         };
         PointEditDialog.createNewPointViaDialog(this, point, cb);
@@ -591,11 +435,7 @@ public class PointsToolLayer extends AbstractMovableToolLayer<Point> implements
     /**
      * This is used to change everything on the point except for its unique
      * name. This throws an exception if the point does not exist.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param point
      * @throws PointNameChangeException
      */

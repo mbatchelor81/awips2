@@ -78,11 +78,7 @@ import com.raytheon.viz.ui.personalities.awips.CAVE;
  * Dec 04, 2015  5169     bsteffen  Allow ProductAlertObserver to send messages
  *                                  to the AutoUpdater
  * Feb 08, 2016, 5281     tjensen   Combined Data and Menu Refresh Intervals
-<<<<<<< HEAD
  * May 05, 2017	mjames			Removed thinclient blacklist 
-=======
- * 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  * 
  * @author njensen
@@ -121,37 +117,6 @@ public class ThinClientComponent extends CAVE implements IThinClientComponent {
 
         ThinClientURICatalog.getInstance();
         ThinClientDataUpdateTree.getInstance();
-<<<<<<< HEAD
-=======
-        List<String> pluginBlacklist = new ArrayList<String>();
-        File blacklistFile = BundleScanner.searchInBundle(
-                com.raytheon.uf.viz.thinclient.cave.Activator.PLUGIN_ID, "",
-                "ThinClientPluginBlacklist.txt");
-        if (blacklistFile != null && blacklistFile.exists()) {
-            BufferedReader reader = null;
-            try {
-                reader = new BufferedReader(new FileReader(blacklistFile));
-                String line = null;
-                while (null != (line = reader.readLine())) {
-                    pluginBlacklist.add(line.trim());
-                }
-            } finally {
-                if (reader != null) {
-                    reader.close();
-                }
-            }
-        }
-        try {
-            for (Bundle b : Activator.getDefault().getContext().getBundles()) {
-                if (pluginBlacklist.contains(b.getSymbolicName())) {
-                    b.stop();
-                    b.uninstall();
-                }
-            }
-        } catch (Throwable t) {
-            t.printStackTrace();
-        }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override

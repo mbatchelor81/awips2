@@ -50,12 +50,7 @@
             fileName="menus/radar/dualPol/baseRadarDataQuality.xml" />
         <contribute xsi:type="subinclude" subMenu="${icao} 4-bit/Legacy Prods"
             fileName="menus/radar/dualPol/baseRadarLegacy.xml" />
-<<<<<<< HEAD
-    </contribute>
-</menuTemplate>
-=======
         <!--  <contribute xsi:type="subinclude" subMenu="${icao} Obsolete Products"
             fileName="menus/radar/dualPol/baseRadarObsolete.xml" />  -->
     </contribute>
 </menuTemplate>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

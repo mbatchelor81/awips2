@@ -90,12 +90,9 @@ import org.locationtech.jts.geom.GeometryFactory;
  *                                     code cleanup
  * 07/05/2016   19153   mgamazaychikov Fix disappearance of AlarmAlert Bell after initial close
  * Jan 24, 2018  7132      tgurney     Add destroyAlarmAlertBell()
-<<<<<<< HEAD
  * Sep 13, 2023         tiffanym@ucar  Brought back logic that looks at the site level for the
  *                                     DefaultSiteAlarms.xml if it doesn't exist at the workstation
  *                                     level
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  *
  * </pre>
@@ -680,11 +677,7 @@ public class AlarmAlertFunctions {
     public static AAPACombined loadSiteAlarms(
             ILocalizationFileObserver listener) {
         LocalizationFile workstationFile = getFile(
-<<<<<<< HEAD
                 initLocalization(LocalizationLevel.SITE), SITE_FILE);
-=======
-                initLocalization(LocalizationLevel.WORKSTATION), SITE_FILE);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         AAPACombined aapaCombined = null;
 
         if (workstationFile == null || !workstationFile.exists()) {

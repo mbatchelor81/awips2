@@ -50,11 +50,8 @@ import jep.NDArray;
  *                                    equals and hashCode
  * Feb 23, 2018  7178     randerso    Fix hashCode and equals to not depend on
  *                                    Buffer.array()
-<<<<<<< HEAD
-=======
  * May 15, 2023  2033890  dhaines     Changed unsigned integer handling to be 
  *                                    more clear 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -477,11 +474,7 @@ public class Grid2DByte implements IGrid2D {
         sb.append(xdim).append('X').append(ydim).append("\n[\n");
         for (int y = 0; y < ydim; y++) {
             for (int x = 0; x < xdim; x++) {
-<<<<<<< HEAD
-                sb.append(0xFF & this.get(x, y))
-=======
                 sb.append(Byte.toUnsignedInt(this.get(x, y)))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         .append((x + 1) == xdim ? "" : ",");
             }
             sb.append('\n');

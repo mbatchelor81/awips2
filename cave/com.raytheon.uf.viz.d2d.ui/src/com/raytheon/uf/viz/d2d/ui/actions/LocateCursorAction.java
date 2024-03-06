@@ -48,10 +48,7 @@ import com.raytheon.viz.ui.tools.AbstractTool;
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
  * May 1, 2009            bgonzale     Initial creation
-<<<<<<< HEAD
  * Nov 8, 2023          srcarter@ucar  Fix functionality of the dialog, make UI more reasonable
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -93,22 +90,12 @@ public class LocateCursorAction extends AbstractTool {
 
         // set up close timer
         Display display = PlatformUI.getWorkbench().getDisplay();
-<<<<<<< HEAD
         int delay = 400;
 
         display.timerExec(delay, new Runnable() {
             @Override
             public void run() {
                 if (dialog != null) {
-=======
-        int oneAndAHalfSeconds = 1500;
-
-        display.timerExec(oneAndAHalfSeconds, new Runnable() {
-            @Override
-            public void run() {
-                if (dialog != null && dialog.getShell() != null
-                        && !dialog.getShell().isDisposed()) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     dialog.close();
                 }
             }
@@ -116,16 +103,10 @@ public class LocateCursorAction extends AbstractTool {
     }
 
     private static class CursorBoxDialog extends CaveJFACEDialog {
-<<<<<<< HEAD
         private Shell shell;
         protected CursorBoxDialog(Shell parentShell) {
             super(parentShell);
             shell = new Shell(parentShell, SWT.NO_TRIM | SWT.MODELESS);
-=======
-        protected CursorBoxDialog(Shell parentShell) {
-            super(parentShell);
-            setShellStyle(SWT.NO_TRIM | SWT.MODELESS);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         /*
@@ -143,24 +124,12 @@ public class LocateCursorAction extends AbstractTool {
             final Point cLoc = display.getCursorLocation();
             final Color white = display.getSystemColor(SWT.COLOR_WHITE);
             final Color black = display.getSystemColor(SWT.COLOR_BLACK);
-<<<<<<< HEAD
             final int boxCount = 15; // 8 white boxes and 7 black boxes
             final int sideSize = 60;
             final int center = sideSize / 2;
             final int sideInc = center / boxCount;
             final int margin = sideInc * 2;
 
-=======
-            final int boxCount = 23; // 12 white boxes and 11 black boxes
-            final int sideSize = 190;
-            final int center = sideSize / 2;
-            final int sideInc = center / boxCount;
-            final int margin = sideInc * 2;
-            GridData shellGD = new GridData(SWT.FILL, SWT.FILL, true, true);
-
-            newShell.setLayout(new GridLayout(1, false));
-            newShell.setLayoutData(shellGD);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             newShell.setBounds(cLoc.x - center, cLoc.y - center, sideSize,
                     sideSize);
 
@@ -197,7 +166,6 @@ public class LocateCursorAction extends AbstractTool {
             // drawn.
             return null;
         }
-<<<<<<< HEAD
         
         @Override
         public int open() {
@@ -213,8 +181,6 @@ public class LocateCursorAction extends AbstractTool {
             super.close();
             return true;
         }
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     }
 }

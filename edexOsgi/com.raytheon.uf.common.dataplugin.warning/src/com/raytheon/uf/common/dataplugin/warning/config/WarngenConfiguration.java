@@ -28,11 +28,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.measure.Unit;
-<<<<<<< HEAD
-import javax.measure.format.ParserException;
-=======
 import javax.measure.format.MeasurementParseException;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.measure.quantity.Length;
 import javax.measure.quantity.Speed;
 import javax.xml.bind.JAXBException;
@@ -51,11 +47,7 @@ import com.raytheon.uf.common.status.UFStatus;
 import com.raytheon.uf.common.status.UFStatus.Priority;
 
 import systems.uom.common.USCustomary;
-<<<<<<< HEAD
-import tec.uom.se.format.SimpleUnitFormat;
-=======
 import tech.units.indriya.format.SimpleUnitFormat;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * WarngenConfiguration
@@ -552,11 +544,7 @@ import org.geotools.xs.facets.Length;
         try {
             this.unitDistance = SimpleUnitFormat.getInstance(SimpleUnitFormat.Flavor.ASCII).parseProductUnit(
                     unitDistance, new ParsePosition(0)).asType(Length.class);
-<<<<<<< HEAD
-        } catch (ParserException e) {
-=======
         } catch (MeasurementParseException e) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             throw new RuntimeException("Error setting unit speed: "
                     + e.getLocalizedMessage(), e);
         }
@@ -571,11 +559,7 @@ import org.geotools.xs.facets.Length;
         try {
             this.unitSpeed = SimpleUnitFormat.getInstance(SimpleUnitFormat.Flavor.ASCII).parseProductUnit(
                     unitSpeed, new ParsePosition(0)).asType(Speed.class);
-<<<<<<< HEAD
-        } catch (ParserException e) {
-=======
         } catch (MeasurementParseException e) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             throw new RuntimeException("Error setting unit speed: "
                     + e.getLocalizedMessage(), e);
         }

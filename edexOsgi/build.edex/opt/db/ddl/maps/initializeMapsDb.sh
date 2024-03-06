@@ -25,25 +25,6 @@
 # SOFTWARE HISTORY
 # Date         Ticket#    Engineer    Description
 # ------------ ---------- ----------- --------------------------
-<<<<<<< HEAD
-# 02/11/2016    #5348     randerso    Do a full vacuum after creating the maps database
-# 01/23/2017    #6097     randerso    Restored incorrectly deleted file.
-#                                     Updated for changes to importShapeFile.sh
-# 04/11/2018    #7140     tgurney     Use a2dbauth
-#
-##
-
-DATABASEDIR=/awips2/database/sqlScripts/share/sql/maps
-POSTGIS_CONTRIB=/awips2/postgresql/share/contrib/postgis-2.3
-PGBINDIR=/awips2/postgresql/bin
-PSQLBINDIR=/awips2/psql/bin
-PGUSER=awipsadmin
-PGPORT=5432
-
-psql="a2dbauth ${PSQLBINDIR}/psql"
-vacuumdb="a2dbauth ${PGBINDIR}/vacuumdb"
-pg_restore="a2dbauth ${PGBINDIR}/pg_restore"
-=======
 # 02/11/2016   5348       randerso    Do a full vacuum after creating the maps database
 # 01/23/2017   6097       randerso    Restored incorrectly deleted file.
 #                                     Updated for changes to importShapeFile.sh
@@ -59,15 +40,10 @@ PGPORT=5432
 psql="a2dbauth psql"
 vacuumdb="a2dbauth vacuumdb"
 pg_restore="a2dbauth pg_restore"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 ${psql} -d postgres -U $PGUSER -q -p $PGPORT -f ${DATABASEDIR}/createMapsDb.sql
 ${psql} -d maps -U $PGUSER -q -p $PGPORT -c "CREATE EXTENSION postgis;"
 ${psql} -d maps -U $PGUSER -q -p $PGPORT -c "CREATE EXTENSION postgis_topology;"
-<<<<<<< HEAD
-${psql} -d maps -U $PGUSER -q -p $PGPORT -f ${POSTGIS_CONTRIB}/legacy.sql
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 if [ -f ${DATABASEDIR}/maps.db ] ; then
     ${psql} -d maps -U ${PGUSER} -q -p ${PGPORT} -c "DROP TABLE IF EXISTS mapdata.map_version"
     ${pg_restore} -d maps -U $PGUSER -p $PGPORT -n mapdata ${DATABASEDIR}/maps.db
@@ -83,11 +59,7 @@ else
     for file in `find /awips2/edex/data/utility/edex_static/base/infofiles -type f`; do
         base=`basename \`dirname $file\``
         echo Importing `basename $file` into $base...
-<<<<<<< HEAD
-        ${DATABASEDIR}/importPointsInfo.sh $file mapdata $base $PGUSER $PGPORT $1
-=======
         ${DATABASEDIR}/importPointsInfo.sh $file mapdata $base $PGUSER $PGPORT /awips2
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     done
     ${vacuumdb} -d maps -U ${PGUSER} -p ${PGPORT} -vfz
     ${DATABASEDIR}/createMapsDbSnapshot.sh ${DATABASEDIR}/maps.db

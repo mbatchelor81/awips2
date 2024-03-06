@@ -59,11 +59,7 @@ import com.raytheon.viz.radar.rsc.RadarResourceData;
 import com.raytheon.viz.radar.rsc.image.IRadialMeshExtension.RadialMeshData;
 
 import systems.uom.common.USCustomary;
-<<<<<<< HEAD
-import tec.uom.se.quantity.Quantities;
-=======
 import tech.units.indriya.quantity.Quantities;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * {@link RadarImageResource} that is able to display radial data.
@@ -81,10 +77,7 @@ import tech.units.indriya.quantity.Quantities;
  * Jun 24, 2014  3072     bsteffen    Remove RadarRecord dependency for Radial
  *                                    Mesh
  * Sep 13, 2016  3239     nabowle     Use the Interrogatable API.
-<<<<<<< HEAD
-=======
  * Nov 14, 2022  8973     mapeters    Sync radarRecords access
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -119,11 +112,7 @@ public class RadarRadialResource extends RadarImageResource<MapDescriptor>
     @Override
     protected IImage createImage(IGraphicsTarget target,
             ColorMapParameters params, RadarRecord record, Rectangle rect)
-<<<<<<< HEAD
-                    throws VizException {
-=======
             throws VizException {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         byte[] table = createConversionTable(params, record);
         return target.getExtension(IColormappedImageExtension.class)
                 .initializeRaster(new RadarRadialDataRetrievalAdapter(record,
@@ -170,11 +159,7 @@ public class RadarRadialResource extends RadarImageResource<MapDescriptor>
                                         dataMap.get(IRadarInterrogator.RANGE),
                                         dataMap.get(
                                                 IRadarInterrogator.MNEMONIC),
-<<<<<<< HEAD
-                                dataMap.get(Interrogator.VALUE)));
-=======
                                         dataMap.get(Interrogator.VALUE)));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     }
                 }
             }
@@ -235,18 +220,6 @@ public class RadarRadialResource extends RadarImageResource<MapDescriptor>
         try {
             // TODO: This duplicates logic in
             // RadarResourceData.constructResource
-<<<<<<< HEAD
-            if (radarRecords != null && !radarRecords.isEmpty()) {
-                RadarRecord r = radarRecords.values().iterator().next();
-                productCode = r.getProductCode();
-            } else {
-                RequestConstraint productCodeConstraint = getResourceData()
-                        .getMetadataMap().get("productCode");
-                if (productCodeConstraint
-                        .getConstraintType() == ConstraintType.EQUALS) {
-                    productCode = Integer.parseInt(
-                            productCodeConstraint.getConstraintValue());
-=======
             synchronized (radarRecords) {
                 if (!radarRecords.isEmpty()) {
                     RadarRecord r = radarRecords.values().iterator().next();
@@ -259,7 +232,6 @@ public class RadarRadialResource extends RadarImageResource<MapDescriptor>
                         productCode = Integer.parseInt(
                                 productCodeConstraint.getConstraintValue());
                     }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
             }
         } catch (RuntimeException e) {
@@ -273,12 +245,8 @@ public class RadarRadialResource extends RadarImageResource<MapDescriptor>
         RadarRecord radarRecord = getRadarRecord(displayedDate);
 
         if (radarRecord != null) {
-<<<<<<< HEAD
-            return Quantities.getQuantity(radarRecord.getElevation(), USCustomary.FOOT);
-=======
             return Quantities.getQuantity(radarRecord.getElevation(),
                     USCustomary.FOOT);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         return Quantities.getQuantity(0.0, USCustomary.FOOT);
     }

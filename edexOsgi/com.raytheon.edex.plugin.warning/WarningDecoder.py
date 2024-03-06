@@ -65,11 +65,7 @@
 import calendar
 import sys, os, time, re, getopt
 
-<<<<<<< HEAD
 from awips import TimeUtil
-=======
-from ufpy import TimeUtil
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 from com.raytheon.uf.common.wmo import WMOTimeParser
 from com.raytheon.uf.edex.decodertools.time import TimeTools

@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -45,11 +33,8 @@ import com.raytheon.uf.common.dataquery.responses.DbQueryResponse;
 import com.raytheon.uf.common.menus.vb.VbSource;
 import com.raytheon.uf.common.menus.vb.VbSourceList;
 import com.raytheon.uf.common.pointdata.spatial.SurfaceObsLocation;
-<<<<<<< HEAD
-=======
 import com.raytheon.uf.common.status.IPerformanceStatusHandler;
 import com.raytheon.uf.common.status.PerformanceStatus;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.status.UFStatus.Priority;
 import com.raytheon.uf.viz.core.exception.VizException;
 import com.raytheon.uf.viz.core.requests.ThriftClient;
@@ -61,15 +46,6 @@ import com.raytheon.viz.volumebrowser.vbui.SelectedData;
 
 /**
  * Catalog for model sounding data
-<<<<<<< HEAD
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * 
- * Date          Ticket#  Engineer  Description
- * ------------- -------- --------- --------------------------
-=======
  *
  * <pre>
  *
@@ -77,25 +53,10 @@ import com.raytheon.viz.volumebrowser.vbui.SelectedData;
  *
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- --------------------------------------------
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Sep 28, 2011           mschenke  Initial creation
  * May 02, 2013  1949     bsteffen  Force ModelSounding in Vb to play nicely
  *                                  with others.
  * Jul 23, 2014  3410     bclement  location changed to floats
-<<<<<<< HEAD
- * Aug 19, 2014  3506     mapeters  Modified getTypeMap function to still get 
- *                                  correct VB sources after splitting them 
- *                                  into multiple files.
- * Aug 03, 2015  3861     bsteffen  Move to volumebrowser.dataplugin plugin.
- * 
- * </pre>
- * 
- * @author mschenke
- * @version 1.0
- */
-
-public class ModelSoundingCatalog extends PointDataCatalog {
-=======
  * Aug 19, 2014  3506     mapeters  Modified getTypeMap function to still get
  *                                  correct VB sources after splitting them into
  *                                  multiple files.
@@ -110,7 +71,6 @@ public class ModelSoundingCatalog extends PointDataCatalog {
 public class ModelSoundingCatalog extends PointDataCatalog {
     private static final IPerformanceStatusHandler perfLog = PerformanceStatus
             .getHandler("ModelSoundingCatalog");
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private static Map<String, String> typeMap = null;
 
@@ -118,32 +78,6 @@ public class ModelSoundingCatalog extends PointDataCatalog {
 
     private static final String typeKey = "reportType";
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.raytheon.viz.volumebrowser.datacatalog.PointDataCatalog#isValidSelection
-     * (com.raytheon.viz.volumebrowser.vbui.SelectedData)
-     */
-    @Override
-    protected boolean isValidSelection(SelectedData selData) {
-        return super.isValidSelection(new SelectedData(
-                selData.getSourcesText(), pluginName, selData.getFieldsText(),
-                selData.getFieldsKey(), selData.getPlanesText(), selData
-                        .getPlanesKey(), selData.getUniqueKey()));
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.raytheon.viz.volumebrowser.datacatalog.PointDataCatalog#
-     * getSupportedSources()
-     */
-    @Override
-    public List<String> getSupportedSources() {
-        return new ArrayList<String>(getTypeMap().keySet());
-=======
     @Override
     protected boolean isValidSelection(SelectedData selData) {
         return super.isValidSelection(new SelectedData(selData.getSourcesText(),
@@ -155,7 +89,6 @@ public class ModelSoundingCatalog extends PointDataCatalog {
     @Override
     public List<String> getSupportedSources() {
         return new ArrayList<>(getTypeMap().keySet());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override
@@ -163,72 +96,27 @@ public class ModelSoundingCatalog extends PointDataCatalog {
         return new String[] { pluginName };
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.raytheon.viz.volumebrowser.datacatalog.PointDataCatalog#getType(java
-     * .lang.String)
-     */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     protected String getType(String sourceKey) {
         return getTypeMap().get(sourceKey);
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.raytheon.viz.volumebrowser.datacatalog.PointDataCatalog#getTypeKey
-     * (java.lang.String)
-     */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     protected String getTypeKey(String sourceKey) {
         return typeKey;
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.raytheon.viz.volumebrowser.datacatalog.PointDataCatalog#getAvailableData
-     * (com.raytheon.viz.volumebrowser.datacatalog.AvailableDataRequest)
-     */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void getAvailableData(AvailableDataRequest request) {
         super.getAvailableData(new ModelSoundingAvailableDataRequest(request));
     }
 
-<<<<<<< HEAD
-    public class ModelSoundingAvailableDataRequest extends
-            DelegateAvailableRequest {
-=======
     public class ModelSoundingAvailableDataRequest
             extends DelegateAvailableRequest {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         public ModelSoundingAvailableDataRequest(AvailableDataRequest request) {
             super(modifySelectedSources(request));
         }
 
-<<<<<<< HEAD
-        /*
-         * (non-Javadoc)
-         * 
-         * @see
-         * com.raytheon.viz.volumebrowser.datacatalog.DelegateAvailableRequest
-         * #addAvailableSource(java.lang.String)
-         */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         @Override
         public void addAvailableSource(String source) {
             for (String modSource : getTypeMap().keySet()) {
@@ -254,20 +142,6 @@ public class ModelSoundingCatalog extends PointDataCatalog {
     private static synchronized Map<String, String> getTypeMap() {
         if (typeMap == null) {
             long t0 = System.currentTimeMillis();
-<<<<<<< HEAD
-            typeMap = new HashMap<String, String>();
-            try {
-                // The code in this try block is an optimization for the current
-                // version of postgres. Currently there are only two types, GFS
-                // and ETA, if you query for all distinct types it can take as
-                // long as 12 seconds. If you query for the types one at a time
-                // then it takes less than 100ms for each of the two queries.
-                DbQueryRequest request = new DbQueryRequest();
-                request.setDistinct(true);
-                request.setLimit(1);
-                request.addConstraint("pluginName", new RequestConstraint(
-                        pluginName));
-=======
             typeMap = new HashMap<>();
             try {
                 /*
@@ -282,20 +156,14 @@ public class ModelSoundingCatalog extends PointDataCatalog {
                 request.setLimit(1);
                 request.addConstraint("pluginName",
                         new RequestConstraint(pluginName));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 request.addRequestField(typeKey);
                 for (VbSource source : VbSourceList.getInstance()
                         .getAllSources()) {
                     if (!source.getRemove()
                             && source.getKey().startsWith(pluginName)) {
                         String type = source.getKey().replace(pluginName, "");
-<<<<<<< HEAD
-                        request.addConstraint(typeKey, new RequestConstraint(
-                                type));
-=======
                         request.addConstraint(typeKey,
                                 new RequestConstraint(type));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         DbQueryResponse response = (DbQueryResponse) ThriftClient
                                 .sendRequest(request);
                         if (!response.getResults().isEmpty()) {
@@ -303,15 +171,6 @@ public class ModelSoundingCatalog extends PointDataCatalog {
                         }
                     }
                 }
-<<<<<<< HEAD
-            } catch (VizException e) {
-                // If something went wrong try to just query for all distinct
-                // types.
-                DbQueryRequest request = new DbQueryRequest();
-                request.setDistinct(true);
-                request.addConstraint("pluginName", new RequestConstraint(
-                        pluginName));
-=======
             } catch (@SuppressWarnings("squid:S1166")
             VizException e) {
                 /*
@@ -322,7 +181,6 @@ public class ModelSoundingCatalog extends PointDataCatalog {
                 request.setDistinct(true);
                 request.addConstraint("pluginName",
                         new RequestConstraint(pluginName));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 request.addRequestField(typeKey);
                 try {
                     DbQueryResponse response = (DbQueryResponse) ThriftClient
@@ -336,13 +194,8 @@ public class ModelSoundingCatalog extends PointDataCatalog {
                             e1.getLocalizedMessage(), e1);
                 }
             }
-<<<<<<< HEAD
-            System.out.println("Time to populate typeMap = "
-                    + (System.currentTimeMillis() - t0) + "ms");
-=======
             perfLog.logDuration("Populating typeMap",
                     (System.currentTimeMillis() - t0));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         return typeMap;
     }
@@ -361,11 +214,7 @@ public class ModelSoundingCatalog extends PointDataCatalog {
         if (spipv == null) {
             return super.getStationLocations(sourceKey);
         }
-<<<<<<< HEAD
-        List<SurfaceObsLocation> locs = new ArrayList<SurfaceObsLocation>();
-=======
         List<SurfaceObsLocation> locs = new ArrayList<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         for (Entry<String, SPIEntry> entry : spipv.getSpiList().entrySet()) {
             SurfaceObsLocation loc = new SurfaceObsLocation();
             loc.setStationId(entry.getKey());

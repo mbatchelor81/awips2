@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -52,22 +40,6 @@ import com.raytheon.uf.viz.core.catalog.CatalogQuery;
 import com.raytheon.uf.viz.core.exception.VizException;
 
 /**
-<<<<<<< HEAD
- * 
- * A basic node which fulfills time and data requests by going to edex.
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * 
- * Date          Ticket#  Engineer  Description
- * ------------- -------- --------- ------------------------------
- * Apr 13, 2010  4473     rjpeter   Initial creation
- * Aug 15, 2017  6332     bsteffen  Move to viz.grid.radar plugin
- * 
- * </pre>
- * 
-=======
  *
  * A basic node which fulfills time and data requests by going to edex.
  *
@@ -85,7 +57,6 @@ import com.raytheon.uf.viz.core.exception.VizException;
  *
  * </pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  */
 public class RadarRequestableLevelNode extends AbstractBaseDataNode {
 
@@ -99,11 +70,7 @@ public class RadarRequestableLevelNode extends AbstractBaseDataNode {
 
     /**
      * Copy constructor
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param that
      */
     public RadarRequestableLevelNode(RadarRequestableLevelNode that) {
@@ -116,11 +83,7 @@ public class RadarRequestableLevelNode extends AbstractBaseDataNode {
     /**
      * Create a new requestable Level Node that is LevelNode clone of that and
      * uses rcMap for all Requests
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param that
      * @param rcMap
      */
@@ -168,19 +131,12 @@ public class RadarRequestableLevelNode extends AbstractBaseDataNode {
             throw new DataCubeException(e);
         }
         if (results != null) {
-<<<<<<< HEAD
-            resultsSet = new HashSet<>(results.length);
-            for (int i = 0; i < results.length; i++) {
-                resultsSet.add(new TimeAndSpace(results[i],
-                        RadarAdapter.getInstance().getCoverage()));
-=======
             String icao = rcMap.get(RadarAdapter.ICAO_QUERY)
                     .getConstraintValue();
             resultsSet = new HashSet<>(results.length);
             for (DataTime result : results) {
                 resultsSet.add(new TimeAndSpace(result,
                         RadarAdapter.getInstance().getCoverage(icao)));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
             RadarUpdater.getInstance().setTimes(this, resultsSet);
             return resultsSet;
@@ -219,14 +175,9 @@ public class RadarRequestableLevelNode extends AbstractBaseDataNode {
         // GribRecord, needs to call getDataValue on Requestable
         for (Map<String, Object> objMap : rows) {
             try {
-<<<<<<< HEAD
-                rval.add(new RadarRequestableData(
-                        (RadarRecord) objMap.get(null), paramAbbrev));
-=======
                 rval.add(RadarRequestableDataFactory.getInstance()
                         .getRadarRequestableData((RadarRecord) objMap.get(null),
                                 paramAbbrev));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             } catch (VizException e) {
                 throw new DataCubeException(e);
             }

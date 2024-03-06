@@ -75,15 +75,9 @@ import com.raytheon.uf.edex.plugin.bufrobs.category.CategoryKey;
 import com.raytheon.uf.edex.plugin.bufrobs.category.CategoryParser;
 
 import si.uom.SI;
-<<<<<<< HEAD
-import tec.uom.se.format.SimpleUnitFormat;
-import tec.uom.se.unit.MetricPrefix;
-import tec.uom.se.unit.Units;
-=======
 import tech.units.indriya.format.SimpleUnitFormat;
 import javax.measure.MetricPrefix;
 import tech.units.indriya.unit.Units;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import ucar.nc2.Attribute;
 import ucar.nc2.NetcdfFile;
 import ucar.nc2.Variable;
@@ -96,23 +90,6 @@ import ucar.nc2.Variable;
  * 
  * SOFTWARE HISTORY
  * 
-<<<<<<< HEAD
- * Date          Ticket#  Engineer  Description
- * ------------- -------- --------- --------------------------------------------
- * Mar 21, 2014  2906     bclement  Initial creation
- * Apr 21, 2014  2906     bclement  populated wmo header in record for
- *                                  consistency
- * Jun 12, 2014  3229     bclement  default implementation for
- *                                  getTranslationFile() and createStationId()
- *                                  moved processGeneralFields() and
- *                                  processPrecip() from synoptic land decoder
- * Jul 23, 2014  3410     bclement  location changed to floats
- * Jul 11, 2016  5744     mapeters  Localization files moved from edex_static to
- *                                  common_static
- * Sep 11, 2017  6406     bsteffen  Upgrade ucar
- * Apr 15, 2019 7596      lsingh    Updated units framework to JSR-363.
- *                                  Handled unit conversion.
-=======
  * Date          Ticket#  Engineer      Description
  * ------------- -------- ---------     --------------------------------------------
  * Mar 21, 2014  2906     bclement      Initial creation
@@ -134,7 +111,6 @@ import ucar.nc2.Variable;
  * May 31, 2022  100866   smanoj        Adding appropriate error check to avoid
  *                                      Null Pointer Exception.
  * Aug 17, 2023  2035948  lisa.singh    Added support for alternative WMO Header parsing.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -242,24 +218,6 @@ public abstract class AbstractBufrSfcObsDecoder {
         boolean hasMore = true;
         while (hasMore) {
             try {
-<<<<<<< HEAD
-                try {
-                    ObsCommon record = getNextRecord(parser, reportType, header,
-                            pointMap);
-                    if (record != null) {
-                        rval.add(record);
-                    } else {
-                        hasMore = false;
-                    }
-                } catch (MissingRequiredDataException e) {
-                    /* missing data required for record, no stack trace */
-                    log.warn(e.getLocalizedMessage());
-                    findEndOfStructure(parser);
-                } catch (BufrObsDecodeException e) {
-                    /* problem with individual structure, try to parse more */
-                    log.error(e.getLocalizedMessage(), e);
-                    findEndOfStructure(parser);
-=======
                 if (parser != null && parser.hasNext()) {
                     try {
                         ObsCommon record = getNextRecord(parser, reportType,
@@ -282,7 +240,6 @@ public abstract class AbstractBufrSfcObsDecoder {
                     }
                 } else {
                     hasMore = false;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
             } catch (IOException e) {
                 /* problem with the parser itself, give up on file */
@@ -310,9 +267,6 @@ public abstract class AbstractBufrSfcObsDecoder {
         ObsCommon currentRecord = null;
         boolean done = false;
         while (parser.hasNext() && !done) {
-<<<<<<< HEAD
-            Event e = parser.next();
-=======
             Event e = null;
             try {
                 e = parser.next();
@@ -322,7 +276,6 @@ public abstract class AbstractBufrSfcObsDecoder {
                                 + parser.getFile());
                 return currentRecord;
             }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             switch (e) {
             case START_FILE:
                 log.debug("Started processing BUFR file: " + parser.getFile());
@@ -331,14 +284,6 @@ public abstract class AbstractBufrSfcObsDecoder {
                 if (parser.getStructLevel() == 1) {
                     /* started a new record */
                     currentRecord = createNewRecord(parser);
-<<<<<<< HEAD
-                    setTime(currentRecord, parser);
-                    setWMOHeaderInfo(currentRecord, header);
-                    currentRecord.setReportType(reportType);
-                    PointDataContainer pdc = getPointDataContainer(pointMap,
-                            currentRecord);
-                    currentRecord.setPointDataView(pdc.append());
-=======
                     if (currentRecord != null && parser != null) {
                         setTime(currentRecord, parser);
                         setWMOHeaderInfo(currentRecord, header);
@@ -347,7 +292,6 @@ public abstract class AbstractBufrSfcObsDecoder {
                                 currentRecord);
                         currentRecord.setPointDataView(pdc.append());
                     }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
                 break;
             case FIELD:
@@ -422,11 +366,7 @@ public abstract class AbstractBufrSfcObsDecoder {
             throw new MissingRequiredDataException(
                     "Missing WMO Header in BUFR file: " + parser.getFile());
         }
-<<<<<<< HEAD
-        return new WMOHeader(attrib.getStringValue().getBytes());
-=======
         return new WMOHeader(attrib.getStringValue().getBytes(), null, true);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
@@ -627,8 +567,6 @@ public abstract class AbstractBufrSfcObsDecoder {
                             + parser.getFile());
         }
 
-<<<<<<< HEAD
-=======
         if (yearData.getValue() == null || monthData.getValue() == null
                 || dayData.getValue() == null || hourData.getValue() == null
                 || minData.getValue() == null) {
@@ -637,7 +575,6 @@ public abstract class AbstractBufrSfcObsDecoder {
                             + parser.getFile());
         }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         int year = ((Number) yearData.getValue()).intValue();
         int month = ((Number) monthData.getValue()).intValue();
         int day = ((Number) dayData.getValue()).intValue();
@@ -782,11 +719,7 @@ public abstract class AbstractBufrSfcObsDecoder {
                         + " to " + toUnit.getName(), e);
                 rval = null;
             }
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         } else {
             log.error("Attempted to convert non-numeric value '" + obj
                     + "' for field: " + var.getFullName());
@@ -1068,15 +1001,8 @@ public abstract class AbstractBufrSfcObsDecoder {
                     precip.intValue());
             break;
         case 3:
-<<<<<<< HEAD
-            /* text synop obs doesn't have 3HR precip */
-            log.debug(
-                    "Received precip period not supported by point data view: "
-                            + Math.abs(period.intValue()) + " HOUR");
-=======
             pdv.setFloat(SfcObsPointDataTransform.PRECIP3_HOUR,
                     precip.intValue());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             break;
         case 6:
             pdv.setFloat(SfcObsPointDataTransform.PRECIP6_HOUR,

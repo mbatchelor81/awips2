@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-##
-=======
 # #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # This software was developed and / or modified by Raytheon Company,
 # pursuant to Contract DG133W-05-CQ-1067 with the US Government.
 #
@@ -20,84 +16,12 @@
 #
 # See the AWIPS II Master Rights File ("Master Rights File.pdf") for
 # further licensing information.
-<<<<<<< HEAD
-##
-
-=======
 # #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 #
 # h5py implementation of IDataStore
 #
 #
-<<<<<<< HEAD
-#     SOFTWARE HISTORY
-#
-#    Date            Ticket#       Engineer       Description
-#    ------------    ----------    -----------    --------------------------
-#    06/16/10                      njensen        Initial Creation.
-#    05/03/11           9134       njensen        Optimized for pointdata
-#    10/09/12                      rjpeter        Optimized __getGroup for retrievals
-#    01/17/13        DR 15294      D. Friedman    Clear out data in response
-#    02/12/13           1608       randerso       Added support for explicitly deleting groups and datasets
-#    Nov 14, 2013       2393       bclement       removed interpolation
-#    Jan 17, 2014       2688       bclement       added file action and subprocess error logging
-#    Mar 19, 2014       2688       bgonzale       added more subprocess logging.  Return value from
-#                                                 subprocess.check_output is not return code, but is
-#                                                 process output.  h5repack has no output without -v arg.
-#    Apr 24, 2015       4425       nabowle        Add DoubleDataRecord
-#    Jun 15, 2015   DR 17556      mgamazaychikov  Add __doMakeReadable method to counteract umask 027 daemon
-#                                                 and make copied files world-readable
-#    Jul 27, 2015       4402       njensen        Set fill_time_never on write if fill value is None
-#    Jul 30, 2015       1574       nabowle        Add deleteOrphanFiles()
-#    Aug 20, 2015   DR 17726      mgamazaychikov  Remove __doMakeReadable method
-#    Sep 14, 2015       4868       rjpeter        Updated writePartialHDFData to create the dataset if
-#                                                 it doesn't exist.
-#    Oct 20, 2015       4982       nabowle        Verify datatypes match when replacing data.
-#    Feb 15, 2016       3857       tgurney        Handle lowercase compression type (e.g. 'lzf')
-#    Feb 24, 2016       5389       nabowle        Orphan purging now uses subdirectory patterns with
-#                                                 separate reftimes, if applicable.
-#    Feb 26, 2016       5420       tgurney        Store and check for time of last repack
-#    Feb 29, 2016       5420       tgurney        Remove timestampCheck arg from copy()
-#    Apr 22, 2016       5389       nabowle        Fix purging false-orphans.
-#    Nov 15, 2016       5992       bsteffen       Support storing compressed records.
-#    Dec 22, 2016    DR 19477      mporricelli    Check that file exists in copy() before attempting file action
-#    May 05, 2017       6256       tgurney        Set restricted file permissions on copy()
-#    May 12, 2017       6256       tgurney        Set restricted file permissions on repack
-#    Jun 14, 2017       6256       tgurney        Set permissions on correct files (bug fix)
-#    Aug 16, 2018       6720       njensen        Improved __getNode() error message, removed __getGroup()
-#    Sep 14, 2018       6448       dlovely        Fixed issue with h5repack and LZF compression
-#    Sep 19, 2018       7435       ksunil         Eliminate compression/decompression on HDF5
-#    Oct 11, 2018       7306       dgilling       Force getDatasets to always return
-#                                                 ndarray of type numpy.string_.
-#    May 15, 2019       7847       dlovely        Fix for segmentation fault using LZF compression
-#    Jun 25, 2019       7885       tgurney        Python 3 fixes
-#    Jul 23, 2019       7885       tgurney        Decode h5repack subprocess output
-#    Aug 13, 2019       7885       tgurney        Fix str/bytes issue with
-#                                                 delete requests
-#    Jan 28, 2020       7985       ksunil         Removed the compression changes introduced in 7435
-#    Feb 11, 2020       7628       bsteffen       Ensure __retrieve only returns datasets.
-#    Jan 17, 2022       8729       rjpeter        Call method cleanUp
-
-import fnmatch
-import h5py
-import logging
-import numpy
-import os
-import re
-import shutil
-import stat # for h5repack
-import subprocess # for h5repack
-import time
-import traceback
-
-import pypies
-from datetime import datetime, timedelta
-from pypies import IDataStore, StorageException, NotImplementedException
-from pypies import MkDirLockManager as LockManager
-from . import HDF5OpManager, DataStoreFactory
-=======
 # SOFTWARE HISTORY
 #
 # Date          Ticket#  Engineer       Description
@@ -178,27 +102,19 @@ import h5py
 import numpy
 from pypies import IDataStore, MkDirLockManager as LockManager, NotImplementedException, StorageException
 import pypies
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 from dynamicserialize.dstypes.com.raytheon.uf.common.datastorage import *
 from dynamicserialize.dstypes.com.raytheon.uf.common.datastorage.records import *
 from dynamicserialize.dstypes.com.raytheon.uf.common.pypies.records import *
 from dynamicserialize.dstypes.com.raytheon.uf.common.pypies.response import *
 
-<<<<<<< HEAD
-=======
 from . import DataStoreFactory, HDF5OpManager
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 logger = pypies.logger
 timeMap = pypies.timeMap
 fullDiskThreshold = pypies.fullDiskThreshold
 
-<<<<<<< HEAD
-vlen_str_type = h5py.special_dtype(vlen=bytes)
-=======
 vlen_str_type = h5py.vlen_dtype(bytes)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 FILE_PERMISSIONS = 0o0640
 
@@ -263,11 +179,7 @@ class H5pyDataStore(IDataStore.IDataStore):
                 if 'index' in ss:
                     status.setIndexOfAppend(ss['index'])
             t1 = time.time()
-<<<<<<< HEAD
-            timeMap['store']= t1 - t0
-=======
             timeMap['store'] = t1 - t0
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             resp = StoreResponse()
             resp.setStatus(status)
             resp.setExceptions(exc)
@@ -277,11 +189,7 @@ class H5pyDataStore(IDataStore.IDataStore):
             t0 = time.time()
             f.close()
             t1 = time.time()
-<<<<<<< HEAD
-            timeMap['closeFile']=t1-t0
-=======
             timeMap['closeFile'] = t1 - t0
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             LockManager.releaseLock(lock)
 
     def __prepareRecordsToStore(self, records):
@@ -303,11 +211,7 @@ class H5pyDataStore(IDataStore.IDataStore):
             raise StorageException('Data must be chunked to be compressed')
 
         data = record.retrieveDataObject()
-<<<<<<< HEAD
-        rootNode=f['/']
-=======
         rootNode = f['/']
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         group = self.__getNode(rootNode, record.getGroup(), None, create=True)
         if record.getMinIndex() is not None and len(record.getMinIndex()):
             ss = self.__writePartialHDFDataset(f, data, record.getDimension(), record.getSizes(), record.getName(),
@@ -324,13 +228,8 @@ class H5pyDataStore(IDataStore.IDataStore):
 
     def __writeHDFDataset(self, f, data, dims, szDims, dataset, group, props, dataType, storeOp, rec):
         nDims = len(szDims)
-<<<<<<< HEAD
-        szDims1 = [None,] * nDims
-        maxDims = [None,] * nDims
-=======
         szDims1 = [None, ] * nDims
         maxDims = [None, ] * nDims
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         recMaxDims = rec.getMaxSizes()
         for i in range(nDims):
             szDims1[i] = szDims[nDims - i - 1]
@@ -377,11 +276,7 @@ class H5pyDataStore(IDataStore.IDataStore):
             fillValue = rec.getFillValue()
 
             ds = self.__createDatasetInternal(group, dataset, dataType, szDims1, maxDims, chunk, compression, fillValue)
-<<<<<<< HEAD
-            #ds = group.create_dataset(dataset, szDims1, dataType, maxshape=maxDims, chunks=chunk, compression=compression)
-=======
             # ds = group.create_dataset(dataset, szDims1, dataType, maxshape=maxDims, chunks=chunk, compression=compression)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             ds[()] = data
             ss['op'] = 'STORE_ONLY'
@@ -402,10 +297,6 @@ class H5pyDataStore(IDataStore.IDataStore):
                 dtype = vlen_str_type
         return dtype
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     # Common use case of arrays are passed in x/y and orientation of data is y/x
     def __reverseDimensions(self, dims):
         revDims = [None, ] * len(dims)
@@ -473,11 +364,7 @@ class H5pyDataStore(IDataStore.IDataStore):
 
         ss = {}
         if dataset in group:
-<<<<<<< HEAD
-            ds=group[dataset]
-=======
             ds = group[dataset]
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             ss['op'] = 'REPLACE'
             if ds.dtype.type != data.dtype.type:
                 raise StorageException("Cannot REPLACE data of type " + ds.dtype.name + " with data of type " + data.dtype.name + " in " + f.filename + " " + group.name + ".")
@@ -502,10 +389,6 @@ class H5pyDataStore(IDataStore.IDataStore):
 
         return ss
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def delete(self, request):
         fn = request.getFilename()
         f, lock = self.__openFile(fn, 'w')
@@ -559,43 +442,25 @@ class H5pyDataStore(IDataStore.IDataStore):
             t0 = time.time()
             f.close()
             t1 = time.time()
-<<<<<<< HEAD
-            timeMap['closeFile']=t1-t0
-
-            if deleteFile:
-                logger.info('Removing empty file ['+ str(fn) + ']')
-=======
             timeMap['closeFile'] = t1 - t0
 
             if deleteFile:
                 logger.info('Removing empty file [' + str(fn) + ']')
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 try:
                     os.remove(fn)
                 except Exception as e:
                     logger.error('Error occurred deleting file [' + str(fn) + ']: ' + IDataStore._exc())
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             LockManager.releaseLock(lock)
         return resp
 
     # recursively looks for data sets
     def __hasDataSet(self, group):
         for key in group:
-<<<<<<< HEAD
-            child=group[key]
-            if type(child) == h5py.highlevel.Dataset:
-                return True
-            elif type(child) == h5py.highlevel.Group:
-=======
             child = group[key]
             if isinstance(child, h5py.Dataset):
                 return True
             elif isinstance(child, h5py.Group):
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if self.__hasDataSet(child):
                     return True
         return False
@@ -606,11 +471,7 @@ class H5pyDataStore(IDataStore.IDataStore):
         try:
             group = request.getGroup()
             req = request.getRequest()
-<<<<<<< HEAD
-            rootNode=f['/']
-=======
             rootNode = f['/']
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if req:
                 ds = self.__getNode(rootNode, group, request.getDataset())
                 result = [self.__retrieveInternal(ds, req)]
@@ -624,11 +485,7 @@ class H5pyDataStore(IDataStore.IDataStore):
             t0 = time.time()
             f.close()
             t1 = time.time()
-<<<<<<< HEAD
-            timeMap['closeFile']=t1-t0
-=======
             timeMap['closeFile'] = t1 - t0
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             LockManager.releaseLock(lock)
 
     def __retrieve(self, group):
@@ -636,11 +493,7 @@ class H5pyDataStore(IDataStore.IDataStore):
         datasets = list(group.keys())
         for ds in datasets:
             dataset = group[ds]
-<<<<<<< HEAD
-            if type(dataset) == h5py.highlevel.Dataset:
-=======
             if isinstance(dataset, h5py.Dataset):
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 rec = self.__retrieveInternal(dataset, REQUEST_ALL)
                 records.append(rec)
 
@@ -666,11 +519,7 @@ class H5pyDataStore(IDataStore.IDataStore):
             names = request.getDatasetGroupPath()
             req = request.getRequest()
             result = []
-<<<<<<< HEAD
-            rootNode=f['/']
-=======
             rootNode = f['/']
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             for dsName in names:
                 ds = self.__getNode(rootNode, None, dsName)
                 t2 = time.time()
@@ -693,17 +542,10 @@ class H5pyDataStore(IDataStore.IDataStore):
             if logger.isEnabledFor(logging.DEBUG):
                 logger.debug("pid=" + str(os.getpid()) + " filename=" + fn +
                         ", numberOfDatasets/Parameters=" + str(len(names)) +
-<<<<<<< HEAD
-                        ", getLockTime=" +  ('%.3f' % (t1-t0)) +
-                        ", readDataTime=" + ('%.3f' % (timeSpentReading)) +
-                        ", releaseLockTime=" + ('%.3f' % (t5-t4)) +
-                        ", retrieveDatasetsTotal=" + ('%.3f' % (t4-t6)) +
-=======
                         ", getLockTime=" + ('%.3f' % (t1 - t0)) +
                         ", readDataTime=" + ('%.3f' % (timeSpentReading)) +
                         ", releaseLockTime=" + ('%.3f' % (t5 - t4)) +
                         ", retrieveDatasetsTotal=" + ('%.3f' % (t4 - t6)) +
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         ", perParamRead=" + str(paramMap))
 
     def retrieveGroups(self, request):
@@ -713,20 +555,12 @@ class H5pyDataStore(IDataStore.IDataStore):
             groups = request.getGroups()
             req = request.getRequest()
             recs = []
-<<<<<<< HEAD
-            rootNode=f['/']
-=======
             rootNode = f['/']
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             for group in groups:
                 grp = self.__getNode(rootNode, group)
                 datasets = grp.keys()
                 for ds in datasets:
-<<<<<<< HEAD
-                    dsNode=grp[ds]
-=======
                     dsNode = grp[ds]
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     rawData = HDF5OpManager.read(dsNode, req)
                     rec = DataStoreFactory.createStorageRecord(rawData, dsNode, req)
                     recs.append(rec)
@@ -737,11 +571,7 @@ class H5pyDataStore(IDataStore.IDataStore):
             t0 = time.time()
             f.close()
             t1 = time.time()
-<<<<<<< HEAD
-            timeMap['closeFile']=t1-t0
-=======
             timeMap['closeFile'] = t1 - t0
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             LockManager.releaseLock(lock)
 
     def getDatasets(self, request):
@@ -751,34 +581,22 @@ class H5pyDataStore(IDataStore.IDataStore):
             grpName = request.getGroup()
             grp = self.__getNode(f['/'], grpName)
             ds = list(grp.keys())
-<<<<<<< HEAD
-            return numpy.array(ds, dtype=numpy.string_)
-=======
 
             resp = DatasetNamesResponse()
             resp.setDatasets(ds)
             return resp
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         finally:
             t0 = time.time()
             f.close()
             t1 = time.time()
-<<<<<<< HEAD
-            timeMap['closeFile']=t1-t0
-=======
             timeMap['closeFile'] = t1 - t0
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             LockManager.releaseLock(lock)
 
     def deleteFiles(self, request):
         fn = request.getFilename()
         if os.path.exists(fn):
             if os.path.isdir(fn):
-<<<<<<< HEAD
-                self.__recursiveDeleteFiles(fn,request.getDatesToDelete())
-=======
                 self.__recursiveDeleteFiles(fn, request.getDatesToDelete())
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             else:
                 self.__removeFile(fn)
 
@@ -828,11 +646,7 @@ class H5pyDataStore(IDataStore.IDataStore):
             t0 = time.time()
             f.close()
             t1 = time.time()
-<<<<<<< HEAD
-            timeMap['closeFile']=t1-t0
-=======
             timeMap['closeFile'] = t1 - t0
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             LockManager.releaseLock(lock)
 
     def __createDatasetInternal(self, group, datasetName, dtype, szDims,
@@ -849,24 +663,14 @@ class H5pyDataStore(IDataStore.IDataStore):
 
         if chunks:
             plc.set_chunk(chunks)
-<<<<<<< HEAD
-        if compression is not None and compression.upper() == 'LZF':
-            plc.set_shuffle()
-            plc.set_filter(h5py.h5z.FILTER_LZF, h5py.h5z.FLAG_OPTIONAL)
-=======
         if compression is not None and compression.upper() == 'GZIP':
             plc.set_shuffle()
             plc.set_deflate(1)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         szDims = tuple(szDims)
         if maxDims is not None:
             maxDims = tuple(x if x is not None else h5py.h5s.UNLIMITED for x in maxDims)
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         space_id = h5py.h5s.create_simple(szDims, maxDims)
         type_id = h5py.h5t.py_create(dtype, logical=True)
 
@@ -874,17 +678,6 @@ class H5pyDataStore(IDataStore.IDataStore):
         ds = group[datasetName]
         return ds
 
-<<<<<<< HEAD
-    def __recursiveDeleteFiles(self, dir, datesToDelete):
-        if os.path.exists(dir) and os.path.isdir(dir):
-
-            if datesToDelete is None:
-                self.__removeDir(dir)
-            else:
-                files = os.listdir(dir)
-                for f in files:
-                    fullpath = dir + '/' + f
-=======
     def __recursiveDeleteFiles(self, directory, datesToDelete):
         if os.path.exists(directory) and os.path.isdir(directory):
 
@@ -894,18 +687,13 @@ class H5pyDataStore(IDataStore.IDataStore):
                 files = os.listdir(directory)
                 for f in files:
                     fullpath = os.path.join(directory, f)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     if os.path.isdir(fullpath):
                         self.__recursiveDeleteFiles(fullpath, datesToDelete)
                     else:
                         for deleteDate in datesToDelete:
                             try:
                                 matches = PURGE_REGEX.search(deleteDate)
-<<<<<<< HEAD
-                                ymd = matches.group(2)+'-'+matches.group(3)
-=======
                                 ymd = matches.group(2) + '-' + matches.group(3)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                 if f.find(ymd) != -1:
                                     self.__removeFile(fullpath)
                             except:
@@ -956,11 +744,7 @@ class H5pyDataStore(IDataStore.IDataStore):
             raise e
 
         t1 = time.time()
-<<<<<<< HEAD
-        timeMap['openFile']=t1-t0
-=======
         timeMap['openFile'] = t1 - t0
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return f, fd
 
     def __getNode(self, rootNode, groupName, dsName=None, create=False):
@@ -970,17 +754,6 @@ class H5pyDataStore(IDataStore.IDataStore):
         # expected output of /group1::group2::group3/dataSet-interpolated/1
         if groupName:
             if dsName:
-<<<<<<< HEAD
-                toNormalize=groupName + '/' + dsName
-            else:
-                toNormalize=groupName
-        elif dsName:
-            toNormalize=dsName
-        else:
-            # both None, return root node as default
-            return rootNode
-        tokens=toNormalize.split('/')
-=======
                 toNormalize = groupName + '/' + dsName
             else:
                 toNormalize = groupName
@@ -990,16 +763,11 @@ class H5pyDataStore(IDataStore.IDataStore):
             # both None, return root node as default
             return rootNode
         tokens = toNormalize.split('/')
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # remove any empty tokens
         tokens = [token for token in tokens if token]
 
-<<<<<<< HEAD
-        dsNameToken=None
-=======
         dsNameToken = None
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if dsName:
             # data set name was given, keep last token for ds name
             dsNameToken = tokens.pop()
@@ -1016,15 +784,9 @@ class H5pyDataStore(IDataStore.IDataStore):
                     dsNameToken = isInterpToken
 
         if tokens:
-<<<<<<< HEAD
-            basePath='::'.join(tokens)
-        else:
-            basePath=None
-=======
             basePath = '::'.join(tokens)
         else:
             basePath = None
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         node = None
         if create:
@@ -1063,45 +825,17 @@ class H5pyDataStore(IDataStore.IDataStore):
 
         t1 = time.time()
         if 'getGroup' in timeMap:
-<<<<<<< HEAD
-            timeMap['getGroup']+=t1-t0
-        else:
-            timeMap['getGroup']=t1-t0
-
-        return node
-
-
-
-=======
             timeMap['getGroup'] += t1 - t0
         else:
             timeMap['getGroup'] = t1 - t0
 
         return node
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def __link(self, group, linkName, dataset):
         # this is a hard link
         group[linkName] = dataset
 
         # untested code, this would be if we went with symbolic links, this is unpublished h5py API
-<<<<<<< HEAD
-        #id = group.id
-        #id.link(dataset.name, linkName, h5py.h5g.LINK_SOFT)
-
-    def copy(self, request):
-        resp = FileActionResponse()
-        file = request.getFilename()
-        repack = request.getRepack()
-        action = self.__doCopy if not repack else self.__doRepack
-        if os.path.exists(file):
-            pth = os.path.split(file)[0]
-            self.__doFileAction(file, pth, request.getOutputDir(), action, resp, request.getRepackCompression())
-        else:
-            actionName = self.__getFileActionName(action)
-            logger.error("Error performing action '" + actionName + "' on file " + file + " - No such file or directory")
-            resp.setFailedFiles([file])
-=======
         # id = group.id
         # id.link(dataset.name, linkName, h5py.h5g.LINK_SOFT)
 
@@ -1117,7 +851,6 @@ class H5pyDataStore(IDataStore.IDataStore):
             actionName = self.__getFileActionName(action)
             logger.error("Error performing action '" + actionName + "' on file " + filename + " - No such file or directory")
             resp.setFailedFiles([filename])
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return resp
 
     def __doCopy(self, filepath, basePath, outputDir, compression):
@@ -1154,14 +887,7 @@ class H5pyDataStore(IDataStore.IDataStore):
             repackedFullPath = filepath + '.repacked'
         else:
             repackedFullPath = filepath.replace(basePath, outDir)
-<<<<<<< HEAD
-        #7847 - Fix for segmentation fault using LZF compression in newer
-        # versions of HDF5. LZF support was from 1.6.5-1.8.3 per
-        # https://support.hdfgroup.org/services/filters.html
-        if compression == 'LZF':
-=======
         if compression.upper() == 'GZIP':
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             compression = 'GZIP=1'
         cmd = ['h5repack', '-f', compression, filepath, repackedFullPath]
         if logger.isEnabledFor(logging.DEBUG):
@@ -1307,11 +1033,7 @@ class H5pyDataStore(IDataStore.IDataStore):
             purgeMap = dict()
             # compile the key to a regex, and remap it to the datetime
             for key, oldestDate in oldestDateMap.items():
-<<<<<<< HEAD
-                oldestDatetime = datetime.utcfromtimestamp(oldestDate.getTime()//1000)
-=======
                 oldestDatetime = datetime.utcfromtimestamp(oldestDate.getTime() // 1000)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 purgeMap[re.compile(key)] = oldestDatetime
 
             # Walk the plugin directory looking for orphaned files from the

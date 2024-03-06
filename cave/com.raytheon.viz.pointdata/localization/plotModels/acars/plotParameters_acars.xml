@@ -27,21 +27,6 @@
 <plotParameterDefinitions>
    <plugin>acars</plugin>
 
-<<<<<<< HEAD
-   <plotParameterDefinition displayName="tailNumber" mode="TEXT" param="tailNumber" sampleValue="0" svgClass="text" />
-
-   <plotParameterDefinition displayName="timeObs" format="time:dd/HHmm" mode="TEXT" param="timeObs" sampleValue="0" svgClass="text" />
-
-   <plotParameterDefinition displayName="flightLevel (hft)" format="%3.0f" mode="TEXT" param="flightLevel" sampleValue="75" unit="hft" />
-
-   <plotParameterDefinition displayName="temp (°C)" format="%3.0f" mode="TEXT" param="temp" sampleValue="75" unit="°C" />
-
-   <plotParameterDefinition displayName="dwpt" format="%3.0f" mode="TEXT" param="dwpt" sampleValue="75" />
-
-   <plotParameterDefinition displayName="windSpeed,windDirection (kts)" mode="BARB" param="windSpeed,windDirection" sampleValue="0,1" unit="kts" />
-
-   <plotParameterDefinition displayName="Marker" mode="MARKER" param="Marker" sampleValue=" " svgClass="marker" />
-=======
    <plotParameterDefinition displayName="tailNumber" displayType="TEXT" param="tailNumber" sampleValue="0" svgClass="text" />
 
    <plotParameterDefinition displayName="timeObs" format="time:dd/HHmm" displayType="TEXT" param="timeObs" sampleValue="0" svgClass="text" />
@@ -61,5 +46,4 @@
    <plotParameterDefinition displayName="windSpeed,windDirection (m/s)" displayType="BARB" param="windSpeed,windDirection" sampleValue="0,1" unit="m/s" />
 
    <plotParameterDefinition displayName="Marker" displayType="MARKER" param="Marker" sampleValue=" " svgClass="marker" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 </plotParameterDefinitions>

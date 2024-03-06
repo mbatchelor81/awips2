@@ -19,11 +19,7 @@ Require-Bundle: javax.persistence,
  com.raytheon.uf.common.serialization.comm,
  com.raytheon.uf.common.dataplugin.grid,
  com.raytheon.uf.common.dataaccess,
-<<<<<<< HEAD
- com.google.guava;bundle-version="30.0.0",
-=======
  com.google.guava;bundle-version="32.0.0",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  javax.measure,
  com.raytheon.uf.common.message,
  com.raytheon.uf.common.dataquery,

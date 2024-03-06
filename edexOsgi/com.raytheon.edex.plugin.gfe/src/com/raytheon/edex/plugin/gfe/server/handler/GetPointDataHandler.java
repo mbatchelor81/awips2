@@ -57,13 +57,8 @@ import com.raytheon.uf.common.time.util.TimeUtil;
 
 import si.uom.NonSI;
 import si.uom.SI;
-<<<<<<< HEAD
-import tec.uom.se.AbstractUnit;
-import tec.uom.se.unit.MetricPrefix;
-=======
 import tech.units.indriya.AbstractUnit;
 import javax.measure.MetricPrefix;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Generates results for Point(s) on requested grid database. Used by AvnFPS to
@@ -89,11 +84,8 @@ import javax.measure.MetricPrefix;
  * Apr 04, 2016     #5539  randerso    Fixed unsigned byte issues
  * Feb 22, 2018      6937  njensen     Use null for data outside bounds instead of error
  * Feb 23, 2018      7227  njensen     Continue past missing parms
-<<<<<<< HEAD
-=======
  * May 15, 2023   2033890  dhaines     Changed unsigned integer handling to be 
  *                                     more clear 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -235,11 +227,7 @@ public class GetPointDataHandler extends BaseGfeRequestHandler implements
                                     byte discreteValue = discreteSlice
                                             .getDiscreteGrid().get(x, y);
                                     String discreteKey = discreteSlice
-<<<<<<< HEAD
-                                            .getKeys()[0xFF & discreteValue]
-=======
                                             .getKeys()[Byte.toUnsignedInt(discreteValue)]
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                             .toString();
                                     type = Type.STRING;
                                     view.setData(param, type, unit, discreteKey);
@@ -248,11 +236,7 @@ public class GetPointDataHandler extends BaseGfeRequestHandler implements
                                     WeatherGridSlice weatherSlice = (WeatherGridSlice) slice;
                                     byte wxValue = weatherSlice
                                             .getWeatherGrid().get(x, y);
-<<<<<<< HEAD
-                                    String wxKey = weatherSlice.getKeys()[0xFF & wxValue]
-=======
                                     String wxKey = weatherSlice.getKeys()[Byte.toUnsignedInt(wxValue)]
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                             .toString();
                                     type = Type.STRING;
                                     view.setData(param, type, unit, wxKey);

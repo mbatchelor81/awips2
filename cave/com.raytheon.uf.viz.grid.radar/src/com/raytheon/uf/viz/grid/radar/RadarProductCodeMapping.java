@@ -1,48 +1,24 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
 package com.raytheon.uf.viz.grid.radar;
 
-<<<<<<< HEAD
-import java.io.File;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import com.raytheon.uf.common.localization.IPathManager;
-import com.raytheon.uf.common.localization.LocalizationContext.LocalizationLevel;
-import com.raytheon.uf.common.localization.LocalizationContext.LocalizationType;
-import com.raytheon.uf.common.localization.PathManagerFactory;
-=======
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
@@ -62,62 +38,36 @@ import com.raytheon.uf.common.localization.LocalizationFile;
 import com.raytheon.uf.common.localization.LocalizationUtil;
 import com.raytheon.uf.common.localization.PathManagerFactory;
 import com.raytheon.uf.common.localization.exception.LocalizationException;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.serialization.JAXBManager;
 import com.raytheon.uf.common.serialization.SerializationException;
 import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
-<<<<<<< HEAD
-import com.raytheon.uf.common.status.UFStatus.Priority;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.viz.grid.xml.ParameterList;
 import com.raytheon.viz.grid.xml.ParameterMapping;
 
 /**
  * Structure for retrieving radar product code to grib parameter abbrev mappings
-<<<<<<< HEAD
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * 
-=======
  *
  * <pre>
  *
  * SOFTWARE HISTORY
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- ------------------------------
  * Mar 22, 2010  4473     rjpeter   Initial creation
  * Nov 07, 2361  2361     njensen   Use JAXBManager for XML
  * Aug 15, 2017  6332     bsteffen  Move to viz.grid.radar plugin
-<<<<<<< HEAD
- * 
- * </pre>
- * 
-=======
  * Jan 09, 2024  2036695  mapeters  Support multiple params using the same
  *                                  product code (for SRM/V)
  *
  * </pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author rjpeter
  */
 public class RadarProductCodeMapping {
     private static final IUFStatusHandler statusHandler = UFStatus
             .getHandler(RadarProductCodeMapping.class);
 
-<<<<<<< HEAD
-    private static RadarProductCodeMapping instance = new RadarProductCodeMapping();
-
-    private Map<String, List<Integer>> parameterMappings = new HashMap<>();
-
-    private Map<Integer, String> pCodeMappings = new HashMap<>();
-=======
     private static final String LOC_PATH = LocalizationUtil
             .join("parameterMapping", "radar", "RadarProductCodes.xml");
 
@@ -126,7 +76,6 @@ public class RadarProductCodeMapping {
     private Map<String, List<Integer>> parameterMappings = new HashMap<>();
 
     private Map<Integer, Set<String>> pCodeMappings = new HashMap<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     public static RadarProductCodeMapping getInstance() {
         return instance;
@@ -134,51 +83,6 @@ public class RadarProductCodeMapping {
 
     private RadarProductCodeMapping() {
         IPathManager pm = PathManagerFactory.getPathManager();
-<<<<<<< HEAD
-        File baseFile = pm.getFile(
-                pm.getContext(LocalizationType.CAVE_STATIC,
-                        LocalizationLevel.BASE),
-                "/parameterMapping/radar/RadarProductCodes.xml");
-
-        File siteFile = pm.getFile(
-                pm.getContext(LocalizationType.CAVE_STATIC,
-                        LocalizationLevel.SITE),
-                "/parameterMapping/radar/RadarProductCodes.xml");
-
-        File userFile = pm.getFile(
-                pm.getContext(LocalizationType.CAVE_STATIC,
-                        LocalizationLevel.USER),
-                "/parameterMapping/radar/RadarProductCodes.xml");
-
-        try {
-            JAXBManager jaxb = new JAXBManager(ParameterList.class);
-            loadParameters(baseFile, jaxb);
-
-            if (siteFile.exists()) {
-                loadParameters(siteFile, jaxb);
-            }
-            if (userFile.exists()) {
-                loadParameters(userFile, jaxb);
-            }
-        } catch (Exception e) {
-            statusHandler.handle(Priority.PROBLEM,
-                    "Error occurred loading radar product code to grid parameter mappings",
-                    e);
-        }
-    }
-
-    private void loadParameters(File fileToLoad, JAXBManager jaxb)
-            throws SerializationException {
-        ParameterList parameterList = jaxb
-                .unmarshalFromXmlFile(ParameterList.class, fileToLoad);
-        for (ParameterMapping parameter : parameterList.getParameters()) {
-            // print message for overwrite?
-            parameterMappings.put(parameter.getAbbrev(),
-                    parameter.getProductCodes());
-            for (Integer productCode : parameter.getProductCodes()) {
-                pCodeMappings.put(productCode, parameter.getAbbrev());
-            }
-=======
         Map<LocalizationLevel, LocalizationFile> locFiles = pm
                 .getTieredLocalizationFile(LocalizationType.CAVE_STATIC,
                         LOC_PATH);
@@ -233,7 +137,6 @@ public class RadarProductCodeMapping {
         for (ParameterMapping parameter : parameterList.getParameters()) {
             parameterMappings.put(parameter.getAbbrev(),
                     parameter.getProductCodes());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 
@@ -245,11 +148,7 @@ public class RadarProductCodeMapping {
         return parameterMappings.keySet();
     }
 
-<<<<<<< HEAD
-    public String getParameterAbbrev(Integer productCode) {
-=======
     public Set<String> getParameterAbbrevsForProductCode(Integer productCode) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return pCodeMappings.get(productCode);
     }
 }

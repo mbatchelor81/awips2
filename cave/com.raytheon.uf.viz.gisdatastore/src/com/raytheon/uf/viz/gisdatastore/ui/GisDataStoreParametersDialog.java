@@ -78,11 +78,8 @@ import com.raytheon.viz.ui.widgets.TimeRangeEntry;
  * ------------ ---------- ----------- --------------------------
  * Dec  5, 2012            randerso    Initial creation
  * Feb 15, 2013     #1629  randerso    Fix saving of default plugin to prefs
-<<<<<<< HEAD
  * Nov  1, 2021        srcarter@ucar   Made the dialog shorter to show on smaller screens
  * Mar  7, 2023        srcarter@ucar   Allow dialog to be resized
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -263,21 +260,12 @@ public class GisDataStoreParametersDialog extends CaveJFACEDialog {
         tableGroup.setLayoutData(layoutData);
         layout = new GridLayout(1, false);
         tableGroup.setLayout(layout);
-<<<<<<< HEAD
-=======
-        layout.marginWidth = 0;
-        layout.marginHeight = 0;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         tableGroup.setText("Table:");
 
         tablesList = new List(tableGroup, SWT.SINGLE | SWT.BORDER
                 | SWT.V_SCROLL | SWT.H_SCROLL);
         layoutData = new GridData(SWT.FILL, SWT.FILL, true, true);
-<<<<<<< HEAD
         layoutData.heightHint = tablesList.getItemHeight() * 4;
-=======
-        layoutData.heightHint = tablesList.getItemHeight() * 12;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         tablesList.setLayoutData(layoutData);
         tablesList.addSelectionListener(new SelectionAdapter() {
             @Override
@@ -318,11 +306,8 @@ public class GisDataStoreParametersDialog extends CaveJFACEDialog {
         typeCombo.setText(pluginName);
         selectedPlugin = null;
         selectPlugin(pluginName);
-<<<<<<< HEAD
         
         ((GridLayout)mainComp.getLayout()).marginHeight=2;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return mainComp;
     }
 
@@ -469,7 +454,6 @@ public class GisDataStoreParametersDialog extends CaveJFACEDialog {
         }
         return pluginNames;
     }
-<<<<<<< HEAD
     
     /**
      *  Override isResizable from Dialog, to allow the GIS Import
@@ -480,7 +464,3 @@ public class GisDataStoreParametersDialog extends CaveJFACEDialog {
     }
 
 }
-=======
-
-}
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

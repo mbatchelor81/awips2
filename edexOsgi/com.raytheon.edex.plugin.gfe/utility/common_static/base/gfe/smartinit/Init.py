@@ -42,13 +42,10 @@
 #                                  accumulative and non-accumulative weather
 #                                  elements as inputs 
 # Feb 06, 2017  5959     randerso  Removed Java .toString() calls 
-<<<<<<< HEAD
-=======
 # May 13, 2021  8463     randerso  Made mode a separate parameter to runFromJava
 #                                  Added a forceRecalc flag to force 
 #                                  recalculation of existing data just like when
 #                                  mode is true.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 ##
 
@@ -325,19 +322,12 @@ class GridUtilities:
 # Weather Element calculations
 #-------------------------------------------------------------------------
 class Forecaster(GridUtilities):
-<<<<<<< HEAD
-    def __init__(self, srcName, dstName=None):
-=======
     def __init__(self, srcName, dstName=None, forceRecalc=False):
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         self._srcName = srcName
         self._dstName = dstName
         self._ndbkeys = None
         self.__dbParms = None
-<<<<<<< HEAD
-=======
         self.__forceRecalc = forceRecalc
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         #host, port = self._getServer()
         #Options = getOpts()
         #if Options is not None and Options.has_key('userID'):
@@ -597,17 +587,9 @@ class Forecaster(GridUtilities):
     # Runs the main program
     #--------------------------------------------------------------------------
     def run(self):
-<<<<<<< HEAD
-        dbName = SmartInitParams.params['dbName']
-        validTime = SmartInitParams.params['validTime']
-
-        dbInfo = dbName.split(':')
-        self.__dbName = dbInfo[0]
-=======
         self.__dbName = SmartInitParams.params['dbName']
         validTime = SmartInitParams.params['validTime']
         mode = SmartInitParams.params['mode'] or self.__forceRecalc
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         start = time.time()
         self.__init()
@@ -626,11 +608,7 @@ class Forecaster(GridUtilities):
         self._ifpio.setLevels(self.levels())
         methods = self.__getMethods()
         times = self.__sortTimes(methods, validTime)
-<<<<<<< HEAD
-        tr, numGrids = self.__process(methods, times, int(dbInfo[1]))
-=======
         tr, numGrids = self.__process(methods, times, mode)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         stop = time.time()
         msgTime = "%s: Elapsed time: %-.1f sec." % (self.newdb().getModelIdentifier(), (stop - start))
 
@@ -1397,16 +1375,10 @@ class IFPIO:
 #--------------------------------------------------------------------------
 # Main program
 #--------------------------------------------------------------------------
-<<<<<<< HEAD
-def runFromJava(dbName, model, validTime):
-    SmartInitParams.params['dbName'] = dbName
-    SmartInitParams.params['validTime'] = validTime
-=======
 def runFromJava(dbName, model, validTime, mode):
     SmartInitParams.params['dbName'] = dbName
     SmartInitParams.params['validTime'] = validTime
     SmartInitParams.params['mode'] = mode
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     mod = __import__(model)
     mod.main()

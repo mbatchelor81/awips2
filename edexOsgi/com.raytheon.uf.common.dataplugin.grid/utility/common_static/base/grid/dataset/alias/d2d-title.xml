@@ -127,9 +127,5 @@
     <alias base="UKMET44">UKMET</alias>
     <alias base="UKMET-NorthernHemisphere">UKMET</alias>
     <alias base="WNAWAVE238">WNAwave</alias>
-<<<<<<< HEAD
     <alias base="HRRR-Smoke">HRRR Smoke</alias>
 </aliasList>
-=======
-</aliasList>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

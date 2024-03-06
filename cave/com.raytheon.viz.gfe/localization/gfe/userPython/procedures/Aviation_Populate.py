@@ -7,14 +7,6 @@
 #
 # Author: lefebvre
 #
-<<<<<<< HEAD
-# Aviation_Populate - Version 20181114
-#
-# Last Modified: 14 November 2018
-# 
-# ----------------------------------------------------------------------------
-
-=======
 # Aviation_Populate - Version 20191212
 #
 # Last Modified: 28 July 2022
@@ -35,7 +27,6 @@ import Exceptions
 import tkinter as tk
 import tkinter.messagebox as msg
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # The MenuItems list defines the GFE menu item(s) under which the
 # Procedure is to appear.
 # Possible items are: Populate, Edit, Consistency, Verify, Hazards
@@ -44,20 +35,7 @@ MenuItems = ["Populate"]
 VariableList = []
 
 
-<<<<<<< HEAD
-import time
-import SmartScript
-from math import *
-import numpy as np
-import tkinter as tk
-import AbsTime, TimeRange
-import Aviation_EDASConfig as PopulateConfig
-
-
-class Procedure (SmartScript.SmartScript):
-=======
 class Procedure(SmartScript.SmartScript):
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def __init__(self, dbss):
         SmartScript.SmartScript.__init__(self, dbss)
         self._dbss = dbss
@@ -79,20 +57,6 @@ class Procedure(SmartScript.SmartScript):
     # Copied from the original CR version of Aviation_Populate.
     # We should replace this with a version that's vectorized for better performance.
     def calcCloudBaseRH(self, modelName, version, topo, timeRange):
-<<<<<<< HEAD
-        self.levels = ["MB1000","MB975", "MB950", "MB925", "MB900",
-                        "MB875", "MB850", "MB825", "MB800", "MB775",
-                        "MB750", "MB725", "MB700", "MB675", "MB650",
-                        "MB625", "MB600", "MB575", "MB550", "MB525",
-                        "MB500", "MB450", "MB400", "MB350", "MB300"
-                       ]
-        self.cloudRH = [98.0, 96.0, 94.0, 92.0, 90.0,
-                        88.0, 85.0, 83.0, 80.0, 78.0,
-                        75.0, 73.0, 70.0, 68.0, 65.0,
-                        63.0, 60.0, 58.0, 55.0, 53.0,
-                        50.0, 45.0, 40.0, 35.0, 30.0,
-                        ]
-=======
         self.levels = [
             "MB1000",
             "MB975",
@@ -147,7 +111,6 @@ class Procedure(SmartScript.SmartScript):
             35.0,
             30.0,
         ]
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # Fetch the proper D2D databaseID
         if version == "Previous":
@@ -158,26 +121,6 @@ class Procedure(SmartScript.SmartScript):
 
         trList = self.getWEInventory(databaseID, "rh", "MB500", timeRange)
         gridTRList = []
-<<<<<<< HEAD
-        MaxCloudBase=250
-        
-        for tr in trList:
-            CloudBaseRH=self.newGrid(MaxCloudBase)
-            sounding = self.makeNumericSounding(databaseID, "rh", self.levels, tr, noDataError=0)
-            print("Making Sounding at ", tr)
-
-            if sounding is not None:
-               gh_c, rh_c = sounding 
-               for i in range(rh_c.shape[0]):
-                   rh = rh_c[i]
-                   height = gh_c[i]/0.3048
-                   height = height - topo
-                   
-                   height = np.where(np.less(height, 1.0), 0.0, height)
-                   rh = np.where(np.less(height, 1.0), 0.0, rh)
-                   CloudBaseRH = np.where(np.logical_and(np.equal(CloudBaseRH, MaxCloudBase),
-                                          np.greater_equal(rh, self.cloudRH[i])), height/100.0, CloudBaseRH)
-=======
         MaxCloudBase = 250.0
 
         for tr in trList:
@@ -196,7 +139,6 @@ class Procedure(SmartScript.SmartScript):
                     rh[height < 1.0] = 0.0
                     mask = (CloudBaseRH == MaxCloudBase) & (rh >= self.cloudRH[i])
                     CloudBaseRH[mask] = (height / 100.0)[mask]
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             else:
                 print("Got None sounding back at:", tr)
                 continue
@@ -205,22 +147,13 @@ class Procedure(SmartScript.SmartScript):
             gridTRList.append((grid, tr))
 
         return gridTRList
-<<<<<<< HEAD
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     # This method will fetch the fromElement and copy it to the toElement
     # for the specified database.
     def copyGridsFromOtherElement(self, dbid, fromElement, toElement, timeRange):
         fromInv = self.getWEInventory(dbid, fromElement, "SFC", timeRange)
         for tr in fromInv:
             grid = self.getGrids(dbid, fromElement, "SFC", tr)
-<<<<<<< HEAD
-            self.createGrid("Fcst", toElement, "SCALAR", grid, tr)
-        return len(fromInv)
-
-    # The main mthod that does the grid copying and calculations
-=======
             self.createGrid(self.mutableID(), toElement, "SCALAR", grid, tr)
         return len(fromInv)
 
@@ -243,7 +176,6 @@ class Procedure(SmartScript.SmartScript):
             self.createGrid(self.mutableID(), targetWeName, "SCALAR", targetGrid, tr)
 
     # The main method that does the grid copying and calculations
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def populateAviationGrids(self):
 
         # Calculate the timeRange for the generic elements
@@ -252,14 +184,9 @@ class Procedure(SmartScript.SmartScript):
 
         # Make the timeRanges for the generic and convective populate steps
         if self._timeButtonSelected.get() == "Choose -->":
-<<<<<<< HEAD
-            genTimeRange = TimeRange.TimeRange(AbsTime.AbsTime(start),
-                                               AbsTime.AbsTime(end))
-=======
             genTimeRange = TimeRange.TimeRange(
                 AbsTime.AbsTime(start), AbsTime.AbsTime(end)
             )
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         elif self._timeButtonSelected.get() == "GFE Selected\nTime":
             genTimeRange = self._timeRange
 
@@ -280,15 +207,6 @@ class Procedure(SmartScript.SmartScript):
                     supportedWEs.append(we)
             self.copyCmd(supportedWEs, selectedDBID, genTimeRange)
 
-<<<<<<< HEAD
-            self.interpolateCmd(self._genElementsSelected, genTimeRange, "GAPS", "SYNC", interval=1, duration=1)
-
-        else: # convective state on
-            # Populate the convective elements if needed.
-            selectedDBID = self._dbIDDict[self._selectedConSource][0]  # Fetch the dbid from the dict
-            if (self._selectedConSource == "CONSShort") & (self._selectedConAlgorithm == "CloudBaseRH"):
-                self.statusBarMsg("Error!!!! CONNShort does not currently support the CloudBaseRH algorithm.", "S")
-=======
             # A special hack for NBM sources. Use the Ceiling for CBP where Ceiling is
             # defined.
             if (
@@ -324,33 +242,11 @@ class Procedure(SmartScript.SmartScript):
                     "ERROR: CONNShort does not currently support the CloudBaseRH algorithm.",
                     "S",
                 )
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 return
 
             if self._selectedConAlgorithm == "CloudBaseRH":
                 self._activeLabel.config(text="Calculating", fg="red")
                 self._master.update()
-<<<<<<< HEAD
-                cloudBaseGrids = self.calcCloudBaseRH(self._selectedConSource, self._selectedPrevCur.get(), self.getTopo(), genTimeRange)
-                self.deleteCmd([self._conElementSelected], genTimeRange)  # remove the grids first
-                for grid, tr in cloudBaseGrids:
-                    self.createGrid("Fcst", self._conElementSelected, "SCALAR", grid, tr)
-                self._activeLabel.config(text="           ")
-            else:
-                self.deleteCmd([self._conElementSelected], genTimeRange)  # remove the grids first
-                copyFromWE = self._selectedConAlgorithm
-                copyCount = self.copyGridsFromOtherElement(selectedDBID, copyFromWE, self._conElementSelected, genTimeRange)
-                if copyCount == 0:
-                    self.statusBarMsg("No grids found for " + selectedDBID.modelName() + " " + copyFromWE, "S")
-                                     
-
-            self.interpolateCmd([self._conElementSelected], genTimeRange, "GAPS", "SYNC", interval=1, duration=1)
-
-        # Finally Populate with Obs grids to back fill and make a gap for interpolation
-        obsDB = self.findDatabase(self._obsSource)
-        obsTR = TimeRange.TimeRange(AbsTime.AbsTime(self._baseTime - (self._backfillHours * 3600)),
-                                    AbsTime.AbsTime(self._baseTime))
-=======
                 cloudBaseGrids = self.calcCloudBaseRH(
                     self._selectedConSource,
                     self._selectedPrevCur.get(),
@@ -397,7 +293,6 @@ class Procedure(SmartScript.SmartScript):
             AbsTime.AbsTime(self._baseTime - (self._backfillHours * 3600)),
             AbsTime.AbsTime(self._baseTime),
         )
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # Copy the Obs into the Fcst
         if self._convState == "Off":
@@ -411,33 +306,13 @@ class Procedure(SmartScript.SmartScript):
             if weName in self._modelWEDict[self._obsSource]:
                 self.copyCmd([weName], obsDB, obsTR)
 
-<<<<<<< HEAD
-        return 
-=======
         return
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     # Create the Execute and Cancel buttons
     def makeBottomButtons(self, frame):
 
         # Make the frame
         self._bottomButtonFrame = tk.Frame(frame, bg=self._bgColor)
-<<<<<<< HEAD
-        self._bottomButtonFrame.grid(row=4, column = 0, columnspan=6, pady=20)
-
-        # Run button
-        self._runButton = tk.Button(self._bottomButtonFrame, text="Run",
-                                            command=self.runCommand)
-        self._runButton.grid(row=0, column=0, padx=20)
-
-        # Run/Dismiss buttom
-        self._runDismissButton = tk.Button(self._bottomButtonFrame, text="Run/Dismiss",
-                                            command=self.runDismissCommand)
-        self._runDismissButton.grid(row=0, column=1, padx=20)
-        # Cancel button
-        self._cancelButton = tk.Button(self._bottomButtonFrame, text="Cancel",
-                                            command=self.cancelCommand)
-=======
         self._bottomButtonFrame.grid(row=4, column=0, columnspan=6, pady=20)
 
         # Run button
@@ -455,7 +330,6 @@ class Procedure(SmartScript.SmartScript):
         self._cancelButton = tk.Button(
             self._bottomButtonFrame, text="Cancel", command=self.cancelCommand
         )
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         self._cancelButton.grid(row=0, column=2, padx=20)
 
         return
@@ -472,14 +346,10 @@ class Procedure(SmartScript.SmartScript):
             timeRange = TimeRange.TimeRange(AbsTime.AbsTime(start), AbsTime.AbsTime(end))
             return timeRange
         else:
-<<<<<<< HEAD
-            self.statusBarMsg("Error retrieving Selected TimeRange. Make sure ReturnGFETimeRange tool is installed.", "S")
-=======
             self.statusBarMsg(
                 "Error retrieving Selected TimeRange. Make sure ReturnGFETimeRange tool is installed.",
                 "S",
             )
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return None
 
     # Called when the cursor enter the GUI. Just fetches the current timeRange
@@ -493,45 +363,26 @@ class Procedure(SmartScript.SmartScript):
 
         if self._timeRange != timeRange:
             self._timeRange = timeRange
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # If we're using the GFE time, figure out the start and end time
         # in hours and update the sliders.
         if self._timeButtonSelected.get() == "GFE Selected\nTime":
             self.toggleTimeScaleState(True)
-<<<<<<< HEAD
-            now = int(time.time() / 3600) * 3600
-=======
             now = int(self._gmtime().unixTime() / 3600) * 3600
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             gfeStart = self._timeRange.startTime().unixTime()
             gfeEnd = self._timeRange.endTime().unixTime()
             self._genStartTime = int((gfeStart - now) / 3600)
             self._genEndTime = int((gfeEnd - now) / 3600)
-<<<<<<< HEAD
-            
-            self._genSTScale.set(self._genStartTime)
-            self._genETScale.set(self._genEndTime)
-            
-=======
 
             self._genSTScale.set(self._genStartTime)
             self._genETScale.set(self._genEndTime)
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             self.updateStartEndTimeLabels()
             self.toggleTimeScaleState(False)
 
         return
 
-<<<<<<< HEAD
-    # Called when a element button is selected.  
-=======
     # Called when a element button is selected.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def genElementSelected(self, event, elementName):
 
         # Make a list of the elements that are supported
@@ -541,14 +392,6 @@ class Procedure(SmartScript.SmartScript):
             return
 
         # toggle on
-<<<<<<< HEAD
-        if elementName not in self._genElementsSelected and \
-            self._genElementDict[elementName].cget("state") == tk.ACTIVE:
-            self._genElementsSelected.append(elementName)
-            self._genElementDict[elementName].select()
-        elif elementName in self._genElementsSelected and \
-            self._genElementDict[elementName].cget("state") == tk.ACTIVE:
-=======
         if (
             elementName not in self._genElementsSelected
             and self._genElementDict[elementName].cget("state") == tk.ACTIVE
@@ -559,7 +402,6 @@ class Procedure(SmartScript.SmartScript):
             elementName in self._genElementsSelected
             and self._genElementDict[elementName].cget("state") == tk.ACTIVE
         ):
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if elementName in self._genElementsSelected:
                 self._genElementsSelected.remove(elementName)
                 self._genElementDict[elementName].deselect()
@@ -570,13 +412,8 @@ class Procedure(SmartScript.SmartScript):
     def makeGenElementButtons(self, frame):
         # Make the element frame for selecting the source
         elementFrame = tk.Frame(frame, relief=tk.GROOVE, bd=3, bg=self._bgColor)
-<<<<<<< HEAD
-        elementFrame.grid(row=0, column=2, sticky=tk.N+tk.E+tk.S+tk.W)
-        
-=======
         elementFrame.grid(row=0, column=2, sticky=tk.N + tk.E + tk.S + tk.W)
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # make a label
         label = tk.Label(elementFrame, text="Select Element")
         label.grid(row=0, column=0)
@@ -584,22 +421,6 @@ class Procedure(SmartScript.SmartScript):
         row = 1
         for i in range(len(self._config["genElementList"])):
             weName = self._config["genElementList"][i]
-<<<<<<< HEAD
-            def cbHandler(event, self=self, buttonName=weName):
-                return self.genElementSelected(event, buttonName)
-            self._genElementDict[weName] = tk.Checkbutton(elementFrame,
-                text=weName)
-            
-            self._genElementDict[weName].grid(row=row, sticky=tk.W)
-            self._genElementDict[weName].bind("<ButtonRelease-1>", cbHandler)
-            self._genElementDict[weName].bind("<ButtonRelease-2>", cbHandler)
-            if weName in self._config["genElementDefaultList"]:
-                self._genElementDict[weName].select()
-                
-            self._genWidgetList.append((self._genElementDict[weName], tk.NORMAL))
-
-            row = row + 1
-=======
 
             def cbHandler(event, self=self, buttonName=weName):
                 return self.genElementSelected(event, buttonName)
@@ -615,7 +436,6 @@ class Procedure(SmartScript.SmartScript):
             self._genWidgetList.append((self._genElementDict[weName], tk.NORMAL))
 
             row += 1
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         return
 
@@ -624,20 +444,12 @@ class Procedure(SmartScript.SmartScript):
         # Tk variables are used to track the state of this button. Nothing to do here.
         return
 
-<<<<<<< HEAD
-    # Make the Current/Previous version buttons.  The frame parameter is the topLevel frame.
-    def makePrevCurrentButtons(self, frame):
-        # Make the Current/Previous frame for selecting the source
-        prevCurFrame = tk.Frame(frame, relief=tk.GROOVE, bd=3, bg=self._bgColor)
-        prevCurFrame.grid(row=0, column=1, sticky=tk.N+tk.E+tk.S+tk.W)
-=======
     # Make the Current/Previous version buttons.  The frame parameter is the
     # topLevel frame.
     def makePrevCurrentButtons(self, frame):
         # Make the Current/Previous frame for selecting the source
         prevCurFrame = tk.Frame(frame, relief=tk.GROOVE, bd=3, bg=self._bgColor)
         prevCurFrame.grid(row=0, column=1, sticky=tk.N + tk.E + tk.S + tk.W)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # Make each source button
 
         label = tk.Label(prevCurFrame, text="Model Run")
@@ -645,27 +457,12 @@ class Procedure(SmartScript.SmartScript):
 
         buttonList = ["Previous", "Current"]
         self._prevCurButtonDict = {}
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         self._selectedPrevCur = tk.StringVar()
         self._selectedPrevCur.set(self._config["prevCurDefault"])
 
         row = 1
         for buttonName in buttonList:
-<<<<<<< HEAD
-            self._prevCurButtonDict[buttonName] = tk.Radiobutton(prevCurFrame, text=buttonName,
-                                                           padx=10, pady=2, command=self.prevCurSelected,
-                                                           variable=self._selectedPrevCur, value = buttonName)
-            self._prevCurButtonDict[buttonName].grid(row=row, sticky=tk.W)
-            
-            if buttonName == self._config["prevCurDefault"]:
-                self._prevCurButtonDict[buttonName].select()
-                self._selectedPrevCur.set(buttonName)
-                
-=======
             self._prevCurButtonDict[buttonName] = tk.Radiobutton(
                 prevCurFrame,
                 text=buttonName,
@@ -681,34 +478,18 @@ class Procedure(SmartScript.SmartScript):
                 self._prevCurButtonDict[buttonName].select()
                 self._selectedPrevCur.set(buttonName)
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             tkState = tk.NORMAL
             self._prevCurButtonDict[buttonName].config(state=tkState)
 
             self._genWidgetList.append((self._prevCurButtonDict[buttonName], tkState))
-<<<<<<< HEAD
-            
-            row = row + 1
-=======
 
             row += 1
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         return
 
     def genSourceButtonClicked(self):
         self._selectedGenSource = self._genSourceButtonSelected.get()
 
-<<<<<<< HEAD
-        # Enable or disable the element buttons based on the elements the selected model supports
-        for weName, widget in self._genElementDict.items():
-            
-            if weName in self._modelWEDict[self._selectedGenSource]:
-                widget.config(state=tk.NORMAL)
-            else: # not available for this model so deselect and remove from selected list
-                widget.deselect()
-                widget.config(state=tk.DISABLED)
-=======
         # Enable or disable the element buttons based on the elements the selected
         # model supports
         for weName in self._genElementDict:
@@ -718,7 +499,6 @@ class Procedure(SmartScript.SmartScript):
             else:  # not available for this model so deselect and remove from selected list
                 self._genElementDict[weName].deselect()
                 self._genElementDict[weName].config(state=tk.DISABLED)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if weName in self._genElementsSelected:
                     self._genElementsSelected.remove(weName)
         return
@@ -727,13 +507,8 @@ class Procedure(SmartScript.SmartScript):
     # source is not found.
     def makeGenSourceRadioButtons(self, frame):
         # Make the source frame for selecting the source
-<<<<<<< HEAD
-        genFrame = tk.Frame(frame, relief=tk.GROOVE, bd=3, bg = self._bgColor)
-        genFrame.grid(row=0, column=0, sticky=tk.N+tk.E+tk.S+tk.W)
-=======
         genFrame = tk.Frame(frame, relief=tk.GROOVE, bd=3, bg=self._bgColor)
         genFrame.grid(row=0, column=0, sticky=tk.N + tk.E + tk.S + tk.W)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # Add a label at the top
         label = tk.Label(genFrame, text=" Select Model")
@@ -744,12 +519,6 @@ class Procedure(SmartScript.SmartScript):
         self._genSourceButtonDict = {}
         row = 1
         for buttonName in self._config["genSources"]:
-<<<<<<< HEAD
-            self._genSourceButtonDict[buttonName] = tk.Radiobutton(genFrame, text=buttonName,
-                                                               padx=10, pady=2, command=self.genSourceButtonClicked,
-                                                               variable=self._genSourceButtonSelected,
-                                                               value = buttonName)
-=======
             self._genSourceButtonDict[buttonName] = tk.Radiobutton(
                 genFrame,
                 text=buttonName,
@@ -759,7 +528,6 @@ class Procedure(SmartScript.SmartScript):
                 variable=self._genSourceButtonSelected,
                 value=buttonName,
             )
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             self._genSourceButtonDict[buttonName].grid(row=row, sticky=tk.W)
             if buttonName == self._config["defaultGenSource"]:
                 self._genSourceButtonDict[buttonName].invoke()
@@ -773,11 +541,7 @@ class Procedure(SmartScript.SmartScript):
 
             self._genWidgetList.append((self._genSourceButtonDict[buttonName], tkState))
 
-<<<<<<< HEAD
-            row = row + 1
-=======
             row += 1
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return
 
     # Formats the time string for display.
@@ -789,15 +553,9 @@ class Procedure(SmartScript.SmartScript):
 
     # Updates the start end tne time labels in the GUI
     def updateStartEndTimeLabels(self):
-<<<<<<< HEAD
-        
-        # self._baseTime is truncated to 00Z
-        start = self._baseTime + self._genStartTime * 3600 
-=======
 
         # self._baseTime is truncated to 00Z
         start = self._baseTime + self._genStartTime * 3600
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         end = self._baseTime + self._genEndTime * 3600
 
         startStr = self.makeTimeStr(start)
@@ -807,11 +565,7 @@ class Procedure(SmartScript.SmartScript):
         self._endTimeLabel.config(text=endStr)
 
         return
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     # Called when the generic start time is moved.
     def genStartChanged(self, event):
 
@@ -826,11 +580,7 @@ class Procedure(SmartScript.SmartScript):
             self._genEndTime = self._genStartTime + 1
             if self._genEndTime > self._endHours:
                 self._genEndTime = self._endHours
-<<<<<<< HEAD
-                
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             self._genETScale.set(self._genEndTime)
 
         self.updateStartEndTimeLabels()
@@ -848,11 +598,7 @@ class Procedure(SmartScript.SmartScript):
             self._genEndTime = 1
         self._genETScale.set(self._genEndTime)
 
-<<<<<<< HEAD
-        #reset startTime if needed
-=======
         # reset startTime if needed
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if self._genEndTime <= self._genStartTime:
             self._genStartTime = self._genEndTime - 1
             if self._genStartTime <= 0:
@@ -863,11 +609,7 @@ class Procedure(SmartScript.SmartScript):
         self.updateStartEndTimeLabels()
         return
 
-<<<<<<< HEAD
-    # Called when either time selector is selected. 
-=======
     # Called when either time selector is selected.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def timeButtonSelected(self):
 
         if self._timeButtonSelected.get() == "Choose -->":
@@ -875,15 +617,9 @@ class Procedure(SmartScript.SmartScript):
         else:
             self.enterEvent()
             self.toggleTimeScaleState(False)
-<<<<<<< HEAD
-                  
-        return
-    
-=======
 
         return
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     # Toggles the time scales to active (True) or disabled (False)
     def toggleTimeScaleState(self, activate):
 
@@ -900,19 +636,11 @@ class Procedure(SmartScript.SmartScript):
     # Creates the generic time scales on the GUI
     def makeGenTimeScales(self, frame):
         self._genTimeFrame = tk.Frame(frame, relief=tk.GROOVE, bd=3, bg=self._bgColor)
-<<<<<<< HEAD
-        self._genTimeFrame.grid(row=1, column=0, columnspan=3, sticky=tk.E+tk.W)
-
-        # Selector frame
-        selFrame = tk.Frame(self._genTimeFrame, relief=tk.GROOVE, bd=3, bg=self._bgColor)
-        selFrame.grid(row=0, column=0, sticky=tk.N+tk.S, rowspan=2)
-=======
         self._genTimeFrame.grid(row=1, column=0, columnspan=3, sticky=tk.E + tk.W)
 
         # Selector frame
         selFrame = tk.Frame(self._genTimeFrame, relief=tk.GROOVE, bd=3, bg=self._bgColor)
         selFrame.grid(row=0, column=0, sticky=tk.N + tk.S, rowspan=2)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # Create Selector buttons
         buttonList = ["GFE Selected\nTime", "Choose -->"]
@@ -921,19 +649,6 @@ class Procedure(SmartScript.SmartScript):
         self._timeButtonSelected.set(self._timeButtonDefault)
         row = 0
         for buttonName in buttonList:
-<<<<<<< HEAD
-            self._timeButtonDict[buttonName] = tk.Radiobutton(selFrame,
-                text=buttonName, padx=10, pady=2, command=self.timeButtonSelected,
-                variable=self._timeButtonSelected, value=buttonName)
-                        
-            self._timeButtonDict[buttonName].grid(row=row)
-            row = row + 1
-
-        # Make the time frame, time scales and time labels
-        timeScaleFrame = tk.Frame(self._genTimeFrame, relief=tk.GROOVE, bd=3, bg=self._bgColor)
-        timeScaleFrame.grid(row=1, column=1, sticky=tk.E+tk.W, columnspan=2)
-                
-=======
             self._timeButtonDict[buttonName] = tk.Radiobutton(
                 selFrame,
                 text=buttonName,
@@ -953,7 +668,6 @@ class Procedure(SmartScript.SmartScript):
         )
         timeScaleFrame.grid(row=1, column=1, sticky=tk.E + tk.W, columnspan=2)
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # Create start and end time scales with labels
         self._startLabel = tk.Label(timeScaleFrame, text="\nStart")
         self._startLabel.grid(row=1, column=0)
@@ -962,13 +676,6 @@ class Procedure(SmartScript.SmartScript):
         self._timeWidgetList.append(self._startLabel)
         self._timeWidgetList.append(self._endLabel)
 
-<<<<<<< HEAD
-        self._genSTScale = tk.Scale(timeScaleFrame, from_= 0, 
-                                       to=self._startHours, orient=tk.HORIZONTAL,
-                                       command=self.genStartChanged,
-                                       resolution=1, length=190, sliderlength=20)
-        self._genSTScale.grid(row=1, column=1, sticky=tk.E+tk.W, columnspan=2)
-=======
         self._genSTScale = tk.Scale(
             timeScaleFrame,
             from_=0,
@@ -980,18 +687,10 @@ class Procedure(SmartScript.SmartScript):
             sliderlength=20,
         )
         self._genSTScale.grid(row=1, column=1, sticky=tk.E + tk.W, columnspan=2)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         self._genSTScale.set(self._defaultStartHour)
         self._genStartTime = self._defaultStartHour
         self._timeWidgetList.append(self._genSTScale)
 
-<<<<<<< HEAD
-        self._genETScale = tk.Scale(timeScaleFrame, from_= 0, 
-                                       to=self._endHours, orient=tk.HORIZONTAL,
-                                       command=self.genEndChanged,
-                                       resolution=1, length=190, sliderlength=20)
-        self._genETScale.grid(row=2, column=1, sticky=tk.E+tk.W, columnspan=2)
-=======
         self._genETScale = tk.Scale(
             timeScaleFrame,
             from_=0,
@@ -1003,17 +702,11 @@ class Procedure(SmartScript.SmartScript):
             sliderlength=20,
         )
         self._genETScale.grid(row=2, column=1, sticky=tk.E + tk.W, columnspan=2)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         self._genEndTime = self._genETScale.set(self._defaultEndHour)
         self._genEndTime = self._defaultEndHour
         self._timeWidgetList.append(self._genETScale)
 
         # And finally the start and end time labels
-<<<<<<< HEAD
-        self._startTimeLabel = tk.Label(timeScaleFrame, text=" DD.HH Z", font=self._activeFont)
-        self._startTimeLabel.grid(row=1, column=3, sticky=tk.E)
-        self._endTimeLabel = tk.Label(timeScaleFrame, text=" DD.HH Z", font=self._activeFont)
-=======
         self._startTimeLabel = tk.Label(
             timeScaleFrame, text=" DD.HH Z", font=self._activeFont
         )
@@ -1021,18 +714,13 @@ class Procedure(SmartScript.SmartScript):
         self._endTimeLabel = tk.Label(
             timeScaleFrame, text=" DD.HH Z", font=self._activeFont
         )
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         self._endTimeLabel.grid(row=2, column=3, sticky=tk.E)
 
         self.updateStartEndTimeLabels()
 
         return
-<<<<<<< HEAD
-    # Toggles the widgets in the generic frame 
-=======
 
     # Toggles the widgets in the generic frame
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def toggleGenFrame(self, active):
         if active:
             for w, tkState in self._genWidgetList:
@@ -1047,19 +735,11 @@ class Procedure(SmartScript.SmartScript):
         if active:
             self.toggleGenFrame(False)
             for w, tkState in self._conWidgetList:
-<<<<<<< HEAD
-                w.config(state=tkState, bg=self._bgColor)
-        else:
-            self.toggleGenFrame(True)
-            for w, tkState in self._conWidgetList:
-                w.config(state=tk.DISABLED)
-=======
                 w.config(state=tkState, fg=self._fgColor)
         else:
             self.toggleGenFrame(True)
             for w, tkState in self._conWidgetList:
                 w.config(state=tk.DISABLED, fg=self._bgColor)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return
 
     # Called when the convective button is selected
@@ -1068,25 +748,15 @@ class Procedure(SmartScript.SmartScript):
         # If it's on, turn it off
         if self._convState == "On":
             self._convState = "Off"
-<<<<<<< HEAD
-            self._convButton.config(fg='gray20')
-            self._convButton.config(activeforeground='gray20')
-=======
             self._convButton.config(fg="gray20")
             self._convButton.config(activeforeground="gray20")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             self._convButton.config(font=self._disabledFont)
             self.toggleConvectiveFrame(False)
         # If it's off, turn it on
         elif self._convState == "Off":
             self._convState = "On"
-<<<<<<< HEAD
-            self._convButton.config(fg='black')
-            self._convButton.config(activeforeground='black')
-=======
             self._convButton.config(fg="black")
             self._convButton.config(activeforeground="black")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             self._convButton.config(font=self._activeFont)
             self.toggleConvectiveFrame(True)
             # Reset the algorithm button state
@@ -1098,10 +768,7 @@ class Procedure(SmartScript.SmartScript):
     def makeConvectiveButton(self, frame):
 
         buttonName = "Alternative Cloud Base"
-<<<<<<< HEAD
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         def cbHandler(event, self=self, buttonName=buttonName):
             return self.convButtonSelected(event, buttonName)
 
@@ -1110,11 +777,6 @@ class Procedure(SmartScript.SmartScript):
         else:
             font = self._disabledFont
 
-<<<<<<< HEAD
-        self._convButton = tk.Button(frame, text=buttonName, font=font,
-                                     height=1, width=len(buttonName), relief=tk.RAISED, bd=3,
-                                     justify=tk.CENTER)
-=======
         self._convButton = tk.Button(
             frame,
             text=buttonName,
@@ -1125,7 +787,6 @@ class Procedure(SmartScript.SmartScript):
             bd=3,
             justify=tk.CENTER,
         )
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         self._convButton.grid(row=0, column=0, columnspan=4)
 
         self._convButton.bind("<ButtonRelease-1>", cbHandler)
@@ -1153,8 +814,6 @@ class Procedure(SmartScript.SmartScript):
 
         return
 
-<<<<<<< HEAD
-=======
     def altCBVersionButtonSelected(self, event):
         if self._altCBVersionButtonState == "Current Version":
             self._altCBVersionButton.config(text="Previous Version")
@@ -1165,20 +824,10 @@ class Procedure(SmartScript.SmartScript):
 
         return
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     # Creates the button for the convective sources. It will disable buttons when that
     # source is not found.
     def makeConSourceRadioButtons(self, frame):
         # Make the source frame for selecting the source
-<<<<<<< HEAD
-        conFrame = tk.Frame(frame, relief=tk.GROOVE, bd=3, bg = self._bgColor)
-        conFrame.grid(row=3, column=0, sticky=tk.N+tk.E+tk.S+tk.W)
-        
-        # Add a label at the top
-        label = tk.Label(conFrame, text=" Select One Model")
-        label.grid(row=0, column=0)
-
-=======
         conFrame = tk.Frame(frame, relief=tk.GROOVE, bd=3, bg=self._bgColor)
         conFrame.grid(row=3, column=0, sticky=tk.N + tk.E + tk.S + tk.W)
 
@@ -1210,18 +859,11 @@ class Procedure(SmartScript.SmartScript):
         self._altCBVersionButton.bind("<ButtonRelease-2>", cbHandler)
         self._altCBVersionButton.config(state=tk.NORMAL)
         self._conWidgetList.append((self._altCBVersionButton, tk.NORMAL))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         self._conSourceButtonSelected = tk.StringVar()
         self._conSourceButtonSelected.set(self._config["conSources"][0])
         row = 1
         for buttonName in self._config["conSources"]:
-<<<<<<< HEAD
-            self._conSourceButtonDict[buttonName] = tk.Radiobutton(conFrame, text=buttonName,
-                                                               padx=10, pady=2, command=self.conSourceButtonClicked,
-                                                               variable=self._conSourceButtonSelected,
-                                                               value = buttonName)
-=======
             self._conSourceButtonDict[buttonName] = tk.Radiobutton(
                 conFrame,
                 text=buttonName,
@@ -1231,7 +873,6 @@ class Procedure(SmartScript.SmartScript):
                 variable=self._conSourceButtonSelected,
                 value=buttonName,
             )
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             self._conSourceButtonDict[buttonName].grid(row=row, sticky=tk.W)
             if buttonName == self._config["defaultConSource"]:
                 self._conSourceButtonDict[buttonName].invoke()
@@ -1246,17 +887,10 @@ class Procedure(SmartScript.SmartScript):
 
             self._conWidgetList.append((self._conSourceButtonDict[buttonName], tkState))
 
-<<<<<<< HEAD
-            row = row + 1
-        return
-
-    # Called when a convective element button is selected.  
-=======
             row += 1
         return
 
     # Called when a convective element button is selected.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def conElementSelected(self):
         self._conElementSelected = self._conElementStringVar.get()
 
@@ -1266,11 +900,7 @@ class Procedure(SmartScript.SmartScript):
     def makeConElementButtons(self, frame):
         # Make the element frame for selecting the source
         conElementFrame = tk.Frame(frame, relief=tk.GROOVE, bd=3, bg=self._bgColor)
-<<<<<<< HEAD
-        conElementFrame.grid(row=3, column=1, sticky=tk.E+tk.W+tk.N)
-=======
         conElementFrame.grid(row=3, column=1, sticky=tk.E + tk.W + tk.N)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # make a label
         label = tk.Label(conElementFrame, text="Select Element")
@@ -1285,14 +915,6 @@ class Procedure(SmartScript.SmartScript):
         row = 1
         # Make each element button
         for buttonName in self._config["conElementList"]:
-<<<<<<< HEAD
-            self._conElementDict[buttonName] = tk.Radiobutton(conElementFrame, text=buttonName,
-                                                               padx=10, pady=2, command=self.conElementSelected,
-                                                               variable=self._conElementStringVar,
-                                                               value = buttonName)
-            self._conElementDict[buttonName].grid(row=row, sticky=tk.W)
-            
-=======
             self._conElementDict[buttonName] = tk.Radiobutton(
                 conElementFrame,
                 text=buttonName,
@@ -1304,7 +926,6 @@ class Procedure(SmartScript.SmartScript):
             )
             self._conElementDict[buttonName].grid(row=row, sticky=tk.W)
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             # Select the default value
             if buttonName == self._config["conElementDefault"]:
                 self._conElementDict[buttonName].invoke()
@@ -1313,15 +934,6 @@ class Procedure(SmartScript.SmartScript):
             self._conElementDict[buttonName].config(state=tkState)
 
             self._conWidgetList.append((self._conElementDict[buttonName], tkState))
-<<<<<<< HEAD
-            
-            row = row + 1
-
-        # make a label that indicates the tool is calculating
-        labelFrame = tk.Frame(conElementFrame, relief=tk.GROOVE, bd=3, bg=self._bgColor)
-        labelFrame.grid(row=row+1, sticky=tk.N+tk.S+tk.E+tk.W)
-        self._activeLabel = tk.Label(labelFrame, text="           ", padx=50)
-=======
 
             row += 1
 
@@ -1329,15 +941,10 @@ class Procedure(SmartScript.SmartScript):
         labelFrame = tk.Frame(conElementFrame, relief=tk.GROOVE, bd=3, bg=self._bgColor)
         labelFrame.grid(row=row + 1, sticky=tk.N + tk.S + tk.E + tk.W)
         self._activeLabel = tk.Label(labelFrame, text="            ", padx=50)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         self._activeLabel.grid(row=1, column=0)
 
         return
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def algButtonClicked(self):
         self._selectedConAlgorithm = self._algButtonSelected.get()
 
@@ -1346,13 +953,8 @@ class Procedure(SmartScript.SmartScript):
     # Creates the button for the algorithm choices.
     def makeAlgRadioButtons(self, frame):
         # Make the alg frame for selecting the algorithm
-<<<<<<< HEAD
-        algFrame = tk.Frame(frame, relief=tk.GROOVE, bd=3, bg = self._bgColor)
-        algFrame.grid(row=3, column=2, sticky=tk.N+tk.E+tk.S+tk.W)
-=======
         algFrame = tk.Frame(frame, relief=tk.GROOVE, bd=3, bg=self._bgColor)
         algFrame.grid(row=3, column=2, sticky=tk.N + tk.E + tk.S + tk.W)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # Add a label at the top
         label = tk.Label(algFrame, text="Select One Algorithm")
@@ -1363,14 +965,6 @@ class Procedure(SmartScript.SmartScript):
         self._algButtonDict = {}
         row = 1
         for buttonName in self._config["algChoices"]:
-<<<<<<< HEAD
-            self._algButtonDict[buttonName] = tk.Radiobutton(algFrame, text=buttonName,
-                                                             padx=10, pady=2, command=self.algButtonClicked,
-                                                             variable=self._algButtonSelected,
-                                                             value = buttonName)
-            self._algButtonDict[buttonName].grid(row=row, sticky=tk.W)
-                            
-=======
             self._algButtonDict[buttonName] = tk.Radiobutton(
                 algFrame,
                 text=buttonName,
@@ -1382,7 +976,6 @@ class Procedure(SmartScript.SmartScript):
             )
             self._algButtonDict[buttonName].grid(row=row, sticky=tk.W)
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if buttonName == self._config["defaultAlg"]:
                 self._algButtonDict[buttonName].invoke()
                 self._selectedConAlgorithm = self._config["defaultAlg"]
@@ -1394,11 +987,7 @@ class Procedure(SmartScript.SmartScript):
 
             self._conWidgetList.append((self._algButtonDict[buttonName], tkState))
 
-<<<<<<< HEAD
-            row = row + 1
-=======
             row += 1
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return
 
     # High-level method that calls other methods to build the GUI a widget at a time
@@ -1410,17 +999,6 @@ class Procedure(SmartScript.SmartScript):
         self._master.title("Aviation_Populate")
 
         # Capture the "x" click to close the GUI
-<<<<<<< HEAD
-        self._master.protocol('WM_DELETE_WINDOW', self.cancelCommand)
-
-#         self._topFrame = tk.Frame(self._master, bg=self._bgColor)
-        self._topFrame = tk.Frame(self._master)
-        self._topFrame.grid()
-        self._tkmaster.withdraw() # remove the master from the display
-        self._topFrame.bind("<Enter>", self.enterEvent)
-
-
-=======
         self._master.protocol("WM_DELETE_WINDOW", self.cancelCommand)
 
         #         self._topFrame = tk.Frame(self._master, bg=self._bgColor)
@@ -1429,7 +1007,6 @@ class Procedure(SmartScript.SmartScript):
         self._tkmaster.withdraw()  # remove the master from the display
         self._topFrame.bind("<Enter>", self.enterEvent)
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # Make the widgets for the generic sources
         self._genWidgetList = []
         self._timeWidgetList = []
@@ -1440,13 +1017,9 @@ class Procedure(SmartScript.SmartScript):
         self.makeGenTimeScales(self._topFrame)
 
         # Put the next set of widgets in a frame
-<<<<<<< HEAD
-        self._conFrame = tk.Frame(self._topFrame, relief=tk.GROOVE, bd=3, bg=self._bgColor)
-=======
         self._conFrame = tk.Frame(
             self._topFrame, relief=tk.GROOVE, bd=3, bg=self._bgColor
         )
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         self._conFrame.grid(row=2, column=0, columnspan=3)
 
         # Initialize Alternative CloudBase state data
@@ -1460,13 +1033,8 @@ class Procedure(SmartScript.SmartScript):
         self.makeConSourceRadioButtons(self._conFrame)
         self.makeConElementButtons(self._conFrame)
         self.makeAlgRadioButtons(self._conFrame)
-<<<<<<< HEAD
-        #self.makeConTimeScales(self._conFrame)
-        
-=======
         # self.makeConTimeScales(self._conFrame)
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if self._convState == "Off":
             self.toggleConvectiveFrame(False)
 
@@ -1476,15 +1044,9 @@ class Procedure(SmartScript.SmartScript):
 
     #####################################################################################
 
-<<<<<<< HEAD
-    # Returns a dictionary modelName : list of databaseIDs for the specified modelList. 
-    def makeDatabaseIDDict(self, modelList):
-        
-=======
     # Returns a dictionary modelName : list of databaseIDs for the specified modelList.
     def makeDatabaseIDDict(self, modelList):
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         dbIDDict = {}
         allDBs = self.availableDatabases()
         for dbid in allDBs:
@@ -1498,10 +1060,6 @@ class Procedure(SmartScript.SmartScript):
                 else:
                     dbIDDict[modelName] = [dbid]
 
-<<<<<<< HEAD
-        # Sort the dbids in place newest to oldest.
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         for dbids in dbIDDict.values():
             dbids.sort(key=lambda x: x.modelTime(), reverse=True)
 
@@ -1509,11 +1067,7 @@ class Procedure(SmartScript.SmartScript):
 
     # Fetches the inventory in the form of a timeRange list
     def getWEInventory(self, modelName, weName, level, timeRange=None):
-<<<<<<< HEAD
-       
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if timeRange is None:
             timeRange = TimeRange.allTimes()
 
@@ -1522,11 +1076,7 @@ class Procedure(SmartScript.SmartScript):
         # so wrap it in a try block and return [] if it fails
         try:
             gridInfo = self.getGridInfo(modelName, weName, level, timeRange)
-<<<<<<< HEAD
-        except:
-=======
         except Exceptions.EditActionError:
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return trList
 
         for g in gridInfo:
@@ -1536,11 +1086,7 @@ class Procedure(SmartScript.SmartScript):
         return trList
 
     def makeModelWEDict(self, modelList, weList):
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         modelWEDict = {}
         allDBs = self.availableParms()
         for weName, level, dbid in allDBs:
@@ -1560,24 +1106,15 @@ class Procedure(SmartScript.SmartScript):
         self._baseTime = int(time.time() / 3600) * 3600
         return
 
-<<<<<<< HEAD
-    # Make a temporary dialog to see if the user wants to continue.        
-=======
     # Make a temporary dialog to see if the user wants to continue.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def dialogPrompt(self):
         root = tk.Tk()
         # root.withdraw() # This removes the toot window, but causes the dialog
         # to appear on other screen. Both windows are removed by destroy
-<<<<<<< HEAD
-        import tkinter.messagebox as msg
-        result = msg.askyesno("Aviation_Populate","Aviation_Populate may be already running. Continue?")
-=======
 
         result = msg.askyesno(
             "Aviation_Populate", "Aviation_Populate may be already running. Continue?"
         )
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         root.destroy()
         return result
 
@@ -1588,39 +1125,23 @@ class Procedure(SmartScript.SmartScript):
         # The presence of this object indicates the tool is already running.
         try:
             # getObject throws an exception if the object is not found
-<<<<<<< HEAD
-            self.getObject("Aviation_Populate", "Aviation_Populate")
-            keepGoing = self.dialogPrompt()
-            return keepGoing
-        except: # not found
-            # Didn't find the object so save it now to prevent another execution of this procedure
-=======
             lock = self.getObject("Aviation_Populate", "Aviation_Populate")
             keepGoing = self.dialogPrompt()
             return keepGoing
         except IOError:  # not found
             # Didn't find the object so save it now to prevent another execution of
             # this procedure
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             self.saveObject("Aviation_Populate", "StringObject", "Aviation_Populate")
             return True
 
     def unlockProcedure(self):
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # Remove the object now that we're done.
         self.deleteObject("Aviation_Populate", "Aviation_Populate")
         return
 
     # Main method that sets up the GUI and enters the event loop
-<<<<<<< HEAD
-    def execute(self, timeRange):
-=======
     def execute(self, editArea, timeRange, varDict):
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         self._config = PopulateConfig.config["Populate"]
 
@@ -1634,17 +1155,6 @@ class Procedure(SmartScript.SmartScript):
         # set up some constants for this tool
         self._activeFont = "Helvetica 12 bold"
         self._disabledFont = "Helvetica 12 normal"
-<<<<<<< HEAD
-        self._bgColor = "#d9d9d9"
-                
-        self._genElementsSelected = self._config["genElementDefaultList"]
-
-        self._obsSource = "Obs"
-        self._backfillHours = 6
-        
-        self._timeButtonDefault = "Choose -->" # "GFE Selected"
-        
-=======
         self._fgColor = "Black"
         self._bgColor = "#d9d9d9"
         # Configuration variable get cached sometimes, so make a deep copy.
@@ -1655,31 +1165,17 @@ class Procedure(SmartScript.SmartScript):
         self._NBMSources = ["NBM", "NBMEXP", "NationalBlend"]
         self._timeButtonDefault = "Choose -->"  # "GFE Selected"
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         self._startHours = 35
         self._endHours = 36
         self._defaultStartHour = 0
         self._defaultEndHour = 36
         self._interpGap = 1
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         self.calcBaseTime()
 
         # Convective source, element and algorithm configuration
         self._convState = "Off"
         self._selectedConvState = self._convState
-<<<<<<< HEAD
-                
-        self._conElementDefault = self._config["conElementDefault"]
-        self._conElementSelected = self._conElementDefault
-
-        # Make a dictionary of dbids
-        self._dbIDDict = self.makeDatabaseIDDict(self._config["genSources"] + self._config["conSources"])
-
-=======
 
         self._conElementDefault = self._config["conElementDefault"]
         self._conElementSelected = self._conElementDefault
@@ -1688,7 +1184,6 @@ class Procedure(SmartScript.SmartScript):
         self._dbIDDict = self.makeDatabaseIDDict(
             self._config["genSources"] + self._config["conSources"]
         )
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # Identify any model we didn't find.
         self._genModelsMissing = []
         for modelName in self._config["genSources"]:
@@ -1698,18 +1193,12 @@ class Procedure(SmartScript.SmartScript):
         for modelName in self._config["conSources"]:
             if modelName not in self._dbIDDict:
                 self._conModelsMissing.append(modelName)
-<<<<<<< HEAD
-                        
-        weList = self._config["genElementList"] + self._config["conElementList"]
-        self._modelWEDict = self.makeModelWEDict(self._config["genSources"] + self._config["conSources"] + [self._obsSource], weList)
-=======
 
         weList = self._config["genElementList"] + self._config["conElementList"]
         self._modelWEDict = self.makeModelWEDict(
             self._config["genSources"] + self._config["conSources"] + [self._obsSource],
             weList,
         )
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # Call the main method to set up all the GUI widgets
         self.setUpUI()
@@ -1717,8 +1206,3 @@ class Procedure(SmartScript.SmartScript):
         # Clean up the lock
         self.unlockProcedure()
         return
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

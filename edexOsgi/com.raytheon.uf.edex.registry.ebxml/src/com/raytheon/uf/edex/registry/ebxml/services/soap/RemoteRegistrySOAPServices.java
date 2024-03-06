@@ -26,15 +26,6 @@ import java.util.Map;
 
 import javax.xml.ws.wsaddressing.W3CEndpointReferenceBuilder;
 
-<<<<<<< HEAD
-import oasis.names.tc.ebxml.regrep.wsdl.registry.services.v4.Cataloger;
-import oasis.names.tc.ebxml.regrep.wsdl.registry.services.v4.LifecycleManager;
-import oasis.names.tc.ebxml.regrep.wsdl.registry.services.v4.NotificationListener;
-import oasis.names.tc.ebxml.regrep.wsdl.registry.services.v4.QueryManager;
-import oasis.names.tc.ebxml.regrep.wsdl.registry.services.v4.Validator;
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.message.Message;
@@ -46,14 +37,11 @@ import com.raytheon.uf.common.registry.services.RegistryServiceConfiguration;
 import com.raytheon.uf.common.registry.services.RegistryServiceException;
 import com.raytheon.uf.edex.security.SecurityConfiguration;
 
-<<<<<<< HEAD
-=======
 import oasis.names.tc.ebxml.regrep.wsdl.registry.services.v4.Cataloger;
 import oasis.names.tc.ebxml.regrep.wsdl.registry.services.v4.LifecycleManager;
 import oasis.names.tc.ebxml.regrep.wsdl.registry.services.v4.QueryManager;
 import oasis.names.tc.ebxml.regrep.wsdl.registry.services.v4.Validator;
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 /**
  * 
  * Convenience class used for accessing the registry soap services remotely.
@@ -65,18 +53,11 @@ import oasis.names.tc.ebxml.regrep.wsdl.registry.services.v4.Validator;
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- -----------------
  * Jun 07, 2016  5589     tjensen   Initial creation
-<<<<<<< HEAD
-=======
  * May 26, 2020  8165     bsteffen  Remove notification.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
  * @author tjensen
-<<<<<<< HEAD
- * @version 1.0
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  */
 public class RemoteRegistrySOAPServices extends RegistrySOAPServices {
 
@@ -87,15 +68,6 @@ public class RemoteRegistrySOAPServices extends RegistrySOAPServices {
     protected SecurityConfiguration securityConfig;
 
     @Override
-<<<<<<< HEAD
-    public NotificationListener getNotificationListenerServiceForUrl(
-            final String url) throws RegistryServiceException {
-        return createService(url, NotificationListener.class);
-    }
-
-    @Override
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public LifecycleManager getLifecycleManagerServiceForUrl(final String url) {
         return createService(url, LifecycleManager.class);
     }
@@ -121,13 +93,8 @@ public class RemoteRegistrySOAPServices extends RegistrySOAPServices {
     public <T extends Object> T createService(String serviceUrl,
             Class<?> serviceInterface) throws RegistryServiceException {
         W3CEndpointReferenceBuilder endpointBuilder = new W3CEndpointReferenceBuilder();
-<<<<<<< HEAD
-        endpointBuilder.wsdlDocumentLocation(serviceUrl.toString() + WSDL);
-        endpointBuilder.address(serviceUrl.toString());
-=======
         endpointBuilder.wsdlDocumentLocation(serviceUrl + WSDL);
         endpointBuilder.address(serviceUrl);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         T port = (T) endpointBuilder.build().getPort(serviceInterface);
         Client client = ClientProxy.getClient(port);
         client.getOutInterceptors().add(this.securityInterceptor);
@@ -146,12 +113,8 @@ public class RemoteRegistrySOAPServices extends RegistrySOAPServices {
 
     }
 
-<<<<<<< HEAD
-    public void setSecurityInterceptor(WSS4JOutInterceptor securityInterceptor) {
-=======
     public void setSecurityInterceptor(
             WSS4JOutInterceptor securityInterceptor) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         this.securityInterceptor = securityInterceptor;
     }
 

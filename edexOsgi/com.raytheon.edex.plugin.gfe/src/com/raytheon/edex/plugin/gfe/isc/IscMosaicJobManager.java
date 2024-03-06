@@ -3,71 +3,33 @@
  **/
 package com.raytheon.edex.plugin.gfe.isc;
 
-<<<<<<< HEAD
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Date;
-=======
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-<<<<<<< HEAD
 import java.util.HashMap;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-<<<<<<< HEAD
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.hibernate.Session;
 
 import com.raytheon.uf.common.python.concurrent.IPythonExecutor;
 import com.raytheon.uf.common.python.concurrent.PythonJobCoordinator;
-=======
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import org.apache.commons.lang3.StringUtils;
-import org.hibernate.Session;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.raytheon.uf.common.dataplugin.gfe.python.GfePyIncludeUtil;
-import com.raytheon.uf.common.localization.IPathManager;
-import com.raytheon.uf.common.localization.LocalizationContext;
-import com.raytheon.uf.common.localization.LocalizationContext.LocalizationLevel;
-import com.raytheon.uf.common.localization.LocalizationContext.LocalizationType;
-import com.raytheon.uf.common.localization.LocalizationUtil;
-import com.raytheon.uf.common.localization.PathManagerFactory;
-import com.raytheon.uf.common.python.PyUtil;
-import com.raytheon.uf.common.python.PythonIncludePathUtil;
-import com.raytheon.uf.common.python.PythonScript;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.serialization.SerializationException;
 import com.raytheon.uf.common.serialization.SerializationUtil;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerialize;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
-<<<<<<< HEAD
 import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.time.util.TimeUtil;
 import com.raytheon.uf.edex.core.EDEXUtil;
 import com.raytheon.uf.edex.core.EdexException;
@@ -77,10 +39,6 @@ import com.raytheon.uf.edex.database.cluster.ClusterLockUtils;
 import com.raytheon.uf.edex.database.cluster.ClusterLockUtils.LockState;
 import com.raytheon.uf.edex.database.cluster.ClusterTask;
 
-<<<<<<< HEAD
-=======
-import jep.JepConfig;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import jep.JepException;
 
 /**
@@ -89,23 +47,14 @@ import jep.JepException;
  *
  * <pre>
  * SOFTWARE HISTORY
-<<<<<<< HEAD
  * Date        Ticket#     Engineer       Description
  * ----------  ----------  -------------  ----------------------------------
  * 2018-08-08  DCS 19452   dfriedman      Initial creation
-=======
- * Date         Ticket#    Engineer    Description
- * ------------ ---------- ----------- --------------------------
- * Aug 08, 2018 19452      dfriedman    Initial creation
- * Sep 09, 2022 23257      dgilling     Rewrite to no longer reuse PythonScript
- *                                      instances between site ids.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
  * @author dfriedman
  */
-<<<<<<< HEAD
 public class IscMosaicJobManager implements IContextStateProcessor {
 
     private static final String CLUSTER_LOCK_NAME = "ISC Write Lock";
@@ -138,103 +87,40 @@ public class IscMosaicJobManager implements IContextStateProcessor {
     private AtomicInteger nActiveThreads = new AtomicInteger();
 
     private ConcurrentHashMap<Integer, MosaicJob> waitingJobs = new ConcurrentHashMap<>();
-=======
-
-public class IscMosaicJobManager implements IContextStateProcessor {
-
-    private static final Logger logger = LoggerFactory
-            .getLogger(IscMosaicJobManager.class);
-
-    private static final String CLUSTER_LOCK_NAME = "ISC Write Lock";
-
-    private static final long CLUSTER_TASK_TIMEOUT = Long
-            .getLong("iscMosaicJob.clusterTaskTimeout", 400)
-            * TimeUtil.MILLIS_PER_SECOND;
-
-    private static final String NOTIFY_ROUTE_NAME = "iscMosaicStatusNotifyRoute";
-
-    private static final String PREPARE_METHOD_NAME = "prepareMosaicRequest";
-
-    private static final String PROCESS_PARM_METHOD_NAME = "processParm";
-
-    private static final String CLEAN_UP_JOB_METHOD_NAME = "cleanUpJob";
-
-    private static final String DELETE_INPUT_ARG_NAME = "deleteInput";
-
-    private static final String INPUT_FILES_ARG_NAME = "inFiles";
-
-    private static final Comparator<ClusterTask> CT_LAST_EXEC_COMPARATOR = Comparator
-            .comparingLong(ClusterTask::getLastExecution);
-
-    private final ThreadPoolExecutor threadPool;
-
-    private final ConcurrentMap<Integer, MosaicJob> waitingJobs;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Used to wake up work threads that are waiting for a WAKEUP notification.
      */
-<<<<<<< HEAD
     private Object wakeSignal = new Object();
-=======
-    private final Object wakeSignal;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Used by worker threads to determine if a WAKEUP has been received while
      * running.
      */
-<<<<<<< HEAD
     private volatile int wakeupCounter;
-=======
-    private final AtomicInteger wakeupCounter;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Controls whether worker threads will be started and continue running.
      */
-<<<<<<< HEAD
     private volatile boolean running;
 
     private IscMosaicJobDao dao;
-=======
-    private final AtomicBoolean running;
-
-    private final IscMosaicJobDao dao;
-
-    private CountDownLatch shutdownSignal;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Used to communicate mosaic processing events between EDEX nodes.
      * <p>
      * There are two types of messages:
-<<<<<<< HEAD
      * <p>
      * WAKEUP - Indicates worker threads should resume processing because a
      * cluster lock has been released or a new job has been prepared.
      * <p>
      * COMPLETED_JOB - Indicates a thread waiting for a job to complete should
      * resume. Also includes an error message.
-=======
-     * <ul>
-     * <li>WAKEUP - Indicates worker threads should resume processing because a
-     * cluster lock has been released or a new job has been prepared.
-     * <li>COMPLETED_JOB - Indicates a thread waiting for a job to complete
-     * should resume. Also includes an error message.
-     * </ul>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     @DynamicSerialize
     private static class MosaicStatusMessage {
 
-<<<<<<< HEAD
         private static enum Type { WAKEUP, COMPLETED_JOB };
-=======
-        private enum Type {
-            WAKEUP, COMPLETED_JOB
-        }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         @DynamicSerializeElement
         private Type type;
@@ -286,12 +172,7 @@ public class IscMosaicJobManager implements IContextStateProcessor {
     /**
      * Provides an interface to set up and submit jobs.
      */
-<<<<<<< HEAD
     public class MosaicJob {
-=======
-    public static class MosaicJob {
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         private IscMosaicJobRecord record;
 
         /**
@@ -299,11 +180,7 @@ public class IscMosaicJobManager implements IContextStateProcessor {
          */
         private List<MosaicJob> jobs;
 
-<<<<<<< HEAD
         private volatile boolean done;
-=======
-        private AtomicBoolean done;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         private String result;
 
@@ -312,19 +189,11 @@ public class IscMosaicJobManager implements IContextStateProcessor {
 
         private MosaicJob() {
             this(new IscMosaicJobRecord());
-<<<<<<< HEAD
             record.setLastUse(new Date(System.currentTimeMillis()));
-=======
-            record.setLastUse(TimeUtil.newDate());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         public MosaicJob(IscMosaicJobRecord record) {
             this.record = record;
-<<<<<<< HEAD
-=======
-            this.done = new AtomicBoolean();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         public void setSiteID(String siteID) {
@@ -348,11 +217,7 @@ public class IscMosaicJobManager implements IContextStateProcessor {
          */
         public MosaicJob createAssociatedJob(Object data) throws IOException {
             if (data == null) {
-<<<<<<< HEAD
                 throw new NullPointerException("args must not be null");
-=======
-                throw new IllegalArgumentException("args must not be null");
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
             if (jobs == null) {
                 jobs = new ArrayList<>();
@@ -373,21 +238,12 @@ public class IscMosaicJobManager implements IContextStateProcessor {
          * running the preparation step. Does not include the @{code record} of
          * this @{code MosaicJob} instance.
          */
-<<<<<<< HEAD
         List<IscMosaicJobRecord> getJobsToStore() throws SerializationException {
-=======
-        List<IscMosaicJobRecord> getJobsToStore()
-                throws SerializationException {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             List<IscMosaicJobRecord> records = new ArrayList<>();
             if (jobs != null) {
                 for (MosaicJob job : jobs) {
                     if (job.lockNames.isEmpty()) {
-<<<<<<< HEAD
                         statusHandler.warn(String.format(
-=======
-                        logger.warn(String.format(
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                 "job with args %s has no parms to process",
                                 record.getArgs()));
                         continue;
@@ -407,7 +263,6 @@ public class IscMosaicJobManager implements IContextStateProcessor {
         public synchronized void addLockName(String lockName) {
             lockNames.add(lockName);
         }
-<<<<<<< HEAD
 
     }
 
@@ -415,19 +270,6 @@ public class IscMosaicJobManager implements IContextStateProcessor {
         this.threadPool = threadPool;
         this.nThreads = nThreads;
         dao = new IscMosaicJobDao();
-=======
-    }
-
-    public IscMosaicJobManager(ThreadPoolExecutor threadPool) {
-        this.threadPool = threadPool;
-        this.waitingJobs = new ConcurrentHashMap<>();
-        this.wakeSignal = new Object();
-        this.wakeupCounter = new AtomicInteger();
-        this.running = new AtomicBoolean();
-        this.dao = new IscMosaicJobDao();
-        this.shutdownSignal = new CountDownLatch(
-                this.threadPool.getMaximumPoolSize());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
@@ -440,24 +282,16 @@ public class IscMosaicJobManager implements IContextStateProcessor {
                 wakeUpExecutors();
             }
         } catch (Exception e) {
-<<<<<<< HEAD
             statusHandler.error(
                     "failed to check for existing jobs: " + e.toString(), e);
-=======
-            logger.error("Failed to check for existing jobs: " + e.toString(),
-                    e);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 
     /**
      * Create a new job
      *
-<<<<<<< HEAD
      * @param siteID
      *            site ID to use for IscScript invocations in this job.
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public MosaicJob createJob() {
         return new MosaicJob();
@@ -466,36 +300,20 @@ public class IscMosaicJobManager implements IContextStateProcessor {
     /**
      * Submit a new job to the manager. Writes a job record to the database,
      * marked as "unprepared". Sends a notification that new work is available.
-<<<<<<< HEAD
      * After calling this, clients can call {@link waitForJob} to wait for the job
      * to complete.
-=======
-     * After calling this, clients can call {@link waitForJob} to wait for the
-     * job to complete.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      *
      * @param job
      */
     public void submit(MosaicJob job) {
         IscMosaicJobRecord record = job.record;
-<<<<<<< HEAD
         if (record.getSite() == null || record.getArgs() == null) {
             throw new NullPointerException("job site and args must not be null");
-=======
-        if (StringUtils.isEmpty(record.getSite())
-                || StringUtils.isEmpty(record.getArgs())) {
-            throw new IllegalArgumentException(
-                    "job site and args must not be null");
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         record.setPrepared(false);
         record.setInUse(false);
-<<<<<<< HEAD
         record.setLastUse(new Date(System.currentTimeMillis()));
-=======
-        record.setLastUse(TimeUtil.newDate());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         synchronized (waitingJobs) {
             dao.create(record);
@@ -507,7 +325,6 @@ public class IscMosaicJobManager implements IContextStateProcessor {
 
     public String waitForJob(MosaicJob job) throws InterruptedException {
         synchronized (job) {
-<<<<<<< HEAD
             while (!job.done) {
                 job.wait(CLUSTER_TASK_TIMEOUT / 2);
                 if (!job.done && !dao.isJobPresent(job.record.getId())) {
@@ -516,15 +333,6 @@ public class IscMosaicJobManager implements IContextStateProcessor {
                     statusHandler
                             .error("did not receive a notification for completed "
                                     + getJobDescription(job.record));
-=======
-            while (!job.done.get()) {
-                job.wait(CLUSTER_TASK_TIMEOUT / 2);
-                if (!job.done.get() && !dao.isJobPresent(job.record.getId())) {
-                    job.done.set(true);
-                    waitingJobs.remove(job.record.getId());
-                    logger.error("Did not receive a notification for completed "
-                            + getJobDescription(job.record));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
             }
         }
@@ -534,41 +342,22 @@ public class IscMosaicJobManager implements IContextStateProcessor {
     /**
      * Return the collection of files to be removed when the job is completed.
      * Always returns a non-null collection.
-<<<<<<< HEAD
-=======
-     *
-     * @param job
-     * @return
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     private Collection<String> getFilesToDelete(IscMosaicJobRecord job) {
         Map<String, Object> args = null;
         try {
             args = job.getArgsMap();
         } catch (IOException e) {
-<<<<<<< HEAD
             statusHandler.error("failed to get files to delete for %s: %s",
-=======
-            logger.error("failed to get files to delete for %s: %s",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     getJobDescription(job), e);
         }
         if (args != null) {
             Object deleteInput = args.get(DELETE_INPUT_ARG_NAME);
-<<<<<<< HEAD
             if (deleteInput instanceof Boolean && (Boolean) deleteInput) {
                 Object inputSpec = args.get(INPUT_FILES_ARG_NAME);
                 if (inputSpec instanceof Collection) {
                     Collection<?> inputFilesCollection = (Collection<?>) inputSpec;
                     Collection<String> result = new ArrayList<>(inputFilesCollection.size());
-=======
-            if ((deleteInput instanceof Boolean) && (Boolean) deleteInput) {
-                Object inputSpec = args.get(INPUT_FILES_ARG_NAME);
-                if (inputSpec instanceof Collection) {
-                    Collection<?> inputFilesCollection = (Collection<?>) inputSpec;
-                    Collection<String> result = new ArrayList<>(
-                            inputFilesCollection.size());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     for (Object o : inputFilesCollection) {
                         if (o instanceof String) {
                             result.add((String) o);
@@ -597,17 +386,9 @@ public class IscMosaicJobManager implements IContextStateProcessor {
      * @param lockAndRemoveAll
      *            If true, try to exclusively lock the given job's record and
      *            then remove all job records which have the job's ID as the
-<<<<<<< HEAD
      *            leader ID.  If false, just remove the given job without locking.
      */
     private void complete(IscMosaicJobRecord job, String message, Session session, boolean lockAndRemoveAll) {
-=======
-     *            leader ID. If false, just remove the given job without
-     *            locking.
-     */
-    private void complete(IscMosaicJobRecord job, String message,
-            Session session, boolean lockAndRemoveAll) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         session.evict(job);
         try {
             if (!dao.removeJob(job, session, lockAndRemoveAll)) {
@@ -623,13 +404,8 @@ public class IscMosaicJobManager implements IContextStateProcessor {
             try {
                 Files.delete(Paths.get(path));
             } catch (Exception e) {
-<<<<<<< HEAD
                 statusHandler.error(
                         String.format("error deleting %s: %s", path, e), e);
-=======
-                logger.error(String.format("error deleting %s: %s", path, e),
-                        e);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         }
         notifyExecutors(new MosaicStatusMessage(
@@ -645,7 +421,6 @@ public class IscMosaicJobManager implements IContextStateProcessor {
      * If the preparation set fails, the job record is removed from the database
      * and a notification is sent.
      *
-<<<<<<< HEAD
      * @param script
      * @return
      * @throws DataAccessLayerException
@@ -657,21 +432,6 @@ public class IscMosaicJobManager implements IContextStateProcessor {
         try {
             boolean didWork = false;
             while (running && !jobIDs.isEmpty()) {
-=======
-     * @return
-     * @throws DataAccessLayerException
-     */
-    private boolean prepareJobs() throws DataAccessLayerException {
-        Queue<Number> jobIDs = dao.queryJobs(false);
-        Session session = dao.getSession();
-        PythonScript script = null;
-
-        try {
-            boolean didWork = false;
-            String prevSiteId = StringUtils.EMPTY;
-
-            while (running.get() && !jobIDs.isEmpty()) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 int jobID = jobIDs.poll().intValue();
                 IscMosaicJobRecord job = dao.lockUnpreparedJob(jobID, session);
                 if (job == null) {
@@ -683,46 +443,18 @@ public class IscMosaicJobManager implements IContextStateProcessor {
                     Map<String, Object> args = job.getArgsMap();
                     MosaicJob wrapper = new MosaicJob(job);
                     args.put("job", wrapper);
-<<<<<<< HEAD
                     script.execute(PREPARE_METHOD_NAME,
                             args, job.getSite());
-=======
-
-                    String siteId = job.getSite();
-                    if (!siteId.equals(prevSiteId)) {
-                        if (script != null) {
-                            try {
-                                script.dispose();
-                            } catch (JepException e) {
-                                logger.warn(
-                                        "Error disposing of PythonScript instance.",
-                                        e);
-                            }
-                        }
-
-                        script = getPythonScript(siteId);
-                        prevSiteId = siteId;
-                    }
-                    script.execute(PREPARE_METHOD_NAME, args);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     jobsToStore = wrapper.getJobsToStore();
                 } catch (Exception e) {
                     String message = String.format(
                             "iscMosaic script failed during preparation of %s: %s",
                             getJobDescription(job), e);
-<<<<<<< HEAD
                     statusHandler.error(message, e);
                     complete(job, message, session, false);
                     continue;
                 }
                 if (jobsToStore.size() == 0) {
-=======
-                    logger.error(message, e);
-                    complete(job, message, session, false);
-                    continue;
-                }
-                if (jobsToStore.isEmpty()) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     complete(job, null, session, false);
                     continue;
                 }
@@ -742,47 +474,21 @@ public class IscMosaicJobManager implements IContextStateProcessor {
             return didWork;
         } finally {
             session.close();
-<<<<<<< HEAD
-=======
-
-            if (script != null) {
-                try {
-                    script.dispose();
-                } catch (JepException e) {
-                    logger.warn("Error disposing of PythonScript instance.", e);
-                }
-            }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 
     /**
      * Process parms of prepared jobs.
-<<<<<<< HEAD
      */
     private boolean processParms(IscScript script) throws DataAccessLayerException {
         boolean didWork = false;
-=======
-     *
-     * @return
-     * @throws DataAccessLayerException
-     */
-    private boolean processParms() throws DataAccessLayerException {
-        boolean didWork = false;
-        PythonScript script = null;
-        String prevSiteId = StringUtils.EMPTY;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         // Get prepared jobs and their parm sets
         Collection<Number> jobs = dao.queryJobs(true);
         Session session = dao.getSession();
         try {
             for (Number jobID : jobs) {
-<<<<<<< HEAD
                 if (! running) {
-=======
-                if (!running.get()) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     break;
                 }
                 IscMosaicJobRecord job = null;
@@ -801,12 +507,7 @@ public class IscMosaicJobManager implements IContextStateProcessor {
                  * Get the list of current locks to find candidate parms to
                  * process.
                  */
-<<<<<<< HEAD
                 List<ClusterTask> locks = ClusterLockUtils.getLocks(CLUSTER_LOCK_NAME);
-=======
-                List<ClusterTask> locks = ClusterLockUtils
-                        .getLocks(CLUSTER_LOCK_NAME);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 /*
                  * Sort locks in order of last execution time so that if a stale
                  * lock is overridden in @{code lockNextParm}, it will be the
@@ -814,7 +515,6 @@ public class IscMosaicJobManager implements IContextStateProcessor {
                  */
                 locks.sort(CT_LAST_EXEC_COMPARATOR);
 
-<<<<<<< HEAD
                 try {
                     MosaicJob jobWrapper = new MosaicJob(job);
 
@@ -826,70 +526,19 @@ public class IscMosaicJobManager implements IContextStateProcessor {
                              * If a cluster lock could not be obtained, do
                              * not keep looping. This will try another job,
                              * but the number of jobs is limited.
-=======
-                String siteId = job.getSite();
-                if (!siteId.equals(prevSiteId)) {
-                    if (script != null) {
-                        try {
-                            script.close();
-                        } catch (JepException e) {
-                            logger.warn(
-                                    "Error disposing of PythonScript instance.",
-                                    e);
-                        }
-                    }
-
-                    try {
-                        script = getPythonScript(siteId);
-                        prevSiteId = siteId;
-                    } catch (JepException e) {
-                        String message = String.format(
-                                "iscMosaic script failed during preparation of %s",
-                                getJobDescription(job));
-                        logger.error(message, e);
-                        // move on to next jobID from jobs
-                        continue;
-                    }
-                }
-
-                try {
-                    MosaicJob jobWrapper = new MosaicJob(job);
-
-                    while (running.get() && !job.getParms().isEmpty()) {
-                        boolean locked = processOneParm(jobWrapper, locks,
-                                session, script);
-                        didWork |= locked;
-                        if (!locked) {
-                            /*
-                             * If a cluster lock could not be obtained, do not
-                             * keep looping. This will try another job, but the
-                             * number of jobs is limited.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                              */
                             break;
                         }
                     }
                 } finally {
-<<<<<<< HEAD
                     // Call the script's cleanup method to close the NetCDF file if needed.
                     try {
                         script.execute(CLEAN_UP_JOB_METHOD_NAME, new HashMap<>(), job.getSite());
-=======
-                    // Call the script's cleanup method to close the NetCDF file
-                    // if needed.
-                    try {
-                        script.execute(CLEAN_UP_JOB_METHOD_NAME,
-                                Collections.emptyMap());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     } catch (Exception e) {
                         String error = String.format(
                                 "iscMosaic script failed during cleanup for %s: %s",
                                 getJobDescription(job), e);
-<<<<<<< HEAD
                         statusHandler.error(error, e);
-=======
-                        logger.error(error, e);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     }
                 }
 
@@ -899,11 +548,7 @@ public class IscMosaicJobManager implements IContextStateProcessor {
                  * job.
                  */
                 if (dao.isJobComplete(job.getLeader())) {
-<<<<<<< HEAD
                     IscMosaicJobRecord leader = (IscMosaicJobRecord) session
-=======
-                    IscMosaicJobRecord leader = session
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                             .get(IscMosaicJobRecord.class, job.getLeader());
                     if (leader != null) {
                         complete(leader, null, session, true);
@@ -912,17 +557,6 @@ public class IscMosaicJobManager implements IContextStateProcessor {
             }
         } finally {
             session.close();
-<<<<<<< HEAD
-=======
-
-            if (script != null) {
-                try {
-                    script.close();
-                } catch (JepException e) {
-                    logger.warn("Error disposing of PythonScript instance.", e);
-                }
-            }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         return didWork;
@@ -938,7 +572,6 @@ public class IscMosaicJobManager implements IContextStateProcessor {
      * list of parms in memory and in the database. The cluster lock
      * synchronizes this read and delete cycle for the given lock name.
      *
-<<<<<<< HEAD
      * @return true if a lock was obtained (Does not imply a parm was actually
      *         processed.)
      */
@@ -948,22 +581,6 @@ public class IscMosaicJobManager implements IContextStateProcessor {
         try {
             if (clusterTask != null && clusterTask
                     .getLockState() == LockState.SUCCESSFUL) {
-=======
-     * @param jobWrapper
-     * @param locks
-     * @param session
-     * @param script
-     * @return true if a lock was obtained (Does not imply a parm was actually
-     *         processed.)
-     */
-    private boolean processOneParm(MosaicJob jobWrapper,
-            List<ClusterTask> locks, Session session, PythonScript script) {
-        IscMosaicJobRecord job = jobWrapper.record;
-        ClusterTask clusterTask = lockNextParm(job.getParms(), locks);
-        try {
-            if (clusterTask != null
-                    && clusterTask.getLockState() == LockState.SUCCESSFUL) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 /*
                  * Check if the lock name is still in the job's set.
                  *
@@ -979,51 +596,29 @@ public class IscMosaicJobManager implements IContextStateProcessor {
                     return true;
                 }
                 try {
-<<<<<<< HEAD
                     Map<String, Object> args = new HashMap<>();
                     args.put("job", jobWrapper);
                     args.put("lockName", lockName);
                     script.execute(PROCESS_PARM_METHOD_NAME, args, job.getSite());
-=======
-                    Map<String, Object> args = Map.of("job", jobWrapper,
-                            "lockName", lockName);
-                    script.execute(PROCESS_PARM_METHOD_NAME, args);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 } catch (Exception e) {
                     String error = String.format(
                             "iscMosaic script failed for lock name %s in %s: %s",
                             lockName, getJobDescription(job), e);
-<<<<<<< HEAD
                     statusHandler.error(error, e);
-=======
-                    logger.error(error, e);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
                 try {
                     dao.removeParm(job, lockName, session);
                 } catch (Exception e) {
                     throw new RuntimeException(
-<<<<<<< HEAD
                             String.format("error removing parm %s of %s", lockName,
                                     getJobDescription(job)),
-=======
-                            String.format("error removing parm %s of %s",
-                                    lockName, getJobDescription(job)),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                             e);
                 }
                 return true;
             } else {
-<<<<<<< HEAD
                 if (clusterTask != null && clusterTask
                         .getLockState() == LockState.FAILED) {
                     statusHandler.error(String.format("Attempt to take cluster lock %s failed",
-=======
-                if (clusterTask != null
-                        && clusterTask.getLockState() == LockState.FAILED) {
-                    logger.error(String.format(
-                            "Attempt to take cluster lock %s failed",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                             clusterTask.getId().getDetails()));
                 }
                 return false;
@@ -1033,13 +628,8 @@ public class IscMosaicJobManager implements IContextStateProcessor {
                     && clusterTask.getLockState() == LockState.SUCCESSFUL) {
                 ClusterLockUtils.unlock(clusterTask, true);
                 /*
-<<<<<<< HEAD
                  * Wake up other executors that may now be able
                  * to process a parm with this name.
-=======
-                 * Wake up other executors that may now be able to process a
-                 * parm with this name.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                  */
                 notifyExecutors(new MosaicStatusMessage(
                         MosaicStatusMessage.Type.WAKEUP));
@@ -1047,7 +637,6 @@ public class IscMosaicJobManager implements IContextStateProcessor {
         }
     }
 
-<<<<<<< HEAD
     /**
      * Work processor for the job manager. Although it implements the
      * IPythonExecutor interface, it does not actually produce a value. It will
@@ -1086,45 +675,12 @@ public class IscMosaicJobManager implements IContextStateProcessor {
                     if (!didWork) {
                         synchronized (wakeSignal) {
                             if (running && lastCounter == wakeupCounter) {
-=======
-    private Runnable createWorkerJob() {
-        return () -> {
-            int lastCounter = wakeupCounter.get();
-
-            try {
-                while (running.get()) {
-                    boolean didWork = false;
-
-                    try {
-                        didWork = prepareJobs();
-                        didWork = processParms() || didWork;
-                    } catch (Exception e) {
-                        logger.error("Error occurred running iscMosaic.", e);
-                    }
-
-                    /*
-                     * If there is work left (previously known or new jobs), but
-                     * we did not do anything due to being unable to take a
-                     * cluster lock, wait for a wakeup signal. The wakeup can be
-                     * for the notification of an unlock operation or creation
-                     * of additional work.
-                     *
-                     * In case something goes wrong that prevents notification
-                     * (Unexpected error, message queue or database failure,
-                     * etc.), only wait a limited amount of time.
-                     */
-                    if (!didWork) {
-                        synchronized (wakeSignal) {
-                            if ((running.get())
-                                    && (lastCounter == wakeupCounter.get())) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                 try {
                                     wakeSignal.wait(CLUSTER_TASK_TIMEOUT / 2);
                                 } catch (InterruptedException e) {
                                     // just continue
                                 }
                             }
-<<<<<<< HEAD
                             lastCounter = wakeupCounter;
                         }
                     }
@@ -1147,28 +703,6 @@ public class IscMosaicJobManager implements IContextStateProcessor {
      *
      * @param lockNames remaining lock names for parms of a job that need to be processed
      * @param locks recent list of cluster locks ordered by getLastExecution()
-=======
-                            lastCounter = wakeupCounter.get();
-                        }
-                    }
-                }
-            } finally {
-                shutdownSignal.countDown();
-            }
-        };
-    }
-
-    /**
-     * Attempt to lock the next parm for a job without waiting. If none of the
-     * desired locks are free, attempt to override a stale lock. If no stale
-     * locks can be overridden, return null.
-     *
-     * @param lockNames
-     *            remaining lock names for parms of a job that need to be
-     *            processed
-     * @param locks
-     *            recent list of cluster locks ordered by getLastExecution()
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return ClusterTask in case of success or a hard failure, null if no
      *         locks are currently free.
      */
@@ -1203,11 +737,7 @@ public class IscMosaicJobManager implements IContextStateProcessor {
                 }
             }
         }
-<<<<<<< HEAD
         if (ctToUse == null && fallbackCTs.size() > 0) {
-=======
-        if (ctToUse == null && !fallbackCTs.isEmpty()) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             for (ClusterTask fallbackCT : fallbackCTs) {
                 ClusterTask ct = ClusterLockUtils.lock(CLUSTER_LOCK_NAME,
                         fallbackCT.getId().getDetails(), CLUSTER_TASK_TIMEOUT,
@@ -1225,35 +755,18 @@ public class IscMosaicJobManager implements IContextStateProcessor {
     /**
      * Send the given message to all request processes. When the message is
      * received, it is handled in {@link handleStatusMessage()}.
-<<<<<<< HEAD
-=======
-     *
-     * @param msg
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     private static void notifyExecutors(MosaicStatusMessage msg) {
         try {
             EDEXUtil.getMessageProducer().sendAsync(NOTIFY_ROUTE_NAME,
                     SerializationUtil.transformToThrift(msg));
         } catch (EdexException | SerializationException e) {
-<<<<<<< HEAD
             statusHandler.error(String.format("failed to send to %s: %s",
-=======
-            logger.error(String.format("failed to send to %s: %s",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     NOTIFY_ROUTE_NAME, e), e);
         }
     }
 
-<<<<<<< HEAD
     /** Called in response to an inter-process notification. */
-=======
-    /**
-     * Called in response to an inter-process notification.
-     *
-     * @param msg
-     */
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public void handleStatusMessage(MosaicStatusMessage msg) {
         if (msg != null
                 && msg.getType() == MosaicStatusMessage.Type.COMPLETED_JOB) {
@@ -1261,16 +774,9 @@ public class IscMosaicJobManager implements IContextStateProcessor {
             synchronized (waitingJobs) {
                 job = waitingJobs.remove(msg.getJobID());
             }
-<<<<<<< HEAD
             if (job != null) {
                 synchronized (job) {
                     job.done = true;
-=======
-
-            if (job != null) {
-                synchronized (job) {
-                    job.done.set(true);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     job.result = msg.getMessage();
                     job.notifyAll();
                 }
@@ -1281,7 +787,6 @@ public class IscMosaicJobManager implements IContextStateProcessor {
     }
 
     /**
-<<<<<<< HEAD
      * Wake up executors in this proccess, starting them if they are not
      * running.
      */
@@ -1293,56 +798,14 @@ public class IscMosaicJobManager implements IContextStateProcessor {
                     this.threadPool.submitJob(new MosaicJobExecutor());
                 }
                 ++wakeupCounter;
-=======
-     * Wake up executors in this process, starting them if they are not running.
-     */
-    private void wakeUpExecutors() {
-        synchronized (wakeSignal) {
-            if (running.get()) {
-                int nToStart = threadPool.getMaximumPoolSize()
-                        - threadPool.getActiveCount();
-                for (int i = 0; i < nToStart; ++i) {
-                    threadPool.submit(createWorkerJob());
-                }
-                wakeupCounter.incrementAndGet();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 wakeSignal.notifyAll();
             }
         }
     }
 
-<<<<<<< HEAD
     @Override
     public void preStart() {
         running = true;
-=======
-    private PythonScript getPythonScript(String siteId) throws JepException {
-        IPathManager pathMgr = PathManagerFactory.getPathManager();
-        LocalizationContext ctx = pathMgr.getContext(
-                LocalizationType.COMMON_STATIC, LocalizationLevel.BASE);
-        File scriptLoc = pathMgr.getFile(ctx,
-                LocalizationUtil.join("gfe", "python", "isc", "iscMosaic.py"));
-
-        String includePath = PyUtil.buildJepIncludePath(
-                PythonIncludePathUtil.getCommonPythonIncludePath(),
-                GfePyIncludeUtil.getCommonGfeIncludePath(),
-                GfePyIncludeUtil.getVtecIncludePath(siteId),
-                GfePyIncludeUtil.getIscScriptsIncludePath(),
-                GfePyIncludeUtil.getGfeConfigIncludePath(siteId));
-
-        return new PythonScript(new JepConfig().setIncludePath(includePath)
-                .setClassLoader(getClass().getClassLoader()),
-                scriptLoc.getPath());
-    }
-
-    @Override
-    public void preStart() {
-        running.set(true);
-        if (shutdownSignal.getCount() != threadPool.getMaximumPoolSize()) {
-            shutdownSignal = new CountDownLatch(
-                    threadPool.getMaximumPoolSize());
-        }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override
@@ -1357,11 +820,7 @@ public class IscMosaicJobManager implements IContextStateProcessor {
     @Override
     public void preStop() {
         synchronized (wakeSignal) {
-<<<<<<< HEAD
             running = false;
-=======
-            running.set(false);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             wakeSignal.notifyAll();
         }
     }
@@ -1372,7 +831,6 @@ public class IscMosaicJobManager implements IContextStateProcessor {
      */
     @Override
     public void postStop() {
-<<<<<<< HEAD
         long start = System.nanoTime();
         long waitTime = CLUSTER_TASK_TIMEOUT * 1_000_000; // convert to nanoseconds
         synchronized (nActiveThreads) {
@@ -1391,16 +849,4 @@ public class IscMosaicJobManager implements IContextStateProcessor {
         }
     }
 
-=======
-        try {
-            boolean latchTriggered = shutdownSignal.await(CLUSTER_TASK_TIMEOUT,
-                    TimeUnit.MILLISECONDS);
-            if (!latchTriggered) {
-                logger.warn("Timed out waiting for ISC mosaic jobs to finish");
-            }
-        } catch (InterruptedException e) {
-            logger.warn("IscMosaicJobManager postStop() interrupted.", e);
-        }
-    }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -39,13 +27,10 @@ import org.eclipse.ui.IEditorPart;
 import org.geotools.referencing.CRS;
 import org.geotools.referencing.operation.projection.MapProjection;
 import org.geotools.referencing.operation.projection.MapProjection.AbstractProvider;
-<<<<<<< HEAD
-=======
 import org.locationtech.jts.densify.Densifier;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.LineString;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.opengis.geometry.Envelope;
 import org.opengis.parameter.ParameterNotFoundException;
 import org.opengis.parameter.ParameterValueGroup;
@@ -58,10 +43,7 @@ import com.raytheon.uf.viz.core.drawables.IRenderableDisplay;
 import com.raytheon.uf.viz.core.grid.rsc.GridLoadProperties;
 import com.raytheon.uf.viz.core.map.MapDescriptor;
 import com.raytheon.uf.viz.core.maps.display.VizMapEditor;
-<<<<<<< HEAD
-=======
 import com.raytheon.uf.viz.core.maps.scales.MapScalesManager;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.rsc.DisplayType;
 import com.raytheon.uf.viz.core.rsc.LoadProperties;
 import com.raytheon.uf.viz.xy.crosssection.display.CrossSectionDescriptor;
@@ -76,22 +58,6 @@ import com.raytheon.viz.volumebrowser.util.CrossSectionUtil;
 import com.raytheon.viz.volumebrowser.vbui.SelectedData;
 import com.raytheon.viz.volumebrowser.vbui.VBMenuBarItemsMgr.SpaceTimeMenu;
 import com.raytheon.viz.volumebrowser.vbui.VolumeBrowserDialogSettings;
-<<<<<<< HEAD
-import org.locationtech.jts.densify.Densifier;
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.GeometryFactory;
-import org.locationtech.jts.geom.LineString;
-
-/**
- * 
- * Creates a {@link CrossSectionRenderableDisplay} containing a
- * {@link CrossSectionResourceData}.
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * 
-=======
 
 /**
  *
@@ -102,24 +68,17 @@ import org.locationtech.jts.geom.LineString;
  *
  * SOFTWARE HISTORY
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- --------------------------
  * Aug 03, 2015  3861     bsteffen  Initial Creation
  * Apr 18, 2018  6719     njensen   Create a curved line if the user selected
  *                                  a single Lat or Lon and try to center and
  *                                  zoom on it nicely
-<<<<<<< HEAD
- * 
- * </pre>
- * 
-=======
  * Sep 13, 2022 8792      mapeters  Prevent error in makeProjectedLine when no
  *                                  map editor is open
  *
  * </pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author bsteffen
  */
 public class CrossSectionProductCreator extends AbstractProductCreator {
@@ -204,32 +163,20 @@ public class CrossSectionProductCreator extends AbstractProductCreator {
      * basic lat/lon) by splitting the original line into multiple coordinates,
      * centering over the central meridian if it's a latitude line, and then
      * filtering the coordinates that fit within the map's display extent.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * Turns the line into multiple smaller segments using {@link Densifier}.
      * For example, the equator with only two coordinates could have a start
      * point of (-180, 0) and end point of (180, 0). Using a distanceTolerance
      * of 1.0, the line would be turned into 360 coordinates, each 1.0 degrees
      * (arbitrary units) apart. So the same line would now be (-180, 0), (-179,
      * 0), (-178, 0)... (178, 0), (179, 0), (180, 0).
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * After the line has been been turned into more coordinates, the
      * coordinates are checked against the display's extent to see if the
      * coordinate fits on the extent. If not, the coordinate is discarded. For
      * example, if your extent only covered the Americas, then the equator line
      * would now be cut off on both ends to fit inside the extent.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param start
      *            the start of the line
      * @param end
@@ -249,12 +196,8 @@ public class CrossSectionProductCreator extends AbstractProductCreator {
                 mapDesc = (MapDescriptor) ((AbstractEditor) editor)
                         .getActiveDisplayPane().getDescriptor();
             } else {
-<<<<<<< HEAD
-                mapDesc = new MapDescriptor();
-=======
                 mapDesc = (MapDescriptor) MapScalesManager.getInstance()
                         .getDefaultScaleDisplay().getDescriptor();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
 
             if (latitude) {
@@ -276,11 +219,7 @@ public class CrossSectionProductCreator extends AbstractProductCreator {
             IExtent extent = display.getExtent();
             List<Coordinate> withinBounds = new ArrayList<>();
             for (Coordinate coord : line.getCoordinates()) {
-<<<<<<< HEAD
-                double[] c = new double[] { coord.x, coord.y };
-=======
                 double[] c = { coord.x, coord.y };
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 double[] pixel = mapDesc.worldToPixel(c);
                 if (pixel != null && extent.contains(pixel)) {
                     withinBounds.add(coord);
@@ -304,11 +243,7 @@ public class CrossSectionProductCreator extends AbstractProductCreator {
 
     /**
      * Gets the central meridian out of an envelope
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param worldEnvelope
      * @return
      */

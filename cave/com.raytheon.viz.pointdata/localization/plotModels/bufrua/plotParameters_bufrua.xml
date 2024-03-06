@@ -28,13 +28,9 @@
 
     <plotParameterDefinition displayName="staName" displayType="TEXT" param="staName" sampleValue="R" />       
 
-<<<<<<< HEAD
-    <plotParameterDefinition displayName="T (°C)" format="%3.0f" displayType="TEXT" param="T" sampleValue="70" unit="°C" />   
-=======
     <plotParameterDefinition displayName="T (°C)" format="%3.0f" displayType="TEXT" param="T" sampleValue="22" unit="°C" />   
 
     <plotParameterDefinition displayName="T (°F)" format="%3.0f" displayType="TEXT" param="T" sampleValue="70" unit="°F" />   
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     <plotParameterDefinition displayName="GH (dam)" format="%4.0f" displayType="TEXT" param="GH" sampleValue="71" trim="1" unit="dam" />
 

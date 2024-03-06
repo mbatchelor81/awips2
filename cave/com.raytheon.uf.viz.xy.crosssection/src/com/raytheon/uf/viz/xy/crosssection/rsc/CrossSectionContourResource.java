@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -41,10 +29,7 @@ import org.geotools.coverage.grid.GeneralGridGeometry;
 import org.geotools.coverage.grid.GridEnvelope2D;
 import org.geotools.geometry.DirectPosition2D;
 import org.geotools.geometry.Envelope2D;
-<<<<<<< HEAD
-=======
 import org.locationtech.jts.geom.Envelope;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.opengis.referencing.datum.PixelInCell;
 import org.opengis.referencing.operation.MathTransform;
 import org.opengis.referencing.operation.TransformException;
@@ -74,29 +59,6 @@ import com.raytheon.uf.viz.xy.crosssection.adapter.AbstractCrossSectionAdapter;
 import com.raytheon.uf.viz.xy.crosssection.display.CrossSectionDescriptor;
 import com.raytheon.viz.core.contours.ContourSupport;
 import com.raytheon.viz.core.contours.ContourSupport.ContourGroup;
-<<<<<<< HEAD
-import org.locationtech.jts.geom.Envelope;
-
-/**
- * Resource for displaying cross sections as contours
- * 
- * <pre>
- * SOFTWARE HISTORY
- * Date          Ticket#  Engineer    Description
- * ------------- -------- ----------- --------------------------
- * Dec 04, 2007           njensen     Initial creation
- * Feb 17, 2009           njensen     Refactored to new rsc architecture
- * Feb 09, 2011  8244     bkowal      Enabled the magnification capability.
- * Feb 17, 2014  2661     bsteffen    Use only u,v for vectors.
- * Nov 10, 2015  4689     kbisanz     Ensure corners are within grid when
- *                                    zooming.
- * Feb 28, 2018  7231     njensen     Use source as creating entity to get style rule
- * Apr 12, 2018  7264     njensen     Use OutlineCapability/LineStyle
- * 
- * 
- * </pre>
- * 
-=======
 
 /**
  * Resource for displaying cross sections as contours
@@ -120,7 +82,6 @@ import org.locationtech.jts.geom.Envelope;
  *
  * </pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author njensen
  */
 public class CrossSectionContourResource extends AbstractCrossSectionResource {
@@ -192,13 +153,9 @@ public class CrossSectionContourResource extends AbstractCrossSectionResource {
             PaintProperties paintProps) throws VizException {
         super.paintInternal(target, paintProps);
         DataTime currentTime = paintProps.getDataTime();
-<<<<<<< HEAD
-        if (sliceMap.get(currentTime) == null) {
-=======
 
         List<float[]> dataList = getSliceData(currentTime);
         if (dataList == null) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return;
         }
         LineStyle posLineStyle = null;
@@ -250,10 +207,6 @@ public class CrossSectionContourResource extends AbstractCrossSectionResource {
                     cgs[level].negValueShape.dispose();
                 }
             }
-<<<<<<< HEAD
-            List<float[]> dataList = sliceMap.get(currentTime);
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             GeneralGridGeometry geometry = this.geometry;
             try {
                 // Prepare math transforms
@@ -330,13 +283,6 @@ public class CrossSectionContourResource extends AbstractCrossSectionResource {
             if (getCapability(DisplayTypeCapability.class)
                     .getDisplayType() == DisplayType.STREAMLINE) {
                 dataList = Arrays.asList(dataList.get(0), dataList.get(1));
-<<<<<<< HEAD
-                cgs[level] = ContourSupport.createContours(dataList, level,
-                        extent, density, geometry, target, contourPrefs);
-            } else {
-                cgs[level] = ContourSupport.createContours(dataList.get(0),
-                        level, extent, density, geometry, target, contourPrefs);
-=======
                 cgs[level] = ContourSupport.createContours(
                         getResourceId(currentTime), dataList, level, extent,
                         density, geometry, target, contourPrefs);
@@ -344,7 +290,6 @@ public class CrossSectionContourResource extends AbstractCrossSectionResource {
                 cgs[level] = ContourSupport.createContours(
                         getResourceId(currentTime), dataList.get(0), level,
                         extent, density, geometry, target, contourPrefs);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
             cgs[level].lastUsedPixelExtent = (PixelExtent) extent;
         }
@@ -367,11 +312,7 @@ public class CrossSectionContourResource extends AbstractCrossSectionResource {
 
     /**
      * Ensure point is between 0 and grid size, updating values if necessary.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param point
      *            Point to check and update.
      */

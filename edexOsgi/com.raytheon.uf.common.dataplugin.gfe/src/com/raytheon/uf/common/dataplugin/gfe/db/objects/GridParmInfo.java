@@ -24,11 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.measure.Unit;
-<<<<<<< HEAD
-import javax.measure.format.ParserException;
-=======
 import javax.measure.format.MeasurementParseException;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
@@ -54,15 +50,9 @@ import com.raytheon.uf.common.status.UFStatus.Priority;
 import si.uom.NonSI;
 import si.uom.SI;
 import systems.uom.common.USCustomary;
-<<<<<<< HEAD
-import tec.uom.se.AbstractUnit;
-import tec.uom.se.format.SimpleUnitFormat;
-import tec.uom.se.unit.Units;
-=======
 import tech.units.indriya.AbstractUnit;
 import tech.units.indriya.format.SimpleUnitFormat;
 import tech.units.indriya.unit.Units;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * GridParmInfo
@@ -424,11 +414,7 @@ public class GridParmInfo {
                         .getInstance(SimpleUnitFormat.Flavor.ASCII)
                         .parseProductUnit(this.unitString,
                                 new ParsePosition(0));
-<<<<<<< HEAD
-            } catch (ParserException e) {
-=======
             } catch (MeasurementParseException e) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 statusHandler.handle(Priority.EVENTB,
                         "Error parsing unit string \"" + this.unitString + "\"",
                         e);

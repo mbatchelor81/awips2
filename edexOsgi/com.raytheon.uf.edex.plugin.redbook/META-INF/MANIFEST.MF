@@ -7,12 +7,8 @@ Bundle-Vendor: RAYTHEON
 Require-Bundle: com.raytheon.edex.common,
  com.raytheon.uf.common.localization,
  com.raytheon.uf.common.status,
-<<<<<<< HEAD
- com.raytheon.uf.common.dataplugin.redbook
-=======
  com.raytheon.uf.common.dataplugin.redbook,
  org.slf4j
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 Export-Package: com.raytheon.uf.edex.plugin.redbook,
  com.raytheon.uf.edex.plugin.redbook.decoder
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7

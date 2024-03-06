@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-package com.raytheon.uf.edex.registry.ebxml.dao;
-
-import oasis.names.tc.ebxml.regrep.xsd.rim.v4.DynamicObjectRefType;
-
-import com.raytheon.uf.edex.database.dao.SessionManagedDao;
-
-public class DynamicObjectRefDao extends
-        SessionManagedDao<String, DynamicObjectRefType> {
-=======
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
@@ -56,7 +46,6 @@ public class DynamicObjectRefDao
     public DynamicObjectRefDao(IDaoConfigFactory daoConfigFactory) {
         super(daoConfigFactory);
     }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     @Override
     protected Class<DynamicObjectRefType> getEntityClass() {

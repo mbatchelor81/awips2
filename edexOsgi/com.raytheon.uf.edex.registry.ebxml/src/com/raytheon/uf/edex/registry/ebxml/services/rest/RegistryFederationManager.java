@@ -37,10 +37,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.Executor;
-<<<<<<< HEAD
-=======
 import java.util.concurrent.Future;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
@@ -55,16 +52,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
-<<<<<<< HEAD
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-=======
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.TransactionCallback;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.springframework.transaction.support.TransactionTemplate;
 
 import com.google.common.eventbus.Subscribe;
@@ -96,10 +88,6 @@ import com.raytheon.uf.edex.registry.ebxml.init.RegistryInitializedListener;
 import com.raytheon.uf.edex.registry.ebxml.services.RegistryRESTServices;
 import com.raytheon.uf.edex.registry.ebxml.services.query.RegistryQueryUtil;
 import com.raytheon.uf.edex.registry.ebxml.services.soap.RegistrySOAPServices;
-<<<<<<< HEAD
-import com.raytheon.uf.edex.registry.ebxml.util.EbxmlObjectUtil;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.edex.registry.ebxml.util.PurgeOrphanedRegObjectSlots;
 import com.raytheon.uf.edex.registry.ebxml.util.RegistryIdUtil;
 import com.raytheon.uf.edex.registry.events.CreateAuditTrailEvent;
@@ -216,12 +204,6 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.StringValueType;
  * Jul 26, 2019  7839     skabasele Added ability to delete orphaned Registry Object slots on startup.
  * Aug 29, 2019  7836     bsteffen  Extract logic for sending replication events.
  * Oct 22, 2019  7952     bsteffen  Fixes so that replication tables aren't used when federation is disabled.
-<<<<<<< HEAD
- * May 06, 2020  8066     skabasele Added ability to remove duplicate registry entries on startup
- * Jun 18, 2020  8066     skabasele update removeReplicationserver method to also delete the replication site event
- * Sep 14, 2021  8656     rjpeter   No longer pass txTemplate to ReplicationJob.
- * 
-=======
  * Apr 06, 2020  8054     bsteffen  Move EVENT_SOURCE_SLOT to common.
  * May 06, 2020  8066     skabasele Added ability to remove duplicate registry entries on startup
  * Jun 18, 2020  8066     skabasele update removeReplicationserver method to also delete the replication site event
@@ -229,7 +211,6 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.StringValueType;
  * Sep 14, 2021  8656     rjpeter   No longer pass txTemplate to ReplicationJob.
  * Mar 21, 2022  8789     mapeters  Sync with central before considering this registry initialized
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  *
  * @author bphillip
@@ -247,14 +228,9 @@ public class RegistryFederationManager
     private static final int SYNC_POOL_SIZE = Integer
             .parseInt(System.getProperty("ebxml-federation-sync-threads"));
 
-<<<<<<< HEAD
-    /** Max number of seconds to wait for a sync thread to complete */
-    private static final int SYNC_POOL_WAIT_TIME = 60_000;
-=======
     /** Max number of seconds to wait for synchronization to complete */
     private static final int SYNC_POOL_WAIT_TIME_SECS = (int) TimeUnit.HOURS
             .toSeconds(20);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * During registry synch , this delay buffer time is used against the
@@ -383,11 +359,6 @@ public class RegistryFederationManager
     @Transactional
     public void executeAfterRegistryInit() throws EbxmlRegistryException {
         synchronized (initializedInstance) {
-<<<<<<< HEAD
-            if (federationEnabled && !isInititialized()) {
-                try {
-                    this.federationDbInit.initDb();
-=======
             if (isInitialized()) {
                 return;
             }
@@ -395,7 +366,6 @@ public class RegistryFederationManager
             if (federationEnabled) {
                 try {
                     federationDbInit.initDb();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 } catch (Exception e) {
                     throw new EbxmlRegistryException(
                             "Error initializing database for federation!", e);
@@ -430,86 +400,6 @@ public class RegistryFederationManager
                             }
                         }
                     }
-<<<<<<< HEAD
-
-                    if (!joinFederation()) {
-                        throw new EbxmlRegistryException(
-                                "Error joining federation!!");
-                    }
-
-                } catch (Exception e1) {
-                    throw new EbxmlRegistryException(
-                            "Error initializing RegistryFederationManager", e1);
-                }
-
-                PurgeOrphanedRegObjectSlots purgeOrphanedRegObjectSlots = new PurgeOrphanedRegObjectSlots(
-                        registryObjectDao);
-                Thread thread = new Thread(purgeOrphanedRegObjectSlots);
-                thread.start();
-
-            }
-
-            /*
-             * If this is the central registry then we ensure that the superuser
-             * is in the registry
-             */
-            try {
-                if (centralRegistry) {
-                    if (!registryUsers.userExists(RegistryUtil.registryUser)) {
-                        /*
-                         * The registry super user initially gets the default
-                         * password which *must* be changed immediately
-                         */
-                        statusHandler.info(REGISTRY_ADMIN
-                                + " Not present in Central Registry! Adding user: "
-                                + REGISTRY_ADMIN);
-
-                        registryUsers.addUser(RegistryUtil.registryUser,
-                                "password", REGISTRY_ADMIN);
-                    } else {
-                        statusHandler.info(REGISTRY_ADMIN
-                                + " present in Central Registry: "
-                                + REGISTRY_ADMIN);
-                    }
-
-                } else if (!centralRegistry) {
-
-                    if (!registryUsers
-                            .userExists(securityConfig.getSecurityProperties()
-                                    .getProperty(EDEX_SECURITY_AUTH_USER))) {
-
-                        statusHandler.info(EDEX_SECURITY_AUTH_USER
-                                + " Not present in Registry! Adding user: "
-                                + securityConfig.getSecurityProperties()
-                                        .getProperty(EDEX_SECURITY_AUTH_USER));
-
-                        registryUsers.addUser(
-                                securityConfig.getSecurityProperties()
-                                        .getProperty(EDEX_SECURITY_AUTH_USER),
-                                securityConfig.getSecurityProperties()
-                                        .getProperty(
-                                                EDEX_SECURITY_AUTH_PASSWORD),
-                                REGISTRY_LOCAL_ADMIN);
-                    } else {
-                        statusHandler.info(EDEX_SECURITY_AUTH_USER
-                                + " Present in Registry: "
-                                + securityConfig.getSecurityProperties()
-                                        .getProperty(EDEX_SECURITY_AUTH_USER));
-                    }
-                }
-            } catch (MsgRegistryException e) {
-                throw new EbxmlRegistryException(
-                        "Error Checking registry user! ", e);
-            }
-
-            initializedInstance.set(this);
-            computeRegistryReplicationList();
-        }
-
-    }
-
-    public static boolean isInititialized() {
-=======
                 } catch (Exception e) {
                     throw new EbxmlRegistryException(
                             "Error initializing RegistryFederationManager", e);
@@ -641,7 +531,6 @@ public class RegistryFederationManager
     }
 
     public static boolean isInitialized() {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return initializedInstance.get() != null;
     }
 
@@ -685,11 +574,7 @@ public class RegistryFederationManager
                         new RegistryObjectListType(objects), false,
                         Mode.CREATE_OR_REPLACE);
                 submitObjectsRequest.getSlot()
-<<<<<<< HEAD
-                        .add(new SlotType(EbxmlObjectUtil.EVENT_SOURCE_SLOT,
-=======
                         .add(new SlotType(RegistryUtil.EVENT_SOURCE_SLOT,
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                 new StringValueType(RegistryIdUtil.getId())));
                 try {
 
@@ -901,11 +786,7 @@ public class RegistryFederationManager
     /**
      * Creates a RemoveObjectsRequest object based on the passed List of
      * RegistryObjectType
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param objs
      * @return
      */
@@ -939,11 +820,6 @@ public class RegistryFederationManager
      * replicated up to the federation's 4) if an object is in both the
      * federation and the site , use the latest version of the object.
      *
-<<<<<<< HEAD
-     * @throws Exception
-     */
-    private void synchronize() throws EbxmlRegistryException {
-=======
      * @param initialSync
      *            true if this local registry has been wiped and needs to do the
      *            initial pull of all objects from central, false if a normal
@@ -953,7 +829,6 @@ public class RegistryFederationManager
      */
     private void synchronize(boolean initialSync)
             throws EbxmlRegistryException {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         statusHandler.warn("Synchronizing registry with federation...");
         Set<String> replicationSet = getReplicationSet();
@@ -990,12 +865,8 @@ public class RegistryFederationManager
                     "No available registries found! Registry data will not be synchronized with the federation!");
         } else {
             try {
-<<<<<<< HEAD
-                synchronizeWithRegistry(registryToSyncFrom.getId());
-=======
                 synchronizeWithRegistry(registryToSyncFrom.getId(),
                         initialSync);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             } catch (Exception e) {
                 throw new EbxmlRegistryException(
                         "Error synchronizing with registry ["
@@ -1015,14 +886,9 @@ public class RegistryFederationManager
     @Transactional
     @GET
     @Path("updateRegistryEvents/{registryId}/{time}")
-<<<<<<< HEAD
-    public void updateRegistryEvents(@PathParam("registryId") String registryId,
-            @PathParam("time") String time) {
-=======
     public void updateRegistryEvents(@PathParam("registryId")
     String registryId, @PathParam("time")
     String time) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         long lTime = Long.parseLong(time);
         updateRegistryEvents(registryId, new Date(lTime));
     }
@@ -1048,8 +914,6 @@ public class RegistryFederationManager
         }
     }
 
-<<<<<<< HEAD
-=======
     @Override
     @Transactional
     @GET
@@ -1059,24 +923,10 @@ public class RegistryFederationManager
         synchronizeWithRegistry(registryId, false);
     }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /**
      * Synchronizes this registry's data with the registry at the specified URL
      *
      * @param registryId
-<<<<<<< HEAD
-     * @throws EbxmlRegistryException
-     *             If the thread executor fails to shut down properly
-     * @throws MsgRegistryException
-     */
-    @Override
-    @Transactional
-    @GET
-    @Path("synchronizeWithRegistry/{registryId}")
-    public void synchronizeWithRegistry(
-            @PathParam("registryId") String registryId) throws Exception {
-
-=======
      * @param initialSync
      *            true if this local registry has been wiped and needs to do the
      *            initial pull of all objects from central, false if a normal
@@ -1087,7 +937,6 @@ public class RegistryFederationManager
      */
     private void synchronizeWithRegistry(String registryId, boolean initialSync)
             throws EbxmlRegistryException {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if (SYNC_IN_PROGRESS.compareAndSet(false, true)) {
             try {
                 long start = TimeUtil.currentTimeMillis();
@@ -1125,11 +974,7 @@ public class RegistryFederationManager
 
                 ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
                 taskExecutor.setMaxPoolSize(SYNC_POOL_SIZE);
-<<<<<<< HEAD
-                taskExecutor.setKeepAliveSeconds(SYNC_POOL_WAIT_TIME);
-=======
                 taskExecutor.setKeepAliveSeconds(SYNC_POOL_WAIT_TIME_SECS);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 taskExecutor.initialize();
 
                 /*
@@ -1138,22 +983,6 @@ public class RegistryFederationManager
                  */
                 Date syncDelayTime = new Date(start - SYNC_DELAY);
 
-<<<<<<< HEAD
-                for (final String objectType : replicatedObjectTypes) {
-
-                    taskExecutor.execute(new SynchronizationTask(objectType,
-                            remoteRegistryUrl, txTemplate, soapService,
-                            restClient, registryObjectDao, syncDelayTime,
-                            coredao));
-                }
-                // Wait for all threads to finished.
-                taskExecutor.setWaitForTasksToCompleteOnShutdown(true);
-                taskExecutor.shutdown();
-                try {
-                    taskExecutor.getThreadPoolExecutor().awaitTermination(
-                            SYNC_POOL_WAIT_TIME, TimeUnit.SECONDS);
-                } catch (IllegalStateException | InterruptedException e) {
-=======
                 long timeoutCutoff = TimeUtil.currentTimeMillis()
                         + TimeUnit.SECONDS.toMillis(SYNC_POOL_WAIT_TIME_SECS);
                 List<Future<Object>> taskFutures = new ArrayList<>();
@@ -1178,17 +1007,13 @@ public class RegistryFederationManager
                                 TimeUnit.MILLISECONDS);
                     }
                 } catch (Exception e) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     throw new EbxmlRegistryException(
                             "Error synchronizing with [" + registryId
                                     + "]. All threads did not complete successfully",
                             e);
-<<<<<<< HEAD
-=======
                 } finally {
                     taskExecutor.setWaitForTasksToCompleteOnShutdown(false);
                     taskExecutor.shutdown();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
 
                 federatedRegistryMonitor.updateTime();
@@ -1209,20 +1034,9 @@ public class RegistryFederationManager
                         .append((TimeUtil.currentTimeMillis() - start))
                         .append(" ms");
                 statusHandler.info(syncMsg.toString());
-<<<<<<< HEAD
-            } catch (Exception e) {
-                statusHandler.error(
-                        "Could not create registry synchronization objects!",
-                        e);
             } finally {
                 SYNC_IN_PROGRESS.set(false);
             }
-
-=======
-            } finally {
-                SYNC_IN_PROGRESS.set(false);
-            }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         } else {
             statusHandler.info("Registry sync already in progress.");
         }
@@ -1279,8 +1093,6 @@ public class RegistryFederationManager
     }
 
     /**
-<<<<<<< HEAD
-=======
      * Calls {@link #computeRegistryReplicationList(boolean)}, defaulting
      * duringInit to false.
      */
@@ -1289,16 +1101,10 @@ public class RegistryFederationManager
     }
 
     /**
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * Determines which registries should receive replication events. A new job
      * is created and scheduled for any registry that does not already have one.
      * If a registry has left the federation this will cancel its replication
      * job.
-<<<<<<< HEAD
-     */
-    private synchronized void computeRegistryReplicationList() {
-        if (!isInititialized() || !federationEnabled) {
-=======
      *
      * @param duringInit
      *            true if this is being called as part of initialization, false
@@ -1308,7 +1114,6 @@ public class RegistryFederationManager
     private synchronized void computeRegistryReplicationList(
             boolean duringInit) {
         if ((!duringInit && !isInitialized()) || !federationEnabled) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return;
         }
         if (replicationCache == null) {
@@ -1329,10 +1134,6 @@ public class RegistryFederationManager
             }
         } else {
             replicate.add("NCF");
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         synchronized (replicationJobs) {
@@ -1362,14 +1163,9 @@ public class RegistryFederationManager
                     replicationSiteEventDao
                             .create(new ReplicationSiteEvent(registryId, now));
                 }
-<<<<<<< HEAD
-                ReplicationJob task = initializedInstance.get()
-                        .createReplicationJob(registryId);
-=======
                 RegistryFederationManager instance = duringInit ? this
                         : initializedInstance.get();
                 ReplicationJob task = instance.createReplicationJob(registryId);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 replicationJobs.put(registryId, task);
                 task.schedule();
             }
@@ -1381,11 +1177,7 @@ public class RegistryFederationManager
      * {@link #initializedInstance} of this class to ensure that the txTemplate
      * and DAO objects used by the job are the same as those used in the
      * ReplicationCache.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param remoteRegistryId
      */
     protected ReplicationJob createReplicationJob(String remoteRegistryId) {
@@ -1440,13 +1232,8 @@ public class RegistryFederationManager
     @GET
     @Path("subscribeToRegistry/{registryId}")
     @Transactional
-<<<<<<< HEAD
-    public void subscribeToRegistry(@PathParam("registryId") String registryId)
-            throws Exception {
-=======
     public void subscribeToRegistry(@PathParam("registryId")
     String registryId) throws Exception {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         statusHandler
                 .info("Establishing replication with [" + registryId + "]...");
         RegistryType remoteRegistry = getRegistry(registryId);
@@ -1460,13 +1247,8 @@ public class RegistryFederationManager
     @GET
     @Path("unsubscribeFromRegistry/{registryId}")
     @Transactional
-<<<<<<< HEAD
-    public void unsubscribeFromRegistry(
-            @PathParam("registryId") String registryId) throws Exception {
-=======
     public void unsubscribeFromRegistry(@PathParam("registryId")
     String registryId) throws Exception {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         statusHandler
                 .info("Disconnecting replication with [" + registryId + "]...");
         RegistryType remoteRegistry = getRegistry(registryId);
@@ -1480,13 +1262,8 @@ public class RegistryFederationManager
     @GET
     @Path("addReplicationServer/{registryId}")
     @Transactional
-<<<<<<< HEAD
-    public synchronized void addReplicationServer(
-            @PathParam("registryId") String registryId) throws Exception {
-=======
     public synchronized void addReplicationServer(@PathParam("registryId")
     String registryId) throws Exception {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         computeRegistryReplicationList();
         synchronized (replicationJobs) {
             /*
@@ -1510,13 +1287,8 @@ public class RegistryFederationManager
     @GET
     @Path("removeReplicationServer/{registryId}")
     @Transactional
-<<<<<<< HEAD
-    public synchronized void removeReplicationServer(
-            @PathParam("registryId") String registryId) {
-=======
     public synchronized void removeReplicationServer(@PathParam("registryId")
     String registryId) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         computeRegistryReplicationList();
         replicationSiteEventDao.deleteByRegistryId(registryId);
     }
@@ -1584,13 +1356,8 @@ public class RegistryFederationManager
      * @throws JAXBException
      * @throws RegistryServiceException
      */
-<<<<<<< HEAD
-    private FederationType getFederation() throws EbxmlRegistryException,
-            RegistryServiceException, JAXBException {
-=======
     private FederationType getFederation()
             throws RegistryServiceException, JAXBException {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         FederationType federation = null;
         if (centralRegistry) {
@@ -1624,11 +1391,7 @@ public class RegistryFederationManager
     public void processEvent(CreateAuditTrailEvent event) {
         statusHandler.info("Processing Event id:[" + event.getId() + "]");
         String sourceRegistry = event.getRequest()
-<<<<<<< HEAD
-                .getSlotValue(EbxmlObjectUtil.EVENT_SOURCE_SLOT);
-=======
                 .getSlotValue(RegistryUtil.EVENT_SOURCE_SLOT);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         String actionType = event.getActionType();
         List<RegistryObjectType> objsAffected = event.getObjectsAffected();
         boolean needsReplication = false;
@@ -1659,11 +1422,7 @@ public class RegistryFederationManager
 
             }
         }
-<<<<<<< HEAD
-        if (federationEnabled && DbInit.isDbInitialized() && isInititialized()
-=======
         if (federationEnabled && DbInit.isDbInitialized() && isInitialized()
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 && !SYNC_IN_PROGRESS.get()) {
             synchronized (replicationJobs) {
                 for (ReplicationJob task : replicationJobs.values()) {
@@ -1674,64 +1433,6 @@ public class RegistryFederationManager
     }
 
     /**
-<<<<<<< HEAD
-     * 
-     * 
-     * statusHandler.info("Event Ids size:[" + eventIds.size() + "]");
-     * 
-     * 
-     * Updates the record in the registry that keeps track of if this registry
-     * has been synchronized. This method is called every hour via a quartz cron
-     * configured in Camel
-     *
-     * @throws EbxmlRegistryException
-     */
-    @Transactional
-    public void updateUpTime() throws EbxmlRegistryException {
-
-        if (!centralRegistry) {
-            if (federationEnabled && isInititialized()
-                    && EDEXUtil.isRunning()) {
-                long currentTime = TimeUtil.currentTimeMillis();
-                long lastKnownUp = federatedRegistryMonitor
-                        .getLastKnownSynchronizedtime();
-
-                statusHandler.debug("autoSynchIntervalInMs is "
-                        + autoSynchIntervalInMs + " ms");
-
-                long downTime = currentTime - lastKnownUp;
-
-                if (downTime > autoSynchIntervalInMs) {
-
-                    if (!SYNC_IN_PROGRESS.get()) {
-                        statusHandler.info(
-                                "Registry has not been synchronized since: "
-                                        + new Date(currentTime - downTime));
-                        statusHandler.warn(
-                                "Registry may be out of sync with federation. Attempting to automatically synchronize");
-                        try {
-                            synchronize();
-                            statusHandler.info(
-                                    "Registry successfully synchronized!");
-                        } catch (EbxmlRegistryException e) {
-                            statusHandler.error("Error synchronizing registry!",
-                                    e);
-                            throw e;
-                        }
-                    }
-                } else {
-
-                    Date date = new Date(lastKnownUp);
-                    SimpleDateFormat dt = new SimpleDateFormat(
-                            "yyyy-MM-dd HH:mm:ss");
-                    String dateText = dt.format(date);
-                    statusHandler
-                            .info("** Registry last synchronized at " + dateText
-                                    + "  , no synchronization necessary. ***");
-                }
-
-            }
-=======
      * Calls {@link #checkSynchronizeInternal(boolean)}, defaulting duringInit
      * to false.
      *
@@ -1800,7 +1501,6 @@ public class RegistryFederationManager
             String dateText = dt.format(date);
             statusHandler.info("** Registry last synchronized at " + dateText
                     + "  , no synchronization necessary. ***");
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 

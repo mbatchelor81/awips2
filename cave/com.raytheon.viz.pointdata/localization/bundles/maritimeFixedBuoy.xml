@@ -80,7 +80,6 @@
                         <mapName>Fixed Buoy Locations</mapName>
                     </resourceData>
                 </resource>
-<<<<<<< HEAD
                 <resource>
                     <loadProperties loadWithoutData="true" />
                     <properties isSystemResource="false"
@@ -127,8 +126,6 @@
                         </metadataMap>
                     </resourceData>
                 </resource>
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             </descriptor>
         </displays>
     </displayList>

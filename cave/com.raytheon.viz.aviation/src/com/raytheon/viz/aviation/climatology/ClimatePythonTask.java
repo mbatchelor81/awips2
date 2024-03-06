@@ -29,24 +29,12 @@ import com.raytheon.uf.common.localization.LocalizationContext.LocalizationType;
 import com.raytheon.uf.common.localization.LocalizationFile;
 import com.raytheon.uf.common.localization.LocalizationUtil;
 import com.raytheon.uf.common.localization.PathManagerFactory;
-<<<<<<< HEAD
-import com.raytheon.uf.common.python.PyUtil;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
 import com.raytheon.uf.common.time.util.TimeUtil;
 import com.raytheon.viz.aviation.climatedata.ClimatePythonScript;
-<<<<<<< HEAD
-import com.raytheon.viz.aviation.monitor.AvnPyUtil;
-
-import jep.JepConfig;
-import jep.JepException;
-import jep.NamingConventionClassEnquirer;
-=======
 
 import jep.JepException;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Runs a single climate Python method in a new thread
@@ -61,13 +49,10 @@ import jep.JepException;
  * Dec 02, 2019  7986     randerso  Remove redundant setting of shared modules
  * Jan  8, 2020  7878     tgurney   Raise log level of Python exceptions from
  *                                  warn to error
-<<<<<<< HEAD
-=======
  * Jun  7, 2023  2034261  tgurney   Fixes for Jep 4 upgrade
  * Jul 13, 2023  2035920  tgurney   Move JepConfig to ClimatePythonScript class
  *                                  (while replacing SubInterpreter with
  *                                  SharedInterpreter)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -140,23 +125,6 @@ public class ClimatePythonTask {
         this.pythonLock = pythonLock;
     }
 
-<<<<<<< HEAD
-    private JepConfig makeJepConfig(File scriptFile) {
-        String includePath = PyUtil.buildJepIncludePath(
-                scriptFile.getParentFile().getPath(),
-                AvnPyUtil.getLoggingHandlerDir(), AvnPyUtil.getPointDataDir(),
-                AvnPyUtil.getCommonPythonDir());
-        JepConfig jepConfig = new JepConfig();
-        jepConfig.setInteractive(false);
-        jepConfig.setIncludePath(includePath);
-        jepConfig.setClassLoader(getClass().getClassLoader());
-        jepConfig.setClassEnquirer(new NamingConventionClassEnquirer());
-        jepConfig.setRedirectOutputStreams(true);
-        return jepConfig;
-    }
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private void run() {
         listener.started();
         try {
@@ -167,18 +135,9 @@ public class ClimatePythonTask {
                     LocalizationUtil.getParent(CLIMATE_ENTRY_SCRIPT_PATH));
             parentDir.getFile(true);
             File scriptFile = pm.getStaticFile(CLIMATE_ENTRY_SCRIPT_PATH);
-<<<<<<< HEAD
-            JepConfig jepConfig = makeJepConfig(scriptFile);
-            String scriptAbsPath = scriptFile.getAbsolutePath();
-
-            synchronized (pythonLock) {
-                try (ClimatePythonScript python = new ClimatePythonScript(
-                        jepConfig, scriptAbsPath)) {
-=======
             synchronized (pythonLock) {
                 try (ClimatePythonScript python = new ClimatePythonScript(
                         scriptFile)) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     Map<String, Object> newMethodKwargs = new HashMap<>(
                             methodKwargs);
                     InternalClimatePythonListener internalListener;

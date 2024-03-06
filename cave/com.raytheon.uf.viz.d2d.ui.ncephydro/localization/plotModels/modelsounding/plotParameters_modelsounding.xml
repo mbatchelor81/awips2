@@ -30,11 +30,8 @@
 
 <plotParameterDefinition displayName="T (F)" displayType="TEXT" format="%2.0f" param="T" sampleValue="75" unit="F" />
 
-<<<<<<< HEAD
-=======
 <plotParameterDefinition displayName="T (C)" displayType="TEXT" format="%2.0f" param="T" sampleValue="24" unit="C" />
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 <plotParameterDefinition displayName="DpT (F)" displayType="TEXT" format="%2.0f" param="DpT" sampleValue="75" unit="F" />
 
 <plotParameterDefinition displayName="dP3hr (daPa)" displayType="TEXT" format="%02.0f" param="dP3hr" sampleValue="018" unit="daPa" />

@@ -76,10 +76,7 @@ import com.raytheon.uf.common.status.UFStatus;
  * Apr 11, 2016  5564     bsteffen  Move localization files to common_static
  * Apr 15, 2016  5182     tjensen     Changed processorMap population to be done
  *                                       during processing instead of up front.
-<<<<<<< HEAD
  * Sep 01, 2022           srcarter  Remove region localization level
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -321,13 +318,8 @@ public class GribPostProcessor {
     private synchronized void initProcessorMap() {
         IPathManager pathMgr = PathManagerFactory.getPathManager();
         LocalizationLevel[] levels = new LocalizationLevel[] {
-<<<<<<< HEAD
                 LocalizationLevel.BASE, LocalizationLevel.CONFIGURED, 
                 LocalizationLevel.SITE };
-=======
-                LocalizationLevel.BASE, LocalizationLevel.REGION,
-                LocalizationLevel.CONFIGURED, LocalizationLevel.SITE };
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         Map<LocalizationLevel, ? extends ILocalizationFile> files = pathMgr
                 .getTieredLocalizationFile(LocalizationType.COMMON_STATIC,

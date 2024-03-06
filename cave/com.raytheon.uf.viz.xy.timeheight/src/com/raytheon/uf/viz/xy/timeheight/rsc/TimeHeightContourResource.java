@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -63,17 +51,10 @@ import com.raytheon.viz.core.contours.ContourSupport.ContourGroup;
 
 /**
  * Resource for displaying cross sections as contours
-<<<<<<< HEAD
- * 
- * <pre>
- * SOFTWARE HISTORY
- * 
-=======
  *
  * <pre>
  * SOFTWARE HISTORY
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- --------------------------------------------
  * Dec 04, 2007  625      njensen   Initial creation
@@ -82,13 +63,6 @@ import com.raytheon.viz.core.contours.ContourSupport.ContourGroup;
  * Aug 12, 2016  5822     bsteffen  add disposeRenderables for handling data
  *                                  refresh.
  * Aug 12, 2016  5822     bsteffen  implement disposeRenderables
-<<<<<<< HEAD
- * Feb 28, 2018  7231     njensen   Use source as creating entity to get style rule
- * Apr 12, 2018  7264     njensen   Use OutlineCapability/LineStyle
- * 
- * </pre>
- * 
-=======
  * Feb 28, 2018  7231     njensen   Use source as creating entity to get style
  *                                  rule
  * Apr 12, 2018  7264     njensen   Use OutlineCapability/LineStyle
@@ -97,7 +71,6 @@ import com.raytheon.viz.core.contours.ContourSupport.ContourGroup;
  *
  * </pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author njensen
  */
 public class TimeHeightContourResource extends AbstractTimeHeightResource {
@@ -148,28 +121,6 @@ public class TimeHeightContourResource extends AbstractTimeHeightResource {
 
     @Override
     protected void disposeRenderables() {
-<<<<<<< HEAD
-        VizApp.runAsync(new Runnable() {
-            @Override
-            public void run() {
-                if (timeHeightFont != null) {
-
-                    timeHeightFont.dispose();
-                    timeHeightFont = null;
-                }
-                if (contours != null) {
-                    for (ContourGroup cg : contours) {
-                        if (cg != null) {
-                            cg.posValueShape.dispose();
-                            cg.negValueShape.dispose();
-                        }
-                    }
-                    contours = null;
-                }
-                issueRefresh();
-            }
-
-=======
         VizApp.runAsync(() -> {
             if (timeHeightFont != null) {
 
@@ -186,7 +137,6 @@ public class TimeHeightContourResource extends AbstractTimeHeightResource {
                 contours = null;
             }
             issueRefresh();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         });
     }
 
@@ -243,10 +193,7 @@ public class TimeHeightContourResource extends AbstractTimeHeightResource {
 
             if (descriptor.getGraph(this).isReady()) {
                 contours[level] = ContourSupport.createContours(
-<<<<<<< HEAD
-=======
                         getResourceId(paintProps.getDataTime()),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         interpolatedData, level,
                         descriptor.getGraph(this).getExtent(), density,
                         geometry, target, contourPrefs);
@@ -273,20 +220,6 @@ public class TimeHeightContourResource extends AbstractTimeHeightResource {
 
     @Override
     public void setDescriptor(TimeHeightDescriptor descriptor) {
-<<<<<<< HEAD
-        VizApp.runAsync(new Runnable() {
-            @Override
-            public void run() {
-                if (contours != null) {
-                    for (ContourGroup cg : contours) {
-                        if (cg != null) {
-                            cg.posValueShape.dispose();
-                            cg.negValueShape.dispose();
-                        }
-                    }
-                    contours = null;
-                }
-=======
         VizApp.runAsync(() -> {
             if (contours != null) {
                 for (ContourGroup cg : contours) {
@@ -296,7 +229,6 @@ public class TimeHeightContourResource extends AbstractTimeHeightResource {
                     }
                 }
                 contours = null;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         });
         super.setDescriptor(descriptor);

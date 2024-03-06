@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -61,30 +49,14 @@ import com.raytheon.uf.viz.xy.graph.AbstractXyRenderableDisplay;
 import com.raytheon.uf.viz.xy.map.IInsetMapContainer;
 
 /**
-<<<<<<< HEAD
- * TODO Add Description
- * 
- * <pre>
- * 
-=======
  * Abstract class for any D2D graph renderable display.
  *
  * <pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * SOFTWARE HISTORY
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
  * Feb 23, 2009            njensen     Initial creation
-<<<<<<< HEAD
- * 
- * </pre>
- * 
- * @author njensen
- * @version 1.0
- */
-
-=======
  * Oct 10, 2022 8946       mapeters    Handle renamed scale property constant
  * Nov 03, 2022 8959       mapeters    Update setDescriptor to only set time
  *                                     matcher if null before
@@ -93,7 +65,6 @@ import com.raytheon.uf.viz.xy.map.IInsetMapContainer;
  *
  * @author njensen
  */
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement
 public abstract class AbstractNonMapDisplay extends AbstractXyRenderableDisplay
@@ -132,13 +103,9 @@ public abstract class AbstractNonMapDisplay extends AbstractXyRenderableDisplay
     @Override
     public void setDescriptor(IDescriptor desc) {
         super.setDescriptor(desc);
-<<<<<<< HEAD
-        desc.setTimeMatcher(new D2DTimeMatcher());
-=======
         if (desc.getTimeMatcher() == null) {
             desc.setTimeMatcher(new D2DTimeMatcher());
         }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override
@@ -149,10 +116,7 @@ public abstract class AbstractNonMapDisplay extends AbstractXyRenderableDisplay
     /**
      * @return the magnification
      */
-<<<<<<< HEAD
-=======
     @Override
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public double getMagnification() {
         return magnification;
     }
@@ -161,17 +125,10 @@ public abstract class AbstractNonMapDisplay extends AbstractXyRenderableDisplay
      * @param magnification
      *            the magnification to set
      */
-<<<<<<< HEAD
-    public void setMagnification(double magnification) {
-        this.magnification = magnification;
-        List<ResourcePair> rps = new ArrayList<ResourcePair>(
-                descriptor.getResourceList());
-=======
     @Override
     public void setMagnification(double magnification) {
         this.magnification = magnification;
         List<ResourcePair> rps = new ArrayList<>(descriptor.getResourceList());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         for (int i = 0; i < rps.size(); i++) {
             AbstractVizResource<?, ?> resource = rps.get(i).getResource();
             if (resource != null) {
@@ -189,10 +146,7 @@ public abstract class AbstractNonMapDisplay extends AbstractXyRenderableDisplay
     /**
      * @return the density
      */
-<<<<<<< HEAD
-=======
     @Override
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public double getDensity() {
         return density;
     }
@@ -201,17 +155,10 @@ public abstract class AbstractNonMapDisplay extends AbstractXyRenderableDisplay
      * @param density
      *            the density to set
      */
-<<<<<<< HEAD
-    public void setDensity(double density) {
-        this.density = density;
-        List<ResourcePair> rps = new ArrayList<ResourcePair>(
-                descriptor.getResourceList());
-=======
     @Override
     public void setDensity(double density) {
         this.density = density;
         List<ResourcePair> rps = new ArrayList<>(descriptor.getResourceList());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         for (int i = 0; i < rps.size(); i++) {
             AbstractVizResource<?, ?> resource = rps.get(i).getResource();
             if (resource != null) {
@@ -219,37 +166,19 @@ public abstract class AbstractNonMapDisplay extends AbstractXyRenderableDisplay
                     rps.addAll(((IResourceGroup) resource).getResourceList());
                 }
                 if (resource.hasCapability(DensityCapability.class)) {
-<<<<<<< HEAD
-                    resource.getCapability(DensityCapability.class).setDensity(
-                            density);
-=======
                     resource.getCapability(DensityCapability.class)
                             .setDensity(density);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
             }
         }
     }
 
-<<<<<<< HEAD
-    /**
-     * @return the scale
-     */
-=======
     @Override
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public String getScale() {
         return scale;
     }
 
-<<<<<<< HEAD
-    /**
-     * @param scale
-     *            the scale to set
-     */
-=======
     @Override
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public void setScale(String scale) {
         this.scale = scale;
     }
@@ -274,11 +203,7 @@ public abstract class AbstractNonMapDisplay extends AbstractXyRenderableDisplay
     @Override
     public Map<String, Object> getGlobalsMap() {
         Map<String, Object> globals = super.getGlobalsMap();
-<<<<<<< HEAD
-        globals.put(VizConstants.SCALE_ID, getScale());
-=======
         globals.put(VizConstants.HEIGHT_SCALE_ID, getScale());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         globals.put(VizConstants.MAGNIFICATION_ID, getMagnification());
         globals.put(VizConstants.DENSITY_ID, getDensity());
         if (getDescriptor().getTimeMatcher() instanceof D2DTimeMatcher) {
@@ -292,19 +217,6 @@ public abstract class AbstractNonMapDisplay extends AbstractXyRenderableDisplay
     @Override
     protected void customizeResourceList(ResourceList resourceList) {
         // Add the d2d colorbar resource
-<<<<<<< HEAD
-        resourceList.add(ResourcePair
-                .constructSystemResourcePair(colorBarRscData));
-        // Get the d2d legend resource
-        resourceList.add(ResourcePair
-                .constructSystemResourcePair(legendRscData));
-        // Add the d2d select pane resource
-        resourceList.add(ResourcePair
-                .constructSystemResourcePair(selectedRscData));
-        // Add the d2d sample resource
-        resourceList.add(ResourcePair
-                .constructSystemResourcePair(samplingRscData));
-=======
         resourceList
                 .add(ResourcePair.constructSystemResourcePair(colorBarRscData));
         // Get the d2d legend resource
@@ -316,7 +228,6 @@ public abstract class AbstractNonMapDisplay extends AbstractXyRenderableDisplay
         // Add the d2d sample resource
         resourceList
                 .add(ResourcePair.constructSystemResourcePair(samplingRscData));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
 }

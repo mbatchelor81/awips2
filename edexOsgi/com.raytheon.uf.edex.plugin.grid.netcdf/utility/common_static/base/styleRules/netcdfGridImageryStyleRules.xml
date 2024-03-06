@@ -18,12 +18,6 @@
         See_the_AWIPS_II_Master_Rights_File_("Master_Rights_File.pdf")_for
         further_licensing_information.
     -->
-<<<<<<< HEAD
-   <!--
-        This is an incremental override file, indicating that the files
-        at different localization levels will be combined.
-    -->
-=======
   <!-- TOWRdocs Header
         Netcdf Grid Imagery style rules.
    -->
@@ -48,7 +42,6 @@
    <!-- TOWRdocs POC
         Lee Byerle 8/26/2019
    -->
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 <styleRuleset>
    <!-- Blended Hydro products -->
     <styleRule>
@@ -207,8 +200,6 @@
       </colorbarLabeling>
     </imageStyle>
     </styleRule>
-<<<<<<< HEAD
-=======
 <!--End of blended hydro products -->
 
 <!--Global Multi-sat Geostationary composites -->
@@ -267,6 +258,5 @@
       </colorbarLabeling>
     </imageStyle>
   </styleRule>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 </styleRuleset>

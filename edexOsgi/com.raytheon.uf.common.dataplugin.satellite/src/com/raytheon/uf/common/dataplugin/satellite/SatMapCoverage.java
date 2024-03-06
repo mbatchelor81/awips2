@@ -21,11 +21,8 @@
 package com.raytheon.uf.common.dataplugin.satellite;
 
 import java.awt.geom.Rectangle2D;
-<<<<<<< HEAD
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,7 +39,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-<<<<<<< HEAD
 import org.geotools.coverage.grid.GeneralGridEnvelope;
 import org.geotools.coverage.grid.GridEnvelope2D;
 import org.geotools.coverage.grid.GridGeometry2D;
@@ -51,36 +47,22 @@ import org.geotools.geometry.GeneralEnvelope;
 import org.geotools.referencing.crs.DefaultGeographicCRS;
 import org.geotools.referencing.operation.DefaultMathTransformFactory;
 import org.hibernate.annotations.Type;
-=======
-import org.geotools.coverage.grid.GridEnvelope2D;
-import org.geotools.coverage.grid.GridGeometry2D;
-import org.geotools.geometry.Envelope2D;
-import org.geotools.referencing.crs.DefaultGeographicCRS;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Polygon;
 import org.opengis.coverage.grid.GridEnvelope;
 import org.opengis.geometry.Envelope;
-<<<<<<< HEAD
 import org.opengis.parameter.ParameterValueGroup;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.NoSuchIdentifierException;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.opengis.referencing.crs.ProjectedCRS;
-=======
-import org.opengis.referencing.FactoryException;
-import org.opengis.referencing.crs.CoordinateReferenceSystem;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.uf.common.dataplugin.annotations.DataURI;
 import com.raytheon.uf.common.dataplugin.persist.PersistableDataObject;
 import com.raytheon.uf.common.geospatial.CRSCache;
 import com.raytheon.uf.common.geospatial.IGridGeometryProvider;
-<<<<<<< HEAD
 import com.raytheon.uf.common.geospatial.MapUtil;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.geospatial.adapter.GeometryAdapter;
 import com.raytheon.uf.common.geospatial.util.EnvelopeIntersection;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerialize;
@@ -109,11 +91,8 @@ import com.raytheon.uf.common.status.UFStatus;
  * Apr 11, 2014  2947     bsteffen    Fix equals
  * Oct 16, 2014  3454     bphillip    Upgrading to Hibernate 4
  * Nov 05, 2014  3788     bsteffen    Make gid a sequence instead of a hash.
-<<<<<<< HEAD
  * May 19, 2015           mjames      Added McIDAS GVAR native projection support.
  * Apr 03, 2017           mjames      Un-deprecate projection and fix for goesr ingest.
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Mar 20, 2019  6140     tgurney     Hibernate 5 GeometryType fix
  * May  8, 2019  6140     tgurney     Lower the log level of some previously
  *                                    ignored exceptions (from error to debug)
@@ -121,28 +100,19 @@ import com.raytheon.uf.common.status.UFStatus;
  * </pre>
  */
 @Entity
-<<<<<<< HEAD
 @Table(name = "satellite_spatial", uniqueConstraints = { @UniqueConstraint(columnNames = {
 		"minX", "minY", "dx", "dy", "nx", "ny", "projection", "upperLeftElement",
 		"upperLeftLine", "elementRes", "lineRes", "crsWKT" }) })
-=======
-@Table(name = "satellite_spatial", uniqueConstraints = {
-        @UniqueConstraint(columnNames = { "minX", "minY", "dx", "dy", "nx",
-                "ny", "crsWKT" }) })
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 @SequenceGenerator(name = "SATELLITE_SPATIAL_GENERATOR", sequenceName = "satspatial_seq", allocationSize = 1)
 @XmlAccessorType(XmlAccessType.NONE)
 @DynamicSerialize
 public class SatMapCoverage extends PersistableDataObject<Object>
         implements IGridGeometryProvider {
 
-<<<<<<< HEAD
 	public static final int PROJ_GVAR = 7585;
 	
     public static final Integer VAL_MISSING = new Integer(-9999998);
 	
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private static final long serialVersionUID = 1L;
 
     private static final IUFStatusHandler logger = UFStatus
@@ -203,7 +173,6 @@ public class SatMapCoverage extends PersistableDataObject<Object>
     @DynamicSerializeElement
     private double dy;
 
-<<<<<<< HEAD
     /** image element coordinate of area line 0, element 0 */
     @Column
     @XmlAttribute
@@ -229,9 +198,6 @@ public class SatMapCoverage extends PersistableDataObject<Object>
     private int lineRes;
 
     @Column(length = 5120)
-=======
-    @Column(length = 2047)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @XmlAttribute
     @DynamicSerializeElement
     private String crsWKT;
@@ -240,11 +206,7 @@ public class SatMapCoverage extends PersistableDataObject<Object>
     private CoordinateReferenceSystem crsObject;
 
     /** The map coverage */
-<<<<<<< HEAD
     @Column(name = "the_geom")
-=======
-    @Column(name = "the_geom", columnDefinition = "geometry")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @XmlJavaTypeAdapter(value = GeometryAdapter.class)
     @DynamicSerializeElement
     private Geometry location;
@@ -310,13 +272,10 @@ public class SatMapCoverage extends PersistableDataObject<Object>
         this.ny = ny;
         this.dx = dx;
         this.dy = dy;
-<<<<<<< HEAD
         setUpperLeftElement(VAL_MISSING);
         setUpperLeftLine(VAL_MISSING);
         setElementRes(VAL_MISSING);
         setLineRes(VAL_MISSING);
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         this.crsObject = crs;
         if (latLonGeometry == null) {
             try {
@@ -336,7 +295,6 @@ public class SatMapCoverage extends PersistableDataObject<Object>
     }
 
     /**
-<<<<<<< HEAD
      * Constructs a new SatMapCoverage Object
      * 
      * @param projection
@@ -398,10 +356,6 @@ public class SatMapCoverage extends PersistableDataObject<Object>
     }
 
 	/**
-=======
-     * @deprecated This field is only useful for GINI satellite format decoding
-     *             and should not be in the coverage object
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return
      */
     @Deprecated
@@ -475,7 +429,6 @@ public class SatMapCoverage extends PersistableDataObject<Object>
         this.dy = dy;
     }
 
-<<<<<<< HEAD
     public int getUpperLeftElement() {
 		return upperLeftElement;
 	}
@@ -508,8 +461,6 @@ public class SatMapCoverage extends PersistableDataObject<Object>
 		this.lineRes = lineRes;
 	}
 	
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public String getCrsWKT() {
         if (crsWKT == null && crsObject != null) {
             crsWKT = crsObject.toWKT();
@@ -518,11 +469,7 @@ public class SatMapCoverage extends PersistableDataObject<Object>
     }
 
     public void setCrsWKT(String crsWKT) {
-<<<<<<< HEAD
         this.crsWKT = crsWKT.replaceAll("\r\n", "");;
-=======
-        this.crsWKT = crsWKT;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if (crsObject != null) {
             crsObject = null;
         }
@@ -575,7 +522,6 @@ public class SatMapCoverage extends PersistableDataObject<Object>
     public CoordinateReferenceSystem getCrs() {
         if (crsObject == null && crsWKT != null) {
             try {
-<<<<<<< HEAD
             	if (this.projection != null) {
             		if (this.projection == PROJ_GVAR) {
                         crsObject = constructCRSfromWKT(crsWKT);
@@ -588,10 +534,6 @@ public class SatMapCoverage extends PersistableDataObject<Object>
  	                        .getCoordinateReferenceSystem(crsWKT);
                 }
             	
-=======
-                crsObject = CRSCache.getInstance()
-                        .getCoordinateReferenceSystem(crsWKT);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             } catch (FactoryException e) {
                 logger.debug("Error in getting the Coordinate Reference System",
                         e);
@@ -603,7 +545,6 @@ public class SatMapCoverage extends PersistableDataObject<Object>
 
     @Override
     public GridGeometry2D getGridGeometry() {
-<<<<<<< HEAD
     	/* 
         * Native projections
         */
@@ -706,12 +647,6 @@ public class SatMapCoverage extends PersistableDataObject<Object>
     
     public Geometry getGeometry() {
         return getLocation();
-=======
-        GridEnvelope gridRange = new GridEnvelope2D(0, 0, getNx(), getNy());
-        Envelope crsRange = new Envelope2D(getCrs(), new Rectangle2D.Double(
-                minX, minY, getNx() * getDx(), getNy() * getDy()));
-        return new GridGeometry2D(gridRange, crsRange);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override

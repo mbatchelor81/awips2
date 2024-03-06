@@ -118,10 +118,7 @@ import org.locationtech.jts.geom.Coordinate;
  *                                   refresh.
  * 01/13/2020   73084     ksunil    added a missing PlotUnit.register() call that was inadvertently dropped
  *                                   in 71272
-<<<<<<< HEAD
-=======
  * Mar 24, 2020  75529    ksunil    new PlotThreadOverseer constructor
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 10/26/2020   8253      ksunil    call recycle at svg file restart/refresh
  * </pre>
  *
@@ -295,13 +292,7 @@ public class PlotResource
         RequestConstraint plugin = request.get("pluginName");
         PlotUnits.register();
         generator = new PlotThreadOverseer(target, descriptor,
-<<<<<<< HEAD
-                this.resourceData.getPlotModelFile(),
-                this.resourceData.getLevelKey(), plugin.getConstraintValue(),
-                this.resourceData.getMetadataMap(), this);
-=======
                 this.resourceData, plugin.getConstraintValue(), this);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         generator.setPlotModelColor(
                 getCapability(ColorableCapability.class).getColor());
         this.generator.setPlotModelLineStyle(

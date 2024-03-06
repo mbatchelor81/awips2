@@ -62,10 +62,7 @@ import jep.JepException;
  * Jul 27, 2015  4263     dgilling  Use new ProcedureRunnerController.
  * Sep 16, 2015  4871     randerso  Return modified varDict from Procedure
  * Feb 13, 2018  6906     randerso  Updated for merged ProcedureController
-<<<<<<< HEAD
-=======
  * Jul 12, 2021  21692    jrohwein  add timeout when joining jobs    
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -178,11 +175,7 @@ public class ProcedureJobPool {
         synchronized (joinLock) {
             for (Job j : jobList) {
                 try {
-<<<<<<< HEAD
-                    j.join();
-=======
                     j.join(1,null);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 } catch (InterruptedException e) {
                     // Ignore interupt
                 }
@@ -438,7 +431,4 @@ public class ProcedureJobPool {
         }
     }
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

@@ -14,11 +14,7 @@
             value="com.raytheon.uf.edex.plugin.scan.ScanDao" />
         <property name="record"
             value="com.raytheon.uf.common.dataplugin.scan.ScanRecord" />
-<<<<<<< HEAD
-        <property name="compression" value="LZF"/>
-=======
         <property name="compression" value="GZIP"/>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     </bean>
 
     <bean factory-bean="pluginRegistry" factory-method="register"
@@ -28,8 +24,4 @@
     </bean>
 
 
-<<<<<<< HEAD
 </beans>
-=======
-</beans>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

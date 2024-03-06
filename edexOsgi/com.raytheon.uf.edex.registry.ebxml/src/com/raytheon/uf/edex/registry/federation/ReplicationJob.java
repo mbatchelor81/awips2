@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract EA133W-17-CQ-0082 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -55,13 +43,8 @@ import com.raytheon.uf.edex.database.DataAccessLayerException;
 import com.raytheon.uf.edex.registry.ebxml.dao.RegistryDao;
 import com.raytheon.uf.edex.registry.ebxml.dao.ReplicationSiteEventDao;
 import com.raytheon.uf.edex.registry.ebxml.services.RegistryRESTServices;
-<<<<<<< HEAD
-import com.raytheon.uf.edex.registry.ebxml.services.soap.RegistrySOAPServices;
-import com.raytheon.uf.edex.registry.ebxml.util.EbxmlObjectUtil;
-=======
 import com.raytheon.uf.edex.registry.ebxml.services.rest.RegistryFederationManager;
 import com.raytheon.uf.edex.registry.ebxml.services.soap.RegistrySOAPServices;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.edex.registry.ebxml.util.RegistryIdUtil;
 
 import oasis.names.tc.ebxml.regrep.wsdl.registry.services.v4.LifecycleManager;
@@ -82,11 +65,7 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.ValueType;
  * single remote registry. The job should be run by calling {@link #schedule()}
  * which will automatically execute it using the Executor passed into the
  * constructor.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * <pre>
  *
  * SOFTWARE HISTORY
@@ -96,12 +75,6 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.ValueType;
  * Aug 26, 2019  7836     bsteffen  Initial creation
  * Oct 31, 2019  7963     bsteffen  Ensure events aren't sent back to where they came from.
  * Nov 21, 2019  7977     bsteffen  Prevent job from being scheduled more than once.
-<<<<<<< HEAD
- * Jul 13, 2020  8169     ksunil    code tweak to DELETE multiple objects in a single request
- * Aug 21, 2021  8641     rjpeter   Allow submits to be batched.
- * Sep 10, 2021  8656     rjpeter   Rerun job on runtime exception. Remove outer transaction 
- *                                  block and force smaller database transactions.
-=======
  * Apr 06, 2020  8054     bsteffen  Move EVENT_SOURCE_SLOT to common.
  * Jul 13, 2020  8169     ksunil    code tweak to DELETE multiple objects in a single request
  * Dec 01, 2020  8232     ksunil    introduced code to not retry in case of an exception after a long
@@ -110,7 +83,6 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.ValueType;
  * Sep 10, 2021  8656     rjpeter   Rerun job on runtime exception. Remove outer transaction
  *                                  block and force smaller database transactions.
  * Apr 05, 2022  8789     mapeters  Do nothing until federation manager is initialized
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -154,8 +126,6 @@ public class ReplicationJob implements Runnable {
             .getLong("ebxml-federation-error-threshold", 60)
             * TimeUtil.MILLIS_PER_MINUTE;
 
-<<<<<<< HEAD
-=======
     /**
      * When replicating, if there is an exception, do no retry if the threshold
      * is more than
@@ -164,7 +134,6 @@ public class ReplicationJob implements Runnable {
     private static final long REPLICATION_MAX_WAIT = Long.getLong(
             "ebxml-replication-wait-threshold", 5) * TimeUtil.MILLIS_PER_MINUTE;
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private final String registryId;
 
     private final ReplicationSiteEventDao replicationSiteEventDao;
@@ -240,8 +209,6 @@ public class ReplicationJob implements Runnable {
 
     @Override
     public void run() {
-<<<<<<< HEAD
-=======
         while (!RegistryFederationManager.isInitialized()) {
             /*
              * Wait until federation manager is fully initialized, especially
@@ -249,7 +216,6 @@ public class ReplicationJob implements Runnable {
              */
         }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         synchronized (this) {
             if (running) {
                 /* Just in case. */
@@ -312,22 +278,9 @@ public class ReplicationJob implements Runnable {
                 return Boolean.FALSE;
             }
 
-<<<<<<< HEAD
-            /*
-             * we can send delete requests in bulk. But other requests one at a
-             * time. Batch up all consecutive delete events. As soon as you find
-             * a non-delete, first send a delete for all the deletes you have
-             * queued up, then process the current event. That way the event
-             * order of delete-create is still maintained.
-             */
-
-            List<ReplicationEvent> deleteEvents = new ArrayList<>(batch.size());
-            List<ReplicationEvent> submitEvents = new ArrayList<>(batch.size());
-=======
             List<ReplicationEvent> deleteEvents = new ArrayList<>(batch.size());
             List<ReplicationEvent> submitEvents = new ArrayList<>(batch.size());
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             for (ReplicationEvent event : batch) {
                 if (registryId.equals(event.getSource())) {
                     lastEvent = event;
@@ -459,14 +412,8 @@ public class ReplicationJob implements Runnable {
         RemoveObjectsRequest removeRequest = new RemoveObjectsRequest(
                 "Replicate - Remove events", "", null, null, refList, false,
                 true, DeletionScope.DELETE_ALL);
-<<<<<<< HEAD
-        removeRequest.getSlot()
-                .add(new SlotType(EbxmlObjectUtil.EVENT_SOURCE_SLOT,
-                        new StringValueType(RegistryIdUtil.getId())));
-=======
         removeRequest.getSlot().add(new SlotType(RegistryUtil.EVENT_SOURCE_SLOT,
                 new StringValueType(RegistryIdUtil.getId())));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         int attempts = 0;
         while (attempts < REPLICATION_RETRY_ATTEMPTS && !reset) {
             attempts++;
@@ -502,12 +449,9 @@ public class ReplicationJob implements Runnable {
                             "Attempt {} failed to remove {} objects from {} after {}. Connection was lost.",
                             attempts, events.size(), registryId,
                             TimeUtil.prettyDuration(t1 - t0), e);
-<<<<<<< HEAD
-=======
                     logger.error("Failed object IDs:"
                             + events.stream().map(ReplicationEvent::getObjectId)
                                     .collect(Collectors.joining(",")));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     lcm = null;
                     break;
                 } else {
@@ -592,14 +536,8 @@ public class ReplicationJob implements Runnable {
         RegistryObjectListType objList = new RegistryObjectListType();
         objList.setRegistryObject(objects);
         submitRequest.setRegistryObjectList(objList);
-<<<<<<< HEAD
-        submitRequest.getSlot()
-                .add(new SlotType(EbxmlObjectUtil.EVENT_SOURCE_SLOT,
-                        new StringValueType(RegistryIdUtil.getId())));
-=======
         submitRequest.getSlot().add(new SlotType(RegistryUtil.EVENT_SOURCE_SLOT,
                 new StringValueType(RegistryIdUtil.getId())));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         while (attempts < REPLICATION_RETRY_ATTEMPTS && !reset) {
             attempts++;
@@ -613,16 +551,11 @@ public class ReplicationJob implements Runnable {
                 lcm.submitObjectsQueued(submitRequest);
                 long t2 = TimeUtil.currentTimeMillis();
                 logger.info("Sent {} insert/update to {} in {}", batchSize,
-<<<<<<< HEAD
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         registryId, TimeUtil.prettyDuration(t2 - t1));
                 return batchSize;
             } catch (Exception e) {
                 long t1 = TimeUtil.currentTimeMillis();
-<<<<<<< HEAD
-=======
 
                 // it took over REPLICATION_MAX_WAIT to get an exception.
                 // No reason to send retry.
@@ -643,7 +576,6 @@ public class ReplicationJob implements Runnable {
                     break;
                 }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if (attempts >= REPLICATION_RETRY_ATTEMPTS) {
                     if (batchSize == 1) {
                         int failCount = failures.incrementAndGet();
@@ -652,11 +584,7 @@ public class ReplicationJob implements Runnable {
                                         + "Final attempt failed it will be skipped in replication. "
                                         + "{} objects skipped since last sync or restart of central. "
                                         + "{} will need resynced.",
-<<<<<<< HEAD
-                                attempts, objects.get(0).getLid(), registryId,
-=======
                                 attempts, objects.get(0).getId(), registryId,
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                 TimeUtil.prettyDuration(t1 - t0), failCount,
                                 registryId, e);
                     } else {

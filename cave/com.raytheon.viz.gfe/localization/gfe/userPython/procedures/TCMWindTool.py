@@ -1,9 +1,5 @@
 # ----------------------------------------------------------------------------
-<<<<<<< HEAD
-# Version: 2020.06.03-1
-=======
 # Version: 2023.03.13-0
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 # This software is in the public domain, furnished "as is", without technical
 # support, and with no warranty, express or implied, as to its usefulness for
@@ -42,11 +38,7 @@
 # ----------------------------------------------------------------------------
 # SOFTWARE HISTORY
 #
-<<<<<<< HEAD
-# Date          Ticket#  Engineer  Description
-=======
 # Date          Ticket# Engineer  Description
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # ------------- -------- --------- --------------------------------------------
 # Apr 19, 2018  7271     randerso  Renamed and/or removed models. Code cleanup.
 # Jul 09, 2019  21163    randerso  Merged field changes to support use in
@@ -58,17 +50,11 @@
 #                        psantos
 # Jan 22, 2021  8333     mbelk,    Ensured TCMDecoder.keyWordDict preserves
 #                        randerso  insertion order
-<<<<<<< HEAD
-# Feb 15, 2021  8363     randerso  Fix returned grids to be float32. Removed 
-#                                  unnecessary dependency on MetLib
-# Feb 25, 2021  8363     randerso  Fix infinite recursion in getLatLonGrids
-=======
 # Feb 15, 2021  8363     randerso  Fix returned grids to be float32. Removed
 #                                  unnecessary dependency on MetLib
 # Feb 25, 2021  8363     randerso  Fix infinite recursion in getLatLonGrids
 # Aug 16, 2022  DR23254  mbelk     Fix time function
 # Mar 13, 2023  DR23464  mballard  Fix Incorrect Circulation in the South Pacific
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 ##
 
@@ -78,24 +64,13 @@
 ##
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import calendar
 import copy
 import time
 
-<<<<<<< HEAD
-import numpy as np
-
-import AbsTime
-import DefineMaxWindGUI
-=======
 import AbsTime
 import DefineMaxWindGUI
 import numpy as np
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import SmartScript
 import TimeRange
 
@@ -149,11 +124,7 @@ VariableList = [
             "PREEP5",
         ],
     ),
-<<<<<<< HEAD
-    #                ("Background\nModel:", "Fcst", "radio", ["GFS0p5degGbl", "UKMET", "ECMWF", "Fcst"]),
-=======
     # ("Background\nModel:", "Fcst", "radio", ["GFS0p5degGbl", "UKMET", "ECMWF", "Fcst"]),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     ("Number of Pie Slices?", "16", "radio", ["4", "8", "12", "16", "24"]),
     ("Eye Diameter:", 0, "scale", [0, 100], 1),
     ("34 knot radius at 3 days (NM):", 100, "scale", [0, 1000], 10),
@@ -178,39 +149,6 @@ VariableList = [
 ]
 
 
-<<<<<<< HEAD
-class TCMDecoder:
-    def __init__(self):
-        self.pos = 0
-        # key words in TCM products from NCEP
-        self.keyWordDict = OrderedDict([
-            # Cannot have this as the first item because it prevents proper decoding
-            # of the initial position. It skips right past.
-#             ("HURRICANE CENTER", self.decodeProductTime),
-            ("FORECAST VALID", self.decodeWindForecast),
-            ("CENTER LOCATED NEAR", self.decodeCenterLocation),
-            ("CENTER LOCATED INLAND NEAR", self.decodeCenterLocation),
-            ("HURRICANE CENTER", self.decodeProductTime),
-            ("MINIMUM CENTRAL PRESSURE", self.decodeCentralPressure),
-            ("MAX SUSTAINED WINDS", self.decodeMaxSustainedWinds),
-            ("MAX WIND", self.decodeMaxWind),
-            ("OUTLOOK VALID", self.decodeWindForecast),
-            ("EYE DIAMETER", self.decodeEyeDiameter),
-            ("64 KT...", self.decodeRadii),
-            ("50 KT...", self.decodeRadii),
-            ("34 KT...", self.decodeRadii),
-            # key words for JTWC products
-            ("WTPN", self.decodeJTWCProductTime),
-            ("WARNING POSITION:", self.decodeJTWCTimeCenter),
-            ("VALID AT:", self.decodeJTWCWindForecast),
-            ("RADIUS OF 034 KT WINDS", self.decodeJTWCRadii),
-            ("RADIUS OF 050 KT WINDS", self.decodeJTWCRadii),
-            ("RADIUS OF 064 KT WINDS", self.decodeJTWCRadii),
-            ("RADIUS OF 100 KT WINDS", self.decodeJTWCRadii),
-            ("    ---", self.endJTWCWindForecast),
-            ("REMARKS:", self.stopDecodingJTWC),
-        ])
-=======
 class TCMDecoder(SmartScript.SmartScript):
     def __init__(self):
         self.pos = 0
@@ -244,7 +182,6 @@ class TCMDecoder(SmartScript.SmartScript):
                 ("REMARKS:", self.stopDecodingJTWC),
             ]
         )
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         self.fcstList = []  # a place to store all of the forecasts
 
@@ -402,20 +339,12 @@ class TCMDecoder(SmartScript.SmartScript):
                 if len(tokenList) > 3:  # grab the time
                     validTime = self.convert_ddhhmm(tokenList[3], self.baseProductTime)
                 # New fcst (analysis actually)
-<<<<<<< HEAD
-                self.currentFcst = {}
-                self.currentFcst["validTime"] = validTime
-                self.currentFcst["centerLocation"] = (lat, lon)
-                self.currentFcst["radii"] = {}
-                self.currentFcst["eyeDiameter"] = self.defaultEyeDiameter
-=======
                 self.currentFcst = {
                     "validTime": validTime,
                     "centerLocation": (lat, lon),
                     "radii": {},
                     "eyeDiameter": self.defaultEyeDiameter,
                 }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         return
 
@@ -439,11 +368,7 @@ class TCMDecoder(SmartScript.SmartScript):
                     windList.append(float(tokenList[i - 1]))
 
         # Sometimes there is no max wind/gust reported
-<<<<<<< HEAD
-        if windList == []:
-=======
         if not windList:
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return
 
         # store the max wind
@@ -455,14 +380,7 @@ class TCMDecoder(SmartScript.SmartScript):
         if "centerLocation" in self.currentFcst and "maxWind" in self.currentFcst:
             # if it's zero it's not in the product and the user didn't
             # change it, so calculate it based on the Willoughby formula
-<<<<<<< HEAD
-            if (
-                "eyeDiameter" in self.currentFcst
-                and self.currentFcst["eyeDiameter"] == 0
-            ):
-=======
             if "eyeDiameter" in self.currentFcst and self.currentFcst["eyeDiameter"] == 0:
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 self.currentFcst["eyeDiameter"] = self.calcEyeDiameter(
                     self.currentFcst["centerLocation"], self.currentFcst["maxWind"]
                 )
@@ -488,14 +406,7 @@ class TCMDecoder(SmartScript.SmartScript):
         if "centerLocation" in self.currentFcst and "maxWind" in self.currentFcst:
             # if it's zero it's not in the product and the user didn't
             # change it, so calculate it based on the Willoughby formula
-<<<<<<< HEAD
-            if (
-                "eyeDiameter" in self.currentFcst
-                and self.currentFcst["eyeDiameter"] == 0
-            ):
-=======
             if "eyeDiameter" in self.currentFcst and self.currentFcst["eyeDiameter"] == 0:
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 self.currentFcst["eyeDiameter"] = self.calcEyeDiameter(
                     self.currentFcst["centerLocation"], self.currentFcst["maxWind"]
                 )
@@ -552,20 +463,12 @@ class TCMDecoder(SmartScript.SmartScript):
                 return
 
             # initialize a new forecast and begin filling values
-<<<<<<< HEAD
-            self.currentFcst = {}
-            self.currentFcst["validTime"] = validTime
-            self.currentFcst["centerLocation"] = (lat, lon)
-            self.currentFcst["radii"] = {}
-            self.currentFcst["eyeDiameter"] = self.defaultEyeDiameter
-=======
             self.currentFcst = {
                 "validTime": validTime,
                 "centerLocation": (lat, lon),
                 "radii": {},
                 "eyeDiameter": self.defaultEyeDiameter,
             }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         return
 
@@ -649,20 +552,12 @@ class TCMDecoder(SmartScript.SmartScript):
         productTime = self.convert_ddhhmm(dateTimeStr, self.baseProductTime)
 
         # make a new fcst object to store the analysis
-<<<<<<< HEAD
-        self.currentFcst = {}
-        self.currentFcst["validTime"] = productTime
-        self.currentFcst["centerLocation"] = (lat, lon)
-        self.currentFcst["radii"] = {}
-        self.currentFcst["eyeDiameter"] = self.defaultEyeDiameter
-=======
         self.currentFcst = {
             "validTime": productTime,
             "centerLocation": (lat, lon),
             "radii": {},
             "eyeDiameter": self.defaultEyeDiameter,
         }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def decodeJTWCWindForecast(self):
         line = self.nextLine()
@@ -683,20 +578,12 @@ class TCMDecoder(SmartScript.SmartScript):
         lon = self.decodeLatLonToken(lonStr)
 
         # make a new currentFcst and store the info
-<<<<<<< HEAD
-        self.currentFcst = {}
-        self.currentFcst["validTime"] = validTime
-        self.currentFcst["centerLocation"] = (lat, lon)
-        self.currentFcst["radii"] = {}
-        self.currentFcst["eyeDiameter"] = self.defaultEyeDiameter
-=======
         self.currentFcst = {
             "validTime": validTime,
             "centerLocation": (lat, lon),
             "radii": {},
             "eyeDiameter": self.defaultEyeDiameter,
         }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return
 
     def decodeJTWCRadii(self):
@@ -707,11 +594,7 @@ class TCMDecoder(SmartScript.SmartScript):
             tokenList = line.split()
             if "RADIUS" in line:  # it's the first line
                 # check to see if we need to store the radii first
-<<<<<<< HEAD
-                if radList != []:  # we decoded some already
-=======
                 if radList:  # we decoded some already
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     self.currentFcst["radii"][windSpeed] = radList
                     radList = []
 
@@ -731,11 +614,7 @@ class TCMDecoder(SmartScript.SmartScript):
             line = self.nextLine()
 
         # save the last radii info
-<<<<<<< HEAD
-        if radList != []:
-=======
         if radList:
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             self.currentFcst["radii"][windSpeed] = radList
 
         # save the whole forecast in the list
@@ -754,20 +633,12 @@ class TCMDecoder(SmartScript.SmartScript):
 
     def stopDecodingJTWC(self):
         line = "ZZZZZ"
-<<<<<<< HEAD
-        while line != "":
-=======
         while line:
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             line = self.nextLine()
         return
 
 
-<<<<<<< HEAD
-#  end class TCMDecoder
-=======
 # end class TCMDecoder
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 # begin class CircleEA
 # This class helps make circular edit areas and quadrants thereof.
@@ -777,11 +648,7 @@ class CircleEA(SmartScript.SmartScript):
         cosLatGrid = np.cos(np.deg2rad(latGrid))
         self.xDist = (lonGrid - center[1]) * 111.1 * cosLatGrid
         self.yDist = (latGrid - center[0]) * 111.1
-<<<<<<< HEAD
-        self.distGrid = np.sqrt(self.xDist ** 2 + self.yDist ** 2)
-=======
         self.distGrid = np.sqrt(self.xDist**2 + self.yDist**2)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         self.tanGrid = np.arctan2(-self.xDist, -self.yDist)
         # mask off all but the specified quadrant.
@@ -844,11 +711,7 @@ class Procedure(SmartScript.SmartScript):
     # Use this method if you have no luck getting products
     # directly from the text database
     def getTextProductFromFile(self, filename):
-<<<<<<< HEAD
-        with open(filename, "r") as f:
-=======
         with open(filename) as f:
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             textList = []
             line = f.readline()
             textList.append(line)
@@ -860,12 +723,8 @@ class Procedure(SmartScript.SmartScript):
     def printFcst(self, f, baseTime=None):
         print("==============================================================")
         print(
-<<<<<<< HEAD
-            "Time:", time.asctime(time.gmtime(f["validTime"])),
-=======
             "Time:",
             time.asctime(time.gmtime(f["validTime"])),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         )
         if baseTime is not None:
             print("LeadTime:", ((f["validTime"] - baseTime) / 3600.0) + 3)
@@ -942,10 +801,6 @@ class Procedure(SmartScript.SmartScript):
     def makeDirectionGrid(self, latGrid, lonGrid, latCenter, lonCenter):
         cycWt = 0.7  # cyclonic circulation weight
         convWt = 0.3  # convergence weight
-<<<<<<< HEAD
-        cycU = -(latGrid - latCenter)  # pure counter-clockwise circulation
-        cycV = lonGrid - lonCenter
-=======
         # SP needs to go clockwise, so need to do the opposite for cycU and cycV
         if latCenter < 0:
             cycU = (latGrid - latCenter)   # pure clockwise circulation
@@ -953,7 +808,6 @@ class Procedure(SmartScript.SmartScript):
         else:
             cycU = -(latGrid - latCenter)  # pure counter-clockwise circulation
             cycV = lonGrid - lonCenter
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         convU = -cycV  # pure convergence
         convV = cycU
         u = cycU * cycWt + convU * convWt
@@ -980,11 +834,7 @@ class Procedure(SmartScript.SmartScript):
             if len(f1Radii[r]) < 4 or len(f2Radii[r]) < 4:
                 print("Partial radii list found. Substituting with zero radius.")
 
-<<<<<<< HEAD
-            #  Add zeros if list is partial
-=======
             # Add zeros if list is partial
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             while len(f1Radii[r]) < 4:
                 f1Radii[r].append(0)
             while len(f2Radii[r]) < 4:
@@ -1045,14 +895,6 @@ class Procedure(SmartScript.SmartScript):
                 newEMW = emw1 + (i * demw)
 
             newRadii = self.interpRadii(t1, t2, newTime, f1Radii, f2Radii)
-<<<<<<< HEAD
-            f = {}
-            f["centerLocation"] = (newLat, newLon)
-            f["eyeDiameter"] = newEye
-            f["validTime"] = newTime
-            f["maxWind"] = newMaxWind
-            f["radii"] = newRadii
-=======
             f = {
                 "centerLocation": (newLat, newLon),
                 "eyeDiameter": newEye,
@@ -1060,7 +902,6 @@ class Procedure(SmartScript.SmartScript):
                 "maxWind": newMaxWind,
                 "radii": newRadii,
             }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if "editedMaxWinds" in f1:
                 f["editedMaxWinds"] = list(newEMW)
             fcstList.append(f)
@@ -1092,11 +933,7 @@ class Procedure(SmartScript.SmartScript):
             if leadTime <= 36:  # no extrapolation for these times
                 continue
             # for this period, manufacture new 64 knot radii under specific conditions
-<<<<<<< HEAD
-            if leadTime > 36 and leadTime <= 72:
-=======
             if 36 < leadTime <= 72:
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 # make sure we have the data we need
                 if 64 not in prevFcst["radii"]:
                     continue
@@ -1114,19 +951,11 @@ class Procedure(SmartScript.SmartScript):
                 prev64 = prevFcst["radii"][64]
                 fcst50 = fcst["radii"][50]
                 newRadii = [0, 0, 0, 0]
-<<<<<<< HEAD
-                for i in range(len(prev50)):
-                    if prev50[i] == 0:
-                        continue
-
-                    newRadii[i] = fcst50[i] / prev50[i] * prev64[i]
-=======
                 for p in range(len(prev50)):
                     if prev50[p] == 0:
                         continue
 
                     newRadii[p] = fcst50[p] / prev50[p] * prev64[p]
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                 if 64 not in fcst["radii"]:
                     fcst["radii"][64] = newRadii
@@ -1137,11 +966,7 @@ class Procedure(SmartScript.SmartScript):
 
                 # if there are radii already defined, don't extrapolate new radii
                 if "radii" in fcst:
-<<<<<<< HEAD
-                    if len(fcst["radii"]) > 0:
-=======
                     if fcst["radii"]:
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         continue
 
                 # Stuff radii into the rDict to make a cyclone
@@ -1161,13 +986,7 @@ class Procedure(SmartScript.SmartScript):
                 for ws in [64.0, 50.0]:
                     newRadii = [0, 0, 0, 0]
                     if ws < maxWind:
-<<<<<<< HEAD
-                        newRadii = self.calcRadiusList(
-                            maxWind, rmw, extRadius, newRadii
-                        )
-=======
                         newRadii = self.calcRadiusList(maxWind, rmw, extRadius, newRadii)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         rDict[ws] = newRadii
 
                 rDict[34.0] = [extRadius, extRadius, extRadius, extRadius]
@@ -1215,13 +1034,8 @@ class Procedure(SmartScript.SmartScript):
                     xTargetSlice = slice(0, -x, None)
                     xSrcSlice = slice(x, None, None)
 
-<<<<<<< HEAD
-                target = [yTargetSlice, xTargetSlice]
-                src = [ySrcSlice, xSrcSlice]
-=======
                 target = tuple([yTargetSlice, xTargetSlice])
                 src = tuple([ySrcSlice, xSrcSlice])
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 sg[target] += grid[src]
                 count[target] += gridOfOnes[src]
         return sg / count
@@ -1285,13 +1099,7 @@ class Procedure(SmartScript.SmartScript):
 
     def getTimeConstraintDuration(self, element):
 
-<<<<<<< HEAD
-        parmStart, parmDuration, parmRepeat = self.getParmTimeConstraints(
-            element, "Fcst"
-        )
-=======
         parmStart, parmDuration, parmRepeat = self.getParmTimeConstraints(element, "Fcst")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return parmDuration
 
     def getParmMinMaxLimits(self, modelName, weName):
@@ -1320,11 +1128,7 @@ class Procedure(SmartScript.SmartScript):
 
         return radiusList[-1]  # return the last item
 
-<<<<<<< HEAD
-    #  Blends the specified grid together
-=======
     # Blends the specified grid together
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def blendGrids(self, windGrid, bgGrid):
 
         # Combine the two grids using the windGrid for the cyclone and the
@@ -1349,11 +1153,7 @@ class Procedure(SmartScript.SmartScript):
         except BaseException:
             trList = []
 
-<<<<<<< HEAD
-        if len(trList) > 0:
-=======
         if trList:
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             timeRange = trList[0]
             latGrid = self.getGrids(
                 "Fcst", "latGrid", "SFC", timeRange, mode="First", noDataError=0
@@ -1462,11 +1262,7 @@ class Procedure(SmartScript.SmartScript):
             level = "SFC"
             elementName = "Wind"
         else:
-<<<<<<< HEAD
-            modelName = siteID + "_D2D_" + modelName
-=======
             modelName = f"{siteID}_D2D_{modelName}"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if "ECMWF" in modelName:
                 level = "SFC"
                 elementName = "wind"
@@ -1482,27 +1278,12 @@ class Procedure(SmartScript.SmartScript):
     def secondsToYYYYMMDDHH(self, baseTime):
         # convert the base time to a string
         gTime = time.gmtime(baseTime)
-<<<<<<< HEAD
-        yearStr = str(gTime.tm_year)
-        monthStr = str(gTime.tm_mon)
-        dayStr = str(gTime.tm_mday)
-        hourStr = str(gTime.tm_hour)
-        while len(monthStr) < 2:
-            monthStr = "0" + monthStr
-        while len(dayStr) < 2:
-            dayStr = "0" + dayStr
-        while len(hourStr) < 2:
-            hourStr = "0" + hourStr
-
-        baseTimeStr = yearStr + monthStr + dayStr + hourStr
-=======
         yearStr = f"{gTime.tm_year}"
         monthStr = f"{gTime.tm_mon:02d}"
         dayStr = f"{gTime.tm_mday:02d}"
         hourStr = f"{gTime.tm_hour:02d}"
 
         baseTimeStr = f"{yearStr}{monthStr}{dayStr}{hourStr}"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         return baseTimeStr
 
@@ -1799,15 +1580,9 @@ class Procedure(SmartScript.SmartScript):
                     grid[mask] = (inSpeed + (dSdR * distanceGrid))[mask]
                     insideRMWMask[mask] = True
                 else:  # outside RMW
-<<<<<<< HEAD
-                    grid[mask] = (
-                        inSpeed * np.power(inRadius / distanceGrid, exponent)
-                    )[mask]
-=======
                     grid[mask] = (inSpeed * np.power(inRadius / distanceGrid, exponent))[
                         mask
                     ]
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if outSpeed >= 34.0 and inSpeed >= 34.0:
                     self._cycloneMask |= mask
 
@@ -1830,27 +1605,19 @@ class Procedure(SmartScript.SmartScript):
         # apply the wind reduction over land
         fraction = 1.0 - (self.lessOverLand / 100.0)
         grid = self.decreaseWindOverLand(grid, fraction, self.elevation, timeRange)
-<<<<<<< HEAD
-        return (grid, dirGrid)
-=======
         return grid, dirGrid
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def makeMaxWindGrid(self, interpFcstList):
 
         if not interpFcstList:
             return
 
-<<<<<<< HEAD
-        startTime = interpFcstList[0]["validTime"]
-=======
         try:
             startTime = interpFcstList[0]["validTime"]
         except IndexError:
             print("interpFcstList is empty!")
         except KeyError:
             print("First interpFcstList object has no 'validTime'")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         endTime = startTime + (123 * 3600)  # 123 hours later
 
         timeRange = self.makeTimeRange(startTime, endTime)
@@ -1885,11 +1652,7 @@ class Procedure(SmartScript.SmartScript):
         # Now check each forecast to make sure that we have a radius for any
         # standard wind values less than the maxWind
 
-<<<<<<< HEAD
-        if len(fcstList) == 0:
-=======
         if not fcstList:
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return False
 
         windValues = [34]
@@ -1966,15 +1729,9 @@ class Procedure(SmartScript.SmartScript):
 
             ea = circleEA.getQuadrant(quad + 1, 500.0)
             grid = (
-<<<<<<< HEAD
-                coeff[quad][0] * dist ** 4
-                + coeff[quad][1] * dist ** 3
-                + coeff[quad][2] * dist ** 2
-=======
                 coeff[quad][0] * dist**4
                 + coeff[quad][1] * dist**3
                 + coeff[quad][2] * dist**2
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 + coeff[quad][3] * dist
                 + coeff[quad][4]
             )
@@ -2053,11 +1810,7 @@ class Procedure(SmartScript.SmartScript):
         #    textProduct = self.getTextProductFromFile("/data/local/research/TPCWindProb/WRKTCM")
         else:
             # try fetching the RCL first.
-<<<<<<< HEAD
-            rclProductID = "MIARCL" + productID[3:]
-=======
             rclProductID = f"MIARCL{productID[3:]}"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             print("Attempting to Fetch rclProductID:", rclProductID)
             rclTextProduct = self.getTextProductFromDB(rclProductID)
             completeFcst = False
@@ -2072,21 +1825,13 @@ class Procedure(SmartScript.SmartScript):
                 completeFcst = self.validateCycloneForecast(rclFcstList)
 
             if productID[:3] == "PRE":
-<<<<<<< HEAD
-                productID = "MIA" + productID
-=======
                 productID = "MIA{productID}"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             tcmTextProduct = self.getTextProductFromDB(productID)
 
             if len(tcmTextProduct) < 5:
-<<<<<<< HEAD
-                msg = productID + " could not be retrieved from the text database."
-=======
                 msg = f"{productID} could not be retrieved from the text database."
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 self.statusBarMsg(msg, "S")
                 return None  # Just return if no TCM is found.  Something's really wrong
             else:
@@ -2096,15 +1841,8 @@ class Procedure(SmartScript.SmartScript):
 
             # print("TCM and RCL Base Times are: ", tcmBaseTime, rclBaseTime)
             if not completeFcst or rclBaseTime != tcmBaseTime:
-<<<<<<< HEAD
-                msg = (
-                    rclProductID
-                    + " incomplete. Revert and rerun tool using HSU input for GUI sliders for days 3, 4, 5"
-                )
-=======
                 msg = f"{rclProductID} incomplete. Revert and rerun tool using HSU input for GUI sliders for days 3, 4, 5"
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 # self.statusBarMsg(msg, "S")
                 fcstList = tcmFcstList
                 baseTime = tcmBaseTime
@@ -2171,44 +1909,20 @@ class Procedure(SmartScript.SmartScript):
         selectedEndTime = self.toolTimeRange.endTime().unixTime()
         interpFcstList = []
         for i in range(len(fcstList) - 1):
-<<<<<<< HEAD
-            newFcstList = self.interpolateWindFcst(
-                fcstList[i], fcstList[i + 1], interval
-            )
-=======
             newFcstList = self.interpolateWindFcst(fcstList[i], fcstList[i + 1], interval)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             # Make sure the fcst is within the selected time range or we're in testMode
             for f in newFcstList:
                 if (
-<<<<<<< HEAD
-                    testMode
-                    and (
-                        f["validTime"] >= selectedStartTime
-                        and f["validTime"] < selectedEndTime
-                    )
-=======
                     testMode and (selectedStartTime <= f["validTime"] < selectedEndTime)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 ) or (not testMode):
                     interpFcstList.append(f)
 
         # append the very last forecast on to the end of the interpolated list
         if fcstList:
-<<<<<<< HEAD
-            if (
-                testMode
-                and (
-                    f["validTime"] >= selectedStartTime
-                    and f["validTime"] < selectedEndTime
-                )
-            ) or (not testMode):
-=======
             if (testMode and (selectedStartTime <= f["validTime"] < selectedEndTime)) or (
                 not testMode
             ):
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 interpFcstList.append(fcstList[-1])
 
         if len(fcstList) == 1:
@@ -2267,19 +1981,11 @@ class Procedure(SmartScript.SmartScript):
             timeRange = self.makeTimeRange(startTime, endTime)
             self._cycloneTimeRange = timeRange
 
-<<<<<<< HEAD
-            t1 = time.time()
-            windGrid = self.makeRankine(
-                f, latGrid, lonGrid, pieSlices, RADII_FACTOR, timeRange
-            )
-            print("Time to makeRankine:", time.time() - t1)
-=======
             t1 = self._gmtime().unixTime()
             windGrid = self.makeRankine(
                 f, latGrid, lonGrid, pieSlices, RADII_FACTOR, timeRange
             )
             print("Time to makeRankine:", self._gmtime().unixTime() - t1)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             magGrid, dirGrid = self.blendGrids(windGrid, bgGrid)
             magGrid = self.smoothGrid(magGrid, 5)
@@ -2314,13 +2020,6 @@ class Procedure(SmartScript.SmartScript):
         # interpolate through forecast period to very high resolution and make
         # a composite maxWind grid from those wind grids
         if maxwindswath == "Yes":
-<<<<<<< HEAD
-            t1 = time.time()
-            self.makeMaxWindGrid(interpFcstList)
-            print(time.time() - t1, "seconds to generate Max wind composite.")
-
-        if msg != "":
-=======
             t1 = self._gmtime().unixTime()
             self.makeMaxWindGrid(interpFcstList)
             print(
@@ -2328,7 +2027,6 @@ class Procedure(SmartScript.SmartScript):
             )
 
         if msg:
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             self.statusBarMsg(msg, "S")
 
         return None

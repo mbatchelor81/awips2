@@ -32,10 +32,7 @@
 #                                     which was largely redundant with IFPServer.
 # Feb 06, 2017 5959       randerso    Code cleanup.
 # Feb 22, 2017 6143       randerso    Set area to none for fewer transmissions.
-<<<<<<< HEAD
-=======
 # Nov 10, 2021 8698       njensen     Replace time.clock() with os.times()
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 ##
 
@@ -93,11 +90,7 @@ def executeIscExtract(parmNames, databaseName, startTime, endTime,
                       irtTableAddressA, irtTableAddressB, transmitScript, ourServerHost,
                       ourServerPort, ourServerProtocol, ourMHSid, ourSiteID, destinations=None):
 
-<<<<<<< HEAD
-    startT = time.time()
-=======
     t0 = os.times()
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     parms = parmNames
     dbid = databaseName
     startTR = startTime
@@ -454,19 +447,12 @@ def executeIscExtract(parmNames, databaseName, startTime, endTime,
 
             fname = fname + '.gz'
             size = os.stat(fname)[stat.ST_SIZE]
-<<<<<<< HEAD
-            endT = time.time()
-            logEvent('File Size: ', size)
-            logEvent('After ifpnetCDF, ,wctime:', "%-6.2f" % (endT - startT),
-                                   ',cputime:', "%-6.2f" % time.clock())
-=======
             t1 = os.times()
             elapsed = t1.elapsed - t0.elapsed
             cpu = t1.system + t1.user - t0.system - t0.user
             logEvent('File Size: ', size)
             logEvent('After ifpnetCDF, wctime:', "%-6.2f" % elapsed,
                                    ',cputime:', "%-6.2f" % cpu)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             # create XML destinations file for this output
             iscE = Element('isc')  #create the XML tree root
@@ -492,17 +478,11 @@ def executeIscExtract(parmNames, databaseName, startTime, endTime,
             if maskName != "ISC_Send_Area":
                 iscUtil.deleteEditArea(maskName,siteID)
 
-<<<<<<< HEAD
-            endT = time.time()
-            logEvent('After transmission pass, ,wctime:',
-              "%-6.2f" % (endT - startT), ',cputime:', "%-6.2f" % time.clock())
-=======
             t2 = os.times()
             elapsed = t2.elapsed - t0.elapsed
             cpu = t2.system + t2.user - t0.system - t0.user
             logEvent('After transmission pass, wctime:',
               "%-6.2f" % elapsed, ',cputime:', "%-6.2f" % cpu)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     except:
         logProblem("Failure", traceback.format_exc())

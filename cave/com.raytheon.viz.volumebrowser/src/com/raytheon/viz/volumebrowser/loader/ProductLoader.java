@@ -39,10 +39,7 @@ import com.raytheon.uf.viz.core.rsc.ResourceType;
 import com.raytheon.uf.viz.core.rsc.groups.ICombinedResourceData;
 import com.raytheon.uf.viz.core.rsc.groups.ICombinedResourceData.CombineOperation;
 import com.raytheon.viz.ui.BundleProductLoader;
-<<<<<<< HEAD
-=======
 import com.raytheon.viz.ui.EditorTypeInfo;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.viz.ui.EditorUtil;
 import com.raytheon.viz.ui.UiUtil;
 import com.raytheon.viz.ui.editor.AbstractEditor;
@@ -71,15 +68,12 @@ import com.raytheon.viz.volumebrowser.vbui.VBMenuBarItemsMgr;
  * Aug 03, 2015  3861     bsteffen  Initial Creation
  * Jan 13, 2016  5246     bsteffen  Create editor with new display so map
  *                                  resources are preserved.
-<<<<<<< HEAD
-=======
  * Apr 01, 2022  8790     mapeters  Update determination of editor type to
  *                                  load to
  * Apr 25, 2022  8791     mapeters  Handle minor DescriptorMap change
  * Oct 19, 2022  8956     mapeters  Handle UiUtil.createOrOpenEditor
  *                                  signature change
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -141,11 +135,6 @@ public class ProductLoader {
                 first.setCombineOperation(CombineOperation.DIFFERENCE);
             }
         }
-<<<<<<< HEAD
-        System.out.println(
-                "Loading a Difference Product from the Volume Browser.");
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         load(display1);
     }
 
@@ -171,21 +160,12 @@ public class ProductLoader {
     }
 
     protected void load(AbstractRenderableDisplay display) {
-<<<<<<< HEAD
-        String editorId = DescriptorMap
-                .getEditorId(display.getDescriptor().getClass().getName());
-
-        IEditorPart activeEditor = EditorUtil.getActiveEditor();
-
-        AbstractEditor editor = UiUtil.createOrOpenEditor(editorId,
-=======
         String editorId = DescriptorMap.getEditorId(display);
 
         IEditorPart activeEditor = EditorUtil.getActiveEditor();
 
         AbstractEditor editor = UiUtil.createOrOpenEditor(
                 new EditorTypeInfo(editorId, false), true,
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 display.createNewDisplay());
 
         if (editor != null) {

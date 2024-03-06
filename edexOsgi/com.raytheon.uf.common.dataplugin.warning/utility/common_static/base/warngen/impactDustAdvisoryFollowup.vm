@@ -6,10 +6,7 @@
 ##    WG TEAM (Tomalak/Bookbinder/Birchard/DeAngelo) 2-1-2017  New Template; DCS20066    ##
 ##    Bookbinder      01-30-2019 DR20914 Fix format error caused when no highway         ##
 ##                               mile markers are found                                  ##
-<<<<<<< HEAD
-=======
 ##    Bookbinder 9-21-2023 Force selection of CTA for && break point DR 2036278          ##
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ###########################################################################################
 ##
 ##
@@ -27,29 +24,6 @@
 #############################################################
 #### CREATE BASIS WORDING ###################################
 #############################################################
-<<<<<<< HEAD
-#if(${list.contains(${bullets}, "meteorologists")})
-  #set($reportAuthDSW = "capable of producing")
-  #set($source = "Detected by National Weather Service meteorologists.")
-#end
-#if(${list.contains(${bullets}, "doppler")})
-  #set($reportAuthDSW = "capable of producing")
-  #set($source = "Doppler radar.")
-#end
-#if(${list.contains(${bullets}, "trainedSpotters")})
-  #set($reportAuthDSW = "producing") 
-  #set($source = "Trained weather spotters.")
-#end
-#if(${list.contains(${bullets}, "lawEnforcement")})
-  #set($reportAuthDSW = "producing") 
-  #set($source = "Law enforcement.")
-#end
-#if(${list.contains(${bullets}, "emergencyMgmt")})
-  #set($reportAuthDSW = "producing") 
-  #set($source = "Emergency management.")
-#end
-#if(${list.contains(${bullets}, "public")})
-=======
 #if($bullets.contains("meteorologists"))
   #set($reportAuthDSW = "capable of producing")
   #set($source = "Detected by National Weather Service meteorologists.")
@@ -71,7 +45,6 @@
   #set($source = "Emergency management.")
 #end
 #if($bullets.contains("public"))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($reportAuthDSW = "producing") 
   #set($source = "Public.")
 #end
@@ -86,44 +59,28 @@
 #set($vsbyTag = "")
 #set($vsbyHazard = "less than three miles visibility")
 #set($vsbyDist = 100)
-<<<<<<< HEAD
-#if(${list.contains(${bullets}, "threeVis")})
-=======
 #if($bullets.contains("threeVis"))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($vsbyTrail = "visibility") 
   #set($vsbyLead = "")
   #set($vsbyDist = 3.0) 
   #set($vsbyTag = "3.00MI")
   #set($vsbyHazard = "less than three miles visibility")
 #end
-<<<<<<< HEAD
-#if(${list.contains(${bullets}, "twoVis")})
-=======
 #if($bullets.contains("twoVis"))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($vsbyTrail = "visibility") 
   #set($vsbyLead = "")
   #set($vsbyDist = 2.0) 
   #set($vsbyTag = "2.00MI")
   #set($vsbyHazard = "less than two miles visibility")
 #end  
-<<<<<<< HEAD
-#if(${list.contains(${bullets}, "oneVis")})
-=======
 #if($bullets.contains("oneVis"))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($vsbyTrail = "visibility") 
   #set($vsbyLead = "")
   #set($vsbyDist = 1.0) 
   #set($vsbyTag = "1.00MI")
   #set($vsbyHazard = "less than a mile visibility")
 #end
-<<<<<<< HEAD
-#if(${list.contains(${bullets}, "halfVis")})
-=======
 #if($bullets.contains("halfVis"))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($vsbyTrail = "visibility") 
   #set($vsbyLead = "")
   #set($vsbyDist = 0.5) 
@@ -137,31 +94,19 @@
 #set($windTag = "")
 #set($windHazard = "strong wind in excess of 30 mph")
 #set($windSpeed = 0)
-<<<<<<< HEAD
-#if(${list.contains(${bullets}, "30mphWind")})
-=======
 #if($bullets.contains("30mphWind"))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($windThreat = "wind in excess of 30 mph") 
   #set($windSpeed = 30)
   #set($windTag = "30MPH")
   #set ($windHazard = "strong wind in excess of 30 mph")
 #end
-<<<<<<< HEAD
-#if(${list.contains(${bullets}, "40mphWind")})
-=======
 #if($bullets.contains("40mphWind"))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($windThreat = "wind in excess of 40 mph")   
   #set($windSpeed = 40)
   #set($windTag = "40MPH")
   #set ($windHazard = "strong wind in excess of 40 mph")
 #end
-<<<<<<< HEAD
-#if(${list.contains(${bullets}, "50mphWind")})
-=======
 #if($bullets.contains("50mphWind"))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($windThreat = "wind in excess of 50 mph") 
   #set($windSpeed = 50)
   #set($windTag = "50MPH")
@@ -274,17 +219,6 @@ ${dateUtil.format(${now}, ${timeFormat.header}, ${localtimezone})}
 #### SET A DEFAULT STATEMENT IN CASE NO BULLET WAS SELECTED OR AVAILABLE
 #set($expcanPhrase = "The blowing dust that prompted the advisory has dissipated. Therefore, the dust advisory ${expcanBODYTag}.")
 #### WEAKENED BELOW SEVERE LIMITS
-<<<<<<< HEAD
-#if(${list.contains(${bullets}, "weakened")})
-  #set($expcanPhrase = "The blowing dust that prompted the advisory has dissipated. Therefore, the dust advisory ${expcanBODYTag}.")
-#end
-#### MOVED OUT OF THE WARNED AREA
-#if(${list.contains(${bullets}, "movedout")})
-  #set($expcanPhrase = "The blowing dust that prompted the advisory has exited the area. Therefore, the dust advisory ${expcanBODYTag}.")
-#end
-#### WEAKENED AND MOVED OUT OF THE AREA
-#if(${list.contains(${bullets}, "wkndandmoved")})
-=======
 #if($bullets.contains("weakened"))
   #set($expcanPhrase = "The blowing dust that prompted the advisory has dissipated. Therefore, the dust advisory ${expcanBODYTag}.")
 #end
@@ -294,7 +228,6 @@ ${dateUtil.format(${now}, ${timeFormat.header}, ${localtimezone})}
 #end
 #### WEAKENED AND MOVED OUT OF THE AREA
 #if($bullets.contains("wkndandmoved"))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
   #set($expcanPhrase = "The blowing dust that prompted the advisory has dissipated and exited the area. Therefore, the dust advisory ${expcanBODYTag}.")
 #end
 ########################################
@@ -304,19 +237,11 @@ ${dateUtil.format(${now}, ${timeFormat.header}, ${localtimezone})}
 ##Blowing Dust/Sand still a threat
 #set($blowingdustcheck = 0)
 #set($lowvsbycheck = 0)
-<<<<<<< HEAD
-#if(${list.contains(${bullets}, "stillblowingdust")})
- #set($blowingdustcheck = 1)
-#end
-##Low Visibility still a threat
-#if(${list.contains(${bullets}, "stilllowvsby")})
-=======
 #if($bullets.contains("stillblowingdust"))
  #set($blowingdustcheck = 1)
 #end
 ##Low Visibility still a threat
 #if($bullets.contains("stilllowvsby"))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  #set($lowvsbycheck = 1)
 #end
 ################################################
@@ -333,14 +258,10 @@ ${dateUtil.format(${now}, ${timeFormat.header}, ${localtimezone})}
 
 ${expcanPhrase} ${addthreat}
 
-<<<<<<< HEAD
-#printcoords(${areaPoly}, ${list})
-=======
 &&
 
 
 #printcoords(${areaPoly})
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 #tml(${TMLtime}, ${timeFormat}, ${movementDirection}, ${movementInKnots}, ${eventLocation})
 
@@ -424,15 +345,9 @@ THIS IS A TEST MESSAGE. ##
 , ${reportType3} ##
 ##Many of the variables passed below are controlled by config.vm
 #if(${stormType} == "line")
-<<<<<<< HEAD
-#handleClosestPoints(${list}, ${closestPoints}, ${otherClosestPoints}, ${stormType}, ${nearPhrase} , ${maxLandNearDistance}, ${overPhrase}, ${maxLandOverDistance}, ${landDistanceUnits}, ${useSecondReferenceLine})
-#else
-#handleClosestPoints(${list}, ${closestPoints}, ${otherClosestPoints}, ${stormType}, ${nearPhrase} , ${maxLandNearDistance}, ${overPhrase}, ${maxLandOverDistance}, ${landDistanceUnits}, ${useSecondReferenceCell})
-=======
 #handleClosestPoints(${closestPoints}, ${otherClosestPoints}, ${stormType}, ${nearPhrase} , ${maxLandNearDistance}, ${overPhrase}, ${maxLandOverDistance}, ${landDistanceUnits}, ${useSecondReferenceLine})
 #else
 #handleClosestPoints(${closestPoints}, ${otherClosestPoints}, ${stormType}, ${nearPhrase} , ${maxLandNearDistance}, ${overPhrase}, ${maxLandOverDistance}, ${landDistanceUnits}, ${useSecondReferenceCell})
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #end
 #if(${movementSpeed} < ${landStationary} || ${stationary})
 , and is nearly stationary. 
@@ -471,21 +386,13 @@ $mileMarkers
 #set($pathcastLead = "This dust channel")
 #set($otherLead = "this dust channel")
 #end
-<<<<<<< HEAD
-#if(${list.contains(${bullets}, "pathcast")})
-=======
 #if($bullets.contains("pathcast"))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #if(${productClass}=="T")
 THIS IS A TEST MESSAGE. ##
 #end
 #pathCast("#capitalize(${pathcastLead} 'FIRSTONLY') will be near..." ${otherLead} ${pathCast} ${otherPoints} ${areas} ${dateUtil} ${timeFormat} 0)
 
-<<<<<<< HEAD
-#elseif(${list.contains(${bullets}, "listofcities")})
-=======
 #elseif($bullets.contains("listofcities"))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #if(${productClass}=="T")
 THIS IS A TEST MESSAGE. ##
 #end
@@ -506,11 +413,7 @@ Locations impacted include...
 ##############################################
 ###### SPECIAL VENUE/EVENT CASE ##############
 ##############################################
-<<<<<<< HEAD
-#if(${list.contains(${bullets}, "specialEvent")})
-=======
 #if($bullets.contains("specialEvent"))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #if(${stormType} == "line")
 Those attending the !**EVENT/VENUE NAME OR LOCATION**! are in the path of this wall of dust and should prepare for hazardous weather conditions.
 
@@ -540,66 +443,39 @@ Those attending the !**EVENT/VENUE NAME OR LOCATION**! are in the path of this d
 ##
 #if(${ctaSelected} == "YES") 
 PRECAUTIONARY/PREPAREDNESS ACTIONS...
-<<<<<<< HEAD
-=======
 #else
 !** YOU DID NOT SELECT A CTA. PLEASE RESTART **!
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 #end
 ###############################################################################
 ##################### CALL TO ACTION STATEMENTS ###############################
 ###############################################################################
-<<<<<<< HEAD
-#if(${list.contains(${bullets}, "healthCTA")})
-=======
 #if($bullets.contains("healthCTA"))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 Blowing dust can be unhealthy and has been known to lead to Valley Fever. Avoid outdoor exposure.
 
 #end
 ##
-<<<<<<< HEAD
-#if(${list.contains(${bullets}, "genericCTA")})
-=======
 #if($bullets.contains("genericCTA"))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 Blowing dust brings reduced visibility, leading to dangerous driving conditions. If driving, avoid blowing dust if possible. If caught in dense blowing dust, pull off the road, turn off your lights and keep your foot off the brake.
 
 #end
 ##
-<<<<<<< HEAD
-#if(${list.contains(${bullets}, "motoristCTA")})
-=======
 #if($bullets.contains("motoristCTA"))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 Motorists should not drive into an area of blowing dust. PULL ASIDE STAY ALIVE!
 
 #end
 ##
-<<<<<<< HEAD
-#if(${list.contains(${bullets}, "lawEnforcementCTA")})
-=======
 #if($bullets.contains("lawEnforcementCTA"))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 To report severe weather, contact the National Weather Service, or your nearest law enforcement agency, who will relay your report to the National Weather Service office in ${officeLoc}.
 
 #end
 ##
-<<<<<<< HEAD
-#if(${list.contains(${bullets}, "boatersCTA")})
-=======
 #if($bullets.contains("boatersCTA"))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 If on or near !**NAME OF LAKE**!, get out of the water and move indoors or inside a vehicle. Remember, lightning can strike out to 15 miles from the parent thunderstorm. If you can hear thunder, you are close enough to be struck by lightning. Move to safe shelter now! Do not be caught on the water in a thunderstorm.
 
 #end
 ##
-<<<<<<< HEAD
-#if(${list.contains(${bullets}, "ThunderstormCTA")})
-=======
 #if($bullets.contains("ThunderstormCTA"))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 Strong to severe thunderstorms are also possible behind ${reportType4}. Keep updated with this quickly evolving situation.
 
 #end
@@ -608,11 +484,7 @@ Strong to severe thunderstorms are also possible behind ${reportType4}. Keep upd
 &&
 
 #end
-<<<<<<< HEAD
-#printcoords(${areaPoly}, ${list})
-=======
 #printcoords(${areaPoly})
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 #tml(${TMLtime}, ${timeFormat}, ${movementDirection}, ${movementInKnots}, ${eventLocation})
 
@@ -620,8 +492,4 @@ Strong to severe thunderstorms are also possible behind ${reportType4}. Keep upd
 $$
 #end
 
-<<<<<<< HEAD
 #parse("forecasterName.vm")
-=======
-#parse("forecasterName.vm")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

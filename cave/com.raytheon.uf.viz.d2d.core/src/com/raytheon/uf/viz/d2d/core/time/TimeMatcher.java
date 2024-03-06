@@ -304,6 +304,7 @@ public class TimeMatcher {
                 haveFcst = true;
             }
             if (d >= dt2) {
+
             } else if (d == dt) {
                 nn++;
             } else if (d < dt) {
@@ -420,6 +421,7 @@ public class TimeMatcher {
             } else if (d == dt) {
                 nn++;
             } else if (d >= dt2) {
+
             } else if (d < dt) {
                 dt2 = dt;
                 dt = d;

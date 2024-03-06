@@ -83,10 +83,7 @@ import org.locationtech.jts.geom.LineString;
  * Oct 22, 2015  4970     bsteffen  Add ldadmesonet to supported plugins.
  * Nov 16, 2017  5697     bsteffen  Remove profiler plugin
  * Nov 01, 2018  7314     bsteffen  Better support for OA.
-<<<<<<< HEAD
-=======
  * Jun 04, 2021	 DCS22300 dmurray   Add back in profiler plugin
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -333,11 +330,7 @@ public class PointDataCatalog extends AbstractInventoryDataCatalog {
     @Override
     protected String[] getPlugins() {
         return new String[] { "goessounding", "poessounding", "bufrua", "obs",
-<<<<<<< HEAD
-                "bufrmosLAMP", "ldadmesonet" };
-=======
                 "bufrmosLAMP", "ldadmesonet", "profiler" };
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         // njensen removed bufrmosAVN, bufrmosETA, bufrmosGFS, bufrmosHPC,
         // bufrmosMRF, bufrmosNGM
         // TODO ideally this list should not be in code, and should contain all

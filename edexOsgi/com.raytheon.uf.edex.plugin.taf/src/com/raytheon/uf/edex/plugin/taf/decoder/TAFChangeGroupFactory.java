@@ -26,30 +26,21 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-<<<<<<< HEAD
-=======
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.edex.exception.DecoderException;
 import com.raytheon.uf.common.dataplugin.taf.TAFParts;
 import com.raytheon.uf.common.dataplugin.taf.TafConstants;
 import com.raytheon.uf.common.dataplugin.taf.TafPeriod;
 import com.raytheon.uf.common.dataplugin.taf.TafRecord;
-<<<<<<< HEAD
-=======
 import com.raytheon.uf.common.pointdata.spatial.ObStation;
 import com.raytheon.uf.common.pointdata.spatial.SurfaceObsLocation;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.time.DataTime;
 import com.raytheon.uf.common.time.TimeRange;
 import com.raytheon.uf.common.time.util.TimeUtil;
 import com.raytheon.uf.common.wmo.WMOHeader;
-<<<<<<< HEAD
-=======
 import com.raytheon.uf.edex.pointdata.spatial.ObStationDao;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * 
@@ -65,10 +56,7 @@ import com.raytheon.uf.edex.pointdata.spatial.ObStationDao;
  * May 15, 2014 3002       bgonzale    Moved common taf code to com.raytheon.uf.common.dataplugin.taf.
  * Apr 01, 2015 3722       rjpeter     Updated amd/corindicator to boolean flags.
  * Sep 21, 2015 4890       rferrel     Removal of Change Group from TafRecord and clean up.
-<<<<<<< HEAD
-=======
  * May 24, 2022 20788      smoorthy    Add processing for SurfaceObsLocation field.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  * 
  * @author jkorman
@@ -125,11 +113,8 @@ public class TAFChangeGroupFactory {
 
     private String stationId = null;
 
-<<<<<<< HEAD
-=======
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /**
      * 
      * @param tafData
@@ -523,9 +508,6 @@ public class TAFChangeGroupFactory {
 
             record.setDataTime(tafPeriod);
 
-<<<<<<< HEAD
-            record.setStationId(stationId);
-=======
             ObStation station = getStationInfo(stationId);
             if (station != null) {
                 SurfaceObsLocation loc = record.getLocation();
@@ -546,7 +528,6 @@ public class TAFChangeGroupFactory {
                         .format("Station info not found for id [%s]",
                                  stationId));
             }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             if (tafParts.getTafHeader().indexOf(TafConstants.COR_IND) >= 0) {
                 record.setCorIndicator(true);
@@ -571,8 +552,6 @@ public class TAFChangeGroupFactory {
         return record;
     }
 
-<<<<<<< HEAD
-=======
     private ObStation getStationInfo(String icao) {
         ObStation station = null;
         ObStationDao dao = new ObStationDao();
@@ -587,5 +566,4 @@ public class TAFChangeGroupFactory {
     }
 
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

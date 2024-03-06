@@ -19,15 +19,9 @@ import org.geotools.geometry.jts.JTS;
 import org.geotools.referencing.GeodeticCalculator;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Geometry;
-<<<<<<< HEAD
-import org.locationtech.jts.geom.Point;
-import org.locationtech.jts.geom.prep.PreparedGeometry;
-import org.locationtech.jts.geom.prep.PreparedGeometryFactory;
-=======
 import org.locationtech.jts.geom.prep.PreparedGeometry;
 import org.locationtech.jts.geom.prep.PreparedGeometryFactory;
 import org.locationtech.jts.operation.distance.DistanceOp;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.opengis.referencing.operation.MathTransform;
 
 import com.raytheon.uf.common.dataplugin.warning.config.PathcastConfiguration;
@@ -46,20 +40,12 @@ import com.raytheon.uf.viz.core.maps.rsc.DbMapQueryFactory;
 import com.raytheon.viz.core.map.GeoUtil;
 import com.raytheon.viz.warngen.gis.ClosestPoint;
 import com.raytheon.viz.warngen.gis.ClosestPointComparator;
-<<<<<<< HEAD
-import com.raytheon.viz.warngen.util.AdjustAngle;
-
-import si.uom.SI;
-import tec.uom.se.unit.MetricPrefix;
-import tec.uom.se.unit.ProductUnit;
-=======
 import com.raytheon.viz.warngen.gis.PathCast;
 import com.raytheon.viz.warngen.util.AdjustAngle;
 
 import si.uom.SI;
 import javax.measure.MetricPrefix;
 import tech.units.indriya.unit.ProductUnit;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  *
@@ -80,11 +66,7 @@ import tech.units.indriya.unit.ProductUnit;
  * May  7, 2015 ASM #17438 D. Friedman  Clean up debug and performance logging.
  * Jul  9, 2015 ASM #16769 mgamazaychikov Add filtering out pathcast data features based on the inclusion criteria.
  * Feb 22, 2021 8258       mapeters     Optimize geometry intersections
-<<<<<<< HEAD
- *
-=======
  * Nov 29, 2021 ASM #22724 dhaines      Changes for DR 22724 - Some Cities Can't be Added to Pathcasts
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  *
  * @author jsanchez
@@ -92,11 +74,7 @@ import tech.units.indriya.unit.ProductUnit;
 public abstract class AbstractDbSourceDataAdaptor {
 
     private static final IPerformanceStatusHandler perfLog = PerformanceStatus
-<<<<<<< HEAD
-            .getHandler("WG:");
-=======
             .getHandler("WG");
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private static final String transformedKey = "com.raytheon.transformed";
 
@@ -339,23 +317,11 @@ public abstract class AbstractDbSourceDataAdaptor {
      * @throws Exception
      */
     public List<ClosestPoint> getPathcastData(
-<<<<<<< HEAD
-            PathcastConfiguration pathcastConfiguration,
-            UnitConverter distanceToMeters, MathTransform latLonToLocal,
-            Geometry pcGeom, Point centroid, SpatialQueryResult[] areaFeatures,
-            String pcArea, String pcParentArea) throws Exception {
-        String pointField = pathcastConfiguration.getPointField();
-        String areaField = pathcastConfiguration.getAreaField();
-        String parentAreaField = pathcastConfiguration.getParentAreaField();
-        double thresholdInMeters = distanceToMeters
-                .convert(pathcastConfiguration.getDistanceThreshold());
-=======
             PathcastConfiguration pathcastConfiguration, UnitConverter distanceToMeters,
             MathTransform latLonToLocal, SpatialQueryResult[] areaFeatures,
             PathCast pathCast) throws Exception {
         Geometry pcGeom = pathCast.getPcGeom();
         String pointField = pathcastConfiguration.getPointField();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         if (latLonToLocal != null) {
             for (SpatialQueryResult rslt : ptFeatures) {
@@ -385,49 +351,6 @@ public abstract class AbstractDbSourceDataAdaptor {
         // Find closest points
         List<ClosestPoint> points = new ArrayList<>(ptFeaturesFiltered.length);
         for (SpatialQueryResult pointRslt : ptFeaturesFiltered) {
-<<<<<<< HEAD
-            Geometry localPt = (Geometry) pointRslt.attributes
-                    .get(transformedKey);
-            double minDist = Double.MAX_VALUE;
-            Coordinate closestCoord = null;
-            if (localPCGeom != null) {
-                Coordinate[] localPts = localPCGeom.getCoordinates();
-                Coordinate[] latLonPts = pcGeom.getCoordinates();
-                for (int i = 0; i < localPts.length; ++i) {
-                    Coordinate loc = localPts[i];
-                    double distance = loc.distance(localPt.getCoordinate());
-                    if (distance <= thresholdInMeters && distance < minDist) {
-                        minDist = distance;
-                        closestCoord = latLonPts[i];
-                    }
-                }
-            } else {
-                closestCoord = centroid.getCoordinate();
-                minDist = 0;
-            }
-
-            if (closestCoord != null) {
-                boolean found = false;
-                String area = null;
-                String parentArea = null;
-                for (SpatialQueryResult areaRslt : areaFeatures) {
-                    if (areaRslt.geometry.contains(pointRslt.geometry)) {
-                        area = String
-                                .valueOf(areaRslt.attributes.get(areaField));
-                        parentArea = String.valueOf(
-                                areaRslt.attributes.get(parentAreaField));
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                    area = pcArea;
-                    parentArea = pcParentArea;
-                }
-
-                ClosestPoint cp = createClosestPoint(pointField, pointRslt,
-                        minDist, closestCoord, area, parentArea,
-=======
             Geometry localPts = (Geometry) pointRslt.attributes
                     .get(transformedKey);
             if (localPts.intersects(localPCGeom)) {
@@ -438,16 +361,11 @@ public abstract class AbstractDbSourceDataAdaptor {
                 ClosestPoint cp = createClosestPoint(pointField, pointRslt,
                         distOp.distance(), new Coordinate(nearestDbl[0], nearestDbl[1]),
                         pathCast.getArea(), pathCast.getParentArea(),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         distanceToMeters.inverse());
                 points.add(cp);
             }
         }
-<<<<<<< HEAD
-
-=======
         
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         List<String> fields = null;
         if (pathcastConfiguration.getSortBy() != null) {
             fields = Arrays.asList(pathcastConfiguration.getSortBy());
@@ -570,7 +488,4 @@ public abstract class AbstractDbSourceDataAdaptor {
     }
 
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

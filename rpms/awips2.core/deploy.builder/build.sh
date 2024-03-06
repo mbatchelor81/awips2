@@ -179,11 +179,7 @@ buildRPM "Installer.gfesuite-server"
 buildRPM "Installer.database-standalone-configuration"
 buildRPM "Installer.database-server-configuration"
 buildRPM "Installer.adapt-native"
-<<<<<<< HEAD
 #buildRPM "Installer.alertviz"
-=======
-buildRPM "Installer.alertviz"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 buildRPM "Installer.aviation"
 buildRPM "Installer.cli"
 buildRPM "Installer.database"

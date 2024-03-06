@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -41,10 +29,7 @@ import org.geotools.coverage.grid.GridCoverage2D;
 import org.geotools.coverage.grid.GridGeometry2D;
 import org.geotools.gce.geotiff.GeoTiffFormat;
 import org.geotools.gce.geotiff.GeoTiffReader;
-<<<<<<< HEAD
-=======
 import org.geotools.util.factory.Hints;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.opengis.referencing.operation.TransformException;
@@ -63,36 +48,22 @@ import com.raytheon.uf.viz.core.tile.TileSetRenderable;
 
 /**
  * Supports GeoTIFF imagery
-<<<<<<< HEAD
- * 
- * <pre>
- * 
- *     SOFTWARE HISTORY
- * 
-=======
  *
  * <pre>
  *
  *     SOFTWARE HISTORY
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- ----------------------------------
  * Aug 24, 2006           chammack  Initial Creation.
  * Aug 14, 2014  3522     bclement  reworked to use TileSetRenderable
  * Oct 25, 2017  5773     bsteffen  Support colormapped data.
  * Oct 10, 2018  7498     bsteffen  Ensure ImageIO loads geotools extensions.
-<<<<<<< HEAD
- * 
- * </pre>
- * 
-=======
  * Oct 24, 2023  2036318  mapeters  Force (lon, lat) axis order for coordinates
  *                                  to work correctly with geotools 26
  *
  * </pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author chammack
  */
 public class GeoTiffResource
@@ -144,9 +115,6 @@ public class GeoTiffResource
         }
         initializeImageIO();
         try {
-<<<<<<< HEAD
-            GeoTiffReader gcr = new GeoTiffFormat().getReader(imgFile);
-=======
             /*
              * Our GeoTIFF processing code expects coordinates to be in the
              * (longitude, latitude) axis format. However, some coordinate
@@ -157,7 +125,6 @@ public class GeoTiffResource
             Hints hints = new Hints(Hints.FORCE_LONGITUDE_FIRST_AXIS_ORDER,
                     Boolean.TRUE);
             GeoTiffReader gcr = new GeoTiffFormat().getReader(imgFile, hints);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             GridCoverage2D gridCoverage = gcr.read(null);
 
             ImagingCapability imaging = getCapability(ImagingCapability.class);
@@ -230,11 +197,7 @@ public class GeoTiffResource
      * loaded so this method ensures the geotools extensions are loaded. The
      * GeotiffReader specifically needs to use
      * it.geosolutions.imageio.stream.input.spi.URLImageInputStreamSpi.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * ImageIO will initialize with whatever classloader is available when it is
      * first loaded. Removing this code might appear like nothing is broken
      * since this plugin initializes ImageIO through the geotools classes so the

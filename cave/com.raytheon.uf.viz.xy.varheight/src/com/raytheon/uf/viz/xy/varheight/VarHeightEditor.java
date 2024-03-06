@@ -20,10 +20,7 @@
 package com.raytheon.uf.viz.xy.varheight;
 
 import com.raytheon.uf.viz.core.IDisplayPane;
-<<<<<<< HEAD
-=======
 import com.raytheon.uf.viz.core.InputManager;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.drawables.IRenderableDisplay;
 import com.raytheon.uf.viz.core.rsc.IInputHandler;
 import com.raytheon.uf.viz.core.rsc.IInputHandler.InputPriority;
@@ -31,10 +28,6 @@ import com.raytheon.uf.viz.xy.VizXyEditor;
 import com.raytheon.uf.viz.xy.varheight.display.VarHeightRenderableDisplay;
 import com.raytheon.uf.viz.xy.varheight.util.VarHeightPanHandler;
 import com.raytheon.uf.viz.xy.varheight.util.VarHeightZoomHandler;
-<<<<<<< HEAD
-import com.raytheon.viz.ui.input.InputManager;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Editor for var height graphs that registers/updates zoom and pan handlers

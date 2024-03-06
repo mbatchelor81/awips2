@@ -40,11 +40,8 @@
 <plotParameterDefinition displayName="longitude" displayType="TEXT" format="%3.2f" param="longitude" sampleValue="0" svgClass="text" symbol="deg" />
 
 <plotParameterDefinition displayName="windSpeed (kts)" displayType="RANGE" format="%2.1f" lookupTable="output_formats.txt" param="windSpeed" sampleValue="59" svgClass="text" unit="kts" />
-<<<<<<< HEAD
-=======
 <plotParameterDefinition displayName="windSpeed (mph)" displayType="RANGE" format="%2.1f" lookupTable="output_formats.txt" param="windSpeed" sampleValue="59" svgClass="text" unit="mph" />
 <plotParameterDefinition displayName="windSpeed (m/s)" displayType="RANGE" format="%2.1f" lookupTable="output_formats.txt" param="windSpeed" sampleValue="59" svgClass="text" unit="m/s" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 <plotParameterDefinition displayName="Marker" displayType="MARKER" param="Marker" sampleValue=" " svgClass="marker" />
 
@@ -54,11 +51,8 @@
 
 <plotParameterDefinition displayName="seaTemp (°C)" displayType="TEXT" format="%2.1f" param="seaTemp" sampleValue="0" svgClass="text" symbol="C" unit="°C" />
 
-<<<<<<< HEAD
-=======
 <plotParameterDefinition displayName="seaTemp (°F)" displayType="TEXT" format="%2.1f" param="seaTemp" sampleValue="32" svgClass="text" symbol="F" unit="°F" />
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 <plotParameterDefinition displayName="vertIntegWater-1" displayType="TEXT" format="%2.1f" lookupTable="output_formats.txt" param="vertIntegWater" sampleValue="75" svgClass="text" symbol="kg/(m**2)" />
 
 <plotParameterDefinition displayName="vertIntegWater" displayType="RANGE" format="%2.2f" lookupTable="output_formats.txt" param="vertIntegWater" sampleValue="0" svgClass="text" />

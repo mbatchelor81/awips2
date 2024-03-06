@@ -40,20 +40,11 @@
         <contribute xsi:type="subinclude" subMenu="${icao} Algorithm Overlays"
             fileName="menus/radar/with0p2/baseRadarAlgorithmOverlays.xml" />
         <contribute xsi:type="subinclude" subMenu="${icao} four panel"
-<<<<<<< HEAD
-            fileName="menus/radar/dualPol/baseRadarFourPanelBestRes.xml" />
-=======
             fileName="menus/radar/with0p2/baseRadarFourPanelBestRes.xml" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <contribute xsi:type="subinclude" subMenu="${icao} Data Quality"
             fileName="menus/radar/with0p2/baseRadarDataQuality.xml" />
         <contribute xsi:type="subinclude" subMenu="${icao} 4-bit/Legacy Prods"
             fileName="menus/radar/with0p2/baseRadarLegacy.xml" />
         <!-- <contribute xsi:type="subinclude" subMenu="${icao} Obsolete Products" fileName="menus/radar/with0p2/baseRadarObsolete.xml" />  -->
-<<<<<<< HEAD
-        <contribute xsi:type="subinclude" subMenu="Radar Applications"
-            fileName="menus/radar/baseRadarApplications.xml" />
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     </contribute>
 </menuTemplate> 

@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -54,19 +42,11 @@ import com.raytheon.uf.common.status.UFStatus;
 /**
  * Metar.cfg config file reader class. Refactored out of ObsToSHEFOptions.java.
  * Allows for injection via spring
-<<<<<<< HEAD
- * 
- * <pre>
- *
- * SOFTWARE HISTORY
- * 
-=======
  *
  * <pre>
  *
  * SOFTWARE HISTORY
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- --------------------------------------------
  * May 30, 2018  6843     mduff     Initial creation
@@ -74,13 +54,9 @@ import com.raytheon.uf.common.status.UFStatus;
  * Jul 23, 2019  6843     randerso  Remove comment check in parseConfig().
  *                                  Ensure first 3 lines are counted but not
  *                                  processed.
-<<<<<<< HEAD
- * 
-=======
  * Jul 25, 2022  22667    aghanava  Fixed reading of higher level METAR config
  *                                  files.
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  *
  * @author mpduff
@@ -130,14 +106,9 @@ public class MetarToShefConfigReader {
 
         IPathManager manager = PathManagerFactory.getPathManager();
         if (manager != null) {
-<<<<<<< HEAD
-            ILocalizationFile cfgFile = manager
-                    .getStaticLocalizationFile(configFile);
-=======
             String siteCfgPath = LocalizationUtil.join("shef", configFile);
             ILocalizationFile cfgFile = manager
                     .getStaticLocalizationFile(siteCfgPath);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if (cfgFile == null) {
                 // Look for default file
                 cfgFile = manager.getStaticLocalizationFile(METAR_CFG);
@@ -164,15 +135,9 @@ public class MetarToShefConfigReader {
         boolean errorFile = false;
         boolean shefPass = false;
         int lineCount = 0;
-<<<<<<< HEAD
-        optAlias.clear();
-        optNames.clear();
-        optPCReset.clear();
-=======
         optAlias = new Properties();
         optNames = new HashSet<>();
         optPCReset = new Properties();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         boolean readAlias = false;
         boolean readNames = false;
         boolean readReset = false;
@@ -203,11 +168,7 @@ public class MetarToShefConfigReader {
                 // TAIRZP
                 // TAIRZY
                 StringTokenizer st = new StringTokenizer(line, " ");
-<<<<<<< HEAD
-                optPE.clear();
-=======
                 optPE = new HashSet<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 while (st.hasMoreTokens()) {
                     optPE.add(st.nextToken());
                 }
@@ -228,18 +189,6 @@ public class MetarToShefConfigReader {
                     } else if (END_PC_RESET.equals(s)) {
                         readReset = false;
                     }
-<<<<<<< HEAD
-                } else {
-                    if (readNames) {
-                        optNames.add(line.trim());
-                    } else if (readAlias) {
-                        String[] parts = line.trim().split("\\s+");
-                        optAlias.setProperty(parts[0], parts[1]);
-                    } else if (readReset) {
-                        String[] parts = line.trim().split("\\s+");
-                        optPCReset.setProperty(parts[0], parts[1]);
-                    }
-=======
                 } else if (readNames) {
                     optNames.add(line.trim());
                 } else if (readAlias) {
@@ -248,7 +197,6 @@ public class MetarToShefConfigReader {
                 } else if (readReset) {
                     String[] parts = line.trim().split("\\s+");
                     optPCReset.setProperty(parts[0], parts[1]);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
             }
         }

@@ -30,11 +30,7 @@ import javax.measure.IncommensurableException;
 import javax.measure.UnconvertibleException;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
-<<<<<<< HEAD
-import javax.measure.format.ParserException;
-=======
 import javax.measure.format.MeasurementParseException;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.measure.quantity.Length;
 
 import com.raytheon.uf.common.dataplugin.PluginDataObject;
@@ -60,11 +56,7 @@ import com.raytheon.uf.edex.database.plugin.PluginDao;
 import com.raytheon.uf.edex.database.plugin.PluginFactory;
 
 import si.uom.SI;
-<<<<<<< HEAD
-import tec.uom.se.unit.MetricPrefix;
-=======
 import javax.measure.MetricPrefix;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Generates a Satellite Precipitation XMRG data file based on the data
@@ -164,11 +156,7 @@ public class GridPrecipDataCreator implements IPrecipDataCreator<GridRecord> {
         Unit<?> gi = null;
         try {
             gi = UnitConv.deserializer(gribUnit);
-<<<<<<< HEAD
-        } catch (ParserException e) {
-=======
         } catch (MeasurementParseException e) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             throw new PrecipCreationException(
                     "Failed to parse grib unit: " + gribUnit + ".", e);
         }

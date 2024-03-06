@@ -28,13 +28,8 @@ import javax.measure.quantity.Dimensionless;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-<<<<<<< HEAD
-import tec.uom.se.AbstractUnit;
-import tec.uom.se.quantity.QuantityDimension;
-=======
 import tech.units.indriya.AbstractUnit;
 import tech.units.indriya.unit.UnitDimension;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * TODO Add Description
@@ -85,10 +80,6 @@ public class GenericPixel extends AbstractUnit<Dimensionless> {
 
     @Override
     public Dimension getDimension() {
-<<<<<<< HEAD
-        return QuantityDimension.NONE;
-=======
         return UnitDimension.NONE;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 }

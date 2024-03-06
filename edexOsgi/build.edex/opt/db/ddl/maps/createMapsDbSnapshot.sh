@@ -22,14 +22,9 @@
 # SOFTWARE HISTORY
 # Date         Ticket#    Engineer    Description
 # ------------ ---------- ----------- --------------------------
-<<<<<<< HEAD
-# 01/23/2017    #6097     randerso    Removed unnecessary command line parameters.
-# 04/11/2018    #7140     tgurney     Use a2dbauth
-=======
 # Jan 23, 2017 6097       randerso    Removed unnecessary command line parameters.
 # Apr 11, 2018 7140       tgurney     Use a2dbauth
 # Jul  1, 2021 8544       tgurney     Remove PGBINDIR, not needed anymore
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # 
 ##
 if [ $# -lt 1 ] ; then
@@ -40,10 +35,6 @@ if [ $# -lt 1 ] ; then
     exit -1
 fi
 
-<<<<<<< HEAD
-PGBINDIR=/awips2/postgresql/bin
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 PGUSER=awipsadmin
 PGPORT=5432
 
@@ -53,8 +44,4 @@ else
     OUTFILE=${1}
 fi
 
-<<<<<<< HEAD
-a2dbauth ${PGBINDIR}/pg_dump -Fc maps -U ${PGUSER} -p ${PGPORT} > $OUTFILE
-=======
 a2dbauth pg_dump -Fc maps -U ${PGUSER} -p ${PGPORT} > $OUTFILE
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

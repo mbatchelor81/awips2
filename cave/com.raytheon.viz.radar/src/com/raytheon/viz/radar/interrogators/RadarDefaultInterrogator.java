@@ -53,17 +53,10 @@ import com.raytheon.uf.viz.core.rsc.interrogation.InterrogateMap;
 import com.raytheon.uf.viz.core.rsc.interrogation.InterrogationKey;
 import com.raytheon.uf.viz.core.rsc.interrogation.Interrogator;
 
-<<<<<<< HEAD
-import tec.uom.se.AbstractConverter;
-import tec.uom.se.AbstractUnit;
-import tec.uom.se.format.SimpleUnitFormat;
-import tec.uom.se.quantity.Quantities;
-=======
 import tech.units.indriya.AbstractUnit;
 import tech.units.indriya.format.SimpleUnitFormat;
 import tech.units.indriya.function.AbstractConverter;
 import tech.units.indriya.quantity.Quantities;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Default interrogator for radar resource.
@@ -84,10 +77,7 @@ import tech.units.indriya.quantity.Quantities;
  *                                     Handled unit conversion.
  * Apr 20, 2020  8145     randerso     Replace SamplePreferences with
  *                                     SampleFormat
-<<<<<<< HEAD
-=======
  * Nov 03, 2022  8905     lsingh       Check for NaN when converting units.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -295,16 +285,12 @@ public class RadarDefaultInterrogator implements IRadarInterrogator {
             RadarRecord radarRecord, ColorMapParameters params,
             Set<InterrogationKey<?>> keys) {
         UnitConverter converter = getConverter(params, radarRecord);
-<<<<<<< HEAD
-        double dispVal = converter.convert(dataValue);
-=======
         double dispVal;
         try {
             dispVal = converter.convert(dataValue);
         } catch (NumberFormatException e) {
             dispVal = Double.NaN;
         }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         String unitString = "";
         Unit<?> unit = AbstractUnit.ONE;
         if (params != null && params.getDisplayUnit() != AbstractUnit.ONE) {

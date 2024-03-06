@@ -19,20 +19,11 @@
  **/
 package com.raytheon.uf.common.dataplugin.satellite.units.counts;
 
-<<<<<<< HEAD
-import java.math.BigDecimal;
-import java.math.MathContext;
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.measure.UnitConverter;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import si.uom.SI;
-<<<<<<< HEAD
-import tec.uom.se.AbstractConverter;
-=======
 import tech.units.indriya.function.AbstractConverter;
 
 /**
@@ -51,7 +42,6 @@ import tech.units.indriya.function.AbstractConverter;
  * 
  */
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 public class DerivedWVPixelToTempConverter extends AbstractConverter {
 
@@ -60,21 +50,11 @@ public class DerivedWVPixelToTempConverter extends AbstractConverter {
     private static UnitConverter celsiusToKelvin = SI.CELSIUS
             .getConverterTo(SI.KELVIN);
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see tec.uom.se.AbstractConverter#convert(double)
-     */
-    @Override
-    public double convert(double aPixel) {
-=======
     @Override
     public Number convertWhenNotIdentity(Number pixel) {
         
         double aPixel = pixel.doubleValue();
         
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         // aPixel should be an unsigned byte(0-255)
         // If it is negative, assume we accidently got a signed byte and unsign
         // it
@@ -86,66 +66,27 @@ public class DerivedWVPixelToTempConverter extends AbstractConverter {
         return result;
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see tec.uom.se.AbstractConverter#equals(java.lang.Object)
-     */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public boolean equals(Object aConverter) {
         return (aConverter instanceof DerivedWVPixelToTempConverter);
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see tec.uom.se.AbstractConverter#hashCode()
-     */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this);
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see tec.uom.se.AbstractConverter#inverse()
-     */
-    @Override
-    public AbstractConverter inverse() {
-        return new DerivedTempToWVPixelConverter();
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see tec.uom.se.AbstractConverter#isLinear()
-     */
-=======
     @Override
     public AbstractConverter inverseWhenNotIdentity() {
         return new DerivedTempToWVPixelConverter();
     }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public boolean isLinear() {
         return false;
     }
 
     @Override
-<<<<<<< HEAD
-    public BigDecimal convert(BigDecimal value, MathContext ctx)
-            throws ArithmeticException {
-        return BigDecimal.valueOf(convert(value.doubleValue()));
-=======
     public boolean isIdentity() {
         return false;
     }
@@ -166,7 +107,6 @@ public class DerivedWVPixelToTempConverter extends AbstractConverter {
     protected boolean canReduceWith(AbstractConverter that) {
         // This method hasn't been implemented yet since it's unused
         return false;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
 }

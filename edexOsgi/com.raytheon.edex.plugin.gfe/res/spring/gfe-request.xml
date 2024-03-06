@@ -54,10 +54,7 @@
     <bean id="iscMosaicJobManager" class="com.raytheon.edex.plugin.gfe.isc.IscMosaicJobManager"
         depends-on="gfeDbRegistered">
         <constructor-arg ref="iscMosaicPythonThreadPool"/>
-<<<<<<< HEAD
         <constructor-arg value="${iscMosaicJob.threads}"/>
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     </bean>
     <bean factory-bean="contextManager" factory-method="registerContextStateProcessor">
         <constructor-arg ref="gfe-request-camel"/>
@@ -159,7 +156,6 @@
         <constructor-arg ref="ifpnetCDFFactory"/>
     </bean>
 
-<<<<<<< HEAD
     <bean id="iscMosaicFactory" class="com.raytheon.edex.plugin.gfe.isc.IscScriptFactory">
         <constructor-arg value="iscMosaic"/>
     </bean>
@@ -167,15 +163,6 @@
         <constructor-arg value="${iscMosaicJob.threads}" />
         <constructor-arg value="iscMosaic" />
         <constructor-arg ref="iscMosaicFactory" />
-=======
-    <bean id="iscMosaicQueue" class="java.util.concurrent.LinkedBlockingQueue" />
-    <bean id="iscMosaicPythonThreadPool" class="java.util.concurrent.ThreadPoolExecutor">    
-        <constructor-arg value="${iscMosaicJob.threads}" />
-        <constructor-arg value="${iscMosaicJob.threads}" />
-        <constructor-arg value="0" />
-        <constructor-arg value="MILLISECONDS" />
-        <constructor-arg ref="iscMosaicQueue" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     </bean>
 
     <!-- End Additional ISC Beans -->

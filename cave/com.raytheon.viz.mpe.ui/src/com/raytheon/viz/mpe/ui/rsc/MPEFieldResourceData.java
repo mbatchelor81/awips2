@@ -24,18 +24,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-<<<<<<< HEAD
-import si.uom.NonSI;
-import si.uom.SI;
-import systems.uom.common.USCustomary;
-import tec.uom.se.AbstractUnit;
-import tec.uom.se.unit.MetricPrefix;
-=======
 import si.uom.SI;
 import systems.uom.common.USCustomary;
 import tech.units.indriya.AbstractUnit;
 import javax.measure.MetricPrefix;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import javax.measure.Unit;
 import javax.xml.bind.annotation.XmlAccessType;

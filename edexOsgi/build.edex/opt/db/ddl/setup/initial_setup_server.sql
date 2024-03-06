@@ -36,11 +36,7 @@ ALTER USER awipsadmin with password 'awips';
 CREATE USER awips with password 'awips' login; 
 
 --Create the metadata tablespace
-<<<<<<< HEAD
-CREATE TABLESPACE metadata owner awipsadmin location '%{tablespace_dir}/metadata';
-=======
 CREATE TABLESPACE metadata owner awipsadmin location '%{tablespace_dir}%/metadata';
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 --Create the database
 CREATE DATABASE metadata OWNER awipsadmin TABLESPACE metadata;
@@ -67,10 +63,6 @@ COMMENT ON DATABASE metadata IS 'AWIPS Metadata Database';
 COMMENT ON TABLESPACE metadata IS 'AWIPS Metadata Database Tablespace';
 COMMENT ON SCHEMA awips IS 'AWIPS Schema';
 
-<<<<<<< HEAD
-CREATE TABLESPACE pgdata_ihfs OWNER awipsadmin LOCATION '%{tablespace_dir}/pgdata_ihfs';
-=======
 CREATE TABLESPACE pgdata_ihfs OWNER awipsadmin LOCATION '%{tablespace_dir}%/pgdata_ihfs';
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 COMMENT ON TABLESPACE pgdata_ihfs IS 'IHFS Database tablespace';
 

@@ -87,19 +87,12 @@ import com.raytheon.uf.viz.core.rsc.LoadProperties;
 import com.raytheon.uf.viz.core.rsc.ResourceList;
 import com.raytheon.uf.viz.core.rsc.ResourceList.RemoveListener;
 import com.raytheon.viz.hydrocommon.util.MPEColors;
-<<<<<<< HEAD
-import com.raytheon.viz.hydrocommon.whfslib.colorthreshold.GetColorValues;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.viz.hydrocommon.whfslib.colorthreshold.NamedColorUseSet;
 import com.raytheon.viz.mpe.MPECommandConstants;
 import com.raytheon.viz.mpe.MPEDateFormatter;
 import com.raytheon.viz.mpe.core.MPEDataManager;
 import com.raytheon.viz.mpe.core.MPEDataManager.MPERadarLoc;
-<<<<<<< HEAD
-=======
 import com.raytheon.viz.mpe.ui.colors.MPEGetColorValues;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.viz.mpe.ui.dialogs.BadGagesDlg;
 import com.raytheon.viz.mpe.ui.dialogs.MultiHourPrecipAccDialog;
 import com.raytheon.viz.mpe.ui.dialogs.QcFreezeOptionsDialog;
@@ -162,10 +155,7 @@ import com.raytheon.viz.ui.editor.IMultiPaneEditor;
  *                                      make a new instance when opened again)
  * Jan 28, 2019  7131      tgurney      setDisplayedResource() fix casting error
  * Jan 29, 2019  7131      tgurney      reloadDqc() fix copy/paste mistake
-<<<<<<< HEAD
-=======
  * Feb 3, 2022   22005     jrohwein     Now uses MPEColorManager instead of ColorManager
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -1090,11 +1080,7 @@ public class MPEDisplayManager {
 
         DataMappingPreferences dm = new DataMappingPreferences();
 
-<<<<<<< HEAD
-        Colorvalue[] colorSet = GetColorValues
-=======
         Colorvalue[] colorSet = MPEGetColorValues
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 .get_colorvalues(
                         LocalizationManager
                                 .getContextName(LocalizationLevel.USER),

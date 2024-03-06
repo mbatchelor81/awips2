@@ -47,32 +47,6 @@
    </extension>
    <extension
 		point="org.eclipse.ui.menus">
-<<<<<<< HEAD
-=======
-		<menuContribution
-			locationURI="toolbar:org.eclipse.ui.main.toolbar?after=d2d-3">
-			<toolbar
-				id="plugins">
-				<command
-					commandId="com.raytheon.viz.warngen.gui.WarngenAction"
-					icon="icons/warngen.gif"
-					label="Warngen">
-					<visibleWhen>
-					    <and>
-							<reference
-								definitionId="com.raytheon.uf.viz.d2d.ui.inD2DActionSet">
-							</reference>
-							<test
-	        					args="WFO"
-	        					forcePluginActivation="true"
-	        					property="com.raytheon.viz.warngen.site.SiteMode">
-	                      	</test>
-                       </and>
-					</visibleWhen>
-				</command>
-			</toolbar>
-		</menuContribution>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 		<menuContribution locationURI="menu:tools?after=tools.W">
 			<command
 				commandId="com.raytheon.viz.warngen.gui.WarngenAction"

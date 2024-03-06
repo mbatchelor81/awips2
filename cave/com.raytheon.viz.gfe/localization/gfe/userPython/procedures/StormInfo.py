@@ -3,60 +3,14 @@
 # support, and with no warranty, express or implied, as to its usefulness for
 # any purpose.
 #
-<<<<<<< HEAD
-# StormInfo - Version 4.0
-#
-# Authors: Matt Belk (BOX), Shannon White (OCWWS), Tom LeFebvre (GSD), Pablo Santos (MFL)
-=======
 # StormInfo - Version 4.1
 #
 # Authors: Matt Belk (BOX), Shannon White (OCWWS), Tom LeFebvre (GSL), Pablo Santos (MFL)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 # ----------------------------------------------------------------------------
 #
 # SOFTWARE HISTORY
 #
-<<<<<<< HEAD
-# Date         Ticket#    Engineer    Description
-# ------------ ---------- ----------- ------------------------------------------
-# Sep 13, 2016                        Adjustments from Hermine to add
-#                                     Post-Tropical stormType.
-# Sep 19, 2016 19293      randerso    Initial baseline check in
-# Aug  5, 2019            TLef        Modified to Support Wind Recommender as well
-# Apr 22, 2020            tlefebvre   Old JSON files are now purged when older than
-#                                     a day. JSON file written to all active sites
-#                                     to keep them consistent.
-# May  1, 2020  22033     tlefebvre   Added code to support CPHC forecasts
-# May  5  2020  22033     tlefebvre   Added WP bins to bin list.
-# May  7  2020  22033     tlefebvre   Fixed bug that failed to update stormName when
-#                                     upgrading to named storm.
-# May 11  2020  22033     tlefebvre   Added code to check stormID to ensure no
-#                                     duplcates.
-# May 12  2020  22033     tlefebvre   Added dialog to ask if storm number should be
-#                                     reused.
-# May 13  2020  22033     tlefebvre   Added method to save JSON file to text product
-#                                     so WFOs get the information. Plus other tweaks.
-# May 13  2020  22033     tlefebvre   Active storms limited to those in the local basin.
-# May 14  2020  22033     tlefebvre   Modified to use WWUtil ***Sites methods.
-# May 15  2020  22033     tlefebvre   Fixed issue with Numbered storm names not
-#                                     appearing. Third try.
-# May 18  2020  22033     tlefebvre   Filtered stormNames by siteID.
-# May 19  2020  22033     tlefebvre   Fixed storm filtering bug.
-# May 21  2020  22033     tlefebvre   Addressed code review comments.
-# May 27  2020  22033     tlefebvre   Added StormID to existing storm GUI.
-# May 28  2020  22033     tlefebvre   Addressed code review comment.
-# May 28  2020  22033     tlefebvre   Added stormID to stormName label
-# May 29  2020  22033     tlefebvre   Refactored makeStormID into WindWWUtils.
-# May 30  2020  22033     tlefebvre   Fixed bug in filtering active storms.
-#
-########################################################################
-
-##
-# This is an absolute override file, indicating that a higher priority version
-# of the file will completely replace a lower priority version of the file.
-##
-=======
 # Date          Ticket#  Engineer  Description
 # ------------- -------- --------- --------------------------------------------
 # Sep 13, 2016                     Adjustments from Hermine to add
@@ -122,7 +76,6 @@
 # This is an absolute override file, indicating that a higher priority version
 # of the file will completely replace a lower priority version of the file.
 # #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import ProcessVariableList
 import StormNames
 import TropicalUtility
@@ -132,13 +85,6 @@ import os
 
 MenuItems = ["None"]
 
-<<<<<<< HEAD
-class Procedure (TropicalUtility.TropicalUtility):
-
-    def __init__(self, dbss):
-        TropicalUtility.TropicalUtility.__init__(self, dbss)
-        self._WindWWUtils = WindWWUtils.WindWWUtils(self._dbss)
-=======
 single_words = ['zero', 'one', 'two', 'three', 'four',
                  'five', 'six', 'seven', 'eight', 'nine',
                  'ten', 'eleven', 'twelve', 'thirteen', 'fourteen',
@@ -155,7 +101,6 @@ class Procedure (WindWWUtils.WindWWUtils):
     def __init__(self, dbss):
         WindWWUtils.WindWWUtils.__init__(self, dbss)
         self._path = self.getDataFilePath()
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def removeOldJSONFiles(self, stormList):
         """
@@ -185,27 +130,6 @@ class Procedure (WindWWUtils.WindWWUtils):
                                                LocalizationSupport.SITE, siteID, fileName)
 
         return stormList
-<<<<<<< HEAD
-    
-    def getPILList(self, siteID):
-        """
-        Returns the list of PILs or Bins based on the site ID.
-        Currently active storms are removed as they are in use.
-        """ 
-        pilList = []
-        if siteID in self._WindWWUtils.NHCSites():
-            pilList = self._basinBins["Atlantic"] + self._basinBins["Eastern Pacific"]
-            return pilList
-        elif siteID in self._WindWWUtils.HFOSites():
-            pilList = self._basinBins["Central Pacific"] + self._basinBins["Western Pacific"]
-            return pilList
-        elif siteID in self._WindWWUtils.GUMSites():
-            pilList = self._basinBins["Western Pacific"]
-            return pilList
-        else:
-            self.statusBarMsg("This tool is not configured for " + siteID, "S")
-            return []
-=======
 
     def getPILList(self, siteID):
         """
@@ -219,7 +143,6 @@ class Procedure (WindWWUtils.WindWWUtils):
         for pils in self.basinBins(basinList):
             pilList += pils
         return pilList
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def makeStormList(self, basinDict):
         """
@@ -236,11 +159,7 @@ class Procedure (WindWWUtils.WindWWUtils):
         storm. Only works when there are activeStorms.
         """
         # If no active storms we don't know where to start
-<<<<<<< HEAD
-        # so just return the raw list.    
-=======
         # so just return the raw list.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if not self._activeStormNames:
             return rawStormList
 
@@ -259,27 +178,6 @@ class Procedure (WindWWUtils.WindWWUtils):
         Fetches the stormName list based on the siteID and in the case
         of NHC the year, as they rotate stormName lists each year.
         """
-<<<<<<< HEAD
-        stormList = []
-        if siteID in self._WindWWUtils.NHCSites():
-            basinList = ["Atlantic", "Eastern Pacific"]
-            for basin in basinList:
-                listNum = currentYear % len(StormNames.NameDict[basin])
-                stormList += StormNames.NameDict[basin][listNum]
-            return stormList
-        elif siteID in self._WindWWUtils.HFOSites():
-            basinDict = StormNames.NameDict["Central Pacific"]
-            stormList = self.makeStormList(basinDict)
-            return stormList
-        elif siteID in self._WindWWUtils.GUMSites():
-            basinDict = StormNames.NameDict["Western Pacific"]
-            stormList = self.makeStormList(basinDict)
-            return stormList
-        else:
-            self.statusBarMsg("This tool is not configured for " + siteID, "S")
-
-        return []
-=======
         basinList = self.forecastBasins(siteID)
         if not basinList:
             self.statusBarMsg(f"This tool is not configured for {siteID}", "S")
@@ -298,7 +196,6 @@ class Procedure (WindWWUtils.WindWWUtils):
                 basinStorms = self.makeStormList(basinDict)
             stormList += basinStorms
         return stormList
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def checkGUISelections(self, varDict, bogusStormName, existingStormLabel,
                                            newStormLabel):
@@ -337,19 +234,6 @@ class Procedure (WindWWUtils.WindWWUtils):
 
         return stormName, message
 
-<<<<<<< HEAD
-    def askAreYouSure(self, stormNumber):
-        """
-        Pops a dialog that asks if the user wants to specify a used stormID.
-        Returns True if they wish to continue. 
-        """
-        variableList = []
-        question = "Are you sure you want to reuse this storm number?"
-        variableList.append((question, "No", "radio", ["Yes", "No"]))
-        varDict = {}
-        processVarList = ProcessVariableList.ProcessVariableList(
-            '"' + str(stormNumber) + '"' + ' is a previously used storm number',
-=======
     def askAreYouSure(self, stormNumber, pil):
         """
         Pops a dialog that asks if the user wants to specify a used stormID.
@@ -367,7 +251,6 @@ class Procedure (WindWWUtils.WindWWUtils):
         varDict = {}
         processVarList = ProcessVariableList.ProcessVariableList(
             f'"{stormNumber}" is a previously used storm number',
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             variableList, varDict)
         status = processVarList.status()
         if status.upper() != "OK":
@@ -378,36 +261,6 @@ class Procedure (WindWWUtils.WindWWUtils):
 
         return False
 
-<<<<<<< HEAD
-    def saveJSONFileToTextProduct(self, bulletin):
-        """
-        Runs a script that save the specified JSON file to a text product.
-        Then it is automatically sent to the WFOs.  
-        """
-        mode = " operational"
-        if self.gfeOperatingMode() == "PRACTICE":
-            mode = " practice"               
-        execStr = "/localapps/runtime/RecommendWindWatchWarning/nhc_pushJsonFile.sh MIAJSN" + bulletin + mode
-        os.system(execStr)
-        return
-    
-    def filterStormList(self, stormList, siteID, currentYear):
-        """
-        Filters storm list by looking at valid stormNames for this siteID.
-        """
-        basinList = []
-        if siteID in self._WindWWUtils.NHCSites():
-            basinList = ["AT", "EP"]
-        elif siteID in self._WindWWUtils.HFOSites():
-            basinList = ["CP"]
-        elif siteID in self._WindWWUtils.GUMSites():
-            basinList = ["WP"]
-
-        filteredStormList = [storm for storm in stormList if storm["pil"][:2] in basinList]
-        
-        return filteredStormList
-
-=======
     def saveJSONFileToTextProduct(self, bulletin, siteID):
         """
         Runs a script that save the specified JSON file to a text product.
@@ -477,32 +330,11 @@ class Procedure (WindWWUtils.WindWWUtils):
                 return s in single_words or s in tens_multiples
         return False
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def execute(self):
         #  Get the current UTC year - two digits only
         curYear = self._gmtime().timetuple().tm_year % 100
         siteID = self.getSiteID()
         # Get list of available storms
-<<<<<<< HEAD
-        stormList = self.extractStormInfo(filterATOnly=False)
-        # Purge old JSON files
-        stormList = self.removeOldJSONFiles(stormList)
-
-        stormList = self.filterStormList(stormList, siteID, curYear)
-
-        # Get info on what storm this is
-        bogusStormName = "ZYXWWXYZ" # Define a bogus storm so none will be defaulted
-
-        Numbers = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight",
-                   "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen",
-                   "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty",
-                   "Twenty-One", "Twenty-Two", "Twenty-Three", "Twenty-Four", "Twenty-Five"]
-
-        stormNameList = self.getStormNameList(siteID, curYear)
-        
-        self._activeStormNames = []
-        for storm in stormList:
-=======
         stormList = list(self.fetchStormInfo().values())
         # Purge old JSON files
         stormList = self.removeOldJSONFiles(stormList)
@@ -519,7 +351,6 @@ class Procedure (WindWWUtils.WindWWUtils):
             if storm.get("stormID", None) is None:
                 self.statusBarMsg("StormID not found in stormInfo.", "S")
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             self._activeStormNames.append(storm["stormName"] + ":" + storm["stormID"])
         self._activeStormNames.sort()
 
@@ -528,11 +359,7 @@ class Procedure (WindWWUtils.WindWWUtils):
         # Ensure "None" is on top
         if "None" in stormNameList:
             stormNameList.remove("None")
-<<<<<<< HEAD
-            stormNameList.insert(0, "None")    
-=======
             stormNameList.insert(0, "None")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         variableList = []
         existingStormLabel = "   Select an \nExisting Storm\n"
@@ -557,19 +384,6 @@ class Procedure (WindWWUtils.WindWWUtils):
         if status.upper() != "OK":
             self.cancel()
 
-<<<<<<< HEAD
-        # Validate the GUI selections 
-        stormName, response = self.checkGUISelections(varDict, bogusStormName, 
-                                existingStormLabel, newStormLabel)
-
-        if response is not "":
-            self.statusBarMsg("Please select ONE and ONLY one storm.", "S")
-            return
-        
-        if ":" in stormName:
-            stormName = stormName[:stormName.index(":")]
-        self._basinBins = self._WindWWUtils._basinBins
-=======
         # Validate the GUI selections
         stormName, response = self.checkGUISelections(varDict, bogusStormName,
                                 existingStormLabel, newStormLabel)
@@ -580,33 +394,20 @@ class Procedure (WindWWUtils.WindWWUtils):
 
         if ":" in stormName:
             stormName = stormName[:stormName.index(":")]
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # Build the Variable Lists dynamically based on the chosen storm
         # If New, make default GUI
         newStorm = False
-<<<<<<< HEAD
-        if stormName in stormNameList: # New storm
-            newStorm = True
-            pilList = self.getPILList(siteID)
-=======
         pilList = self.getPILList(siteID)
         if stormName in stormNameList:  # New storm
             newStorm = True
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             variableList = []
             variableList.append(("AWIPS bin number", "", "radio", pilList))
             variableList.append(("Storm Type", "Tropical Storm", "radio",
                                  ["Potential Tropical Cyclone", "Subtropical Depression", "Subtropical Storm",
-<<<<<<< HEAD
-                                  "Tropical Depression", "Tropical Storm", "Hurricane", "Post-Tropical Cyclone"]))
-            variableList.append(("Other Storm Name (e.g. Alpha but NOT Three)", "", "alphaNumeric"))
-            variableList.append(("Storm Number", 1, "scale", [1, 25], 1))
-=======
                                   "Tropical Depression", "Tropical Storm", "Hurricane", "Post-Tropical Cyclone", "Remnants of"]))
             variableList.append(("Other Storm Name (e.g. Alpha but NOT Three)", "", "alphaNumeric"))
             variableList.append(("Storm Number", 1, "scale", [1, self.maxStorms()], 1))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             variableList.append(("Advisory Type" , "Routine", "radio",
                                  ["Routine", "Special", "Intermediate"]))
             variableList.append(("Advisory Number" , "", "alphaNumeric"))
@@ -619,24 +420,15 @@ class Procedure (WindWWUtils.WindWWUtils):
                     stormType = sDict["stormType"]
                     stormNum = sDict["stormNumber"]
                     advisoryType = sDict["advisoryType"]
-<<<<<<< HEAD
-                    advisoryNum = sDict["advisoryNumber"]            
-=======
                     advisoryNum = sDict["advisoryNumber"]
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     stormID = sDict["stormID"]
 
             variableList = []
             variableList.append(("AWIPS bin number", PIL, "radio", [PIL]))
             variableList.append(("Storm Type", stormType, "radio",
                                  ["Potential Tropical Cyclone", "Subtropical Depression", "Subtropical Storm",
-<<<<<<< HEAD
-                                  "Tropical Depression", "Tropical Storm", "Hurricane", "Post-Tropical Cyclone"]))
-            if stormName in Numbers:
-=======
                                   "Tropical Depression", "Tropical Storm", "Hurricane", "Post-Tropical Cyclone", "Remnants of"]))
             if self.is_numeric_words(stormName, case_check=str.istitle):
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 variableList.append(("Storm Name", "None", "radio", stormNameList))
             elif stormName not in stormNameList:
                 variableList.append(("Other Storm Name (e.g. Alpha but NOT Three)", stormName, "alphaNumeric"))
@@ -671,23 +463,6 @@ class Procedure (WindWWUtils.WindWWUtils):
 
         # QC the storm number but only for NHC
         stormNumber = int(varDict["Storm Number"])
-<<<<<<< HEAD
-        if siteID in self._WindWWUtils.NHCSites():
-            try:
-                pilModNumber = int(pil[2:])
-                if pilModNumber == 5:
-                    pilModNumber = 0
-            except:
-                self.statusBarMsg("You did not provide a correct bin. Please rerun StormInfo.", "U")
-                return
-    
-            if stormNumber % 5 != pilModNumber:
-                self.statusBarMsg("The chosen storm number is not correct for chosen bin. Please rerun StormInfo.", "S")
-                return
-
-        if stormName == "None":
-            stormName = Numbers[int(stormNumber)-1]
-=======
         # Special rules for "AT" storms
         if "AT" in pil:
             divisor = len(self._basinBins["Atlantic"])
@@ -702,7 +477,6 @@ class Procedure (WindWWUtils.WindWWUtils):
 
         if stormName == "None":
             stormName = self.convert_to_words(int(stormNumber), case=str.title)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         advisoryType = varDict["Advisory Type"].strip()
 
@@ -718,25 +492,11 @@ class Procedure (WindWWUtils.WindWWUtils):
         if advisoryType == "Intermediate":
             advisoryNumber += "A"
 
-<<<<<<< HEAD
-        stormID = ""
-=======
         stormID = self.makeStormID(pil, stormNumber)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if not newStorm:
             if advisoryNumber == advisoryNum:
                 self.statusBarMsg("You did not increment the advisory number. Make sure that is what you want. Proceeded without changing Adv number", "A")
         else:  # It's a new storm. Save the stormID in the history
-<<<<<<< HEAD
-            stormID = self._WindWWUtils.makeStormID(pil, stormNumber)
-            stormIDHistory = self._WindWWUtils.stormIDHistory()
-            # Check to see if the stormNumber has been used before for this basin.
-            if stormID in stormIDHistory:
-                if not self.askAreYouSure(stormNumber):
-                    return
-
-            self._WindWWUtils.updateStormIDHistory(stormID)
-=======
             stormIDHistory = self.stormIDHistory()
             # Check to see if the stormNumber has been used before for this basin.
             if stormID in stormIDHistory:
@@ -744,7 +504,6 @@ class Procedure (WindWWUtils.WindWWUtils):
                     return
 
             self.updateStormIDHistory(stormID)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         #  Open the file to store all the info for this particular storm
         stormDict = {}
@@ -761,18 +520,6 @@ class Procedure (WindWWUtils.WindWWUtils):
         stormDict["advisoryType"] = advisoryType
         stormDict["advisoryNumber"] = advisoryNumber
         stormDict["pil"] = pil
-<<<<<<< HEAD
-        if newStorm:
-            stormDict["stormID"] = stormID
-
-        #  Save the info for this storm
-        self._saveAdvisory(pil, stormDict)
-
-        self.saveJSONFileToTextProduct(pil)
-        
-        if siteID not in self._WindWWUtils.NHCSites():
-            self.statusBarMsg(pil + " successfully saved.", "R")
-=======
         stormDict["stormID"] = stormID
         # Get the time and round to the nearest hour
         hour = 3600
@@ -786,4 +533,3 @@ class Procedure (WindWWUtils.WindWWUtils):
 
         if siteID not in self.NHCSites():
             self.statusBarMsg(f"{pil} successfully saved.", "R")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

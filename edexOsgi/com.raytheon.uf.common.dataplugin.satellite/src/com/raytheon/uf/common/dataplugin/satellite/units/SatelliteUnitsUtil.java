@@ -23,11 +23,7 @@ import java.text.ParsePosition;
 import java.util.Map;
 
 import javax.measure.Unit;
-<<<<<<< HEAD
-import javax.measure.format.ParserException;
-=======
 import javax.measure.format.MeasurementParseException;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.uf.common.dataplugin.satellite.SatelliteConstants;
 import com.raytheon.uf.common.dataplugin.satellite.SatelliteRecord;
@@ -37,13 +33,8 @@ import com.raytheon.uf.common.datastorage.records.IDataRecord;
 import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
 
-<<<<<<< HEAD
-import tec.uom.se.AbstractUnit;
-import tec.uom.se.format.SimpleUnitFormat;
-=======
 import tech.units.indriya.AbstractUnit;
 import tech.units.indriya.format.SimpleUnitFormat;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Utility class for dealing with satellite record units.
@@ -84,11 +75,7 @@ public class SatelliteUnitsUtil {
                         .getInstance(SimpleUnitFormat.Flavor.ASCII)
                         .parseProductUnit(record.getUnits(),
                                 new ParsePosition(0));
-<<<<<<< HEAD
-            } catch (ParserException e) {
-=======
             } catch (MeasurementParseException e) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 statusHandler.warn(
                         "Unable to parse satellite units: " + record.getUnits(),
                         e);

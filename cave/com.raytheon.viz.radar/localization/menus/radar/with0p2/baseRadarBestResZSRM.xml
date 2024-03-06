@@ -27,13 +27,8 @@
         <substitute key="icao" value="${icao}" />
         <substitute key="product1" value="153" />
         <substitute key="product2" value="94" />
-<<<<<<< HEAD
-        <substitute key="product3" value="19" />
-        <substitute key="product4" value="20" />
-=======
         <substitute key="product3" value="" />
         <substitute key="product4" value="" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="mode1" value="" />
         <substitute key="product5" value="154" />
         <substitute key="product6" value="99" />
@@ -48,13 +43,8 @@
         <substitute key="icao" value="${icao}" />
         <substitute key="product1" value="153" />
         <substitute key="product2" value="94" />
-<<<<<<< HEAD
-        <substitute key="product3" value="19" />
-        <substitute key="product4" value="20" />
-=======
         <substitute key="product3" value="" />
         <substitute key="product4" value="" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="mode1" value="" />
         <substitute key="product5" value="154" />
         <substitute key="product6" value="99" />
@@ -69,13 +59,8 @@
         <substitute key="icao" value="${icao}" />
         <substitute key="product1" value="153" />
         <substitute key="product2" value="94" />
-<<<<<<< HEAD
-        <substitute key="product3" value="19" />
-        <substitute key="product4" value="20" />
-=======
         <substitute key="product3" value="" />
         <substitute key="product4" value="" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="mode1" value="" />
         <substitute key="product5" value="154" />
         <substitute key="product6" value="99" />
@@ -90,13 +75,8 @@
         <substitute key="icao" value="${icao}" />
         <substitute key="product1" value="153" />
         <substitute key="product2" value="94" />
-<<<<<<< HEAD
-        <substitute key="product3" value="19" />
-        <substitute key="product4" value="20" />
-=======
         <substitute key="product3" value="" />
         <substitute key="product4" value="" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="mode1" value="" />
         <substitute key="product5" value="154" />
         <substitute key="product6" value="99" />
@@ -112,13 +92,8 @@
             <substitute key="icao" value="${icao}" />
             <substitute key="product1" value="153" />
             <substitute key="product2" value="94" />
-<<<<<<< HEAD
-            <substitute key="product3" value="19" />
-            <substitute key="product4" value="20" />
-=======
             <substitute key="product3" value="" />
             <substitute key="product4" value="" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="mode1" value="" />
             <substitute key="product5" value="154" />
             <substitute key="product6" value="99" />
@@ -133,13 +108,8 @@
             <substitute key="icao" value="${icao}" />
             <substitute key="product1" value="153" />
             <substitute key="product2" value="94" />
-<<<<<<< HEAD
-            <substitute key="product3" value="19" />
-            <substitute key="product4" value="20" />
-=======
             <substitute key="product3" value="" />
             <substitute key="product4" value="" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="mode1" value="" />
             <substitute key="product5" value="154" />
             <substitute key="product6" value="99" />
@@ -154,13 +124,8 @@
             <substitute key="icao" value="${icao}" />
             <substitute key="product1" value="153" />
             <substitute key="product2" value="94" />
-<<<<<<< HEAD
-            <substitute key="product3" value="19" />
-            <substitute key="product4" value="20" />
-=======
             <substitute key="product3" value="" />
             <substitute key="product4" value="" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="mode1" value="" />
             <substitute key="product5" value="154" />
             <substitute key="product6" value="99" />
@@ -175,13 +140,8 @@
             <substitute key="icao" value="${icao}" />
             <substitute key="product1" value="153" />
             <substitute key="product2" value="94" />
-<<<<<<< HEAD
-            <substitute key="product3" value="19" />
-            <substitute key="product4" value="20" />
-=======
             <substitute key="product3" value="" />
             <substitute key="product4" value="" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="mode1" value="" />
             <substitute key="product5" value="154" />
             <substitute key="product6" value="99" />
@@ -196,13 +156,8 @@
             <substitute key="icao" value="${icao}" />
             <substitute key="product1" value="153" />
             <substitute key="product2" value="94" />
-<<<<<<< HEAD
-            <substitute key="product3" value="19" />
-            <substitute key="product4" value="20" />
-=======
             <substitute key="product3" value="" />
             <substitute key="product4" value="" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="mode1" value="" />
             <substitute key="product5" value="154" />
             <substitute key="product6" value="99" />
@@ -217,13 +172,8 @@
             <substitute key="icao" value="${icao}" />
             <substitute key="product1" value="153" />
             <substitute key="product2" value="94" />
-<<<<<<< HEAD
-            <substitute key="product3" value="19" />
-            <substitute key="product4" value="20" />
-=======
             <substitute key="product3" value="" />
             <substitute key="product4" value="" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="mode1" value="" />
             <substitute key="product5" value="154" />
             <substitute key="product6" value="99" />
@@ -238,13 +188,8 @@
             <substitute key="icao" value="${icao}" />
             <substitute key="product1" value="153" />
             <substitute key="product2" value="94" />
-<<<<<<< HEAD
-            <substitute key="product3" value="19" />
-            <substitute key="product4" value="20" />
-=======
             <substitute key="product3" value="" />
             <substitute key="product4" value="" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="mode1" value="" />
             <substitute key="product5" value="154" />
             <substitute key="product6" value="99" />
@@ -259,13 +204,8 @@
             <substitute key="icao" value="${icao}" />
             <substitute key="product1" value="153" />
             <substitute key="product2" value="94" />
-<<<<<<< HEAD
-            <substitute key="product3" value="19" />
-            <substitute key="product4" value="20" />
-=======
             <substitute key="product3" value="" />
             <substitute key="product4" value="" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="mode1" value="" />
             <substitute key="product5" value="154" />
             <substitute key="product6" value="99" />
@@ -280,13 +220,8 @@
             <substitute key="icao" value="${icao}" />
             <substitute key="product1" value="153" />
             <substitute key="product2" value="94" />
-<<<<<<< HEAD
-            <substitute key="product3" value="19" />
-            <substitute key="product4" value="20" />
-=======
             <substitute key="product3" value="" />
             <substitute key="product4" value="" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="mode1" value="" />
             <substitute key="product5" value="154" />
             <substitute key="product6" value="99" />
@@ -301,13 +236,8 @@
             <substitute key="icao" value="${icao}" />
             <substitute key="product1" value="153" />
             <substitute key="product2" value="94" />
-<<<<<<< HEAD
-            <substitute key="product3" value="19" />
-            <substitute key="product4" value="20" />
-=======
             <substitute key="product3" value="" />
             <substitute key="product4" value="" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="mode1" value="" />
             <substitute key="product5" value="154" />
             <substitute key="product6" value="99" />
@@ -322,13 +252,8 @@
             <substitute key="icao" value="${icao}" />
             <substitute key="product1" value="153" />
             <substitute key="product2" value="94" />
-<<<<<<< HEAD
-            <substitute key="product3" value="19" />
-            <substitute key="product4" value="20" />
-=======
             <substitute key="product3" value="" />
             <substitute key="product4" value="" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="mode1" value="" />
             <substitute key="product5" value="154" />
             <substitute key="product6" value="99" />
@@ -343,13 +268,8 @@
             <substitute key="icao" value="${icao}" />
             <substitute key="product1" value="153" />
             <substitute key="product2" value="94" />
-<<<<<<< HEAD
-            <substitute key="product3" value="19" />
-            <substitute key="product4" value="20" />
-=======
             <substitute key="product3" value="" />
             <substitute key="product4" value="" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="mode1" value="" />
             <substitute key="product5" value="154" />
             <substitute key="product6" value="99" />
@@ -364,13 +284,8 @@
             <substitute key="icao" value="${icao}" />
             <substitute key="product1" value="153" />
             <substitute key="product2" value="94" />
-<<<<<<< HEAD
-            <substitute key="product3" value="19" />
-            <substitute key="product4" value="20" />
-=======
             <substitute key="product3" value="" />
             <substitute key="product4" value="" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="mode1" value="" />
             <substitute key="product5" value="154" />
             <substitute key="product6" value="99" />
@@ -385,13 +300,8 @@
             <substitute key="icao" value="${icao}" />
             <substitute key="product1" value="153" />
             <substitute key="product2" value="94" />
-<<<<<<< HEAD
-            <substitute key="product3" value="19" />
-            <substitute key="product4" value="20" />
-=======
             <substitute key="product3" value="" />
             <substitute key="product4" value="" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="mode1" value="" />
             <substitute key="product5" value="154" />
             <substitute key="product6" value="99" />

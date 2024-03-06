@@ -24,10 +24,6 @@ import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-<<<<<<< HEAD
-=======
-import javax.persistence.Index;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -38,11 +34,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-<<<<<<< HEAD
 import org.hibernate.annotations.Index;
-=======
-import org.locationtech.jts.geom.Geometry;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.uf.common.dataplugin.PluginDataObject;
 import com.raytheon.uf.common.dataplugin.annotations.DataURI;
@@ -51,23 +43,14 @@ import com.raytheon.uf.common.geospatial.ISpatialEnabled;
 import com.raytheon.uf.common.pointdata.spatial.AircraftObsLocation;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerialize;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
-<<<<<<< HEAD
 import org.locationtech.jts.geom.Geometry;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Record object for Aircraft Communications Addressing and Reporting System
  * data.
-<<<<<<< HEAD
  * 
  * <pre>
  * 
-=======
- *
- * <pre>
- *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * SOFTWARE HISTORY
  * Date         Ticket#  Engineer    Description
  * ------------ -------- ----------- --------------------------
@@ -85,7 +68,6 @@ import org.locationtech.jts.geom.Geometry;
  * Jun 11, 2014  2061    bsteffen    Remove IDecoderGettable, drop datauri
  * Jul 22, 2014  3392    nabowle     Change Double fields to Float.
  * Jul 16, 2015  4360    rferrel     tailNumber no longer nullable and unique constraints named.
-<<<<<<< HEAD
  * 
  * 
  * </pre>
@@ -107,28 +89,6 @@ import org.locationtech.jts.geom.Geometry;
 @DynamicSerialize
 public class ACARSRecord extends PluginDataObject implements ISpatialEnabled,
         Comparable<ACARSRecord> {
-=======
- * Aug 08, 2022  8892    tjensen     Update indexes for Hibernate 5
- *
- * </pre>
- *
- * @author jkorman
- */
-@Entity
-@SequenceGenerator(initialValue = 1, name = PluginDataObject.ID_GEN, sequenceName = "acarsseq")
-@Table(name = "acars", uniqueConstraints = {
-        @UniqueConstraint(name = "uk_acars_datauri_fields", columnNames = {
-                "refTime", "tailNumber", "flightLevel", "latitude",
-                "longitude" }) }, indexes = {
-                        @Index(name = "%TABLE%_refTimeIndex", columnList = "refTime"),
-                        @Index(name = "%TABLE%_stationIndex", columnList = "stationId") })
-
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.NONE)
-@DynamicSerialize
-public class ACARSRecord extends PluginDataObject
-        implements ISpatialEnabled, Comparable<ACARSRecord> {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private static final long serialVersionUID = 1L;
 
@@ -270,11 +230,7 @@ public class ACARSRecord extends PluginDataObject
     /**
      * Constructor for DataURI construction through base class. This is used by
      * the notification service.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param uri
      *            A data uri applicable to this class.
      */
@@ -336,11 +292,7 @@ public class ACARSRecord extends PluginDataObject
     }
 
     /**
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return
      */
     public AircraftObsLocation getLocation() {
@@ -348,11 +300,7 @@ public class ACARSRecord extends PluginDataObject
     }
 
     /**
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param location
      */
     public void setLocation(AircraftObsLocation location) {
@@ -361,11 +309,7 @@ public class ACARSRecord extends PluginDataObject
 
     /**
      * Get this observation's geometry.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry for this observation.
      */
     public Geometry getGeometry() {
@@ -374,11 +318,7 @@ public class ACARSRecord extends PluginDataObject
 
     /**
      * Get the geometry latitude.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry latitude.
      */
     public double getLatitude() {
@@ -387,11 +327,7 @@ public class ACARSRecord extends PluginDataObject
 
     /**
      * Get the geometry longitude.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry longitude.
      */
     public double getLongitude() {
@@ -400,11 +336,7 @@ public class ACARSRecord extends PluginDataObject
 
     /**
      * Get the elevation, in meters, of the observing platform or location.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The observation elevation, in meters.
      */
     public Boolean getLocationDefined() {
@@ -413,11 +345,7 @@ public class ACARSRecord extends PluginDataObject
 
     /**
      * Get the elevation, in meters, of the observing platform or location.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The observation elevation, in meters.
      */
     public Integer getFlightLevel() {
@@ -425,11 +353,7 @@ public class ACARSRecord extends PluginDataObject
     }
 
     /**
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return
      */
     public String getFlightNumber() {
@@ -438,11 +362,7 @@ public class ACARSRecord extends PluginDataObject
 
     /**
      * Get the receiving station.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return the receiver
      */
     public String getReceiver() {
@@ -451,11 +371,7 @@ public class ACARSRecord extends PluginDataObject
 
     /**
      * Set the receiving station.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param receiver
      *            the receiver to set
      */
@@ -674,11 +590,7 @@ public class ACARSRecord extends PluginDataObject
     }
 
     /**
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return the rollAngleQuality
      */
     public Integer getRollAngleQuality() {
@@ -686,11 +598,7 @@ public class ACARSRecord extends PluginDataObject
     }
 
     /**
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param rollAngleQuality
      *            the rollAngleQuality to set
      */
@@ -713,14 +621,11 @@ public class ACARSRecord extends PluginDataObject
         this.usedInSounding = usedInSounding;
     }
 
-<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
      * @see java.lang.Object#hashCode()
      */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -732,14 +637,11 @@ public class ACARSRecord extends PluginDataObject
         return result;
     }
 
-<<<<<<< HEAD
     /*
      * (non-Javadoc)
      * 
      * @see java.lang.Object#equals(java.lang.Object)
      */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -769,7 +671,6 @@ public class ACARSRecord extends PluginDataObject
         return true;
     }
 
-<<<<<<< HEAD
     /**
      *
      */
@@ -777,12 +678,6 @@ public class ACARSRecord extends PluginDataObject
     public int compareTo(ACARSRecord other) {
         int result = 0;
         if (this == other) {
-=======
-    @Override
-    public int compareTo(ACARSRecord other) {
-        int result = 0;
-        if (this.equals(other)) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             result = 0;
         } else {
             if (getTailNumber().equals(getTailNumber())) {

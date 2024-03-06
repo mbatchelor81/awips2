@@ -21,11 +21,7 @@
     <!-- 
         This is an absolute override file, indicating that a higher priority 
         version of the file will completely replace a lower priority version
-<<<<<<< HEAD
-        of the file. 
-=======
         of the file.         
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     -->
 <plotParameterDefinitions>
    <plugin>qc</plugin>
@@ -47,11 +43,8 @@
    <plotParameterDefinition displayName="pressChange3Hour ((mb*0.1)/s))" displayType="TEXT" format="%5.0f" param="pressChange3Hour" sampleValue="777" trim="2" unit="(mb*0.1)/s)" />
 
    <plotParameterDefinition displayName="wSp,WD (kts)" displayType="BARB" param="wSp,WD" sampleValue="0,1" unit="kts" />
-<<<<<<< HEAD
-=======
    <plotParameterDefinition displayName="wSp,WD (mph)" displayType="BARB" param="wSp,WD" sampleValue="0,1" unit="mph" />
    <plotParameterDefinition displayName="wSp,WD (m/s)" displayType="BARB" param="wSp,WD" sampleValue="0,1" unit="m/s" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    
    <plotParameterDefinition displayName="WD" displayType="ARROWUV" param="wSp,WD" sampleValue="0,1" unit="kts" />
 
@@ -59,19 +52,6 @@
 
    <plotParameterDefinition displayName="temperature (°F)" displayType="TEXT" format="%3.0f" param="temperature" sampleValue="75" unit="°F" />
 
-<<<<<<< HEAD
-   <plotParameterDefinition displayName="dewpoint (°F)" displayType="TEXT" format="%3.0f" param="dewpoint" sampleValue="59" unit="°F" />
-
-   <plotParameterDefinition displayName="seaLevelPressure (dPa)" displayType="TEXT" format="%5.0f" param="seaLevelPressure" sampleValue="018" trim="2" unit="dPa" />
-
-   <plotParameterDefinition displayName="windSpeed,windDir,windGust (kts)" displayType="BARB" param="windSpeed,windDir,windGust" sampleValue="0,1,2" unit="kts" />
-
-   <plotParameterDefinition displayName="windBarb" displayType="BARB" param="windSpeed,windDir" sampleValue="16,17" unit="kts" />
-
-   <plotParameterDefinition displayName="windDir" displayType="ARROWUV" param="windSpeed,windDir" sampleValue="16,17" unit="kts" />
-
-   <plotParameterDefinition displayName="windGust (kts)" displayType="TEXT" param="windGust" sampleValue="8" unit="kts" />
-=======
    <plotParameterDefinition displayName="temperature (°C)" displayType="TEXT" format="%3.0f" param="temperature" sampleValue="24" unit="°C" />
 
    <plotParameterDefinition displayName="dewpoint (°F)" displayType="TEXT" format="%3.0f" param="dewpoint" sampleValue="59" unit="°F" />
@@ -93,5 +73,4 @@
    <plotParameterDefinition displayName="windGust (kts)" displayType="TEXT" param="windGust" format="%02.0f" sampleValue="8" unit="kts" />
    <plotParameterDefinition displayName="windGust (mph)" displayType="TEXT" param="windGust" format="%02.0f" sampleValue="8" unit="mph" />
    <plotParameterDefinition displayName="windGust (m/s)" displayType="TEXT" param="windGust" format="%02.0f" sampleValue="8" unit="m/s" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 </plotParameterDefinitions>

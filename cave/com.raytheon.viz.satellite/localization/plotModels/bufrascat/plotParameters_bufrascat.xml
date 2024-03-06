@@ -21,25 +21,14 @@
     <!-- 
         This is an absolute override file, indicating that a higher priority 
         version of the file will completely replace a lower priority version
-<<<<<<< HEAD
-        of the file. 
-    -->
-=======
         of the file.       
     -->  
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 <plotParameterDefinitions>
 <plugin>bufrascat</plugin>
 
 <plotParameterDefinition displayName="validTime" displayType="TEXT" format="time" param="validTime" sampleValue="T" svgClass="text" symbol="Z" />
 
 <plotParameterDefinition displayName="satelliteID" displayType="TEXT" lookupTable="sat_type_lookup_ascat.txt" param="satelliteID" sampleValue="0" svgClass="text" />
-<<<<<<< HEAD
-
-<plotParameterDefinition displayName="windDir" displayType="TEXT" format="%3.0f" param="windDir" sampleValue="0" svgClass="text" symbol=" @" />
-
-<plotParameterDefinition displayName="windSpd (kts)" displayType="TEXT" format="%3.0f" param="windSpd" sampleValue="0" svgClass="text" symbol="  RAIN FLAG" unit="kts" />
-=======
  
 <plotParameterDefinition displayName="windDir" displayType="TEXT" format="%3.0f" param="windDir" sampleValue="0" svgClass="text" symbol=" @" />
 <plotParameterDefinition displayName="windDir (kts)" displayType="ARROWUV" param="windSpd,windDir" sampleValue="0,1" unit="kts" />
@@ -47,18 +36,12 @@
 <plotParameterDefinition displayName="windSpd (kts)" displayType="TEXT" format="%3.0f" param="windSpd" sampleValue="0" svgClass="text" symbol="  RAIN FLAG" unit="kts" />
 <plotParameterDefinition displayName="windSpd (mph)" displayType="TEXT" format="%3.0f" param="windSpd" sampleValue="0" svgClass="text" symbol="  RAIN FLAG" unit="mph" />
 <plotParameterDefinition displayName="windSpd (m/s)" displayType="TEXT" format="%3.0f" param="windSpd" sampleValue="0" svgClass="text" symbol="  RAIN FLAG" unit="m/s" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 <plotParameterDefinition displayName="probRain" displayType="TEXT" param="probRain" sampleValue="0" svgClass="text" />
 
 <plotParameterDefinition displayName="windSpd,windDir (kts)" displayType="BARB" param="windSpd,windDir" sampleValue="0,1" unit="kts" />
-<<<<<<< HEAD
-
-<plotParameterDefinition displayName="windDir" displayType="ARROWUV" param="windSpd,windDir" sampleValue="0,1" unit="kts" />
-=======
 <plotParameterDefinition displayName="windSpd,windDir (mph)" displayType="BARB" param="windSpd,windDir" sampleValue="0,1" unit="mph" />
 <plotParameterDefinition displayName="windSpd,windDir (m/s)" displayType="BARB" param="windSpd,windDir" sampleValue="0,1" unit="m/s" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 <plotParameterDefinition displayName="Marker" displayType="MARKER" param="Marker" sampleValue=" " svgClass="marker" />
 </plotParameterDefinitions>

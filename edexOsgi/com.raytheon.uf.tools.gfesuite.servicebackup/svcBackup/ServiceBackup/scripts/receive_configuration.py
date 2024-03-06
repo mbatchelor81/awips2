@@ -25,11 +25,7 @@ import os
 from dynamicserialize.dstypes.com.raytheon.uf.common.dataplugin.gfe.request import ProcessReceivedConfRequest
 from dynamicserialize.dstypes.com.raytheon.uf.common.message import WsId
 
-<<<<<<< HEAD
 from awips import ThriftClient
-=======
-from ufpy import ThriftClient
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 #
 # TODO: ADD DESCRIPTION

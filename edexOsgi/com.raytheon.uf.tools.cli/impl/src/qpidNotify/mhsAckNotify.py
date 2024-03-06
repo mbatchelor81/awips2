@@ -14,13 +14,10 @@
 # Jul 23, 2019  7724     mrichardson    Upgrade Qpid to Qpid Proton
 # Jul 07, 2020  7724     randerso       Rewrote to use BlockingConnection
 # Jul 07, 2020  8187     randerso       Added qpid connection_id
-<<<<<<< HEAD
-=======
 # Mar 08, 2021  7899     tbucher        Updated JMS password to use new decryption class
 # Apr 14, 2022  8677     tgurney        Remove unnecessary password retrieval code
 # Jun 28, 2023  2035875  dgilling       Add additional CA verification to fix SSL/TLS
 #                                       connections to QPID.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 ##############################################################################
 
@@ -63,29 +60,19 @@ class MhsAckConnection:
     def __init__(self, host, port=5672, ssl=None):
 
         pwuid = pwd.getpwuid(os.getuid())
-<<<<<<< HEAD
-        certdb = os.getenv("QPID_SSL_CERT_DB", os.path.join(pwuid.pw_dir, ".qpid"))
-        certname = os.getenv("QPID_SSL_CERT_NAME", "guest")
-        cert_password = os.getenv("QPID_SSL_CERT_PASSWORD", "password")
-=======
         
         certdb = os.getenv("QPID_SSL_CERT_DB", os.path.join(pwuid.pw_dir, ".qpid"))
         certname = os.getenv("QPID_SSL_CERT_NAME", "guest")
         
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         certfile = os.path.join(certdb, f"{certname}.crt")
         keyfile = os.path.join(certdb, f"{certname}.key")
 
         url = f"amqps://{host}:{port}"
         ADDRESS = "amq.topic/mhs.ackmgr"
         ssl_domain = proton.SSLDomain(mode=proton.SSLDomain.MODE_CLIENT)
-<<<<<<< HEAD
-        ssl_domain.set_credentials(certfile, keyfile, cert_password)
-=======
         ssl_domain.set_trusted_ca_db(os.path.join(certdb, "root.crt"))
         ssl_domain.set_peer_authentication(proton.SSLDomain.VERIFY_PEER)
         ssl_domain.set_credentials(certfile, keyfile, None)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         clientID = ":".join([
             socket.gethostname(),

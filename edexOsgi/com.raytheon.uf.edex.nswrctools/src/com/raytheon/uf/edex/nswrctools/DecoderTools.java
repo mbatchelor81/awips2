@@ -320,11 +320,7 @@ public class DecoderTools {
             List<Variable> variables, String attribute) {
         Variable dataVar = getVariable(variables, variableName);
 
-<<<<<<< HEAD
-        String unit = tec.uom.se.AbstractUnit.ONE.toString();
-=======
         String unit = tech.units.indriya.AbstractUnit.ONE.toString();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         if (dataVar != null) {
             Attribute attr = getAttribute(dataVar, attribute);

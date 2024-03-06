@@ -13,16 +13,12 @@ import java.util.ArrayList;
  * ------------ ---------- ----------- --------------------------
  * Mar 10, 2016 5411       randerso    Moved upper case conversion for QC checks into the 
  *                                      specific checks that need it.
-<<<<<<< HEAD
- * 
-=======
  * Dec 12, 2023 2036715    dhaines     Removed start marker check when end marker is
  *                                      present since "&&" can now appear in products 
  *                                      with no CTA section due to changes in DR 
  *                                      #2036278.
  * Jan 08, 2024 2036715    dhaines     Made same change as last time but for multi-
  *                                      segmented products.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  * 
  * @version 1.0
@@ -61,15 +57,6 @@ public class CtaMarkerCheck implements IQCCheck {
                 }
             }
 
-<<<<<<< HEAD
-            // if (startMarker.size() == 0 && endMarker.size() == 0) {
-            // errorMsg += "There are no instruction markers.\n";
-            // }
-            if ((startMarker.size() == 0) && (endMarker.size() != 0)) {
-                errorMsg += "There is no start marker.\n";
-            }
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if ((startMarker.size() != 0) && (endMarker.size() == 0)) {
                 errorMsg += "There is no end marker.\n";
             }
@@ -120,17 +107,6 @@ public class CtaMarkerCheck implements IQCCheck {
                     }
                 }
 
-<<<<<<< HEAD
-                // if (startMarker.size() == 0 && endMarker.size() == 0) {
-                // errorMsg += "There are no instruction marker in "
-                // + segmentString + ".\n";
-                // }
-                if ((startMarker.size() == 0) && (endMarker.size() != 0)) {
-                    errorMsg += "There is no start marker in " + segmentString
-                            + ".\n";
-                }
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if ((startMarker.size() != 0) && (endMarker.size() == 0)) {
                     errorMsg += "There is no end marker in " + segmentString
                             + ".\n";

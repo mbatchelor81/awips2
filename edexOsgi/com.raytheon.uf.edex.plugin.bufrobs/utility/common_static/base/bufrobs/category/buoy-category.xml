@@ -23,14 +23,8 @@
     -->
 <categories>
     <category code="1" description="Surface data — sea">
-<<<<<<< HEAD
-        <subcategory code="25" description="Buoy observation (BUOY)" reportType="1006"/>
-    </category>
-</categories>
-=======
         <subcategory code="0" description="Ship observations (SHIP)" reportType="1003"/>
         <subcategory code="25" description="Buoy observation (BUOY)" reportType="1006"/>
     </category>
 </categories>
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

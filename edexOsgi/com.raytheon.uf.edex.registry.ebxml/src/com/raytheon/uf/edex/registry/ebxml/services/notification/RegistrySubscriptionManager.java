@@ -26,15 +26,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import javax.xml.datatype.Duration;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-<<<<<<< HEAD
-import oasis.names.tc.ebxml.regrep.wsdl.registry.services.v4.MsgRegistryException;
-import oasis.names.tc.ebxml.regrep.wsdl.registry.services.v4.NotificationListener;
-import oasis.names.tc.ebxml.regrep.xsd.rim.v4.DateTimeValueType;
-import oasis.names.tc.ebxml.regrep.xsd.rim.v4.SlotType;
-import oasis.names.tc.ebxml.regrep.xsd.rim.v4.SubscriptionType;
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -42,10 +33,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-<<<<<<< HEAD
-import com.google.common.collect.Lists;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
 import com.raytheon.uf.common.time.util.TimeUtil;
@@ -55,14 +42,11 @@ import com.raytheon.uf.edex.registry.ebxml.exception.EbxmlRegistryException;
 import com.raytheon.uf.edex.registry.ebxml.services.IRegistrySubscriptionManager;
 import com.raytheon.uf.edex.registry.ebxml.util.EbxmlObjectUtil;
 
-<<<<<<< HEAD
-=======
 import oasis.names.tc.ebxml.regrep.wsdl.registry.services.v4.MsgRegistryException;
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.DateTimeValueType;
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.SlotType;
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.SubscriptionType;
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 /**
  * 
  * Class to manage registry replication subscriptions
@@ -90,24 +74,16 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.SubscriptionType;
  * 01/21/2014   2613        bphillip    Changed how last run time is updated for replication subscriptions
  * 2/4/2014     2769        bphillip    Removed flush and clear call
  * 2/13/2014    2769        bphillip    Removed caching of subscriptions
-<<<<<<< HEAD
-=======
  * 5/26/2020    8165        bsteffen    Remove notification.
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  * 
  * @author bphillip
  * @version 1
  */
 @Component
-<<<<<<< HEAD
-public class RegistrySubscriptionManager implements
-        IRegistrySubscriptionManager, ApplicationContextAware {
-=======
 public class RegistrySubscriptionManager
         implements IRegistrySubscriptionManager, ApplicationContextAware {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /** The logger instance */
     private static final IUFStatusHandler statusHandler = UFStatus
@@ -117,41 +93,6 @@ public class RegistrySubscriptionManager
     private AtomicBoolean running = new AtomicBoolean(false);
 
     /**
-<<<<<<< HEAD
-     * Associates a {@link SubscriptionType} with its
-     * {@link NotificationListenerWrapper} instances.
-     */
-    static final class SubscriptionNotificationListeners {
-        public final SubscriptionType subscription;
-
-        public final List<NotificationListenerWrapper> listeners;
-
-        private SubscriptionNotificationListeners(
-                SubscriptionType subscription,
-                List<NotificationListenerWrapper> listeners) {
-            this.subscription = subscription;
-            this.listeners = listeners;
-        }
-    }
-
-    /**
-     * Associates a {@link NotificationListener} with its address.
-     */
-    static final class NotificationListenerWrapper {
-        public final String address;
-
-        public final NotificationListener notificationListener;
-
-        private NotificationListenerWrapper(String address,
-                NotificationListener notificationListener) {
-            this.address = address;
-            this.notificationListener = notificationListener;
-        }
-    }
-
-    /**
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * If a subscription does not specify a notification interval, wait this
      * amount of milliseconds before processing the subscription again
      */
@@ -163,20 +104,9 @@ public class RegistrySubscriptionManager
     /** The XML endpointType tag */
     public static final String ENDPOINT_TAG = "endpointType";
 
-<<<<<<< HEAD
-    /** The notification manager */
-    private RegistryNotificationManager notificationManager;
-
     /** Data access object for subscription objects */
     private SubscriptionDao subscriptionDao;
 
-    private INotificationListenerFactory notificationListenerFactory;
-
-=======
-    /** Data access object for subscription objects */
-    private SubscriptionDao subscriptionDao;
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private ApplicationContext applicationContext;
 
     public RegistrySubscriptionManager() {
@@ -184,44 +114,6 @@ public class RegistrySubscriptionManager
     }
 
     /**
-<<<<<<< HEAD
-     * Get the notification listeners for a subscription.
-     * 
-     * @param subscription
-     *            the subscription
-     * @return the list of listeners
-     * @throws EbxmlRegistryException
-     *             on error
-     */
-    protected List<NotificationListenerWrapper> getNotificationListenersForSubscription(
-            final SubscriptionType subscription) throws EbxmlRegistryException {
-        try {
-            List<NotificationListenerWrapper> listeners = Lists.newArrayList();
-            // Get the list of destinations for the notifications
-            final List<NotificationDestination> destinations = EbxmlObjectUtil
-                    .getNotificationDestinations(subscription);
-            if (destinations.isEmpty()) {
-                statusHandler.warn("No destinations found for notification!");
-            } else {
-                for (NotificationDestination destination : destinations) {
-                    listeners
-                            .add(new NotificationListenerWrapper(
-                                    destination.getDestination(),
-                                    notificationListenerFactory
-                                            .getNotificationListenerForDestination(destination)));
-                }
-            }
-            return listeners;
-        } catch (Exception e) {
-            throw new EbxmlRegistryException(
-                    "Error extracting service addresses from subscription delivery info!",
-                    e);
-        }
-    }
-
-    /**
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * {@inheritDoc}
      */
     @Override
@@ -290,13 +182,8 @@ public class RegistrySubscriptionManager
     private void updateLastRunTime(SubscriptionType subscription, long time)
             throws EbxmlRegistryException {
         try {
-<<<<<<< HEAD
-            SlotType lastRunTimeSlot = subscription
-                    .getSlotByName(EbxmlObjectUtil.SUBSCRIPTION_LAST_RUN_TIME_SLOT_NAME);
-=======
             SlotType lastRunTimeSlot = subscription.getSlotByName(
                     EbxmlObjectUtil.SUBSCRIPTION_LAST_RUN_TIME_SLOT_NAME);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if (lastRunTimeSlot == null) {
                 lastRunTimeSlot = new SlotType(
                         EbxmlObjectUtil.SUBSCRIPTION_LAST_RUN_TIME_SLOT_NAME,
@@ -325,13 +212,8 @@ public class RegistrySubscriptionManager
      */
     private Calendar getLastRunTime(SubscriptionType subscription)
             throws EbxmlRegistryException {
-<<<<<<< HEAD
-        XMLGregorianCalendar lastRunTime = subscription
-                .getSlotValue(EbxmlObjectUtil.SUBSCRIPTION_LAST_RUN_TIME_SLOT_NAME);
-=======
         XMLGregorianCalendar lastRunTime = subscription.getSlotValue(
                 EbxmlObjectUtil.SUBSCRIPTION_LAST_RUN_TIME_SLOT_NAME);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if (lastRunTime == null) {
             updateLastRunTime(subscription, 0);
             lastRunTime = EbxmlObjectUtil.getTimeAsXMLGregorianCalendar(0);
@@ -353,21 +235,6 @@ public class RegistrySubscriptionManager
     public void processSubscription(final String subscriptionName) {
         try {
             XMLGregorianCalendar currentTime = EbxmlObjectUtil
-<<<<<<< HEAD
-                    .getTimeAsXMLGregorianCalendar(TimeUtil.currentTimeMillis());
-            SubscriptionType subscription = subscriptionDao
-                    .load(subscriptionName);
-            if (!subscriptionShouldRun(subscription)) {
-                statusHandler
-                        .info("Skipping subscription ["
-                                + subscription.getId()
-                                + "]. Required notification frequency interval has not elapsed.");
-                return;
-            }
-
-            XMLGregorianCalendar startTime = subscription
-                    .getSlotValue(EbxmlObjectUtil.SUBSCRIPTION_LAST_RUN_TIME_SLOT_NAME);
-=======
                     .getTimeAsXMLGregorianCalendar(
                             TimeUtil.currentTimeMillis());
             SubscriptionType subscription = subscriptionDao
@@ -381,7 +248,6 @@ public class RegistrySubscriptionManager
 
             XMLGregorianCalendar startTime = subscription.getSlotValue(
                     EbxmlObjectUtil.SUBSCRIPTION_LAST_RUN_TIME_SLOT_NAME);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             XMLGregorianCalendar endTime = subscription.getEndTime();
 
             if (startTime == null) {
@@ -392,27 +258,12 @@ public class RegistrySubscriptionManager
                 endTime = currentTime;
             }
 
-<<<<<<< HEAD
-            notificationManager
-                    .sendNotifications(
-                            new SubscriptionNotificationListeners(
-                                    subscription,
-                                    getNotificationListenersForSubscription(subscription)),
-                            startTime, endTime);
-            updateLastRunTime(subscription, currentTime.toGregorianCalendar()
-                    .getTimeInMillis());
-
-        } catch (Throwable e) {
-            statusHandler.error(
-                    "Errors occurred while processing subscription ["
-=======
             updateLastRunTime(subscription,
                     currentTime.toGregorianCalendar().getTimeInMillis());
 
         } catch (Throwable e) {
             statusHandler
                     .error("Errors occurred while processing subscription ["
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                             + subscriptionName + "]", e);
         }
 
@@ -422,30 +273,6 @@ public class RegistrySubscriptionManager
         this.subscriptionDao = subscriptionDao;
     }
 
-<<<<<<< HEAD
-    public void setNotificationManager(
-            RegistryNotificationManager notificationManager) {
-        this.notificationManager = notificationManager;
-    }
-
-    /**
-     * @return the notificationListenerFactory
-     */
-    public INotificationListenerFactory getNotificationListenerFactory() {
-        return notificationListenerFactory;
-    }
-
-    /**
-     * @param notificationListenerFactory
-     *            the notificationListenerFactory to set
-     */
-    public void setNotificationListenerFactory(
-            INotificationListenerFactory notificationListenerFactory) {
-        this.notificationListenerFactory = notificationListenerFactory;
-    }
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void setApplicationContext(ApplicationContext applicationContext)
             throws BeansException {

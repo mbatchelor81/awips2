@@ -1,48 +1,28 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
 package com.raytheon.viz.satellite.menu;
 
 import java.util.Arrays;
-<<<<<<< HEAD
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.ui.IWorkbenchWindow;
-=======
-import java.util.HashMap;
-import java.util.Map;
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.geotools.coverage.grid.GeneralGridGeometry;
 
 import com.raytheon.uf.common.localization.PathManagerFactory;
@@ -59,10 +39,6 @@ import com.raytheon.uf.viz.core.drawables.IDescriptor;
 import com.raytheon.uf.viz.core.drawables.IRenderableDisplay;
 import com.raytheon.uf.viz.core.drawables.ResourcePair;
 import com.raytheon.uf.viz.core.exception.VizException;
-<<<<<<< HEAD
-import com.raytheon.uf.viz.core.globals.IGlobalChangedListener;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.globals.VizGlobalsManager;
 import com.raytheon.uf.viz.core.map.IMapDescriptor;
 import com.raytheon.uf.viz.core.procedures.Bundle;
@@ -77,27 +53,6 @@ import com.raytheon.viz.satellite.rsc.SatBlendedResourceData;
 import com.raytheon.viz.ui.EditorUtil;
 
 /**
-<<<<<<< HEAD
- * 
- * Custom bundle contribution item for satellite so it has the ability to
- * determine available times differently depending on scale by using a
- * {@link SatBestResResourceData} to determine which resources are best to load.
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * 
- * Date          Ticket#  Engineer    Description
- * ------------- -------- ----------- --------------------------
- * Aug 26, 2011           bsteffen    Initial creation
- * Oct 22, 2013  2491     bsteffen    Switch serialization to 
- *                                    ProcedureXmlManager
- * 
- * </pre>
- * 
- * @author bsteffen
- * @version 1.0
-=======
  *
  * Custom bundle contribution item for satellite so it has the ability to
  * determine available times differently depending on scale by using a
@@ -117,7 +72,6 @@ import com.raytheon.viz.ui.EditorUtil;
  * </pre>
  *
  * @author bsteffen
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  */
 public class SatBundleContributionItem extends BundleContributionItem {
     private static final transient IUFStatusHandler statusHandler = UFStatus
@@ -162,23 +116,6 @@ public class SatBundleContributionItem extends BundleContributionItem {
                     return;
                 }
                 // sort the times.
-<<<<<<< HEAD
-                Arrays.sort(aTimes, new Comparator<DataTime>() {
-
-                    @Override
-                    public int compare(DataTime o1, DataTime o2) {
-                        Long t1 = o1.getMatchValid();
-                        Long t2 = o2.getMatchValid();
-                        return t1.compareTo(t2);
-                    }
-                });
-                // use the latest one.
-                this.time = aTimes[aTimes.length - 1];
-            } catch (VizException e) {
-                statusHandler.handle(Priority.PROBLEM, e.getLocalizedMessage(),
-                        e);
-            } catch (SerializationException e) {
-=======
                 Arrays.sort(aTimes, (o1, o2) -> {
                     Long t1 = o1.getMatchValid();
                     Long t2 = o2.getMatchValid();
@@ -187,7 +124,6 @@ public class SatBundleContributionItem extends BundleContributionItem {
                 // use the latest one.
                 this.time = aTimes[aTimes.length - 1];
             } catch (VizException | SerializationException e) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 statusHandler.handle(Priority.PROBLEM, e.getLocalizedMessage(),
                         e);
             }
@@ -222,10 +158,6 @@ public class SatBundleContributionItem extends BundleContributionItem {
                         e);
             }
             updateMenuTextAsync();
-<<<<<<< HEAD
-            return;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
     }
@@ -234,33 +166,15 @@ public class SatBundleContributionItem extends BundleContributionItem {
 
     private SatBlendedResourceData blendedData = null;
 
-<<<<<<< HEAD
-    private Map<GeneralGridGeometry, FindBestResJob> bestResResult = new HashMap<GeneralGridGeometry, FindBestResJob>();
-
-    private Map<AbstractRequestableResourceData, QueryResourceJob> times = new HashMap<AbstractRequestableResourceData, QueryResourceJob>();
-=======
     private Map<GeneralGridGeometry, FindBestResJob> bestResResult = new HashMap<>();
 
     private Map<AbstractRequestableResourceData, QueryResourceJob> times = new HashMap<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     public SatBundleContributionItem(CommonBundleMenuContribution contribution,
             VariableSubstitution[] includeSubstitutions) throws VizException {
         super(contribution, includeSubstitutions);
-<<<<<<< HEAD
-        VizGlobalsManager.addListener(VizConstants.SCALE_ID,
-                new IGlobalChangedListener() {
-
-                    @Override
-                    public void updateValue(IWorkbenchWindow changedWindow,
-                            Object value) {
-                        updateMenuTextAsync();
-                    }
-                });
-=======
         VizGlobalsManager.addListener(VizConstants.MAP_SCALE_ID,
                 (changedWindow, value) -> updateMenuTextAsync());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override
@@ -306,11 +220,7 @@ public class SatBundleContributionItem extends BundleContributionItem {
         }
 
         if (widget != null
-<<<<<<< HEAD
-                && (widget.getText() == null || widget.getText().equals(""))) {
-=======
                 && (widget.getText() == null || widget.getText().isEmpty())) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             updateMenuText();
         }
     }
@@ -320,20 +230,10 @@ public class SatBundleContributionItem extends BundleContributionItem {
         @Override
         public void run() {
             try {
-<<<<<<< HEAD
-                Bundle b = Bundle
-                        .unmarshalBundle(
-                                PathManagerFactory
-                                        .getPathManager()
-                                        .getStaticFile(
-                                                menuContribution.xml.bundleFile),
-                                substitutions);
-=======
                 Bundle b = Bundle.unmarshalBundle(
                         PathManagerFactory.getPathManager()
                                 .getStaticFile(menuContribution.xml.bundleFile),
                         substitutions);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 for (IRenderableDisplay display : b.getDisplays()) {
                     for (ResourcePair rp : display.getDescriptor()
                             .getResourceList()) {
@@ -342,12 +242,8 @@ public class SatBundleContributionItem extends BundleContributionItem {
                                     .getResourceData();
                             updateMenuTextAsync();
                             return;
-<<<<<<< HEAD
-                        } else if (rp.getResourceData() instanceof SatBlendedResourceData) {
-=======
                         } else if (rp
                                 .getResourceData() instanceof SatBlendedResourceData) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                             blendedData = (SatBlendedResourceData) rp
                                     .getResourceData();
                             updateMenuTextAsync();
@@ -359,10 +255,6 @@ public class SatBundleContributionItem extends BundleContributionItem {
                 statusHandler.handle(Priority.PROBLEM, e.getLocalizedMessage(),
                         e);
             }
-<<<<<<< HEAD
-            return;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 

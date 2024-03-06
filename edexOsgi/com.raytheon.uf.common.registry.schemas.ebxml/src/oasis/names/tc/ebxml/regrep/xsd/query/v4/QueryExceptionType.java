@@ -1,65 +1,30 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
 
 package oasis.names.tc.ebxml.regrep.xsd.query.v4;
 
-<<<<<<< HEAD
-import javax.persistence.Entity;
-import javax.persistence.Table;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-<<<<<<< HEAD
-import oasis.names.tc.ebxml.regrep.xsd.rs.v4.RegistryExceptionType;
-
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import com.raytheon.uf.common.registry.schemas.ebxml.util.RegrepUtil;
-import com.raytheon.uf.common.serialization.annotations.DynamicSerialize;
-
-/**
- * <p>
- * Java class for QueryExceptionType complex type.
- * 
- * <p>
- * The following schema fragment specifies the expected content contained within
- * this class.
- * 
-=======
 import com.raytheon.uf.common.serialization.annotations.DynamicSerialize;
 
 import oasis.names.tc.ebxml.regrep.xsd.rs.v4.RegistryExceptionType;
@@ -72,7 +37,6 @@ import oasis.names.tc.ebxml.regrep.xsd.rs.v4.RegistryExceptionType;
  * The following schema fragment specifies the expected content contained within
  * this class.
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * <pre>
  * &lt;complexType name="QueryExceptionType">
  *   &lt;complexContent>
@@ -83,33 +47,16 @@ import oasis.names.tc.ebxml.regrep.xsd.rs.v4.RegistryExceptionType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
-<<<<<<< HEAD
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * 
-=======
  *
  * <pre>
  *
  * SOFTWARE HISTORY
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date         Ticket#     Engineer    Description
  * ------------ ----------  ----------- --------------------------
  * 2012                     bphillip    Initial implementation
  * 10/17/2013    1682       bphillip    Added software history
  * 12/2/2013     1829       bphillip    Added Hibernate annotations
-<<<<<<< HEAD
- * 12/2/2013     1829       bphillip    Made ExtensibleObjectType persistable, 
- *                                      modified persistence annotations, added 
- *                                      constructors, hashCode, toString and equals
- * </pre>
- * 
- * @author bphillip
- * @version 1
-=======
  * 12/2/2013     1829       bphillip    Made ExtensibleObjectType persistable,
  *                                      modified persistence annotations, added
  *                                      constructors, hashCode, toString and equals
@@ -117,27 +64,16 @@ import oasis.names.tc.ebxml.regrep.xsd.rs.v4.RegistryExceptionType;
  * </pre>
  *
  * @author bphillip
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  */
 @XmlRootElement(name = "QueryException")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "QueryExceptionType")
 @DynamicSerialize
-<<<<<<< HEAD
-@Entity
-@Cache(region = RegrepUtil.DB_CACHE_REGION, usage = CacheConcurrencyStrategy.TRANSACTIONAL)
-@Table(schema = RegrepUtil.EBXML_SCHEMA)
-public class QueryExceptionType extends RegistryExceptionType {
-
-    /**
-     * 
-=======
 
 public class QueryExceptionType extends RegistryExceptionType {
 
     /**
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     private static final long serialVersionUID = 6580264492439969629L;
 

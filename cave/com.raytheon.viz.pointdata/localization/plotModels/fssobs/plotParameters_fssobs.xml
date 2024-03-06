@@ -34,27 +34,6 @@
 
    <plotParameterDefinition displayName="pressChange3Hour (daPa)" format="%02.0f" displayType="TEXT" param="pressChange3Hour" sampleValue="018" unit="daPa" />
 
-<<<<<<< HEAD
-   <plotParameterDefinition displayName="pressChangeChar" lookupTable="press_change_char_lookup.txt" displayType="TABLE" param="pressChangeChar" sampleValue="KOAX" svgClass="weather" />
-
-   <plotParameterDefinition displayName="temperature" format="%3.0f" displayType="TEXT" param="temperature" sampleValue="75" />
-
-   <plotParameterDefinition displayName="dewpoint" format="%3.0f" displayType="TEXT" param="dewpoint" sampleValue="59" />
-
-   <plotParameterDefinition displayName="maxWindSpeed (kts)" format="PK%2.0f" displayType="TEXT" param="maxWindSpeed" sampleValue="59" unit="kts" />
-
-   <plotParameterDefinition displayName="seaSurfaceTemp" format="%3.0f" displayType="TEXT" param="seaSurfaceTemp" sampleValue="75" />
-
-   <plotParameterDefinition displayName="presWeather" lookupTable="wx_symbol_trans.txt" displayType="TABLE" param="presWeather" recursiveLookup="true" sampleValue="0" svgClass="weather" />
-
-   <plotParameterDefinition displayName="windSpeed,windDir,windGust (kts)" displayType="BARB" param="windSpeed,windDir,windGust" sampleValue="0,1,2" unit="kts" />
-
-   <plotParameterDefinition displayName="windBarb" displayType="BARB" param="windSpeed,windDir" sampleValue="16,17" unit="kts" />
-
-   <plotParameterDefinition displayName="windDir" displayType="ARROWUV" param="windSpeed,windDir" sampleValue="16,17" unit="kts" />
-
-   <plotParameterDefinition displayName="windGust (kts)" displayType="TEXT" param="windGust" sampleValue="8" unit="kts" />
-=======
    <plotParameterDefinition displayName="pressChangeChar" lookupTable="press_change_char_lookup.txt" displayType="TABLE" param="pressChangeChar" sampleValue="5" svgClass="weather" />
 
    <plotParameterDefinition displayName="temperature" format="%3.0f" displayType="TEXT" param="temperature" sampleValue="75" />
@@ -82,7 +61,6 @@
    <plotParameterDefinition displayName="windGust (kts)" displayType="TEXT" param="windGust" format="%02.0f" sampleValue="8" unit="kts" />
    <plotParameterDefinition displayName="windGust (mph)" displayType="TEXT" param="windGust" format="%02.0f" sampleValue="8" unit="mph" />
    <plotParameterDefinition displayName="windGust (m/s)" displayType="TEXT" param="windGust" format="%02.0f" sampleValue="8" unit="m/s" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
    <plotParameterDefinition displayName="Marker" displayType="MARKER" param="Marker" sampleValue=" " svgClass="marker" />
 

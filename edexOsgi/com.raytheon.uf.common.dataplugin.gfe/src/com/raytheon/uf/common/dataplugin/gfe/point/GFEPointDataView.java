@@ -25,11 +25,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.measure.Unit;
-<<<<<<< HEAD
-import javax.measure.format.ParserException;
-=======
 import javax.measure.format.MeasurementParseException;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.persistence.Transient;
 
 import com.raytheon.uf.common.pointdata.IPointDataContainerReader;
@@ -40,11 +36,7 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
 import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
 
-<<<<<<< HEAD
-import tec.uom.se.format.SimpleUnitFormat;
-=======
 import tech.units.indriya.format.SimpleUnitFormat;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * GFE Point Data View to support AvnFPS
@@ -193,11 +185,7 @@ public class GFEPointDataView implements IPointDataViewReader {
                     return (Unit<?>) SimpleUnitFormat
                             .getInstance(SimpleUnitFormat.Flavor.ASCII)
                             .parseObject(unit, new ParsePosition(0));
-<<<<<<< HEAD
-                } catch (ParserException e) {
-=======
                 } catch (MeasurementParseException e) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     statusHandler.error("Error parsing unit " + unit, e);
                 }
             }

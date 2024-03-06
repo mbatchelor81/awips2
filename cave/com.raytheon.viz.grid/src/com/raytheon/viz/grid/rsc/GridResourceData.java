@@ -1,46 +1,27 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
 package com.raytheon.viz.grid.rsc;
 
-<<<<<<< HEAD
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-=======
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.Set;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -52,15 +33,10 @@ import com.raytheon.uf.common.dataplugin.PluginDataObject;
 import com.raytheon.uf.common.dataplugin.grid.GridConstants;
 import com.raytheon.uf.common.dataplugin.grid.GridRecord;
 import com.raytheon.uf.common.dataplugin.level.Level;
-<<<<<<< HEAD
-import com.raytheon.uf.common.dataquery.requests.RequestConstraint;
-import com.raytheon.uf.common.time.DataTime;
-=======
 import com.raytheon.uf.common.dataplugin.level.util.LevelUtilities;
 import com.raytheon.uf.common.dataquery.requests.RequestConstraint;
 import com.raytheon.uf.common.time.DataTime;
 import com.raytheon.uf.viz.core.alerts.AlertMessage;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.drawables.IDescriptor;
 import com.raytheon.uf.viz.core.drawables.ResourcePair;
 import com.raytheon.uf.viz.core.exception.VizException;
@@ -68,11 +44,8 @@ import com.raytheon.uf.viz.core.rsc.AbstractRequestableResourceData;
 import com.raytheon.uf.viz.core.rsc.AbstractResourceData;
 import com.raytheon.uf.viz.core.rsc.AbstractVizResource;
 import com.raytheon.uf.viz.core.rsc.DisplayType;
-<<<<<<< HEAD
-=======
 import com.raytheon.uf.viz.core.rsc.IResourceDataChanged.ChangeType;
 import com.raytheon.uf.viz.core.rsc.IUpdateHandlingResourceData;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.rsc.LoadProperties;
 import com.raytheon.uf.viz.core.rsc.capabilities.DisplayTypeCapability;
 import com.raytheon.uf.viz.core.rsc.groups.ICombinedResourceData;
@@ -84,19 +57,11 @@ import com.raytheon.viz.grid.rsc.general.DifferenceGridResourceData;
 
 /**
  * Resource data for grids from GridRecords
-<<<<<<< HEAD
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * 
-=======
  *
  * <pre>
  *
  * SOFTWARE HISTORY
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- --------------------------------------------
  * Feb 12, 2009  1960     njensen   Initial creation
@@ -105,11 +70,6 @@ import com.raytheon.viz.grid.rsc.general.DifferenceGridResourceData;
  * Sep 03, 2015  4779     njensen   Removed DataScale references
  * Mar 03, 2016  5439     bsteffen  Rename inventory class
  * Aug 15, 2017  6332     bsteffen  Move radar specific logic to extension
-<<<<<<< HEAD
- * 
- * </pre>
- * 
-=======
  * Sep 09, 2021  8651     njensen   Implemented IUpdateHandlingResourceData
  *                                  and added keepDataWhileRetrievingUpdate
  * Oct 29, 2022  8959     mapeters  Update how data time levels are set
@@ -122,18 +82,11 @@ import com.raytheon.viz.grid.rsc.general.DifferenceGridResourceData;
  *
  * </pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author njensen
  */
 @XmlAccessorType(XmlAccessType.NONE)
 public class GridResourceData extends AbstractRequestableResourceData
-<<<<<<< HEAD
-        implements ICombinedResourceData {
-
-    protected GridRecord[] records;
-=======
         implements ICombinedResourceData, IUpdateHandlingResourceData {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     @XmlElement
     protected GridResourceData secondaryResourceData;
@@ -150,12 +103,9 @@ public class GridResourceData extends AbstractRequestableResourceData
     @XmlAttribute
     protected boolean spatial = false;
 
-<<<<<<< HEAD
-=======
     @XmlAttribute
     protected boolean keepDataWhileRetrievingUpdate = true;
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public GridResourceData() {
         setAlertParser(new GribDataCubeAlertMessageParser());
     }
@@ -183,11 +133,7 @@ public class GridResourceData extends AbstractRequestableResourceData
     protected AbstractVizResource<?, ?> constructResource(
             LoadProperties loadProperties, PluginDataObject[] objects)
             throws VizException {
-<<<<<<< HEAD
-        records = new GridRecord[objects.length];
-=======
         GridRecord[] records = new GridRecord[objects.length];
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         for (int i = 0; i < objects.length; i++) {
             if (objects[i] instanceof GridRecord) {
                 records[i] = (GridRecord) objects[i];
@@ -214,26 +160,7 @@ public class GridResourceData extends AbstractRequestableResourceData
                 sampling = true;
             }
         }
-<<<<<<< HEAD
-        return new D2DGridResource(this, loadProperties);
-    }
-
-    /**
-     * @return the records
-     */
-    public GridRecord[] getRecords() {
-        return records;
-    }
-
-    /**
-     * @param records
-     *            the records to set
-     */
-    public void setRecords(GridRecord[] records) {
-        this.records = records;
-=======
         return new D2DGridResource(this, loadProperties, records);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override
@@ -310,58 +237,21 @@ public class GridResourceData extends AbstractRequestableResourceData
         this.sampling = sampling;
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.raytheon.viz.core.rsc.ICombinedResourceData#getCombineOperation()
-     */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public CombineOperation getCombineOperation() {
         return combinationOperation;
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.raytheon.viz.core.rsc.ICombinedResourceData#getSecondaryData()
-     */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public AbstractResourceData getSecondaryData() {
         return secondaryResourceData;
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.raytheon.viz.core.rsc.ICombinedResourceData#setCombineOperation(com
-     * .raytheon.viz.core.rsc.ICombinableResource.CombineOperation)
-     */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void setCombineOperation(CombineOperation operation) {
         combinationOperation = operation;
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.raytheon.viz.core.rsc.ICombinedResourceData#setSecondaryData(com.
-     * raytheon.uf.viz.core.rsc.AbstractResourceData)
-     */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void setSecondaryData(AbstractResourceData data) {
         secondaryResourceData = (GridResourceData) data;
@@ -379,13 +269,6 @@ public class GridResourceData extends AbstractRequestableResourceData
         Set<Level> levels = ((VizGridInventory) DataCubeContainer
                 .getInventory(GridConstants.GRID))
                         .getAvailableLevels(metadataMap);
-<<<<<<< HEAD
-        List<DataTime> timesWithLevels = new ArrayList<>();
-        for (int i = 0; i < times.length; ++i) {
-            for (Level l : levels) {
-                DataTime time = times[i].clone();
-                time.setLevelValue(l.getLevelonevalue());
-=======
         /*
          * Using a set here because the super method can return times without
          * levels and the same times with levels. That would result in duplicate
@@ -402,7 +285,6 @@ public class GridResourceData extends AbstractRequestableResourceData
             for (Level l : levels) {
                 time = time.clone();
                 LevelUtilities.setDataTimeLevel(time, l.getLevelonevalue(), l);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if (time.isSpatial()) {
                     timesWithLevels.add(time);
                 }
@@ -417,17 +299,6 @@ public class GridResourceData extends AbstractRequestableResourceData
         if (!spatial) {
             return super.getLatestPluginDataObjects(desired, current);
         }
-<<<<<<< HEAD
-        Set<DataTime> stripped = new HashSet<>(desired.length);
-        Double levelValue = null;
-        for (int i = 0; i < desired.length; ++i) {
-            if (desired[i] == null) {
-                continue;
-            }
-            boolean found = false;
-            for (int j = 0; j < current.length; ++j) {
-                if (desired[i].equals(current[j])) {
-=======
 
         if (desired == null || desired.length == 0 || !isRetrieveData()
                 || !isRequeryNecessaryOnTimeMatch()) {
@@ -443,7 +314,6 @@ public class GridResourceData extends AbstractRequestableResourceData
             boolean found = false;
             for (DataTime currentTime : current) {
                 if (desiredTime.equals(currentTime)) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     found = true;
                     break;
                 }
@@ -451,15 +321,6 @@ public class GridResourceData extends AbstractRequestableResourceData
             if (found) {
                 continue;
             }
-<<<<<<< HEAD
-            DataTime strip = desired[i].clone();
-            strip.setLevelValue(null);
-            stripped.add(strip);
-            if (levelValue == null) {
-                levelValue = desired[i].getLevelValue();
-            } else if (levelValue != desired[i].getLevelValue()) {
-                levelValue = -1.0;
-=======
             DataTime strip = desiredTime.clone();
             strip.clearLevel();
             stripped.add(strip);
@@ -467,16 +328,11 @@ public class GridResourceData extends AbstractRequestableResourceData
                 levelValue = desiredTime.getLevelValue();
             } else if (levelValue != desiredTime.getLevelValue()) {
                 levelValue = Level.INVALID_VALUE;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         }
 
         HashMap<String, RequestConstraint> originalMetadataMap = this.metadataMap;
-<<<<<<< HEAD
-        if (levelValue != null && levelValue != -1) {
-=======
         if (levelValue != null && levelValue != Level.INVALID_VALUE) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             this.metadataMap = new HashMap<>(this.metadataMap);
             this.metadataMap.put(GridConstants.LEVEL_ONE,
                     new RequestConstraint(levelValue.toString()));
@@ -487,13 +343,9 @@ public class GridResourceData extends AbstractRequestableResourceData
         for (PluginDataObject obj : objs) {
             GridRecord record = (GridRecord) obj;
             DataTime time = obj.getDataTime().clone();
-<<<<<<< HEAD
-            time.setLevelValue(record.getLevel().getLevelonevalue());
-=======
             Level level = record.getLevel();
             LevelUtilities.setDataTimeLevel(time, level.getLevelonevalue(),
                     level);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             obj.setDataTime(time);
         }
         return objs;
@@ -505,9 +357,6 @@ public class GridResourceData extends AbstractRequestableResourceData
         return null;
     }
 
-<<<<<<< HEAD
-}
-=======
     @Override
     public void handleUpdate(AlertMessage message) {
         DataTime time = (DataTime) message.decodedAlert.get("dataTime");
@@ -527,4 +376,3 @@ public class GridResourceData extends AbstractRequestableResourceData
         this.keepDataWhileRetrievingUpdate = keepDataWhileRetrievingUpdate;
     }
 }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

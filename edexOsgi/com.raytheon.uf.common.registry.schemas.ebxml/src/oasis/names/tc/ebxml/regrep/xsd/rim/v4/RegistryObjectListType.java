@@ -24,10 +24,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-<<<<<<< HEAD
-=======
 import java.util.Objects;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -48,10 +45,7 @@ import javax.xml.bind.annotation.XmlType;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Cascade;
-<<<<<<< HEAD
-=======
 import org.hibernate.annotations.CascadeType;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.uf.common.registry.schemas.ebxml.util.RegrepUtil;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerialize;
@@ -92,10 +86,7 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
  * 12/2/2013     1829       bphillip    Modified persistence annotations, added
  *                                      constructors, hashCode, toString and equals
  * Aug 12, 2019  6140       tgurney     Explicitly specify join column names
-<<<<<<< HEAD
-=======
  * Feb 08, 2022  7849       mapeters    Update cascade annotation to support deletion
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  *
  * @author bphillip
@@ -119,11 +110,7 @@ public class RegistryObjectListType implements Serializable {
     private int id;
 
     @ManyToMany(fetch = FetchType.EAGER)
-<<<<<<< HEAD
-    @Cascade({})
-=======
     @Cascade({ CascadeType.ALL })
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @JoinTable(schema = RegrepUtil.EBXML_SCHEMA, joinColumns = {
             @JoinColumn(name = "registryobjectlist_id") })
     @XmlElement(name = "RegistryObject")
@@ -208,15 +195,7 @@ public class RegistryObjectListType implements Serializable {
      */
     @Override
     public int hashCode() {
-<<<<<<< HEAD
-        final int prime = 31;
-        int result = 1;
-        result = prime * result
-                + (registryObject == null ? 0 : registryObject.hashCode());
-        return result;
-=======
         return Objects.hash(registryObject);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /*
@@ -236,15 +215,7 @@ public class RegistryObjectListType implements Serializable {
             return false;
         }
         RegistryObjectListType other = (RegistryObjectListType) obj;
-<<<<<<< HEAD
-        if (registryObject == null) {
-            if (other.registryObject != null) {
-                return false;
-            }
-        } else if (!registryObject.equals(other.registryObject)) {
-=======
         if (!Objects.equals(registryObject, other.registryObject)) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return false;
         }
         return true;

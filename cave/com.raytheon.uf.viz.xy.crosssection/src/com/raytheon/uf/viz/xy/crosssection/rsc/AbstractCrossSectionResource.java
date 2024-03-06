@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -37,10 +25,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-<<<<<<< HEAD
-import java.util.Set;
-import java.util.concurrent.ConcurrentLinkedQueue;
-=======
 import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
@@ -48,7 +32,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.RunnableFuture;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
@@ -76,26 +59,15 @@ import com.raytheon.uf.common.style.StyleException;
 import com.raytheon.uf.common.style.level.SingleLevel;
 import com.raytheon.uf.common.time.DataTime;
 import com.raytheon.uf.common.units.UnitConv;
-<<<<<<< HEAD
-import com.raytheon.uf.viz.core.IExtent;
-import com.raytheon.uf.viz.core.IGraphicsTarget;
-import com.raytheon.uf.viz.core.drawables.IWireframeShape;
-import com.raytheon.uf.viz.core.drawables.JTSCompiler;
-=======
 import com.raytheon.uf.viz.core.DrawableLine;
 import com.raytheon.uf.viz.core.IExtent;
 import com.raytheon.uf.viz.core.IGraphicsTarget;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.drawables.PaintProperties;
 import com.raytheon.uf.viz.core.exception.VizException;
 import com.raytheon.uf.viz.core.map.MapDescriptor;
 import com.raytheon.uf.viz.core.rsc.AbstractVizResource;
 import com.raytheon.uf.viz.core.rsc.DisplayType;
-<<<<<<< HEAD
-import com.raytheon.uf.viz.core.rsc.IResourceDataChanged;
-=======
 import com.raytheon.uf.viz.core.rsc.IResourceDataChanged.ChangeType;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.rsc.LoadProperties;
 import com.raytheon.uf.viz.core.rsc.capabilities.ColorableCapability;
 import com.raytheon.uf.viz.core.rsc.capabilities.DisplayTypeCapability;
@@ -112,18 +84,6 @@ import com.raytheon.uf.viz.xy.scales.HeightScale;
 import com.raytheon.viz.core.graphing.util.GraphPrefsFactory;
 import com.raytheon.viz.core.map.GeoUtil;
 
-<<<<<<< HEAD
-import tec.uom.se.AbstractUnit;
-import tec.uom.se.format.SimpleUnitFormat;
-
-/**
- * 
- * Abstract resource for cross sections
- * 
- * <pre>
- * SOFTWARE HISTORY
- * 
-=======
 import tech.units.indriya.AbstractUnit;
 import tech.units.indriya.format.SimpleUnitFormat;
 
@@ -134,7 +94,6 @@ import tech.units.indriya.format.SimpleUnitFormat;
  * <pre>
  * SOFTWARE HISTORY
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- -------------------------------------------
  * Dec 04, 2007           njensen   Initial creation
@@ -144,11 +103,6 @@ import tech.units.indriya.format.SimpleUnitFormat;
  * Nov 28, 2017  5863     bsteffen  Change dataTimes to a NavigableSet
  * Feb 18, 2018  7231     njensen   Made statusHandler protected
  * Apr 15, 2019  7596     lsingh    Updated units framework to JSR-363.
-<<<<<<< HEAD
- * 
- * </pre>
- * 
-=======
  * Oct 29, 2022  8959     mapeters  Update how data time levels are set
  * Nov 14, 2022  8973     mapeters  Prevent NPE when editor is closed
  * Nov 17, 2022  8978     mapeters  Don't cache inset map lines to prevent them
@@ -159,7 +113,6 @@ import tech.units.indriya.format.SimpleUnitFormat;
  *
  * </pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author njensen
  */
 public abstract class AbstractCrossSectionResource extends
@@ -176,17 +129,6 @@ public abstract class AbstractCrossSectionResource extends
 
     protected GridGeometry2D geometry = null;
 
-<<<<<<< HEAD
-    protected AbstractCrossSectionAdapter<?> adapter;
-
-    protected Map<DataTime, List<float[]>> sliceMap = new HashMap<>(64);
-
-    protected AbstractStylePreferences prefs;
-
-    protected Map<LineString, IWireframeShape> lines = new HashMap<>();
-
-    protected DataRetrievalJob dataRetrievalJob = new DataRetrievalJob(
-=======
     protected final AbstractCrossSectionAdapter<?> adapter;
 
     /**
@@ -201,7 +143,6 @@ public abstract class AbstractCrossSectionResource extends
     protected AbstractStylePreferences prefs;
 
     protected final DataRetrievalJob dataRetrievalJob = new DataRetrievalJob(
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             "Loading Cross Section Data");
 
     public AbstractCrossSectionResource(CrossSectionResourceData data,
@@ -209,25 +150,6 @@ public abstract class AbstractCrossSectionResource extends
         super(data, props, false);
         this.adapter = adapter;
 
-<<<<<<< HEAD
-        data.addChangeListener(new IResourceDataChanged() {
-
-            @Override
-            public void resourceChanged(ChangeType type, Object object) {
-                if (type == ChangeType.DATA_UPDATE) {
-                    PluginDataObject[] pdos = (PluginDataObject[]) object;
-                    synchronized (AbstractCrossSectionResource.this) {
-                        for (PluginDataObject pdo : pdos) {
-                            addRecord(pdo);
-                        }
-                    }
-                    // Schedule retrieval job as addRecord adds to times
-                    dataRetrievalJob.schedule();
-                }
-                issueRefresh();
-            }
-
-=======
         data.addChangeListener((type, object) -> {
             if (type == ChangeType.DATA_UPDATE) {
                 PluginDataObject[] pdos = (PluginDataObject[]) object;
@@ -240,29 +162,17 @@ public abstract class AbstractCrossSectionResource extends
                 dataRetrievalJob.schedule();
             }
             issueRefresh();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         });
     }
 
     @Override
     protected void disposeInternal() {
-<<<<<<< HEAD
-        if (dataRetrievalJob != null) {
-            dataRetrievalJob.times.clear();
-            dataRetrievalJob.run = false;
-        }
-        for (IWireframeShape shape : lines.values()) {
-            shape.dispose();
-        }
-        lines.clear();
-=======
         synchronized (lock) {
             dataRetrievalJob.times.clear();
             dataRetrievalJob.run = false;
             sliceMap.clear();
             adapter.dispose();
         }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override
@@ -275,20 +185,10 @@ public abstract class AbstractCrossSectionResource extends
                 throw new VizException(e.getLocalizedMessage(), e);
             }
         }
-<<<<<<< HEAD
-        int numTimes = dataTimes.size();
-        if (numTimes > 0) {
-            DataTime lastTime = dataTimes.last();
-            sliceMap.put(lastTime, null);
-            dataRetrievalJob.times.add(lastTime);
-            for (DataTime time : dataTimes.headSet(lastTime)) {
-                sliceMap.put(time, null);
-=======
 
         synchronized (lock) {
             for (DataTime time : dataTimes) {
                 sliceMap.remove(time);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 dataRetrievalJob.times.add(time);
             }
         }
@@ -323,74 +223,6 @@ public abstract class AbstractCrossSectionResource extends
 
     @Override
     public void setDescriptor(CrossSectionDescriptor descriptor) {
-<<<<<<< HEAD
-        adapter.setDescriptor(descriptor);
-        this.descriptor = descriptor;
-        Set<DataTime> times = new HashSet<>();
-        for (DataTime time : dataTimes) {
-            for (int i = 0; i < descriptor.getLines().size(); i++) {
-                time = time.clone();
-                time.setLevelValue((double) i);
-                times.add(time);
-                sliceMap.put(time, null);
-                dataRetrievalJob.times.add(time);
-            }
-        }
-        dataTimes.retainAll(times);
-        dataTimes.addAll(times);
-        dataRetrievalJob.schedule();
-    }
-
-    protected void loadSlice(DataTime time) throws VizException {
-        List<float[]> floatData = sliceMap.get(time);
-        if (floatData == null) {
-            CrossSectionGraph graph = ((CrossSectionGraph) descriptor
-                    .getGraph(this));
-            floatData = adapter.loadData(time, graph, geometry);
-            if (floatData == null) {
-                sliceMap.remove(time);
-                resourceData.blackListTime(time);
-                descriptor.getTimeMatcher().redoTimeMatching(this);
-                descriptor.getTimeMatcher().redoTimeMatching(descriptor);
-                issueRefresh();
-                return;
-            }
-            Coordinate[] lineData = GeoUtil.splitLine(GRID_SIZE,
-                    descriptor.getLine(time).getCoordinates());
-            int lineLengthInMeters = (int) graph
-                    .getVirtualLocation(graph.getExtent().getMaxX(), 0)[0];
-            floatData = CrossSectionRotation.rotateVector(
-                    resourceData.getParameter(), Arrays.asList(lineData),
-                    floatData, lineLengthInMeters, descriptor.getHeightScale(),
-                    adapter.getDataCoordinateReferenceSystem());
-            if (adapter.getUnit().isCompatible(getUnit())) {
-                UnitConverter converter = UnitConv
-                        .getConverterToUnchecked(adapter.getUnit(), getUnit());
-                for (float[] floatArr : floatData) {
-                    for (int i = 0; i < floatArr.length; i++) {
-                        if (floatArr[i] > -9998) {
-                            floatArr[i] = (float) converter
-                                    .convert(floatArr[i]);
-                        }
-                    }
-                }
-            }
-            double[] topoData = graph.getTopoData(descriptor.getLine(time),
-                    GRID_SIZE);
-            // filter below topo
-            for (int i = 0; i < GRID_SIZE; i++) {
-                double height = (GRID_SIZE
-                        * (graph.getExtent().getMaxY() - topoData[i]))
-                        / graph.getExtent().getHeight();
-                for (int j = 0; j < height; j++) {
-                    for (float[] floatArr : floatData) {
-                        floatArr[(j * GRID_SIZE) + i] = -999_999;
-                    }
-                }
-            }
-            sliceMap.put(time, floatData);
-        }
-=======
         synchronized (lock) {
             adapter.setDescriptor(descriptor);
             this.descriptor = descriptor;
@@ -454,7 +286,6 @@ public abstract class AbstractCrossSectionResource extends
         }
 
         return floatData;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     public SingleLevel[] getLevels() {
@@ -478,12 +309,6 @@ public abstract class AbstractCrossSectionResource extends
     }
 
     public void addRecord(PluginDataObject pdo) {
-<<<<<<< HEAD
-
-        // Refresh if any new records were added
-        DataTime pdoTime = pdo.getDataTime().clone();
-        pdoTime.setLevelValue(null);
-=======
         if (getStatus() == ResourceStatus.DISPOSED) {
             return;
         }
@@ -491,7 +316,6 @@ public abstract class AbstractCrossSectionResource extends
         // Refresh if any new records were added
         DataTime pdoTime = pdo.getDataTime().clone();
         pdoTime.clearLevel();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if (resourceData.getBinOffset() != null) {
             pdoTime = resourceData.getBinOffset().getNormalizedTime(pdoTime);
         }
@@ -500,11 +324,7 @@ public abstract class AbstractCrossSectionResource extends
         if (descriptor != null) {
             for (int i = 0; i < descriptor.getLines().size(); i++) {
                 pdoTime = pdoTime.clone();
-<<<<<<< HEAD
-                pdoTime.setLevelValue((double) i);
-=======
                 pdoTime.setLevel((double) i, descriptor.getLevelType());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if (!dataTimes.add(pdoTime)) {
                     // We are adding a record for a time we have, dispose of
                     // existing time data and add to retrieval job
@@ -519,15 +339,8 @@ public abstract class AbstractCrossSectionResource extends
 
     @Override
     public final void remove(DataTime dataTime) {
-<<<<<<< HEAD
-        synchronized (this) {
-            if (this.sliceMap != null) {
-                sliceMap.remove(dataTime);
-            }
-=======
         synchronized (lock) {
             sliceMap.remove(dataTime);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             adapter.remove(dataTime);
             dataTimes.remove(dataTime);
             dataRetrievalJob.times.remove(dataTime);
@@ -545,11 +358,7 @@ public abstract class AbstractCrossSectionResource extends
             // the data time while ignoring the level value
             if (!someLeft) {
                 DataTime tmp = dataTime.clone();
-<<<<<<< HEAD
-                tmp.setLevelValue(null);
-=======
                 tmp.clearLevel();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 adapter.remove(tmp);
             }
         }
@@ -559,13 +368,6 @@ public abstract class AbstractCrossSectionResource extends
 
     /**
      * Dispose resource data for this time
-<<<<<<< HEAD
-     * 
-     * @param dataTime
-     */
-    protected void disposeTimeData(DataTime dataTime) {
-        sliceMap.remove(dataTime);
-=======
      *
      * @param dataTime
      */
@@ -573,7 +375,6 @@ public abstract class AbstractCrossSectionResource extends
         synchronized (lock) {
             sliceMap.remove(dataTime);
         }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override
@@ -596,19 +397,6 @@ public abstract class AbstractCrossSectionResource extends
             return;
         }
         LineString line = descriptor.getLine(time);
-<<<<<<< HEAD
-        IWireframeShape shape = lines.get(line);
-        if (shape == null) {
-            shape = target.createWireframeShape(false, insetMapDescriptor);
-            JTSCompiler compiler = new JTSCompiler(null, shape,
-                    insetMapDescriptor);
-            compiler.handle(line);
-            shape.compile();
-            lines.put(line, shape);
-        }
-        target.drawWireframeShape(shape,
-                getCapability(ColorableCapability.class).getColor(), 2.0f);
-=======
         DrawableLine drawableLine = new DrawableLine();
         for (Coordinate coord : line.getCoordinates()) {
             double[] pixelCoord = insetMapDescriptor
@@ -620,7 +408,6 @@ public abstract class AbstractCrossSectionResource extends
                 .getColor();
 
         target.drawLine(drawableLine);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override
@@ -671,13 +458,9 @@ public abstract class AbstractCrossSectionResource extends
         } else if (adapter.getUnit() == AbstractUnit.ONE) {
             return "";
         } else {
-<<<<<<< HEAD
-            unitString = SimpleUnitFormat.getInstance(SimpleUnitFormat.Flavor.ASCII).format(adapter.getUnit());
-=======
             unitString = SimpleUnitFormat
                     .getInstance(SimpleUnitFormat.Flavor.ASCII)
                     .format(adapter.getUnit());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         return unitString;
@@ -737,10 +520,6 @@ public abstract class AbstractCrossSectionResource extends
 
     }
 
-<<<<<<< HEAD
-    private class DataRetrievalJob extends Job {
-        protected ConcurrentLinkedQueue<DataTime> times = new ConcurrentLinkedQueue<>();
-=======
     /**
      * Get the slice data for the given time. This does not wait for data
      * retrieval to complete.
@@ -788,7 +567,6 @@ public abstract class AbstractCrossSectionResource extends
                         return t1.hasFcst() ? 1 : -1;
                     }
                 });
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         protected boolean run = true;
 
@@ -803,18 +581,6 @@ public abstract class AbstractCrossSectionResource extends
 
         @Override
         protected IStatus run(IProgressMonitor monitor) {
-<<<<<<< HEAD
-            DataTime time = null;
-
-            while (run && ((time = times.poll()) != null)) {
-                try {
-                    AbstractCrossSectionResource.this.loadSlice(time);
-                    AbstractCrossSectionResource.this.issueRefresh();
-                } catch (VizException e) {
-                    if (run) {
-                        statusHandler.handle(Priority.ERROR,
-                                "Error Loading Cross Section Data", e);
-=======
             while (run) {
                 DataTime time = times.poll();
                 if (time == null) {
@@ -861,7 +627,6 @@ public abstract class AbstractCrossSectionResource extends
                     if (run) {
                         statusHandler.error("Error Loading Cross Section Data",
                                 e);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     }
                 }
             }

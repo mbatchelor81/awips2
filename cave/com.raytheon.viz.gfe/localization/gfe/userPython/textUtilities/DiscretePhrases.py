@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-##
-=======
 # #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # This software was developed and / or modified by Raytheon Company,
 # pursuant to Contract DG133W-05-CQ-1067 with the US Government.
 #
@@ -20,11 +16,7 @@
 #
 # See the AWIPS II Master Rights File ("Master Rights File.pdf") for
 # further licensing information.
-<<<<<<< HEAD
-##
-=======
 # #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # ----------------------------------------------------------------------------
 # This software is in the public domain, furnished "as is", without technical
 # support, and with no warranty, express or implied, as to its usefulness for
@@ -48,21 +40,6 @@
 #                                  to prevent similar segments from incorrectly
 #                                  combining
 # Apr 29, 2020  8151     randerso  Use SiteMap.getSite4LetterId()
-<<<<<<< HEAD
-#
-##
-
-##
-# This is a base file that is not intended to be overridden.
-##
-
-import functools
-import PhraseBuilder
-import ModuleAccessor
-import types, copy, time, os
-import SampleAnalysis
-import TimeRange, AbsTime
-=======
 # Jan 13, 2021  8331     randerso  Update to get Hazard Services Headlines
 # May 10, 2021  DCS22297 dkingfiel Remove RB.Y, SI.Y, and SW.Y from marineHazList
 # Aug 31, 2022  23275    zalberts  Time Zone incorrectly displayed in hazard text
@@ -101,7 +78,6 @@ from com.raytheon.uf.common.dataplugin.gfe.request import HazardServicesHeadline
 from com.raytheon.uf.common.serialization.comm import RequestRouter
 from com.raytheon.uf.viz.core.localization import LocalizationManager
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 
 class DiscretePhrases(PhraseBuilder.PhraseBuilder):
@@ -109,11 +85,7 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
     def __init__(self):
         PhraseBuilder.PhraseBuilder.__init__(self)
 
-<<<<<<< HEAD
-    ### Local non-VTEC headlines.
-=======
     # ## Local non-VTEC headlines.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     # To sample the Hazards grid and produce locally generated headlines
     # independent of the VTEC Headlines structure, follow these steps:
     #
@@ -157,20 +129,6 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
         # timing phrases to use. In particular, the "key" is the Hazard
         # key so different local headlines can use different timing.
         #
-<<<<<<< HEAD
-        startPhraseType = "FUZZY"
-        endPhraseType = "FUZZY"
-
-        #Example code
-        #startTime = timeRange.startTime().unixTime()
-        #if startTime <= issuanceTime + 12 * 3600:   # 12 hours past issuance
-            #startPhraseType = "EXPLICIT"
-        #endTime = timeRange.endTime().unixTime()
-        #if endTime <= issuanceTime + 12 * 3600:   # 12 hours past issuance
-            #endPhraseType = "EXPLICIT"
-
-        #return startPhraseType, endPhraseType
-=======
         # startPhraseType = "FUZZY"
         # endPhraseType = "FUZZY"
 
@@ -183,7 +141,6 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
             # endPhraseType = "EXPLICIT"
 
         # return startPhraseType, endPhraseType
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return None, None
 
     def Headlines(self):
@@ -244,10 +201,6 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
             allowedHeadlines.append(key)
         issuanceTime = self._issueTime.unixTime()
 
-<<<<<<< HEAD
-        from com.raytheon.uf.viz.core.localization import LocalizationManager
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         siteId = LocalizationManager.getInstance().getSite()
         for key, tr in headlines:  # value == list of subkeys
             if key not in allowedHeadlines:
@@ -304,15 +257,9 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
 ############################################################################################
     ### WARNING!!!!  VTEC CODE  -- DO NOT OVERRIDE ANY CODE BELOW THIS POINT!!!!!
 
-<<<<<<< HEAD
-    ### IF YOU USE A METHOD BELOW THIS POINT AND WANT TO ALTER IT,
-    ### COPY IT TO YOUR LOCAL FILE AND RE-NAME IT. THEN OVERRIDE ANY
-    ### METHODS THAT CALL IT AND USE THE NEW NAME.
-=======
     # ## IF YOU USE A METHOD BELOW THIS POINT AND WANT TO ALTER IT,
     # ## COPY IT TO YOUR LOCAL FILE AND RE-NAME IT. THEN OVERRIDE ANY
     # ## METHODS THAT CALL IT AND USE THE NEW NAME.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def getHazards(self, argDict, areaList):
         # This is for setting up the argDict hazards entry AFTER the TextFormatter
@@ -365,10 +312,6 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
 
     def hazards_words(self, tree, node):
         "Create the phrase for any watches, warnings or advisories"
-<<<<<<< HEAD
-        hazardsTable = self._hazards
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         tree.combinations = self._combinations
         if self._combinations is None:
             areaLabel = None
@@ -386,10 +329,7 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
         # Check for a particular entry in argDict that is inserted when
         # we're formatting hazards type products like WSW, NPW.
         argDict = tree.get("argDict")
-<<<<<<< HEAD
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # look for segmentAreas in the argDict and override editAreas
         if "segmentAreas" in argDict:
             editAreas = argDict['segmentAreas']  # override editAreas
@@ -574,11 +514,7 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
         for i in range(len(hazardTable)):
             if hazardTable[i]['sig'] != "":  # VTEC
                 hazStr = hazardTable[i]['phen'] + "." + hazardTable[i]['sig']
-<<<<<<< HEAD
-            else:  #non-VTEC
-=======
             else:  # non-VTEC
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 hazStr = hazardTable[i]['phen']
 
             if hazStr in allowedHazardList:
@@ -636,11 +572,7 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
     # FUZZY8, or DAY_NIGHT_ONLY. Returns phrase like:
     #  FROM 4 PM MST THIS AFTERNOON THROUGH TUESDAY EVENING
     def getTimingPhrase(self, hazRec, issueTime, stype=None, etype=None):
-<<<<<<< HEAD
-        #Returns the timing phrase to use
-=======
         # Returns the timing phrase to use
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # Get the timing type
         if stype is None or etype is None:
@@ -733,11 +665,7 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
       endPrefix):
 
         if (stype, etype) == ("NONE", "NONE"):
-<<<<<<< HEAD
-            return ""  #no timing phrase
-=======
             return ""  # no timing phrase
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         elif (stype, etype) in [("NONE", "EXPLICIT")]:
             return self.ctp_NONE_EXPLICIT(stext, etext, startPrefix, endPrefix)
@@ -785,65 +713,33 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
         else:
             return "<UnknownPhraseType-" + stype + "/" + etype + ">"
 
-<<<<<<< HEAD
-    #calculates the NONE/EXPLICIT timing phrase
-    def ctp_NONE_EXPLICIT(self, stext, etext, startPrefix, endPrefix):
-        #single time zone
-        if len(etext) == 1:
-            hourStr, hourTZstr, description = etext[0]
-            #special cases NOON
-=======
     # calculates the NONE/EXPLICIT timing phrase
     def ctp_NONE_EXPLICIT(self, stext, etext, startPrefix, endPrefix):
         # single time zone
         if len(etext) == 1:
             hourStr, hourTZstr, description = etext[0]
             # special cases NOON
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if hourStr == "12 PM":
                hourStr = "noon"
             return endPrefix + ' ' + hourStr + ' ' + hourTZstr + ' ' + \
               description
 
-<<<<<<< HEAD
-        #multiple time zones
-        elif len(etext) > 1:
-            hourStr, hourTZstr, description = etext[0]
-            #special cases NOON
-=======
         # multiple time zones
         elif len(etext) > 1:
             hourStr, hourTZstr, description = etext[0]
             # special cases NOON
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if hourStr == "12 PM":
                hourStr = "noon"
             s = endPrefix + ' ' + hourStr + ' ' + hourTZstr + ' '
             for x in range(1, len(etext)):
                 hourStr, hourTZstr, othDescription = etext[x]
-<<<<<<< HEAD
-                #special cases NOON
-=======
                 # special cases NOON
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if hourStr == "12 PM":
                    hourStr = "noon"
                 s = s + "/" + hourStr + ' ' + hourTZstr + "/ "
             s = s + description
             return s
 
-<<<<<<< HEAD
-    #calculates the NONE/FUZZY timing phrase
-    def ctp_NONE_FUZZY(self, stext, etext, startPrefix, endPrefix):
-        #returns phrase like:  THROUGH THIS EVENING
-        hourStr, hourTZstr, description = etext[0]  #ending text
-        s = endPrefix + ' ' + description
-        return s
-
-    #calculates the NONE/EXPLICIT timing phrase
-    def ctp_EXPLICIT_EXPLICIT(self, stext, etext, startPrefix, endPrefix):
-        #return phrases like:
-=======
     # calculates the NONE/FUZZY timing phrase
     def ctp_NONE_FUZZY(self, stext, etext, startPrefix, endPrefix):
         # returns phrase like:  THROUGH THIS EVENING
@@ -854,22 +750,11 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
     # calculates the NONE/EXPLICIT timing phrase
     def ctp_EXPLICIT_EXPLICIT(self, stext, etext, startPrefix, endPrefix):
         # return phrases like:
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         #  FROM 2 AM WEDNESDAY TO 2 AM CST THURSDAY
         #  FROM 2 AM TO 5 AM CST THURSDAY
         #  FROM 2 AM CST /1 AM MST/ WEDNESDAY TO 2 AM CST /1 AM MST/ THURSDAY
         #  FROM 2 AM CST /1 AM MST/ TO 6 AM CST /5AM MST/ THURSDAY
 
-<<<<<<< HEAD
-        shourStr, shourTZstr, sdescription = stext[0]  #starting text
-        ehourStr, ehourTZstr, edescription = etext[0]  #ending text
-
-        #special cases NOON
-        if shourStr == "12 PM":
-           shourStr = "noon"
-
-        #special cases NOON
-=======
         shourStr, shourTZstr, sdescription = stext[0]  # starting text
         ehourStr, ehourTZstr, edescription = etext[0]  # ending text
 
@@ -878,7 +763,6 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
            shourStr = "noon"
 
         # special cases NOON
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if ehourStr == "12 PM":
            ehourStr = "noon"
 
@@ -886,11 +770,7 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
         # just THIS MORNING
         if sdescription == "early this morning" and \
           edescription == "this morning":
-<<<<<<< HEAD
-            sdescription = "this morning"  #combine two phrases
-=======
             sdescription = "this morning"  # combine two phrases
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # single time zone, same time zone for start/end times - same day
         if len(stext) == 1 and len(etext) == 1 and \
@@ -910,22 +790,14 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
             s = startPrefix + ' ' + shourStr + ' ' + shourTZstr + ' '
             for x in range(1, len(stext)):
                 hourStr, hourTZstr, description = stext[x]
-<<<<<<< HEAD
-                #special cases NOON
-=======
                 # special cases NOON
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if hourStr == "12 PM":
                    hourStr = "noon"
                 s = s + "/" + hourStr + ' ' + hourTZstr + "/ "
             s = s + endPrefix + ' ' + ehourStr + ' ' + ehourTZstr + ' '
             for x in range(1, len(etext)):
                 hourStr, hourTZstr, description = etext[x]
-<<<<<<< HEAD
-                #special cases NOON
-=======
                 # special cases NOON
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if hourStr == "12 PM":
                    hourStr = "noon"
                 s = s + "/" + hourStr + ' ' + hourTZstr + "/ "
@@ -937,11 +809,7 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
             s = startPrefix + ' ' + shourStr + ' ' + shourTZstr + ' '
             for x in range(1, len(stext)):
                 hourStr, hourTZstr, description = stext[x]
-<<<<<<< HEAD
-                #special cases NOON
-=======
                 # special cases NOON
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if hourStr == "12 PM":
                    hourStr = "noon"
                 s = s + "/" + hourStr + ' ' + hourTZstr + "/ "
@@ -949,28 +817,13 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
               ' ' + ehourTZstr + ' '
             for x in range(1, len(etext)):
                 hourStr, hourTZstr, description = etext[x]
-<<<<<<< HEAD
-                #special cases NOON
-=======
                 # special cases NOON
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if hourStr == "12 PM":
                    hourStr = "noon"
                 s = s + "/" + hourStr + ' ' + hourTZstr + "/ "
             s = s + edescription
             return s
 
-<<<<<<< HEAD
-    #calculates the NONE/EXPLICIT timing phrase
-    def ctp_EXPLICIT_FUZZY(self, stext, etext, startPrefix, endPrefix):
-        #returns phrase like:
-        #    FROM 2 AM CST WEDNESDAY THROUGH LATE WEDNESDAY NIGHT
-        #    FROM 2 AM CST /1 AM MST/ WEDNESDAY THROUGH LATE WEDNESDAY NIGHT
-
-        #start phrase
-        hourStr, hourTZstr, description0 = stext[0]
-        #special cases NOON
-=======
     # calculates the NONE/EXPLICIT timing phrase
     def ctp_EXPLICIT_FUZZY(self, stext, etext, startPrefix, endPrefix):
         # returns phrase like:
@@ -980,47 +833,23 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
         # start phrase
         hourStr, hourTZstr, description0 = stext[0]
         # special cases NOON
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if hourStr == "12 PM":
            hourStr = "noon"
         s = startPrefix + ' ' + hourStr + ' ' + hourTZstr + ' '
         for x in range(1, len(stext)):
             hourStr, hourTZstr, description = stext[x]
-<<<<<<< HEAD
-            #special cases NOON
-=======
             # special cases NOON
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if hourStr == "12 PM":
                hourStr = "noon"
             s = s + "/" + hourStr + ' ' + hourTZstr + "/ "
         s = s + description0 + ' '
 
-<<<<<<< HEAD
-        #end phrase
-=======
         # end phrase
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         hourStr, hourTZstr, description = etext[0]
         s = s + endPrefix + ' ' + description
 
         return s
 
-<<<<<<< HEAD
-    #calculates the FUZZY/FUZZY timing phrase
-    def ctp_FUZZY_FUZZY(self, stext, etext, startPrefix, endPrefix):
-        #return phrases like FROM THIS EVENING THROUGH LATE WEDNESDAY NIGHT
-        #return phrases like LATE WEDNESDAY NIGHT
-
-        hourStr, hourTZstr, s_description = stext[0]  #starting text
-        hourStr, hourTZstr, e_description = etext[0]  #ending text
-
-        #special case of description the same
-        if s_description == e_description:
-            return s_description
-
-        #normal case of different descriptions
-=======
     # calculates the FUZZY/FUZZY timing phrase
     def ctp_FUZZY_FUZZY(self, stext, etext, startPrefix, endPrefix):
         # return phrases like FROM THIS EVENING THROUGH LATE WEDNESDAY NIGHT
@@ -1034,37 +863,21 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
             return s_description
 
         # normal case of different descriptions
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         s = startPrefix + ' ' + s_description + ' ' + endPrefix + ' ' + \
           e_description
 
         return s
 
     def ctp_NONE_DAYNIGHT(self, stext, etext, startPrefix, endPrefix):
-<<<<<<< HEAD
-        #return phrases like THROUGH WEDNESDAY
-
-        hourStr, hourTZstr, e_description = etext[0]  #ending text
-=======
         # return phrases like THROUGH WEDNESDAY
 
         hourStr, hourTZstr, e_description = etext[0]  # ending text
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         s = endPrefix + ' ' + e_description
 
         return s
 
     def ctp_EXPLICIT_DAYNIGHT(self, stext, etext, startPrefix, endPrefix):
-<<<<<<< HEAD
-        #returns phrase like:
-        #    FROM 2 AM CST WEDNESDAY THROUGH WEDNESDAY
-        #    FROM 2 AM CST /1 AM MST/ WEDNESDAY THROUGH WEDNESDAY
-
-        #start phrase
-        hourStr, hourTZstr, description0 = stext[0]
-        #special cases NOON
-=======
         # returns phrase like:
         #    FROM 2 AM CST WEDNESDAY THROUGH WEDNESDAY
         #    FROM 2 AM CST /1 AM MST/ WEDNESDAY THROUGH WEDNESDAY
@@ -1072,45 +885,24 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
         # start phrase
         hourStr, hourTZstr, description0 = stext[0]
         # special cases NOON
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if hourStr == "12 PM":
            hourStr = "noon"
         s = startPrefix + ' ' + hourStr + ' ' + hourTZstr + ' '
         for x in range(1, len(stext)):
             hourStr, hourTZstr, description = stext[x]
-<<<<<<< HEAD
-            #special cases NOON
-=======
             # special cases NOON
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if hourStr == "12 PM":
                hourStr = "noon"
             s = s + "/" + hourStr + ' ' + hourTZstr + "/ "
         s = s + description0 + ' '
 
-<<<<<<< HEAD
-        #end phrase
-=======
         # end phrase
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         hourStr, hourTZstr, description = etext[0]
         s = s + endPrefix + ' ' + description
 
         return s
 
     def ctp_FUZZY_DAYNIGHT(self, stext, etext, startPrefix, endPrefix):
-<<<<<<< HEAD
-        #return phrases like FROM THIS EVENING THROUGH WEDNESDAY NIGHT
-
-        hourStr, hourTZstr, s_description = stext[0]  #starting text
-        hourStr, hourTZstr, e_description = etext[0]  #ending text
-
-        #special case of description the same
-        if s_description == e_description:
-            return s_description
-
-        #normal case of different descriptions
-=======
         # return phrases like FROM THIS EVENING THROUGH WEDNESDAY NIGHT
 
         hourStr, hourTZstr, s_description = stext[0]  # starting text
@@ -1121,25 +913,12 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
             return s_description
 
         # normal case of different descriptions
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         s = startPrefix + ' ' + s_description + ' ' + endPrefix + ' ' + \
           e_description
 
         return s
 
     def ctp_DAYNIGHT_DAYNIGHT(self, stext, etext, startPrefix, endPrefix):
-<<<<<<< HEAD
-        #return phrases like FROM TONIGHT THROUGH WEDNESDAY
-
-        hourStr, hourTZstr, s_description = stext[0]  #starting text
-        hourStr, hourTZstr, e_description = etext[0]  #ending text
-
-        #special case of description the same
-        if s_description == e_description:
-            return s_description
-
-        #normal case of different descriptions
-=======
         # return phrases like FROM TONIGHT THROUGH WEDNESDAY
 
         hourStr, hourTZstr, s_description = stext[0]  # starting text
@@ -1150,26 +929,12 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
             return s_description
 
         # normal case of different descriptions
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         s = startPrefix + ' ' + s_description + ' ' + endPrefix + ' ' + \
           e_description
 
         return s
 
     def ctp_DAYNIGHT_EXPLICIT(self, stext, etext, startPrefix, endPrefix):
-<<<<<<< HEAD
-        #returns phrase like:
-        #    FROM TUESDAY UNTIL 2 AM CST WEDNESDAY
-        #    FROM TUESDAY UNTIL 2 AM CST /1 AM MST/ WEDNESDAY
-
-        #start phrase
-        hourStr, hourTZstr, description = stext[0]
-        s = startPrefix + ' ' + description + ' '
-
-        #end phrase
-        hourStr, hourTZstr, description0 = etext[0]
-        #special cases NOON
-=======
         # returns phrase like:
         #    FROM TUESDAY UNTIL 2 AM CST WEDNESDAY
         #    FROM TUESDAY UNTIL 2 AM CST /1 AM MST/ WEDNESDAY
@@ -1181,17 +946,12 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
         # end phrase
         hourStr, hourTZstr, description0 = etext[0]
         # special cases NOON
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if hourStr == "12 PM":
            hourStr = "noon"
         s = s + endPrefix + ' ' + hourStr + ' ' + hourTZstr + ' '
         for x in range(1, len(etext)):
             hourStr, hourTZstr, description = etext[x]
-<<<<<<< HEAD
-            #special cases NOON
-=======
             # special cases NOON
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if hourStr == "12 PM":
                hourStr = "noon"
             s = s + "/" + hourStr + ' ' + hourTZstr + "/ "
@@ -1200,33 +960,15 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
         return s
 
     def ctp_DAYNIGHT_NONE(self, stext, etext, startPrefix, endPrefix):
-<<<<<<< HEAD
-        #return phrases like FROM TONIGHT
-
-        hourStr, hourTZstr, s_description = stext[0]  #starting text
-=======
         # return phrases like FROM TONIGHT
 
         hourStr, hourTZstr, s_description = stext[0]  # starting text
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         s = startPrefix + ' ' + s_description
 
         return s
 
     def ctp_DAYNIGHT_FUZZY(self, stext, etext, startPrefix, endPrefix):
-<<<<<<< HEAD
-        #return phrases like FROM TONIGHT THROUGH WEDNESDAY NIGHT
-
-        hourStr, hourTZstr, s_description = stext[0]  #starting text
-        hourStr, hourTZstr, e_description = etext[0]  #ending text
-
-        #special case of description the same
-        if s_description == e_description:
-            return s_description
-
-        #normal case of different descriptions
-=======
         # return phrases like FROM TONIGHT THROUGH WEDNESDAY NIGHT
 
         hourStr, hourTZstr, s_description = stext[0]  # starting text
@@ -1237,7 +979,6 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
             return s_description
 
         # normal case of different descriptions
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         s = startPrefix + ' ' + s_description + ' ' + endPrefix + ' ' + \
           e_description
 
@@ -1275,33 +1016,19 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
         return d.get(timingType, ("<startPrefix?>", "<endPrefix?>"))
 
     def getTimingType(self, hazRec, issueTime):
-<<<<<<< HEAD
-        #Returns the timing type based on the issuanceTime and hazard record
-        #Returns (startType, endType), which is NONE, EXPLICIT, FUZZY4, FUZZY8
-=======
         # Returns the timing type based on the issuanceTime and hazard record
         # Returns (startType, endType), which is NONE, EXPLICIT, FUZZY4, FUZZY8
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # Get the local headlines customizable timing
         tr = self.makeTimeRange(hazRec['startTime'], hazRec['endTime'])
         locStart, locEnd = self.getLocalHeadlinesTiming(
             None, None, hazRec['phen'], tr, hazRec['id'], issueTime)
 
-<<<<<<< HEAD
-        #time from issuanceTime
-        deltaTstart = hazRec['startTime'] - issueTime  #seconds past now
-        deltaTend = hazRec['endTime'] - issueTime  #seconds past now
-
-        HR = 3600  #convenience constants
-        MIN = 60  #convenience constants
-=======
         # time from issuanceTime
         deltaTstart = hazRec['startTime'] - issueTime  # seconds past now
         deltaTend = hazRec['endTime'] - issueTime  # seconds past now
 
         HR = 3600  # convenience constants
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # record in the past, ignore
         if deltaTend <= 0:
@@ -1309,11 +1036,7 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
 
         # upgrades and cancels
         if hazRec['act'] in ['UPG', 'CAN']:
-<<<<<<< HEAD
-            return ("NONE", "NONE")  #upgrades/cancels never get timing phrases
-=======
             return ("NONE", "NONE")  # upgrades/cancels never get timing phrases
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # expirations EXP codes are always expressed explictly, only end time
         if hazRec['act'] == 'EXP':
@@ -1336,43 +1059,13 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
             return ('NONE', 'NONE')
 
         # special marine case?
-<<<<<<< HEAD
-        marineHazList = ["SC.Y", "SW.Y", "GL.W", "SR.W", 'HF.W', 'BW.Y',
-          'UP.W', 'UP.Y', 'RB.Y', 'SE.W', 'SI.Y']  #treat like watches
-        marinePils = ['CWF', 'OFF', 'NSH', 'GLF']  #specific marine pils
-=======
         marineHazList = ["SC.Y", "GL.W", "SR.W", 'HF.W', 'BW.Y',
           'UP.W', 'UP.Y', 'SE.W']  # treat like watches
         marinePils = ['CWF', 'OFF', 'NSH', 'GLF']  # specific marine pils
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         oconusSites = ['PGUM', 'PPPG', 'PHFO', 'PAFC', 'PAJK', 'PAFG']
 
         # regular products - not marine
         if hazRec['pil'] not in marinePils:
-<<<<<<< HEAD
-            #advisories/warnings
-            if hazRec['sig'] in ['Y', 'W']:  #advisories/warnings - explicit
-                if deltaTstart < 3 * HR:  #no start time in first 3 hours
-                    start = 'NONE'
-                else:
-                    start = 'EXPLICIT'  #explicit start time after 3 hours
-                end = 'EXPLICIT'  #end time always explicit
-
-            #watches
-            elif hazRec['sig'] in ['A']:  #watches - mix of explicit/fuzzy
-                if deltaTstart < 3 * HR:  #no start time in first 3 hours
-                    start = 'NONE'
-                elif deltaTstart < 12 * HR:
-                    start = 'EXPLICIT'  #explicit start time 3-12 hours
-                else:
-                    start = 'FUZZY4'  #fuzzy times after 12 (4/day)
-                if deltaTend < 12 * HR:  #explicit end time 0-12 hours
-                    end = 'EXPLICIT'
-                else:
-                    end = 'FUZZY4'  #fuzzy times after 12 (4/day)
-
-            #local hazards
-=======
             # advisories/warnings
             if hazRec['sig'] in ['Y', 'W']:  # advisories/warnings - explicit
                 if deltaTstart < 3 * HR:  # no start time in first 3 hours
@@ -1395,23 +1088,10 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
                     end = 'FUZZY4'  # fuzzy times after 12 (4/day)
 
             # local hazards
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             elif locStart is not None and locEnd is not None:
                 start = locStart
                 end = locEnd
             else:
-<<<<<<< HEAD
-                if deltaTstart < 3 * HR:  #no start time in first 3 hours
-                    start = 'NONE'
-                elif deltaTstart < 12 * HR:
-                    start = 'EXPLICIT'  #explicit start time 3-12 hours
-                else:
-                    start = 'FUZZY4'  #fuzzy times after 12 (4/day)
-                if deltaTend < 12 * HR:  #explicit end time 0-12 hours
-                    end = 'EXPLICIT'
-                else:
-                    end = 'FUZZY4'  #fuzzy times after 12 (4/day)
-=======
                 if deltaTstart < 3 * HR:  # no start time in first 3 hours
                     start = 'NONE'
                 elif deltaTstart < 12 * HR:
@@ -1422,35 +1102,10 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
                     end = 'EXPLICIT'
                 else:
                     end = 'FUZZY4'  # fuzzy times after 12 (4/day)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # marine - CONUS
         elif hazRec['officeid'] not in oconusSites:
 
-<<<<<<< HEAD
-            #advisories/warnings - explicit, but not some phensigs
-            if hazRec['sig'] in ['Y', 'W'] and phensig not in marineHazList:
-                if deltaTstart < 3 * HR:  #no start time in first 3 hours
-                    start = 'NONE'
-                else:
-                    start = 'EXPLICIT'  #explicit start time after 3 hours
-                end = 'EXPLICIT'  #end time always explicit
-
-            #watches - mix of explicit/fuzzy, some phensig treated as watches
-            elif hazRec['sig'] in ['A'] or phensig in marineHazList:
-                if deltaTstart < 3 * HR:  #no start time in first 3 hours
-                    start = 'NONE'
-                elif deltaTstart < 12 * HR:
-                    start = 'EXPLICIT'  #explicit start time 3-12 hours
-                else:
-                    start = 'FUZZY4'  #fuzzy times after 12 (4/day)
-                if deltaTend < 12 * HR:  #explicit end time 0-12 hours
-                    end = 'EXPLICIT'
-                else:
-                    end = 'FUZZY4'  #fuzzy times after 12 (4/day)
-
-            #local hazards - treat as watches
-=======
             # advisories/warnings - explicit, but not some phensigs
             if hazRec['sig'] in ['Y', 'W'] and phensig not in marineHazList:
                 if deltaTstart < 3 * HR:  # no start time in first 3 hours
@@ -1473,23 +1128,10 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
                     end = 'FUZZY4'  # fuzzy times after 12 (4/day)
 
             # local hazards - treat as watches
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             elif locStart is not None and locEnd is not None:
                 start = locStart
                 end = locEnd
             else:
-<<<<<<< HEAD
-                if deltaTstart < 3 * HR:  #no start time in first 3 hours
-                    start = 'NONE'
-                elif deltaTstart < 12 * HR:
-                    start = 'EXPLICIT'  #explicit start time 3-12 hours
-                else:
-                    start = 'FUZZY4'  #fuzzy times after 12 (4/day)
-                if deltaTend < 12 * HR:  #explicit end time 0-12 hours
-                    end = 'EXPLICIT'
-                else:
-                    end = 'FUZZY4'  #fuzzy times after 12 (4/day)
-=======
                 if deltaTstart < 3 * HR:  # no start time in first 3 hours
                     start = 'NONE'
                 elif deltaTstart < 12 * HR:
@@ -1500,43 +1142,10 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
                     end = 'EXPLICIT'
                 else:
                     end = 'FUZZY4'  # fuzzy times after 12 (4/day)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # marine - OCONUS
         else:
 
-<<<<<<< HEAD
-            #advisories/warnings - explicit, but not some phensigs
-            if hazRec['sig'] in ['Y', 'W'] and phensig not in marineHazList:
-                if deltaTstart < 3 * HR:  #no start time in first 3 hours
-                    start = 'NONE'
-                else:
-                    start = 'EXPLICIT'  #explicit start time after 3 hours
-                end = 'EXPLICIT'  #end time always explicit
-
-            #special marine phensigs - treat as watches, with fuzzy8
-            elif phensig in marineHazList:
-                if deltaTstart < 3 * HR:  #no start time in first 3 hours
-                    start = 'NONE'
-                else:
-                    start = 'FUZZY8'  #fuzzy start times
-                end = 'FUZZY8'  #always fuzzy end times
-
-            #regular watches - fuzzy4
-            elif hazRec['sig'] in ['A']:
-                if deltaTstart < 3 * HR:  #no start time in first 3 hours
-                    start = 'NONE'
-                elif deltaTstart < 12 * HR:
-                    start = 'EXPLICIT'  #explicit start time 3-12 hours
-                else:
-                    start = 'FUZZY4'  #fuzzy times after 12 (4/day)
-                if deltaTend < 12 * HR:  #explicit end time 0-12 hours
-                    end = 'EXPLICIT'
-                else:
-                    end = 'FUZZY4'  #fuzzy times after 12 (4/day)
-
-            #local hazards - treat as watches
-=======
             # advisories/warnings - explicit, but not some phensigs
             if hazRec['sig'] in ['Y', 'W'] and phensig not in marineHazList:
                 if deltaTstart < 3 * HR:  # no start time in first 3 hours
@@ -1567,23 +1176,10 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
                     end = 'FUZZY4'  # fuzzy times after 12 (4/day)
 
             # local hazards - treat as watches
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             elif locStart is not None and locEnd is not None:
                 start = locStart
                 end = locEnd
             else:
-<<<<<<< HEAD
-                if deltaTstart < 3 * HR:  #no start time in first 3 hours
-                    start = 'NONE'
-                elif deltaTstart < 12 * HR:
-                    start = 'EXPLICIT'  #explicit start time 3-12 hours
-                else:
-                    start = 'FUZZY4'  #fuzzy times after 12 (4/day)
-                if deltaTend < 12 * HR:  #explicit end time 0-12 hours
-                    end = 'EXPLICIT'
-                else:
-                    end = 'FUZZY4'  #fuzzy times after 12 (4/day)
-=======
                 if deltaTstart < 3 * HR:  # no start time in first 3 hours
                     start = 'NONE'
                 elif deltaTstart < 12 * HR:
@@ -1594,7 +1190,6 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
                     end = 'EXPLICIT'
                 else:
                     end = 'FUZZY4'  # fuzzy times after 12 (4/day)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         return (start, end)
 
@@ -1614,28 +1209,17 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
         return locStart, locEnd
 
     def hazardTimeZones(self, areaList):
-<<<<<<< HEAD
-        #returns list of time zones for the starting time
-        #and list of time zones for the ending time.  The areaList provides
-        #a complete list of areas for this headline. startT, endT are the
-        #hazard times.
-=======
         # returns list of time zones for the starting time
         # and list of time zones for the ending time.  The areaList provides
         # a complete list of areas for this headline. startT, endT are the
         # hazard times.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # sort the areaList so time zones are in consistent order
         areaList.sort()
 
         # get this time zone
-<<<<<<< HEAD
-        thisTimeZone = os.environ["TZ"]
-=======
         thisTimeZone = offsetTime.getTimeZone()
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         zoneList = []
 
         # get the AreaDictionary that contains time zones per edit area
@@ -1647,11 +1231,7 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
         for areaName in areaList:
             if areaName in areaDict:
                 entry = areaDict[areaName]
-<<<<<<< HEAD
-                if "ugcTimeZone" not in entry: #add your site id
-=======
                 if "ugcTimeZone" not in entry:  # add your site id
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     if thisTimeZone not in zoneList:
                         zoneList.append(thisTimeZone)
                     continue  # skip it
@@ -1680,49 +1260,6 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
 
     def timingWordTableEXPLICIT(self, issueTime, eventTime, timezone,
       timeType='start'):
-<<<<<<< HEAD
-        #returns (timeValue, timeZone, descriptiveWord).
-        #eventTime is either the starting or ending time, based on
-        #the timeType flag. timezone is the time zone for the hazard area
-
-        HR = 3600
-        sameDay = [
-          (0 * HR, 6 * HR, "early this morning"),  #midnght-559am
-          (6 * HR, 12 * HR - 1, "this morning"),  #600am-1159am
-          (12 * HR, 12 * HR + 1, "today"),  #noon
-          (12 * HR + 1, 18 * HR - 1, "this afternoon"),  #1201pm-559pm
-          (18 * HR, 24 * HR, "this evening")]  #6pm-1159pm
-
-        nextDay = [
-          (0 * HR, 0 * HR + 1, "tonight"),  #midnght
-          (0 * HR, 24 * HR, "<dayOfWeek>"), ]  #midnght-1159pm
-
-        subsequentDay = [
-          (0 * HR, 0 * HR + 1, "<dayOfWeek-1> night"),  #midnght
-          (0 * HR, 24 * HR, "<dayOfWeek>"), ]  #midnght-1159pm
-
-        #determine local time
-        myTimeZone = os.environ["TZ"]  # save the defined time zone
-        os.environ["TZ"] = timezone  # set the new time zone
-        ltissue = time.localtime(issueTime)  # issuance local time
-        ltevent = time.localtime(eventTime)  # event local time
-        #get the hour string (e.g., 8 PM)
-        hourStr = time.strftime("%I %p", ltevent)
-        if hourStr[0] == '0':
-            hourStr = hourStr[1:]  #eliminate leading zero
-
-        #get the time zone (e.g., MDT)
-        hourTZstr = time.strftime("%Z", ltevent)
-
-        #determine the delta days from issuance to event
-        diffDays = ltevent[7] - ltissue[7]  #julian day
-        if diffDays < 0:  #year wrap around, assume Dec/Jan
-            diffDays = ltevent[2] + 31 - ltissue[2]  #day of month
-
-        #get description time phrase
-        description = "<day>"
-        hourmin = ltevent[3] * 3600 + ltevent[4] * 60  #hour, minute
-=======
         # returns (timeValue, timeZone, descriptiveWord).
         # eventTime is either the starting or ending time, based on
         # the timeType flag. timezone is the time zone for the hazard area
@@ -1765,7 +1302,6 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
         # get description time phrase
         description = "<day>"
         hourmin = ltevent[3] * 3600 + ltevent[4] * 60  # hour, minute
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if diffDays == 0:
             for (startT, endT, desc) in sameDay:
                 if hourmin >= startT and hourmin < endT and timeType == 'start':
@@ -1776,53 +1312,27 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
                     break
 
         else:
-<<<<<<< HEAD
-            #choose proper table
-=======
             # choose proper table
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if diffDays == 1:
                 table = nextDay
             else:
                 table = subsequentDay
             for (startT, endT, desc) in table:
-<<<<<<< HEAD
-                hourmin = ltevent[3] * 3600 + ltevent[4] * 60  #hour, minute
-=======
                 hourmin = ltevent[3] * 3600 + ltevent[4] * 60  # hour, minute
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if hourmin >= startT and hourmin < endT and timeType == 'start':
                     description = desc
                     break
                 elif hourmin <= endT and timeType == 'end':
                     description = desc
                     break
-<<<<<<< HEAD
-            dow = ltevent[6]  #day of week
-            dowMinusOne = ltevent[6] - 1
-            if dowMinusOne < 0:
-                dowMinusOne = 6  #week wraparound
-=======
             dow = ltevent[6]  # day of week
             dowMinusOne = ltevent[6] - 1
             if dowMinusOne < 0:
                 dowMinusOne = 6  # week wraparound
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             description = description.replace("<dayOfWeek>", self.asciiDayOfWeek(dow))
             description = description.replace("<dayOfWeek-1>", self.asciiDayOfWeek(dowMinusOne))
 
-<<<<<<< HEAD
-        #special cases NOON
-        if hourStr == "12 PM" and description == "today":
-            hourStr = "noon"
-
-        #special cases MIDNIGHT
-        if hourStr == "12 AM":
-            hourStr = "midnight"
-
-        os.environ["TZ"] = myTimeZone  # reset the defined time zone
-=======
         # special cases NOON
         if hourStr == "12 PM" and description == "today":
             hourStr = "noon"
@@ -1833,53 +1343,11 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
 
 
         offsetTime.setTimeZone(myTimeZone)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         return (hourStr, hourTZstr, description)
 
     def timingWordTableFUZZY4(self, issueTime, eventTime, timeZone,
       timeType='start'):
-<<<<<<< HEAD
-        #returns (timeValue, timeZone, descriptiveWord).
-        #eventTime is either the starting or ending time, based on
-        #the timeType flag. timezone is the time zone for the hazard area
-        #table is local time, start, end, descriptive phrase
-        HR = 3600
-        sameDay = [
-          (0 * HR, 6 * HR, "early this morning"),  #midnght-559am
-          (6 * HR, 12 * HR, "this morning"),  #600am-noon
-          (12 * HR, 18 * HR, "this afternoon"),  #1200pm-559pm
-          (18 * HR, 24 * HR, "this evening")]  #6pm-1159pm
-
-        nextDay = [
-          (0 * HR, 0 * HR, "this evening"),  #midnght tonight
-          (0 * HR, 6 * HR, "late tonight"),  #midnght-559am
-          (6 * HR, 12 * HR, "<dayOfWeek> morning"),  #600am-noon
-          (12 * HR, 18 * HR, "<dayOfWeek> afternoon"),  #1200pm-559pm
-          (18 * HR, 24 * HR, "<dayOfWeek> evening")]  #6pm-1159pm
-
-        subsequentDay = [
-          (0 * HR, 0 * HR, "<dayOfWeek-1> evening"),  #midnght ystdy
-          (0 * HR, 6 * HR, "late <dayOfWeek-1> night"),  #midnght-559am
-          (6 * HR, 12 * HR, "<dayOfWeek> morning"),  #600am-noon
-          (12 * HR, 18 * HR, "<dayOfWeek> afternoon"),  #1200pm-559pm
-          (18 * HR, 24 * HR, "<dayOfWeek> evening")]  #6pm-1159pm
-
-        #determine local time
-        myTimeZone = os.environ["TZ"]  # save the defined time zone
-        os.environ["TZ"] = timeZone  # set the new time zone
-        ltissue = time.localtime(issueTime)  # issuance local time
-        ltevent = time.localtime(eventTime)  # event local time
-
-        #determine the delta days from issuance to event
-        diffDays = ltevent[7] - ltissue[7]  #julian day
-        if diffDays < 0:  #year wrap around, assume Dec/Jan
-            diffDays = ltevent[2] + 31 - ltissue[2]  #day of month
-
-        #get description time phrase
-        description = "<day>"
-        hourmin = ltevent[3] * 3600 + ltevent[4] * 60  #hour, minute
-=======
         # returns (timeValue, timeZone, descriptiveWord).
         # eventTime is either the starting or ending time, based on
         # the timeType flag. timezone is the time zone for the hazard area
@@ -1921,7 +1389,6 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
         # get description time phrase
         description = "<day>"
         hourmin = ltevent[3] * 3600 + ltevent[4] * 60  # hour, minute
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if diffDays == 0:
             for (startT, endT, desc) in sameDay:
                 if hourmin >= startT and hourmin < endT and timeType == 'start':
@@ -1932,37 +1399,19 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
                     break
 
         else:
-<<<<<<< HEAD
-            #choose proper table
-=======
             # choose proper table
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if diffDays == 1:
                 table = nextDay
             else:
                 table = subsequentDay
             for (startT, endT, desc) in table:
-<<<<<<< HEAD
-                hourmin = ltevent[3] * 3600 + ltevent[4] * 60  #hour, minute
-=======
                 hourmin = ltevent[3] * 3600 + ltevent[4] * 60  # hour, minute
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if hourmin >= startT and hourmin < endT and timeType == 'start':
                     description = desc
                     break
                 elif hourmin <= endT and timeType == 'end':
                     description = desc
                     break
-<<<<<<< HEAD
-            dow = ltevent[6]  #day of week
-            dowMinusOne = ltevent[6] - 1
-            if dowMinusOne < 0:
-                dowMinusOne = 6  #week wraparound
-            description = description.replace("<dayOfWeek>", self.asciiDayOfWeek(dow))
-            description = description.replace("<dayOfWeek-1>", self.asciiDayOfWeek(dowMinusOne))
-
-        os.environ["TZ"] = myTimeZone  # reset the defined time zone
-=======
             dow = ltevent[6]  # day of week
             dowMinusOne = ltevent[6] - 1
             if dowMinusOne < 0:
@@ -1972,7 +1421,6 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
 
 
         offsetTime.setTimeZone(myTimeZone)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         hourStr = None
         hourTZstr = None
@@ -1980,65 +1428,6 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
 
     def timingWordTableFUZZY8(self, issueTime, eventTime, timeZone,
       timeType='start'):
-<<<<<<< HEAD
-        #returns the descriptive word for the event.  eventTime is either
-        #the starting or ending time, based on the timeType flag.
-        #table is local time, start, end, descriptive phrase-A
-
-        HR = 3600
-        sameDay = [
-          (0 * HR, 3 * HR, "late <dayOfWeek-1> night"),  #midnght-259am
-          (3 * HR, 6 * HR, "early this morning"),  #300am-559am
-          (6 * HR, 9 * HR, "this morning"),  #600am-859am
-          (9 * HR, 12 * HR, "late this morning"),  #900am-1159am
-          (12 * HR, 15 * HR, "early this afternoon"),  #noon-259pm
-          (15 * HR, 18 * HR, "late this afternoon"),  #300pm-559pm
-          (18 * HR, 21 * HR, "this evening"),  #600pm-859pm
-          (21 * HR, 24 * HR, "tonight")]  #900pm-1159pm
-
-        nextDayStart = [
-          (0 * HR, 3 * HR, "late <dayOfWeek-1> night"),  #midnght-259am
-          (3 * HR, 6 * HR, "early <dayOfWeek> morning"),  #300am-559am
-          (6 * HR, 12 * HR, "<dayOfWeek> morning"),  #600am-noon
-          (12 * HR, 18 * HR, "<dayOfWeek> afternoon"),  #1200pm-559pm
-          (18 * HR, 24 * HR, "<dayOfWeek> evening")]  #6pm-1159pm
-
-        nextDayEnd = [
-          (0 * HR, 0 * HR, "tonight"),  #midnght tonight
-          (0 * HR, 3 * HR, "late <dayOfWeek-1> night"),  #midnght-259am
-          (3 * HR, 6 * HR, "early <dayOfWeek> morning"),  #300am-559am
-          (6 * HR, 12 * HR, "<dayOfWeek> morning"),  #600am-noon
-          (12 * HR, 18 * HR, "<dayOfWeek> afternoon"),  #1200pm-559pm
-          (18 * HR, 24 * HR, "<dayOfWeek> night")]  #6pm-1159pm
-
-        subsequentDayStart = [
-          (0 * HR, 6 * HR, "late <dayOfWeek-1> night"),  #midnght-559am
-          (6 * HR, 12 * HR, "<dayOfWeek> morning"),  #600am-noon
-          (12 * HR, 18 * HR, "<dayOfWeek> afternoon"),  #1200pm-559pm
-          (18 * HR, 24 * HR, "<dayOfWeek> evening")]  #6pm-1159pm
-
-        subsequentDayEnd = [
-          (0 * HR, 0 * HR, "<dayOfWeek-1> night"),  #midnght tonight
-          (0 * HR, 6 * HR, "early <dayOfWeek> morning"),  #midnght-559am
-          (6 * HR, 12 * HR, "<dayOfWeek> morning"),  #600am-noon
-          (12 * HR, 18 * HR, "<dayOfWeek> afternoon"),  #1200pm-559pm
-          (18 * HR, 24 * HR, "<dayOfWeek> night")]  #6pm-1159pm
-
-        #determine local time
-        myTimeZone = os.environ["TZ"]  # save the defined time zone
-        os.environ["TZ"] = timeZone  # set the new time zone
-        ltissue = time.localtime(issueTime)  # issuance local time
-        ltevent = time.localtime(eventTime)  # event local time
-
-        #determine the delta days from issuance to event
-        diffDays = ltevent[7] - ltissue[7]  #julian day
-        if diffDays < 0:  #year wrap around, assume Dec/Jan
-            diffDays = ltevent[2] + 31 - ltissue[2]  #day of month
-
-        #get description time phrase
-        description = "<day>"
-        hourmin = ltevent[3] * 3600 + ltevent[4] * 60  #hour, minute
-=======
         # returns the descriptive word for the event.  eventTime is either
         # the starting or ending time, based on the timeType flag.
         # table is local time, start, end, descriptive phrase-A
@@ -2098,7 +1487,6 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
         # get description time phrase
         description = "<day>"
         hourmin = ltevent[3] * 3600 + ltevent[4] * 60  # hour, minute
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if diffDays == 0:
             for (startT, endT, desc) in sameDay:
                 if hourmin >= startT and hourmin < endT and timeType == 'start':
@@ -2109,11 +1497,7 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
                     break
 
         else:
-<<<<<<< HEAD
-            #choose proper table
-=======
             # choose proper table
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if timeType == 'start':
                 if diffDays == 1:
                     table = nextDayStart
@@ -2125,11 +1509,7 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
                 else:
                     table = subsequentDayEnd
             for (startT, endT, desc) in table:
-<<<<<<< HEAD
-                hourmin = ltevent[3] * 3600 + ltevent[4] * 60  #hour, minute
-=======
                 hourmin = ltevent[3] * 3600 + ltevent[4] * 60  # hour, minute
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if hourmin >= startT and hourmin < endT and timeType == 'start':
                     description = desc
                     break
@@ -2137,17 +1517,6 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
                     description = desc
                     break
 
-<<<<<<< HEAD
-       #do substitution
-        dow = ltevent[6]  #day of week
-        dowMinusOne = ltevent[6] - 1
-        if dowMinusOne < 0:
-            dowMinusOne = 6  #week wraparound
-        description = description.replace("<dayOfWeek>", self.asciiDayOfWeek(dow))
-        description = description.replace("<dayOfWeek-1>", self.asciiDayOfWeek(dowMinusOne))
-
-        os.environ["TZ"] = myTimeZone  # reset the defined time zone
-=======
        # do substitution
         dow = ltevent[6]  # day of week
         dowMinusOne = ltevent[6] - 1
@@ -2159,7 +1528,6 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
 
         # reset the defined time zone
         offsetTime.setTimeZone(myTimeZone)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         hourStr = None
         hourTZstr = None
@@ -2167,42 +1535,6 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
 
     def timingWordTableDAYNIGHT(self, issueTime, eventTime, timeZone,
       timeType='start'):
-<<<<<<< HEAD
-        #returns (timeValue, timeZone, descriptiveWord).
-        #eventTime is either the starting or ending time, based on
-        #the timeType flag. timezone is the time zone for the hazard area
-        #table is local time, start, end, descriptive phrase
-        HR = 3600
-        sameDay = [
-          (0 * HR, self.DAY() * HR, "early today"),  #midnght-559am
-          (self.DAY() * HR, self.NIGHT() * HR, "today"),  #600am-6pm
-          (self.NIGHT() * HR, 24 * HR, "tonight")]  #6pm-midnight
-
-        nextDay = [
-          (0 * HR, self.DAY() * HR, "tonight"),  #midnght-559am
-          (self.DAY() * HR, self.NIGHT() * HR, "<dayOfWeek>"),  #600am-6pm
-          (self.NIGHT() * HR, 24 * HR, "<dayOfWeek> night")]  #6pm-midnight
-
-        subsequentDay = [
-          (0 * HR, self.DAY() * HR, "<dayOfWeek-1> night"),  #midnght-559am
-          (self.DAY() * HR, self.NIGHT() * HR, "<dayOfWeek>"),  #600am-6pm
-          (self.NIGHT() * HR, 24 * HR, "<dayOfWeek> night")]  #6pm-midnight
-
-        #determine local time
-        myTimeZone = os.environ["TZ"]  # save the defined time zone
-        os.environ["TZ"] = timeZone  # set the new time zone
-        ltissue = time.localtime(issueTime)  # issuance local time
-        ltevent = time.localtime(eventTime)  # event local time
-
-        #determine the delta days from issuance to event
-        diffDays = ltevent[7] - ltissue[7]  #julian day
-        if diffDays < 0:  #year wrap around, assume Dec/Jan
-            diffDays = ltevent[2] + 31 - ltissue[2]  #day of month
-
-        #get description time phrase
-        description = "<day>"
-        hourmin = ltevent[3] * 3600 + ltevent[4] * 60  #hour, minute
-=======
         # returns (timeValue, timeZone, descriptiveWord).
         # eventTime is either the starting or ending time, based on
         # the timeType flag. timezone is the time zone for the hazard area
@@ -2239,7 +1571,6 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
         # get description time phrase
         description = "<day>"
         hourmin = ltevent[3] * 3600 + ltevent[4] * 60  # hour, minute
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if diffDays == 0:
             for (startT, endT, desc) in sameDay:
                 if hourmin >= startT and hourmin < endT and timeType == 'start':
@@ -2250,37 +1581,19 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
                     break
 
         else:
-<<<<<<< HEAD
-            #choose proper table
-=======
             # choose proper table
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if diffDays == 1:
                 table = nextDay
             else:
                 table = subsequentDay
             for (startT, endT, desc) in table:
-<<<<<<< HEAD
-                hourmin = ltevent[3] * 3600 + ltevent[4] * 60  #hour, minute
-=======
                 hourmin = ltevent[3] * 3600 + ltevent[4] * 60  # hour, minute
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if hourmin >= startT and hourmin < endT and timeType == 'start':
                     description = desc
                     break
                 elif hourmin <= endT and timeType == 'end':
                     description = desc
                     break
-<<<<<<< HEAD
-            dow = ltevent[6]  #day of week
-            dowMinusOne = ltevent[6] - 1
-            if dowMinusOne < 0:
-                dowMinusOne = 6  #week wraparound
-            description = description.replace("<dayOfWeek>", self.asciiDayOfWeek(dow))
-            description = description.replace("<dayOfWeek-1>", self.asciiDayOfWeek(dowMinusOne))
-
-        os.environ["TZ"] = myTimeZone  # reset the defined time zone
-=======
             dow = ltevent[6]  # day of week
             dowMinusOne = ltevent[6] - 1
             if dowMinusOne < 0:
@@ -2291,18 +1604,13 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
         # reset the defined time zone
         offsetTime.setTimeZone(myTimeZone)
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         hourStr = None
         hourTZstr = None
         return (hourStr, hourTZstr, description)
 
     def asciiDayOfWeek(self, number):
-<<<<<<< HEAD
-        #converts number (0-Monday) to day of week
-=======
         # converts number (0-Monday) to day of week
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday',
           'Saturday', 'Sunday']
         if number >= 0 and number < 7:
@@ -2324,11 +1632,7 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
           (hazard['act'] == 'EXP' and issuanceTime > 30 * 60 + hazard['endTime']):
             return ""  # no headline for expired hazards
 
-<<<<<<< HEAD
-        #assemble the hazard type
-=======
         # assemble the hazard type
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         hazStr = hazard['hdln']
 
         # if the hazard is a convective watch, tack on the etn
@@ -2340,11 +1644,7 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
         actionWords = self.actionControlWord(hazard, issuanceTime)
         hazStr = hazStr + ' ' + actionWords
 
-<<<<<<< HEAD
-        #get the timing words
-=======
         # get the timing words
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         timeWords = self.getTimingPhrase(hazard, issuanceTime)
         if len(timeWords):
             hazStr = hazStr + ' ' + timeWords
@@ -2364,24 +1664,15 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
     # then significance, then phen alphabetically.
     @property
     def marineSortHazardAlg(self):
-<<<<<<< HEAD
-        def cmpfunc(r1, r2):
-            #1st by start time
-=======
 
         def cmpfunc(r1, r2):
             # 1st by start time
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if r1['startTime'] < r2['startTime']:
                 return -1
             elif r1['startTime'] > r2['startTime']:
                 return 1
 
-<<<<<<< HEAD
-            #2nd by action
-=======
             # 2nd by action
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             actionCodeOrder = ["CAN", "EXP", "UPG", "NEW", "EXB", "EXA",
                                "EXT", "ROU", "CON"]
             try:
@@ -2396,13 +1687,8 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
                 return -1
             elif aIndex > bIndex:
                 return 1
-<<<<<<< HEAD
-    
-            #3rd by significance
-=======
 
             # 3rd by significance
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             sig = ['W', 'Y', 'A']
             try:
                 index1 = sig.index(r1['sig'])
@@ -2416,26 +1702,12 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
                 return -1
             elif index1 > index2:
                 return 1
-<<<<<<< HEAD
-    
-            #4th by phen (alphabetically)
-=======
 
             # 4th by phen (alphabetically)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if r1['phen'] < r2['phen']:
                 return -1
             elif r1['phen'] > r2['phen']:
                 return 1
-<<<<<<< HEAD
-    
-            #equal
-            return 0
-        return functools.cmp_to_key(cmpfunc)
-    # Sorts headlines for regular products.
-    @property
-    def regularSortHazardAlg(self):
-=======
 
             # equal
             return 0
@@ -2446,36 +1718,23 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
     @property
     def regularSortHazardAlg(self):
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         def cmpfunc(r1, r2):
             actActions = ["NEW", "EXB", "EXA", "EXT", "ROU", "CON"]
             inactActions = ["CAN", "EXP", "UPG"]
             actionCodeOrder = actActions + inactActions
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             # 1st by general action category
             if r1['act'] in actActions and r2['act'] in inactActions:
                 return -1
             elif r1['act'] in inactActions and r2['act'] in actActions:
                 return 1
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             # 2nd by chronological event starting time
             if r1['startTime'] < r2['startTime']:
                 return -1
             elif r1['startTime'] > r2['startTime']:
                 return 1
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             # 3rd by action code order
             try:
                 aIndex = actionCodeOrder.index(r1['act'])
@@ -2490,11 +1749,7 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
             elif aIndex > bIndex:
                 return 1
 
-<<<<<<< HEAD
-            #4th by significance
-=======
             # 4th by significance
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             sig = ['W', 'Y', 'A']
             try:
                 index1 = sig.index(r1['sig'])
@@ -2508,27 +1763,16 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
                 return -1
             elif index1 > index2:
                 return 1
-<<<<<<< HEAD
-    
-            #5th by phen (alphabetically)
-=======
 
             # 5th by phen (alphabetically)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if r1['phen'] < r2['phen']:
                 return -1
             elif r1['phen'] > r2['phen']:
                 return 1
-<<<<<<< HEAD
-    
-            #equal
-            return 0
-=======
 
             # equal
             return 0
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return functools.cmp_to_key(cmpfunc)
 
     # Makes multiple headlines based on the hazards list and returns the lot.
@@ -2548,8 +1792,6 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
         while len(hList) > 0:
             hazard = hList[0]
 
-<<<<<<< HEAD
-=======
             # use pre-formatted headline if it exists
             headlineStr = hazard.get('headlineStr', None)
             isCreatedByHs = hazard.get('createdByHs', False)
@@ -2558,7 +1800,6 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
                 hList.remove(hazard)
                 continue
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             # Can't make phrases with hazards with no 'hdln' entry
             if hazard['hdln'] == "":
                 hList.remove(hazard)
@@ -2595,14 +1836,6 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
         if len(fcstArea) <= 0:
             return ""
         hazardTable = self._hazards.getHazardList(fcstArea)
-<<<<<<< HEAD
-        returnStr = ""
-        issuanceTime = self._issueTime.unixTime()
-
-        returnStr = self.makeHeadlinePhrases(tree, node, hazardTable,
-                                             issuanceTime)
-        #Test mode?
-=======
         issuanceTime = self._issueTime.unixTime()
 
         # Get headline from Hazard Services
@@ -2615,14 +1848,11 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
                                              issuanceTime)
 
         # Test mode?
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         returnStr = self.headlinePhraseTESTcheck(tree.get("argDict"),
           returnStr)
 
         return returnStr.upper()
 
-<<<<<<< HEAD
-=======
     def getHazardServicesHeadlineDicts(self, tree, node, editAreas):
         allowedHazards = self.getAllowedHazardList()
         hazardsTable = self._hazards
@@ -2691,7 +1921,6 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
 
         return mergedDicts
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     # The organizeHazard method brings in the raw analyzed table,
     # then organizes it by edit area, returing a list of
     # editArea lists. The first element of the list must the the first
@@ -2701,11 +1930,6 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
 
         # Initialize data structures to be used.
         byIdDict = {}
-<<<<<<< HEAD
-        byHazardDict = {}
-        masterEditAreaList = []
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # Loop over the activeTable, and organize by editArea
 
@@ -2900,10 +2124,7 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
     # Sorts tuples of (weight, list, time), by weight
     @property
     def _wtListSort(self):
-<<<<<<< HEAD
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         def cmpfunc(a, b):
             if a[0] > b[0]:
                 return -1
@@ -2911,10 +2132,7 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
                 return 0
             else:
                 return 1
-<<<<<<< HEAD
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return functools.cmp_to_key(cmpfunc)
 
     # Modifies string to have ...TEST... if we are in TEST mode.  This
@@ -2935,15 +2153,6 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
         if argDict.get('testMode', 0):
             lines = str.split('\n')
             str = "...THIS MESSAGE IS FOR TEST PURPOSES ONLY...\n"
-<<<<<<< HEAD
-            for x in range(len(lines) - 1):  #-1 for trailing new line
-                line = lines[x]
-
-                #beginning of line
-                if line.find("...") == 0:
-                    line = line[0:3] + "TEST " + line[3:]
-                #end of line
-=======
             for x in range(len(lines) - 1):  # -1 for trailing new line
                 line = lines[x]
 
@@ -2951,7 +2160,6 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
                 if line.find("...") == 0:
                     line = line[0:3] + "TEST " + line[3:]
                 # end of line
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 index = line.rfind("...")
                 if index != 0 and index == len(line) - 3:
                     line = line[0:-3] + " TEST..."
@@ -2960,11 +2168,7 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
 
             return str + '\n'.join(lines)
 
-<<<<<<< HEAD
-        #normal mode (not test mode)
-=======
         # normal mode (not test mode)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         else:
             return str
 
@@ -2978,11 +2182,7 @@ class DiscretePhrases(PhraseBuilder.PhraseBuilder):
 
         # test mode
         if argDict.get('testMode', 0):
-<<<<<<< HEAD
-            phrase = 'Test ' + name  #test mode, prepend "TEST"
-=======
             phrase = 'Test ' + name  # test mode, prepend "TEST"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         else:
             phrase = name
 

@@ -8,20 +8,6 @@
 # This tool generates an XML file based on the hazards defined in the JSON
 # files. The XML file is source of the web graphic for NHC.
 #
-<<<<<<< HEAD
-# April 13, 2020 21020      tlefebvr    Removed empty tags.
-# April 13, 2020 21020      tlefebvr    Slight adjustment to output format.
-# May    6, 2020 21020      tlefebvr    Code clean-up
-# May   27, 2020 21020      tlefebvr    Re-implemented using ElementTree
-# May   28, 2020 21020      tlefebvr    More code review changes.
-# June   3, 2020 21020      tlefebvr    Moved PATH definition to top of module.
-# 
-################################################################################
-
-MenuItems = ["Populate"]
-
-import SmartScript
-=======
 # SOFTWARE HISTORY
 #
 # Date         Ticket#  Engineer    Description
@@ -48,63 +34,30 @@ MenuItems = ["None"]
 import SmartScript
 import os
 import errno
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import TropicalUtility
 import WindWWUtils
 import xml.etree.ElementTree as et
 from xml.etree.ElementTree import ElementTree
 
-<<<<<<< HEAD
-# XML files will be written to this directory
-PATH = "/tmp/" 
-
-class Procedure (TropicalUtility.TropicalUtility):
-=======
 
 class Procedure(TropicalUtility.TropicalUtility):
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def __init__(self, dbss):
         TropicalUtility.TropicalUtility.__init__(self, dbss)
         self._dbss = dbss
         # Instantiate the WindWWUtils module
         self._WindWWUtils = WindWWUtils.WindWWUtils(self._dbss)
-<<<<<<< HEAD
-=======
         self._path = self._WindWWUtils.getDataFilePath()
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def getAdvisoryNames(self):
         """
         Fetches all of the advisory names.
         """
-<<<<<<< HEAD
-        fileNames = self._getStormAdvisoryNames() # fetch the JSON fileNames
-        # Strip the .json
-        finalList = [fileName[:-5] for fileName in fileNames]
-        return finalList
-
-    def fetchStormInfo(self):
-        """
-        Fetch all the storm info dictionaries.
-        """
-        stormInfoDictList = self._WindWWUtils.getStormInfoDicts()
-        stormInfoDicts = {}
-        for stormInfo in stormInfoDictList:
-            # Add the Breakpoints key if we don't have it.
-            if "Breakpoints" not in stormInfo:
-                stormInfo["Breakpoints"] = {}
-
-            stormInfoDicts[stormInfo["pil"]] = stormInfo
-
-        return stormInfoDicts
-=======
         fileNames = self._getStormAdvisoryNames()  # fetch the JSON fileNames
         # Strip the .json
         finalList = [fileName[:-5] for fileName in fileNames]
 
         return finalList
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def parsePhenSig(self, hazard):
         """
@@ -122,22 +75,12 @@ class Procedure(TropicalUtility.TropicalUtility):
         return finalList
 
     def execute(self, editArea, timeRange, varDict):
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # Fetch the active advisory names from the JSON files.
         self._advisoryNames = sorted(self.getAdvisoryNames())
         if not self._advisoryNames:
             self.statusBarMsg("No Advisory files found. Please run StormInfo first.", "U")
             return
 
-<<<<<<< HEAD
-        # Fetch the storm information from the JSON files.        
-        self._stormInfoDict = self.fetchStormInfo()
-        for advisory in self._stormInfoDict:
-            stormName = self._stormInfoDict[advisory]["stormName"]
-=======
         # Fetch the storm information from the JSON files.
         self._stormInfoDict = self._WindWWUtils.fetchStormInfo()
         for advisory in self._stormInfoDict:
@@ -145,7 +88,6 @@ class Procedure(TropicalUtility.TropicalUtility):
             lastModified = self._stormInfoDict[advisory]["lastModified"]
             advisoryNumber = self._stormInfoDict[advisory]["advisoryNumber"]
             pil = self._stormInfoDict[advisory]["pil"]
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             stormData = et.Element(stormName)
             if "latLonDict" not in self._stormInfoDict[advisory]:
                 continue
@@ -155,22 +97,6 @@ class Procedure(TropicalUtility.TropicalUtility):
                     continue
                 phenSigList = self.parsePhenSig(hazard)
                 for phen, sig in phenSigList:
-<<<<<<< HEAD
-                    
-                    for segment in latLonSegments:
-                        latLonStr = ""
-                        for lat, lon in segment:   
-                            latLonStr += str(lat) + " " + str(lon) + " "
-                        # Define the SubElements and values
-                        phenItem = et.SubElement(stormData, "WWType").text=phen
-                        sigItem = et.SubElement(stormData, "WWCat").text=sig
-                        pointsItem = et.SubElement(stormData, "WWPoints").text=latLonStr
-
-            stormDataStr = et.tostring(stormData)
-            pathname = PATH + stormName + ".xml"
-            ElementTree(stormData).write(pathname, encoding="utf-8", xml_declaration=True)
-
-=======
                     for segment in latLonSegments:
                         latLonStr = ""
                         for lat, lon in segment:
@@ -195,4 +121,3 @@ class Procedure(TropicalUtility.TropicalUtility):
 
             # Display a message in CAVE
             self.statusBarMsg("Procedure completed. Produced an .xml file for wwgraph.", "A")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

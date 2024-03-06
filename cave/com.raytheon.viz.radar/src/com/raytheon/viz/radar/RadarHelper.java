@@ -47,10 +47,7 @@ import com.raytheon.uf.common.dataplugin.radar.level3.UnlinkedVectorPacket;
 import com.raytheon.uf.common.dataplugin.radar.level3.WindBarbPacket;
 import com.raytheon.uf.common.dataplugin.radar.util.RadarConstants;
 import com.raytheon.uf.common.dataplugin.radar.util.RadarDataRetriever;
-<<<<<<< HEAD
-=======
 import com.raytheon.uf.common.dataplugin.radar.util.RadarRecordUtil;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.dataquery.requests.DbQueryRequest;
 import com.raytheon.uf.common.dataquery.requests.DbQueryRequest.OrderMode;
 import com.raytheon.uf.common.dataquery.requests.RequestConstraint;
@@ -61,12 +58,6 @@ import com.raytheon.uf.common.datastorage.IDataStore;
 import com.raytheon.uf.common.datastorage.StorageException;
 import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
-<<<<<<< HEAD
-import com.raytheon.uf.common.time.util.TimeUtil;
-import com.raytheon.uf.viz.core.exception.VizException;
-import com.raytheon.uf.viz.core.requests.ThriftClient;
-import com.raytheon.viz.awipstools.common.StormTrackData;
-=======
 import com.raytheon.uf.common.time.SimulatedTime;
 import com.raytheon.uf.common.time.util.TimeUtil;
 import com.raytheon.uf.viz.core.exception.VizException;
@@ -76,7 +67,6 @@ import com.raytheon.viz.awipstools.common.StormTrackData;
 import com.raytheon.viz.radar.rsc.image.RadarSRMResource.SRMSource;
 import com.raytheon.viz.radar.ui.RadarDisplayControls;
 import com.raytheon.viz.radar.ui.RadarDisplayManager;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Gets information from classes and processes these values to figure values for
@@ -99,11 +89,8 @@ import com.raytheon.viz.radar.ui.RadarDisplayManager;
  * Mar 26, 2018  6711      randerso     Removed methods/fields that were
  *                                      duplicated in RadarUtil and
  *                                      RadarConstants
-<<<<<<< HEAD
-=======
  * Feb 22, 2023  9021      mapeters     Moved loadSRMVelocity() here from
  *                                      RadarSRMResource
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -473,8 +460,6 @@ public class RadarHelper {
         return rval;
     }
 
-<<<<<<< HEAD
-=======
     public static void loadSRMVelocity(RadarRecord record) throws VizException {
         RadarDisplayControls currentSettings = RadarDisplayManager.getInstance()
                 .getCurrentSettings();
@@ -526,5 +511,4 @@ public class RadarHelper {
         RadarRecordUtil.setSRMData(record, direction, speed, movementTime,
                 sourceName);
     }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

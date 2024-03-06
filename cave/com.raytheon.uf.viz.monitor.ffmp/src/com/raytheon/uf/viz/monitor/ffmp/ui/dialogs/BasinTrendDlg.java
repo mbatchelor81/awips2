@@ -93,11 +93,7 @@ public class BasinTrendDlg extends CaveSWTDialog {
 
     /** Performance logger */
     private final IPerformanceStatusHandler perfLog = PerformanceStatus
-<<<<<<< HEAD
-            .getHandler("FFMP Basin Trend:");
-=======
             .getHandler("FFMP Basin Trend");
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * String prefix for the color for label.

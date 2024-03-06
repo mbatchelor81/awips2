@@ -32,11 +32,6 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
-<<<<<<< HEAD
-=======
-import org.locationtech.jts.geom.Geometry;
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.dataplugin.PluginDataObject;
 import com.raytheon.uf.common.dataplugin.annotations.DataURI;
 import com.raytheon.uf.common.dataplugin.persist.IPersistable;
@@ -47,10 +42,7 @@ import com.raytheon.uf.common.pointdata.PointDataView;
 import com.raytheon.uf.common.pointdata.spatial.SurfaceObsLocation;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerialize;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
-<<<<<<< HEAD
 import org.locationtech.jts.geom.Geometry;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * The GOESSounding class encapsulates the location and time information for a
@@ -74,40 +66,23 @@ import org.locationtech.jts.geom.Geometry;
  * 10/16/2014   3454       bphillip    Upgrading to Hibernate 4
  * Jul 16, 2015 4360       rferrel     Add name to unique constraint.
  * Mar 20, 2019 6140       tgurney     Hibernate 5 fixes
-<<<<<<< HEAD
-=======
- * Aug 08, 2022 8892       tjensen     Update indexes for Hibernate 5
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
  * @author jkorman
  */
 @Entity
-<<<<<<< HEAD
 @SequenceGenerator(initialValue = 1, name = PluginDataObject.ID_GEN,
         sequenceName = "goessoundingseq")
-=======
-@SequenceGenerator(initialValue = 1, name = PluginDataObject.ID_GEN, sequenceName = "goessoundingseq")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 /*
  * Both refTime and forecastTime are included in the refTimeIndex since
  * forecastTime is unlikely to be used.
  */
-<<<<<<< HEAD
 @Table(name = "goessounding", uniqueConstraints = { @UniqueConstraint(
         name = "uk_goessounding_datauri_fields",
         columnNames = { "stationid", "reftime", "latitude", "longitude" }) },
         indexes = { @Index(name = "goessounding_refTimeIndex",
                 columnList = "refTime,forecastTime") })
-=======
-@Table(name = "goessounding", uniqueConstraints = {
-        @UniqueConstraint(name = "uk_goessounding_datauri_fields", columnNames = {
-                "stationid", "reftime", "latitude",
-                "longitude" }) }, indexes = {
-                        @Index(name = "%TABLE%_refTimeIndex", columnList = "refTime,forecastTime"),
-                        @Index(name = "%TABLE%_stationIndex", columnList = "stationId") })
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 @DynamicSerialize
 public class GOESSounding extends PersistablePluginDataObject
         implements ISpatialEnabled, IPointData, IPersistable {

@@ -26,9 +26,6 @@
     <default-memory-setting>
         <default-max-memory>
             <jvm-arg>-Xmx</jvm-arg>
-<<<<<<< HEAD
-            <value>6144M</value>
-=======
             <!--
                 This must match the Xmx value in cave.ini, which is generated
                 based off the Xmx values in awips.product. IniFileGenerator.java
@@ -37,7 +34,6 @@
                 the Xmx substitution values below.
             -->
             <value>8192M</value>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         </default-max-memory>
     </default-memory-setting>
     
@@ -234,11 +230,7 @@
             <site-type>wfo</site-type>
             <ini-substitutions>
                 <max-memory>
-<<<<<<< HEAD
-                    <value>6144M</value>
-=======
                     <value>8192M</value>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 </max-memory>
             </ini-substitutions>
         </site-type-override>
@@ -256,11 +248,7 @@
             <site-type>ncep</site-type>
             <ini-substitutions>
                 <max-memory>
-<<<<<<< HEAD
-                    <value>3072M</value>
-=======
                     <value>31744M</value>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 </max-memory>
             </ini-substitutions>
         </site-type-override>

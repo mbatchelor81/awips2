@@ -27,26 +27,15 @@ package com.raytheon.uf.common.registry.constants;
  * 
  * SOFTWARE HISTORY
  * 
-<<<<<<< HEAD
- * Date         Ticket#    Engineer    Description
- * ------------ ---------- ----------- --------------------------
- * Jul 31, 2012            bphillip     Initial creation
- * 4/9/2013     1802       bphillip    Moved into EBXML common plugin
-=======
  * Date          Ticket#  Engineer    Description
  * ------------- -------- ----------- --------------------------
  * Jul 31, 2012           bphillip    Initial creation
  * Apr 09, 2013  1802     bphillip    Moved into EBXML common plugin
  * May 26, 2020  8165     bsteffen    Remove auditableevent and notification.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
  * @author bphillip
-<<<<<<< HEAD
- * @version 1.0
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  */
 public class RegistryObjectTypes {
 
@@ -58,11 +47,6 @@ public class RegistryObjectTypes {
 
     public static final String ASSOCIATION_PATH = "/urn:oasis:names:tc:ebxml-regrep:classificationScheme:AssociationType/HasFederationMember";
 
-<<<<<<< HEAD
-    public static final String AUDITABLE_EVENT = "urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:AuditableEvent";
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public static final String CLASSIFICATION = "urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification";
 
     public static final String CLASSIFICATION_NODE = "urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ClassificationNode";
@@ -97,11 +81,6 @@ public class RegistryObjectTypes {
 
     public static final String FEDERATION = "urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Federation";
 
-<<<<<<< HEAD
-    public static final String NOTIFICATION = "urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Notification";
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public static final String ORGANIZATION = "urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Organization";
 
     public static final String PARTY = "urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Party";

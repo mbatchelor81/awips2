@@ -35,11 +35,8 @@
 #    10/20/2014       #3685        randerso       Changes to support mixed case products
 #    07/15/2016       #5749        randerso       Format lists with commas
 #    01/14/2020      DR#21161      mbelk          Fixed "Issued by" line length
-<<<<<<< HEAD
-=======
 #    05/11/2023       #2033877     smoorthy       Utilize timezone in offsetTime.py, as opposed to 
 #                                  os.environ['TZ']
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 ##
 
@@ -60,11 +57,8 @@ import time
 import re
 
 
-<<<<<<< HEAD
-=======
 import offsetTime
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 class Header(EditAreaUtils.EditAreaUtils, StringUtils.StringUtils):
     #             TimeRangeUtils):
 
@@ -191,12 +185,8 @@ class Header(EditAreaUtils.EditAreaUtils, StringUtils.StringUtils):
                                   linelength=self._lineLength, breakStr=["-"])
 
         # get this time zone
-<<<<<<< HEAD
-        thisTimeZone = os.environ["TZ"]
-=======
         thisTimeZone = offsetTime.getTimeZone()
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         zoneList = []
         # check to see if we have any areas outside our time zone
         for areaName in areaList:
@@ -729,14 +719,8 @@ class Header(EditAreaUtils.EditAreaUtils, StringUtils.StringUtils):
             raise Exception(s)
 
         # reset time zone to GMT for this function
-<<<<<<< HEAD
-        prevTZ = os.environ.get('TZ', None)
-        os.environ['TZ'] = "GMT0"
-        time.tzset()
-=======
         prevTZ = offsetTime.getTimeZone()
         offsetTime.setTimeZone("GMT0")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # assemble time tuple
         gmtuple = time.gmtime(time.time())
@@ -759,14 +743,6 @@ class Header(EditAreaUtils.EditAreaUtils, StringUtils.StringUtils):
         dt = datetime.datetime(wmo_year, wmo_month, wmo_day, wmo_hour, wmo_min, tzinfo=datetime.timezone.utc)
         wmoTime = dt.timestamp()
 
-<<<<<<< HEAD
-        # reset the time zone
-        if prevTZ is not None:
-            os.environ['TZ'] = prevTZ
-        else:
-            del os.environ['TZ']
-        time.tzset()
-=======
 
         # reset the time zone
         if prevTZ is not None:
@@ -774,7 +750,6 @@ class Header(EditAreaUtils.EditAreaUtils, StringUtils.StringUtils):
         else:
             offsetTime.setTimeZone('GMT0')
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return wmoTime
 
     # Given the issuance time, offset in hours from local time midnight,
@@ -865,14 +840,8 @@ class Header(EditAreaUtils.EditAreaUtils, StringUtils.StringUtils):
             return 0
         else:
             # reset time zone to GMT for this function
-<<<<<<< HEAD
-            prevTZ = os.environ.get('TZ', None)
-            os.environ['TZ'] = "GMT0"
-            time.tzset()
-=======
             prevTZ = offsetTime.getTimeZone()
             offsetTime.setTimeZone("GMT0")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             timeString = yyyymmdd + hhmm
             timeTuple = time.strptime(timeString, "%y%m%d%H%M")
@@ -880,16 +849,9 @@ class Header(EditAreaUtils.EditAreaUtils, StringUtils.StringUtils):
 
             # reset the time zone
             if prevTZ is not None:
-<<<<<<< HEAD
-                os.environ['TZ'] = prevTZ
-            else:
-                del os.environ['TZ']
-            time.tzset()
-=======
                 offsetTime.setTimeZone(prevTZ)
             else:
                 offsetTime.setTimeZone("GMT0")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return seconds
 
 #############################

@@ -23,11 +23,7 @@
         at different localization levels will be combined. 
     -->
 <DerivedParameter abbreviation="ZDR" name="Differential Reflectivity" unit="dB">
-<<<<<<< HEAD
-    <Method name="SliceSample" levels="S,0.5kmAgl&gt;10kmAgl,FH,TEMP,WetBulb0">
-=======
     <Method name="SliceSample" levels="S,1.5kftAgl>40kftAgl,FH,TEMP,WetBulb0">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <Field abbreviation="ZDR" level="3D" />
         <Field abbreviation="P" />
         <ConstantField value="-2" />

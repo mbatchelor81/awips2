@@ -24,20 +24,12 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-<<<<<<< HEAD
-=======
-import javax.persistence.Index;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
-<<<<<<< HEAD
 import org.hibernate.annotations.Index;
-=======
-import org.locationtech.jts.geom.Geometry;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.uf.common.dataplugin.PluginDataObject;
 import com.raytheon.uf.common.dataplugin.annotations.DataURI;
@@ -50,10 +42,7 @@ import com.raytheon.uf.common.pointdata.PointDataView;
 import com.raytheon.uf.common.pointdata.spatial.SurfaceObsLocation;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerialize;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
-<<<<<<< HEAD
 import org.locationtech.jts.geom.Geometry;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Record implementation for Local Storm Reports
@@ -82,10 +71,6 @@ import org.locationtech.jts.geom.Geometry;
  *                                  nullable.
  * Mar 12, 2018  6824     randerso  Improved readability of toString() result.
  *                                  Code cleanup.
-<<<<<<< HEAD
-=======
- * Aug 08, 2022  8892     tjensen   Update indexes for Hibernate 5
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -93,30 +78,17 @@ import org.locationtech.jts.geom.Geometry;
  */
 @Entity
 @SequenceGenerator(initialValue = 1, name = PluginDataObject.ID_GEN, sequenceName = "lsrseq")
-<<<<<<< HEAD
 @Table(name = "lsr", uniqueConstraints = {
         @UniqueConstraint(name = "uk_lsr_datauri_fields", columnNames = {
                 "latitude", "longitude", "stationId", "refTime", "forecastTime",
                 "eventType" }) })
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 /*
  * Both refTime and forecastTime are included in the refTimeIndex since
  * forecastTime is unlikely to be used.
  */
-<<<<<<< HEAD
 @org.hibernate.annotations.Table(appliesTo = "lsr", indexes = {
         @Index(name = "lsr_refTimeIndex", columnNames = { "refTime",
                 "forecastTime" }) })
-=======
-@Table(name = "lsr", uniqueConstraints = {
-        @UniqueConstraint(name = "uk_lsr_datauri_fields", columnNames = {
-                "latitude", "longitude", "stationId", "refTime", "forecastTime",
-                "eventType" }) }, indexes = {
-                        @Index(name = "%TABLE%_refTimeIndex", columnList = "refTime, forecastTime"),
-                        @Index(name = "%TABLE%_stationIndex", columnList = "stationId") })
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 @DynamicSerialize
 public class LocalStormReport extends PersistablePluginDataObject
         implements ISpatialEnabled, IPointData, IPersistable {

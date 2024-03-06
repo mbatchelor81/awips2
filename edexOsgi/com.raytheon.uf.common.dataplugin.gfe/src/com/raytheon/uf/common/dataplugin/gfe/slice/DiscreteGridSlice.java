@@ -23,10 +23,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-<<<<<<< HEAD
-=======
 import java.util.Comparator;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.Iterator;
 import java.util.List;
 
@@ -66,15 +63,12 @@ import jep.NDArray;
  * Dec 13, 2017  7178     randerso  Code formatting and cleanup
  * Jan 04, 2018  7178     randerso  Change clone() to copy(). Code cleanup.
  *                                  Removed deprecated setKey methods
-<<<<<<< HEAD
-=======
  * May 15, 2023  2033890  dhaines   Changed sorting of usedKeys in collapse to use 
  *                                  a comparator with Byte::toUnsignedInt - this
  *                                  prevents having keys with negative indeces at 
  *                                  the beginning of the key list, which was causing
  *                                  GFE hazard transformations to occur when the
  *                                  number of unique keys exceeded 128
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -251,13 +245,8 @@ public class DiscreteGridSlice extends AbstractGridSlice {
         byte[] thisData = discreteGrid.getBuffer().array();
         byte[] rhsData = rhsGrid.getBuffer().array();
         for (int i = 0; i < thisData.length; i++) {
-<<<<<<< HEAD
-            if (!this.keys[0xFF & thisData[i]]
-                    .equals(rhsDiscreteGridSlice.keys[0xFF & rhsData[i]])) {
-=======
             if (!this.keys[Byte.toUnsignedInt(thisData[i])]
                     .equals(rhsDiscreteGridSlice.keys[Byte.toUnsignedInt(rhsData[i])])) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 return false;
             }
         }
@@ -276,11 +265,7 @@ public class DiscreteGridSlice extends AbstractGridSlice {
         int keyLength = keys.length;
         byte[] b = discreteGrid.getBuffer().array();
         for (int i = 0; i < b.length; i++) {
-<<<<<<< HEAD
-            int index = 0xFF & b[i];
-=======
             int index = Byte.toUnsignedInt(b[i]);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if (index >= keyLength) {
                 return "Data Values Exceeded in Grid at coordinate: "
                         + (i % discreteGrid.getXdim()) + ","
@@ -388,11 +373,7 @@ public class DiscreteGridSlice extends AbstractGridSlice {
                 if (editArea.get(i, j) != 0) {
                     // Get the DiscreteKey from the source grid
                     byte dByte = gsDiscreteGrid.get(i, j);
-<<<<<<< HEAD
-                    DiscreteKey dKey = gs.keys[0xFF & dByte];
-=======
                     DiscreteKey dKey = gs.keys[Byte.toUnsignedInt(dByte)];
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     // See if this key already exists in target grid
                     boolean found = false;
                     byte keyIndex = 0;
@@ -470,11 +451,7 @@ public class DiscreteGridSlice extends AbstractGridSlice {
         byte[] data = discreteGrid.getBuffer().array();
         int thisB;
         for (int i = 0; i < data.length; i++) {
-<<<<<<< HEAD
-            thisB = 0xFF & data[i];
-=======
             thisB = Byte.toUnsignedInt(data[i]);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             byte keyIndex;
             if ((keyIndex = (byte) currentKeys.indexOf(gs.keys[thisB])) != -1) {
                 data[i] = keyIndex;
@@ -636,12 +613,8 @@ public class DiscreteGridSlice extends AbstractGridSlice {
         byte[] rhsB = gs.getDiscreteGrid().getBuffer().array();
         byte[] b = bits.getBuffer().array();
         for (int i = 0; i < thisB.length; i++) {
-<<<<<<< HEAD
-            if (keys[0xFF & thisB[i]].equals(gs.keys[0xFF & rhsB[i]])) {
-=======
             if (keys[Byte.toUnsignedInt(thisB[i])].equals(
                         gs.keys[Byte.toUnsignedInt(rhsB[i])])) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 b[i] = (byte) 1;
             }
         }
@@ -695,22 +668,14 @@ public class DiscreteGridSlice extends AbstractGridSlice {
         /*
          * Now remove all unused keys
          */
-<<<<<<< HEAD
-        Collections.sort(usedKeys);
-=======
         Collections.sort(usedKeys, Comparator.comparingInt(Byte::toUnsignedInt));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         int keyIndex = 0;
         DiscreteKey newKey[] = new DiscreteKey[usedKeys.size()];
         for (Iterator<Byte> usedKeysI = usedKeys.iterator(); usedKeysI
                 .hasNext(); keyIndex++) {
             byte thisByte = usedKeysI.next();
             discreteGrid.setAllOfValue(thisByte, (byte) keyIndex);
-<<<<<<< HEAD
-            newKey[keyIndex] = keys[0xFF & thisByte];
-=======
             newKey[keyIndex] = keys[Byte.toUnsignedInt(thisByte)];
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         keys = newKey;

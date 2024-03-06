@@ -72,11 +72,8 @@ import com.raytheon.viz.gfe.core.IAsyncStartupObjectListener;
  *                                  constructor so SiteMap is initialized before
  *                                  any formatters are run since it fails to
  *                                  initialized on a Jep thread.
-<<<<<<< HEAD
-=======
  * Jan 31, 2022  8761     mapeters  Allow other plugins to contribute extra
  *                                  initializers
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -85,15 +82,10 @@ import com.raytheon.viz.gfe.core.IAsyncStartupObjectListener;
 
 public class TextProductManager implements ILocalizationPathObserver {
 
-<<<<<<< HEAD
-    private final IUFStatusHandler statusHandler = UFStatus
-            .getHandler(getClass());
-=======
     private static final IUFStatusHandler statusHandler = UFStatus
             .getHandler(TextProductManager.class);
 
     private static final List<Runnable> extraInitializers = new ArrayList<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private String issuedBy;
 
@@ -123,11 +115,6 @@ public class TextProductManager implements ILocalizationPathObserver {
         SiteMap.getInstance();
     }
 
-<<<<<<< HEAD
-    public void init(boolean startListener,
-            final IAsyncStartupObjectListener initListener) {
-        CompletableFuture.runAsync(() -> {
-=======
     /**
      * Register a runnable that should be run to perform some extra
      * initialization for each text product manager instance.
@@ -153,7 +140,6 @@ public class TextProductManager implements ILocalizationPathObserver {
          * https://github.com/eclipse-ee4j/jaxb-api/issues/99
          */
         new Thread(() -> {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             try (FormatterScript script = new FormatterScriptFactory()
                     .createPythonScript()) {
                 Map<String, Object> map = new HashMap<>(2, 1f);
@@ -167,10 +153,6 @@ public class TextProductManager implements ILocalizationPathObserver {
                         e);
             }
 
-<<<<<<< HEAD
-            initListener.objectInitialized();
-        });
-=======
             for (Runnable runnable : extraInitializers) {
                 try {
                     runnable.run();
@@ -188,7 +170,6 @@ public class TextProductManager implements ILocalizationPathObserver {
 
             initListener.objectInitialized();
         }).start();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         if (startListener) {
             IPathManager pathMgr = PathManagerFactory.getPathManager();

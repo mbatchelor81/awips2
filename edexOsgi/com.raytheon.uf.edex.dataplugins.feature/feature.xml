@@ -44,11 +44,7 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-<<<<<<< HEAD
          
-=======
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    <plugin
          id="com.raytheon.uf.common.dataplugin.ldad"
          download-size="0"
@@ -57,27 +53,12 @@
          unpack="false"/>
 
    <plugin
-<<<<<<< HEAD
-=======
-         id="com.raytheon.uf.common.dataplugin.ldadhydro"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
          id="com.raytheon.uf.common.dataplugin.ldadmesonet"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-<<<<<<< HEAD
     <plugin
-=======
-
-   <plugin
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
          id="com.raytheon.uf.common.dataplugin.lsr"
          download-size="0"
          install-size="0"
@@ -90,11 +71,7 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-<<<<<<< HEAD
          
-=======
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    <plugin
          id="com.raytheon.uf.common.dataplugin.sfcobs"
          download-size="0"
@@ -138,26 +115,12 @@
          unpack="false"/>
 
    <plugin
-<<<<<<< HEAD
-=======
-         id="com.raytheon.edex.plugin.ldadhydro"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
          id="com.raytheon.edex.plugin.ldad"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-<<<<<<< HEAD
          
-=======
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    <plugin
          id="com.raytheon.edex.plugin.obs"
          download-size="0"
@@ -213,11 +176,7 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-<<<<<<< HEAD
          
-=======
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    <plugin
          id="com.raytheon.uf.edex.plugin.lsr"
          download-size="0"
@@ -230,11 +189,7 @@
          download-size="0"
          install-size="0"
          version="0.0.0"
-<<<<<<< HEAD
          unpack="false"/>         
-=======
-         unpack="false"/>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
    <plugin
          id="com.raytheon.uf.edex.plugin.svrwx"
@@ -300,15 +255,6 @@
          unpack="false"/>
 
    <plugin
-<<<<<<< HEAD
-=======
-         id="com.raytheon.uf.common.plugin.hpe"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
          id="com.raytheon.uf.common.damagepath"
          download-size="0"
          install-size="0"

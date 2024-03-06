@@ -28,9 +28,6 @@ text.marker
     {
         font-family: MarkerSymbolFont;
     }
-<<<<<<< HEAD
-
-=======
 text.large
     {
        fill: none;
@@ -68,4 +65,3 @@ text.arrow2
 @font-face { font-family: "LargeSpecialSymbolFont";
               src: url(LargeSpecialSymbols.svg#LrgSpecialSymbols); }
               
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

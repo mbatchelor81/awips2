@@ -48,11 +48,7 @@ import os
 #                                              local-delivery messages
 #
 
-<<<<<<< HEAD
 from awips import NotificationMessage 
-=======
-from ufpy import NotificationMessage 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 def usage():
   print('')

@@ -21,10 +21,6 @@ package com.raytheon.viz.radar.rsc;
 
 import java.io.File;
 import java.util.Arrays;
-<<<<<<< HEAD
-import java.util.Collection;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -35,10 +31,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
-<<<<<<< HEAD
-=======
 import java.util.function.Function;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
@@ -97,13 +90,8 @@ import com.raytheon.viz.radar.textcontributors.UpperTextSet;
 
 import si.uom.NonSI;
 import systems.uom.common.USCustomary;
-<<<<<<< HEAD
-import tec.uom.se.AbstractUnit;
-import tec.uom.se.format.SimpleUnitFormat;
-=======
 import tech.units.indriya.AbstractUnit;
 import tech.units.indriya.format.SimpleUnitFormat;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Top level radar resource that contains the code that is shared by all below
@@ -130,10 +118,7 @@ import tech.units.indriya.format.SimpleUnitFormat;
  *                                   Handled unit conversion
  * Mar 02, 2021  22247    smoorthy   Added volume scan time calculation logic using
  *                                   cached data times.
-<<<<<<< HEAD
-=======
  * Nov 14, 2022  8973     mapeters   Sync radarRecords access
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -159,46 +144,19 @@ public class AbstractRadarResource<D extends IDescriptor>
     }
 
     private static final Set<InterrogationKey<?>> defaultInspectLabels = new HashSet<>(
-<<<<<<< HEAD
-            Arrays.asList(new InterrogationKey<?>[] { Interrogator.VALUE,
-=======
             Arrays.asList(Interrogator.VALUE,
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     RadarDefaultInterrogator.VALUE_STRING,
                     RadarDefaultInterrogator.SHEAR,
                     RadarDefaultInterrogator.MSL, RadarDefaultInterrogator.AGL,
                     IRadarInterrogator.RANGE, IRadarInterrogator.AZIMUTH,
-<<<<<<< HEAD
-                    IRadarInterrogator.ICAO }));
-
-    private static final Set<InterrogationKey<?>> primaryInspectLabels = new HashSet<>(
-            Arrays.asList(new InterrogationKey<?>[] {
-                    RadarDefaultInterrogator.MNEMONIC, Interrogator.VALUE,
-=======
                     IRadarInterrogator.ICAO));
 
     private static final Set<InterrogationKey<?>> primaryInspectLabels = new HashSet<>(
             Arrays.asList(RadarDefaultInterrogator.MNEMONIC, Interrogator.VALUE,
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     RadarDefaultInterrogator.VALUE_STRING,
                     RadarDefaultInterrogator.SHEAR,
                     RadarDefaultInterrogator.MSL, RadarDefaultInterrogator.AGL,
                     IRadarInterrogator.RANGE, IRadarInterrogator.AZIMUTH,
-<<<<<<< HEAD
-                    IRadarInterrogator.ICAO }));
-
-    private static final Set<InterrogationKey<?>> secondaryInspectLabels = new HashSet<>(
-            Arrays.asList(new InterrogationKey<?>[] { Interrogator.VALUE,
-                    RadarDefaultInterrogator.VALUE_STRING,
-                    RadarDefaultInterrogator.SHEAR, IRadarInterrogator.ICAO }));
-
-    private static final Set<InterrogationKey<?>> offscreenInspectLabels = new HashSet<>(
-            Arrays.asList(new InterrogationKey<?>[] {
-                    RadarDefaultInterrogator.MNEMONIC, Interrogator.VALUE,
-                    RadarDefaultInterrogator.VALUE_STRING,
-                    RadarDefaultInterrogator.PRIMAY_ELEVATION_ANGLE,
-                    RadarDefaultInterrogator.SHEAR }));
-=======
                     IRadarInterrogator.ICAO));
 
     private static final Set<InterrogationKey<?>> secondaryInspectLabels = new HashSet<>(
@@ -211,7 +169,6 @@ public class AbstractRadarResource<D extends IDescriptor>
                     RadarDefaultInterrogator.VALUE_STRING,
                     RadarDefaultInterrogator.PRIMAY_ELEVATION_ANGLE,
                     RadarDefaultInterrogator.SHEAR));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private IRadarInterrogator interrogator;
 
@@ -223,14 +180,10 @@ public class AbstractRadarResource<D extends IDescriptor>
 
     protected String actualLevel = "";
 
-<<<<<<< HEAD
-    protected Map<DataTime, VizRadarRecord> radarRecords;
-=======
     /**
      * Map of times to radar records. Access to this map must by synchronized.
      */
     protected final Map<DataTime, VizRadarRecord> radarRecords = new HashMap<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     protected Map<DataTime, String[]> upperTextMap = new HashMap<>();
 
@@ -259,12 +212,6 @@ public class AbstractRadarResource<D extends IDescriptor>
         super(resourceData, loadProperties, false);
         getCapability(ColorableCapability.class);
         resourceData.addChangeListener(this);
-<<<<<<< HEAD
-
-        radarRecords = Collections
-                .synchronizedMap(new HashMap<DataTime, VizRadarRecord>());
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         icao = "";
     }
 
@@ -276,13 +223,9 @@ public class AbstractRadarResource<D extends IDescriptor>
 
     @Override
     protected void disposeInternal() {
-<<<<<<< HEAD
-        radarRecords.clear();
-=======
         synchronized (radarRecords) {
             radarRecords.clear();
         }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         upperTextMap.clear();
     }
 
@@ -342,13 +285,9 @@ public class AbstractRadarResource<D extends IDescriptor>
         }
         if (existing == null) {
             existing = createVizRadarRecord(radarRecord);
-<<<<<<< HEAD
-            radarRecords.put(d, existing);
-=======
             synchronized (radarRecords) {
                 radarRecords.put(d, existing);
             }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             synchronized (dataTimes) {
                 dataTimes.add(d);
             }
@@ -489,12 +428,7 @@ public class AbstractRadarResource<D extends IDescriptor>
             displayedData.append(dataMap.get(IRadarInterrogator.VALUE_STRING));
         } else if (containsNonNullKey(Interrogator.VALUE, keys, dataMap,
                 keysToSkip)) {
-<<<<<<< HEAD
-            Quantity<?> value = dataMap
-                    .get(Interrogator.VALUE);
-=======
             Quantity<?> value = dataMap.get(Interrogator.VALUE);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             String format;
             if (value.getValue() instanceof Double
                     || value.getValue() instanceof Float) {
@@ -522,18 +456,6 @@ public class AbstractRadarResource<D extends IDescriptor>
 
         if (containsNonNullKey(IRadarInterrogator.MSL, keys, dataMap,
                 keysToSkip)) {
-<<<<<<< HEAD
-            Quantity<Length> msl = dataMap
-                    .get(IRadarInterrogator.MSL);
-            displayedData.append(formatQuantity(msl, USCustomary.FOOT, " %.0f%sMSL "));
-
-            Quantity<Length> agl = dataMap
-                    .get(IRadarInterrogator.AGL);
-            if (agl == null || Double.isNaN(agl.getValue().doubleValue())) {
-                displayedData.append("???ft");
-            } else {
-                displayedData.append(formatQuantity(agl, USCustomary.FOOT, "%.0f%s"));
-=======
             Quantity<Length> msl = dataMap.get(IRadarInterrogator.MSL);
             displayedData.append(
                     formatQuantity(msl, USCustomary.FOOT, " %.0f%sMSL "));
@@ -544,19 +466,13 @@ public class AbstractRadarResource<D extends IDescriptor>
             } else {
                 displayedData.append(
                         formatQuantity(agl, USCustomary.FOOT, "%.0f%s"));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
             displayedData.append("AGL");
         }
 
         if (containsNonNullKey(IRadarInterrogator.AZIMUTH, keys, dataMap,
                 keysToSkip)) {
-<<<<<<< HEAD
-            Quantity<Length> range = dataMap
-                    .get(IRadarInterrogator.RANGE);
-=======
             Quantity<Length> range = dataMap.get(IRadarInterrogator.RANGE);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             displayedData
                     .append(formatQuantity(range, USCustomary.NAUTICAL_MILE,
                             " %.0fnm"))
@@ -583,41 +499,25 @@ public class AbstractRadarResource<D extends IDescriptor>
      * returns a formatted string using the converted measure value and unit
      * string, provided in that respective order.
      *
-<<<<<<< HEAD
-     * If outputUnit is null or AbstractUnit.ONE, the output unit will be the measure's
-     * current unit, if non-null.
-=======
      * If outputUnit is null or AbstractUnit.ONE, the output unit will be the
      * measure's current unit, if non-null.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      *
      * @param measure
      *            The measure. Must be non-null and have a non-null value, or
      *            null will be returned. If the unit is null, no conversion will
      *            happen and "" will be used as the unit String.
      * @param outputUnit
-<<<<<<< HEAD
-     *            The desired output unit. If null or AbstractUnit.ONE, measure will not
-     *            be converted, and the current unit will be used for the unit
-     *            string.
-=======
      *            The desired output unit. If null or AbstractUnit.ONE, measure
      *            will not be converted, and the current unit will be used for
      *            the unit string.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param format
      *            The format String. Arguments to this will be the double value
      *            of the measure and the unit String, in that order. This must
      *            be non null.
      * @return The formatted output.
      */
-<<<<<<< HEAD
-    protected String formatQuantity(Quantity<?> quantity,
-            Unit<?> outputUnit, String format) {
-=======
     protected String formatQuantity(Quantity<?> quantity, Unit<?> outputUnit,
             String format) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if (quantity == null || quantity.getValue() == null || format == null) {
             return null;
         }
@@ -627,13 +527,9 @@ public class AbstractRadarResource<D extends IDescriptor>
         if (currentUnit == null) {
             unitString = "";
         } else {
-<<<<<<< HEAD
-            unitString = SimpleUnitFormat.getInstance(SimpleUnitFormat.Flavor.ASCII).format(quantity.getUnit());
-=======
             unitString = SimpleUnitFormat
                     .getInstance(SimpleUnitFormat.Flavor.ASCII)
                     .format(quantity.getUnit());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         double value = quantity.getValue().doubleValue();
@@ -682,12 +578,8 @@ public class AbstractRadarResource<D extends IDescriptor>
                             point[0] + "," + point[1]);
                 } else if (key.equals(IRadarInterrogator.RANGE)) {
                     map.put(IRadarInterrogator.RANGE.getId(),
-<<<<<<< HEAD
-                            formatQuantity(dataMap.get(IRadarInterrogator.RANGE),
-=======
                             formatQuantity(
                                     dataMap.get(IRadarInterrogator.RANGE),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                     USCustomary.NAUTICAL_MILE, "%.0fnm"));
                 } else if (key instanceof StringInterrogationKey<?>) {
                     StringInterrogationKey<?> sKey = (StringInterrogationKey<?>) key;
@@ -767,17 +659,9 @@ public class AbstractRadarResource<D extends IDescriptor>
     }
 
     public VizRadarRecord getRadarRecord(DataTime time) {
-<<<<<<< HEAD
-        return radarRecords.get(time);
-    }
-
-    public Map<DataTime, VizRadarRecord> getRadarRecords() {
-        return radarRecords;
-=======
         synchronized (radarRecords) {
             return radarRecords.get(time);
         }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     public Coordinate getRadarLocation() {
@@ -789,13 +673,9 @@ public class AbstractRadarResource<D extends IDescriptor>
         synchronized (dataTimes) {
             super.remove(dataTime);
         }
-<<<<<<< HEAD
-        radarRecords.remove(dataTime);
-=======
         synchronized (radarRecords) {
             radarRecords.remove(dataTime);
         }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         upperTextMap.remove(dataTime);
     }
 
@@ -841,10 +721,6 @@ public class AbstractRadarResource<D extends IDescriptor>
          * volume scan interval.
          */
         Set<RadarRecord> records = new HashSet<>();
-<<<<<<< HEAD
-        records.addAll(this.getRadarRecords().values());
-        records.addAll(radarBasis.getRadarRecords().values());
-=======
         synchronized (radarRecords) {
             records.addAll(radarRecords.values());
         }
@@ -852,7 +728,6 @@ public class AbstractRadarResource<D extends IDescriptor>
             records.addAll(radarBasis.radarRecords.values());
         }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         Map<Integer, SortedSet<Date>> elevationTimeMap = new HashMap<>();
         for (RadarRecord record : records) {
             Integer elevation = record.getElevationNumber();
@@ -863,15 +738,8 @@ public class AbstractRadarResource<D extends IDescriptor>
             }
             times.add(record.getDataTime().getRefTime());
         }
-<<<<<<< HEAD
-        long minInterval1 = getMinVolumeScanInterval(
-                radarBasis.getRadarRecords().values());
-        long minInterval2 = getMinVolumeScanInterval(
-                this.getRadarRecords().values());
-=======
         long minInterval1 = radarBasis.getMinVolumeScanInterval();
         long minInterval2 = this.getMinVolumeScanInterval();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         long minInteval = Math.min(minInterval1, minInterval2);
         if (minInteval < TimeUtil.MILLIS_PER_HOUR) {
             /*
@@ -893,27 +761,12 @@ public class AbstractRadarResource<D extends IDescriptor>
      * records at the same elvation number than this will return
      * {@link Long#MAX_VALUE}.
      */
-<<<<<<< HEAD
-    private static long getMinVolumeScanInterval(
-            Collection<? extends RadarRecord> records) {
-=======
     private long getMinVolumeScanInterval() {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         /*
          * Sorting by elevation number ensures that VCP changes and SAILS frames
          * are properly separated and do not invalidate the result.
          */
         Map<Integer, SortedSet<Date>> elevationTimeMap = new HashMap<>();
-<<<<<<< HEAD
-        for (RadarRecord record : records) {
-            Integer elevation = record.getElevationNumber();
-            SortedSet<Date> times = elevationTimeMap.get(elevation);
-            if (times == null) {
-                times = new TreeSet<>();
-                elevationTimeMap.put(elevation, times);
-            }
-            times.add(record.getDataTime().getRefTime());
-=======
         synchronized (radarRecords) {
             for (RadarRecord record : radarRecords.values()) {
                 Integer elevation = record.getElevationNumber();
@@ -924,7 +777,6 @@ public class AbstractRadarResource<D extends IDescriptor>
                 }
                 times.add(record.getDataTime().getRefTime());
             }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         long minVolumeScanInterval = Long.MAX_VALUE;
         for (SortedSet<Date> times : elevationTimeMap.values()) {
@@ -945,46 +797,24 @@ public class AbstractRadarResource<D extends IDescriptor>
     }
 
     /**
-<<<<<<< HEAD
-     * Helper function for intervalCalc. Takes a list of DataTimes, expected to be RadarDataTimes, and
-     * calculates the difference between the 2 latest times with elevation number 1. Return
-     * empty Optional if this cannot be calculated.
-=======
      * Helper function for intervalCalc. Takes a list of DataTimes, expected to
      * be RadarDataTimes, and calculates the difference between the 2 latest
      * times with elevation number 1. Return empty Optional if this cannot be
      * calculated.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public static Optional<Long> intervalCalcHelper(DataTime[] times) {
 
         long newest = -1;
         long secondNewest = -1;
 
-<<<<<<< HEAD
-        for (DataTime dt: times) {
-            if (!(dt instanceof RadarDataTime)) { // should be RadarDataTimes only, stop calculating
-=======
         for (DataTime dt : times) {
             if (!(dt instanceof RadarDataTime)) {
                 // should be RadarDataTimes only, stop calculating
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 newest = -1;
                 secondNewest = -1;
                 break;
             }
 
-<<<<<<< HEAD
-            RadarDataTime rdt = ((RadarDataTime)dt);
-
-            if (rdt.getElevationNumber() == 1 ) { //only considering elevation numbers of 1 for this
-                long timeNew = rdt.getRefTime().getTime();
-                if (timeNew > newest) {
-                    secondNewest=newest;
-                    newest = timeNew;
-                }
-                else if (timeNew > secondNewest) {
-=======
             RadarDataTime rdt = ((RadarDataTime) dt);
 
             // only considering elevation numbers of 1 for this
@@ -994,56 +824,18 @@ public class AbstractRadarResource<D extends IDescriptor>
                     secondNewest = newest;
                     newest = timeNew;
                 } else if (timeNew > secondNewest) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     secondNewest = timeNew;
                 }
             }
         }
-<<<<<<< HEAD
-        if (newest < 0 || secondNewest < 0) { //we don't have 2 elevation numbers of "1".
-            return Optional.empty();
-        }
-        else {
-=======
         if (newest < 0 || secondNewest < 0) {
             // we don't have 2 elevation numbers of "1".
             return Optional.empty();
         } else {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return Optional.of(newest - secondNewest);
         }
     }
 
-<<<<<<< HEAD
-
-
-
-    /**
-     * Calculate the volume scan time estimate for a radarRsc utilizing the cached RadarDataTimes.
-     * Use the difference between the 2 latest times with elevation number 1.
-     */
-    public static long intervalCalc(AbstractRadarResource<?> radarRsc) {
-         try {
-             //cached DataTimes
-             DataTime[] radarRscTimes = radarRsc.getResourceData().getAvailableTimes();
-
-             Optional<Long> volumeScanTime = intervalCalcHelper(radarRscTimes);
-
-             //return the calculated volumeScanTime, or the default if the time is null
-             return volumeScanTime.orElse(5 * TimeUtil.MILLIS_PER_MINUTE);
-         }
-        catch(Exception e) {
-            statusHandler.handle(Priority.PROBLEM,
-               "Exception occurred during calculation of volume scan time interval.", e);
-        }
-        return 5 * TimeUtil.MILLIS_PER_MINUTE; //return original default on error
-    }
-
-
-
-
-
-=======
     /**
      * Calculate the volume scan time estimate for a radarRsc utilizing the
      * cached RadarDataTimes. Use the difference between the 2 latest times with
@@ -1071,7 +863,6 @@ public class AbstractRadarResource<D extends IDescriptor>
         // return original default on error
         return 5 * TimeUtil.MILLIS_PER_MINUTE;
     }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     @Override
     public Set<InterrogationKey<?>> getInterrogationKeys() {
@@ -1091,14 +882,10 @@ public class AbstractRadarResource<D extends IDescriptor>
 
         Set<InterrogationKey<?>> keySet = new HashSet<>(Arrays.asList(keys));
 
-<<<<<<< HEAD
-        RadarRecord record = radarRecords.get(time);
-=======
         RadarRecord record;
         synchronized (radarRecords) {
             record = radarRecords.get(time);
         }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if (record == null) {
             return new InterrogateMap();
         }
@@ -1121,8 +908,6 @@ public class AbstractRadarResource<D extends IDescriptor>
         }
     }
 
-<<<<<<< HEAD
-=======
     /**
      * Perform some arbitrary read-only processing of this resource's radar
      * records map and return the result.
@@ -1141,5 +926,4 @@ public class AbstractRadarResource<D extends IDescriptor>
             return processor.apply(Collections.unmodifiableMap(radarRecords));
         }
     }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

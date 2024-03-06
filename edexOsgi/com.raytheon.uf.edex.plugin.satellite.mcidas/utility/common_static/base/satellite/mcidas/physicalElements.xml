@@ -30,7 +30,6 @@
         different localization levels will be combined.
     -->
 <physicalElements>
-<<<<<<< HEAD
 	<map>
 		<!-- MTSAT-1R -->
 		<entry><key ss="84" band="1"/><value name="Imager Visible" /></entry>
@@ -121,25 +120,3 @@
 	</map>
 </physicalElements>
     
-=======
-  <map>
-    <!-- MTSAT-1R -->
-    <entry><key ss="84" band="1"/><value name="Imager Visible" /></entry>
-    <entry><key ss="84" band="2"/><value name="Imager 11 micron IR" units="IRPixel" /></entry>
-    <entry><key ss="84" band="3"/><value name="Imager 12 micron IR" units="IRPixel" /></entry>
-    <entry><key ss="84" band="4"/><value name="Imager 6.7-6.5 micron IR (WV)" /></entry>
-    <entry><key ss="84" band="5"/><value name="Imager 3.5-4.0 micro IR (Fog)" /></entry>
-    <!-- Not documented, but this is what is actually being received. -->
-    <entry><key ss="84" band="6"/><value name="Imager 3.5-4.0 micro IR (Fog)" /></entry>
-
-    <!-- MTSAT-2 -->
-    <entry><key ss="85" band="1"/><value name="Imager Visible" /></entry>
-    <entry><key ss="85" band="2"/><value name="Imager 11 micron IR" units="IRPixel" /></entry>
-    <entry><key ss="85" band="3"/><value name="Imager 12 micron IR" units="IRPixel" /></entry>
-    <entry><key ss="85" band="4"/><value name="Imager 6.7-6.5 micron IR (WV)" /></entry>
-    <entry><key ss="85" band="5"/><value name="Imager 3.5-4.0 micro IR (Fog)" /></entry>
-    <!-- Not documented, but this is what is actually being received. -->
-    <entry><key ss="85" band="6"/><value name="Imager 3.5-4.0 micro IR (Fog)" /></entry>
-  </map>
-</physicalElements>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

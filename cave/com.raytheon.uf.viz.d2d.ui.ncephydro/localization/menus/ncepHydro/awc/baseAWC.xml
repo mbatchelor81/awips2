@@ -23,11 +23,7 @@
         of the file will completely replace a lower priority version of the file. 
     -->
 <menuTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-<<<<<<< HEAD
-    <contribute xsi:type="subMenu" menuText="CCFP"
-=======
     <contribute xsi:type="subMenu" menuText="TCF"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         id="ncepHydro.awc.ccfp">
         <contribute xsi:type="subinclude" fileName="menus/ncepHydro/awc/ccfp.xml" />
     </contribute>

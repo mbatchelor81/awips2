@@ -286,6 +286,7 @@ public class D2DLegendClickHandler extends AbstractD2DLegendInputHandler {
                     }
                 }
                 return rp.getProperties().isVisible();
+
             }
         }
         rp.getProperties().setVisible(!rp.getProperties().isVisible());

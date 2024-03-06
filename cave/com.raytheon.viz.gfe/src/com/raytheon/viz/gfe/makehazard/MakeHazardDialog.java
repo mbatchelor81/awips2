@@ -124,11 +124,8 @@ import com.raytheon.viz.ui.statusline.StatusStore;
  * Jan 03, 2018  7178     randerso    Change to use IDataObject. Code cleanup.
  * Jan 24, 2018  7153     randerso    Changes to allow new GFE config file to be
  *                                    selected when perspective is re-opened.
-<<<<<<< HEAD
-=======
  * Oct 05, 2023  2028154  alockleigh  Changes to have runFromPython wait on a Job 
  *                                    instance vs Display.getDisplay().syncExec()
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -237,13 +234,10 @@ public class MakeHazardDialog extends CaveSWTDialog
     private static final Map<String, String> BASINS = ImmutableMap.of("AL",
             "10", "EP", "20", "CP", "30", "WP", "40");
 
-<<<<<<< HEAD
-=======
     private static final int WAIT_INTERVAL = 250;
 
     private final Object waiter = new Object();
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /**
      * Constructor
      *
@@ -692,10 +686,6 @@ public class MakeHazardDialog extends CaveSWTDialog
         argmap.put("dismiss", dismiss);
 
         setReturnValue(argmap);
-<<<<<<< HEAD
-        running = false;
-
-=======
 
         // Signal to waiter that we're ready to continue.
         running = false;
@@ -704,7 +694,6 @@ public class MakeHazardDialog extends CaveSWTDialog
             waiter.notify();
         }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return true;
     }
 
@@ -1578,26 +1567,6 @@ public class MakeHazardDialog extends CaveSWTDialog
      * @return map of Python arguments for MakeHazard.py
      */
     public Object runFromPython() {
-<<<<<<< HEAD
-        final Object[] retVal = new Object[1];
-
-        VizApp.runSync(new Runnable() {
-
-            @Override
-            public void run() {
-                running = true;
-                setReturnValue(null);
-                while (running) {
-                    if (!getDisplay().readAndDispatch()) {
-                        getDisplay().sleep();
-                    }
-                }
-                retVal[0] = getReturnValue();
-            }
-        });
-
-        return retVal[0];
-=======
         // Kick off the loop to wait until action is taken by the user.
         running = true;
         try {
@@ -1613,7 +1582,6 @@ public class MakeHazardDialog extends CaveSWTDialog
 
         return getReturnValue();
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
@@ -1702,11 +1670,7 @@ public class MakeHazardDialog extends CaveSWTDialog
 
     @Override
     protected void disposed() {
-<<<<<<< HEAD
-        this.running = false;
-=======
         running = false;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         super.disposed();
     }
 

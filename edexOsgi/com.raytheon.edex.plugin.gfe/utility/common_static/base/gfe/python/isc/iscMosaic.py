@@ -83,13 +83,6 @@
 #                                  IscMosaicJobManager.
 # Nov 09, 2018 DR 21001  dfriedman Fix handling of renamed grids.
 # May 03, 2019 7842      dgilling  Update to use library netcdf4-python.
-<<<<<<< HEAD
-=======
-# Sep 09, 2022 23257     dgilling  Add additional logging for AdditionalISCRouting
-#                                  feature.
-# Nov 07, 2022 23338     dhaines   added parameters to mergeGrid constuctor and 
-#                                  methods for additional logging 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 ##
 
@@ -778,11 +771,7 @@ class IscMosaic:
 
                     # create the mergeGrid class
                     mGrid = mergeGrid.MergeGrid(self.__creTime, self.__siteID, inFillV,
-<<<<<<< HEAD
                       minV, self.__areaMask, gridType, self.__dbwe.getDiscreteKeys())
-=======
-                      minV, self.__areaMask, gridType, self.__dbwe.getDiscreteKeys(), parmName)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                     # erase all existing grids first?
                     self.__dbinv = self._wec.keys()
@@ -902,17 +891,10 @@ class IscMosaic:
                 if m[2] == 1 or (m[2] == 0 and m[0] is None):
                     if self.__replaceOnly:
                         mergedGrid = mGrid.mergeGrid(
-<<<<<<< HEAD
                           (remappedGrid, remappedHistory), None)
                     else:
                         mergedGrid = mGrid.mergeGrid (
                           (remappedGrid, remappedHistory), (destGrid, oldHist))
-=======
-                          (remappedGrid, remappedHistory), None, printTR(tr))
-                    else:
-                        mergedGrid = mGrid.mergeGrid (
-                          (remappedGrid, remappedHistory), (destGrid, oldHist), printTR(tr))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                 else:
                     mergedGrid = (destGrid, oldHist)
@@ -927,11 +909,7 @@ class IscMosaic:
                         adjGrid = self.__adjustForTime(tr, m[1], remappedGrid,
                           inFillV)
                         mergedGrid = mGrid.mergeGrid(
-<<<<<<< HEAD
                           (adjGrid, remappedHistory), None)
-=======
-                          (adjGrid, remappedHistory), None, printTR(tr))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     else:
                         adjGridIn = self.__adjustForTime(tr, m[1],
                           remappedGrid, inFillV)
@@ -939,11 +917,7 @@ class IscMosaic:
                           0.0)
                         mergedGrid = mGrid.mergeGrid(\
                           (adjGridIn, remappedHistory),
-<<<<<<< HEAD
                           (adjGridDb, oldHist))
-=======
-                          (adjGridDb, oldHist), printTR(tr))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                 else:
                     adjGrid = self.__adjustForTime(m[0], m[1], destGrid, 0.0)
@@ -1724,21 +1698,9 @@ def prepareMosaicRequest(siteID, userID, databaseID, parmsToProcess, blankOtherP
         job):
     import serverConfig
 
-<<<<<<< HEAD
     additionalISCRouting = []
     if additionalRoutingSiteID and serverConfig.AdditionalISCRouting:
         additionalISCRouting = serverConfig.AdditionalISCRouting
-=======
-    initLogger(logFileName)
-
-    logger.debug(f"additionalRoutingSiteID: {additionalRoutingSiteID}")
-    logger.debug(f"serverConfig.AdditionalISCRouting: {serverConfig.AdditionalISCRouting}")
-
-    additionalISCRouting = []
-    if additionalRoutingSiteID and serverConfig.AdditionalISCRouting:
-        additionalISCRouting = serverConfig.AdditionalISCRouting
-    logger.debug(f"AdditionalISCRouting: {additionalISCRouting}")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     # convert Java types to python and send to IscMosaic for execution
     parmsToProcess = convertList(parmsToProcess)
@@ -1764,36 +1726,16 @@ def prepareMosaicRequest(siteID, userID, databaseID, parmsToProcess, blankOtherP
                 "parmsToIgnore": parmsToIgnore,
                 "gridDelay": float(gridDelay),
                 "logFileName": logFileName}
-<<<<<<< HEAD
         prepareJob(argv, job)
 
         for entry in additionalISCRouting:
             (parms, dbName, editAreaPrefix) = entry
             parmNameList = [parm[0] + "_SFC" for parm in parms]
-=======
-        logger.debug(f"Calling prepareJob for standard ISC job")
-        prepareJob(argv, job)
-        logger.debug(f"Prepared standard ISC job")
-
-        logger.debug(f"Preparing {len(additionalISCRouting)} AdditionalISCRouting jobs...")
-        for entry in additionalISCRouting:
-            (parms, dbName, editAreaPrefix) = entry
-            parmNameList = [parm[0] + "_SFC" for parm in parms]
-            logger.debug(f"parmNameList: {parmNameList}")
-            logger.debug(f"dbName: {dbName}")
-            logger.debug(f"editAreaPrefix: {editAreaPrefix}")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             argv = dict(argv)
             argv['parmsToProcess'] = parmNameList
             argv['databaseID'] = siteID + "_GRID__" + dbName + "_00000000_0000"
             argv['altMask'] = editAreaPrefix + additionalRoutingSiteID
-<<<<<<< HEAD
             prepareJob(argv, job)
-=======
-            logger.debug(f"Preparing AdditionalISCRouting job: {argv}")
-            prepareJob(argv, job)
-            logger.debug(f"Prepared AdditionalISCRouting job")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 lastJob = None
 lastIscMosaic = None

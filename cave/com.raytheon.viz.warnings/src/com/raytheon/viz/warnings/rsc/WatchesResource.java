@@ -27,10 +27,7 @@ import com.raytheon.uf.common.time.SimulatedTime;
 import com.raytheon.uf.viz.core.IGraphicsTarget;
 import com.raytheon.uf.viz.core.drawables.FillPatterns;
 import com.raytheon.uf.viz.core.drawables.IShadedShape;
-<<<<<<< HEAD
 import com.raytheon.uf.viz.core.drawables.IWireframeShape;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.drawables.JTSCompiler;
 import com.raytheon.uf.viz.core.drawables.JTSCompiler.JTSGeometryData;
 import com.raytheon.uf.viz.core.exception.VizException;
@@ -60,10 +57,7 @@ import org.locationtech.jts.geom.GeometryFactory;
  * Mar 04, 2014 2832       njensen     Moved disposeInternal() to abstract class
  * Apr 07, 2014 2959       njensen     Correct handling of color change
  * Jan 16, 2017 5976       bsteffen    Update shaded shape constructor.
-<<<<<<< HEAD
  * Mar 15, 2022			srcarter@ucar  Change initshape() to add a shadedshape and wireframeshape to every entry
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -177,18 +171,10 @@ public class WatchesResource extends AbstractWWAResource {
         if (!record.getUgcZones().isEmpty()) {
             setGeometry(record);
             if ((record.getGeometry() != null) && (record.getPhen() != null)) {
-<<<<<<< HEAD
                 //add fill (shadedshape)
             	IShadedShape ss = target.createShadedShape(false, descriptor.getGridGeometry());
                 geo = record.getGeometry();
                 JTSCompiler jtsCompiler = new JTSCompiler(ss, null, this.descriptor);
-=======
-                IShadedShape ss = target.createShadedShape(false,
-                        descriptor.getGridGeometry());
-                geo = record.getGeometry();
-                JTSCompiler jtsCompiler = new JTSCompiler(ss, null,
-                        this.descriptor);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 JTSGeometryData geoData = jtsCompiler.createGeometryData();
                 geoData.setGeometryColor(color);
                 jtsCompiler.handle(geo, geoData);
@@ -202,7 +188,6 @@ public class WatchesResource extends AbstractWWAResource {
                     entryMap.put(record.getDataURI(), entry);
                 }
                 entry.shadedShape = ss;
-<<<<<<< HEAD
                 
                 //add outline (wireshape)
                 IWireframeShape wfs = entry.wireframeShape;
@@ -218,8 +203,6 @@ public class WatchesResource extends AbstractWWAResource {
                 jtsCompiler.handle(geo);
                 wfs.compile();
                 entry.wireframeShape = wfs;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         }
     }

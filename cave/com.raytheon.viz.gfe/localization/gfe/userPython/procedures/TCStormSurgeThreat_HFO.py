@@ -10,19 +10,6 @@
 #
 # SOFTWARE HISTORY
 #
-<<<<<<< HEAD
-# Date         Ticket#    Engineer    Description
-# ------------ ---------- ----------- ------------------------------------------
-# 04/26/2019: DCS 21021   S. White    Added ability for HFO to create a ProposedSS
-#                                     grid as part of the SurgeThreat process
-# 06/17/2019: DCS 21021   N. Hardin   Cleaning and Refactoring for code review
-#  -----------------------------------------------------------------------------
-
-##
-# This is an absolute override file, indicating that a higher priority version
-# of the file will completely replace lower priority version of the file.
-##
-=======
 # Date         Ticket#     Engineer    Description
 # ------------ ----------  ----------- ------------------------------------------
 # 04/26/2019   DCS 21021  S. White     Added ability for HFO to create a ProposedSS
@@ -35,26 +22,16 @@
 # This is an absolute override file, indicating that a higher priority version
 # of the file will completely replace lower priority version of the file.
 # #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # The MenuItems list defines the GFE menu item(s) under which the
 # Procedure is to appear.
 # Possible items are: Populate, Edit, Consistency, Verify, Hazards
 
 MenuItems = ["None"]
 
-<<<<<<< HEAD
-import TropicalUtility, LogStream
-import SmartScript
-import numpy as np
-import TimeRange
-import AbsTime
-import time
-=======
 import TropicalUtility
 import numpy as np
 import TimeRange
 import AbsTime
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import re
 
 VariableList = [('''INSTRUCTIONS: Prior to running this procedure, do the following:
@@ -86,13 +63,9 @@ For each running, choose the bin/advisory PIL for ProposedSS creation.''', "", "
 ("End Hour for Inundation Timing", 6, "scale", [0.0, 102.0], 6.0),
 ]
 
-<<<<<<< HEAD
-class Procedure (TropicalUtility.TropicalUtility):
-=======
 
 class Procedure (TropicalUtility.TropicalUtility):
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def __init__(self, dbss):
         TropicalUtility.TropicalUtility.__init__(self, dbss)
 
@@ -123,11 +96,7 @@ class Procedure (TropicalUtility.TropicalUtility):
         '''
         List elements for which Threats/Information will be created
         '''
-<<<<<<< HEAD
-        return ['StormSurgeThreat','InundationMax']
-=======
         return ['StormSurgeThreat', 'InundationMax']
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def createKeyList(self):
         '''
@@ -157,19 +126,6 @@ class Procedure (TropicalUtility.TropicalUtility):
         startTime = int((self._gmtime().unixTime() - (2 * 3600)) / (6 * 3600)) * (6 * 3600)
         return startTime
 
-<<<<<<< HEAD
-    def getEtnFromTCP(self, bin):
-        '''
-        Creates ETN from TCP
-        '''
-        tcp = self.getTextProductFromDB("TCP" + bin)
-        senderSearch = None
-        if len(tcp) == 0:
-            self.statusBarMsg("TCP" + bin + " does not exist in textdb", "A")
-            return
-        else:
-            senderSearch = re.search("(?im)^(?P<sender>(NWS (National |Central Pacific )?Hurricane Center|" +
-=======
     def getEtnFromTCP(self, bin_id):
         '''
         Creates ETN from TCP
@@ -181,7 +137,6 @@ class Procedure (TropicalUtility.TropicalUtility):
             return
         else:
             senderSearch = re.search("(?im)^(?P<sender>(NWS (National |Central Pacific )?Hurricane Center|" + 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                  "National Weather Service).*?)$", tcp)
 
         if senderSearch is not None:
@@ -242,18 +197,6 @@ class Procedure (TropicalUtility.TropicalUtility):
 
         return maxGrid
 
-<<<<<<< HEAD
-        '''
-        **************************************************************************************
-        This procedure was written to extract datum corrections from the VDATUMS D2D
-        Database. It is not yet implemented because the VDATUMS database has not been
-        finalized.
-        '''
-#
-#     def deleteAllGrids(self, weList):
-#         '''
-#         Deletes all grids of weather elements in lise
-=======
 #     **************************************************************************************
 #     This procedure was written to extract datum corrections from the VDATUMS D2D
 #     Database. It is not yet implemented because the VDATUMS database has not been
@@ -262,7 +205,6 @@ class Procedure (TropicalUtility.TropicalUtility):
 #     def deleteAllGrids(self, weList):
 #         '''
 #         Deletes all grids of weather elements in weList
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #         '''
 #         for weName in weList:
 #             trList = self.GM_getWEInventory(weName)
@@ -348,11 +290,7 @@ class Procedure (TropicalUtility.TropicalUtility):
 
         baseTime = self.baseGuidanceTime()
         endTime = baseTime + 102 * 3600
-<<<<<<< HEAD
-        gridList= []
-=======
         gridList = []
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         trList = self.makeTimingTRs(baseTime, endTime)
 
         for tr in trList:
@@ -448,12 +386,7 @@ class Procedure (TropicalUtility.TropicalUtility):
             grid[~ssea] = 0.0
             timingGrids.append(grid)
 
-<<<<<<< HEAD
-
-        surgePctGrid = self.makeInundationMaxGrid(timingGrids, itTRList)
-=======
         self.makeInundationMaxGrid(timingGrids, itTRList)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def keepCurrentGrids(self):
         '''
@@ -501,10 +434,6 @@ class Procedure (TropicalUtility.TropicalUtility):
 
         return surgePctGrid
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def createThreshDict(self, keyMap):
         '''
         Creates threshold dictionary using keys in keyMap
@@ -528,15 +457,9 @@ class Procedure (TropicalUtility.TropicalUtility):
         '''
         Removes old guidance grids and replaces them with new grids defined in elementList
         '''
-<<<<<<< HEAD
-        cTime = int(self._gmtime().unixTime()/ 3600) * 3600
-        startTime = AbsTime.AbsTime(cTime - 48*3600)
-        endTime = startTime + 240*3600
-=======
         cTime = int(self._gmtime().unixTime() / 3600) * 3600
         startTime = AbsTime.AbsTime(cTime - 48 * 3600)
         endTime = startTime + 240 * 3600
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         deleteTimeRange = TimeRange.TimeRange(startTime, endTime)
 
         for elem in elementList:
@@ -571,27 +494,12 @@ class Procedure (TropicalUtility.TropicalUtility):
         if hazSSKeys != ["<None>"]:
             self.statusBarMsg("Check ProposedSS for possible needed change to warning from watch (threshold 36 hours). Review InundationTiming grids and manually modify ProposedSS as needed!", "U")
 
-<<<<<<< HEAD
-    def logEvent(self, t0):
-        '''
-        Logs event time
-        '''
-        t1 = time.time()
-        LogStream.logEvent("Finished TCStormSurgeThreat in %f.4 ms" % ((t1-t0) * 1000))
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def createProposedSS_Mask(self, varDict, inunStartHour, surgePctGrid, ssea, selectedMask):
         '''
         Create mask based on Storm Surge edit area
         '''
-<<<<<<< HEAD
-        bin = varDict["Choose Bin/Product ID of storm"]
-        curETN = self.getEtnFromTCP(bin)
-=======
         bin_id = varDict["Choose Bin/Product ID of storm"]
         curETN = self.getEtnFromTCP(bin_id)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         inundationThresh = self.setInundationThreshold()
 
         if inunStartHour < 36:
@@ -608,21 +516,6 @@ class Procedure (TropicalUtility.TropicalUtility):
 
         return ssAddKey, surgeMask
 
-<<<<<<< HEAD
-    def createEmptyGrid(self, ssAddKey, surgeMask):
-        '''
-        Creates empty grid which will be populated with ProposedSS
-        '''
-        ssGrid = self.empty(np.int8)
-        ssKeys = ["<None>", ssAddKey]
-
-        ssIndex = self.getIndex(ssAddKey, ssKeys)
-        ssGrid[surgeMask] = ssIndex
-
-        return ssGrid
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def createHazardSS(self, proposedSSTRList):
         '''
         Extract the existing SS Hazards from the Hazard grid
@@ -730,18 +623,6 @@ class Procedure (TropicalUtility.TropicalUtility):
                 HazardList.append((ssHazardsFound, hazardsGrid))
 
             for index in range(len(HazardList)):
-<<<<<<< HEAD
-                ssFound, hazardsGrid =  HazardList[index]
-
-                if hazTRList[index].overlaps(timeRange):
-                    if not anySSHazardsFound or (anySSHazardsFound and ssFound):
-                        self.calcDiffGrid(HazardList[index][1], proposedGrid, "CollabDiffSS",  hazTRList[index], isWFO=True)
-
-    def execute(self, varDict, editArea, timeRange):
-        self.chooseValidStorm(varDict)
-
-        t0 = time.time()
-=======
                 ssFound, hazardsGrid = HazardList[index]
 
                 if hazTRList[index].overlaps(timeRange):
@@ -750,7 +631,6 @@ class Procedure (TropicalUtility.TropicalUtility):
 
     def execute(self, varDict, editArea, timeRange):
         self.chooseValidStorm(varDict)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         self.mutableID = self.mutableID()
         self.makeOption = varDict['''Replace all Inundation grids, append to existing, or keep current?''']
         ssea = self.encodeEditArea("StormSurgeWW_EditArea_Local")
@@ -762,11 +642,7 @@ class Procedure (TropicalUtility.TropicalUtility):
             if self.makeOption == "Replace":
                 self.replaceTimingGrids(inunStartHour, inunEndHour, surgePctGrid, baseTime)
             elif self.makeOption == "Append":
-<<<<<<< HEAD
-                self.appendTimingGrids(inunStartHour, inunEndHour, baseTime, ssea, inundationHeight)
-=======
                 self.appendTimingGrids(inunStartHour, inunEndHour, baseTime, ssea)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         elif self.makeOption == "Keep Current":
             surgePctGrid = self.keepCurrentGrids()
 
@@ -783,10 +659,6 @@ class Procedure (TropicalUtility.TropicalUtility):
             self.checkForUpgrade()
         else:
             ssAddKey, surgeMask = self.createProposedSS_Mask(varDict, inunStartHour, surgePctGrid, ssea, selectedMask)
-<<<<<<< HEAD
-            ssGrid = self.createEmptyGrid(ssAddKey, surgeMask)
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             hazTRList = self.GM_getWEInventory("Hazards")
             proposedSSTRList = self.GM_getWEInventory("ProposedSS")
             hazSSGrid, hazSSKeys = self.createHazardSS(proposedSSTRList)
@@ -797,8 +669,3 @@ class Procedure (TropicalUtility.TropicalUtility):
             proposedGrid = self.createFinalizedSS_Grid(hazSSGrid, hazSSKeys)
 
         self.createDiffGrid(proposedGrid, timeRange)
-<<<<<<< HEAD
-
-        self.logEvent(t0)
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

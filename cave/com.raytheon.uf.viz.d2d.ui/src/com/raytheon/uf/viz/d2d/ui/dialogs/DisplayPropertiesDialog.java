@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -44,17 +32,9 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
-<<<<<<< HEAD
-import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IWorkbenchWindow;
-=======
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.Shell;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
@@ -87,15 +67,9 @@ import com.raytheon.viz.ui.dialogs.CaveSWTDialog;
 
 /**
  * Dialog for changing display properties.
-<<<<<<< HEAD
- * 
- * <pre>
- * 
-=======
  *
  * <pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * SOFTWARE HISTORY
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
@@ -103,17 +77,6 @@ import com.raytheon.viz.ui.dialogs.CaveSWTDialog;
  * Oct 16, 2012 1229       rferrel     Made dialog non-blocking.
  * Mar 21, 2013       1638 mschenke    Changed map scales not tied to d2d
  * Oct 10, 2013       2104 mschenke    Switched to use MapScalesManager
-<<<<<<< HEAD
- * 
- * </pre>
- * 
- * @author bgonzale
- * @version 1.0
- */
-
-public class DisplayPropertiesDialog extends CaveSWTDialog {
-    private final transient IUFStatusHandler statusHandler = UFStatus
-=======
  * Oct 10, 2022 8946       mapeters    Handle renamed map scale property constant
  *
  * </pre>
@@ -123,7 +86,6 @@ public class DisplayPropertiesDialog extends CaveSWTDialog {
 public class DisplayPropertiesDialog extends CaveSWTDialog {
 
     private static final IUFStatusHandler statusHandler = UFStatus
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             .getHandler(DisplayPropertiesDialog.class);
 
     private Combo scale;
@@ -150,57 +112,6 @@ public class DisplayPropertiesDialog extends CaveSWTDialog {
 
     private Combo lineStyle;
 
-<<<<<<< HEAD
-    private Map<String, LineStyle> styleMap = new HashMap<String, LineStyle>();
-
-    private IGlobalChangedListener densityListener = new IGlobalChangedListener() {
-        @Override
-        public void updateValue(IWorkbenchWindow changedWindow, Object value) {
-            Double d = (Double) value;
-            if (d != null) {
-                density.setText(DensityPopulator.getLabelFor(d));
-            }
-        }
-    };
-
-    private IGlobalChangedListener magListener = new IGlobalChangedListener() {
-        @Override
-        public void updateValue(IWorkbenchWindow changedWindow, Object value) {
-            Double m = (Double) value;
-            if (m != null) {
-                magnification.setText(MagnificationPopulator.getLabelFor(m));
-            }
-        }
-    };
-
-    private IGlobalChangedListener loadModeListener = new IGlobalChangedListener() {
-        @Override
-        public void updateValue(IWorkbenchWindow changedWindow, Object value) {
-            LoadMode lm = (LoadMode) value;
-            if (lm != null) {
-                loadMode.setText(lm.getLabel());
-            }
-        }
-    };
-
-    private IGlobalChangedListener scaleListener = new IGlobalChangedListener() {
-        @Override
-        public void updateValue(IWorkbenchWindow changedWindow, Object value) {
-            String scale = String.valueOf(value);
-            if (scale != null) {
-                DisplayPropertiesDialog.this.scale.setText(scale);
-            }
-        }
-    };
-
-    private IGlobalChangedListener framesListener = new IGlobalChangedListener() {
-        @Override
-        public void updateValue(IWorkbenchWindow changedWindow, Object value) {
-            Integer frames = (Integer) value;
-            if (frames != null) {
-                DisplayPropertiesDialog.this.frames.setText(frames.toString());
-            }
-=======
     private Map<String, LineStyle> styleMap = new HashMap<>();
 
     private IGlobalChangedListener densityListener = (changedWindow, value) -> {
@@ -236,28 +147,18 @@ public class DisplayPropertiesDialog extends CaveSWTDialog {
         Integer frames = (Integer) value;
         if (frames != null) {
             this.frames.setText(frames.toString());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     };
 
     /**
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param parentShell
      * @param title
      * @param editor
      */
     public DisplayPropertiesDialog(Shell parentShell) {
-<<<<<<< HEAD
-        super(parentShell, SWT.DIALOG_TRIM | SWT.MIN, CAVE.INDEPENDENT_SHELL
-                | CAVE.DO_NOT_BLOCK);
-=======
         super(parentShell, SWT.DIALOG_TRIM | SWT.MIN,
                 CAVE.INDEPENDENT_SHELL | CAVE.DO_NOT_BLOCK);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         setText("Display Properties");
 
         this.sHandler = new ScaleHandler();
@@ -267,11 +168,7 @@ public class DisplayPropertiesDialog extends CaveSWTDialog {
         this.densityHandler = new DensityHandler();
 
         // Add listeners
-<<<<<<< HEAD
-        VizGlobalsManager.addListener(VizConstants.SCALE_ID, scaleListener);
-=======
         VizGlobalsManager.addListener(VizConstants.MAP_SCALE_ID, scaleListener);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         VizGlobalsManager.addListener(VizConstants.LOADMODE_ID,
                 loadModeListener);
         VizGlobalsManager.addListener(VizConstants.FRAMES_ID, framesListener);
@@ -283,20 +180,12 @@ public class DisplayPropertiesDialog extends CaveSWTDialog {
     @Override
     protected void disposed() {
         // remove listeners
-<<<<<<< HEAD
-        VizGlobalsManager.removeListener(VizConstants.SCALE_ID, scaleListener);
-        VizGlobalsManager.removeListener(VizConstants.LOADMODE_ID,
-                loadModeListener);
-        VizGlobalsManager
-                .removeListener(VizConstants.FRAMES_ID, framesListener);
-=======
         VizGlobalsManager.removeListener(VizConstants.MAP_SCALE_ID,
                 scaleListener);
         VizGlobalsManager.removeListener(VizConstants.LOADMODE_ID,
                 loadModeListener);
         VizGlobalsManager.removeListener(VizConstants.FRAMES_ID,
                 framesListener);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         VizGlobalsManager.removeListener(VizConstants.DENSITY_ID,
                 densityListener);
         VizGlobalsManager.removeListener(VizConstants.MAGNIFICATION_ID,
@@ -321,31 +210,19 @@ public class DisplayPropertiesDialog extends CaveSWTDialog {
     }
 
     private Object getCurrentValue(String key) {
-<<<<<<< HEAD
-        return VizGlobalsManager.getCurrentInstance().getPropery(key);
-=======
         return VizGlobalsManager.getCurrentInstance().getProperty(key);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
      * Executes the handler with the given key/pair combo
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param handler
      * @param key
      * @param value
      */
     private void executeHandler(AbstractHandler handler, String key,
             String value) {
-<<<<<<< HEAD
-        Map<String, String> params = new HashMap<String, String>();
-=======
         Map<String, String> params = new HashMap<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         params.put(key, value);
         ExecutionEvent eEvent = new ExecutionEvent(null, params, null, null);
         try {
@@ -357,23 +234,12 @@ public class DisplayPropertiesDialog extends CaveSWTDialog {
     }
 
     private void setupScaleWidget(Composite parent) {
-<<<<<<< HEAD
-        Listener listener = new Listener() {
-            public void handleEvent(Event event) {
-                executeHandler(sHandler, "scale", scale.getText());
-            }
-        };
-        int maxSize = 0;
-        List<String> scales = new ArrayList<String>();
-        for (ManagedMapScale scale : MapScalesManager.getInstance().getScales()) {
-=======
         Listener listener = event -> executeHandler(sHandler,
                 VizConstants.MAP_SCALE_ID, scale.getText());
         int maxSize = 0;
         List<String> scales = new ArrayList<>();
         for (ManagedMapScale scale : MapScalesManager.getInstance()
                 .getScales()) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             String displayName = scale.getDisplayName();
             scales.add(displayName);
             if (displayName.length() > maxSize) {
@@ -382,26 +248,13 @@ public class DisplayPropertiesDialog extends CaveSWTDialog {
         }
 
         scale = createComboBox(parent, "Scale:", scales.toArray(new String[0]),
-<<<<<<< HEAD
-                String.valueOf(getCurrentValue(VizConstants.SCALE_ID)),
-=======
                 String.valueOf(getCurrentValue(VizConstants.MAP_SCALE_ID)),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 listener);
     }
 
     private void setupLoadModeWidget(Composite parent) {
-<<<<<<< HEAD
-        Listener listener = new Listener() {
-            public void handleEvent(Event event) {
-                executeHandler(lmHandler, "loadMode",
-                        LoadMode.valueOfLabel(loadMode.getText()).toString());
-            }
-        };
-=======
         Listener listener = event -> executeHandler(lmHandler, "loadMode",
                 LoadMode.valueOfLabel(loadMode.getText()).toString());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         LoadMode curMode = (LoadMode) getCurrentValue(VizConstants.LOADMODE_ID);
         if (curMode == null) {
@@ -412,16 +265,8 @@ public class DisplayPropertiesDialog extends CaveSWTDialog {
     }
 
     private void setupFramesWidget(Composite parent) {
-<<<<<<< HEAD
-        Listener listener = new Listener() {
-            public void handleEvent(Event event) {
-                executeHandler(framesHandler, "frameCount", frames.getText());
-            }
-        };
-=======
         Listener listener = event -> executeHandler(framesHandler, "frameCount",
                 frames.getText());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         // TODO this is not how the current systems frame count selection menu
         // looks
         String[] frameArr = new String[64];
@@ -434,47 +279,16 @@ public class DisplayPropertiesDialog extends CaveSWTDialog {
     }
 
     private void setupMagnificationWidget(Composite parent) {
-<<<<<<< HEAD
-        Listener listener = new Listener() {
-            public void handleEvent(Event event) {
-                executeHandler(magHandler, "magnification",
-                        magnification.getText());
-            }
-        };
-        magnification = createComboBox(
-                parent,
-                "Mag:",
-                MagnificationPopulator.getMagnifications(),
-                MagnificationPopulator
-                        .getLabelFor((Double) getCurrentValue(VizConstants.MAGNIFICATION_ID)),
-=======
         Listener listener = event -> executeHandler(magHandler, "magnification",
                 magnification.getText());
         magnification = createComboBox(parent, "Mag:",
                 MagnificationPopulator.getMagnifications(),
                 MagnificationPopulator.getLabelFor((Double) getCurrentValue(
                         VizConstants.MAGNIFICATION_ID)),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 listener);
     }
 
     private void setupDensityWidget(Composite parent) {
-<<<<<<< HEAD
-        Listener listener = new Listener() {
-            public void handleEvent(Event event) {
-                executeHandler(densityHandler, "density",
-                        String.valueOf(DensityPopulator.getValueFor(density
-                                .getText())));
-            }
-        };
-
-        density = createComboBox(
-                parent,
-                "Density:",
-                DensityPopulator.getDensityLabels(),
-                DensityPopulator
-                        .getLabelFor((Double) getCurrentValue(VizConstants.DENSITY_ID)),
-=======
         Listener listener = event -> executeHandler(densityHandler, "density",
                 String.valueOf(
                         DensityPopulator.getValueFor(density.getText())));
@@ -483,37 +297,10 @@ public class DisplayPropertiesDialog extends CaveSWTDialog {
                 DensityPopulator.getDensityLabels(),
                 DensityPopulator.getLabelFor(
                         (Double) getCurrentValue(VizConstants.DENSITY_ID)),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 listener);
     }
 
     private void setupLineWidthWidget(Composite parent) {
-<<<<<<< HEAD
-        Listener listener = new Listener() {
-            public void handleEvent(Event event) {
-                String text = lineWidth.getText();
-                int width = 1;
-                try {
-                    width = Integer.parseInt(text);
-                } catch (Throwable t) {
-
-                }
-                IDisplayPaneContainer container = EditorUtil
-                        .getActiveVizContainer();
-                if (container != null) {
-                    for (IDisplayPane pane : container.getDisplayPanes()) {
-                        IDescriptor desc = pane.getDescriptor();
-                        if (desc != null) {
-                            List<OutlineCapability> capabilities = getCapabilities(
-                                    desc.getResourceList(),
-                                    OutlineCapability.class);
-                            for (OutlineCapability cap : capabilities) {
-                                cap.setOutlineWidth(width);
-                            }
-                        }
-                        pane.refresh();
-                    }
-=======
         Listener listener = event -> {
             String text = lineWidth.getText();
             int width = 1;
@@ -536,36 +323,10 @@ public class DisplayPropertiesDialog extends CaveSWTDialog {
                         }
                     }
                     pane.refresh();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
             }
         };
 
-<<<<<<< HEAD
-        lineWidth = createComboBox(parent, "Line Width:", new String[] { "1",
-                "2", "3", "4" }, "1", listener);
-    }
-
-    private void setupLineStyleWidget(Composite parent) {
-        Listener listener = new Listener() {
-            public void handleEvent(Event event) {
-                LineStyle style = styleMap.get(lineStyle.getText());
-                IDisplayPaneContainer container = EditorUtil
-                        .getActiveVizContainer();
-                if (container != null) {
-                    for (IDisplayPane pane : container.getDisplayPanes()) {
-                        IDescriptor desc = pane.getDescriptor();
-                        if (desc != null) {
-                            List<OutlineCapability> capabilities = getCapabilities(
-                                    desc.getResourceList(),
-                                    OutlineCapability.class);
-                            for (OutlineCapability cap : capabilities) {
-                                cap.setLineStyle(style);
-                            }
-                        }
-                        pane.refresh();
-                    }
-=======
         lineWidth = createComboBox(parent, "Line Width:",
                 new String[] { "1", "2", "3", "4" }, "1", listener);
     }
@@ -587,7 +348,6 @@ public class DisplayPropertiesDialog extends CaveSWTDialog {
                         }
                     }
                     pane.refresh();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
             }
         };
@@ -596,15 +356,6 @@ public class DisplayPropertiesDialog extends CaveSWTDialog {
         for (int i = 0; i < values.length; ++i) {
             String label = styles[i].toString().toLowerCase();
             String[] parts = label.split("[_]");
-<<<<<<< HEAD
-            label = "";
-            for (String part : parts) {
-                char[] chars = part.toCharArray();
-                chars[0] = Character.toUpperCase(chars[0]);
-                label += " " + new String(chars);
-            }
-            values[i] = label.trim();
-=======
             StringBuilder value = new StringBuilder();
             for (String part : parts) {
                 char[] chars = part.toCharArray();
@@ -612,7 +363,6 @@ public class DisplayPropertiesDialog extends CaveSWTDialog {
                 value.append(" ").append(chars);
             }
             values[i] = value.toString().trim();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             styleMap.put(values[i], styles[i]);
         }
 
@@ -620,13 +370,8 @@ public class DisplayPropertiesDialog extends CaveSWTDialog {
                 listener);
     }
 
-<<<<<<< HEAD
-    private Combo createComboBox(Composite parent, String title,
-            String[] items, String selected, Listener listener) {
-=======
     private Combo createComboBox(Composite parent, String title, String[] items,
             String selected, Listener listener) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         GridData gd = new GridData(SWT.DEFAULT, SWT.FILL, false, true);
         Label label = new Label(parent, SWT.BOLD);
         label.setText(title);
@@ -650,22 +395,14 @@ public class DisplayPropertiesDialog extends CaveSWTDialog {
 
     /**
      * Get the list of capabilities to change given the class and descriptor
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param descriptor
      * @param capability
      * @return
      */
     private <T extends AbstractCapability> List<T> getCapabilities(
             ResourceList list, Class<T> capability) {
-<<<<<<< HEAD
-        List<T> capabilities = new ArrayList<T>();
-=======
         List<T> capabilities = new ArrayList<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         for (ResourcePair rp : list) {
             if (rp.getResource() != null) {
                 AbstractVizResource<?, ?> rsc = rp.getResource();

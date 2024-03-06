@@ -38,15 +38,9 @@ from dynamicserialize.dstypes.com.raytheon.uf.common.localization import Localiz
 from dynamicserialize.dstypes.com.raytheon.uf.common.localization import LocalizationType
 from dynamicserialize.dstypes.com.raytheon.uf.common.message import WsId
 from dynamicserialize.dstypes.com.raytheon.uf.common.site.requests import GetActiveSitesRequest
-<<<<<<< HEAD
 from awips import ThriftClient
 from awips.localization import LocalizationUtil
 from awips.localization.LocalizationFileManager import LocalizationFileVersionConflictException
-=======
-from ufpy import ThriftClient
-from ufpy.localization import LocalizationUtil
-from ufpy.localization.LocalizationFileManager import LocalizationFileVersionConflictException
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 #
 # The ifpServerText program.  Stores, deletes, gets, and inventories text.

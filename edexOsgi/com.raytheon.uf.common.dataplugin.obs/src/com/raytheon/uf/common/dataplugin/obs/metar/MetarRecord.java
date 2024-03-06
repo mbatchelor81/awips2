@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
  * 
-=======
- *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
  * 
-=======
- *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
  * 
-=======
- *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -45,10 +33,6 @@ import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-<<<<<<< HEAD
-=======
-import javax.persistence.Index;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -58,11 +42,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-<<<<<<< HEAD
 import org.hibernate.annotations.Index;
 
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.dataplugin.NullUtil;
 import com.raytheon.uf.common.dataplugin.PluginDataObject;
 import com.raytheon.uf.common.dataplugin.annotations.DataURI;
@@ -80,19 +61,11 @@ import com.raytheon.uf.common.time.util.TimeUtil;
 
 /**
  * Record implementation for metar plugin
-<<<<<<< HEAD
  * 
  * <pre>
  * 
  *  SOFTWARE HISTORY
  * 
-=======
- *
- * <pre>
- *
- *  SOFTWARE HISTORY
- *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#  Engineer    Description
  * ------------- -------- ----------- ---------------------------------------
  * Feb 14, 2007  139      bphillip    Initial creation
@@ -118,7 +91,6 @@ import com.raytheon.uf.common.time.util.TimeUtil;
  * Jun 11, 2014  2061     bsteffen    Remove IDecoderGettable
  * Jul 23, 2014  3410     bclement    location changed to floats
  * Jul 28, 2015  4360     rferrel     Named unique constraint. Make reportType and correction non-nullable.
-<<<<<<< HEAD
  * Jan 10, 2019  DCS 20579  MPorricelli Decoding of 1-,3-,6-hour ice accumulation
  * 
  * </pre>
@@ -129,22 +101,10 @@ import com.raytheon.uf.common.time.util.TimeUtil;
 @Entity
 @SequenceGenerator(initialValue = 1, name = PluginDataObject.ID_GEN, sequenceName = "obsseq")
 @Table(name = "obs", uniqueConstraints = { @UniqueConstraint(name = "uk_obs_datauri_fields", columnNames = { "dataURI" }) })
-=======
- * Jan 10, 2019  DCS20579 MPorricelli Decoding of 1-,3-,6-hour ice accumulation
- * Aug 08, 2022  8892     tjensen     Update indexes for Hibernate 5
- *
- * </pre>
- *
- * @author bphillip
- */
-@Entity
-@SequenceGenerator(initialValue = 1, name = PluginDataObject.ID_GEN, sequenceName = "obsseq")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 /*
  * Both refTime and forecastTime are included in the refTimeIndex since
  * forecastTime is unlikely to be used.
  */
-<<<<<<< HEAD
 @org.hibernate.annotations.Table(appliesTo = "obs", indexes = { @Index(name = "obs_refTimeIndex", columnNames = {
         "refTime", "forecastTime" }) })
 @XmlRootElement
@@ -152,19 +112,6 @@ import com.raytheon.uf.common.time.util.TimeUtil;
 @DynamicSerialize
 public class MetarRecord extends PersistablePluginDataObject implements
         ISpatialEnabled, IPointData {
-=======
-@Table(name = "obs", uniqueConstraints = {
-        @UniqueConstraint(name = "uk_obs_datauri_fields", columnNames = {
-                "dataURI" }) }, indexes = {
-                        @Index(name = "%TABLE%_refTimeIndex", columnList = "refTime, forecastTime"),
-                        @Index(name = "%TABLE%_stationIndex", columnList = "stationId") })
-
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.NONE)
-@DynamicSerialize
-public class MetarRecord extends PersistablePluginDataObject
-        implements ISpatialEnabled, IPointData {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     public static final String PLUGIN_NAME = "obs";
 
@@ -235,11 +182,7 @@ public class MetarRecord extends PersistablePluginDataObject
     @XmlElement
     @DynamicSerializeElement
     @Transient
-<<<<<<< HEAD
     private Set<SkyCover> skyCoverage = new HashSet<SkyCover>();
-=======
-    private Set<SkyCover> skyCoverage = new HashSet<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /** A string denoting the vertical visibility */
     @XmlElement
@@ -269,11 +212,7 @@ public class MetarRecord extends PersistablePluginDataObject
     @DynamicSerializeElement
     @XmlElement
     @Transient
-<<<<<<< HEAD
     private List<WeatherCondition> weatherCondition = new ArrayList<WeatherCondition>();
-=======
-    private List<WeatherCondition> weatherCondition = new ArrayList<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /** A string denoting the sea level pressure in millibars */
     @XmlElement
@@ -287,13 +226,7 @@ public class MetarRecord extends PersistablePluginDataObject
     @Transient
     private int temperature = -9999;
 
-<<<<<<< HEAD
     /** A string denoting the current temperature in tenths of degrees Celsius */
-=======
-    /**
-     * A string denoting the current temperature in tenths of degrees Celsius
-     */
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @XmlElement
     @DynamicSerializeElement
     @Transient
@@ -377,37 +310,19 @@ public class MetarRecord extends PersistablePluginDataObject
     @Transient
     private float precip1Hour = -9999;
 
-<<<<<<< HEAD
     /** A string denoting inches of precipitation observed in the last 3 hours */
-=======
-    /**
-     * A string denoting inches of precipitation observed in the last 3 hours
-     */
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @XmlElement
     @DynamicSerializeElement
     @Transient
     private float precip3Hour = -9999;
 
-<<<<<<< HEAD
     /** A string denoting inches of precipitation observed in the last 6 hours */
-=======
-    /**
-     * A string denoting inches of precipitation observed in the last 6 hours
-     */
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @XmlElement
     @DynamicSerializeElement
     @Transient
     private float precip6Hour = -9999;
 
-<<<<<<< HEAD
     /** A string denoting inches of precipitation observed in the last 24 hours */
-=======
-    /**
-     * A string denoting inches of precipitation observed in the last 24 hours
-     */
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @XmlElement
     @DynamicSerializeElement
     @Transient
@@ -481,11 +396,7 @@ public class MetarRecord extends PersistablePluginDataObject
 
     /**
      * Constructs a metar record from a dataURI
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param uri
      *            The dataURI
      * @param tableDef
@@ -1000,11 +911,7 @@ public class MetarRecord extends PersistablePluginDataObject
      */
     public void setSkyCoverage(Set<SkyCover> skyCoverage) {
         this.skyCoverage = skyCoverage;
-<<<<<<< HEAD
         if ((skyCoverage != null) && (skyCoverage.size() > 0)) {
-=======
-        if ((skyCoverage != null) && (!skyCoverage.isEmpty())) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             for (SkyCover cover : skyCoverage) {
                 cover.setParentMetar(this);
             }
@@ -1044,11 +951,7 @@ public class MetarRecord extends PersistablePluginDataObject
      */
     public void setWeatherCondition(List<WeatherCondition> weatherCondition) {
         this.weatherCondition = weatherCondition;
-<<<<<<< HEAD
         if ((weatherCondition != null) && (weatherCondition.size() > 0)) {
-=======
-        if ((weatherCondition != null) && (!weatherCondition.isEmpty())) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             for (WeatherCondition cond : weatherCondition) {
                 cond.setParentMetar(this);
             }
@@ -1160,11 +1063,7 @@ public class MetarRecord extends PersistablePluginDataObject
 
     /**
      * Get the station identifier for this observation.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return the stationId
      */
     public String getStationId() {
@@ -1181,11 +1080,7 @@ public class MetarRecord extends PersistablePluginDataObject
 
     /**
      * Get the geometry latitude.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry latitude.
      */
     public double getLatitude() {
@@ -1194,11 +1089,7 @@ public class MetarRecord extends PersistablePluginDataObject
 
     /**
      * Get the geometry longitude.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry longitude.
      */
     public double getLongitude() {
@@ -1207,11 +1098,7 @@ public class MetarRecord extends PersistablePluginDataObject
 
     /**
      * Get the elevation, in meters, of the observing platform or location.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The observation elevation, in meters.
      */
     public Integer getElevation() {
@@ -1263,13 +1150,8 @@ public class MetarRecord extends PersistablePluginDataObject
         result = (PRIME * result) + vertVisibility;
         result = (PRIME * result) + +Float.floatToIntBits(visibility);
 
-<<<<<<< HEAD
         result = (PRIME * result)
                 + ((weatherCondition == null) ? 0 : weatherCondition.hashCode());
-=======
-        result = (PRIME * result) + ((weatherCondition == null) ? 0
-                : weatherCondition.hashCode());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         result = (PRIME * result)
                 + ((weatherKey == null) ? 0 : weatherKey.hashCode());
         result = (PRIME * result)
@@ -1500,11 +1382,7 @@ public class MetarRecord extends PersistablePluginDataObject
     }
 
     /**
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return
      */
     public String getWmoHeader() {
@@ -1512,11 +1390,7 @@ public class MetarRecord extends PersistablePluginDataObject
     }
 
     /**
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param header
      */
     public void setWmoHeader(String header) {
@@ -1531,22 +1405,14 @@ public class MetarRecord extends PersistablePluginDataObject
 
     @Override
     public String getMessageData() {
-<<<<<<< HEAD
         if ((sampleType != null) && sampleType.equals("PR")) {
-=======
-        if ((sampleType != null) && "PR".equals(sampleType)) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return getStationId();
         }
         return report;
     }
 
     public void sort(Set<SkyCover> skySet) {
-<<<<<<< HEAD
         SortedSet<SkyCover> skSet = new TreeSet<SkyCover>();
-=======
-        SortedSet<SkyCover> skSet = new TreeSet<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         for (SkyCover sc : skySet) {
             skSet.add(sc);
         }
@@ -1556,11 +1422,7 @@ public class MetarRecord extends PersistablePluginDataObject
 
     /*
      * (non-Javadoc)
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @see com.raytheon.uf.common.pointdata.IPointData#getPointDataView()
      */
     @Override
@@ -1570,11 +1432,7 @@ public class MetarRecord extends PersistablePluginDataObject
 
     /*
      * (non-Javadoc)
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @see
      * com.raytheon.uf.common.pointdata.IPointData#setPointDataView(com.raytheon
      * .uf.common.pointdata.PointDataView)

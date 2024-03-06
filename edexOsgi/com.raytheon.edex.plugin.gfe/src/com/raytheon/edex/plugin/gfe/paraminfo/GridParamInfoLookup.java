@@ -23,10 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-<<<<<<< HEAD
-=======
 import java.text.ParsePosition;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -35,38 +32,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-<<<<<<< HEAD
-=======
 import javax.measure.format.MeasurementParseException;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-<<<<<<< HEAD
-=======
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.dataplugin.grid.mapping.DatasetIdMapper;
 import com.raytheon.uf.common.localization.ILocalizationFile;
 import com.raytheon.uf.common.localization.IPathManager;
 import com.raytheon.uf.common.localization.LocalizationContext.LocalizationType;
 import com.raytheon.uf.common.localization.PathManagerFactory;
 import com.raytheon.uf.common.localization.exception.LocalizationException;
-<<<<<<< HEAD
-import com.raytheon.uf.common.status.IUFStatusHandler;
-import com.raytheon.uf.common.status.UFStatus;
-import com.raytheon.uf.common.status.UFStatus.Priority;
-import com.raytheon.uf.common.util.mapping.MultipleMappingException;
-
-=======
 import com.raytheon.uf.common.util.mapping.MultipleMappingException;
 
 import tech.units.indriya.format.SimpleUnitFormat;
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 /**
  * Lookup class for getting metadata information about grid parameters.
  * 
@@ -91,29 +74,20 @@ import tech.units.indriya.format.SimpleUnitFormat;
  *                                    method call
  * Apr 12, 2016  5564     bsteffen    Move localization files to common_static
  * Mar 25, 2019 20790     ryu         Fix NPE that prevented type instantiation.
-<<<<<<< HEAD
-=======
  * Oct 25, 2021 22848     aghanava    Added null check and unit validation for 
  *                                    paramInfo localization files after 
  *                                    unmarshalling. Moved add Dflt levels to 
  *                                    a separate method. Updated logging to use 
  *                                    slf4j.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
  * @author bphillip
  * @version 1.0
  */
-<<<<<<< HEAD
-public class GridParamInfoLookup {
-    private static final transient IUFStatusHandler statusHandler = UFStatus
-            .getHandler(GridParamInfoLookup.class);
-=======
 public class GridParamInfoLookup {    
     private static final Logger logger = LoggerFactory
             .getLogger(GridParamInfoLookup.class);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /** The singleton instance */
     private static GridParamInfoLookup instance;
@@ -154,11 +128,7 @@ public class GridParamInfoLookup {
             paramInfoName = DatasetIdMapper.getInstance().lookupAliasOrNull(
                     mappedModel, "gfeParamInfo");
         } catch (MultipleMappingException e) {
-<<<<<<< HEAD
-            statusHandler.handle(Priority.WARN, e.getLocalizedMessage(), e);
-=======
         	logger.warn(e.getLocalizedMessage(), e);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             paramInfoName = e.getArbitraryMapping();
         }
 
@@ -208,8 +178,6 @@ public class GridParamInfoLookup {
     }
 
     /**
-<<<<<<< HEAD
-=======
      * Checks grid parameters and adds the Dflt level if no other levels are defined
      * 
      * @param file
@@ -265,7 +233,6 @@ public class GridParamInfoLookup {
     }
 
     /**
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * Initializes the grid parameter information
      */
     private void init() {
@@ -275,11 +242,7 @@ public class GridParamInfoLookup {
                     GridParamInfo.class);
             um = context.createUnmarshaller();
         } catch (JAXBException e) {
-<<<<<<< HEAD
-            statusHandler.handle(Priority.PROBLEM, e.getLocalizedMessage(), e);
-=======
             logger.error(e.getLocalizedMessage(), e);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return;
         }
         IPathManager pm = PathManagerFactory.getPathManager();
@@ -294,27 +257,6 @@ public class GridParamInfoLookup {
                 GridParamInfo paramInfo = (GridParamInfo) um.unmarshal(is);
                 Path path = Paths.get(file.getPath());
                 String key = path.getFileName().toString().replace(".xml", "");
-<<<<<<< HEAD
-                if (!modelParamMap.containsKey(key)) {
-                    modelParamMap.put(key, paramInfo);
-                }
-            } catch (JAXBException | IOException | LocalizationException e) {
-                statusHandler.handle(Priority.PROBLEM,
-                        "Error unmarshalling grid parameter information from file "
-                                + file.getPath(), e);
-            }
-        }
-        for (GridParamInfo gridParamInfo : modelParamMap.values()) {
-            for (String parmName : gridParamInfo.getParmNames()) {
-                ParameterInfo parameterInfo = gridParamInfo
-                        .getParameterInfo(parmName);
-
-                // add Dflt level if no other levels defined
-                if (parameterInfo != null && 
-                        parameterInfo.getLevels().isEmpty()) {
-                    parameterInfo.getLevels().add("Dflt");
-                }
-=======
 
                 if(isValidParameterInfo(file, paramInfo)) {
                     if (!modelParamMap.containsKey(key)) {
@@ -325,7 +267,6 @@ public class GridParamInfoLookup {
             } catch (JAXBException | IOException | LocalizationException e) {
                 logger.error("Error unmarshalling grid parameter information from file "
                         + file.getPath(), e);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         }
     }

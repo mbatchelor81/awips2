@@ -5,18 +5,6 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-<<<<<<< HEAD
-import java.util.Set;
-
-import com.raytheon.uf.common.dataplugin.grid.GridRecord;
-import com.raytheon.uf.common.dataplugin.level.Level;
-import com.raytheon.uf.common.dataplugin.level.LevelFactory;
-import com.raytheon.uf.common.dataplugin.radar.RadarStation;
-import com.raytheon.uf.common.dataquery.requests.RequestConstraint;
-import com.raytheon.uf.common.dataquery.requests.RequestConstraint.ConstraintType;
-import com.raytheon.uf.common.inventory.TimeAndSpace;
-import com.raytheon.uf.common.parameter.Parameter;
-=======
 import java.util.Objects;
 import java.util.Set;
 
@@ -34,25 +22,10 @@ import com.raytheon.uf.common.jms.notification.NotificationException;
 import com.raytheon.uf.common.parameter.Parameter;
 import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.time.DataTime;
 import com.raytheon.uf.viz.core.alerts.AlertMessage;
 import com.raytheon.viz.alerts.IAlertObserver;
 import com.raytheon.viz.alerts.observers.ProductAlertObserver;
-<<<<<<< HEAD
-
-/**
- * 
- * Listens for updates to radatr products and transforms them into grid updates
- * so that radar data being used in grid derived parameters will update.
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * 
- * Date          Ticket#  Engineer   Description
- * ------------- -------- ---------- ------------------------------
-=======
 import com.raytheon.viz.radar.util.RadarAsGridUtil;
 
 /**
@@ -66,20 +39,11 @@ import com.raytheon.viz.radar.util.RadarAsGridUtil;
  *
  * Date          Ticket#  Engineer   Description
  * ------------- -------- ---------- -------------------------------------------
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Sep 20, 2012           bsteffen   Initial creation
  * Aug 30, 2013  2298     rjpeter    Make getPluginName abstract
  * Feb 21, 2014  16744    dfriedman  Support thin client updates
  * Sep 09, 2014  3356     njensen    Remove CommunicationException
  * Aug 15, 2017  6332     bsteffen   Move to viz.grid.radar plugin
-<<<<<<< HEAD
- * 
- * </pre>
- * 
- * @author bsteffen
- */
-public class RadarUpdater implements IAlertObserver {
-=======
  * Jul 07, 2021  8576     randerso   Changed RadarAdapter to support multiple
  *                                   local radars as defined in radarsInUse.txt
  * Jul 26, 2021  8600     randerso   Send converted DataURIs to GridCacheUpdater.
@@ -93,7 +57,6 @@ public class RadarUpdater implements IAlertObserver {
 public class RadarUpdater implements IAlertObserver {
     private static final IUFStatusHandler statusHandler = UFStatus
             .getHandler(RadarUpdater.class);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     protected static final int CACHE_SIZE = 100;
 
@@ -118,17 +81,7 @@ public class RadarUpdater implements IAlertObserver {
 
         @Override
         public int hashCode() {
-<<<<<<< HEAD
-            final int prime = 31;
-            int result = 1;
-            result = (prime * result) + ((elevationAngle == null) ? 0
-                    : elevationAngle.hashCode());
-            result = (prime * result)
-                    + ((productCode == null) ? 0 : productCode.hashCode());
-            return result;
-=======
             return Objects.hash(elevationAngle, productCode);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         @Override
@@ -143,25 +96,10 @@ public class RadarUpdater implements IAlertObserver {
                 return false;
             }
             CacheKey other = (CacheKey) obj;
-<<<<<<< HEAD
-            if (elevationAngle == null) {
-                if (other.elevationAngle != null) {
-                    return false;
-                }
-            } else if (!elevationAngle.equals(other.elevationAngle)) {
-                return false;
-            }
-            if (productCode == null) {
-                if (other.productCode != null) {
-                    return false;
-                }
-            } else if (!productCode.equals(other.productCode)) {
-=======
             if (!Objects.equals(elevationAngle, other.elevationAngle)) {
                 return false;
             }
             if (!Objects.equals(productCode, other.productCode)) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 return false;
             }
             return true;
@@ -169,11 +107,7 @@ public class RadarUpdater implements IAlertObserver {
 
     }
 
-<<<<<<< HEAD
-    private class CacheEntry {
-=======
     private static class CacheEntry {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         public CacheEntry(Set<TimeAndSpace> times) {
             this.insertTime = System.currentTimeMillis();
@@ -208,10 +142,6 @@ public class RadarUpdater implements IAlertObserver {
 
     @Override
     public void alertArrived(Collection<AlertMessage> alertMessages) {
-<<<<<<< HEAD
-        ProductAlertObserver.processDataURIAlerts(
-                convertRadarAlertsToGridDatauris(alertMessages));
-=======
         Set<String> dataURIs = convertRadarAlertsToGridDatauris(alertMessages);
         ProductAlertObserver.processDataURIAlerts(dataURIs);
 
@@ -223,32 +153,20 @@ public class RadarUpdater implements IAlertObserver {
         } catch (NotificationException e) {
             statusHandler.error(e.getLocalizedMessage(), e);
         }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     public Set<String> convertRadarAlertsToGridDatauris(
             Collection<AlertMessage> alertMessages) {
-<<<<<<< HEAD
-        RadarStation configuredRadar = RadarAdapter.getInstance()
-                .getConfiguredRadar();
-        if (configuredRadar == null) {
-=======
         Set<String> configuredRadars = RadarAdapter.getInstance()
                 .getConfiguredRadars();
         if (configuredRadars.isEmpty()) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return new HashSet<>();
         }
         Set<String> datauris = new HashSet<>();
         for (AlertMessage alertMessage : alertMessages) {
             String icao = alertMessage.decodedAlert.get(RadarAdapter.ICAO_QUERY)
                     .toString();
-<<<<<<< HEAD
-            if ((icao == null)
-                    || !icao.equalsIgnoreCase(configuredRadar.getRdaId())) {
-=======
             if ((icao == null) || !configuredRadars.contains(icao)) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 continue;
             }
             globalTimes = null;
@@ -258,15 +176,9 @@ public class RadarUpdater implements IAlertObserver {
                 continue;
             }
             Integer productCode = (Integer) obj;
-<<<<<<< HEAD
-            String paramAbbrev = RadarProductCodeMapping.getInstance()
-                    .getParameterAbbrev(productCode);
-            if (paramAbbrev == null) {
-=======
             Set<String> paramAbbrevs = RadarProductCodeMapping.getInstance()
                     .getParameterAbbrevsForProductCode(productCode);
             if (CollectionUtils.isEmpty(paramAbbrevs)) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 continue;
             }
             obj = alertMessage.decodedAlert.get("dataTime");
@@ -282,17 +194,6 @@ public class RadarUpdater implements IAlertObserver {
             cache.remove(new CacheKey(productCode, elevationAngle));
             Level level = LevelFactory.getInstance().getLevel(
                     RadarAdapter.CUBE_MASTER_LEVEL_NAME, elevationAngle);
-<<<<<<< HEAD
-            GridRecord fakeRec = new GridRecord();
-
-            fakeRec.setDataTime(time);
-            fakeRec.setDatasetId(RadarAdapter.RADAR_SOURCE);
-            Parameter param = new Parameter(paramAbbrev);
-            fakeRec.setParameter(param);
-            fakeRec.setLevel(level);
-
-            datauris.add(fakeRec.getDataURI());
-=======
 
             for (String paramAbbrev : paramAbbrevs) {
                 GridRecord fakeRec = new GridRecord();
@@ -304,7 +205,6 @@ public class RadarUpdater implements IAlertObserver {
                 fakeRec.setLevel(level);
                 datauris.add(fakeRec.getDataURI());
             }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         return datauris;
     }

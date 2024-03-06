@@ -23,24 +23,6 @@
 #                                       is not None.
 # May   28, 2020 21020      tlefebvr    Fixed issue with conflicting hazards
 # June   3, 2020 21020      tlefebvr    Addressed code review comments
-<<<<<<< HEAD
-# ----------------------------------------------------------------------------
-
-MenuItems = ["Populate"]
-
-import TropicalUtility
-import HazardUtils
-import numpy as np
-import TimeRange
-import WindWWUtils
-import ZoneMap
-import re
-
-VariableList = []
-VariableList.append(("Merge Hazards from:", "Coastal Only", "radio", ["Coastal Only", "Coastal and Inland"]))
-
-class Procedure (TropicalUtility.TropicalUtility):
-=======
 # Sept   1, 2020 21020      tlefe/santos Changes to GUI per user request
 # Sept   9, 2020 21020      tlefe/santos Fixed issue where hazards were not removed
 #                                        Coastal zones.
@@ -97,17 +79,12 @@ import ZoneMap
 
 class Procedure (TropicalUtility.TropicalUtility):
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def __init__(self, dbss):
         TropicalUtility.TropicalUtility.__init__(self, dbss)
         self._hazUtils = HazardUtils.HazardUtils(dbss, None)
 
          # This will make the NHCCoastal edit area
         self._WindWWUtils = WindWWUtils.WindWWUtils(self._dbss)
-<<<<<<< HEAD
-        self._zoneMap = ZoneMap.ZoneMap(self._dbss)
-                
-=======
         # Make the CWA mask
         siteID = self.getSiteID()
         natCenters = self.getNationalCenterIDs()
@@ -117,7 +94,6 @@ class Procedure (TropicalUtility.TropicalUtility):
 
         self._zoneMap = ZoneMap.ZoneMap(self._dbss, self._cwaMask)
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def checkForAnyConflicts(self, cwaMask, weName, dbName):
         """
         Checks for possible conflicts between existing NHC hazards and the
@@ -129,10 +105,6 @@ class Procedure (TropicalUtility.TropicalUtility):
         proposedGrid = self.getGrids(dbName, weName, "SFC", propTRList[-1])
 
         hazTRs = self.GM_getWEInventory("Hazards")
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         currentTime = self._gmtime()
 
         for tr in hazTRs:
@@ -141,10 +113,6 @@ class Procedure (TropicalUtility.TropicalUtility):
                 continue
 
             hazardGrid = self.getGrids(self.mutableID(), "Hazards", "SFC", tr)
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if self.anyHazardConflicts(hazardGrid, proposedGrid, cwaMask):
                 return True
 
@@ -164,30 +132,6 @@ class Procedure (TropicalUtility.TropicalUtility):
         """
         Fetches and returns the NHCCoastalZone mask.
         """
-<<<<<<< HEAD
-        try: # Try to read the nhcZones
-            nhcEA = self.getEditArea("WindWWNHCZones")
-            nhcZoneMask = self.encodeEditArea(nhcEA)
-        except: # Can't find it so make it from scratch
-            self.statusBarMsg("Making NHCZone mask. Stand by.", "R")
-            nhcZoneList = self._WindWWUtils.breakpointZoneList()
-            # Set the mask
-            self.statusBarMsg("Making Coastal edit area. Stand by.", "S")
-            nhcZoneMask = self._zoneMap.maskFromZoneList(nhcZoneList)
-            # Convert to edit area and save
-            nhcEA = self.decodeEditArea(nhcZoneMask)
-            self.saveEditArea("WindWWNHCZones", nhcEA)
-
-        return nhcZoneMask
-
-    def stripETN(self, hazKey):
-        """
-        Remove the ETN from the hazKey and return the result.
-        """
-        # Remove everything past and including the colon ":"
-        return re.sub(r':\d{4}', "", hazKey)
-    
-=======
         nhcEA = self._WindWWUtils.fetchNHCZonesEditArea()
         nhcZoneMask = self.encodeEditArea(nhcEA)
         return nhcZoneMask
@@ -212,43 +156,26 @@ class Procedure (TropicalUtility.TropicalUtility):
         # Add points where there's an upgrade proposed.
         return hazRank < propRank
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def removeWindHazards(self, weName, timeRange, mask):
         """
         Removes all the tropical wind hazards from the specified grid and time.
         """
-<<<<<<< HEAD
-        tropicalWindKeys =  ["TR.A", "HU.A", "TR.W", "HU.W"]
-        
-=======
         tropicalWindKeys = ["TR.A", "HU.A", "TR.W", "HU.W"]
         # Make sure the grid is still there.
         updatedTRList = self.GM_getWEInventory("Hazards")
         if timeRange not in updatedTRList:
             return
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         hazGrid, hazKeys = self.getGrids(self.mutableID(), weName, "SFC", timeRange)
         for hazKey in hazKeys:
             subKeys = hazKey.split("^")
             for subKey in subKeys:
-<<<<<<< HEAD
-                keyNoETN = self.stripETN(subKey)
-=======
                 keyNoETN = self._WindWWUtils.stripETN(subKey)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if keyNoETN not in tropicalWindKeys:
                     continue
 
                 self._hazUtils._removeHazard(weName, timeRange, subKey, mask)
 
-<<<<<<< HEAD
-    def execute(self, editArea, timeRange, varDict):
-
-        # See if the Hazards WE is loaded in the GFE, if not abort the tool
-        if not self._hazUtils._hazardsLoaded():
-            self.statusBarMsg("Hazards Weather Element must be loaded in "+\
-=======
     def fillHazardGaps(self, proposedWEName, timeRange):
         """
         Fills in any gaps in the Hazards inventory based on timeRange.
@@ -288,7 +215,6 @@ class Procedure (TropicalUtility.TropicalUtility):
         # See if the Hazards WE is loaded in the GFE, if not abort the tool
         if not self._hazUtils._hazardsLoaded():
             self.statusBarMsg("Hazards Weather Element must be loaded in " + \
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
               "the GFE before running MergeProposedWindWW.", "S")
             self.cancel()
 
@@ -304,38 +230,6 @@ class Procedure (TropicalUtility.TropicalUtility):
                 "Please resolve these before running MergeProposedWindWW", "S")
             self.cancel()
 
-<<<<<<< HEAD
-        # Get the coastal mask
-        self._coastalMask = self.fetchNHCZoneMask()
-
-        proposedWEName = "ProposedTropWindWW"
-        proposedDBName = self.mutableID()
-
-        # Make sure we have a ProposedTropWindWW before we begin
-        propTRList = self.GM_getWEInventory(proposedWEName, dbase=proposedDBName)
-        if len(propTRList) == 0:
-            self.statusBarMsg("No ProposedTropWindWW Fcst grid found. Tool aborting.", "S")
-            return        
-
-        userOption = varDict["Merge Hazards from:"]
-
-        # Make the CWA mask
-        siteID = self.getSiteID()
-        cwaMask = self.encodeEditArea(siteID)
-        # Make a mask that will be used to restrict the area that will be merged.
-        if userOption == "Coastal Only":
-            # Set the mask to the Coastal mask           
-            self._hazardMask = self._coastalMask
-        else: # Set the mask to the entire domain
-            self._hazardMask = cwaMask
-
-        # Get the ProposedTropWindWW grid and the Hazard grid.
-        # set propTR to span the full inventory of ProposedWW grids
-        propTR = self.GM_makeTimeRange(propTRList[0].startTime().unixTime(), propTRList[-1].endTime().unixTime())
-
-        # Check each site for any conflicts and return the list of conflicting sites
-        if self.checkForAnyConflicts(cwaMask, proposedWEName, proposedDBName):
-=======
         proposedWEName = "ProposedTropWindWW"
         proposedDBName = self.mutableID()
         self._windKeys = ["<None>", "TR.A", "HU.A", "TR.W", "HU.A^TR.W", "TR.W^HU.A", "HU.W"]
@@ -350,63 +244,10 @@ class Procedure (TropicalUtility.TropicalUtility):
 
         # Check each site for any conflicts and return the list of conflicting sites
         if self.checkForAnyConflicts(self._cwaMask, proposedWEName, proposedDBName):
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             self.statusBarMsg("Hazard conflicts between Hazard grid and ProposedTropWindWW from NHC.\n"\
                               "Check Wind ETN or for CF Hazards.", "U")
             return
 
-<<<<<<< HEAD
-        # If there were not any wfo hazard grids found, make empty grid(s) based on the ProposedWW timeRange
-        hazTRList = self.GM_getWEInventory("Hazards")
-        if not hazTRList:
-            # Make empty hazard grids with same timeRanges as ProposedWW
-            for tr in propTRList:
-                self.makeEmptyHazardGrid(tr)
-
-        # Make new Hazards grids at the beginning and/or end, if needed
-        else:
-            if propTR.startTime() < hazTRList[0].startTime(): # add a new Hazard grid at the beginning
-                newTR = TimeRange.TimeRange(propTR.startTime(), hazTRList[0].startTime())
-                self.makeEmptyHazardGrid(newTR)
-
-            # Check and make one at the end, if needed
-            if hazTRList[-1].endTime() < propTR.endTime():
-                 newTR = TimeRange.TimeRange(hazTRList[-1].endTime(), propTR.endTime())
-                 self.makeEmptyHazardGrid(newTR)
-
-            # Finally split the Hazards grid at the propTR
-            self.splitCmd(["Hazards"], propTR)
-
-        # Re-fetch the hazards inventory, since it may have changed
-        hazTRList = self.GM_getWEInventory("Hazards")
-
-        # Get the ProposedWW grid
-        propGrid, propKeys = self.getGrids(proposedDBName, proposedWEName, "SFC", propTRList[-1])
-
-        # Find areas where the Prop grid is not None and only operate on those areas
-        noneIndex = self.getIndex("<None>", propKeys)
-        propHazMask = ~(propGrid == noneIndex)
-
-        # Now that hazards are separated so update each one individually
-        for hazTR in hazTRList:
-            # Only add Proposed hazards where the Hazards overlap
-            if not hazTR.overlaps(propTR):
-                continue
-            # Remove current hazards as these will be replaced.
-            removeMask = propHazMask & self._hazardMask
-            self.removeWindHazards("Hazards", hazTR, removeMask)
-
-            for propKey in propKeys:
-                if propKey != "<None>":
-                    propIndex = self.getIndex(propKey, propKeys)
-                    mask = (propGrid == propIndex) & self._hazardMask & propHazMask
-                    self._hazUtils._addHazard("Hazards", hazTR, propKey, mask, combine=1)
-
-        # Separate the hazards for easier updating
-        self._hazUtils._separateHazardGrids()
-    
-
-=======
         # Calculate the timeRange over which to fill gaps in the Hazards inventory
         hazTRList = self.GM_getWEInventory("Hazards")
         self.fillHazardGaps(proposedWEName, propTRList[0])
@@ -463,4 +304,3 @@ class Procedure (TropicalUtility.TropicalUtility):
 
         # Separate the hazards so that forecasters won't need to do this manually.
         self._hazUtils._separateHazardGrids()
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

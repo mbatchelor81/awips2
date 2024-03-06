@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -39,10 +27,7 @@ import java.util.Map;
 import org.geotools.coverage.grid.GridEnvelope2D;
 import org.geotools.coverage.grid.GridGeometry2D;
 import org.geotools.referencing.GeodeticCalculator;
-<<<<<<< HEAD
-=======
 import org.locationtech.jts.geom.Coordinate;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.opengis.referencing.operation.MathTransform;
 import org.opengis.referencing.operation.TransformException;
 
@@ -53,18 +38,6 @@ import com.raytheon.uf.common.gridcoverage.GridCoverage;
 import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
 import com.raytheon.uf.common.status.UFStatus.Priority;
-<<<<<<< HEAD
-import com.raytheon.viz.radar.util.StationUtils;
-import org.locationtech.jts.geom.Coordinate;
-
-/**
- * Utility for generating grids of tilt heights for a Radar.
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * 
-=======
 import com.raytheon.uf.common.wxmath.Hgt2Pres;
 import com.raytheon.viz.radar.util.StationUtils;
 
@@ -75,25 +48,11 @@ import com.raytheon.viz.radar.util.StationUtils;
  *
  * SOFTWARE HISTORY
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- ------------------------------
  * Dec 17, 2009           rjpeter   Initial creation
  * Aug 15, 2017  6332     bsteffen  Move to viz.grid.radar plugin
  * Feb 03, 2020 DR21007   kshrestha Resolve Incorrect height readings when sampling radar data.
-<<<<<<< HEAD
- * Jul 17, 2020 17574     smoorthy  Account for curvature of earth in height equation 
- * 
- * </pre>
- * 
- * @author rjpeter
- */
-public class TiltUtils {
-    private static final transient IUFStatusHandler statusHandler = UFStatus
-            .getHandler(TiltUtils.class);
-
-    double EFFECTIVE_EARTH_RADIUS = 1.21 * 6371000; // meters
-=======
  * Jul 17, 2020 17574     smoorthy  Account for curvature of earth in height equation
  * Jul 14, 2021  8576     randerso  Changed RadarAdapter to support multiple
  *                                  local radars as defined in radarsInUse.txt
@@ -109,7 +68,6 @@ public class TiltUtils {
             .getHandler(TiltUtils.class);
 
     private static final double EFFECTIVE_EARTH_RADIUS = 1.21 * 6_371_000; // meters
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private static class CacheKey {
 
@@ -119,12 +77,6 @@ public class TiltUtils {
 
         private final double lon;
 
-<<<<<<< HEAD
-        public CacheKey(Integer coverageId, double lon, double lat) {
-            this.coverageId = coverageId;
-            this.lat = lat;
-            this.lon = lon;
-=======
         private final double tilt;
 
         public CacheKey(Integer coverageId, double lon, double lat,
@@ -133,7 +85,6 @@ public class TiltUtils {
             this.lat = lat;
             this.lon = lon;
             this.tilt = tilt;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         @Override
@@ -147,11 +98,8 @@ public class TiltUtils {
             result = prime * result + (int) (temp ^ (temp >>> 32));
             temp = Double.doubleToLongBits(lon);
             result = prime * result + (int) (temp ^ (temp >>> 32));
-<<<<<<< HEAD
-=======
             temp = Double.doubleToLongBits(tilt);
             result = prime * result + (int) (temp ^ (temp >>> 32));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return result;
         }
 
@@ -182,25 +130,18 @@ public class TiltUtils {
                     .doubleToLongBits(other.lon)) {
                 return false;
             }
-<<<<<<< HEAD
-=======
             if (Double.doubleToLongBits(tilt) != Double
                     .doubleToLongBits(other.tilt)) {
                 return false;
             }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return true;
         }
 
     }
 
-<<<<<<< HEAD
-    private Map<CacheKey, Reference<double[]>> gridRadiusCache = new HashMap<>();
-=======
     private Map<CacheKey, Reference<FloatDataRecord>> gridHeightCache = new HashMap<>();
 
     private Map<CacheKey, Reference<FloatDataRecord>> gridHgt2PresCache = new HashMap<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private static TiltUtils instance;
 
@@ -217,24 +158,13 @@ public class TiltUtils {
     }
 
     /**
-<<<<<<< HEAD
-     * 
-=======
      * @param icao
      *            ICAO of desired radar station. If null radar nearest home
      *            cursor location will be used.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param coverage
      * @param tilt
      *            in degrees
      */
-<<<<<<< HEAD
-    public FloatDataRecord getHeightGrid(GridCoverage coverage, double tilt) {
-
-        RadarStation homeRadar = StationUtils.getInstance()
-                .getHomeRadarStation();
-        return getHeightGrid(homeRadar, coverage, tilt);
-=======
     public FloatDataRecord getHeightGrid(String icao, GridCoverage coverage,
             double tilt) {
         RadarStation radarStation;
@@ -244,7 +174,6 @@ public class TiltUtils {
             radarStation = StationUtils.getInstance().getRadarStation(icao);
         }
         return getHeightGrid(radarStation, coverage, tilt);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     public FloatDataRecord getHeightGrid(Coordinate latLon,
@@ -259,17 +188,6 @@ public class TiltUtils {
             GridCoverage coverage, double tilt) {
         if (radar != null) {
             CacheKey cacheKey = new CacheKey(coverage.getId(), radar.getLon(),
-<<<<<<< HEAD
-                    radar.getLat());
-            GridGeometry2D geometry = MapUtil.getGridGeometry(coverage);
-            GridEnvelope2D gridRange = geometry.getGridRange2D();
-            double[] radius = null;
-            Reference<double[]> radiusRef = gridRadiusCache.get(cacheKey);
-            if (radiusRef != null) {
-                radius = radiusRef.get();
-            }
-            if (radius == null) {
-=======
                     radar.getLat(), tilt);
             GridGeometry2D geometry = MapUtil.getGridGeometry(coverage);
             GridEnvelope2D gridRange = geometry.getGridRange2D();
@@ -280,7 +198,6 @@ public class TiltUtils {
                 height = heightRef.get();
             }
             if (height == null) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 try {
                     MathTransform gridToCrs = geometry.getGridToCRS();
                     MathTransform fromLatLon = MapUtil
@@ -303,11 +220,7 @@ public class TiltUtils {
                     }
                     gridToCrs.transform(gridCoordGrid, 0, gridCoordGrid, 0,
                             numPoints);
-<<<<<<< HEAD
-                    radius = new double[numPoints];
-=======
                     double[] radius = new double[numPoints];
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     offset = 0;
                     for (int i = 0; i < numPoints; i++) {
                         double xDist = radarCrsCoord[0] - gridCoordGrid[offset];
@@ -316,12 +229,8 @@ public class TiltUtils {
                         offset += 1;
                         radius[i] = Math.sqrt(xDist * xDist + yDist * yDist);
                     }
-<<<<<<< HEAD
-                    gridRadiusCache.put(cacheKey, new SoftReference<>(radius));
-=======
                     height = getHeightGrid(radar, gridRange, radius, tilt);
                     gridHeightCache.put(cacheKey, new SoftReference<>(height));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 } catch (Exception e) {
                     statusHandler.handle(Priority.PROBLEM,
                             "Error occurred generating height grid for radar tilt",
@@ -329,26 +238,12 @@ public class TiltUtils {
                     return null;
                 }
             }
-<<<<<<< HEAD
-            return getHeightGrid(radar, gridRange, radius, tilt);
-=======
             return height;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         } else {
             return null;
         }
     }
 
-<<<<<<< HEAD
-    public FloatDataRecord getHeightGrid(GridEnvelope2D gridRange,
-            MathTransform gridToLatLon, double tilt) {
-        RadarStation homeRadar = StationUtils.getInstance()
-                .getHomeRadarStation();
-
-        try {
-            double[] radius = getRadius(homeRadar, gridRange, gridToLatLon);
-            return getHeightGrid(homeRadar, gridRange, radius, tilt);
-=======
     public FloatDataRecord getHeightGrid(String icao, GridEnvelope2D gridRange,
             MathTransform gridToLatLon, double tilt) {
         RadarStation radarStation;
@@ -361,7 +256,6 @@ public class TiltUtils {
         try {
             double[] radius = getRadius(radarStation, gridRange, gridToLatLon);
             return getHeightGrid(radarStation, gridRange, radius, tilt);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         } catch (TransformException e) {
             statusHandler.handle(Priority.PROBLEM,
                     "Error occurred generating height grid for radar tilt", e);
@@ -376,15 +270,10 @@ public class TiltUtils {
         float[] floatData = new float[radius.length];
         for (int i = 0; i < radius.length; i++) {
 
-<<<<<<< HEAD
-            double range = Math.sqrt(Math.pow(radius[i],2) + Math.pow(tanTilt*radius[i],2));
-            floatData[i] = (float) (elevMeter + tanTilt * radius[i] + (range*range)/(2*EFFECTIVE_EARTH_RADIUS));
-=======
             double range = Math.sqrt(
                     Math.pow(radius[i], 2) + Math.pow(tanTilt * radius[i], 2));
             floatData[i] = (float) (elevMeter + tanTilt * radius[i]
                     + (range * range) / (2 * EFFECTIVE_EARTH_RADIUS));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         FloatDataRecord fdr = new FloatDataRecord();
         fdr.setFloatData(floatData);
@@ -423,8 +312,6 @@ public class TiltUtils {
         }
         return radius;
     }
-<<<<<<< HEAD
-=======
 
     public FloatDataRecord getHgt2PresGrid(String icao, GridCoverage coverage,
             double tilt) {
@@ -463,5 +350,4 @@ public class TiltUtils {
 
         return retVal;
     }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

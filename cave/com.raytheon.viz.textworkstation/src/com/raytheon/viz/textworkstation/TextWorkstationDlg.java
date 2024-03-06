@@ -127,10 +127,7 @@ import com.raytheon.viz.ui.dialogs.DialogUtil;
  * Jan 03, 2018  6804     tgurney      Stop all scripts on dispose
  * Jan 24, 2018  7132     tgurney      Set alarm/alert bell to null on dispose
  * May 23, 2018  7313     tgurney      Add scroll bar and allow resize
-<<<<<<< HEAD
  * Nov 16, 2020           mjames       Disable pop-up of first text editor
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Apr 29, 2021  8137     randerso     Force use of short hostname for
  *                                     text workstation queue
  *
@@ -332,11 +329,7 @@ public class TextWorkstationDlg extends CaveSWTDialog
         }
 
         // Display the first Text Editor
-<<<<<<< HEAD
         // showTextEditor(0);
-=======
-        showTextEditor(0);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     private void createMenus() {

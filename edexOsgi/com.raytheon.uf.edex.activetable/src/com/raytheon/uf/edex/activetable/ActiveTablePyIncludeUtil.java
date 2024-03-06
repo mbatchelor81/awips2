@@ -38,11 +38,6 @@ import com.raytheon.uf.common.python.PythonIncludePathUtil;
  * Dec 12, 2014  4953      randerso    Added getCommonGfeIncludePath to allow use of
  *                                     LocalizationSupport in activetable python code
  * Jul 21, 2016  5747      dgilling    Move edex_static to common_static.
-<<<<<<< HEAD
-=======
- * Dec 02, 2022  23322     jkelmer     Fixed GFE Python include path from python/gfe to
- *                                     gfe/python
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -54,11 +49,7 @@ public class ActiveTablePyIncludeUtil extends PythonIncludePathUtil {
 
     public static final String GFE = "gfe";
 
-<<<<<<< HEAD
     public static final String COMMON_GFE = LocalizationUtil.join(PYTHON, GFE);
-=======
-    public static final String COMMON_GFE = LocalizationUtil.join(GFE, PYTHON);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     public static final String GFE_CONFIG = LocalizationUtil
             .join(GFE, "config");

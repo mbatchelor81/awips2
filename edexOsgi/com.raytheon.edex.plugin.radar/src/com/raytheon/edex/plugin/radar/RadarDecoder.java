@@ -116,11 +116,8 @@ import com.raytheon.uf.edex.database.DataAccessLayerException;
  * Jun 04, 2018  6725     bsteffen   Set primaryelevationangle for DUA to
  *                                   differentiate different durations.
  * Jun 21, 2019  7629     mroos      Added calls for setting delta time and scan type.
-<<<<<<< HEAD
-=======
  * Jun 16, 2021  22695    jdynina    Set primaryelevationangle for VAD to
  *                                   differentiate different heights.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Sep 23, 2021  8608     mapeters   Handle PDO.traceId changes
  * </pre>
  *
@@ -145,11 +142,8 @@ public class RadarDecoder {
 
     private static final String NOUS = "NOUS";
 
-<<<<<<< HEAD
-=======
     private static final int VELOCITY_AZIMUTH_DISPLAY = 84;
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private static final int USER_LAYER_REFL = 137;
 
     private static final int USER_SELECT_ACCUM = 173;
@@ -167,11 +161,7 @@ public class RadarDecoder {
     private RadarStationDao radarStationDao = new RadarStationDao();
 
     private final IPerformanceStatusHandler perfLog = PerformanceStatus
-<<<<<<< HEAD
-            .getHandler("Radar:");
-=======
             .getHandler("Radar");
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Construct an instance of the RadarDecoder
@@ -412,14 +402,11 @@ public class RadarDecoder {
                      * unique number for this layer.
                      */
                     record.setPrimaryElevationAngle(bottom / 100 + top);
-<<<<<<< HEAD
-=======
                 } else if (record
                         .getProductCode() == VELOCITY_AZIMUTH_DISPLAY) {
                     // Ensure that products with different heights are distinct
                     double height = l3Radar.getProductDependentValue(2);
                     record.setPrimaryElevationAngle(height);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
 
                 // handle times because radar times are sent out in batches

@@ -22,15 +22,10 @@ package com.raytheon.edex.plugin.gfe.svcbackup;
 
 import java.io.IOException;
 import java.io.InputStream;
-<<<<<<< HEAD
-import java.nio.file.Path;
-import java.nio.file.Paths;
-=======
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
@@ -81,10 +76,7 @@ import com.raytheon.uf.edex.site.SiteAwareRegistry;
  *                                     cleanup.
  * May 04, 2020  8151     randerso     Added method to retrieve all primary
  *                                     sites, not just activated primary sites.
-<<<<<<< HEAD
-=======
  * Jun 30, 2021  8572     randerso     Added svcbu_paths.properties
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -95,12 +87,9 @@ public class SvcBackupUtil {
     private static final String SVCBU_PROPS_PATH = LocalizationUtil.join("gfe",
             "config", "svcbu.properties");
 
-<<<<<<< HEAD
-=======
     private static final Path SVCBU_PATHS_PROPS = Paths.get(
             "/awips2/GFESuite/ServiceBackup/configuration/svcbu_paths.properties");
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /** The logger instance */
     protected static transient Logger logger = LoggerFactory
             .getLogger(SvcBackupUtil.class);
@@ -264,8 +253,6 @@ public class SvcBackupUtil {
             }
         }
 
-<<<<<<< HEAD
-=======
         try (InputStream input = Files.newInputStream(SVCBU_PATHS_PROPS,
                 StandardOpenOption.READ)) {
             svcbuProperties.load(input);
@@ -273,7 +260,6 @@ public class SvcBackupUtil {
             logger.error("Error reading " + SVCBU_PATHS_PROPS.toString(), e);
         }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return svcbuProperties;
     }
 

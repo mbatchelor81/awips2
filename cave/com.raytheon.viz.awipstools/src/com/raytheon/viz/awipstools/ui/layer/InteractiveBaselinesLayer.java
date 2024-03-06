@@ -1,10 +1,6 @@
 /*****************************************************************************************
  * COPYRIGHT (c), 2007, RAYTHEON COMPANY
-<<<<<<< HEAD
- * ALL RIGHTS RESERVED, An Unpublished Work 
-=======
  * ALL RIGHTS RESERVED, An Unpublished Work
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * RAYTHEON PROPRIETARY
  * If the end user is not the U.S. Government or any agency thereof, use
@@ -30,11 +26,8 @@ import java.util.Set;
 
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.swt.graphics.RGB;
-<<<<<<< HEAD
-=======
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.LineString;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.uf.viz.core.DrawableCircle;
 import com.raytheon.uf.viz.core.DrawableLine;
@@ -55,37 +48,6 @@ import com.raytheon.uf.viz.core.rsc.capabilities.EditableCapability;
 import com.raytheon.uf.viz.core.rsc.capabilities.MagnificationCapability;
 import com.raytheon.uf.viz.core.rsc.capabilities.OutlineCapability;
 import com.raytheon.uf.viz.core.rsc.tools.GenericToolsResourceData;
-<<<<<<< HEAD
-import com.raytheon.viz.awipstools.IToolChangedListener;
-import com.raytheon.viz.awipstools.ToolsDataManager;
-import com.raytheon.viz.ui.cmenu.IContextMenuContributor;
-import com.raytheon.viz.ui.cmenu.IContextMenuProvider;
-import com.raytheon.viz.ui.input.EditableManager;
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.LineString;
-
-/**
- * Interactive baselines tool layer. Based on A1 "Interactive Baselines"
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * 
- * Date         Ticket#    Engineer    Description
- * ------------ ---------- ----------- --------------------------
- * 
- * 
- * </pre>
- * 
- * @author mschenke
- * @version 1.0
- */
-
-public class InteractiveBaselinesLayer extends
-        AbstractVizResource<AbstractResourceData, MapDescriptor> implements
-        IResourceDataChanged, IToolChangedListener, IContextMenuContributor,
-        IContextMenuProvider {
-=======
 import com.raytheon.viz.awipstools.IBaselineChangedListener;
 import com.raytheon.viz.awipstools.ToolsDataManager;
 import com.raytheon.viz.ui.UiUtil;
@@ -114,7 +76,6 @@ public class InteractiveBaselinesLayer
         extends AbstractVizResource<AbstractResourceData, MapDescriptor>
         implements IResourceDataChanged, IBaselineChangedListener,
         IContextMenuContributor, IContextMenuProvider {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     public static class Baseline {
         public LineString line;
@@ -127,11 +88,7 @@ public class InteractiveBaselinesLayer
         }
     }
 
-<<<<<<< HEAD
-    static final int CIRCLE_RADIUS_PIX = 3;
-=======
     protected static final int CIRCLE_RADIUS_PIX = 3;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private static final RGB GRAY = new RGB(175, 175, 175);
 
@@ -143,11 +100,7 @@ public class InteractiveBaselinesLayer
     /** The baseline currently in motion */
     private Baseline inMotion = null;
 
-<<<<<<< HEAD
-    private Set<String> doNotDraw = new HashSet<String>();
-=======
     private Set<String> doNotDraw = new HashSet<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private InteractiveBaselineUIManager manager = new InteractiveBaselineUIManager(
             this);
@@ -163,16 +116,6 @@ public class InteractiveBaselinesLayer
         getCapability(EditableCapability.class).setEditable(true);
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.raytheon.uf.viz.core.rsc.AbstractVizResource#initInternal(com.raytheon
-     * .uf.viz.core.IGraphicsTarget)
-     */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     protected void initInternal(IGraphicsTarget target) throws VizException {
         EditableManager.makeEditable(this, isEditable());
@@ -180,13 +123,8 @@ public class InteractiveBaselinesLayer
         resourceData.addChangeListener(this);
         dataManager.addBaselinesChangedListener(this);
 
-<<<<<<< HEAD
-        font = target.getDefaultFont().deriveWithSize(
-                target.getDefaultFont().getFontSize());
-=======
         font = target.getDefaultFont()
                 .deriveWithSize(target.getDefaultFont().getFontSize());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         IDisplayPaneContainer container = getResourceContainer();
         if (container != null) {
@@ -194,17 +132,6 @@ public class InteractiveBaselinesLayer
         }
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.raytheon.uf.viz.core.rsc.AbstractVizResource#paintInternal(com.raytheon
-     * .uf.viz.core.IGraphicsTarget,
-     * com.raytheon.uf.viz.core.drawables.PaintProperties)
-     */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     protected void paintInternal(IGraphicsTarget target,
             PaintProperties paintProps) throws VizException {
@@ -228,18 +155,10 @@ public class InteractiveBaselinesLayer
                     .getOutlineWidth();
 
             Baseline[] baselines = getCurrentBaselines();
-<<<<<<< HEAD
-            List<DrawableString> strings = new ArrayList<DrawableString>(
-                    baselines.length * 2);
-            List<DrawableCircle> circles = new ArrayList<DrawableCircle>();
-            List<DrawableLine> lines = new ArrayList<DrawableLine>(
-                    baselines.length);
-=======
             List<DrawableString> strings = new ArrayList<>(
                     baselines.length * 2);
             List<DrawableCircle> circles = new ArrayList<>();
             List<DrawableLine> lines = new ArrayList<>(baselines.length);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             for (Baseline line : baselines) {
                 RGB colorToUse = color;
@@ -251,13 +170,8 @@ public class InteractiveBaselinesLayer
                     widthToUse = Math.max(2.0f, width);
                     styleToUse = LineStyle.SOLID;
                 }
-<<<<<<< HEAD
-                applyBaseline(target, paintProps, lines, circles, strings,
-                        line, colorToUse, widthToUse, styleToUse, circleRadius,
-=======
                 applyBaseline(target, paintProps, lines, circles, strings, line,
                         colorToUse, widthToUse, styleToUse, circleRadius,
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         editable);
             }
 
@@ -269,26 +183,14 @@ public class InteractiveBaselinesLayer
             }
 
             target.drawLine(lines.toArray(new DrawableLine[lines.size()]));
-<<<<<<< HEAD
-            target.drawCircle(circles.toArray(new DrawableCircle[circles.size()]));
-=======
             target.drawCircle(
                     circles.toArray(new DrawableCircle[circles.size()]));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             target.drawStrings(strings);
         } finally {
             target.setupClippingPlane(paintProps.getClippingPane());
         }
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.raytheon.uf.viz.core.rsc.AbstractVizResource#disposeInternal()
-     */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     protected void disposeInternal() {
         resourceData.removeChangeListener(this);
@@ -336,20 +238,12 @@ public class InteractiveBaselinesLayer
 
             if (i == 0 || i == coords.length - 1) {
                 // Get string to draw for first/last point
-<<<<<<< HEAD
-                String text = baseline.name;
-                if (i != 0) {
-                    text += "'";
-                }
-                DrawableString string = new DrawableString(text, color);
-=======
                 StringBuilder textBuilder = new StringBuilder(baseline.name);
                 if (i != 0) {
                     textBuilder.append("'");
                 }
                 DrawableString string = new DrawableString(
                         textBuilder.toString(), color);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 double[] strPoint = target.getPointOnCircle(location[0],
                         location[1], 0.0, radius, 0.0);
                 string.setCoordinates(strPoint[0], strPoint[1]);
@@ -361,11 +255,6 @@ public class InteractiveBaselinesLayer
     }
 
     /**
-<<<<<<< HEAD
-     * Check if the resource is currently editable
-     * 
-     * @return editable
-=======
      * Get whether or not this layer is currently interactive, that is, whether
      * or not current mouse/key inputs should interact with it.
      *
@@ -383,40 +272,18 @@ public class InteractiveBaselinesLayer
      *
      * @return true if editable, false otherwise
      * @see #isInteractive()
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public boolean isEditable() {
         return getCapability(EditableCapability.class).isEditable();
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.raytheon.uf.viz.core.rsc.IResourceDataChanged#resourceChanged(com
-     * .raytheon.uf.viz.core.rsc.IResourceDataChanged.ChangeType,
-     * java.lang.Object)
-     */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void resourceChanged(ChangeType type, Object object) {
         issueRefresh();
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.raytheon.viz.awipstools.IToolChangedListener#toolChanged()
-     */
-    @Override
-    public void toolChanged() {
-=======
     @Override
     public void baselineChanged(String name, LineString baseline) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         issueRefresh();
     }
 
@@ -425,18 +292,6 @@ public class InteractiveBaselinesLayer
      * entries in the array if a baselines was deleted after all the names were
      * gotten but before it was retrieved or if "Delete Entire Element" was
      * selected
-<<<<<<< HEAD
-     * 
-     * @return
-     */
-    public Baseline[] getCurrentBaselines() {
-        List<String> names = new ArrayList<String>(
-                dataManager.getBaselineNames());
-        List<Baseline> baselines = new ArrayList<Baseline>(names.size());
-        for (int i = 0; i < names.size(); ++i) {
-            String name = names.get(i);
-            if (doNotDraw.contains(name) == false) {
-=======
      *
      * @return
      */
@@ -445,7 +300,6 @@ public class InteractiveBaselinesLayer
         List<Baseline> baselines = new ArrayList<>(names.size());
         for (String name : names) {
             if (!doNotDraw.contains(name)) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 LineString line = dataManager.getBaseline(name);
                 if (line != null && line.getNumPoints() > 1) {
                     baselines.add(new Baseline(line, name));
@@ -457,11 +311,7 @@ public class InteractiveBaselinesLayer
 
     /**
      * Get the baseline in motion
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return
      */
     public Baseline getLineInMotion() {
@@ -470,11 +320,7 @@ public class InteractiveBaselinesLayer
 
     /**
      * Set the baseline in motion
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param inMotion
      */
     public void setLineInMotion(Baseline inMotion) {
@@ -483,45 +329,19 @@ public class InteractiveBaselinesLayer
 
     /**
      * Mark a baseline to not be drawn anymore
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param baseline
      */
     public void doNotDraw(String baseline) {
         doNotDraw.add(baseline);
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.raytheon.viz.ui.cmenu.IContextMenuProvider#provideContextMenuItems
-     * (org.eclipse.jface.action.IMenuManager, int, int)
-     */
-    @Override
-    public void provideContextMenuItems(IMenuManager menuManager, int x, int y) {
-        manager.provideContextMenuItems(menuManager, x, y);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.raytheon.viz.ui.cmenu.IContextMenuContributor#addContextMenuItems
-     * (org.eclipse.jface.action.IMenuManager, int, int)
-     */
-=======
     @Override
     public void provideContextMenuItems(IMenuManager menuManager, int x,
             int y) {
         manager.provideContextMenuItems(menuManager, x, y);
     }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void addContextMenuItems(IMenuManager menuManager, int x, int y) {
         manager.addContextMenuItems(menuManager, x, y);

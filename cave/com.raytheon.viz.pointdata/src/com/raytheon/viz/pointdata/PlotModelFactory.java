@@ -45,21 +45,14 @@ import javax.measure.IncommensurableException;
 import javax.measure.UnconvertibleException;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
-<<<<<<< HEAD
-import javax.measure.format.ParserException;
-=======
 import javax.measure.format.MeasurementParseException;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.measure.quantity.Speed;
 
 import org.apache.batik.anim.dom.SVGOMGElement;
 import org.apache.batik.anim.dom.SVGOMTextElement;
 import org.apache.batik.dom.AbstractDocument;
 import org.apache.batik.dom.util.DOMUtilities;
-<<<<<<< HEAD
-=======
 import org.apache.commons.lang.StringUtils;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.eclipse.swt.graphics.RGB;
 import org.geotools.referencing.GeodeticCalculator;
 import org.w3c.dom.Document;
@@ -101,13 +94,8 @@ import com.raytheon.viz.pointdata.python.PlotPythonScriptFactory;
 import com.raytheon.viz.pointdata.python.SampleTextExecutor;
 import com.raytheon.viz.pointdata.rsc.PlotResource;
 
-<<<<<<< HEAD
-import tec.uom.se.AbstractUnit;
-import tec.uom.se.format.SimpleUnitFormat;
-=======
 import tech.units.indriya.AbstractUnit;
 import tech.units.indriya.format.SimpleUnitFormat;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * A factory for generating plot images and sample messages by parsing the
@@ -151,11 +139,8 @@ import tech.units.indriya.format.SimpleUnitFormat;
  * Feb 18, 2020  74587    ksunil      Fixed a NPE in the sample plot when plotIndex is involved.
  * Mar 02, 2020  75528    ksunil      Changed enum PLOT to VISIBLE. Use svg's built in visibility attribute. Fixed NPE issues
  *                                      while adding a new BARB/ARROWUV parameter ("<g>" elements in .svg)
-<<<<<<< HEAD
-=======
  * Mar 24, 2020  75529    ksunil      added code to handle metarPrcp fields when empty
  * Apr 10, 2020  77336    ksunil      isMetarPrcp no longer available. Can use ptype instead
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  *
  * @author BRock97
@@ -483,11 +468,7 @@ public class PlotModelFactory extends SVGImageFactory
                     unit = SimpleUnitFormat
                             .getInstance(SimpleUnitFormat.Flavor.ASCII)
                             .parseProductUnit(unitStr, new ParsePosition(0));
-<<<<<<< HEAD
-                } catch (ParserException e) {
-=======
                 } catch (MeasurementParseException e) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     statusHandler.error("Error parsing units '" + unitStr
                             + "' for " + paramDef.getDisplayName(), e);
                     continue;
@@ -573,8 +554,6 @@ public class PlotModelFactory extends SVGImageFactory
                     continue;
                 }
 
-<<<<<<< HEAD
-=======
                 /*
                  * This is a special case that happens when a metarPrcp field is
                  * paired with a "regular" field. (Say "T" mixed with
@@ -589,7 +568,6 @@ public class PlotModelFactory extends SVGImageFactory
                     element.setValue(" ");
                     return null;
                 }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 element.processConditionalColor(stationData, plugin);
 
                 RGB elementRgb = element.getColor();
@@ -762,11 +740,7 @@ public class PlotModelFactory extends SVGImageFactory
                                             new ParsePosition(0));
                             converter = ob.getUnit(param)
                                     .getConverterToAny(unit);
-<<<<<<< HEAD
-                        } catch (ParserException | UnconvertibleException
-=======
                         } catch (MeasurementParseException | UnconvertibleException
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                 | IncommensurableException e) {
                             throw new VizException(
                                     "Unable to parse and/or convert units"
@@ -834,11 +808,7 @@ public class PlotModelFactory extends SVGImageFactory
                             .parseProductUnit(unitStr, new ParsePosition(0))
                             .asType(Speed.class);
                     converter = speedUnit.getConverterTo(unit);
-<<<<<<< HEAD
-                } catch (ParserException e) {
-=======
                 } catch (MeasurementParseException e) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     throw new VizException("Unable parse units ", e);
                 }
             }
@@ -908,11 +878,7 @@ public class PlotModelFactory extends SVGImageFactory
                             .parseSingleUnit(unitStr, new ParsePosition(0))
                             .asType(Speed.class);
                     converter = speedUnit.getConverterTo(unit);
-<<<<<<< HEAD
-                } catch (ParserException e) {
-=======
                 } catch (MeasurementParseException e) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     throw new VizException("Unable parse units ", e);
                 }
             }
@@ -1062,11 +1028,7 @@ public class PlotModelFactory extends SVGImageFactory
                                             new ParsePosition(0));
                             converter = ob.getUnit(parameter)
                                     .getConverterToAny(unit);
-<<<<<<< HEAD
-                        } catch (ParserException | IncommensurableException
-=======
                         } catch (MeasurementParseException | IncommensurableException
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                 | UnconvertibleException e) {
                             throw new VizException(
                                     "Unable to parse or convert units "
@@ -1138,10 +1100,7 @@ public class PlotModelFactory extends SVGImageFactory
         PlotParameterDefinition paramDef = element.getParamDef();
         String parameter = paramDef.getParamName();
         String sValue = null;
-<<<<<<< HEAD
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         switch (ob.getType(parameter)) {
         case FLOAT:
         case INT:
@@ -1160,11 +1119,7 @@ public class PlotModelFactory extends SVGImageFactory
                                             new ParsePosition(0));
                             converter = ob.getUnit(parameter)
                                     .getConverterToAny(unit);
-<<<<<<< HEAD
-                        } catch (ParserException | IncommensurableException
-=======
                         } catch (MeasurementParseException | IncommensurableException
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                 | UnconvertibleException e) {
                             throw new VizException(
                                     "Unable to parse or convert units "
@@ -1354,9 +1309,6 @@ public class PlotModelFactory extends SVGImageFactory
          */
 
         Element element = null;
-<<<<<<< HEAD
-        if (paramDef.getDisplayType() == DisplayType.BARB
-=======
         if (paramDef.getDisplayType() == DisplayType.ARROWUV
                 && (paramDef.getParamName().contains("ONE,")
                         || paramDef.getParamName().contains("TWO,"))) {
@@ -1371,7 +1323,6 @@ public class PlotModelFactory extends SVGImageFactory
             }
 
         } else if (paramDef.getDisplayType() == DisplayType.BARB
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 || paramDef.getDisplayType() == DisplayType.ARROWUV) {
             element = new SVGOMGElement(null, (AbstractDocument) document);
             element.setAttribute(P_ATTRIBUTE, paramDef.getDisplayName());
@@ -1381,11 +1332,7 @@ public class PlotModelFactory extends SVGImageFactory
                     .filter(num -> num == ',').count();
 
             // we always have Arrow
-<<<<<<< HEAD
-            element.appendChild(getArrowDirectionElement());
-=======
             element.appendChild(getArrowDirectionElement(0));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             // don't put BARB for Arrow requests
             if (paramDef.getDisplayType() == DisplayType.BARB) {
@@ -1418,14 +1365,6 @@ public class PlotModelFactory extends SVGImageFactory
         return pme;
     }
 
-<<<<<<< HEAD
-    private Element getArrowDirectionElement() {
-        SVGOMTextElement element = new SVGOMTextElement(null,
-                (AbstractDocument) document);
-
-        element.setAttribute("id", "windVaneText");
-        element.setAttribute("class", "arrow");
-=======
     private Element getArrowDirectionElement(int modifier) {
         SVGOMTextElement element = new SVGOMTextElement(null,
                 (AbstractDocument) document);
@@ -1446,7 +1385,6 @@ public class PlotModelFactory extends SVGImageFactory
 
         String arrowText = modifier > 0 ? "arrow" + modifier : "arrow";
         element.setAttribute("class", arrowText);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         element.setTextContent("0");
         element.setAttribute("x", "0");
         element.setAttribute("y", "0");

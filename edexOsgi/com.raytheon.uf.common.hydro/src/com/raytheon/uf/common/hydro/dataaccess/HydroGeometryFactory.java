@@ -22,23 +22,15 @@ package com.raytheon.uf.common.hydro.dataaccess;
 import java.util.Date;
 import java.util.Map;
 
-<<<<<<< HEAD
-=======
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.dataaccess.IDataRequest;
 import com.raytheon.uf.common.dataaccess.exception.IncompatibleRequestException;
 import com.raytheon.uf.common.dataaccess.geom.IGeometryData;
 import com.raytheon.uf.common.dataaccess.impl.AbstractGeometryDatabaseFactory;
 import com.raytheon.uf.common.time.DataTime;
 import com.raytheon.uf.common.time.TimeRange;
-<<<<<<< HEAD
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.GeometryFactory;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * A data factory for getting data from the IHFS database. Requires that a
@@ -66,10 +58,7 @@ import org.locationtech.jts.geom.GeometryFactory;
  * Aug 05, 2015  4486     rjpeter     Changed Timestamp to Date.
  * Oct 05, 2016  5926     dgilling    Rewrite assembleGetAvailableLocationNames
  *                                    to use all request parameters.
-<<<<<<< HEAD
-=======
  * Jun 08, 2021  DCS21663 dfriedman   Support time-agnostic queries.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  * 
  * @author njensen
@@ -98,14 +87,11 @@ public class HydroGeometryFactory extends AbstractGeometryDatabaseFactory {
     protected IGeometryData makeGeometry(Object[] data, String[] paramNames,
             Map<String, Object> attrs) {
 
-<<<<<<< HEAD
-=======
         // Discard records with null lat or lon.
         if (data[2] == null || data[3] == null) {
             return null;
         }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         // order is lid, producttime, lat, lon, other params
         String lid = (String) data[0];
         Date date = (Date) data[1];
@@ -122,15 +108,9 @@ public class HydroGeometryFactory extends AbstractGeometryDatabaseFactory {
 
         // intentionally setting level as null until hydrologists determine
         // something better
-<<<<<<< HEAD
-        return super.buildGeometryData(new DataTime(date), null,
-                gisFactory.createPoint(new Coordinate(lon, lat)), lid, attrs, 4,
-                data, paramNames);
-=======
         return super.buildGeometryData(date != null ? new DataTime(date) : null,
                 null, gisFactory.createPoint(new Coordinate(lon, lat)), lid,
                 attrs, 4, data, paramNames);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override
@@ -141,25 +121,17 @@ public class HydroGeometryFactory extends AbstractGeometryDatabaseFactory {
 
     @Override
     protected String assembleGetData(IDataRequest request, DataTime... times) {
-<<<<<<< HEAD
-        return HydroQueryAssembler.assembleGetData(request, times);
-=======
         return isTimeQuerySupported(request)
                 ? HydroQueryAssembler.assembleGetData(request, times)
                 : HydroQueryAssembler.assembleGetData(request);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override
     protected String assembleGetData(IDataRequest request,
             TimeRange timeRange) {
-<<<<<<< HEAD
-        return HydroQueryAssembler.assembleGetData(request, timeRange);
-=======
         return isTimeQuerySupported(request)
                 ? HydroQueryAssembler.assembleGetData(request, timeRange)
                 : HydroQueryAssembler.assembleGetData(request);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override
@@ -194,13 +166,10 @@ public class HydroGeometryFactory extends AbstractGeometryDatabaseFactory {
                 new String[] { HydroQueryAssembler.LID_COL }, request)
                         .contains(HydroQueryAssembler.LID_COL);
     }
-<<<<<<< HEAD
-=======
 
     private boolean isTimeQuerySupported(IDataRequest request) {
         return executeGetColumnNames(
                 new String[] { HydroQueryAssembler.TIME_COL }, request)
                         .contains(HydroQueryAssembler.TIME_COL);
     }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

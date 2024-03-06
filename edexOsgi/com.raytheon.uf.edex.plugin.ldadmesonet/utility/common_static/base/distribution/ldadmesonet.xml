@@ -26,8 +26,5 @@
     -->
 <requestPatterns xmlns:ns2="group">
     <regex>LDAD\.mesonet\.*</regex>
-<<<<<<< HEAD
     <regex>raws_ldad.*</regex>
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 </requestPatterns>

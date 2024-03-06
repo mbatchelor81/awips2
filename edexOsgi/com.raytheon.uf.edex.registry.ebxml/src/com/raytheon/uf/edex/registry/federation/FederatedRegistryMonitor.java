@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -33,14 +21,6 @@ package com.raytheon.uf.edex.registry.federation;
 
 import java.util.Calendar;
 
-<<<<<<< HEAD
-import oasis.names.tc.ebxml.regrep.xsd.rim.v4.DateTimeValueType;
-import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryObjectType;
-import oasis.names.tc.ebxml.regrep.xsd.rim.v4.SlotType;
-import oasis.names.tc.ebxml.regrep.xsd.rim.v4.VersionInfoType;
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.springframework.transaction.annotation.Transactional;
 
 import com.raytheon.uf.common.registry.constants.RegistryObjectTypes;
@@ -48,18 +28,10 @@ import com.raytheon.uf.common.registry.constants.StatusTypes;
 import com.raytheon.uf.common.registry.ebxml.RegistryUtil;
 import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
-<<<<<<< HEAD
-import com.raytheon.uf.common.time.util.TimeUtil;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.edex.registry.ebxml.dao.RegistryObjectDao;
 import com.raytheon.uf.edex.registry.ebxml.exception.EbxmlRegistryException;
 import com.raytheon.uf.edex.registry.ebxml.util.EbxmlObjectUtil;
 
-<<<<<<< HEAD
-/**
- * 
-=======
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.DateTimeValueType;
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryObjectType;
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.SlotType;
@@ -67,40 +39,21 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.VersionInfoType;
 
 /**
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Periodically writes a record to the database as long as this registry is
  * connected to the federation. This class is primarily used to determine if,
  * upon startup, this registry must synchronize with the federation to get the
  * state of the registry up to date
-<<<<<<< HEAD
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * 
-=======
  *
  * <pre>
  *
  * SOFTWARE HISTORY
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date         Ticket#     Engineer    Description
  * ------------ ----------  ----------- --------------------------
  * 7/29/2013    2191        bphillip    Initial implementation
  * 12/2/2013    1829        bphillip    Uses correct getter for getting date time value
  * 2/19/2014    2769        bphillip    Refactored to no longer extend Runnable
  * 7/28/2014    2752        dhladky     Fixed bad default user setup.
-<<<<<<< HEAD
- * 11/19/2014   3586        dhladky     Added registry object type. 
- * 5/11/2015    4448        bphillip    Separated EBXML Registry from Data Delivery
- * 09/11/2018   7238        skabasele   updated method name to  getLastKnownSynchronizedtime
- * 
- * </pre>
- * 
- * @author bphillip
- * @version 1
-=======
  * 11/19/2014   3586        dhladky     Added registry object type.
  * 5/11/2015    4448        bphillip    Separated EBXML Registry from Data Delivery
  * 09/11/2018   7238        skabasele   updated method name to  getLastKnownSynchronizedtime
@@ -110,7 +63,6 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.VersionInfoType;
  * </pre>
  *
  * @author bphillip
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  */
 @Transactional
 public class FederatedRegistryMonitor {
@@ -133,21 +85,6 @@ public class FederatedRegistryMonitor {
         this.registryObjectDao = registryObjectDao;
     }
 
-<<<<<<< HEAD
-    public long getLastKnownSynchronizedtime() {
-        RegistryObjectType regObj = registryObjectDao
-                .getById(REGISTRY_AVAILABLE_ID);
-        Calendar cal = null;
-        if (regObj == null) {
-            cal = TimeUtil.newCalendar();
-            cal.setTimeInMillis(0);
-        } else {
-            DateTimeValueType value = (DateTimeValueType) regObj
-                    .getSlotByName(REGISTRY_AVAILABLE_ID).getSlotValue();
-            cal = value.getDateTimeValue().toGregorianCalendar();
-        }
-        return cal.getTimeInMillis();
-=======
     /**
      * Get the last known time that this registry was synchronized with central.
      *
@@ -165,7 +102,6 @@ public class FederatedRegistryMonitor {
             Calendar cal = value.getDateTimeValue().toGregorianCalendar();
             return cal.getTimeInMillis();
         }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     public void updateTime() {

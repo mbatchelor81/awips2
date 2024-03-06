@@ -76,12 +76,9 @@ import com.raytheon.uf.viz.core.DrawableImage;
 import com.raytheon.uf.viz.core.IExtent;
 import com.raytheon.uf.viz.core.IGraphicsTarget;
 import com.raytheon.uf.viz.core.PixelExtent;
-<<<<<<< HEAD
-=======
 import com.raytheon.uf.viz.core.drawables.IDescriptor;
 import com.raytheon.uf.viz.core.drawables.IDescriptor.IFrameChangedListener;
 import com.raytheon.uf.viz.core.drawables.IFrameCoordinator.AnimationMode;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.drawables.IRenderable;
 import com.raytheon.uf.viz.core.drawables.IRenderableDisplay;
 import com.raytheon.uf.viz.core.drawables.PaintProperties;
@@ -107,15 +104,9 @@ import com.raytheon.viz.satellite.tileset.SatRenderable;
 import com.raytheon.viz.satellite.tileset.SatRenderable.InterrogationResult;
 
 import si.uom.SI;
-<<<<<<< HEAD
-import tec.uom.se.AbstractUnit;
-import tec.uom.se.format.SimpleUnitFormat;
-import tec.uom.se.quantity.Quantities;
-=======
 import tech.units.indriya.AbstractUnit;
 import tech.units.indriya.format.SimpleUnitFormat;
 import tech.units.indriya.quantity.Quantities;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Provides satellite raster rendering support
@@ -173,11 +164,8 @@ import tech.units.indriya.quantity.Quantities;
  *                                  Handled unit conversion
  * Apr 20, 2020  8145     randerso  Replace SamplePreferences with SampleFormat
  * May 06, 2020  8083     tgurney   Fix interrogate for units upgrade
-<<<<<<< HEAD
-=======
  * Feb 10, 2021 20421 mgamazaychikov Add support for centalWaveLength handling
  * Mar 07, 2023 23414     dfriedman Update DR 21057 logic to support derived products
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -185,11 +173,7 @@ import tech.units.indriya.quantity.Quantities;
  */
 public class SatResource extends
         AbstractPluginDataObjectResource<SatResourceData, IMapDescriptor>
-<<<<<<< HEAD
-        implements ImageProvider, Interrogatable, IToolChangedListener {
-=======
         implements ImageProvider, Interrogatable, IToolChangedListener, IFrameChangedListener {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * String id to look for satellite-provided data values
@@ -230,21 +214,15 @@ public class SatResource extends
     /** Flag to avoid reinitializing ColorMapParameters from style rules */
     private boolean initialized = false;
 
-<<<<<<< HEAD
-=======
     private int lastFrame = -1;
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /**
      * Constructor
      */
     public SatResource(SatResourceData data, LoadProperties props) {
         super(data, props);
         addDataObject(data.getRecords());
-<<<<<<< HEAD
-=======
         data.addSatResource(this);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override
@@ -273,8 +251,6 @@ public class SatResource extends
                         extent, canvasBounds);
             }
         }
-<<<<<<< HEAD
-=======
 
         descriptor.addFrameChangedListener(this);
     }
@@ -283,7 +259,6 @@ public class SatResource extends
     protected void disposeResource() {
         super.disposeResource();
         resourceData.removeSatResource(this);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override
@@ -735,8 +710,6 @@ public class SatResource extends
         issueRefresh();
     }
 
-<<<<<<< HEAD
-=======
     @Override
     public void frameChanged(IDescriptor descriptor, DataTime oldTime,
             DataTime newTime) {
@@ -821,7 +794,6 @@ public class SatResource extends
         return false;
     }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public void redoMainTimeMatch() {
         try {
             descriptor.getTimeMatcher().redoTimeMatching(this);
@@ -831,8 +803,6 @@ public class SatResource extends
                     "Unable to redo the time matching " + getSafeName(), e);
         }
     }
-<<<<<<< HEAD
-=======
 
     public void dataTimeInvalidated(DataTime time) {
         /*
@@ -843,5 +813,4 @@ public class SatResource extends
         removeDataTime(time, false);
     }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

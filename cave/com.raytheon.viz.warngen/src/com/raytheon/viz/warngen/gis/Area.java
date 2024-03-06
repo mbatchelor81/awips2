@@ -127,11 +127,7 @@ public class Area {
             .getHandler(Area.class);
 
     private static final IPerformanceStatusHandler perfLog = PerformanceStatus
-<<<<<<< HEAD
-            .getHandler("WG:");
-=======
             .getHandler("WG");
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * If an area greater than this percentage of the area is covered, no

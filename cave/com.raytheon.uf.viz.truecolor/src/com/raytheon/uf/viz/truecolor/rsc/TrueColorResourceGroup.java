@@ -56,11 +56,7 @@ import com.raytheon.uf.viz.truecolor.extension.ITrueColorImagingExtension;
 import com.raytheon.uf.viz.truecolor.extension.ITrueColorImagingExtension.Channel;
 import com.raytheon.uf.viz.truecolor.extension.ITrueColorImagingExtension.ITrueColorImage;
 
-<<<<<<< HEAD
-import tec.uom.se.AbstractConverter;
-=======
 import tech.units.indriya.function.AbstractConverter;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Resource group that operates on 3 resources, one assigned to each band of an

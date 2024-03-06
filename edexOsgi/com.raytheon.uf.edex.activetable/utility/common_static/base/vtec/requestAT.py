@@ -35,10 +35,7 @@
 # Apr 29, 2020  8151     randerso  Use SiteMap.getSite4LetterId()
 # Dec 02, 2020  8294     randerso  Set pickle protocol=2 for backward
 #                                  compatibility with Python2
-<<<<<<< HEAD
-=======
 # Nov 10, 2021  8698     njensen   Replace timing calls with os.times()
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 ##
 
@@ -49,10 +46,6 @@
 import pickle
 import os
 import tempfile
-<<<<<<< HEAD
-import time
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 from xml.etree import ElementTree
 
 import IrtAccess
@@ -151,11 +144,7 @@ def runFromJava(serverHost, serverPort, serverProtocol, mhsid, siteID, ancf,
     init_logging()
 
     logger.info('*********** requestAT ******************')
-<<<<<<< HEAD
-    startT = time.time()
-=======
     startT = os.times()
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     try:
         execute_request_at(serverHost, serverPort, serverProtocol, mhsid,
@@ -166,13 +155,8 @@ def runFromJava(serverHost, serverPort, serverProtocol, mhsid, siteID, ancf,
     #--------------------------------------------------------------------
     # Finish
     #--------------------------------------------------------------------
-<<<<<<< HEAD
-    endT = time.time()
-    logger.info("Final: wctime: {0:-6.2f}, cputime: {1:-6.2f}".format(endT - startT, time.clock()))
-=======
     endT = os.times()
     elapsed = endT.elapsed - startT.elapsed
     cpu = endT.system + endT.user - startT.system - startT.user
     logger.info("Final: wctime: {0:-6.2f}, cputime: {1:-6.2f}".format(elapsed, cpu))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 

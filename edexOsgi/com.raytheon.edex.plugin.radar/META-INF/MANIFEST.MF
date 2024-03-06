@@ -12,16 +12,11 @@ Require-Bundle: com.raytheon.edex.common,
  com.raytheon.uf.common.serialization.comm,
  com.raytheon.uf.common.status,
  com.raytheon.uf.common.dataplugin.radar,
-<<<<<<< HEAD
- org.itadaki.bzip2,
- org.slf4j
-=======
  com.raytheon.uf.common.menus.vb,
  com.raytheon.uf.edex.menus,
  org.itadaki.bzip2,
  org.slf4j,
  javax.xml.bind
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 Export-Package: com.raytheon.edex.plugin.radar,
  com.raytheon.edex.plugin.radar.dao,
  com.raytheon.edex.plugin.radar.level2

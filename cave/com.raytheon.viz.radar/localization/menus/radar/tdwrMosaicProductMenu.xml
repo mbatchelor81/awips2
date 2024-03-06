@@ -40,15 +40,6 @@
         <substitute key="name" value="TDWR 0.5 Long Range Refl" />
     </contribute>
     <contribute xsi:type="bundleItem" file="bundles/DefaultRadarMosaic.xml"
-<<<<<<< HEAD
-        menuText="Hybrid Scan Refl" id="RadarHybridScanRefl">
-        <substitute key="product" value="32" />
-        <substitute key="elevation" value="0.0" />
-        <substitute key="name" value="TDWR Hybrid Scan Refl" />
-    </contribute>
-    <contribute xsi:type="bundleItem" file="bundles/DefaultRadarMosaic.xml"
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         menuText="Composite Refl" id="RadarCompositeRefl">
         <substitute key="product" value="37" />
         <substitute key="elevation" value="0.0" />
@@ -64,35 +55,9 @@
         <substitute key="name" value="TDWR Vert integrated Liquid" />
     </contribute>
     <contribute xsi:type="bundleItem" file="bundles/DefaultRadarMosaic.xml"
-<<<<<<< HEAD
-        menuText="One Hour Precip" id="RadarOneHourPrecip">
-        <substitute key="product" value="78" />
-        <substitute key="elevation" value="0.0" />
-        <substitute key="name" value="One Hour Precip" />
-    </contribute>
-    <contribute xsi:type="bundleItem" file="bundles/DefaultRadarMosaic.xml"
-        menuText="Storm Total Precip" id="RadarStormTotalPrecip">
-        <substitute key="product" value="80" />
-        <substitute key="elevation" value="0.0" />
-        <substitute key="name" value="TDWR Storm Total Precip" />
-    </contribute>
-    <contribute xsi:type="bundleItem" file="bundles/DefaultRadarMosaic.xml"
-        menuText="Digital Storm Total Precip (DSP)" id="RadarDigitalStormTotalPrecip">
-        <substitute key="product" value="138" />
-        <substitute key="elevation" value="0.0" />
-        <substitute key="name"
-            value="TDWR Digital Storm Total Precip (DSP)" />
-    </contribute>
-    <contribute xsi:type="bundleItem" file="bundles/DefaultRadarMosaic.xml"
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         menuText="Echo Tops" id="RadarEchoTops">
         <substitute key="product" value="41" />
         <substitute key="elevation" value="0.0" />
         <substitute key="name" value="TDWR Echo Tops" />
     </contribute>
-<<<<<<< HEAD
 </menuTemplate>
-=======
-</menuTemplate>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

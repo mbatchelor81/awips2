@@ -81,11 +81,8 @@ import org.locationtech.jts.geom.MultiPolygon;
  * Jan 04, 2018  7178     randerso    Changes to support IDataObject. Code
  *                                    cleanup
  * Jan 04, 2019  7705     randerso    Fix misspelled method name.
-<<<<<<< HEAD
-=======
  * May 15, 2023  2033890  dhaines     Changed unsigned integer handling to be 
  *                                    more clear
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -194,12 +191,7 @@ public class DiscreteGridData extends AbstractGridData {
                             for (int newy = j - ss; newy <= (j + ss); newy++) {
                                 // if inside grid limits, make a smoothed value
                                 if (originalGrid.isValid(newx, newy)) {
-<<<<<<< HEAD
-                                    histo[0xFF
-                                            & originalGrid.get(newx, newy)]++;
-=======
                                     histo[Byte.toUnsignedInt(originalGrid.get(newx, newy))]++;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                 }
                             }
                         }
@@ -297,11 +289,7 @@ public class DiscreteGridData extends AbstractGridData {
 
     @Override
     public WxValue getWxValue(int x, int y) {
-<<<<<<< HEAD
-        int index = 0xFF & getDiscreteGrid().get(x, y);
-=======
         int index = Byte.toUnsignedInt(getDiscreteGrid().get(x, y));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         DiscreteWxValue tmpDiscreteWxValue = new DiscreteWxValue(
                 getKeys()[index], getParm());
 
@@ -682,11 +670,7 @@ public class DiscreteGridData extends AbstractGridData {
                     if ((byte) 1 == pToSetA[rowOffset + col]) {
                         // pointsToSet selects this grid point
                         byte dataPoint = gridA[rowOffset + col];
-<<<<<<< HEAD
-                        int dataPointIdx = 0xFF & dataPoint;
-=======
                         int dataPointIdx =Byte.toUnsignedInt(dataPoint);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         if (dataPoint != index) {
                             // value needs to change
                             if (newValues[dataPointIdx] == (byte) -1) {
@@ -806,11 +790,7 @@ public class DiscreteGridData extends AbstractGridData {
                         // of working grid.
                         if (grid.isValid(newx, newy)) {
                             // byte og = originalGrid.get(i, j);
-<<<<<<< HEAD
-                            int og = 0xFF & originalGrid.get(i, j);
-=======
                             int og = Byte.toUnsignedInt(originalGrid.get(i, j));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                             byte v = translate[og];
                             if (v == -1) {
                                 v = lookupKeyValue(originalKeys[og]);
@@ -976,19 +956,11 @@ public class DiscreteGridData extends AbstractGridData {
         int numValues = values.getXdim() * values.getYdim();
         byte[] bp = values.getBuffer().array();
         for (int i = 0; i < numValues; i++) {
-<<<<<<< HEAD
-            if ((0xFF & bp[i]) >= keys.size()) {
-                throw new IndexOutOfBoundsException(String.format(
-                        "Invalid index in values[%d,%d]. Index: %d, Size: %d",
-                        i % values.getXdim(), i / values.getXdim(),
-                        (0XFF & bp[i]), keys.size()));
-=======
             if ((Byte.toUnsignedInt(bp[i])) >= keys.size()) {
                 throw new IndexOutOfBoundsException(String.format(
                         "Invalid index in values[%d,%d]. Index: %d, Size: %d",
                         i % values.getXdim(), i / values.getXdim(),
                         (Byte.toUnsignedInt(bp[i])), keys.size()));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         }
 
@@ -1010,11 +982,7 @@ public class DiscreteGridData extends AbstractGridData {
             for (int i = 0; i < dim.x; i++) {
                 for (int j = 0; j < dim.y; j++) {
                     if (pointsToChange.get(i, j) == 1) {
-<<<<<<< HEAD
-                        grid.set(i, j, remap[0xFF & values.get(i, j)]);
-=======
                         grid.set(i, j, remap[Byte.toUnsignedInt(values.get(i, j))]);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     }
                 }
             }
@@ -1025,11 +993,7 @@ public class DiscreteGridData extends AbstractGridData {
                 for (int j = 0; j < dim.y; j++) {
                     if (pointsToChange.get(i, j) == 1) {
                         DiscreteKey combined = DiscreteKey.combine(
-<<<<<<< HEAD
-                                keys.get(0xFF & values.get(i, j)),
-=======
                                 keys.get(Byte.toUnsignedInt(values.get(i, j))),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                 doGetDiscreteValue(i, j));
                         grid.set(i, j, lookupKeyValue(combined));
                     }
@@ -1042,11 +1006,7 @@ public class DiscreteGridData extends AbstractGridData {
 
     protected DiscreteKey doGetDiscreteValue(int x, int y) {
         byte gridValue = getDiscreteGrid().get(x, y);
-<<<<<<< HEAD
-        int gridValueIdx = 0xFF & gridValue;
-=======
         int gridValueIdx = Byte.toUnsignedInt(gridValue);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return getKeys()[gridValueIdx];
     }
 
@@ -1129,11 +1089,7 @@ public class DiscreteGridData extends AbstractGridData {
         int keySize = keys.length;
 
         for (int j = 0; j < data.length; j++) {
-<<<<<<< HEAD
-            int value = 0xFF & data[j];
-=======
             int value = Byte.toUnsignedInt(data[j]);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if (value > keySize) {
                 statusHandler.handle(Priority.PROBLEM,
                         emsg + "Data=" + value + " Min=0 Max=" + keySize);

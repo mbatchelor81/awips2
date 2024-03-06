@@ -28,13 +28,8 @@ import com.raytheon.uf.common.style.level.Level;
 import com.raytheon.uf.common.style.level.SingleLevel;
 
 import si.uom.NonSI;
-<<<<<<< HEAD
-import tec.uom.se.AbstractConverter;
-import tec.uom.se.unit.MetricPrefix;
-=======
 import tech.units.indriya.function.AbstractConverter;
 import javax.measure.MetricPrefix;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Grid Level Translator

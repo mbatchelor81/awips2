@@ -39,11 +39,7 @@ import com.raytheon.uf.common.pointdata.accumulate.AccumDataRequestMessage;
 import com.raytheon.uf.common.serialization.comm.RequestRouter;
 
 import si.uom.SI;
-<<<<<<< HEAD
-import tec.uom.se.unit.MetricPrefix;
-=======
 import javax.measure.MetricPrefix;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Carries out the Accum derived parameter method by sending an accum request to

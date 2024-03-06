@@ -19,20 +19,11 @@
  **/
 package com.raytheon.uf.common.dataplugin.satellite.units.generic;
 
-<<<<<<< HEAD
-import java.math.BigDecimal;
-import java.math.MathContext;
-
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
-import tec.uom.se.AbstractConverter;
-=======
 import javax.measure.UnitConverter;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import tech.units.indriya.function.AbstractConverter;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * TODO Add Description
@@ -46,11 +37,8 @@ import tech.units.indriya.function.AbstractConverter;
  * Mar 16, 2010            jsanchez     Initial creation
  * Apr 15, 2019  7596      lsingh       Updated units framework to JSR-363.
  *                                      Overrided additional methods.
-<<<<<<< HEAD
-=======
  * Aug 05, 2022  8905      lsingh       Updated units framework to 2.0.2.
  *                                      Renamed methods, and overrided additional methods.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -61,33 +49,6 @@ import tech.units.indriya.function.AbstractConverter;
 public class GenericToPixelConverter extends AbstractConverter {
     private static final long serialVersionUID = 1L;
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see tec.uom.se.AbstractConverter#convert(double)
-     */
-    @Override
-    public double convert(double aCount) {
-        return aCount;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see tec.uom.se.AbstractConverter#equals(java.lang.Object)
-     */
-    @Override
-    public boolean equals(Object aConverter) {
-        return (aConverter instanceof GenericToPixelConverter);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see tec.uom.se.AbstractConverter#hashCode()
-     */
-=======
     @Override
     public Number convertWhenNotIdentity(Number aCount) {
         return aCount;
@@ -102,46 +63,22 @@ public class GenericToPixelConverter extends AbstractConverter {
         
     }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this);
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see tec.uom.se.AbstractConverter#inverse()
-     */
-    @Override
-    public AbstractConverter inverse() {
-        return new GenericFromPixelConverter();
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see tec.uom.se.AbstractConverter#isLinear()
-     */
-=======
     @Override
     public AbstractConverter inverseWhenNotIdentity() {
         return new GenericFromPixelConverter();
     }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public boolean isLinear() {
         return false;
     }
 
     @Override
-<<<<<<< HEAD
-    public BigDecimal convert(BigDecimal value, MathContext ctx)
-            throws ArithmeticException {
-        return BigDecimal.valueOf(convert(value.doubleValue()));
-=======
     public boolean isIdentity() {
         return false;
     }
@@ -162,6 +99,5 @@ public class GenericToPixelConverter extends AbstractConverter {
     protected boolean canReduceWith(AbstractConverter that) {
         // This method hasn't been implemented yet since it's unused
         return false;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 }

@@ -36,10 +36,7 @@ import com.raytheon.uf.common.pointdata.PointDataDescription.Type;
  * ------------ ---------- ----------- --------------------------
  * 10/10/2019   71272      mapeters    Initial Creation. Created from the existing PlotData
  *                                       for plot customization work.
-<<<<<<< HEAD
-=======
  * 03/39/2020   75529      ksunil      added isValidParameter
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -69,9 +66,6 @@ public interface IPlotData {
     public Number[] getNumberAllLevels(String parameter);
 
     public Set<String> getParameters();
-<<<<<<< HEAD
-=======
 
     boolean isValidParameter(String param);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

@@ -27,26 +27,6 @@
 ##
 #
 # SOFTWARE HISTORY
-<<<<<<< HEAD
-#  Date       Ticket#    Engineer        Description
-#  ---------- ---------- -----------     --------------------------
-#  07/13/2018 DCS20374   mgamazaychikov  Updated return message in _initializeStormInformation
-#  02/20/2020 DCS20651   mbelk           Added ability to use previous HLS text, when possible
-#  02/28/2020 DCS20651   mbelk           Reworked methods to load either TCV or HLS advisory JSON
-#  03/09/2020 DCS20651   mbelk           Bug fixes working with HLS advisory JSON
-#  03/10/2020 DCS20651   mbelk           Modifications as part of code review
-#  03/13/2020 DCS20651   mbelk           Added _getPartMethod to handle getting method
-#                                        objects for certain parts
-#  10/21/2020 DR22201    bhurley         Addressed problem in DR "GFE - TCV formatter fails due to TCP parsing when header is broken into two lines"
-#  11/30/2020 8287       randerso        Fixed Python3 issue
-#  01/29/2021 DR22438    mbelk           Updated makeUGCString method to prevent
-#                                        UGC repeating the first zone number
-#  02/05/2021 DR22440    ryu             Added elapsed time logging.
-#
-# Version 2021.01.29-0
-
-from __future__ import print_function
-=======
 # Date       Ticket#    Engineer        Description
 # ---------- ---------- -----------     --------------------------
 # 07/13/2018 DCS20374   mgamazaychikov  Updated return message in _initializeStormInformation
@@ -73,7 +53,6 @@ from __future__ import print_function
 # Version: 2024.02.16-0
 
 import tkinter
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 from StartupDialog import IFPDialog as Dialog
 from com.raytheon.viz.core.mode import CAVEMode
 import AbsTime
@@ -82,10 +61,7 @@ import EditAreaUtils
 import GenericHazards
 import JsonSupport
 import LocalizationSupport
-<<<<<<< HEAD
-=======
 import LogStream
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import ModuleAccessor
 import SampleAnalysis
 import collections
@@ -96,10 +72,7 @@ import pprint
 import re
 import time
 import datetime
-<<<<<<< HEAD
-=======
 import offsetTime
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 AWIPS_ENVIRON = "AWIPS2"
 
@@ -111,14 +84,11 @@ class TextProduct(GenericHazards.TextProduct):
         GenericHazards.TextProduct.__init__(self)
         self._pp = pprint.PrettyPrinter()
 
-<<<<<<< HEAD
-=======
         # Add some variables to shortcut calculation of wind speed probability data
         self._currentWindModerateBy = None
         self._windSpeedProbTR = None
         self._samplerWindSpeedProb = None
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     ###############################################################
     # Hazards and Additional Hazards
     # allowedHazards is used for VTEC records and summary
@@ -190,15 +160,9 @@ class TextProduct(GenericHazards.TextProduct):
     def allowedHeadlines(self):
         allActions = ["NEW", "EXA", "EXB", "EXT", "CAN", "CON", "EXP"]
         return [
-<<<<<<< HEAD
-            ("FF.A", allActions, "Flood"),        # FLASH FLOOD WATCH
-            ("FA.A", allActions, "Flood"),        # FLOOD WATCH
-            ("TO.A", allActions, "Convective"),   # TORNADO WATCH
-=======
             ("FF.A", allActions, "Flood"),  # FLASH FLOOD WATCH
             ("FA.A", allActions, "Flood"),  # FLOOD WATCH
             ("TO.A", allActions, "Convective"),  # TORNADO WATCH
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         ]
 
     ###############################################################
@@ -238,13 +202,8 @@ class TextProduct(GenericHazards.TextProduct):
 
     def moderated_dict(self, parmHisto, timeRange, componentName):
         """
-<<<<<<< HEAD
-           Specifies the lower percentages and upper percentages of
-           data to be thrown out for moderated stats.
-=======
         Specifies the lower percentages and upper percentages of
         data to be thrown out for moderated stats.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         """
         # COMMENT: This dictionary defines the low and high limit at which
         # outliers will be removed when calculating moderated stats.
@@ -253,24 +212,6 @@ class TextProduct(GenericHazards.TextProduct):
         # for high values.
 
         # Get Baseline thresholds
-<<<<<<< HEAD
-        dict = SampleAnalysis.SampleAnalysis.moderated_dict(
-            self, parmHisto, timeRange, componentName
-        )
-
-        # Change thresholds
-        dict["Wind"] = (0, 15)
-        dict["WindGust"] = (0, 15)
-        dict["pws34int"] = (0, 5)
-        dict["pws64int"] = (0, 5)
-        dict["pwsD34"] = (0, 5)
-        dict["pwsN34"] = (0, 5)
-        dict["pwsD64"] = (0, 5)
-        dict["pwsN64"] = (0, 5)
-        dict["InundationMax"] = (0, 3)
-        dict["InundationTiming"] = (0, 3)
-        return dict
-=======
         hlstcv_dict = SampleAnalysis.SampleAnalysis.moderated_dict(
             self, parmHisto, timeRange, componentName
         )
@@ -412,7 +353,6 @@ class TextProduct(GenericHazards.TextProduct):
         hlstcv_dict["InundationMax"] = (0, 3)
         hlstcv_dict["InundationTiming"] = (0, 3)
         return hlstcv_dict
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     ###############################################################
     # Product Parts Implementation
@@ -481,14 +421,9 @@ class TextProduct(GenericHazards.TextProduct):
             firstPart = newParts[0]
             secondPart = newParts[1].replace("]", "").replace("'", "")
 
-<<<<<<< HEAD
-        self.debug_print("after step 1 -> firstPart = '{}'   secondPart = '{}'".format(
-            firstPart, secondPart), 1)
-=======
         self.debug_print(
             f"after step 1 -> firstPart = '{firstPart}'   secondPart = '{secondPart}'", 1
         )
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # If we have two parts already defined, separate the dictionary key from the
         # method name
@@ -497,14 +432,6 @@ class TextProduct(GenericHazards.TextProduct):
             secondPart = newParts[0]
             thirdPart = newParts[1]
 
-<<<<<<< HEAD
-        self.debug_print("after step 2 -> secondPart = '{}'   thirdPart = '{}'".format(
-            secondPart, thirdPart), 1)
-
-        # Get the object associated with the first part. This could be either a direct
-        # method object, or a segment dictionary
-        part1 = getattr(productGenerator, "_{}".format(firstPart), None)
-=======
         self.debug_print(
             f"after step 2 -> secondPart = '{secondPart}'   thirdPart = '{thirdPart}'", 1
         )
@@ -512,7 +439,6 @@ class TextProduct(GenericHazards.TextProduct):
         # Get the object associated with the first part. This could be either a direct
         # method object, or a segment dictionary
         part1 = getattr(productGenerator, f"_{firstPart}", None)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         self.debug_print(part1, 1)
 
         # If there are more parts, and we got the initial object
@@ -554,10 +480,7 @@ class TextProduct(GenericHazards.TextProduct):
             arguments = productParts.get("arguments")
             partsList = productParts.get("partsList")
         else:
-<<<<<<< HEAD
-=======
             arguments = []
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             partsList = productParts
 
         removedParts = []
@@ -565,11 +488,7 @@ class TextProduct(GenericHazards.TextProduct):
             if isinstance(part, tuple):
                 # e.g. subPart == "segments", subPartsLists == list of parts for each segment
                 subPart, subPartsLists = part
-<<<<<<< HEAD
-                etlog.logElapsedTime("Before processing subpart %s" % subPart)
-=======
                 etlog.logElapsedTime(f"Before processing subpart {subPart}")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 subParts = []
                 for subPartsList in subPartsLists:
                     subDict = collections.OrderedDict()
@@ -579,11 +498,7 @@ class TextProduct(GenericHazards.TextProduct):
                     subParts.append(subDict)
                 # e.g. productDict["segments"] = segment dictionaries
                 productDict[subPart] = subParts
-<<<<<<< HEAD
-                etlog.logElapsedTime("Completed processing subpart %s" % subPart)
-=======
                 etlog.logElapsedTime(f"Completed processing subpart {subPart}")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             else:
                 if part not in self._noOpParts():
                     method = eval(f"productGenerator._{part}")
@@ -593,11 +508,7 @@ class TextProduct(GenericHazards.TextProduct):
 
         for part in removedParts:
             self.debug_print(
-<<<<<<< HEAD
-                "in _processProductParts - Removing product part = %s" % (part), 1
-=======
                 f"in _processProductParts - Removing product part = {part}", 1
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             )
             partsList.remove(part)
 
@@ -630,11 +541,7 @@ class TextProduct(GenericHazards.TextProduct):
 
         Fill in the dictionary information for the product header.
 
-<<<<<<< HEAD
-        @param productSegmentGroup: holds meta information about the product
-=======
         @param productParts: holds meta information about the product
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         @return initialized product dictionary
 
         ***********
@@ -658,11 +565,7 @@ class TextProduct(GenericHazards.TextProduct):
 
         """
         if self._areaName:
-<<<<<<< HEAD
-            self._areaName = " for " + self._areaName + "\n"
-=======
             self._areaName = f" for {self._areaName}\n"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # Fill in product dictionary information
         productDict = collections.OrderedDict()
@@ -680,21 +583,12 @@ class TextProduct(GenericHazards.TextProduct):
     # Sampling and Statistics related methods
 
     def _getStatValue(self, statDict, element, method=None, dataType=None):
-<<<<<<< HEAD
-        self.debug_print("In _getStatValue looking for '%s'" % (element), 1)
-        self.debug_print("method = %s" % (pprint.pformat(method)), 1)
-        self.debug_print("dataType = %s" % (pprint.pformat(dataType)), 1)
-
-        stats = statDict.get(element, None)
-        self.debug_print("stats = %s" % (pprint.pformat(stats)), 1)
-=======
         self.debug_print(f"In _getStatValue looking for '{element}'", 1)
         self.debug_print(f"method = {pprint.pformat(method)}", 1)
         self.debug_print(f"dataType = {pprint.pformat(dataType)}", 1)
 
         stats = statDict.get(element, None)
         self.debug_print(f"stats = {pprint.pformat(stats)}", 1)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         if stats is None:
             return None
@@ -702,17 +596,10 @@ class TextProduct(GenericHazards.TextProduct):
             stats = stats[0]
             stats, tr = stats
         if dataType == self.VECTOR():
-<<<<<<< HEAD
-            stats, dir = stats
-
-        value = self.getValue(stats, method)
-        self.debug_print("value = %s" % (pprint.pformat(value)), 1)
-=======
             stats, vdir = stats
 
         value = self.getValue(stats, method)
         self.debug_print(f"value = {pprint.pformat(value)}", 1)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return value
 
     # Define a class to handle missing statistics
@@ -727,13 +614,8 @@ class TextProduct(GenericHazards.TextProduct):
 
     def _groupSegments(self, productPartsGenerator, segments, areProductPartsSegmented):
         """
-<<<<<<< HEAD
-         Group the segments into the products. The TCV and HLS product generators
-         only create a single product each so there is only one product segment group.
-=======
         Group the segments into the products. The TCV and HLS product generators
         only create a single product each so there is only one product segment group.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         """
 
         segment_vtecRecords_tuples = self._getSegmentVTECRecordsTuples(segments)
@@ -755,11 +637,7 @@ class TextProduct(GenericHazards.TextProduct):
         for segment in segments:
             vtecRecords = self._getVtecRecords(segment)
             self.debug_print(
-<<<<<<< HEAD
-                "vtecRecords for %s =\n\n%s\n" % (segment, self._pp.pformat(vtecRecords))
-=======
                 f"vtecRecords for {segment} =\n\n{self._pp.pformat(vtecRecords)}\n"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             )
             segment_vtecRecords_tuples.append((segment, vtecRecords))
 
@@ -772,11 +650,7 @@ class TextProduct(GenericHazards.TextProduct):
         intersectAreas = []
         for (_, editAreaLabel) in editAreas:
             editArea = editAreaUtils.getEditArea(editAreaLabel, argDict)
-<<<<<<< HEAD
-            intersectAreaLabel = "intersect_" + editAreaLabel
-=======
             intersectAreaLabel = f"intersect_{editAreaLabel}"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             intersectArea = editAreaUtils.intersectAreas(
                 intersectAreaLabel, editArea, surgeEditArea
             )
@@ -851,11 +725,7 @@ class TextProduct(GenericHazards.TextProduct):
         gfeMode = CAVEMode.getMode().name()
 
         self.debug_print("*" * 100, 1)
-<<<<<<< HEAD
-        self.debug_print("gfeMode = '%s'" % (gfeMode), 1)
-=======
         self.debug_print(f"gfeMode = '{gfeMode}'", 1)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         self.debug_print("*" * 100, 1)
 
         if gfeMode == "PRACTICE":
@@ -897,11 +767,7 @@ class TextProduct(GenericHazards.TextProduct):
         hazStr = ""
         for i in range(len(hazardTable)):
             if hazardTable[i]["sig"]:  # VTEC
-<<<<<<< HEAD
-                hazStr = hazardTable[i]["phen"] + "." + hazardTable[i]["sig"]
-=======
                 hazStr = f"{hazardTable[i]['phen']}.{hazardTable[i]['sig']}"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             else:  # non-VTEC
                 hazStr = hazardTable[i]["phen"]
 
@@ -937,26 +803,16 @@ class TextProduct(GenericHazards.TextProduct):
             for area in hazard["id"]:
                 hazDict.setdefault((hdln, phen, sig), []).append(area)
 
-<<<<<<< HEAD
-        self.debug_print("hazDict = %s" % (self._pp.pformat(hazDict)), 1)
-=======
         self.debug_print(f"hazDict = {self._pp.pformat(hazDict)}", 1)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         hazardHdlns = []
         huAreas = []
         self.debug_print("Additional Hazard Headlines", 1)
         for (key, value) in hazDict.items():
             hdln, phen, sig = key
             huAreas += value
-<<<<<<< HEAD
-            hazardHdln = ((hdln, "NEW", phen,sig), value, [], [], [])
-            self.debug_print("   %s" % (self._pp.pformat(hazardHdln)), 1)
-            self.debug_print("       %s" % (self._pp.pformat(value)), 1)
-=======
             hazardHdln = ((hdln, "NEW", phen, sig), value, [], [], [])
             self.debug_print(f"   {self._pp.pformat(hazardHdln)}", 1)
             self.debug_print(f"       {self._pp.pformat(value)}", 1)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             hazardHdlns.append(hazardHdln)
         return hazardHdlns, huAreas
 
@@ -972,11 +828,7 @@ class TextProduct(GenericHazards.TextProduct):
     ):
         # Given a list of hazards in the form
         #    (key, landList, marineList, coastalList, inlandList)
-<<<<<<< HEAD
-        #  where key is (hdln, act, phen, sig) and the lists show which areas
-=======
         # where key is (hdln, act, phen, sig) and the lists show which areas
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         #    contain the hazard
         # If mode == "any":
         #     Check to see if any of the given phenSigList = [(phen, sig), (phen, sig)]
@@ -991,49 +843,31 @@ class TextProduct(GenericHazards.TextProduct):
         #     Otherwise, they are ignored.
         #
         # E.g. hdlnList = self._checkHazard(hazardHdlns, [("FA","W")], returnList=True)
-<<<<<<< HEAD
-        self.debug_print("_checkHazard hazardHdlns is %s" % (self._pp.pformat(hazardHdlns)), 1)
-        self.debug_print("_checkHazard phenSigList is %s" % (self._pp.pformat(phenSigList)), 1)
-=======
         self.debug_print(
             f"_checkHazard hazardHdlns is {self._pp.pformat(hazardHdlns)}", 1
         )
         self.debug_print(
             f"_checkHazard phenSigList is {self._pp.pformat(phenSigList)}", 1
         )
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         chosen = []
         for key, landList, marineList, coastalList, inlandList in hazardHdlns:
 
             # We do not want to consider marine hazards in this product
             hazAreas = landList
             hazValue = (key, hazAreas)
-<<<<<<< HEAD
-            self.debug_print("hazValue is %s" % (repr(hazValue)), 1)
-=======
             self.debug_print(f"hazValue is {repr(hazValue)}", 1)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             hdln, act, phen, sig = key
             if not includeCAN and act == "CAN":
                 continue
             for checkPhen, checkSig in phenSigList:
-<<<<<<< HEAD
-                self.debug_print("checkPhen is %s" % (checkPhen), 1)
-                self.debug_print("checkSig is %s" % (checkSig), 1)
-=======
                 self.debug_print(f"checkPhen is {checkPhen}", 1)
                 self.debug_print(f"checkSig is {checkSig}", 1)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if phen == checkPhen and sig == checkSig:
                     if checkAreaTypes is not None:
                         # Check for land, marine, etc.
                         for checkAreaType in checkAreaTypes:
                             testList = eval(f"{checkAreaType}List")
-<<<<<<< HEAD
-                            self.debug_print("testList is %s" % (testList), 1)
-=======
                             self.debug_print(f"testList is {testList}", 1)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                             if testList:
                                 chosen.append(hazValue)
                     elif checkAreas is not None:
@@ -1048,11 +882,7 @@ class TextProduct(GenericHazards.TextProduct):
                     if not returnList and chosen:
                         break
 
-<<<<<<< HEAD
-        self.debug_print("In _checkHazard chosen = %s" % (self._pp.pformat(chosen)), 1)
-=======
         self.debug_print(f"In _checkHazard chosen = {self._pp.pformat(chosen)}", 1)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if not returnList:
             return chosen != []
         return chosen
@@ -1078,10 +908,6 @@ class TextProduct(GenericHazards.TextProduct):
         # Create a 120 hour time range starting from the issuanceHour and broken into 1-hour chunks
         # Used for Wind Section
         startTime1Hour = self._calculateStartTime(self._issueTime_secs, resolution=1)
-<<<<<<< HEAD
-        self._timeRange1Hour = self.makeTimeRange(startTime1Hour, startTime1Hour + 120 * 3600)
-        self._timeRangeList1Hour = self._createTimeRangeList(self._timeRange1Hour, hours=1)
-=======
         self._timeRange1Hour = self.makeTimeRange(
             startTime1Hour, startTime1Hour + 120 * 3600
         )
@@ -1091,7 +917,6 @@ class TextProduct(GenericHazards.TextProduct):
         self._timeRangeList120Hour = self._createTimeRangeList(
             self._timeRange1Hour, hours=120
         )
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         # Create a 120 hour time range starting from the issuanceHour and broken into 3-hour chunks
         # Used for Flooding Rain and Tornado Sections
@@ -1120,12 +945,7 @@ class TextProduct(GenericHazards.TextProduct):
         trList = []
         for index, tr in enumerate(subRanges):
             self.debug_print(
-<<<<<<< HEAD
-                "In _createTimeRangeList (%s hour chunks) -> tr = %s"
-                % (hours, self._pp.pformat(tr)),
-=======
                 f"In _createTimeRangeList ({hours} hour chunks) -> tr = {self._pp.pformat(tr)}",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 1,
             )
             trList.append((tr, "Label"))
@@ -1141,11 +961,7 @@ class TextProduct(GenericHazards.TextProduct):
         # Determine the number of hours to the next 6AM or 6PM period
         if localtime.tm_hour < 6:
             periodLength = 6 - localtime.tm_hour
-<<<<<<< HEAD
-        elif localtime.tm_hour >= 6 and localtime.tm_hour < 18:
-=======
         elif 6 <= localtime.tm_hour < 18:
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             periodLength = 18 - localtime.tm_hour
         else:
             periodLength = 30 - localtime.tm_hour
@@ -1166,24 +982,15 @@ class TextProduct(GenericHazards.TextProduct):
             self._periodList.append(period)
 
         self.debug_print(
-<<<<<<< HEAD
-            "final periodList =\n\n%s\n" % (self._pp.pformat(self._periodList)), 1
-=======
             f"final periodList =\n\n{self._pp.pformat(self._periodList)}\n", 1
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         )
 
     def _calculateStartTime(self, localCreationTime, resolution):
         resolution *= 3600
 
         self.debug_print(
-<<<<<<< HEAD
-            "In _calculateStartTime incoming res %d   localCreationTime = %d"
-            % (resolution, localCreationTime),
-=======
             f"In _calculateStartTime incoming res {resolution:d}   "
             f"localCreationTime = {localCreationTime:d}",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             1,
         )
 
@@ -1194,22 +1001,14 @@ class TextProduct(GenericHazards.TextProduct):
         # If this is for surge (6 hour resolution aka 21600 seconds) and we
         # aren't within 30 minutes (aka 1800 seconds) of the next block, go
         # back to the start of the current block
-<<<<<<< HEAD
-        if adjust < resolution // 2 or (resolution == 21600 and (resolution - adjust) > 1800):
-=======
         if adjust < resolution // 2 or (
             resolution == 21600 and (resolution - adjust) > 1800
         ):
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             adjust *= -1  # to move back to beginning of the block
         else:
             adjust = resolution - adjust  # go to next block
 
-<<<<<<< HEAD
-        self.debug_print("In _calculateStartTime %d   adjust = %d" % (resolution, adjust), 1)
-=======
         self.debug_print(f"In _calculateStartTime {resolution}   adjust = {adjust}", 1)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         startTime = AbsTime.AbsTime(localCreationTime + adjust)
 
@@ -1223,13 +1022,8 @@ class TextProduct(GenericHazards.TextProduct):
         # If wholePeriod, format FROM ... TO...
 
         self.debug_print(
-<<<<<<< HEAD
-            "Format period wholePeriod = %s, period = %s, useEndTime =%s"
-            % (str(wholePeriod), str(period), str(useEndTime)),
-=======
             f"Format period wholePeriod = {wholePeriod}, period = {period}, "
             f"useEndTime = {useEndTime}",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             1,
         )
         if period is None:
@@ -1239,21 +1033,12 @@ class TextProduct(GenericHazards.TextProduct):
         else:
             startTime = period.startTime()
         result = self._getTimeDesc(startTime, resolution, shiftToLocal)
-<<<<<<< HEAD
-        self.debug_print("_getTimeDesc result = '%s'" % (result), 1)
-        if wholePeriod:
-            endResult = self._getTimeDesc(period.endTime(), resolution, shiftToLocal)
-            self.debug_print("_getTimeDesc endResult = '%s'" % (endResult), 1)
-            if result != endResult:
-                result += " TO " + endResult
-=======
         self.debug_print(f"_getTimeDesc result = '{result}'", 1)
         if wholePeriod:
             endResult = self._getTimeDesc(period.endTime(), resolution, shiftToLocal)
             self.debug_print(f"_getTimeDesc endResult = '{endResult}'", 1)
             if result != endResult:
                 result += f" TO {endResult}"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return result
 
     def _getTimeDesc(self, startTime, resolution=3, shiftToLocal=True):
@@ -1261,43 +1046,25 @@ class TextProduct(GenericHazards.TextProduct):
         # Handle today/tonight and "this" morning/afternoon/etc..
         #
         self.debug_print(
-<<<<<<< HEAD
-            "\n\n**************Formatting Period for GMT startTime %s" % (repr(startTime)), 1
-        )
-        labels = self.Labels()["SimpleWorded"]
-        currentTime = self._timeRange1Hour.startTime()
-        self.debug_print("   currentTime = %s" % (repr(currentTime)), 1)
-=======
             f"\n\n**************Formatting Period for GMT startTime {startTime!r}", 1
         )
         labels = self.Labels()["SimpleWorded"]
         currentTime = self._timeRange1Hour.startTime()
         self.debug_print(f"   currentTime = {currentTime!r}", 1)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if shiftToLocal:
             currentLocalTime, shift = self.determineTimeShift()
             startTime += shift
             currentTime += shift
             self.debug_print(
-<<<<<<< HEAD
-                "shift = %s   shifted start = %s   current = %s"
-                % (int(shift / 3600), startTime, currentTime),
-=======
                 f"shift = {shift // 3600}   shifted start = {startTime}   "
                 f"current = {currentTime}",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 1,
             )
         hour = startTime.hour
         prevDay = False
         prevDay, partOfDay = self._getPartOfDay(hour, resolution)
-<<<<<<< HEAD
-#         if prevDay:
-#             startTime = startTime - 24*3600
-=======
         # if prevDay:
         #     startTime = startTime - 24*3600
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         todayFlag = currentTime.day == startTime.day
         if todayFlag:
             if partOfDay.lower().find("midnight") > 0:
@@ -1310,13 +1077,8 @@ class TextProduct(GenericHazards.TextProduct):
         if "<weekday>" in partOfDay:
             result = partOfDay.replace("<weekday>", weekday)
         else:
-<<<<<<< HEAD
-            result = weekday + " " + partOfDay
-        self.debug_print("Result = '%s'" % (result), 1)
-=======
             result = f"{weekday} {partOfDay}"
         self.debug_print(f"Result = '{result}'", 1)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return result
 
     def _getPartOfDay(self, hour, resolution):
@@ -1325,11 +1087,7 @@ class TextProduct(GenericHazards.TextProduct):
             if hour < 3:
                 prevDay = True
                 partOfDay = "early <weekday> morning"
-<<<<<<< HEAD
-#                 partOfDay = "after midnight"
-=======
                 # partOfDay = "after midnight"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             elif hour < 6:
                 partOfDay = "early <weekday> morning"
             elif hour < 9:
@@ -1347,11 +1105,7 @@ class TextProduct(GenericHazards.TextProduct):
         else:
             if hour < 6:
                 prevDay = True
-<<<<<<< HEAD
-#                 partOfDay = "after midnight"
-=======
                 # partOfDay = "after midnight"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 partOfDay = "early <weekday> morning"
             elif hour < 12:
                 partOfDay = "morning"
@@ -1394,23 +1148,12 @@ class TextProduct(GenericHazards.TextProduct):
         # (including certain special characters).
         # This is for the NHC format.
         mndSearch = re.search(
-<<<<<<< HEAD
-            "(?im)^.*?(?P<stormType>HURRICANE|"
-            + "(POTENTIAL|SUB|POST.?)"
-            + "?TROPICAL\s(STORM|DEPRESSION|CYCLONE)|"
-            + "(SUPER\s)?TYPHOON|REMNANTS\sOF)\s"
-            + r"(?P<stormName>[A-Z0-9\-\(\)\s]+?)"
-            + "(?P<advisoryType>SPECIAL\s|INTERMEDIATE\s)"
-            + "?ADVISORY\sNUMBER[\s]+"
-            + "(?P<advisoryNumber>[A-Z0-9]+)[ ]*",
-=======
             r"(?im)^.*?(?P<stormType>Hurricane|"
             r"(Potential|Sub|Post.?)?Tropical\s(Storm|Depression|Cyclone)|"
             r"(Super\s)?Typhoon|Remnants\sof)\s"
             r"(?P<stormName>[A-Z0-9\-()\s]+?)"
             r"(?P<advisoryType>Special\s|Intermediate\s)?"
             r"Advisory\sNumber[\s]+(?P<advisoryNumber>[A-Z0-9]+)[ ]*",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             tcp,
         )
 
@@ -1645,11 +1388,7 @@ FORECASTER STEWART"""
         self._loadLastTwoAdvisories()
 
     def _synchronizeAdvisories(self):
-<<<<<<< HEAD
-        # Retrieving a directory causes synching to occur.
-=======
         # Retrieving a directory causes syncing to occur.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # This code can throw an exception but don't catch it
         # so that forecasters can be made aware of the issue.
         file = LocalizationSupport.getLocalizationFile(
@@ -1679,11 +1418,7 @@ FORECASTER STEWART"""
         filenames = os.listdir(advisoryDirectoryPath)
         allAdvisories = [fname for fname in filenames if fname[-5:] == ".json"]
 
-<<<<<<< HEAD
-        self.debug_print("allAdvisories = %s" % (self._pp.pformat(allAdvisories)))
-=======
         self.debug_print(f"allAdvisories = {self._pp.pformat(allAdvisories)}")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         stormAdvisories = [
             fname[:-5]
@@ -1702,11 +1437,7 @@ FORECASTER STEWART"""
             stormAdvisories = [adv for adv in stormAdvisories if "HLS" not in adv]
 
         self.debug_print(
-<<<<<<< HEAD
-            "{} stormAdvisories = {}".format(productType, self._pp.pformat(stormAdvisories)), 1
-=======
             f"{productType} stormAdvisories = {self._pp.pformat(stormAdvisories)}", 1
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         )
 
         return stormAdvisories
@@ -1743,13 +1474,7 @@ FORECASTER STEWART"""
                 )
 
         self.debug_print(
-<<<<<<< HEAD
-            "DEBUG: {} last two advisories = {}".format(
-                productType, self._pp.pformat(lastTwoAdvisories)
-            ),
-=======
             f"DEBUG: {productType} last two advisories = {self._pp.pformat(lastTwoAdvisories)}",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             1,
         )
         self._previousAdvisory = None
@@ -1769,28 +1494,16 @@ FORECASTER STEWART"""
                 LocalizationSupport.CAVE_STATIC, self._site, fileName
             )
 
-<<<<<<< HEAD
-            self.debug_print("File contents for %s:" % (fileName), 1)
-            self.debug_print(self._pp.pformat(pythonDict), 1)
-
-            # Only use transmitted advisories
-            if pythonDict["Transmitted"] == False and advisoryName != "pending":
-=======
             self.debug_print(f"File contents for {fileName}:", 1)
             self.debug_print(self._pp.pformat(pythonDict), 1)
 
             # Only use transmitted advisories
             if not pythonDict["Transmitted"] and advisoryName != "pending":
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 return None
             else:
                 return pythonDict
         except Exception as e:
-<<<<<<< HEAD
-            self.debug_print("Load Exception for %s : %s" % (fileName, e), 1)
-=======
             self.debug_print(f"Load Exception for {fileName} : {e}", 1)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return None
 
     def _getAdvisoryPath(self):
@@ -1801,11 +1514,7 @@ FORECASTER STEWART"""
             return os.path.join("gfe", "tcvAdvisories")
 
     def _getAdvisoryFilename(self, advisoryName):
-<<<<<<< HEAD
-        advisoryFilename = os.path.join(self._getAdvisoryPath(), advisoryName + ".json")
-=======
         advisoryFilename = os.path.join(self._getAdvisoryPath(), f"{advisoryName}.json")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return advisoryFilename
 
     ###############################################################
@@ -1838,14 +1547,10 @@ FORECASTER STEWART"""
         return {
             # Order and inclusion of GUI1 buttons
             # Each entry is (name of button in GUI code, desired label on GUI)
-<<<<<<< HEAD
-            "buttonList": [("Run", "Run"), ("Cancel", "Cancel"), ],
-=======
             "buttonList": [
                 ("Run", "Run"),
                 ("Cancel", "Cancel"),
             ],
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
     def _font_GUI_dict(self):
@@ -1855,21 +1560,11 @@ FORECASTER STEWART"""
         }
 
 
-<<<<<<< HEAD
-import tkinter
-class Common_Dialog(Dialog):
-
-    def __init__(self, parent, title, infoDict=None):
-        self._status = "Cancel"    # exception, or user-cancels
-        self._tkObject_dict = {}   # place to store reference to tk objects
-        self._varDict = {}         # all end results must be saved here
-=======
 class Common_Dialog(Dialog):
     def __init__(self, parent, title, infoDict=None):
         self._status = "Cancel"  # exception, or user-cancels
         self._tkObject_dict = {}  # place to store reference to tk objects
         self._varDict = {}  # all end results must be saved here
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         self._infoDict = infoDict
         self._parent = parent
         self._pp = pprint.PrettyPrinter()
@@ -1948,19 +1643,11 @@ class Common_Dialog(Dialog):
         self.cancel()
 
     def _entryName(self, name):
-<<<<<<< HEAD
-        return name + "_entry"
-
-    def _makeTuple(self, str):
-        str = re.sub("(?im)[^_a-z]", "", str)
-        return (str + ":", str)
-=======
         return f"{name}_entry"
 
     def _makeTuple(self, tstr):
         tstr = re.sub("(?im)[^_a-z]", "", tstr)
         return f"{tstr}:", tstr
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def _setVarDict(self, key, value, options=None):
         if options is not None:
@@ -1979,20 +1666,12 @@ class Common_Dialog(Dialog):
 
 
 #########################################################
-<<<<<<< HEAD
-# The following defintions are from TextProductCommon.  #
-=======
 # The following definitions are from TextProductCommon. #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # This is just bringing over the minimum amount needed. #
 #########################################################
 
 
 class TextProductCommon(DiscretePhrases.DiscretePhrases):
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def __init__(self):
         DiscretePhrases.DiscretePhrases.__init__(self)
 
@@ -2009,11 +1688,7 @@ class TextProductCommon(DiscretePhrases.DiscretePhrases):
         """
 
         # get this time zone
-<<<<<<< HEAD
-        thisTimeZone = os.environ.get("TZ")
-=======
         thisTimeZone = offsetTime.getTimeZone()
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if thisTimeZone is None:
             thisTimeZone = "GMT"
 
@@ -2046,11 +1721,7 @@ class TextProductCommon(DiscretePhrases.DiscretePhrases):
             if index != 0:
                 del zoneList[index]
                 zoneList.insert(0, thisTimeZone)
-<<<<<<< HEAD
-        except BaseException:
-=======
         except (IndexError, ValueError):
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             pass
 
         return zoneList
@@ -2132,10 +1803,6 @@ class TextProductCommon(DiscretePhrases.DiscretePhrases):
         Order vtec records and create the sections for the segment
 
         @param vtecRecords:  vtecRecords for a segment
-<<<<<<< HEAD
-        @param metaDataList: list of (metaData, hazardEvent) for the segment
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         @param productID: product ID e.g. FFA, CWF, etc.
         @param issueTime: in seconds so that it compares to the vtec records
         """
@@ -2157,11 +1824,7 @@ class TextProductCommon(DiscretePhrases.DiscretePhrases):
                 hList.remove(vtecRecord)
                 continue
 
-<<<<<<< HEAD
-            # make sure the vtecRecord is still in effect or within EXP critiera
-=======
             # make sure the vtecRecord is still in effect or within EXP criteria
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if (vtecRecord["act"] != "EXP" and issueTime >= vtecRecord["endTime"]) or (
                 vtecRecord["act"] == "EXP" and issueTime > 30 * 60 + vtecRecord["endTime"]
             ):
@@ -2174,15 +1837,6 @@ class TextProductCommon(DiscretePhrases.DiscretePhrases):
             # hazStr = self.convertToLower(hazStr)
 
             # if the vtecRecord is a convective watch, tack on the etn
-<<<<<<< HEAD
-            phenSig = vtecRecord["phen"] + "." + vtecRecord["sig"]
-            if phenSig in ["TO.A", "SV.A"]:
-                hazStr += " " + str(vtecRecord["etn"])
-
-            # add on the action
-            actionWords = self.actionControlWord(vtecRecord, issueTime)
-            hazStr += " " + actionWords
-=======
             phenSig = f"{vtecRecord['phen']}.{vtecRecord['sig']}"
             if phenSig in ["TO.A", "SV.A"]:
                 hazStr += f" {str(vtecRecord['etn'])}"
@@ -2190,7 +1844,6 @@ class TextProductCommon(DiscretePhrases.DiscretePhrases):
             # add on the action
             actionWords = self.actionControlWord(vtecRecord, issueTime)
             hazStr += f" {actionWords}"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             if len(hazStr):
                 # Call user hook
@@ -2203,11 +1856,7 @@ class TextProductCommon(DiscretePhrases.DiscretePhrases):
                     vtecRecord["startTime"],
                     vtecRecord["endTime"],
                 )  # May need to add leading space if non-null
-<<<<<<< HEAD
-                headlineStr += "..." + hazStr + localStr + "...\n"
-=======
                 headlineStr += f"...{hazStr}{localStr}...\n"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             # always remove the main vtecRecord from the list
             hList.remove(vtecRecord)
@@ -2223,36 +1872,22 @@ class TextProductCommon(DiscretePhrases.DiscretePhrases):
         """
         ugcStr = self.makeUGCString(ugcs)
         ddhhmmTime = self.getFormattedTime(
-<<<<<<< HEAD
-              expireTime // 1000, "%d%H%M", shiftToLocal=0, stripLeading=0).upper()
-        ugcStr += "-" + ddhhmmTime + "-"
-=======
             expireTime // 1000, "%d%H%M", shiftToLocal=0, stripLeading=0
         ).upper()
         ugcStr += f"-{ddhhmmTime}-"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return ugcStr
 
     def getFormattedTime(
         self,
         time_secs,
-<<<<<<< HEAD
-        format="%I%M %p %Z %a %b %d %Y",
-=======
         tformat="%I%M %p %Z %a %b %d %Y",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         shiftToLocal=1,
         upperCase=0,
         stripLeading=1,
     ):
         """
-<<<<<<< HEAD
-         Return a text string of the given time in seconds in the given format
-         This method is used for product headers.
-=======
         Return a text string of the given time in seconds in the given format
         This method is used for product headers.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         """
         if time_secs == 0:
             time_secs = time.time()
@@ -2262,11 +1897,7 @@ class TextProductCommon(DiscretePhrases.DiscretePhrases):
             curTime = time.gmtime(time_secs)
             localTime = time.localtime(time_secs)
             zoneName = time.strftime("%Z", localTime)
-<<<<<<< HEAD
-        timeStr = time.strftime(format, curTime)
-=======
         timeStr = time.strftime(tformat, curTime)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if not shiftToLocal:
             timeStr = timeStr.replace(zoneName, "GMT")
         if stripLeading and timeStr[0] in ["0", " "]:
@@ -2293,11 +1924,7 @@ class TextProductCommon(DiscretePhrases.DiscretePhrases):
         for name in nameList:
             nameString += name + separator
         if state:
-<<<<<<< HEAD
-            nameString = nameString.rstrip(separator) + " (" + state + ") "
-=======
             nameString = f"{nameString.rstrip(separator)} ({state}) "
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return nameString
 
     def getVal(self, dictionary, key, default=None, altDict=None):
@@ -2306,36 +1933,22 @@ class TextProductCommon(DiscretePhrases.DiscretePhrases):
 
         @param dictionary
         @param key, potentially without a suffix e.g. "info"
-<<<<<<< HEAD
-        @return the key value accounting for suffixes e.g. "info:skip"
-        """
-        for dictKey in [key, key + ":skip", key + ":editable"]:
-=======
         @param default
         @param altDict
         @return the key value accounting for suffixes e.g. "info:skip"
         """
         for dictKey in [key, f"{key}:skip", f"{key}:editable"]:
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if dictionary.get(dictKey):
                 return dictionary.get(dictKey)
             if altDict and altDict.get(dictKey):
                 return altDict.get(dictKey)
         return default
 
-<<<<<<< HEAD
-    def formatDatetime(self, dt, format="ISO", timeZone=None):
-        """
-        @param dt: datetime object
-        @param format: format string e.g. "%H%M %p %Z %a %e %b %Y"
-        @param zone: time zone e.g."CST7CDT".   If None use UTC
-=======
     def formatDatetime(self, dt, tformat="ISO", timeZone=None):
         """
         @param dt: datetime object
         @param tformat: format string e.g. "%H%M %p %Z %a %e %b %Y"
         @param timeZone: time zone e.g."CST7CDT".   If None use UTC
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         @return datetime formatted with time zone e.g. "1400 PM CST Mon 12 Feb 2011"
         """
         import datetime
@@ -2353,17 +1966,10 @@ class TextProductCommon(DiscretePhrases.DiscretePhrases):
         if format == "ISO":
             return new_time.isoformat()
         else:
-<<<<<<< HEAD
-            return new_time.strftime(format)
-
-    def flush(self):
-        """ Flush the print buffer """
-=======
             return new_time.strftime(tformat)
 
     def flush(self):
         """Flush the print buffer"""
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         os.sys.__stdout__.flush()
 
     def makeUGCString(self, ugcs):
@@ -2401,26 +2007,15 @@ class TextProductCommon(DiscretePhrases.DiscretePhrases):
                         ugcStr = ugcStr[: len(ugcStr) - 3] + ugcNumStr
                         inSeq += 1
                     else:
-<<<<<<< HEAD
-                        ugcStr += ">" + ugcNumStr
-=======
                         ugcStr += f">{ugcNumStr}"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         inSeq = 1
                 else:  # num != lastNum + 1
                     ugcStr = self.checkLastArrow(inSeq, ugcStr)
                     inSeq = 0  # reset sequence when number not in sequence
-<<<<<<< HEAD
-                    ugcStr += "-" + ugcNumStr
-            else:
-                ugcStr = self.checkLastArrow(inSeq, ugcStr)
-                ugcStr += "-" + ugc
-=======
                     ugcStr += f"-{ugcNumStr}"
             else:
                 ugcStr = self.checkLastArrow(inSeq, ugcStr)
                 ugcStr += f"-{ugc}"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 curState = ugcState
                 inSeq = 0  # reset sequence when switching states
             lastNum = num
@@ -2439,43 +2034,22 @@ class TextProductCommon(DiscretePhrases.DiscretePhrases):
             # 062>063  should be   062-063
             arrowIndex = ugcStr.rfind(">")
             if arrowIndex >= 0:
-<<<<<<< HEAD
-                ugcStr = ugcStr[:arrowIndex] + "-" + ugcStr[arrowIndex + 1:]
-        return ugcStr
-
-
-class ETLogger():
-
-=======
                 ugcStr = f"{ugcStr[:arrowIndex]}-{ugcStr[arrowIndex + 1:]}"
         return ugcStr
 
 
 class ETLogger:
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def __init__(self, method):
         self.__method = method
         now = datetime.datetime.now()
         self.__initTime = now
-<<<<<<< HEAD
-        print ("%s  In %s. Elapsed time=%s" % \
-               (now, method, datetime.timedelta(0)))
-=======
         print(f"{now}  In {method}. Elapsed time={datetime.timedelta(0)}")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         self.__lastLogTime = now
 
     def logElapsedTime(self, signature):
         now = datetime.datetime.now()
-<<<<<<< HEAD
-        print ("%s  In %s/%s. Elapsed time=%s  Since last log=%s" % \
-               (now, self.__method, signature, now-self.__initTime, now-self.__lastLogTime))
-        self.__lastLogTime = now
-
-=======
         print(
             f"{now}  In {self.__method}/{signature}. Elapsed time={now - self.__initTime}"
             f"  Since last log={now - self.__lastLogTime}"
         )
         self.__lastLogTime = now
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

@@ -29,11 +29,7 @@
 <menuTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <contribute xsi:type="bundleItem" file="bundles/DefaultRadarMosaic.xml"
         menuText="0.5 Reflectivity" id="Radar05Reflectivity">
-<<<<<<< HEAD
-        <substitute key="product" value="153,94,19,20" />
-=======
         <substitute key="product" value="153,94" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="elevation" value="0.5" />
         <substitute key="name" value="0.5 Reflectivity" />
     </contribute>
@@ -152,8 +148,4 @@
         <substitute key="layer" value="6.0" />
         <substitute key="name" value="Dual Pol User 24hr Accum @12Z (DUA)" />
     </contribute>
-<<<<<<< HEAD
 </menuTemplate>
-=======
-</menuTemplate>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

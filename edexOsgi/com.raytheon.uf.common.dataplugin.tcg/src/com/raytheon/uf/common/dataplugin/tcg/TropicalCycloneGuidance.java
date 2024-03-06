@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
  * 
-=======
- *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
  * 
-=======
- *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
  * 
-=======
- *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -36,20 +24,11 @@ import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-<<<<<<< HEAD
-=======
-import javax.persistence.Index;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
-<<<<<<< HEAD
-=======
-import org.locationtech.jts.geom.Geometry;
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.dataplugin.PluginDataObject;
 import com.raytheon.uf.common.dataplugin.annotations.DataURI;
 import com.raytheon.uf.common.dataplugin.annotations.NullString;
@@ -60,7 +39,6 @@ import com.raytheon.uf.common.pointdata.PointDataView;
 import com.raytheon.uf.common.pointdata.spatial.SurfaceObsLocation;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerialize;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
-<<<<<<< HEAD
 import org.locationtech.jts.geom.Geometry;
 
 /**
@@ -68,14 +46,6 @@ import org.locationtech.jts.geom.Geometry;
  * 
  * <pre>
  * 
-=======
-
-/**
- * Record implementation for tcg plugin
- *
- * <pre>
- *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * SOFTWARE HISTORY
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
@@ -90,31 +60,16 @@ import org.locationtech.jts.geom.Geometry;
  * Jul 28, 2015 4360       rferrel     Named unique constraint. Made productType and modelName non-nullable.
  * Jan 28, 2016 5286       tgurney     Drop dataURI column and update unique constraint.
  * Aug 04, 2016 5783       tgurney     Add forecasttime to unique constraint
-<<<<<<< HEAD
  * 
  * </pre>
  * 
-=======
- * Aug 08, 2022 8892       tjensen     Update indexes for Hibernate 5
- *
- * </pre>
- *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author jsanchez
  */
 @Entity
 @SequenceGenerator(initialValue = 1, name = PluginDataObject.ID_GEN, sequenceName = "tcgseq")
-<<<<<<< HEAD
 @Table(name = "tcg", uniqueConstraints = { @UniqueConstraint(name = "uk_tcg_datauri_fields", columnNames = {
         "refTime", "forecastTime", "productType", "modelName", "latitude",
         "longitude", "stationId" }) })
-=======
-@Table(name = "tcg", uniqueConstraints = {
-        @UniqueConstraint(name = "uk_tcg_datauri_fields", columnNames = {
-                "refTime", "forecastTime", "productType", "modelName",
-                "latitude", "longitude", "stationId" }) }, indexes = {
-                        @Index(name = "%TABLE%_stationIndex", columnList = "stationId") })
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 @DynamicSerialize
 public class TropicalCycloneGuidance extends PersistablePluginDataObject
         implements ISpatialEnabled, IPointData {
@@ -163,11 +118,7 @@ public class TropicalCycloneGuidance extends PersistablePluginDataObject
 
     /**
      * Construct an instance of this class using the supplied datauri.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param dataUri
      */
     public TropicalCycloneGuidance(String dataUri) {
@@ -228,11 +179,7 @@ public class TropicalCycloneGuidance extends PersistablePluginDataObject
 
     /**
      * Get this observation's geometry.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry for this observation.
      */
     public Geometry getGeometry() {
@@ -241,11 +188,7 @@ public class TropicalCycloneGuidance extends PersistablePluginDataObject
 
     /**
      * Get the geometry latitude.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry latitude.
      */
     public double getLatitude() {
@@ -254,11 +197,7 @@ public class TropicalCycloneGuidance extends PersistablePluginDataObject
 
     /**
      * Get the geometry longitude.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry longitude.
      */
     public double getLongitude() {
@@ -267,11 +206,7 @@ public class TropicalCycloneGuidance extends PersistablePluginDataObject
 
     /**
      * Get the station identifier for this observation.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return the stationId
      */
     public String getStationId() {
@@ -280,11 +215,7 @@ public class TropicalCycloneGuidance extends PersistablePluginDataObject
 
     /**
      * Get the elevation, in meters, of the observing platform or location.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The observation elevation, in meters.
      */
     public Integer getElevation() {
@@ -293,11 +224,7 @@ public class TropicalCycloneGuidance extends PersistablePluginDataObject
 
     /**
      * Get whether the location for this observation is defined.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return Is this location defined.
      */
     public Boolean getLocationDefined() {

@@ -52,10 +52,7 @@ import com.raytheon.uf.common.time.util.TimeUtil;
  * Jul 05, 2016 5728       mapeters    Use RequestConstraint to build IN
  *                                     constraints
  * Oct 05, 2016 5926       dgilling    Add assembleGetLocationNames.
-<<<<<<< HEAD
-=======
  * Jun 08, 2021 DCS 21663  dfriedman   Support time-agnostic queries.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -68,11 +65,7 @@ public class HydroQueryAssembler {
 
     protected static final String LID_COL = "lid";
 
-<<<<<<< HEAD
-    private static final String TIME_COL = "producttime";
-=======
     protected static final String TIME_COL = "producttime";
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private static final String TIME_COL_ALIAS = "timeColumn" + TIME_COL;
 
@@ -95,12 +88,8 @@ public class HydroQueryAssembler {
      */
     public static String assembleGetData(IDataRequest request,
             DataTime[] times) {
-<<<<<<< HEAD
-        return assembleGetData(request, buildTimeConstraint(times)).toString();
-=======
         return assembleGetData(request, buildTimeConstraint(times), true)
                 .toString();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
@@ -114,17 +103,11 @@ public class HydroQueryAssembler {
      */
     public static String assembleGetData(IDataRequest request,
             TimeRange timeRange) {
-<<<<<<< HEAD
-        return assembleGetData(request, buildTimeConstraint(timeRange))
-=======
         return assembleGetData(request, buildTimeConstraint(timeRange), true)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 .toString();
     }
 
     /**
-<<<<<<< HEAD
-=======
      * Assembles a SQL query for time agnostic data
      *
      * @param request
@@ -136,7 +119,6 @@ public class HydroQueryAssembler {
     }
 
     /**
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * Assembles a SQL string to query corresponding to the request.
      * 
      * @param request
@@ -147,11 +129,7 @@ public class HydroQueryAssembler {
      * @return a SQL string that corresponds to the request
      */
     private static CharSequence assembleGetData(IDataRequest request,
-<<<<<<< HEAD
-            CharSequence timeConstraint) {
-=======
             CharSequence timeConstraint, boolean isTimeQuerySupported) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         StringBuilder sb = new StringBuilder();
         /*
          * this method assembles a sql string such as: select d.lid as
@@ -162,11 +140,7 @@ public class HydroQueryAssembler {
          */
 
         // select
-<<<<<<< HEAD
-        sb.append(buildSelectParams(request));
-=======
         sb.append(buildSelectParams(request, isTimeQuerySupported));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         // from table name
         sb.append(buildFromWithLocation(request));
@@ -175,13 +149,9 @@ public class HydroQueryAssembler {
         sb.append(buildWhere(request, timeConstraint));
 
         // order by
-<<<<<<< HEAD
-        sb.append(buildOrderByTime());
-=======
         if (isTimeQuerySupported) {
             sb.append(buildOrderByTime());
         }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         sb.append(";");
 
         return sb;
@@ -248,11 +218,6 @@ public class HydroQueryAssembler {
      * 
      * @param request
      *            the request to form a select statement on
-<<<<<<< HEAD
-     * @return the select statement
-     */
-    private static CharSequence buildSelectParams(IDataRequest request) {
-=======
      * @param isTimeQuerySupported
      *            true if the target table has a time column that can be
      *            selected
@@ -260,16 +225,11 @@ public class HydroQueryAssembler {
      */
     private static CharSequence buildSelectParams(IDataRequest request,
             boolean isTimeQuerySupported) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         StringBuilder sb = new StringBuilder();
         // always want the location name and time even if they didn't request it
         // so that returned objects will have that information
         sb.append("select d.").append(LID_COL).append(" as ")
                 .append(LID_COL_ALIAS);
-<<<<<<< HEAD
-        sb.append(", d.").append(TIME_COL).append(" as ")
-                .append(TIME_COL_ALIAS);
-=======
         if (isTimeQuerySupported) {
             sb.append(", d.").append(TIME_COL).append(" as ")
                     .append(TIME_COL_ALIAS);
@@ -281,7 +241,6 @@ public class HydroQueryAssembler {
              */
             sb.append(", null");
         }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         // request lat and lon for the returned geometry objects
         sb.append(", l.lat, l.lon");
 

@@ -33,10 +33,7 @@
 #    ------------    ----------    -----------    --------------------------
 #    02/23/2018      #20395        wkwock         Added NBM3.1 elements.
 #    03/10/2020      DCS20781      wkwock         Add NBM 3.2 elements
-<<<<<<< HEAD
-=======
 #    02/10/2021      DCS21721      wkwock         Add NBM 4.0 elements
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 from numpy import *
 
@@ -280,17 +277,6 @@ class NationalBlendForecaster(Forecaster):
 ##-------------------------------------------------------------------------
 ##  Converts cc from meters to hundreds of feet and put in CloudBasePrimary
 ##-------------------------------------------------------------------------
-<<<<<<< HEAD
-    def calcCloudBasePrimary(self, cc_CBL):
-
-        CloudBasePrimary =  (cc_CBL) * 0.0328083989501 ###  convert from meters to hundreds of feet
-        #  D2D displays -3.28m in clear areas outside the fog areas, so we can take advantage
-        #  this information to distinguish clear areas from the dense fog accociated with 0
-        #  values.
-        CloudBasePrimary = where(less(CloudBasePrimary, 0), 250, CloudBasePrimary)
-
-        return CloudBasePrimary
-=======
   # From: ../../methods/calcCloudBaseSecondary/NWS_NBM4.0.calcCloudBaseSecondary.py
     def calcCloudBaseSecondary(self, cc_CBL):
         """Converts cc from meters to hundreds of feet and put in CloudBaseSecondary"""
@@ -304,7 +290,6 @@ class NationalBlendForecaster(Forecaster):
         CloudBaseSecondary[CloudBaseSecondary < 0] = 250
 
         return CloudBaseSecondary
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def calcMaxRH(self, MAXRH12hr_FHAG2):
         return MAXRH12hr_FHAG2
@@ -324,25 +309,8 @@ class NationalBlendForecaster(Forecaster):
     def calcMinT(self, mnt_FHAG2):
         return  self.KtoF(mnt_FHAG2)
 
-<<<<<<< HEAD
-    #===========================================================================
-    # NegativeEnergyLowLevel
-    #===========================================================================
-    def calcNegativeEnergyLowLevel(self, nbe_SFC):
-        return nbe_SFC
-
-    #===========================================================================
-    # Positive Energy Aloft
-    #===========================================================================
-    def calcPositiveEnergyAloft(self, pbe_FHAG61040000):
-        return pbe_FHAG61040000
-
-    def calcPoP(self, pop_SFC):
-        return pop_SFC
-=======
     def calcPoP(self, pop12hr_SFC):
         return pop12hr_SFC
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def calcPoP01(self, pop1hr_SFC):
         return pop1hr_SFC
@@ -460,14 +428,6 @@ class NationalBlendForecaster(Forecaster):
         return (newmag, tpwdir_FHAG10)
 
     def calcLLWS(self, wind_FHAG0610):
-<<<<<<< HEAD
-        mag, dir = wind_FHAG0610
-        Mask = mag >= 150
-        mag = self.convertMsecToKts(mag)    # convert to knots from m/s
-        mag[Mask] = 0
-        dir[Mask] = 0
-        return (mag, dir)
-=======
         wmag = wind_FHAG0610[0].copy()
         wdir = wind_FHAG0610[1].copy()
         Mask = (wmag >= 40) & (wdir < 290) & (wdir >= 260)
@@ -477,7 +437,6 @@ class NationalBlendForecaster(Forecaster):
 
         wmag = self.convertMsecToKts(wmag)  # convert to knots from m/s
         return (np.clip(wmag, 0, 125), wdir)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def calcSnowAmt(self, totsn6hr_SFC):
         return (totsn6hr_SFC * 1000) / 25.4
@@ -486,9 +445,6 @@ class NationalBlendForecaster(Forecaster):
         return mixht_EA / 0.3048
 
     def calcVentRate(self, vrate_EA):
-<<<<<<< HEAD
-        return vrate_EA
-=======
         """calcVentRate - returns model-supplied ventilation rate
 
         Args:
@@ -509,7 +465,6 @@ class NationalBlendForecaster(Forecaster):
                 vrate = self.BI_fillScalar(vrate)
         except AttributeError:
             pass
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def calcHaines(self, hindex6hr_EA):
         return hindex6hr_EA
@@ -518,21 +473,13 @@ class NationalBlendForecaster(Forecaster):
         return fosindx6hr_SFC
 
     def calcLLWSHgt(self, llwshgt_FHAG0610):
-<<<<<<< HEAD
-        return llwshgt_FHAG0610 * 32.808398951
-=======
         # Convert m to 100 ft (m*3.28084/100)
         return llwshgt_FHAG0610 * 0.0328084
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def calcRadar(self, maxref1hr_FHAG1000):
         return maxref1hr_FHAG1000
 
-<<<<<<< HEAD
-    def calcSigWaveHgt(self, htsgw_SFC):
-=======
     def calcWaveHeight(self, htsgw_SFC):
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return htsgw_SFC / 0.3048
 
     def calcWx(self, pwther_SFC):
@@ -865,17 +812,10 @@ class NationalBlendForecaster(Forecaster):
         return (totsn1hr_SFC * 1000) / 25.4
 
     def calcIceAccum01(self, ficeac1hr_SFC):
-<<<<<<< HEAD
-        return (ficeac1hr_SFC * 1000) / 25.4
-
-    def calcIceAccum(self, ficeac6hr_SFC):
-        return (ficeac6hr_SFC * 1000) / 25.4
-=======
         return ficeac1hr_SFC / 25.4
 
     def calcIceAccum(self, ficeac6hr_SFC):
         return ficeac6hr_SFC / 25.4
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def calcQPF10Prcntl(self, tp10pct6hr_SFC):
         return tp10pct6hr_SFC / 25.4
@@ -886,17 +826,6 @@ class NationalBlendForecaster(Forecaster):
     def calcQPF90Prcntl(self, tp90pct6hr_SFC):
         return tp90pct6hr_SFC / 25.4
 
-<<<<<<< HEAD
-    def calcQPF10Prcntl24hr (self, tp10pct24hr_SFC):
-        return tp10pct24hr_SFC / 25.4
-
-    def calcQPF50Prcntl24hr (self, tp50pct24hr_SFC):
-        return tp50pct24hr_SFC / 25.4
-
-    def calcQPF90Prcntl24hr (self, tp90pct24hr_SFC):
-        return tp90pct24hr_SFC / 25.4
-
-=======
     def calcQPF05PrcntlF24(self, tp5pct24hr_SFC):
         return tp5pct24hr_SFC / 25.4
 
@@ -918,7 +847,6 @@ class NationalBlendForecaster(Forecaster):
     def calcQPF95PrcntlF24(self, tp95pct24hr_SFC):
         return tp95pct24hr_SFC / 25.4
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def calcTstmPrb1(self, thp1hr_SFC):
         return thp1hr_SFC
 
@@ -934,136 +862,6 @@ class NationalBlendForecaster(Forecaster):
     def calcFreezingSpray (self, frzspr_SFC):
         return frzspr_SFC
     
-<<<<<<< HEAD
-    def calcIceAccum05PrcntlF24hr (self, ficeac5pct24hr_SFC):
-        return ficeac5pct24hr_SFC
-
-    def calcIceAccum10PrcntlF24hr (self, ficeac10pct24hr_SFC):
-        return ficeac10pct24hr_SFC
-
-    def calcIceAccum25PrcntlF24hr (self, ficeac25pct24hr_SFC):
-        return ficeac25pct24hr_SFC
-
-    def calcIceAccum50PrcntlF24hr (self, ficeac50pct24hr_SFC):
-        return ficeac50pct24hr_SFC
-
-    def calcIceAccum75PrcntlF24hr (self, ficeac75pct24hr_SFC):
-        return ficeac75pct24hr_SFC
-
-    def calcIceAccum90PrcntlF24hr (self, ficeac90pct24hr_SFC):
-        return ficeac90pct24hr_SFC
-
-    def calcIceAccum95PrcntlF24hr (self, ficeac95pct24hr_SFC):
-        return ficeac95pct24hr_SFC
-
-    def calcIceAccum05PrcntlF48hr (self, ficeac5pct48hr_SFC):
-        return ficeac5pct48hr_SFC
-
-    def calcIceAccum10PrcntlF48hr (self, ficeac10pct48hr_SFC):
-        return ficeac10pct48hr_SFC
-
-    def calcIceAccum25PrcntlF48hr (self, ficeac25pct48hr_SFC):
-        return ficeac25pct48hr_SFC
-
-    def calcIceAccum50PrcntlF48hr (self, ficeac50pct48hr_SFC):
-        return ficeac50pct48hr_SFC
-
-    def calcIceAccum75PrcntlF48hr (self, ficeac75pct48hr_SFC):
-        return ficeac75pct48hr_SFC
-
-    def calcIceAccum90PrcntlF48hr (self, ficeac90pct48hr_SFC):
-        return ficeac90pct48hr_SFC
-
-    def calcIceAccum95PrcntlF48hr (self, ficeac95pct48hr_SFC):
-        return ficeac95pct48hr_SFC
-
-    def calcIceAccum05PrcntlF72hr (self, ficeac5pct72hr_SFC):
-        return ficeac5pct72hr_SFC
-
-    def calcIceAccum10PrcntlF72hr (self, ficeac10pct72hr_SFC):
-        return ficeac10pct72hr_SFC
-
-    def calcIceAccum25PrcntlF72hr (self, ficeac25pct72hr_SFC):
-        return ficeac25pct72hr_SFC
-
-    def calcIceAccum50PrcntlF72hr (self, ficeac50pct72hr_SFC):
-        return ficeac50pct72hr_SFC
-
-    def calcIceAccum75PrcntlF72hr (self, ficeac75pct72hr_SFC):
-        return ficeac75pct72hr_SFC
-
-    def calcIceAccum90PrcntlF72hr (self, ficeac90pct72hr_SFC):
-        return ficeac90pct72hr_SFC
-
-    def calcIceAccum95PrcntlF72hr (self, ficeac95pct72hr_SFC):
-        return ficeac95pct72hr_SFC
-
-    def calcPrecipDur (self, pcpdur12hr_SFC):
-        return pcpdur12hr_SFC
-    
-    def calcSnowAmt05PrcntlF24hr (self, totsn5pct24hr_SFC):
-        return totsn5pct24hr_SFC
-
-    def calcSnowAmt10PrcntlF24hr (self, totsn10pct24hr_SFC):
-        return totsn10pct24hr_SFC
-
-    def calcSnowAmt25PrcntlF24hr (self, totsn25pct24hr_SFC):
-        return totsn25pct24hr_SFC
-
-    def calcSnowAmt50PrcntlF24hr (self, totsn50pct24hr_SFC):
-        return totsn50pct24hr_SFC
-
-    def calcSnowAmt75PrcntlF24hr (self, totsn75pct24hr_SFC):
-        return totsn75pct24hr_SFC
-
-    def calcSnowAmt90PrcntlF24hr (self, totsn90pct24hr_SFC):
-        return totsn90pct24hr_SFC
-
-    def calcSnowAmt95PrcntlF24hr (self, totsn95pct24hr_SFC):
-        return totsn95pct24hr_SFC
-
-    def calcSnowAmt05PrcntlF48hr (self, totsn5pct48hr_SFC):
-        return totsn5pct48hr_SFC
-
-    def calcSnowAmt10PrcntlF48hr (self, totsn10pct48hr_SFC):
-        return totsn10pct48hr_SFC
-
-    def calcSnowAmt25PrcntlF48hr (self, totsn25pct48hr_SFC):
-        return totsn25pct48hr_SFC
-
-    def calcSnowAmt50PrcntlF48hr (self, totsn50pct48hr_SFC):
-        return totsn50pct48hr_SFC
-
-    def calcSnowAmt75PrcntlF48hr (self, totsn75pct48hr_SFC):
-        return totsn75pct48hr_SFC
-
-    def calcSnowAmt90PrcntlF48hr (self, totsn90pct48hr_SFC):
-        return totsn90pct48hr_SFC
-
-    def calcSnowAmt95PrcntlF48hr (self, totsn95pct48hr_SFC):
-        return totsn95pct48hr_SFC
-
-    def calcSnowAmt05PrcntlF72hr (self, totsn5pct72hr_SFC):
-        return totsn5pct72hr_SFC
-
-    def calcSnowAmt10PrcntlF72hr (self, totsn10pct72hr_SFC):
-        return totsn10pct72hr_SFC
-
-    def calcSnowAmt25PrcntlF72hr (self, totsn25pct72hr_SFC):
-        return totsn25pct72hr_SFC
-
-    def calcSnowAmt50PrcntlF72hr (self, totsn50pct72hr_SFC):
-        return totsn50pct72hr_SFC
-
-    def calcSnowAmt75PrcntlF72hr (self, totsn75pct72hr_SFC):
-        return totsn75pct72hr_SFC
-
-    def calcSnowAmt90PrcntlF72hr (self, totsn90pct72hr_SFC):
-        return totsn90pct72hr_SFC
-
-    def calcSnowAmt95PrcntlF72hr (self, totsn95pct72hr_SFC):
-        return totsn95pct72hr_SFC
-=======
     def calcIceAccum05PrcntlF24(self, ficeac5pct24hr_SFC):
         return ficeac5pct24hr_SFC / 25.4
 
@@ -1192,13 +990,10 @@ class NationalBlendForecaster(Forecaster):
 
     def calcSnowAmt95PrcntlF72(self, totsn95pct72hr_SFC):
         return (totsn95pct72hr_SFC * 1000) / 25.4
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def calcVis50pct (self, vis50pct_SFC):
         return vis50pct_SFC
 
-<<<<<<< HEAD
-=======
     def calcProbSnowGE01F24(self, totsn1in24hr_SFC):
         return totsn1in24hr_SFC
 
@@ -1255,7 +1050,6 @@ class NationalBlendForecaster(Forecaster):
         return (mxtmntsprd_FHAG2 * 9/5)
 
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 def main():
     NationalBlendForecaster().run()
 

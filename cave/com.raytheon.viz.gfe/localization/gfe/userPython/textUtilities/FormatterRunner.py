@@ -28,16 +28,6 @@ import TimeRange, AbsTime
 import TextFormatter
 import JUtil, VarDictGroker
 import RedirectLogging
-<<<<<<< HEAD
-
-from com.raytheon.uf.viz.core import VizApp
-from com.raytheon.uf.common.gfe.ifpclient import PyFPClient
-
-#
-# Runs the text formatter to generate text products
-#   
-#    
-=======
 import offsetTime
 
 from com.raytheon.uf.viz.core import VizApp
@@ -48,7 +38,6 @@ from PerformanceStatusHandler import PerformanceStatusHandler
 # Runs the text formatter to generate text products
 #
 #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # SOFTWARE HISTORY
 #
 # Date          Ticket#  Engineer  Description
@@ -67,14 +56,10 @@ from PerformanceStatusHandler import PerformanceStatusHandler
 # Sep 28, 2016  19293    randerso  Log formatter exceptions to formatter log file
 # Feb 07, 2017  6092     randerso  Changed startTime and endTime to be time.struct_times
 # Feb 26, 2018  7230     mapeters  Don't reset DRT time to real time
-<<<<<<< HEAD
-# 
-=======
 # Dec 17, 2021  8342     sharbison Changes for Performance Logging.
 # May 11, 2023  2033877  smoorthy  Utilize timezone in offsetTime.py, as opposed to 
 #                                  os.environ['TZ']
 #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ##
 
 ##
@@ -82,11 +67,8 @@ from PerformanceStatusHandler import PerformanceStatusHandler
 ##
 
 displayNameDict = {}
-<<<<<<< HEAD
-=======
 GridLoc = None
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 # Set up logging info
 PLUGIN_NAME = 'com.raytheon.viz.gfe'
@@ -98,29 +80,16 @@ PATH_MGR = None
 try:
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger("FormatterRunner")
-<<<<<<< HEAD
-    
-         
-    formatter = logging.Formatter("%(asctime)s:%(name)s:%(levelname)s:%(message)s")
-    
-=======
 
     formatter = logging.Formatter("%(asctime)s:%(name)s:%(levelname)s:%(message)s")
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     # Get the information for the file logger
     from com.raytheon.uf.common.localization import PathManagerFactory
     from com.raytheon.uf.common.localization import LocalizationContext
     LocalizationType = LocalizationContext.LocalizationType 
-<<<<<<< HEAD
-    LocalizationLevel = LocalizationContext.LocalizationLevel 
-    PATH_MGR = PathManagerFactory.getPathManager()    
-except:    
-=======
     LocalizationLevel = LocalizationContext.LocalizationLevel
     PATH_MGR = PathManagerFactory.getPathManager()
 except:
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     logging.basicConfig(filename=DEFAULT_LOG_FILENAME,level=logging.DEBUG)
     logger = logging.getLogger()
     logger.exception("Exception occurred")
@@ -130,15 +99,6 @@ except:
 ## access to it.
 def executeFromJava(databaseID, site, username, dataMgr, forecastList, logFile, cmdLineVarDict=None,
                     drtTime=None, vtecMode=None, vtecActiveTable="active", testMode=0 ):
-<<<<<<< HEAD
-    if type(forecastList) is not list:
-        forecastList = [str(forecastList)]
-        
-    # Set up the file logger for this product
-#    ctx = PATH_MGR.getContext(LocalizationType.valueOf('CAVE_STATIC'), LocalizationLevel.valueOf('USER'))
-#    logFile = PATH_MGR.getFile(ctx, os.path.join('gfe', 'logs', forecastList[0])).getPath()    
-    logger.info("logFile: " + str(logFile))     
-=======
     perfLog = PerformanceStatusHandler("GFE")
 
     if type(forecastList) is not list:
@@ -148,39 +108,23 @@ def executeFromJava(databaseID, site, username, dataMgr, forecastList, logFile, 
 #    ctx = PATH_MGR.getContext(LocalizationType.valueOf('CAVE_STATIC'), LocalizationLevel.valueOf('USER'))
 #    logFile = PATH_MGR.getFile(ctx, os.path.join('gfe', 'logs', forecastList[0])).getPath()
     logger.info("logFile: " + str(logFile))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     fh = logging.FileHandler(filename=logFile, mode=FILEMODE)
     fh.setLevel(logging.INFO)
     fh.setFormatter(formatter)
     logger.addHandler(fh)
-<<<<<<< HEAD
-    
-    # redirect stdout and stderr to logger
-    RedirectLogging.redirect(logger, stdout=True, stderr=True)
-        
-=======
 
     # redirect stdout and stderr to logger
     RedirectLogging.redirect(logger, stdout=True, stderr=True)
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     logger.info(forecastList[0])
 
     site = str(site)
     databaseID = str(databaseID)
-<<<<<<< HEAD
-    username = str(username)    
-
-    startTime = time.time()
-    logger.info("Text Formatter Starting")
-    
-=======
     username = str(username)
 
     startTime = time.perf_counter()
     logger.info("Text Formatter Starting")
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     try:
         forecasts = runFormatter(databaseID=databaseID, site=site, forecastList=forecastList, testMode=testMode,
                             cmdLineVarDict=cmdLineVarDict, vtecMode=vtecMode, username=username,
@@ -188,24 +132,6 @@ def executeFromJava(databaseID, site, username, dataMgr, forecastList, logFile, 
     except:
         logger.exception("Error generating text product")
         raise
-<<<<<<< HEAD
-        
-    elapsedTime = (time.time() - startTime)*1000
-    logger.info("Text Formatter Finished, took: %d ms",elapsedTime)
-
-    RedirectLogging.restore()
-    return forecasts
-    
-def getPid(forecast):
-    # taken from ProductParser.py
-    import re
-    
-    sl = r'^'                            # start of line
-    el = r'\s*?\n'                       # end of line
-    id3 = r'[A-Za-z]{3}'                 # 3 charater word
-    empty = r'^\s*' + el                 # empty line
-    
-=======
 
     perfLog.logDuration("Formatting forecast text with text formatter", time.perf_counter() - startTime)
 
@@ -220,26 +146,16 @@ def getPid(forecast):
     el = r'\s*?\n'                       # end of line
     id3 = r'[A-Za-z]{3}'                 # 3 charater word
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     wmoid = r'(?P<wmoid>[A-Z]{4}\d{2})' # wmoid
     fsid  = r'(?P<fsid>[A-Z]{4})'       # full station id
     pit   = r'(?P<pit>\d{6})'           # product issuance time UTC
     ff    = r'(?P<funnyfield> ' + id3 + ')?'          # "funny" field
-<<<<<<< HEAD
-    
-    # CI block
-    ci_start = sl + wmoid + ' ' + fsid + ' ' + pit + ff + el
-    awipsid = r'(?P<pil>(?P<cat>[A-Z0-9]{3})(?P<lid>[A-Z0-9]{1,3}))' + el
-    ci_block = r'(?P<ciblock>' + ci_start + awipsid + '\n?)' 
-    
-=======
 
     # CI block
     ci_start = sl + wmoid + ' ' + fsid + ' ' + pit + ff + el
     awipsid = r'(?P<pil>(?P<cat>[A-Z0-9]{3})(?P<lid>[A-Z0-9]{1,3}))' + el
     ci_block = r'(?P<ciblock>' + ci_start + awipsid + '\n?)'
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     ci_re = re.compile(ci_block)
 
     pid = None
@@ -255,20 +171,12 @@ def runFormatter(databaseID, site, forecastList, cmdLineVarDict, vtecMode,
                     vtecActiveTable='active', testMode=0, experimentalMode=0, serverOutputFile=None,
                     startTime=None, endTime=None, language=None, outputFile=None, appendFile=None
                     ):
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     if cmdLineVarDict:
         cmdLineVarDict = eval(str(cmdLineVarDict))
     else:
         cmdLineVarDict = {}
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     # Set default Forecast Type
     if len(forecastList) == 0:
         usage()
@@ -281,17 +189,11 @@ def runFormatter(databaseID, site, forecastList, cmdLineVarDict, vtecMode,
         logger.error("Can't have both -T and -E switches")
         return
 
-<<<<<<< HEAD
-    if drtTime:
-        import offsetTime
-        offsetTime.setDrtOffset(drtTime)
-=======
     #intercept time functions for new timezone storage and/or displaced time
     if drtTime:
          offsetTime.setDrtOffset(drtTime)
     else:
         offsetTime.setDrtOffset('')
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     # Create Time Range
     useRawTR = 0
@@ -329,11 +231,7 @@ def runFormatter(databaseID, site, forecastList, cmdLineVarDict, vtecMode,
 
     # Create an ifpClient
     ifpClient = PyFPClient(VizApp.getWsId(), site)
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     global GridLoc
     GridLoc = ifpClient.getDBGridLocation()
     #importer = TextIFPImporter(ifpClient)
@@ -391,12 +289,7 @@ def runFormatter(databaseID, site, forecastList, cmdLineVarDict, vtecMode,
 
     # Set the Site Time Zone
     tz = str(ifpClient.getSiteTimeZone())
-<<<<<<< HEAD
-    os.environ['TZ'] = tz
-    time.tzset()
-=======
     offsetTime.setTimeZone(tz)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     # Create the formatter
     formatter = TextFormatter.TextFormatter(dataMgr, ifpClient)
@@ -624,17 +517,10 @@ def ppDef(definition):
 ## widgets in the DialogAreaComposite.    
 def getVarDict(paths, dspName, dataMgr, ifpClient, issuedBy, dataSource):
     importModules(paths)
-<<<<<<< HEAD
-    
-    tz = str(ifpClient.getSiteTimeZone())
-    os.environ['TZ'] = tz
-    time.tzset()
-=======
 
     tz = str(ifpClient.getSiteTimeZone())
     offsetTime.setTimeZone(tz)
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     productDef = displayNameDict[dspName][1]
     productDef['database'] = dataSource
     vdg = VarDictGroker.VarDictGroker(displayNameDict[dspName][0], productDef, dspName, issuedBy, dataMgr)
@@ -673,8 +559,4 @@ def reloadModule(moduleName):
     except:
         logger.exception("Import Failed " + moduleName)
 
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

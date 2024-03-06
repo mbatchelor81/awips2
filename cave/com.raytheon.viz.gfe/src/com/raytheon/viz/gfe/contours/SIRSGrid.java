@@ -22,10 +22,6 @@ package com.raytheon.viz.gfe.contours;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
-import com.raytheon.uf.common.dataplugin.gfe.grid.Grid2DFloat;
-import com.raytheon.uf.common.dataplugin.gfe.grid.Grid2DInteger;
-=======
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.LineString;
 
@@ -33,17 +29,11 @@ import com.raytheon.uf.common.dataplugin.gfe.grid.Grid2DFloat;
 import com.raytheon.uf.common.dataplugin.gfe.grid.Grid2DInteger;
 import com.raytheon.uf.common.status.IPerformanceStatusHandler;
 import com.raytheon.uf.common.status.PerformanceStatus;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.time.util.ITimer;
 import com.raytheon.uf.common.time.util.TimeUtil;
 import com.raytheon.viz.gfe.contours.util.CLine;
 import com.raytheon.viz.gfe.contours.util.ContourValueDistance;
 import com.raytheon.viz.gfe.contours.util.SearchDir;
-<<<<<<< HEAD
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.LineString;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  *
@@ -209,10 +199,7 @@ import org.locationtech.jts.geom.LineString;
  *                                  C++ SIRSGrid.H and SIRSGrid.C
  * Dec 13, 2017  7178     randerso  Code formatting and cleanup
  * Jan 04, 2018  7178     randerso  Replaced clone() with copy()
-<<<<<<< HEAD
-=======
  * Dec 17, 2021  8342     sharbison Changes for Performance Logging.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -220,11 +207,8 @@ import org.locationtech.jts.geom.LineString;
  */
 
 public class SIRSGrid extends AbstractGfeAnalyzer {
-<<<<<<< HEAD
-=======
     private static final IPerformanceStatusHandler perfLog = PerformanceStatus
             .getHandler("GFE");
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /* various flags to control processing */
     private boolean doSmoothing;
@@ -330,11 +314,7 @@ public class SIRSGrid extends AbstractGfeAnalyzer {
         }
         timer.stop();
         this.timeUsed = timer.getElapsedTime();
-<<<<<<< HEAD
-        logger.info("    SIRSGrid cstr         " + this.timeUsed + " ms");
-=======
         perfLog.logDuration("SIRSGrid loading contours", this.timeUsed);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
@@ -817,12 +797,7 @@ public class SIRSGrid extends AbstractGfeAnalyzer {
         timer.stop();
         this.timeUsed += timer.getElapsedTime();
 
-<<<<<<< HEAD
-        logger.info("    FSL SIRSGrid recomputing grid used " + this.timeUsed
-                + " ms");
-=======
         perfLog.logDuration("SIRSGrid recomputing with FSL", this.timeUsed);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         return this.finalResultData.copy();
     }
@@ -966,14 +941,8 @@ public class SIRSGrid extends AbstractGfeAnalyzer {
          * done by step 2 or 3.
          */
         timer.stop();
-<<<<<<< HEAD
-        if (logger.isDebugEnabled()) {
-            logger.debug("    SIRS step 1 " + timer.getElapsedTime() + " ms");
-        }
-=======
         perfLog.logDuration("SIRS computing weighed contour values",
                 timer.getElapsedTime());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
@@ -1325,15 +1294,8 @@ public class SIRSGrid extends AbstractGfeAnalyzer {
                     + this.contourLevels.toString());
         }
         timer.stop();
-<<<<<<< HEAD
-        if (logger.isDebugEnabled()) {
-            logger.debug("    SIRS step 2 " + timer.getElapsedTime() + " ms");
-        }
-
-=======
         perfLog.logDuration("SIRS computing directional gradients",
                 timer.getElapsedTime());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**

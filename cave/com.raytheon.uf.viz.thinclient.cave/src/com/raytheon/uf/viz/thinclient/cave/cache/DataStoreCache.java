@@ -63,48 +63,15 @@ import com.raytheon.uf.viz.core.data.BufferSlicer;
 /**
  * Caching layer used by {@link CachingDataStore}. Caches two things:
  * <ul>
-<<<<<<< HEAD
- * <li>
- * For a group all dataset names are cached.</li>
- * <li>
- * For a dataset a IDataRecord is cached for each request that has been
- * performed.</li>
- * </ul>
- * 
-=======
  * <li>For a group all dataset names are cached.</li>
  * <li>For a dataset a IDataRecord is cached for each request that has been
  * performed.</li>
  * </ul>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * These two pieces of information together can fulfill any {@link IDataStore}
  * request if the data has been requested before. This class maintains a short
  * lived memory cache using {@link SoftReference} and also a persistent disk
  * cache.
-<<<<<<< HEAD
- * 
- * In addition to simply caching java objects this class also compares new
- * {@link Request} objects to what is already in the cache and attempts to reuse
- * cached {@link IDataRecord} objects whenever possible.
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * 
- * Date          Ticket#  Engineer    Description
- * ------------- -------- ----------- --------------------------
- * Sep 18, 2013  2309     bsteffen    Initial creation
- * Dec 04, 2013  2600     bsteffen    Fix typo in contains.
- * Apr 27, 2015  4425     nabowle     Handle DoubleDataRecord.
- * Mar 09, 2016  5461     tgurney     Populate LRU cache with existing files
- *                                    on initialization
- * 
- * </pre>
- * 
- * @author bsteffen
- * @version 1.0
-=======
  *
  * In addition to simply caching java objects this class also compares new
  * {@link Request} objects to what is already in the cache and attempts to reuse
@@ -127,17 +94,12 @@ import com.raytheon.uf.viz.core.data.BufferSlicer;
  * </pre>
  *
  * @author bsteffen
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @see IDataStore
  */
 
 public class DataStoreCache {
 
-<<<<<<< HEAD
-    private static final transient IUFStatusHandler statusHandler = UFStatus
-=======
     private static final IUFStatusHandler statusHandler = UFStatus
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             .getHandler(DataStoreCache.class, "ThinClient");
 
     // quick byte string to hex conversion
@@ -153,11 +115,7 @@ public class DataStoreCache {
      * Construct a DataStoreCache that will store cache files in the given
      * cacheDir. Any existing files in that directory will be loaded into the
      * cache.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param cacheDir
      *            directory for storing files. If the directory does not exist
      *            it will be created. If the directory cannot be created or
@@ -168,23 +126,14 @@ public class DataStoreCache {
         this.cacheDir = cacheDir;
         this.namesMemoryCache = Collections
                 .synchronizedMap(new HashMap<String, Reference<String[]>>());
-<<<<<<< HEAD
-        this.dataMemoryCache = Collections
-                .synchronizedMap(new HashMap<String, Reference<Map<Request, IDataRecord>>>());
-=======
         this.dataMemoryCache = Collections.synchronizedMap(
                 new HashMap<String, Reference<Map<Request, IDataRecord>>>());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         LRUCacheFS.loadFrom(cacheDir);
     }
 
     /**
      * Gets the dataset names for a group from this cache.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param group
      *            the name of a group, must not be null
      * @return an array of dataset names or null if they are not in this cache
@@ -205,11 +154,7 @@ public class DataStoreCache {
     /**
      * Stores dataset names for a group in this cache. The names can be
      * retrieved from the cache using {@link #getDatasetNames(String)}
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param group
      *            the name of a group, must not be null
      * @param datasetNames
@@ -239,11 +184,7 @@ public class DataStoreCache {
     }
 
     private void cacheNamesInMemory(String group, String[] names) {
-<<<<<<< HEAD
-        namesMemoryCache.put(group, new SoftReference<String[]>(names));
-=======
         namesMemoryCache.put(group, new SoftReference<>(names));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     private void cacheNamesInFile(String group, String[] names) {
@@ -253,11 +194,7 @@ public class DataStoreCache {
     /**
      * Gets an {@link IDataRecord} for a specific dataset/group path and request
      * from this cache.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param datasetGroupPath
      *            the group and dataset concatenated together with a
      *            {@link DataStoreFactory#DEF_SEPARATOR}, must not be null.
@@ -297,11 +234,7 @@ public class DataStoreCache {
      * Stores a portion of a dataset corresponding to request in this cache. The
      * record can be retrieved from the cache using
      * {@link #getDataset(String, Request)}
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param datasetGroupPath
      *            the group and dataset concatenated together with a
      *            {@link DataStoreFactory#DEF_SEPARATOR}, must not be null.
@@ -335,11 +268,7 @@ public class DataStoreCache {
                 cacheDataInFile(datasetGroupPath, data);
             }
         } else {
-<<<<<<< HEAD
-            data = new HashMap<Request, IDataRecord>();
-=======
             data = new HashMap<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             data.put(request, record);
             cacheData(datasetGroupPath, data);
         }
@@ -356,12 +285,8 @@ public class DataStoreCache {
         return data;
     }
 
-<<<<<<< HEAD
-    private Map<Request, IDataRecord> getDataFromMemory(String datasetGroupPath) {
-=======
     private Map<Request, IDataRecord> getDataFromMemory(
             String datasetGroupPath) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         Reference<Map<Request, IDataRecord>> ref = dataMemoryCache
                 .get(datasetGroupPath);
         if (ref != null) {
@@ -387,12 +312,7 @@ public class DataStoreCache {
 
     private void cacheDataInMemory(String datasetGroupPath,
             Map<Request, IDataRecord> data) {
-<<<<<<< HEAD
-        dataMemoryCache.put(datasetGroupPath,
-                new SoftReference<Map<Request, IDataRecord>>(data));
-=======
         dataMemoryCache.put(datasetGroupPath, new SoftReference<>(data));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     private void cacheDataInFile(String datasetGroupPath,
@@ -403,11 +323,7 @@ public class DataStoreCache {
     /**
      * Determine if the data returned by outer contains enough of the data to
      * fulfill inner.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return true if outer has enough data for inner, false if not.
      */
     private static boolean contains(Request outer, Request inner) {
@@ -430,13 +346,8 @@ public class DataStoreCache {
             }
         } else if (outerType == Type.POINT) {
             if (innerType == Type.POINT) {
-<<<<<<< HEAD
-                Set<Point> outerSet = new HashSet<Point>(Arrays.asList(outer
-                        .getPoints()));
-=======
                 Set<Point> outerSet = new HashSet<>(
                         Arrays.asList(outer.getPoints()));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 for (Point p : inner.getPoints()) {
                     if (!outerSet.contains(p)) {
                         return false;
@@ -520,13 +431,8 @@ public class DataStoreCache {
         } else if (record instanceof ByteDataRecord) {
             return ByteBuffer.wrap(((ByteDataRecord) record).getByteData());
         } else if (record instanceof DoubleDataRecord) {
-<<<<<<< HEAD
-            return DoubleBuffer.wrap(((DoubleDataRecord) record)
-                    .getDoubleData());
-=======
             return DoubleBuffer
                     .wrap(((DoubleDataRecord) record).getDoubleData());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         return null;
     }
@@ -562,11 +468,7 @@ public class DataStoreCache {
         record.setDataAttributes(copy.getDataAttributes());
         record.setDimension(copy.getDimension());
         record.setFillValue(copy.getFillValue());
-<<<<<<< HEAD
-        record.setProperties(copy.getProperties());
-=======
         record.setProps(copy.getProps());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return record;
     }
 
@@ -596,11 +498,7 @@ public class DataStoreCache {
 
     /**
      * Load a java object from a cache file.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param file
      *            the file containing the object
      * @param clazz
@@ -609,17 +507,9 @@ public class DataStoreCache {
      */
     private static <T> T retrieveFromCache(File file, Class<T> clazz) {
         T rval = null;
-<<<<<<< HEAD
-        try {
-            FileInputStream fin = new FileInputStream(file);
-            Object fromFile = DynamicSerializationManager.getManager(
-                    SerializationType.Thrift).deserialize(fin);
-            fin.close();
-=======
         try (FileInputStream fin = new FileInputStream(file)) {
             Object fromFile = DynamicSerializationManager
                     .getManager(SerializationType.Thrift).deserialize(fin);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if (clazz.isInstance(fromFile)) {
                 rval = clazz.cast(fromFile);
             }
@@ -643,13 +533,6 @@ public class DataStoreCache {
                 if (!file.getParentFile().exists()) {
                     file.getParentFile().mkdirs();
                 }
-<<<<<<< HEAD
-                FileOutputStream fout = new FileOutputStream(file);
-                DynamicSerializationManager
-                        .getManager(SerializationType.Thrift).serialize(result,
-                                fout);
-                fout.close();
-=======
 
                 try (FileOutputStream fout = new FileOutputStream(file)) {
                     DynamicSerializationManager
@@ -657,7 +540,6 @@ public class DataStoreCache {
                             .serialize(result, fout);
                 }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 LRUCacheFS.poll(file);
                 file.setReadable(true, false);
                 file.setWritable(true, false);
@@ -677,13 +559,8 @@ public class DataStoreCache {
         }
         final StringBuilder hex = new StringBuilder(2 * raw.length);
         for (final byte b : raw) {
-<<<<<<< HEAD
-            hex.append(HEXES.charAt((b & 0xF0) >> 4)).append(
-                    HEXES.charAt((b & 0x0F)));
-=======
             hex.append(HEXES.charAt((b & 0xF0) >> 4))
                     .append(HEXES.charAt((b & 0x0F)));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         return hex.toString();
     }

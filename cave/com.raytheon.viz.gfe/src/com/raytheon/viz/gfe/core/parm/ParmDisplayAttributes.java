@@ -59,26 +59,13 @@ import com.raytheon.viz.gfe.rsc.GFEResource;
  * Jan 24, 2018  7153     randerso  Changes to allow new GFE config file to be
  *                                  selected when perspective is re-opened.
  * Mar 15, 2018  6967     randerso  Improved error handling in setDisplayMask()
-<<<<<<< HEAD
-=======
  * May 24, 2021  8458     mapeters  Fix race condition in defaultColor()
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
  * @author chammack
  */
 public class ParmDisplayAttributes {
-<<<<<<< HEAD
-    private static final IUFStatusHandler statusHandler = UFStatus
-            .getHandler(ParmDisplayAttributes.class);
-
-    public static enum EditorType {
-        SPATIAL, TEMPORAL, GRIDMGR
-    };
-
-    public static enum VisMode {
-=======
 
     private static final IUFStatusHandler statusHandler = UFStatus
             .getHandler(ParmDisplayAttributes.class);
@@ -88,7 +75,6 @@ public class ParmDisplayAttributes {
     }
 
     public enum VisMode {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         IMAGE("Image"), GRAPHIC("Graphic");
 
         private String str;
@@ -104,11 +90,7 @@ public class ParmDisplayAttributes {
 
     }
 
-<<<<<<< HEAD
-    public static enum VisualizationType {
-=======
     public enum VisualizationType {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         WIND_BARB("WindBarb"),
         WIND_ARROW("WindArrow"),
         CONTOUR("Contour"),
@@ -147,11 +129,8 @@ public class ParmDisplayAttributes {
         }
     }
 
-<<<<<<< HEAD
-=======
     private static final Object COLOR_LOCK = new Object();
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     protected static String[] genericColors;
 
     protected static int genericNext;
@@ -162,15 +141,10 @@ public class ParmDisplayAttributes {
 
                     @Override
                     public void configurationChanged(String config) {
-<<<<<<< HEAD
-                        genericColors = null;
-                        genericNext = 0;
-=======
                         synchronized (COLOR_LOCK) {
                             genericColors = null;
                             genericNext = 0;
                         }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     }
                 });
     }
@@ -348,11 +322,7 @@ public class ParmDisplayAttributes {
             List<Float> contourValList = new ArrayList<>();
             float value = startValue;
             while (value < parmMax) {
-<<<<<<< HEAD
-                contourValList.add(new Float(value));
-=======
                 contourValList.add(Float.valueOf(value));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 value += intv;
             }
             baseContourValues = new float[contourValList.size()];
@@ -519,13 +489,8 @@ public class ParmDisplayAttributes {
         String[] visStrings = GFEPreference.getStringArray(pn);
         if (visStrings.length > 0) {
             visTypes = new HashSet<>();
-<<<<<<< HEAD
-            for (int i = 0; i < visStrings.length; i++) {
-                visTypes.add(VisualizationType.fromString(visStrings[i]));
-=======
             for (String visString : visStrings) {
                 visTypes.add(VisualizationType.fromString(visString));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         } else {
             visTypes = getDefaultVisualizationTypes(et, vm);
@@ -974,20 +939,11 @@ public class ParmDisplayAttributes {
 
         for (VisualizationType type : visualType) {
             if (!available.contains(type)) {
-<<<<<<< HEAD
-                statusHandler.handle(Priority.PROBLEM,
-                        parm.getParmID().toString()
-                                + " Attempt to setVisualizationType to invalid: "
-                                + type.toString()
-                                + "\nAllowable vis types are: "
-                                + Arrays.toString(available.toArray()));
-=======
                 statusHandler.handle(Priority.PROBLEM, parm.getParmID()
                         .toString()
                         + " Attempt to setVisualizationType to invalid: "
                         + type.toString() + "\nAllowable vis types are: "
                         + Arrays.toString(available.toArray()));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 // no action performed
                 return;
             }
@@ -1210,19 +1166,6 @@ public class ParmDisplayAttributes {
      *
      * @return
      */
-<<<<<<< HEAD
-    private synchronized RGB getDefaultColor() {
-        if (genericColors == null) {
-            genericColors = GFEPreference.getStringArray("Generic_colors");
-            genericNext = 0;
-        }
-
-        String color = genericColors[genericNext];
-
-        genericNext++;
-        if (genericNext >= genericColors.length) {
-            genericNext = 0;
-=======
     private RGB getDefaultColor() {
         String color;
         synchronized (COLOR_LOCK) {
@@ -1237,7 +1180,6 @@ public class ParmDisplayAttributes {
             if (genericNext >= genericColors.length) {
                 genericNext = 0;
             }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         return RGBColors.getRGBColor(color);

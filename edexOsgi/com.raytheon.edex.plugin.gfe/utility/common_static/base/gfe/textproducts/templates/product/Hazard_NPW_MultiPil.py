@@ -24,10 +24,7 @@
 #    Date            Ticket#       Engineer       Description
 #    ------------    ----------    -----------    --------------------------
 #    03/15/2020      DCS21339      NFTF           Updated for HazSimp format
-<<<<<<< HEAD
-=======
 #    05/18/2021      DCS22297      dkingfiel      Add CW.Y, XH.A, and XH.W
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 ##
 # This is a base file that is not intended to be overridden.
@@ -111,16 +108,11 @@ class TextProduct(GenericHazards.TextProduct):
             ("DU.Y", allActions, "Dust"),           # BLOWING DUST ADVISORY
             ("EC.W", allActions, "Cold"),           # EXTREME COLD WARNING
             ("EC.A", allActions, "Cold"),           # EXTREME COLD WATCH
-<<<<<<< HEAD
-            ("EH.W", allActions, "Heat"),           # EXCESSIVE HEAT WARNING
-            ("EH.A", allActions, "Heat"),           # EXCESSIVE HEAT WATCH
-=======
             ('CW.Y', allActions, 'Cold'),           # COLD WEATHER ADVISORY
             ("EH.W", allActions, "Heat"),           # EXCESSIVE HEAT WARNING
             ("EH.A", allActions, "Heat"),           # EXCESSIVE HEAT WATCH
             ('XH.W', allActions, 'Heat'),           # EXTREME HEAT WARNING
             ('XH.A', allActions, 'Heat'),           # EXTREME HEAT WATCH
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             ("HT.Y", allActions, "Heat"),           # HEAT ADVISORY
             ("FG.Y", allActions, "Fog"),            # DENSE FOG ADVISORY
             ("HZ.W", allActions, "FrostFreeze"),    # HARD FREEZE WARNING

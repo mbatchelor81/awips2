@@ -1,46 +1,25 @@
 ##
 # This software was developed and / or modified by Raytheon Company,
 # pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
-# 
-=======
 #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # U.S. EXPORT CONTROLLED TECHNICAL DATA
 # This software product contains export-restricted data whose
 # export/transfer/disclosure is restricted by U.S. law. Dissemination
 # to non-U.S. persons whether in the United States or abroad requires
 # an export license or other authorization.
-<<<<<<< HEAD
-# 
-=======
 #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # Contractor Name:        Raytheon Company
 # Contractor Address:     6825 Pine Street, Suite 340
 #                         Mail Stop B8
 #                         Omaha, NE 68106
 #                         402.291.0100
-<<<<<<< HEAD
-# 
-=======
 #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # See the AWIPS II Master Rights File ("Master Rights File.pdf") for
 # further licensing information.
 ##
 
 #
 # Provides a AWIPS I GFE partially-compatible wrapper to AbsTime
-<<<<<<< HEAD
-# 
-# This class extends standard Python dateTime, so many convenience and
-# manipulation methods are available using the standard syntax.  
-#
-#    
-#     SOFTWARE HISTORY
-#    
-=======
 #
 # AbsTime is an immutable object that holds time info down to second
 # precision.  If sub-second precision is required, it will need to be
@@ -64,14 +43,10 @@
 #
 #     SOFTWARE HISTORY
 #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #    Date            Ticket#       Engineer       Description
 #    ------------    ----------    -----------    --------------------------
 #    04/10/08                      chammack       Initial Creation.
 #    12/01/2014       #3875        randerso       Set time zone on underlying datetime object to GMT
-<<<<<<< HEAD
-# 
-=======
 #    Aug 06, 2021     #8511        njensen        Rewrote to wrap java.util.Date instead of extending Python datetime
 #    Nov 02, 2021     #8511        njensen        Add strftime method
 #    Dec 07, 2021     #8511        njensen        Add timetuple method
@@ -81,7 +56,6 @@
 #    Feb 17, 2023      9028        tgurney        Add __str__ and __repr__, fix toJavaObj
 #    Feb 20, 2023      9028        njensen        Implemented more datetime and timedelta compatibility
 #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 
 ##
@@ -89,81 +63,16 @@
 ##
 
 
-<<<<<<< HEAD
-
-from datetime import datetime, timedelta
-import calendar
-from java.util import Date 
-import JUtil
-
-=======
 import datetime
 import calendar
 from java.util import Date
 import JUtil
 
 # for backwards compatibility we use GMT instead of UTC
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import dateutil.tz
 GMT_ZONE = dateutil.tz.gettz('GMT')
 
 
-<<<<<<< HEAD
-class AbsTime(datetime, JUtil.JavaWrapperClass):
-    
-    def __new__(cls, arg):
-       if arg is None:
-           return None
-       
-       if isinstance(arg, int) or isinstance(arg, float):
-           tmp = datetime.utcfromtimestamp(arg)
-       else:
-           tmp = datetime.utcfromtimestamp(arg.getTime() // 1000)
-           
-       return datetime.__new__(cls, tmp.year,tmp.month,
-              tmp.day, tmp.hour, tmp.minute, tmp.second, tzinfo=GMT_ZONE)
-       
-    def unixTime(self):
-        timeTuple = self.utctimetuple()        
-        return calendar.timegm(timeTuple)
-    
-    def _fromDateTime(self, dt):
-        return AbsTime(calendar.timegm(dt.utctimetuple()))
-    
-    def __add__(self, arg):        
-        if isinstance(arg, int) or isinstance(arg, float):
-            offset = arg         
-        key = {"seconds": offset}
-        dt = datetime.__add__(self, timedelta(**key))
-        return self._fromDateTime(dt)
-        
-    def __sub__(self, arg):
-        if isinstance(arg, AbsTime):
-            return self.unixTime() - arg.unixTime()
-        elif isinstance(arg, int) or isinstance(arg, float):
-            offset = arg 
-        key = {"seconds": offset}
-        dt = datetime.__sub__(self, timedelta(**key))
-        return self._fromDateTime(dt)
-        
-    def javaDate(self):
-        if not hasattr(self, '__javaDate'):
-            sec = calendar.timegm(self.utctimetuple())
-            self.__javaDate = Date(sec*1000)
-        return self.__javaDate
-    
-    def toJavaObj(self):
-        return javaDate()
-
-    def stringFmt(self, fmt):
-        return self.strftime(fmt)
-    
-    def string(self):
-        return self.stringFmt("%h %d %y %T GMT")
-
-def absTimeYMD(year, month, day, hour=0, minute=0, second=0):
-    tm = datetime(year, month, day, hour, minute, second)
-=======
 class AbsTime(JUtil.JavaWrapperClass):
 
     def __new__(cls, arg):
@@ -407,7 +316,6 @@ class AbsTime(JUtil.JavaWrapperClass):
 
 def absTimeYMD(year, month, day, hour=0, minute=0, second=0):
     tm = datetime.datetime(year, month, day, hour, minute, second)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     tup = tm.utctimetuple()
     sec = calendar.timegm(tup)
     return AbsTime(sec)
@@ -420,7 +328,3 @@ def maxFutureTime():
     from com.raytheon.uf.common.time import TimeRange as JavaTimeRange
     tr = JavaTimeRange.allTimes()
     return AbsTime(tr.getEnd())
-<<<<<<< HEAD
-    
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

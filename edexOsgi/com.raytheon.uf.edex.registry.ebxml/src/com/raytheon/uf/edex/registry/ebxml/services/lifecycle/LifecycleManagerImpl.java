@@ -135,10 +135,7 @@ import oasis.names.tc.ebxml.regrep.xsd.rs.v4.RegistryResponseType;
  * Aug 28, 2018  7238     skabasele  Added references to RegistryObjectType.UpdateTime
  * Jul 25, 2019  7890     ksunil    Enhanced logging.
  * Nov 21, 2019  7977     bsteffen  Add source to remove registry events that arrive with no source.
-<<<<<<< HEAD
-=======
  * Apr 06, 2020  8054     bsteffen  Move EVENT_SOURCE_SLOT to common.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  *
@@ -1016,11 +1013,7 @@ public class LifecycleManagerImpl implements LifecycleManager {
     protected void checkSource(RegistryRequestType request,
             Stream<String> affectedIds) {
         SlotType sourceSlot = request
-<<<<<<< HEAD
-                .getSlotByName(EbxmlObjectUtil.EVENT_SOURCE_SLOT);
-=======
                 .getSlotByName(RegistryUtil.EVENT_SOURCE_SLOT);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if (sourceSlot == null) {
             Optional<String> source = affectedIds.filter(
                     id -> id.endsWith(FederationProperties.REGISTRY_SUFFIX))
@@ -1029,11 +1022,7 @@ public class LifecycleManagerImpl implements LifecycleManager {
                 statusHandler.info("Infered source of " + source + " for "
                         + request.getClass().getSimpleName() + ".");
                 request.getSlot()
-<<<<<<< HEAD
-                        .add(new SlotType(EbxmlObjectUtil.EVENT_SOURCE_SLOT,
-=======
                         .add(new SlotType(RegistryUtil.EVENT_SOURCE_SLOT,
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                 new StringValueType(source.get())));
             } else {
                 statusHandler.warn(

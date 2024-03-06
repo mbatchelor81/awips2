@@ -129,6 +129,7 @@ public class ConvSigmetCastDataAdapter extends AbstractAdvisoryDataAdapter {
                     } else if (section.getClassType().equals(STR_LINE)) {
                         newRec = convertLine(section);
                     }
+
                     if (newRec != null) {
                         result.add(newRec);
                     }
@@ -202,6 +203,7 @@ public class ConvSigmetCastDataAdapter extends AbstractAdvisoryDataAdapter {
 
         Coordinate center = new Coordinate(loc.getLongitude(),
                 loc.getLatitude());
+
         String label = section.getSequenceID();
         if (forecast) {
             movePoint(center, section);

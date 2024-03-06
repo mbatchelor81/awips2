@@ -23,10 +23,7 @@ import java.awt.geom.Rectangle2D;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-<<<<<<< HEAD
-=======
 import java.util.Arrays;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
@@ -35,10 +32,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.eclipse.swt.graphics.RGB;
-<<<<<<< HEAD
-=======
 import org.locationtech.jts.geom.Coordinate;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.uf.common.time.DataTime;
 import com.raytheon.uf.viz.core.DrawableString;
@@ -63,10 +57,6 @@ import com.raytheon.uf.viz.xy.graph.labeling.IGraphLabel;
 import com.raytheon.uf.viz.xy.map.rsc.IGraphableResource;
 import com.raytheon.uf.viz.xy.scales.HeightScale;
 import com.raytheon.uf.viz.xy.util.AbstractGraphZoomHandler;
-<<<<<<< HEAD
-import org.locationtech.jts.geom.Coordinate;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Abstract graph, contains common functionality
@@ -86,10 +76,7 @@ import org.locationtech.jts.geom.Coordinate;
  * Aug 09, 2016  5803     bsteffen  Normalize very small ranges better
  * Aug 12, 2016  5822     bsteffen  Fix NPE
  * Apr 24, 2019  7651     randerso  Fix for constant graphs
-<<<<<<< HEAD
-=======
  * Apr 22, 2022  8791     mapeters  Added setDescriptor()
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -110,15 +97,9 @@ public abstract class AbstractGraph implements IGraph {
     /** x label placer */
     protected IAxisPlacer yAxisPlacer;
 
-<<<<<<< HEAD
-    protected IAxis[] xAxes = new IAxis[0];
-
-    protected IAxis[] yAxes = new IAxis[0];
-=======
     protected IAxis[] xAxes = {};
 
     protected IAxis[] yAxes = {};
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /** The resources on the graph */
     protected List<IGraphableResource<?, ?>> graphResource;
@@ -574,22 +555,14 @@ public abstract class AbstractGraph implements IGraph {
             offset = yAxisPlacer.getPixelLoc(val);
             Coordinate loc = new Coordinate(graphExtent.getMinX() + offset,
                     graphExtent.getMaxY(), 0);
-<<<<<<< HEAD
-            String label = xLabel.toLabelString();
-=======
             StringBuilder label = new StringBuilder()
                     .append(xLabel.toLabelString());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             Calendar cal = xLabel.getUnderlyingObject().getValidTime();
             int day = cal.get(Calendar.DAY_OF_YEAR);
             if (day != dayOfYear) {
                 sdf.setCalendar(cal);
-<<<<<<< HEAD
-                label += IGraphLabel.DELIMETER + sdf.format(cal.getTime());
-=======
                 label.append(IGraphLabel.DELIMETER)
                         .append(sdf.format(cal.getTime()));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
             ResourceProperties props = xLabel.getResource().getProperties();
             if (props != null && !props.isVisible()) {
@@ -598,17 +571,9 @@ public abstract class AbstractGraph implements IGraph {
 
             RGB labelColor = xLabel.getResource()
                     .getCapability(ColorableCapability.class).getColor();
-<<<<<<< HEAD
-            String[] labels = label.split(IGraphLabel.DELIMETER);
-            RGB[] rgbs = new RGB[labels.length];
-            for (i = 0; i < rgbs.length; ++i) {
-                rgbs[i] = labelColor;
-            }
-=======
             String[] labels = label.toString().split(IGraphLabel.DELIMETER);
             RGB[] rgbs = new RGB[labels.length];
             Arrays.fill(rgbs, labelColor);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             DrawableString parameters = null;
 
@@ -888,12 +853,9 @@ public abstract class AbstractGraph implements IGraph {
     public void setZoomHandler(AbstractGraphZoomHandler zoomHandler) {
         this.zoomHandler = zoomHandler;
     }
-<<<<<<< HEAD
-=======
 
     @Override
     public void setDescriptor(XyGraphDescriptor descriptor) {
         this.descriptor = descriptor;
     }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

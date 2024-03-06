@@ -23,41 +23,25 @@
         titleText="------ 4-Panel Z+SRM/ZDR+V/KDP+HC/CC+SW ------" />
     <contribute xsi:type="bundleItem"
         file="bundles/DefaultRadarDualPolBaseData.xml" menuText="0.3 base data"
-<<<<<<< HEAD
         fullBundleLoad="true" id="03dualpolbasedata">
-=======
-        id="03dualpolbasedata">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="icao" value="${icao}" />
         <substitute key="elevation" value="0.3--0.3" />
     </contribute>
     <contribute xsi:type="bundleItem"
         file="bundles/DefaultRadarDualPolBaseData.xml" menuText="0.5 base data"
-<<<<<<< HEAD
         fullBundleLoad="true" id="05dualpolbasedata">
-=======
-        id="05dualpolbasedata">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="icao" value="${icao}" />
         <substitute key="elevation" value="0.5--0.5" />
     </contribute>
     <contribute xsi:type="bundleItem"
         file="bundles/DefaultRadarDualPolBaseData.xml" menuText="0.9 base data"
-<<<<<<< HEAD
         fullBundleLoad="true" id="09dualpolbasedata">
-=======
-        id="09dualpolbasedata">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="icao" value="${icao}" />
         <substitute key="elevation" value="0.9--0.9" />
     </contribute>
     <contribute xsi:type="bundleItem"
         file="bundles/DefaultRadarDualPolBaseData.xml" menuText="All Tilts base data"
-<<<<<<< HEAD
         fullBundleLoad="true" id="AllTiltsdualpolbasedata">
-=======
-        id="AllTiltsdualpolbasedata">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="icao" value="${icao}" />
         <substitute key="elevation" value="0.0--360.0" />
     </contribute>
@@ -65,141 +49,85 @@
         menuText="${icao} Hi base data tilts">
         <contribute xsi:type="bundleItem"
             file="bundles/DefaultRadarDualPolBaseData.xml" menuText="1.5 base data"
-<<<<<<< HEAD
             fullBundleLoad="true" id="15dualpolbasedata">
-=======
-            id="15dualpolbasedata">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="1.5--1.5" />
         </contribute>
         <contribute xsi:type="bundleItem"
             file="bundles/DefaultRadarDualPolBaseData.xml" menuText="1.8 base data"
-<<<<<<< HEAD
             fullBundleLoad="true" id="18dualpolbasedata">
-=======
-            id="18dualpolbasedata">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="1.8--1.8" />
         </contribute>
         <contribute xsi:type="bundleItem"
             file="bundles/DefaultRadarDualPolBaseData.xml" menuText="2.4 base data"
-<<<<<<< HEAD
             fullBundleLoad="true" id="24dualpolbasedata">
-=======
-            id="24dualpolbasedata">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="2.4--2.4" />
         </contribute>
         <contribute xsi:type="bundleItem"
             file="bundles/DefaultRadarDualPolBaseData.xml" menuText="3.4 base data"
-<<<<<<< HEAD
             fullBundleLoad="true" id="34dualpolbasedata">
-=======
-            id="34dualpolbasedata">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="3.4--3.4" />
         </contribute>
         <contribute xsi:type="bundleItem"
             file="bundles/DefaultRadarDualPolBaseData.xml" menuText="4.3 base data"
-<<<<<<< HEAD
             fullBundleLoad="true" id="43dualpolbasedata">
-=======
-            id="43dualpolbasedata">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="4.3--4.3" />
         </contribute>
         <contribute xsi:type="bundleItem"
             file="bundles/DefaultRadarDualPolBaseData.xml" menuText="5.3 base data"
-<<<<<<< HEAD
             fullBundleLoad="true" id="53dualpolbasedata">
-=======
-            id="53dualpolbasedata">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="5.3--5.3" />
         </contribute>
         <contribute xsi:type="bundleItem"
             file="bundles/DefaultRadarDualPolBaseData.xml" menuText="6.0 base data"
-<<<<<<< HEAD
             fullBundleLoad="true" id="60dualpolbasedata">
-=======
-            id="60dualpolbasedata">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="6.0--6.0" />
         </contribute>
         <contribute xsi:type="bundleItem"
             file="bundles/DefaultRadarDualPolBaseData.xml" menuText="7.5 base data"
-<<<<<<< HEAD
             fullBundleLoad="true" id="75dualpolbasedata">
-=======
-            id="75dualpolbasedata">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="7.5--7.5" />
         </contribute>
         <contribute xsi:type="bundleItem"
             file="bundles/DefaultRadarDualPolBaseData.xml" menuText="8.7 base data"
-<<<<<<< HEAD
             fullBundleLoad="true" id="87dualpolbasedata">
-=======
-            id="87dualpolbasedata">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="8.7--8.7" />
         </contribute>
         <contribute xsi:type="bundleItem"
             file="bundles/DefaultRadarDualPolBaseData.xml" menuText="10.0 base data"
-<<<<<<< HEAD
             fullBundleLoad="true" id="100dualpolbasedata">
-=======
-            id="100dualpolbasedata">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="10.0--10.0" />
         </contribute>
         <contribute xsi:type="bundleItem"
             file="bundles/DefaultRadarDualPolBaseData.xml" menuText="12.0 base data"
-<<<<<<< HEAD
             fullBundleLoad="true" id="120dualpolbasedata">
-=======
-            id="120dualpolbasedata">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="12.0--12.0" />
         </contribute>
         <contribute xsi:type="bundleItem"
             file="bundles/DefaultRadarDualPolBaseData.xml" menuText="14.0 base data"
-<<<<<<< HEAD
             fullBundleLoad="true" id="140dualpolbasedata">
-=======
-            id="140dualpolbasedata">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="14.0--14.0" />
         </contribute>
         <contribute xsi:type="bundleItem"
             file="bundles/DefaultRadarDualPolBaseData.xml" menuText="16.7 base data"
-<<<<<<< HEAD
             fullBundleLoad="true" id="167dualpolbasedata">
-=======
-            id="167dualpolbasedata">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="16.7--16.7" />
         </contribute>
         <contribute xsi:type="bundleItem"
             file="bundles/DefaultRadarDualPolBaseData.xml" menuText="19.5 base data"
-<<<<<<< HEAD
             fullBundleLoad="true" id="195dualpolbasedata">
-=======
-            id="195dualpolbasedata">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="19.5--19.5" />
         </contribute>
@@ -208,166 +136,94 @@
     <contribute xsi:type="titleItem" id="${icao}4PanelZZDRHC+KDPCC"
         titleText="------ 4-Panel Z/ZDR/HC+KDP/CC ------" />
     <contribute xsi:type="bundleItem" file="bundles/DefaultRadarDualPolHCA.xml"
-<<<<<<< HEAD
         menuText="0.3 HC analysis" fullBundleLoad="true" id="03dualpolHCanalysis">
-=======
-        menuText="0.3 HC analysis" id="03dualpolHCanalysis">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="icao" value="${icao}" />
         <substitute key="elevation" value="0.3--0.3" />
     </contribute>
     <contribute xsi:type="bundleItem" file="bundles/DefaultRadarDualPolHCA.xml"
-<<<<<<< HEAD
         menuText="0.5 HC analysis" fullBundleLoad="true" id="05dualpolHCanalysis">
-=======
-        menuText="0.5 HC analysis" id="05dualpolHCanalysis">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="icao" value="${icao}" />
         <substitute key="elevation" value="0.5--0.5" />
     </contribute>
     <contribute xsi:type="bundleItem" file="bundles/DefaultRadarDualPolHCA.xml"
-<<<<<<< HEAD
         menuText="0.9 HC analysis" fullBundleLoad="true" id="09dualpolHCanalysis">
-=======
-        menuText="0.9 HC analysis" id="09dualpolHCanalysis">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="icao" value="${icao}" />
         <substitute key="elevation" value="0.9--0.9" />
     </contribute>
     <contribute xsi:type="bundleItem" file="bundles/DefaultRadarDualPolHCA.xml"
-<<<<<<< HEAD
         menuText="All Tilts HC analysis" fullBundleLoad="true" id="AllTiltsdualpolHCanalysis">
-=======
-        menuText="All Tilts HC analysis" id="AllTiltsdualpolHCanalysis">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="icao" value="${icao}" />
         <substitute key="elevation" value="0.0--360.0" />
     </contribute>
     <contribute xsi:type="subMenu" id="${icao}HiHCnalysistiltsSubmenu"
         menuText="${icao} Hi HC analysis tilts">
         <contribute xsi:type="bundleItem" file="bundles/DefaultRadarDualPolHCA.xml"
-<<<<<<< HEAD
             menuText="1.5 HC analysis" fullBundleLoad="true" id="15dualpolHCanalysis">
-=======
-            menuText="1.5 HC analysis" id="15dualpolHCanalysis">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="1.5--1.5" />
         </contribute>
         <contribute xsi:type="bundleItem" file="bundles/DefaultRadarDualPolHCA.xml"
-<<<<<<< HEAD
             menuText="1.8 HC analysis" fullBundleLoad="true" id="18dualpolHCanalysis">
-=======
-            menuText="1.8 HC analysis" id="18dualpolHCanalysis">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="1.8--1.8" />
         </contribute>
         <contribute xsi:type="bundleItem" file="bundles/DefaultRadarDualPolHCA.xml"
-<<<<<<< HEAD
             menuText="2.4 HC analysis" fullBundleLoad="true" id="24dualpolHCanalysis">
-=======
-            menuText="2.4 HC analysis" id="24dualpolHCanalysis">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="2.4--2.4" />
         </contribute>
         <contribute xsi:type="bundleItem" file="bundles/DefaultRadarDualPolHCA.xml"
-<<<<<<< HEAD
             menuText="3.4 HC analysis" fullBundleLoad="true" id="34dualpolHCanalysis">
-=======
-            menuText="3.4 HC analysis" id="34dualpolHCanalysis">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="3.4--3.4" />
         </contribute>
         <contribute xsi:type="bundleItem" file="bundles/DefaultRadarDualPolHCA.xml"
-<<<<<<< HEAD
             menuText="4.3 HC analysis" fullBundleLoad="true" id="43dualpolHCanalysis">
-=======
-            menuText="4.3 HC analysis" id="43dualpolHCanalysis">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="4.3--4.3" />
         </contribute>
         <contribute xsi:type="bundleItem" file="bundles/DefaultRadarDualPolHCA.xml"
-<<<<<<< HEAD
             menuText="5.3 HC analysis" fullBundleLoad="true" id="53dualpolHCanalysis">
-=======
-            menuText="5.3 HC analysis" id="53dualpolHCanalysis">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="5.3--5.3" />
         </contribute>
         <contribute xsi:type="bundleItem" file="bundles/DefaultRadarDualPolHCA.xml"
-<<<<<<< HEAD
             menuText="6.0 HC analysis" fullBundleLoad="true" id="60dualpolHCanalysis">
-=======
-            menuText="6.0 HC analysis" id="60dualpolHCanalysis">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="6.0--6.0" />
         </contribute>
         <contribute xsi:type="bundleItem" file="bundles/DefaultRadarDualPolHCA.xml"
-<<<<<<< HEAD
             menuText="7.5 HC analysis" fullBundleLoad="true" id="75dualpolHCanalysis">
-=======
-            menuText="7.5 HC analysis" id="75dualpolHCanalysis">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="7.5--7.5" />
         </contribute>
         <contribute xsi:type="bundleItem" file="bundles/DefaultRadarDualPolHCA.xml"
-<<<<<<< HEAD
             menuText="8.7 HC analysis" fullBundleLoad="true" id="87dualpolHCanalysis">
-=======
-            menuText="8.7 HC analysis" id="87dualpolHCanalysis">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="8.7--8.7" />
         </contribute>
         <contribute xsi:type="bundleItem" file="bundles/DefaultRadarDualPolHCA.xml"
-<<<<<<< HEAD
             menuText="10.0 HC analysis" fullBundleLoad="true" id="100dualpolHCanalysis">
-=======
-            menuText="10.0 HC analysis" id="100dualpolHCanalysis">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="10.0--10.0" />
         </contribute>
         <contribute xsi:type="bundleItem" file="bundles/DefaultRadarDualPolHCA.xml"
-<<<<<<< HEAD
             menuText="12.0 HC analysis" fullBundleLoad="true" id="120dualpolHCanalysis">
-=======
-            menuText="12.0 HC analysis" id="120dualpolHCanalysis">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="12.0--12.0" />
         </contribute>
         <contribute xsi:type="bundleItem" file="bundles/DefaultRadarDualPolHCA.xml"
-<<<<<<< HEAD
             menuText="14.0 HC analysis" fullBundleLoad="true" id="140dualpolHCanalysis">
-=======
-            menuText="14.0 HC analysis" id="140dualpolHCanalysis">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="14.0--14.0" />
         </contribute>
         <contribute xsi:type="bundleItem" file="bundles/DefaultRadarDualPolHCA.xml"
-<<<<<<< HEAD
             menuText="16.7 HC analysis" fullBundleLoad="true" id="167dualpolHCanalysis">
-=======
-            menuText="16.7 HC analysis" id="167dualpolHCanalysis">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="16.7--16.7" />
         </contribute>
         <contribute xsi:type="bundleItem" file="bundles/DefaultRadarDualPolHCA.xml"
-<<<<<<< HEAD
             menuText="19.5 HC analysis" fullBundleLoad="true" id="195dualpolHCanalysis">
-=======
-            menuText="19.5 HC analysis" id="195dualpolHCanalysis">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="elevation" value="19.5--19.5" />
         </contribute>

@@ -21,8 +21,6 @@
 <menuTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <contribute xsi:type="titleItem" titleText="------ Best Res Base ------"
         id="${icao}BestResBaseProducts" />
-<<<<<<< HEAD
-=======
     <contribute xsi:type="subMenu" menuText="${icao} 4-bit Z"
         id="${icao}4bitReflectivity">
         <contribute xsi:type="bundleItem" file="bundles/DefaultRadar.xml"
@@ -245,7 +243,6 @@
             <substitute key="elevation" value="0.0--360.0" />
         </contribute>
     </contribute>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <contribute xsi:type="subMenu" menuText="${icao} SW"
         id="${icao}BestResSpecWidth">
         <contribute xsi:type="bundleItem" file="bundles/DefaultRadar.xml"
@@ -690,8 +687,6 @@
             <substitute key="elevation" value="0.0--360.0" />
         </contribute>
     </contribute>
-<<<<<<< HEAD
-=======
     <contribute xsi:type="titleItem" titleText="------ 4-bit Z+SRM combo ------"
         id="${icao}4BitZSRMCombo" />
     <contribute xsi:type="bundleItem" file="bundles/DefaultRadarBlended.xml"
@@ -1149,7 +1144,6 @@
     </contribute>
     <contribute xsi:type="separator"
         id="${icao}Legacy4bitfourpanelSeparator" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <contribute xsi:type="titleItem" titleText="------ Derived Products ------"
         id="${icao}DerivedProducts" />
     <contribute xsi:type="subMenu" menuText="${icao} Reflectivity Based"
@@ -1268,32 +1262,19 @@
         <contribute xsi:type="subMenu" menuText="${icao} Cross Section"
             id="${icao}CrossSection">
             <contribute xsi:type="bundleItem" file="bundles/DefaultRadarXY.xml"
-<<<<<<< HEAD
-                menuText="3-Bit Refl (XSR)" id="${icao}3BitReflXSR"
-                editorType="com.raytheon.viz.radar.ui.xy.RadarXYEditor">
-=======
                 menuText="3-Bit Refl (XSR)" id="${icao}3BitReflXSR">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 <substitute key="icao" value="${icao}" />
                 <substitute key="product" value="85" />
                 <substitute key="insetMap" value="true" />
             </contribute>
             <contribute xsi:type="bundleItem" file="bundles/DefaultRadarXY.xml"
-<<<<<<< HEAD
-                menuText="3-Bit Vel (XSV)" id="${icao}3BitVelXSV"
-                editorType="com.raytheon.viz.radar.ui.xy.RadarXYEditor">
-=======
                 menuText="3-Bit Vel (XSV)" id="${icao}3BitVelXSV">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 <substitute key="icao" value="${icao}" />
                 <substitute key="product" value="86" />
                 <substitute key="insetMap" value="true" />
             </contribute>
         </contribute>
     </contribute>
-<<<<<<< HEAD
-</menuTemplate>
-=======
     <contribute xsi:type="titleItem"
         titleText="------ Data Quality ------" id="${icao}DataQuality" />
     <contribute xsi:type="subMenu" menuText="${icao} Clutter Filter Control (CFC)"
@@ -1330,4 +1311,3 @@
         </contribute>
     </contribute>
 </menuTemplate>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

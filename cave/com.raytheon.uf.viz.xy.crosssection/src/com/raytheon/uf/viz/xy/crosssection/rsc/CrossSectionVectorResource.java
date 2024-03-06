@@ -23,10 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.swt.graphics.RGB;
-<<<<<<< HEAD
-=======
 import org.locationtech.jts.geom.Coordinate;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.opengis.referencing.operation.MathTransform;
 
 import com.raytheon.uf.common.geospatial.ReferencedCoordinate;
@@ -50,10 +47,6 @@ import com.raytheon.uf.viz.core.rsc.capabilities.DisplayTypeCapability;
 import com.raytheon.uf.viz.core.rsc.capabilities.MagnificationCapability;
 import com.raytheon.uf.viz.core.rsc.capabilities.OutlineCapability;
 import com.raytheon.uf.viz.xy.crosssection.adapter.AbstractCrossSectionAdapter;
-<<<<<<< HEAD
-import org.locationtech.jts.geom.Coordinate;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Creates a vector resource on a cross section display.
@@ -71,10 +64,7 @@ import org.locationtech.jts.geom.Coordinate;
  * Feb 28, 2018  7231     njensen     Use super's statusHandler
  * Nov 15, 2018  58492    edebebe     Enabled configurable 'Wind Barb' properties
  * Feb 28, 2019  7713     tjensen     Fix Wind Barb config to not be static
-<<<<<<< HEAD
-=======
  * Feb 22, 2023  9021     mapeters    Use getSliceData() to access sliceMap
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -131,20 +121,12 @@ public class CrossSectionVectorResource extends AbstractCrossSectionResource {
                 .getMagnification();
 
         DataTime time = paintProps.getDataTime();
-<<<<<<< HEAD
-        if (sliceMap.get(time) == null) {
-            return;
-        }
-        float[] uData = sliceMap.get(time).get(0);
-        float[] vData = sliceMap.get(time).get(1);
-=======
         List<float[]> data = getSliceData(time);
         if (data == null) {
             return;
         }
         float[] uData = data.get(0);
         float[] vData = data.get(1);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         double density = getCapability(DensityCapability.class).getDensity();
         RGB color = getCapability(ColorableCapability.class).getColor();
@@ -225,17 +207,6 @@ public class CrossSectionVectorResource extends AbstractCrossSectionResource {
             int x = (int) Math.round(result[0]);
             int y = (int) Math.round(result[1]);
             if (x > -1 && x < geometry.getGridRange().getSpan(0) && y > -1
-<<<<<<< HEAD
-                    && y < geometry.getGridRange().getSpan(1)
-                    && sliceMap.get(time) != null) {
-                int index = y * geometry.getGridRange().getSpan(0) + x;
-                float[] ufd = sliceMap.get(time).get(0);
-                float[] vfd = sliceMap.get(time).get(1);
-
-                double val = Math.hypot(ufd[index], vfd[index]);
-
-                s = sampleFormat.format(val);
-=======
                     && y < geometry.getGridRange().getSpan(1)) {
                 List<float[]> data = getSliceData(time);
                 if (data != null) {
@@ -247,7 +218,6 @@ public class CrossSectionVectorResource extends AbstractCrossSectionResource {
 
                     s = sampleFormat.format(val);
                 }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         } catch (Exception e) {
             throw new VizException("Error sampling cross section.", e);

@@ -230,12 +230,9 @@ import com.raytheon.viz.ui.simulatedtime.SimulatedTimeOperations;
  * Feb 07, 2018  7073         randerso  Remove "brain" from productDefinition
  *                                      when reviving editor
  * Mar 24, 2020  8049         randerso  Remove READ_ONLY from Spinner controls
-<<<<<<< HEAD
-=======
  * Mar 03, 2022  22994        jkelmer   Added added checks for NEW products
  *                                      loaded from a saved file to prevent
  *                                      ETNs being incremented when they shouldn't
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -1601,8 +1598,6 @@ public class ProductEditorComp extends Composite
                 throw new VizException(msg);
             }
 
-<<<<<<< HEAD
-=======
             // Checks for active records with same ETN as current NEW product
             // If any matching records are found, the recommender should be
             // re-ran
@@ -1627,7 +1622,6 @@ public class ProductEditorComp extends Composite
                 }
             }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             vtecTokens[timesTokenIdx] = vtecStartStr + "-" + vtecEndStr;
             vline = "/" + String.join(".", vtecTokens) + "/";
             rval.add(vline);
@@ -2381,12 +2375,9 @@ public class ProductEditorComp extends Composite
             try {
                 String fileText = ProductFileUtil.readFile(f);
                 setProductText(fileText);
-<<<<<<< HEAD
-=======
                 parseIDs();
                 revive();
                 changeTimes();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             } catch (IOException e) {
                 statusHandler.handle(Priority.PROBLEM, e.getLocalizedMessage(),
                         e);

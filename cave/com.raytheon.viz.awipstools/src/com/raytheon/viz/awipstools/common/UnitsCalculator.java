@@ -23,11 +23,7 @@ package com.raytheon.viz.awipstools.common;
 import si.uom.NonSI;
 import si.uom.SI;
 import systems.uom.common.USCustomary;
-<<<<<<< HEAD
-import tec.uom.se.unit.MetricPrefix;
-=======
 import javax.measure.MetricPrefix;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * UnitsCalculator.

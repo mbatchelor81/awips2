@@ -1,62 +1,32 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
 package com.raytheon.uf.viz.xy.timeseries;
 
 import com.raytheon.uf.viz.core.IDisplayPane;
-<<<<<<< HEAD
-=======
 import com.raytheon.uf.viz.core.InputManager;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.drawables.IRenderableDisplay;
 import com.raytheon.uf.viz.core.rsc.IInputHandler;
 import com.raytheon.uf.viz.core.rsc.IInputHandler.InputPriority;
 import com.raytheon.uf.viz.xy.VizXyEditor;
 import com.raytheon.uf.viz.xy.timeseries.util.TimeSeriesPanHandler;
 import com.raytheon.uf.viz.xy.timeseries.util.TimeSeriesZoomHandler;
-<<<<<<< HEAD
-import com.raytheon.viz.ui.input.InputManager;
-
-/**
- * Editor for time series graphs
- * 
- * <pre>
- * SOFTWARE HISTORY
- * Date         Ticket#     Engineer    Description
- * ------------ ----------	----------- --------------------------
- * Oct 11, 2006              chammack    Initial Creation.
- * 
- * </pre>
- * 
-=======
 
 /**
  * Editor for time series graphs
@@ -69,7 +39,6 @@ import com.raytheon.viz.ui.input.InputManager;
  *
  * </pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author chammack
  * @version 1
  */
@@ -128,13 +97,8 @@ public class TimeSeriesEditor extends VizXyEditor {
     private void updateHandlers() {
         if (this.getActiveDisplayPane() != null) {
             if (this.getActiveDisplayPane().getRenderableDisplay() != null) {
-<<<<<<< HEAD
-                this.updateHandlers(this.getActiveDisplayPane()
-                        .getRenderableDisplay());
-=======
                 this.updateHandlers(
                         this.getActiveDisplayPane().getRenderableDisplay());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         }
     }

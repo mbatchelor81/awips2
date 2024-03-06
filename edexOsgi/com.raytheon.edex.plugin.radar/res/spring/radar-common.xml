@@ -14,11 +14,7 @@
         <property name="pathProvider">
             <ref bean="radarPathProvider" />
         </property>
-<<<<<<< HEAD
-        <property name="compression" value="LZF"/>
-=======
         <property name="compression" value="GZIP"/>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     </bean>
 
     <bean id="radarRegistered" factory-bean="pluginRegistry"
@@ -34,8 +30,4 @@
         <constructor-arg value="radarDataStore" />
     </bean>
 
-<<<<<<< HEAD
 </beans>
-=======
-</beans>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

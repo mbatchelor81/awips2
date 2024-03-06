@@ -20,11 +20,7 @@
 
 import logging
 from dynamicserialize.dstypes.com.raytheon.uf.common.activetable import GetFourCharSitesRequest
-<<<<<<< HEAD
 from awips import ThriftClient
-=======
-from ufpy import ThriftClient
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 ##
 # Convert a list with 3-char site IDs to a list of 4-char site IDs.

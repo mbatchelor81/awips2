@@ -32,10 +32,7 @@ MOVE_ALL_HS_ERR_PID="Y"
 GRAB_REMOTE_TOP="Y"
 GRAB_REMOTE_VMSTAT="Y"
 GRAB_CAVE_AND_ALERTVIZ_LOGS="Y"
-<<<<<<< HEAD
-=======
 run_qpid_jstack="Y"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 GRAB_SCREENSHOT="Y"
 GRAB_CURRENT_QUERIES="Y"
 GRAB_XORG_LOG="Y"
@@ -44,11 +41,8 @@ FORCE="N"
 TGZ_OUTPUT="Y"
 RUN_VERSIONS="Y"
 ACCCUM="N"
-<<<<<<< HEAD
-=======
 WARNGEN="N"
 LOCAL="N"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 #max username length for IdM sites
 UID_LEN="32"
@@ -65,57 +59,38 @@ usage() {
    echo "  Turns off jmap and reduces jstack iterations to 5"
    echo
    echo -e "-c \"{host names}\"\tdefault [$REMOTE_SERVERS_TO_CHECK]"
-<<<<<<< HEAD
-   echo "  The servers to grab top information from, make sure list is quoted and space delimited"
-=======
    echo "  The servers to grab top information from, make sure list is quoted and"
    echo "  space-delimited"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    echo
    echo -e "-d {y/n}\t\tdefault [$RUN_JMAP]"
    echo "  Run jmap to grab the heap dump information"
    echo
    echo -e "-e {request/ingest/ingestGrib/ingestDat}"
-<<<<<<< HEAD
-   echo "  Run edex mode and grab information about the jvm passed.  May be used multiple times to grab data about multiple jvms"
-=======
    echo "  Run edex mode and grab information about the jvm passed.  May be used"
    echo "  multiple times to grab data about multiple jvms"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    echo
    echo -e "-f {y/n}\t\tdefault [$FORCE]"
    echo "  Force a jstack/jmap by default"
    echo
    echo -e "-l {y/n}\t\tdefault [$GRAB_CAVE_AND_ALERTVIZ_LOGS]"
-<<<<<<< HEAD
-   echo "  Captures the cave and alertviz logs.  If run for a specific pid the only cave log captured will be for that pid"
-=======
    echo "  Captures the cave and alertviz logs.  If run for a specific pid the only"
    echo "  cave log captured will be for that pid"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    echo
    echo -e "-m {y/n}\t\tdefault [$MOVE_ALL_HS_ERR_PID]"
    echo "  Captures all hs_err_pid's found"
    echo
    echo -e "-p {PID}\t\tdefault none"
-<<<<<<< HEAD
-   echo "  Run capture for a specific PID, crash information will not be captured.  Defaults to none and runs against all pids found."
-=======
    echo "  Run capture for a specific PID, crash information will not be captured."
    echo "  Defaults to none and runs against all pids found."
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    echo
    echo -e "-q {y/n}\t\tdefault [$RUN_QPID_STAT]"
    echo "  Run qpid-stat"
    echo
-<<<<<<< HEAD
-=======
    echo -e "-qpid-jstack {y/n}\tdefault [$run_qpid_jstack]"
    echo "  Run jstack on remote qpid (if CAVE is not present)."
    echo "  Auto login must be enabled. You may set the BROKER_HOST environment "
    echo "  variable to override the remote Qpid server to connect to "
    echo
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    echo -e "-Q {y/n}\t\tdefault [$GRAB_CURRENT_QUERIES]"
    echo "  Grab current running database queries"
    echo
@@ -126,15 +101,6 @@ usage() {
    echo "  Run jstack to grab the thread stack information"
    echo
    echo -e "-screen {y/n}\t\tdefault [$GRAB_SCREENSHOT]"
-<<<<<<< HEAD
-   echo "  Screen print the current workstation (local user must be running capture)"
-   echo
-   echo -e "-t {y/n}\t\tdefault [$GRAB_REMOTE_TOP]"
-   echo "  Captures top information from servers, auto login must be enabled"
-   echo
-   echo -e "-v {y/n}\t\tdefault [$GRAB_REMOTE_VMSTAT]"
-   echo "  Captures vmstat information from servers, auto login must be enabled"
-=======
    echo "  Screen print the current workstation"
    echo "  (local user must be running capture)"
    echo
@@ -145,7 +111,6 @@ usage() {
    echo -e "-v {y/n}\t\tdefault [$GRAB_REMOTE_VMSTAT]"
    echo "  Captures vmstat information from servers."
    echo "  Auto login must be enabled"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    echo
    echo -e "-V {y/n}\t\tdefault [$RUN_VERSIONS]"
    echo "  Grab version information"
@@ -153,8 +118,6 @@ usage() {
    echo -e "-z {y/n}\t\tdefault [$TGZ_OUTPUT]"
    echo "  Tar and gzip the captured data"
    echo
-<<<<<<< HEAD
-=======
    echo -e "-warngen {y/n}\t\tdefault [$WARNGEN]"
    echo "  Run warngen-specific suite of capture operations."
    echo "  Must be run as root or with sudo on a non-lx machine"
@@ -163,7 +126,6 @@ usage() {
    echo "  Indicates capture is being run on an \"all-in-one\" system, like a"
    echo "  development machine."
    echo
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    echo -e "-h"
    echo "  Display this usage statement"
    exit 0
@@ -194,11 +156,7 @@ checkDir() {
 
 checkYes() {
    local __resultvar="$1"
-<<<<<<< HEAD
-   if [ $2 == "YES" -o $2 == "Y" -o $2 == "yes" -o $2 == "y" ]; then
-=======
    if [[ $2 == "YES" || $2 == "Y" || $2 == "yes" || $2 == "y" ]]; then
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      eval $__resultvar="y"
    else
      eval $__resultvar="n"
@@ -276,8 +234,6 @@ grabRemoteVmstat() {
    fi
 }
 
-<<<<<<< HEAD
-=======
 runQpidJstack() {
     if [ "$run_qpid_jstack" != "y" ]; then
         return
@@ -314,7 +270,6 @@ runQpidJstack() {
     ssh -q $qpidHost "jstack -l $qpidWrapperPid" > "$qpidWrapperOutPath"
 }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 grabCurrentDatabaseQueries() {
    if [ "$GRAB_CURRENT_QUERIES" == "y" ]; then
       echo "Capturing current database queries"
@@ -414,11 +369,7 @@ runJstack() {
    local log=""
    while [ "$count" -le "$numIterations" ]; do
       t1=`date "+%Y%m%d %H:%M:%S"`
-<<<<<<< HEAD
-      log="${prePath}jstack_${count}.log"
-=======
       log="${prePath}$(hostname -s)_jstack_${count}.log"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
       echo "${t1}: Running command: ${cmd} ${options} ${pid} >> ${log} 2>&1" >> $processFile
       echo "Running for $t1" >> $log
@@ -520,15 +471,9 @@ runQpidStat() {
    local log="${prepath}qpid-stat-queues.log"
    echo "${t1}: Running command: $cmd >> $log 2>&1 &" >> $processFile
    if [ "$ACCUM" == "y" ]; then
-<<<<<<< HEAD
-	echo >> $log
-	echo >> $log
-	echo "Running for $t1" >> $log
-=======
        echo >> $log
        echo >> $log
        echo "Running for $t1" >> $log
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    fi
    $cmd >> $log 2>&1 &
 
@@ -536,15 +481,9 @@ runQpidStat() {
    cmd="/awips2/python/bin/qpid-stat -s -Smsg -L500 ${qpidHost}" 
    echo "${t1}: Running command: $cmd >> $log 2>&1 &" >> $processFile
    if [ "$ACCUM" == "y" ]; then
-<<<<<<< HEAD
-	echo >> $log
-	echo >> $log
-	echo "Running for $t1" >> $log
-=======
        echo >> $log
        echo >> $log
        echo "Running for $t1" >> $log
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    fi
    $cmd >> $log 2>&1 &
 }
@@ -602,10 +541,7 @@ while [ ! -z "$1" ]; do
       -p) cavePid="$1"; shift 1;;
       -q) RUN_QPID_STAT="$1"; shift 1;;
       -Q) GRAB_CURRENT_QUERIES="$1"; shift 1;;
-<<<<<<< HEAD
-=======
       -qpid-jstack) run_qpid_jstack="$1"; shift 1;;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
       -r) reason="$1"; shift 1;;
       -s) RUN_JSTACK="$1"; shift 1;;
       -screen) GRAB_SCREENSHOT="$1"; shift 1;;
@@ -614,11 +550,8 @@ while [ ! -z "$1" ]; do
       -V) RUN_VERSIONS="$1"; shift 1;;
       -z) TGZ_OUTPUT="$1"; shift 1;;
       -quick) RUN_JMAP="N"; JSTACK_ITERATIONS=5;;
-<<<<<<< HEAD
-=======
       -local) LOCAL="Y";;
       -warngen) WARNGEN="Y";;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
       -h|*) usage;;
    esac
 done
@@ -639,10 +572,7 @@ checkYes ACCCUM $ACCCUM
 checkYes RUN_VERSIONS $RUN_VERSIONS
 checkYes GRAB_SCREENSHOT $GRAB_SCREENSHOT
 checkYes GRAB_XORG_LOG $GRAB_XORG_LOG
-<<<<<<< HEAD
-=======
 checkYes run_qpid_jstack $run_qpid_jstack
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 # if PID mode don't grab other hs_err_pids
 if [ ! -z $cavePid ]; then
@@ -673,262 +603,6 @@ checkDir $basePath
 user=`whoami`
 
 hostName=`hostname -s`
-<<<<<<< HEAD
-fullHostName=`hostname`
-# remove the -testBed items
-strippedHostName=${hostName%-}
-hostPath="${basePath}/${hostName}"
-
-checkDir $hostPath
-
-curTime=`date +%Y%m%d_%H%M%S`
-curDir=`pwd`
-
-if [ "${ACCUM}" == "y" ]; then
-   curDay=`date +%Y%m%d`
-   dataPath="${hostPath}/captureData_${curDay}"
-else
-   dataPath="${hostPath}/captureData_${curTime}"
-fi
-
-checkDir $dataPath
-
-cd $dataPath
-processFile=${dataPath}/capture_info.log
-export COLUMNS=160
-top -b -c -n1 >> "${dataPath}/top_$hostName.log"
-vmstat -w 1 5 >> "${dataPath}/vmstat_$hostName.log"
-
-if [ "$ACCUM" == "y" ]; then
-   echo "" >> "${dataPath}/top_$hostName.log"
-   echo "" >> "${dataPath}/top_$hostName.log"
-   echo "" >> "${dataPath}/vmstat_$hostName.log"
-fi
-
-#expand user field to account for IdM sites
-export PS_FORMAT="user:${UID_LEN},pid,ppid,c,stime,tty,stat,time,cmd"
-
-if [ "$EDEX_MODE" == "y" ]; then
-   grepString="$edexGrepString("
-   count=0
-   
-   while [ "$count" -lt "$edexProcCount" ]; do
-      if [ "$count" -ne "0" ]; then
-         grepString="${grepString}|"
-      fi
-
-      grepString="${grepString}${edexProcs[$count]}"
-      let "count+=1"
-   done
-
-   grepString="${grepString}) "
-   procs=`ps ef | grep -E "$grepString" | grep -v "grep"`
-else
-   #list of cave process ids to get ps output for
-   caveProcNums=""
-   for parent in $(pgrep '^cave$')
-   do
-       # the cave process starts a new JVM as a child process
-       # find all children of the cave process
-       children=$(pgrep -P $parent)
-       if [[ -z $children ]]
-       then
-           # no children, assume that this is a main cave process
-           caveProcNums="$caveProcNums $parent"
-       else
-           # otherwise, only get ps output for children
-           caveProcNums="$caveProcNums $children"
-       fi
-   done
-   if [ ! "${caveProcNums}" = "" ]; then
-       procs=$(ps --no-header fp $caveProcNums)
-   fi
-fi
-
-unset PS_FORMAT
-
-if [ ! -z "$cavePid" ]; then
-   # limit cave procs to the requested PID
-   echo "Running in PID mode, only requesting for pid $cavePid" >> $processFile
-   procs=`echo "$procs" | grep "$cavePid"`
-fi
-
-myProcs=`echo "$procs" | grep "$user"`
-
-echo "${procs}" >> $processFile
-echo "" >> $processFile
-echo "" >> $processFile
-
-checkForProcsAsOtherUsers
-
-if [ ! -z "${myProcs}" ]; then
-   t1=`date "+%Y%m%d %H:%M:%S"`
-   echo "Processes found for user $user, capturing data to $dataPath"
-   echo "${t1}: Processes found for user $user, capturing data to $dataPath" >> $processFile
-   echo "" >> $processFile
-   numProcs=`echo "$myProcs" | wc -l`
-
-   # preserve IFS and set it to line feed only
-   PREV_IFS=$IFS
-   IFS=$'\n'
-   count=0
-
-   # grab the pids for future use
-   for proc in $myProcs
-   do
-      pids[$count]=`echo "$proc" | awk '{print $2}'`
-      let "count+=1"
-   done
-   IFS=$PREV_IFS
-
-   launchJstacks
-
-   checkJmapMem
-   let rc=$?
-   if [ $rc -eq 1 ]; then 
-       launchJmaps
-   fi
-
-else
-   t1=`date "+%Y%m%d %H:%M:%S"`
-   echo "*** NO processes found for user $user, capturing limited data to $dataPath"
-   echo "${t1}: NO processes found for $user" >> $processFile
-   echo "" >> $processFile
-fi
-
-# grab Xorg logs
-grabXorgLog
-
-# grab top for servers
-grabRemoteTop
-
-# grab vm stat for servers
-grabRemoteVmstat
-
-# grab current database queries
-grabCurrentDatabaseQueries
-
-# grab screen shot, spawns background process for each screen
-grabScreenShot
-
-# grab qpid stat
-runQpidStat
-
-# ls users home directory to check nas performance
-/usr/bin/time -p ls -la ~ > ${dataPath}/nas_check_ls_home.txt 2>&1 &
-
-# move all hs_err_pid from user's home directory to capture directory
-if [ "${MOVE_ALL_HS_ERR_PID}" == "y" ]; then
-   numErrFiles=`ls ${HOME}/hs_err_pid* 2> /dev/null | wc -l`
-   t1=`date "+%Y%m%d %H:%M:%S"`
-
-   if [ "${numErrFiles}" == "0" ]; then
-      echo "*** NO hs_err_pid files to capture"
-      echo "${t1}: No hs_err_pid files to capture" >> $processFile
-   else
-      echo "Capturing ${numErrFiles} hs_err_pids"
-      echo "${t1}: Capturing ${numErrFiles} hs_err_pids" >> $processFile
-      mv ${HOME}/hs_err_pid* ${dataPath}
-   fi
-
-   echo "" >> $processFile
-fi
-
-# Grab the cave console logs for the last 24 hours as well as the current alertviz database, if pid mode only grab cave for that pid
-if [ "${GRAB_CAVE_AND_ALERTVIZ_LOGS}" == "y" ]; then
-   dir="${HOME}/caveData/logs/${hostName}"
-   if [ ! -d $dir ]; then
-      dir="${HOME}/caveData/logs/${strippedHostName}"
-      if [ ! -d $dir ]; then
-         dir="${HOME}/caveData/logs/${fullHostName}"
-      fi
-   fi
-
-   t1=`date "+%Y%m%d %H:%M:%S"`
-   if [ -d $dir ]; then
-      echo "Capturing alertviz logs"
-      echo "${t1}: Capturing alertviz logs" >> $processFile
-      mkdir ${dataPath}/alertVizDatabase
-      cp -r $dir ${dataPath}/alertVizDatabase
-   else
-      echo "*** NO alertviz logs to capture"
-      echo "${t1}: *** Can't find alertviz logs to capture" >> $processFile
-      echo "" >> $processFile
-   fi
-
-   dir="${HOME}/caveData/logs/consoleLogs/${hostName}"
-   if [ ! -d $dir ]; then
-      dir="${HOME}/caveData/logs/consoleLogs/${strippedHostName}"
-      if [ ! -d $dir ]; then
-         dir="${HOME}/caveData/logs/consoleLogs/${fullHostName}"
-      fi
-   fi
-
-   t1=`date "+%Y%m%d %H:%M:%S"`
-   # grab any logs written to in last 2 hours, or pid mode only that log
-   if [ -d $dir ]; then
-      echo "Capturing cave logs"
-      echo "${t1}: Capturing cave logs" >> $processFile
-      mkdir -p ${dataPath}/consoleLogs
-      if [ ! -z ${cavePid} ]; then
-         # logs have cave executable pid or worker pid in the name (-o means OR)
-         find $dir  -type f -name "*$(determineCaveProcess ${cavePid})*" -o -name "*${cavePid}*" -exec cp {} ${dataPath}/consoleLogs \;
-      else
-         find $dir  -type f -mmin -120 -exec cp {} ${dataPath}/consoleLogs \;
-      fi
-   else
-      echo "*** NO cave logs to capture"
-      echo "${t1}: *** Can't find cave logs to capture" >> $processFile
-      echo "" >> $processFile
-   fi
-fi
-
-# grab the version information
-if [ "$RUN_VERSIONS" == "y" ]; then
-   runVersions
-fi
-
-# get reason for running capture
-if ! reasonForCapture ; then
-    # kill all child processes
-    kill $(ps -o pid= --ppid $$)
-    echo Canceling.
-    wait
-    rm -rf "$dataPath"
-    exit 1
-fi
-
-
-# wait for any backgrounded processes by this script to finish
-wait
-
-message=""
-
-# tar/gz the output
-if [ "${TGZ_OUTPUT}" == "y" ]; then
-   echo "Tar/zipping captured data"
-   if [ ! -z ${cavePid} ]; then
-      tgzFile="${hostPath}/captureData_${curTime}_pid_${cavePid}.tgz"
-   else
-      tgzFile="${hostPath}/captureData_${curTime}.tgz"
-   fi
-
-   cd ..
-   tar -czf $tgzFile --remove-files captureData_${curTime}
-   rm -rf ${dataPath}
-   message="Data captured to $tgzFile"
-else
-   message="Data captured to ${dataPath}"
-fi
-
-zenity --info --no-wrap --title="Capture Done" --text="$message" > /dev/null 2>&1 &
-echo
-echo $message
-rm ~/.pgpass
-
-cd $curDir
-
-=======
 
 curTime=`date +%Y%m%d_%H%M%S`
 
@@ -1359,4 +1033,3 @@ fi
 cd $curDir
 
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

@@ -1,14 +1,5 @@
 #!/bin/bash
 ##
-<<<<<<< HEAD
-# This script will be good for migrating from hmdb to climate
-# TODO: This script need to be updated when the hmdb is retired
-# -----------------------------------------------------------------
-# ! script to create the Climate database
-# !
-# ! $1 = psql install directory
-# ! $2 = postgresql install directory
-=======
 # This software was developed and / or modified by Raytheon Company,
 # pursuant to Contract DG133W-05-CQ-1067 with the US Government.
 # 
@@ -32,7 +23,6 @@
 # !
 # ! $1 = ignored (was psql install directory)
 # ! $2 = ignored (was postgresql install directory)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # ! $3 = DB port number
 # ! $4 = username
 # ! $5 = script directory
@@ -41,19 +31,6 @@
 # -----------------------------------------------------------------
 echo ""
 echo "--------------------------------------------------------------------------------"
-<<<<<<< HEAD
-echo "\| Creating Climate Database..."
-echo "--------------------------------------------------------------------------------"
-${1}/bin/psql -d postgres -U ${4} -q -p ${3} -f ${5}/createClimateDb.sql >> ${6} 2>&1
-echo "--------------------------------------------------------------------------------"
-echo "\| Copying schema and data from hmdb to climate DB ... "
-echo "--------------------------------------------------------------------------------"
-${2}/bin/pg_dump -U ${4} hmdb --clean | ${1}/bin/psql -U ${4} climate >> ${6} 2>&1
-
-echo "\| Creating cpg_session and sent_prod_record tables..."
-echo "--------------------------------------------------------------------------------"
-${1}/bin/psql -d climate -U ${4} -q -p ${3} -f ${5}/createAdditionalTables.sql >> ${6} 2>&1
-=======
 echo "\| Creating Climate Database and Tables..."
 echo "--------------------------------------------------------------------------------"
 psql -d postgres -U ${4} -q -p ${3} -f ${5}/createClimateDb.sql >> ${6} 2>&1
@@ -129,4 +106,3 @@ echo "\| Creating cpg_session and sent_prod_record tables..."
 echo "--------------------------------------------------------------------------------"
 psql -d climate -U ${4} -q -p ${3} -f ${5}/createAdditionalTables.sql >> ${6} 2>&1
 echo ""
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

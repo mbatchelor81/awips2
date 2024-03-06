@@ -60,11 +60,7 @@ import com.raytheon.viz.mpe.util.DailyQcUtils.Hrap_Grid;
 import com.raytheon.viz.mpe.util.DailyQcUtils.Maps;
 
 import systems.uom.common.USCustomary;
-<<<<<<< HEAD
-import tec.uom.se.AbstractUnit;
-=======
 import tech.units.indriya.AbstractUnit;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * TODO Add Description

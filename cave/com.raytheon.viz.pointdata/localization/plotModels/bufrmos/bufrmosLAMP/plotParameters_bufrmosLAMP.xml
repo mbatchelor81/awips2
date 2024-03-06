@@ -34,13 +34,9 @@
 
    <plotParameterDefinition displayName="Marker" displayType="MARKER" param="Marker" sampleValue=" " svgClass="marker" />
 
-<<<<<<< HEAD
-   <plotParameterDefinition displayName="temperature (°F)" displayType="TEXT" format="%3.0f" param="temperature" sampleValue="1" svgClass="text" unit="°F" />
-=======
    <plotParameterDefinition displayName="temperature (°F)" displayType="TEXT" format="%3.0f" param="temperature" sampleValue="68" svgClass="text" unit="°F" />
 
    <plotParameterDefinition displayName="temperature (°C)" displayType="TEXT" format="%3.0f" param="temperature" sampleValue="20" svgClass="text" unit="°C" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
    <plotParameterDefinition displayName="dewpoint (°F)" displayType="TEXT" format="%3.0f" param="dewpoint" sampleValue="1" svgClass="text" unit="°F" />
 
@@ -48,11 +44,6 @@
 
    <plotParameterDefinition displayName="stdMaxWindSpeed (kts)" displayType="TEXT" format="%3.0f" param="stdMaxWindSpeed" sampleValue="1" svgClass="text" unit="kts" />
 
-<<<<<<< HEAD
-   <plotParameterDefinition displayName="presWeather" displayType="TABLE" lookupTable="wx_symbol_trans.txt" param="presWeather" recursiveLookup="true" sampleValue="0" svgClass="weather" />
-
-   <plotParameterDefinition displayName="windSpeedInflated,windDir (kts)" displayType="BARB" param="windSpeedInflated,windDir" sampleValue="0,1" unit="kts" />
-=======
    <plotParameterDefinition displayName="presWeather" displayType="TABLE" lookupTable="wx_symbol_trans.txt" param="presWeather" recursiveLookup="true" sampleValue="UP" svgClass="weather" />
 
    <plotParameterDefinition displayName="windSpeedInflated,windDir (kts)" displayType="BARB" param="windSpeedInflated,windDir" sampleValue="0,1" unit="kts" />
@@ -60,7 +51,6 @@
    <plotParameterDefinition displayName="windSpeedInflated,windDir (mph)" displayType="BARB" param="windSpeedInflated,windDir" sampleValue="0,1" unit="mph" />
 
    <plotParameterDefinition displayName="windSpeedInflated,windDir (m/s)" displayType="BARB" param="windSpeedInflated,windDir" sampleValue="0,1" unit="m/s" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    
    <plotParameterDefinition displayName="windDir" displayType="ARROWUV" param="windSpeedInflated,windDir" sampleValue="0,1" unit="kts" />
    

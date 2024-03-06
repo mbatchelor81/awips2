@@ -35,10 +35,7 @@ Require-Bundle: org.eclipse.ui,
  com.raytheon.uf.common.dataplugin.grid.derivparam,
  com.raytheon.uf.common.dataaccess,
  com.raytheon.uf.viz.core.rsc,
-<<<<<<< HEAD
-=======
  com.raytheon.viz.ui,
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  javax.xml.bind
 Export-Package: com.raytheon.viz.grid,
  com.raytheon.viz.grid.data,

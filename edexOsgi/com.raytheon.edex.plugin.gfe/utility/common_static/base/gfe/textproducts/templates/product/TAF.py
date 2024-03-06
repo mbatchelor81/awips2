@@ -22,7 +22,6 @@
 # TAF, TAF_RR_Overrides, TAF_XXX_Overrides,
 # TAF_XXX_Definition
 # -------------------------------------------------------------------------
-<<<<<<< HEAD
 # Version: 20220505
 #
 # Modified: 05 May 2022 - experimental version for Python3
@@ -30,15 +29,6 @@
 # Author:  GSD Digital Aviation Services Group
 #
 # Developers: Sarah Pontius and Tom LeFebvre
-=======
-# Version: 20221018
-#
-# Modified: 18 October 2022 - fix for multiple cloud bases (Matthew Belk - BOX)
-# -------------------------------------------------------------------------
-# Author:  GSD Digital Aviation Services Group
-#
-# Developers: Sarah Pontius, Tom LeFebvre and Matthew Belk (WFO BOX)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 # Support Email: nws.digital.aviation.services@noaa.gov
 # -------------------------------------------------------------------------
@@ -533,10 +523,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         calls various formatter classes that will use the product dictionary to
         create and save the TAF product output in various different formats.
         """
-<<<<<<< HEAD
-=======
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # Get variables
         error = self._getVariables(argDict)
         if error is not None:
@@ -664,10 +650,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         # by the formatters to create the TAF output in various formats.
         self._productDict = OrderedDict()
         self._airportDicts = OrderedDict()
-<<<<<<< HEAD
-=======
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def _determineTimeRanges(self, argDict, airportIcaoId):
         """
         Determines the time range which needs to be sampled for an airport.
@@ -1158,10 +1140,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             if len(categoryInfo) == 3:
                 self.debug_print(
                     f"{categoryInfo[0]}:\tvisibility: {categoryInfo[1]}ceiling: {categoryInfo[2]}",
-<<<<<<< HEAD
                    
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     1,
                 )
             else:
@@ -1251,10 +1230,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             dirAvg = self.round(dirAvg, "Nearest", 10)
         else:
             dirAvg = "VRB"
-<<<<<<< HEAD
-=======
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if speedAvg < 1.0:
             speedAvg = 0
             dirAvg = 0
@@ -1311,10 +1286,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         self._finalizeTemposProbs(keeperFMGroups, allFmGroups, airportIcaoId)
 
         self._displayShortenedTafInfo(keeperFMGroups)
-<<<<<<< HEAD
-=======
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return
 
     def _setProductPart(self, value):
@@ -1355,10 +1326,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
 
     def _tafTypeIdentifier(self, productDict, productPart):
         typeIdentifier = ""  # Default to routine
-<<<<<<< HEAD
-=======
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if self._tafType == "Amendment":
             typeIdentifier = "AAX"
         elif self._tafType == "Delayed":
@@ -1952,10 +1919,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
 
             # Information for each field about whether it changed or not.
             self.fieldChangeInfo = OrderedDict()
-<<<<<<< HEAD
-=======
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             self.rankingValue = 0
             self.rankDict = {}
 
@@ -2223,13 +2186,8 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                 previousBases = []
                 # Remove any None cloud layers first
                 cloudList = [(cov, base) for (cov, base) in rawCloudList if cov and base]
-<<<<<<< HEAD
                 # Sort by base height
                 cloudList = sorted(cloudList, key=itemgetter(1), reverse=True)
-=======
-                # Sort by base height from highest to lowest
-                cloudList = sorted(cloudList, key=cloudBase, reverse=True)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 for cov, base in cloudList:
                     if cov == "SKC":
                         continue
@@ -2248,7 +2206,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                 given the ceiling. These are isolated here.
                 """
                 covList = ["OVC", "BKN", "SCT", "FEW"]
-<<<<<<< HEAD
 
                 if maxCov not in covList:
                     return None
@@ -2264,49 +2221,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                 # a lower coverage than the maxCov.
                 maxCovIndex = covList.index(maxCov)
                 layerIndex = maxCovIndex - (ceilingLayerHt - layerHt)
-=======
-                lenCovList = len(covList)
-                sctIndex = covList.index("SCT")
-
-                self._textProduct.debug_print(
-                    f"\nIn calcCovDiff - layer = {layerHt}   ceil = {ceilingLayerHt}   "
-                    + f"maxCov = {maxCov}\n",
-                    1,
-                )
-
-                if maxCov not in covList:
-                    return None
-
-                # Case where the layer is at or above the ceiling, just return the max.
-                # Remember, the order of cloud bases is reversed (i.e. from high to low).
-                if layerHt <= ceilingLayerHt:
-                    if (maxCov == "OVC" and layerHt == 0) or (maxCov in ["FEW", "SCT"]):
-                        return maxCov
-                    return "BKN"
-
-                # Otherwise, this layer is below the ceiling and can be assigned
-                # a lower coverage than BKN or OVC.
-                maxCovIndex = covList.index(maxCov)
-                layerIndex = maxCovIndex - (ceilingLayerHt - layerHt)
-
-                # Ensure this calculated coverage is valid
-                if layerIndex < 0:
-                    layerIndex += lenCovList
-
-                if layerIndex >= lenCovList:
-                    layerIndex = lenCovList - 1
-
-                # can be SCT at most, since this is not a ceiling
-                if layerIndex < sctIndex:
-                    layerIndex = sctIndex
-
-                self._textProduct.debug_print(
-                    f"layerIndex = {layerIndex}   maxCovIndex = {maxCovIndex}   "
-                    + f"{ceilingLayerHt - layerHt}",
-                    1,
-                )
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 # FEW FEW is allowed
                 if maxCov == "FEW":
                     return "FEW"
@@ -2331,10 +2245,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             if ceiling == 0:
                 self.productDict[productPart] = "VV000"
                 return
-<<<<<<< HEAD
-=======
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             # Fetch the cloud base values
             cloudBase1 = self.productDict["cloudBasePrimary"]
             cloudBase2 = self.productDict["cloudBaseSecondary"]
@@ -2352,7 +2262,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             sky2Cov = self._skyPctToCov(sky2)
             sky3Cov = self._skyPctToCov(sky3)
 
-<<<<<<< HEAD
             if sky:
                 rawCloudList = [(skyCov, cloudBase1)]
             else:
@@ -2372,37 +2281,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             # cloudList.sort(self._cloudLayerSort)
             # cloudList.reverse()
             cloudList = sorted(cloudList, key=itemgetter(1), reverse=True)
-=======
-            # See  if we are using the AWC grids
-            useAWC = getattr(self._textProduct, "_useAdditionalSkyElements", False)
-
-            if useAWC:
-                rawCloudList = [
-                    (sky1Cov, cloudBase1),
-                    (sky2Cov, cloudBase2),
-                    (sky3Cov, cloudBase3),
-                ]
-            else:
-                rawCloudList = [
-                    (skyCov, cloudBase1),
-                    (skyCov, cloudBase2),
-                    (skyCov, cloudBase3),
-                ]
-
-            # Filter out None bases and SKC layers. Cloud bases sorted from high to low.
-            cloudList = filteredCloudList(rawCloudList)
-            if not cloudList:  # No valid clouds, so report clear skies
-                self._textProduct.debug_print("Setting to SKC - no other clouds")
-                self.productDict[productPart] = "SKC"
-                return
-            self._textProduct.debug_print(f"*** filtered cloudList = {cloudList}")
-
-            # If we are using AWC and all the clouds are valid (cov, base), we can set
-            # the product part and return
-            if useAWC and allCloudsValid(cloudList):
-                self.productDict[productPart] = cloudList
-                return
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             # Initialize the coverage from Sky which will decrement as we move down in layers
             finalCloudList = []
@@ -2418,7 +2296,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                         break
             # Assign coverage to each layer.
             for (i, (cov, base)) in enumerate(cloudList):
-<<<<<<< HEAD
                 coverage = cov
                 if cov is None:
                     coverage = calcCovDiff(i, ceilingLayerNum, skyCov)
@@ -2437,33 +2314,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             finalCloudList = filteredCloudList(finalCloudList)  # filter one last time
             # Remove any layers above the lowest OVC
             finalCloudList = removeLayersAboveOVC(finalCloudList)
-=======
-                coverage = calcCovDiff(i, ceilingLayerNum, skyCov)
-                self._textProduct.debug_print(
-                    f"ceilingLayerNum = {ceilingLayerNum}   coverage = {coverage} {i}",
-                    1,
-                )
-
-                if coverage is not None:
-                    finalCloudList.append((coverage, base))
-
-            # No layers here means a clear sky
-            if not finalCloudList:
-                self._textProduct.debug_print("Setting to SKC - finalCloudList is empty", 1)
-                self.productDict[productPart] = "SKC"
-                return
-
-            # Filter the cloud bases one more time
-            finalCloudList = filteredCloudList(finalCloudList)
-            # Remove any layers above the lowest OVC
-            finalCloudList = removeLayersAboveOVC(finalCloudList)
-
-            # Can only have up to 2 FEW layers
-            if skyCov == "FEW":
-                finalCloudList = finalCloudList[:2]
-
-            self._textProduct.debug_print(f"***** finalCloudList = {finalCloudList}")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             self.productDict[productPart] = finalCloudList
 
             return
@@ -2576,12 +2426,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                 )
             else:
                 self._textProduct.debug_print(
-<<<<<<< HEAD
                     f"\nTotal average FM group rating = {ratingRules.averageRating(ratings)}", 1
-=======
-                    f"\nTotal average FM group rating = {ratingRules.averageRating(ratings)}",
-                    1,
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 )
 
         def mergeConditionalGroups(self, otherFmGroup):
@@ -2799,10 +2644,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         def _wind(self, productPart, fmGroup):
             # TODO: Wind information currently not supported by the formatter
             self.productDict[productPart] = None
-<<<<<<< HEAD
-=======
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         def _windGust(self, productPart, fmGroup):
             # TODO: WindGust information currently not supported by the formatter
             self.productDict[productPart] = None
@@ -3038,10 +2879,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         def _makeGroupLabel(self):
             startTimeUTC = time.gmtime(self.productDict["startTime"])
             endTimeUTC = time.gmtime(self.productDict["endTime"])
-<<<<<<< HEAD
-=======
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             # Added this code to fix bug 37515
             # Needed to use raw time from productDict so math would work
             if endTimeUTC.tm_hour == 0:
@@ -3153,10 +2990,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                     return newClouds
                 else:
                     newClouds.append((cover, height))
-<<<<<<< HEAD
-=======
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return newClouds
 
         def _mergeClouds(self, otherClouds):
@@ -3174,10 +3007,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
 
                 # Sort the cloud bases according to height
                 sortedBases = sorted(allClouds, key=itemgetter(1))
-<<<<<<< HEAD
-=======
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 # Filter out any cloud bases above the lowest OVC layer
                 sortedBases = self.filterClouds(sortedBases)
 
@@ -4100,10 +3929,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                 weatherTypes.remove("SHRA")
                 weatherTypes.remove("TSGR")
                 weatherTypes.insert(0, "TSRAGR")
-<<<<<<< HEAD
-=======
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if "SHRA" in weatherTypes and "TSGR" in weatherTypes:
                 weatherTypes.remove("SHRA")
                 weatherTypes.remove("TSGS")
@@ -4442,10 +4267,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         def _cloudBaseTertiarySignificance(self, cloudBaseTertiary):
             # cloudBaseTertiary is a number in units of 100s of feet
             return 0
-<<<<<<< HEAD
-=======
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         def _ceilingSignificance(self, ceiling):
             # ceiling is a number in units of 100s of feet
 
@@ -4787,10 +4608,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                 cat1 = self._calcCategory(vis1, self._visibilityCategories)
                 cat2 = self._calcCategory(vis2, self._visibilityCategories)
                 catDiff = abs(cat1 - cat2)
-<<<<<<< HEAD
-=======
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 def calcVisScaling(visValue):
                     visScaling = [(1.0, 50), (3.0, 30), (5.0, 15)]
                     for vis, scale in visScaling:
@@ -5309,10 +5126,6 @@ class TAC_Formatter(Output_Formatter):
         return fcst
 
     def _saveOutput(self, fcst, siteID):
-<<<<<<< HEAD
-=======
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # Write out the TAFs - minus the WMO header
         try:
             tacOutputFile = self._textProduct._outputFile
@@ -5348,10 +5161,6 @@ class TAC_Formatter(Output_Formatter):
     def _makeProductHeader(self, productDict):
         """
         Create the text for the bulletin header.
-<<<<<<< HEAD
-=======
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         For Example (TAC format):
         FTUS42 KMFL 141100 AAA
         """
@@ -5375,10 +5184,6 @@ class TAC_Formatter(Output_Formatter):
     def _makeAirportTafHeader(self, productDict, airportDict):
         """
         Create the airport specific header.
-<<<<<<< HEAD
-=======
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         For Example (TAC format):
         TAFMIA                    <- Only for verification TAFs
         TAF AMD
@@ -5635,20 +5440,12 @@ class TAC_Formatter(Output_Formatter):
             return "P6SM"
 
     def _formatClouds(self, clouds, weather):
-<<<<<<< HEAD
-=======
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if isinstance(clouds, str):
             return clouds
         elif isinstance(clouds, list):
             cloudText = ""
             for (index, cloud) in enumerate(clouds):
                 coverage, height = cloud
-<<<<<<< HEAD
-=======
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if coverage == "SKC" or height is None:
                     continue
 
@@ -5677,15 +5474,9 @@ class TAC_Formatter(Output_Formatter):
 
         # If we have both a wind and a height to report
         direction, speed, height = llws
-<<<<<<< HEAD
         #Direction is rounded to the nearest 10 degrees.  0 is expressed as 360.
         #direction //= 10
         direction=round(direction/10)*10
-=======
-        # Direction is rounded to the nearest 10 degrees.  0 is expressed as 360.
-        # direction //= 10
-        direction = round(direction / 10) * 10
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if direction == 0:
             direction = 360
         if speed >= self._textProduct._llwsThreshold:
@@ -6370,10 +6161,6 @@ class IWXXM_Formatter(Output_Formatter):
 
         # Write out the generated output
         self._saveOutput(airportXMLs, siteID)
-<<<<<<< HEAD
-=======
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return airportXMLs[list(airportXMLs.keys())[0]]
 
     def _saveOutput(self, fcsts, siteID):
@@ -6416,8 +6203,4 @@ class IWXXM_Formatter(Output_Formatter):
         pass
 
     def _randomUuidString(self):
-<<<<<<< HEAD
         return f"uuid.{uuid4()}"
-=======
-        return f"uuid.{uuid4()}"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

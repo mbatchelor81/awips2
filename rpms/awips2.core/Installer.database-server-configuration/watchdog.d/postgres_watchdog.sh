@@ -12,24 +12,15 @@ err=0
 case "$1" in
     # what watchdog calls when testing the script
     test)
-<<<<<<< HEAD
-        service_action "status" "edex_postgres" 60
-=======
         systemd_action "status" "postgresql@awips" 60
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         err=$?
     ;;
 
     # what watchdog calls when a tested script returns non-zero
     repair)
         # edex_postgres was reported as down; restart and check status
-<<<<<<< HEAD
-        service_action "restart" "edex_postgres" 60
-        service_action "status" "edex_postgres" 60
-=======
         systemd_action "restart" "postgresql@awips" 60
         systemd_action "status" "postgresql@awips" 60
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         err=$?
     ;;
 

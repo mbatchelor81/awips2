@@ -37,7 +37,6 @@
             name="Warnings">
       </command>
    </extension>
-<<<<<<< HEAD
    <extension
          point="com.raytheon.viz.ui.contextualMenu">
           <contextualMenu
@@ -46,6 +45,4 @@
             sortID="1">
           </contextualMenu>
    </extension>
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 </plugin>

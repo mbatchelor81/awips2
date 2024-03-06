@@ -20,20 +20,11 @@
 
 package com.raytheon.uf.common.dataplugin.satellite.units.ir;
 
-<<<<<<< HEAD
-import java.math.BigDecimal;
-import java.math.MathContext;
-
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
-import tec.uom.se.AbstractConverter;
-=======
 import javax.measure.UnitConverter;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import tech.units.indriya.function.AbstractConverter;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Converts a temperature value in Kelvin to a pixel value.
@@ -44,15 +35,10 @@ import tech.units.indriya.function.AbstractConverter;
  * ------------- -------- ----------- --------------------------
  * Aug 29, 2007           njensen     Initial creation
  * Nov 20, 2013  2492     bsteffen    Make conversion unbounded.
-<<<<<<< HEAD
- * Apr 15, 2019   7596    lsingh      Updated units framework to JSR-363.
- *                                    Overrided additional methods
-=======
  * Apr 15, 2019  7596     lsingh      Updated units framework to JSR-363.
  *                                    Overrided additional methods
  * Aug 05, 2022  8905     lsingh      Updated units framework to 2.0.2.
  *                                    Renamed methods, and overrided additional methods.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -63,14 +49,9 @@ public class IRTempToPixelConverter extends AbstractConverter {
     private static final long serialVersionUID = 1L;
 
     @Override
-<<<<<<< HEAD
-    public double convert(double aTemperature) {
-        double result = 0.0;
-=======
     public Number convertWhenNotIdentity(Number temperature) {
         double result = 0.0;
         double aTemperature = temperature.doubleValue();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         if (aTemperature < 238.15) {
             result = 418.15 - aTemperature;
@@ -92,11 +73,7 @@ public class IRTempToPixelConverter extends AbstractConverter {
     }
 
     @Override
-<<<<<<< HEAD
-    public AbstractConverter inverse() {
-=======
     public AbstractConverter inverseWhenNotIdentity() {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return new IRPixelToTempConverter();
     }
 
@@ -106,11 +83,6 @@ public class IRTempToPixelConverter extends AbstractConverter {
     }
 
     @Override
-<<<<<<< HEAD
-    public BigDecimal convert(BigDecimal value, MathContext ctx)
-            throws ArithmeticException {
-        return BigDecimal.valueOf(convert(value.doubleValue()));
-=======
     public boolean isIdentity() {
         return false;
     }
@@ -131,7 +103,6 @@ public class IRTempToPixelConverter extends AbstractConverter {
     protected boolean canReduceWith(AbstractConverter that) {
         // This method hasn't been implemented yet since it's unused
         return false;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
 }

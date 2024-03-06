@@ -65,11 +65,7 @@ import com.raytheon.viz.grid.GridExtensionManager;
  * Aug 15, 2017  6332     bsteffen  Move radar specific logic to extension
  * Aug 23, 2017  6125     bsteffen  Split common updating code to GridInventoryUpdater.
  * Nov 30, 2018  7673     bsteffen  Prevent full queue from blocking.
-<<<<<<< HEAD
  * Apr 29, 2022           tiffanym@ucar.edu Remove the umlauts from schrodingers variables
-=======
- * 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  * 
  * @author bsteffen
@@ -207,25 +203,16 @@ public class GridUpdater extends GridInventoryUpdater {
              * real state of the record here and it is left to the receiver of
              * updates to figure it out.
              */
-<<<<<<< HEAD
             GridRecord schrodingersRecord = new GridRecord();
             DataTime time = record.getDataTime();
             schrodingersRecord.setDataTime(new DataTime(time.getRefTime(),
                     time.getFcstTime() - value.timeOffset));
             schrodingersRecord.setDatasetId(value.node.getModelName());
-=======
-            GridRecord schrödingersRecord = new GridRecord();
-            DataTime time = record.getDataTime();
-            schrödingersRecord.setDataTime(new DataTime(time.getRefTime(),
-                    time.getFcstTime() - value.timeOffset));
-            schrödingersRecord.setDatasetId(value.node.getModelName());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             Parameter param = new Parameter(
                     value.node.getDesc().getAbbreviation(),
                     value.node.getDesc().getName(),
                     value.node.getDesc().getUnit());
-<<<<<<< HEAD
             schrodingersRecord.setParameter(param);
             schrodingersRecord.setLevel(value.node.getLevel());
             if (value.node instanceof GatherLevelNode) {
@@ -241,23 +228,6 @@ public class GridUpdater extends GridInventoryUpdater {
                 statusHandler.handle(Priority.PROBLEM,
                         "Failed to send derived update for "
                                 + schrodingersRecord.getDataURI(),
-=======
-            schrödingersRecord.setParameter(param);
-            schrödingersRecord.setLevel(value.node.getLevel());
-            if (value.node instanceof GatherLevelNode) {
-                schrödingersRecord.setEnsembleId(null);
-            } else {
-                schrödingersRecord.setEnsembleId(record.getEnsembleId());
-            }
-            schrödingersRecord.setSecondaryId(record.getSecondaryId());
-            schrödingersRecord.setLocation(record.getLocation());
-            try {
-                uriUpdateQueue.put(schrödingersRecord.getDataURI());
-            } catch (InterruptedException e) {
-                statusHandler.handle(Priority.PROBLEM,
-                        "Failed to send derived update for "
-                                + schrödingersRecord.getDataURI(),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         e);
             }
         }

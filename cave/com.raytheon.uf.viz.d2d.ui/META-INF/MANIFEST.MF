@@ -27,10 +27,6 @@ Require-Bundle: org.eclipse.core.runtime,
  com.raytheon.uf.viz.xy,
  javax.xml.bind,
  org.eclipse.e4.ui.workbench,
-<<<<<<< HEAD
- org.eclipse.e4.ui.model.workbench
-=======
  org.eclipse.e4.ui.model.workbench,
  org.apache.commons.collections4
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 Bundle-ClassPath: com.raytheon.uf.viz.d2d.ui.jar

@@ -20,7 +20,6 @@
     -->
 <?eclipse version="3.2"?>
 <plugin>
-<<<<<<< HEAD
 <extension
 		point="org.eclipse.ui.menus">
 		<menuContribution locationURI="menu:tools?after=tools.Te">
@@ -37,8 +36,6 @@
 			</command>
 		</menuContribution>
    </extension>
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    <extension
          point="org.eclipse.ui.commands">
       <command
@@ -57,32 +54,5 @@
    		point="com.raytheon.uf.viz.core.component">
    		<component key="textws" class="com.raytheon.viz.textworkstation.TextWorkstationComponent"/>
    </extension>
-<<<<<<< HEAD
-=======
-   <extension
-        point="com.raytheon.uf.viz.localization.perspective.localizationpath">
-        <path
-                application="TextWS"
-                localizationType="CAVE_STATIC"
-                name="Configuration"
-                value="textws/gui"
-                recursive="true">
-        </path>
-        <path
-                application="TextWS"
-                localizationType="COMMON_STATIC"
-                name="Mixed Case"
-                value="mixedCase"
-                recursive="false">
-        </path>
-        <path
-                application="TextDB"
-                localizationType="COMMON_STATIC"
-                name="TextDB Config"
-                value="textdb/config"
-                recursive="false">
-        </path>
-   </extension> 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    
 </plugin>

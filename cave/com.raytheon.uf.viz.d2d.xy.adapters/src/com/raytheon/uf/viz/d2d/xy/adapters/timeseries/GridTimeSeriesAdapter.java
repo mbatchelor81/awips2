@@ -57,11 +57,7 @@ import com.raytheon.viz.core.graphing.xy.XYDataList;
 import com.raytheon.viz.core.graphing.xy.XYIconImageData;
 import com.raytheon.viz.core.graphing.xy.XYWindImageData;
 
-<<<<<<< HEAD
-import tec.uom.se.AbstractUnit;
-=======
 import tech.units.indriya.AbstractUnit;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Adapter providing a TimeSeries view of GridData.

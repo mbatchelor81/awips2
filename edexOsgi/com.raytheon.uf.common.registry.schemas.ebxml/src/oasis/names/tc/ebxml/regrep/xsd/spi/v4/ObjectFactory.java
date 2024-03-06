@@ -60,17 +60,7 @@ public class ObjectFactory implements ISerializableObject {
     public ObjectFactory() {
     }
 
-<<<<<<< HEAD
-    /**
-     * Create an instance of {@link CatalogingExceptionType }
-     * 
-     */
-    public CatalogingExceptionType createCatalogingExceptionType() {
-        return new CatalogingExceptionType();
-    }
-=======
     
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Create an instance of {@link CatalogObjectsResponse }
@@ -96,17 +86,7 @@ public class ObjectFactory implements ISerializableObject {
         return new ValidationExceptionType();
     }
 
-<<<<<<< HEAD
-    /**
-     * Create an instance of {@link FilteringExceptionType }
-     * 
-     */
-    public FilteringExceptionType createFilteringExceptionType() {
-        return new FilteringExceptionType();
-    }
-=======
     
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Create an instance of {@link CatalogObjectsRequest }

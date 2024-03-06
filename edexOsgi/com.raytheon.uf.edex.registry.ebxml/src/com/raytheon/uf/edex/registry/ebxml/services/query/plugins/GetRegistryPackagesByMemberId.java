@@ -25,14 +25,6 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 
-<<<<<<< HEAD
-import oasis.names.tc.ebxml.regrep.wsdl.registry.services.v4.MsgRegistryException;
-import oasis.names.tc.ebxml.regrep.xsd.query.v4.QueryRequest;
-import oasis.names.tc.ebxml.regrep.xsd.query.v4.QueryResponse;
-import oasis.names.tc.ebxml.regrep.xsd.rim.v4.QueryType;
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,14 +34,11 @@ import com.raytheon.uf.common.status.UFStatus;
 import com.raytheon.uf.edex.registry.ebxml.dao.RegistryObjectDao;
 import com.raytheon.uf.edex.registry.ebxml.services.query.QueryConstants;
 
-<<<<<<< HEAD
-=======
 import oasis.names.tc.ebxml.regrep.wsdl.registry.services.v4.MsgRegistryException;
 import oasis.names.tc.ebxml.regrep.xsd.query.v4.QueryRequest;
 import oasis.names.tc.ebxml.regrep.xsd.query.v4.QueryResponse;
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.QueryType;
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 /**
  * The canonical query GetRegistryPackagesByMemberId allows clients to get the
  * RegistryPackages that a specified RegistryObject is a member of.
@@ -65,12 +54,8 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.QueryType;
  * 3/18/2013    1802       bphillip    Modified to use transaction boundaries and spring dao injection
  * 4/9/2013     1802       bphillip     Changed abstract method signature, modified return processing, and changed static variables
  * 10/8/2013    1682       bphillip    Refactored querying
-<<<<<<< HEAD
- * 
-=======
  * 5/26/2020    8165       bsteffen    Fix the statusHandler class.
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  * 
  * @author bphillip
@@ -80,11 +65,7 @@ public class GetRegistryPackagesByMemberId extends RegistryQueryPlugin {
 
     /** The logger */
     protected static final transient IUFStatusHandler statusHandler = UFStatus
-<<<<<<< HEAD
-            .getHandler(GetAuditTrailByTimeInterval.class);
-=======
             .getHandler(GetRegistryPackagesByMemberId.class);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /** Query to get the packages containing the given member */
     private static final String GET_PACKAGES_BY_MEMBER_ID_QUERY = ""

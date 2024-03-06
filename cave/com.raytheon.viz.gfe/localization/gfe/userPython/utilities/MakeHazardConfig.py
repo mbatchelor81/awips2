@@ -8,20 +8,13 @@
 # SOFTWARE HISTORY
 # Date         Ticket#    Engineer     Description
 # ------------ ---------- -----------  --------------------------
-<<<<<<< HEAD
-#  Jul 10,2012 436        randerso     Separated configuration data from the 
-=======
 #  Jul 10,2012 436        randerso     Separated configuration data from the
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #                                      MakeHazard procedure
 # Jul 29, 2015 17770      lshi         Add tcmList template for WP basin
 # Jun 23, 2017 6138       dgilling     Changes for Winter Weather VTEC
 #                                      consolidation.
-<<<<<<< HEAD
-=======
 # Jan 14, 2021 DCS22296   dkingfiel    Remove Hydrology from hazardDict
 # May 10, 2021 DCS22297  dkingfiel     Remove RB.Y, SI.Y, and SW.Y
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 # Author: randerso
 # ----------------------------------------------------------------------------
@@ -46,40 +39,14 @@ def sortHazardList(dict):
 # Lists of hazards organized by type in a dictionary
 # Set these to value you use for your site.  To minimize scrolling,
 # change the order so that the most common values your site uses are
-<<<<<<< HEAD
-# near the front of each list.  The key is the menu entry on the 
-# Make Hazard dialog, the values are the key values for Hazards.
-
-# Using OrderedDict allows you to control the order in which the 
-=======
 # near the front of each list.  The key is the menu entry on the
 # Make Hazard dialog, the values are the key values for Hazards.
 
 # Using OrderedDict allows you to control the order in which the
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # Hazard Types are displayed in the dialog
 #
 from collections import OrderedDict
 hazardDict = OrderedDict([
-<<<<<<< HEAD
-    ('Winter Weather', ["BZ.W", "IS.W", "LE.W", 
-          "WC.Y", "WC.W", "WC.A", "WS.W", "WS.A", "WW.Y"]),
-    ('Hydrology', ["FF.A", "FA.A"]),
-    ('Fire Weather', ["FW.A", "FW.W"]),
-    ('Convective Watches', ["SV.A", "TO.A"]),
-    ('Coastal Flood', ["CF.S", "LS.S", "CF.Y", "CF.W", "CF.A", 
-          "SU.Y", "SU.W", "LS.Y", "LS.W", "LS.A", "BH.S", "RP.S"]),
-    ('Non-Precipitation', ["AF.W", "AF.Y", "AQ.Y", "AS.O", "AS.Y", "DU.W", 
-          "DU.Y", "EH.W", "EH.A", "EC.W", "EC.A", "FG.Y", "FZ.W", "FZ.A", 
-          "HZ.W", "HZ.A", "ZF.Y", "FR.Y", "HT.Y", "HW.W", "HW.A", 
-          "LW.Y", "SM.Y", "WI.Y"]),
-    ('Marine', ["MA.S", "MH.W", "MH.Y", "BW.Y", "UP.Y", "MF.Y",
-          "GL.A", "GL.W", "SE.A", "SE.W", "UP.A", "UP.W", "HF.A", "HF.W", "LO.Y", "SC.Y", "SW.Y", 
-          "RB.Y", "SI.Y", "MS.Y", "SR.A", "SR.W"]),
-    ('Tropical Cyclone', ["HU.W", "HU.A", "TR.W", "TR.A"]),
-    ('Tsunami', ["TS.A", "TS.W", "TS.Y"]),
-      
-=======
     ('Winter Weather', ["BZ.W", "IS.W", "LE.W",
           "WC.Y", "WC.W", "WC.A", "WS.W", "WS.A", "WW.Y"]),
     ('Fire Weather', ["FW.A", "FW.W"]),
@@ -96,7 +63,6 @@ hazardDict = OrderedDict([
     ('Tropical Cyclone', ["HU.W", "HU.A", "TR.W", "TR.A"]),
     ('Tsunami', ["TS.A", "TS.W", "TS.Y"]),
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     # ('Local', ["TEST"]),  #example of adding local hazards
     # you can define your own groups of hazards by adding new categories
     ])
@@ -104,22 +70,6 @@ hazardDict = OrderedDict([
 # for GUM use comment out the above definition and uncomment the one below
 
 #hazardDict = OrderedDict([
-<<<<<<< HEAD
-#    ('Hydrology', ["FF.A", "FA.A"]),
-#    ('Fire Weather', ["FW.A", "FW.W"]),
-#    ('Coastal Flood', ["CF.S", "LS.S", "CF.Y", "CF.W", "CF.A", 
-#          "SU.Y", "SU.W", "LS.Y", "LS.W", "LS.A", "RP.S", "BH.S"]),
-#    ('Non-Precipitation', ["AF.W", "AF.Y", "AQ.Y", "AS.O", "AS.Y", "DU.W", 
-#          "DU.Y", "EH.W", "EH.A", "EC.W", "EC.A", "FG.Y", "FZ.W", "FZ.A", 
-#          "HZ.W", "HZ.A", "ZF.Y", "FR.Y", "HT.Y", "HW.W", "HW.A", 
-#          "LW.Y", "SM.Y", "WI.Y"]),
-#    ('Marine', ["MA.S", "MH.W", "MH.Y", "BW.Y", "UP.Y", "MF.Y",
-#          "GL.A", "GL.W", "SE.A", "SE.W", "UP.A", "UP.W", "HF.A", "HF.W", "LO.Y", "SC.Y", "SW.Y", 
-#          "RB.Y", "SI.Y", "MS.Y", "SR.A", "SR.W"]),
-#    ('Typhoon', ["TY.A", "TY.W", "TR.A", "TR.W", "HU.S"]),
-#    ('Tsunami', ["TS.A", "TS.W"]),
-#      
-=======
 #    ('Fire Weather', ["FW.A", "FW.W"]),
 #    ('Coastal Flood', ["CF.S", "LS.S", "CF.Y", "CF.W", "CF.A",
 #          "SU.Y", "SU.W", "LS.Y", "LS.W", "LS.A", "RP.S", "BH.S"]),
@@ -133,7 +83,6 @@ hazardDict = OrderedDict([
 #    ('Typhoon', ["TY.A", "TY.W", "TR.A", "TR.W", "HU.S"]),
 #    ('Tsunami', ["TS.A", "TS.W"]),
 #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #    # ('Local', ["TEST"]),  #example of adding local hazards
 #    # you can define your own groups of hazards by adding new categories
 #    ])
@@ -184,16 +133,6 @@ timeScaleEndTime = 96
 
 # Define the tropical product used to identify the particular storm
 tcmList = []  # Comment out for HLS sites
-<<<<<<< HEAD
-        
-# Uncomment line below for Atlantic basin sites 
-#tcmList = ["TCMAT1", "TCMAT2", "TCMAT3", "TCMAT4", "TCMAT5"]
-
-# Uncomment line below for EPac basin sites 
-#tcmList = ["TCMEP1", "TCMEP2", "TCMEP3", "TCMEP4", "TCMEP5"]
-
-# Uncomment line below for CPac basin sites 
-=======
 
 # Uncomment line below for Atlantic basin sites
 #tcmList = ["TCMAT1", "TCMAT2", "TCMAT3", "TCMAT4", "TCMAT5"]
@@ -202,19 +141,13 @@ tcmList = []  # Comment out for HLS sites
 #tcmList = ["TCMEP1", "TCMEP2", "TCMEP3", "TCMEP4", "TCMEP5"]
 
 # Uncomment line below for CPac basin sites
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #tcmList = ["TCMCP1", "TCMCP2", "TCMCP3", "TCMCP4", "TCMCP5"]
 
 # Uncomment line below for WPac basin sites
 #tcmList = ["TCPPQ1", "TCPPQ2", "TCPPQ3", "TCPPQ4", "TCPPQ5"]
 
-<<<<<<< HEAD
-# Dictionary mapping Hazard Types to applicable local effect areas 
-#    that can be intersected with the zone edit areas. 
-=======
 # Dictionary mapping Hazard Types to applicable local effect areas
 #    that can be intersected with the zone edit areas.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # You should not define localEffectAreas entries for Tropical Cyclone
 # or Convective Watches.
 localEffectAreas = {}
@@ -224,18 +157,6 @@ localEffectAreas = {}
 #                      "Above_1000","Above_1500","Above_2000","Above_2500","Above_3000","Above_3500"],
 #                   }
 
-<<<<<<< HEAD
-# Dictionary associating local Effect Area names with a corresponding 
-#    segment number, display name, and list of zones to be auto-selected
-# If you do not wish to auto-select zones you should supply an empty list
-#
-# The display name allows you to display a "pretty" string in the UI rather 
-# than the edit area name. If the display name is empty ("") the edit area 
-# name will be used.
-localAreaData = {} 
-
-#localAreaData = { 
-=======
 # Dictionary associating local Effect Area names with a corresponding
 #    segment number, display name, and list of zones to be auto-selected
 # If you do not wish to auto-select zones you should supply an empty list
@@ -246,7 +167,6 @@ localAreaData = {}
 localAreaData = {}
 
 #localAreaData = {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #     "Below_1000" : ( 999, "", []),
 #     "Below_1500" : (1499, "", []),
 #     "Below_2000" : (1999, "", []),
@@ -259,10 +179,6 @@ localAreaData = {}
 #     "Above_2000" : (2000, "", []),
 #     "Above_2500" : (2500, "", []),
 #     "Above_3000" : (3000, "", []),
-<<<<<<< HEAD
-#     "Above_3500" : (3500, "", []),            
-=======
 #     "Above_3500" : (3500, "", []),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #     }
 

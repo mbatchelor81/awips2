@@ -33,11 +33,7 @@ from com.raytheon.uf.common.status import PerformanceStatus
 from com.raytheon.uf.common.time.util import TimeUtil
 
 
-<<<<<<< HEAD
-PERF_LOG = PerformanceStatus.getHandler("GFE:")
-=======
 PERF_LOG = PerformanceStatus.getHandler("GFE")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 
 class Query:

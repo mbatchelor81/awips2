@@ -67,7 +67,6 @@ import com.raytheon.viz.volumebrowser.vbui.VBMenuBarItemsMgr.SpaceTimeMenu;
  * <pre>
  *
  * SOFTWARE HISTORY
-<<<<<<< HEAD
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
  * May 12, 2009 #2161      lvenable    Initial creation
@@ -84,28 +83,6 @@ import com.raytheon.viz.volumebrowser.vbui.VBMenuBarItemsMgr.SpaceTimeMenu;
  * May 25, 2018 DR20566    kshresth    Adjusted toolbar menus                                     
  * Oct 22, 2018  7483      bsteffen    Handle SPACE mode selection on resources
  *                                      instead of editors.
-=======
- *
- * Date          Ticket#  Engineer  Description
- * ------------- -------- --------- --------------------------------------------
- * May 12, 2009  2161     lvenable  Initial creation
- * Jul 21, 2012  875      rferrel   Now uses points.
- * Sep 26, 2012  1216     rferrel   Point Change listener added to update the
- *                                  Time Series Point menu.
- * Oct 02, 2012  1234     rferrel   Time series Point menu accounts for having
- *                                  no points.
- * Jun 23, 2014  3162     lvenable  Added code to have the Volume Browser
- *                                  display the min/max buttons in the title bar
- *                                  on thin client.
- * Jan 12, 2016  5055     randerso  Changed toolbar menus to split when dialog
- *                                  is resized. Other general GUI cleanup
- * Dec 07, 2017  6355     nabowle   Enable refreshing of menus.
- * May 25, 2018  20566    kshresth  Adjusted toolbar menus
- * Oct 22, 2018  7483     bsteffen  Handle SPACE mode selection on resources
- *                                  instead of editors.
- * Aug 24, 2022  8901     tjensen   Increase minimum dialog width for
- *                                  TraditionalOk theme
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -985,19 +962,7 @@ public class VolumeBrowserDlg extends CaveSWTDialog
 
         shell.pack();
 
-<<<<<<< HEAD
         shell.setMinimumSize(shell.getSize());
-=======
-        /*
-         * The GNOME "TraditionalOK" theme with GTK3 shrinks the actual display
-         * area by 2 pixels, so setting this to the minimum size needed actually
-         * ends up with the area being 2 pixels too narrow and can cut off menus
-         * from displaying. Increasing the minumum size by 2 to account for that
-         * since TraditionalOK is the default theme used in the field.
-         */
-        shell.setMinimumSize(shell.getBounds().width + 2,
-                shell.getBounds().height);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     public VolumeBrowserDialogSettings getDialogSettings() {

@@ -14,12 +14,8 @@
 # ------------    ----------    -----------    --------------------------
 # Oct 10, 2012                  mbelk          Initial creation
 # Dec 03, 2015                  mbelk          ????
-<<<<<<< HEAD
-# Sep 19, 2016    19293         randerso       Initial baseline check in 
-=======
 # Sep 19, 2016    19293         randerso       Initial baseline check in
 # Dec 17, 2021    8342          sharbison      Changes for Performance Logging.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 ########################################################################
 
@@ -43,13 +39,8 @@ class GridManipulation(SmartScript.SmartScript):
 
     ############################################################################
     #  (originally from CheckTandTd by Tom LeFebvre).
-<<<<<<< HEAD
-    
-    def GM_getWEInventory(self, WEName, dbase="Fcst", level="SFC", 
-=======
 
     def GM_getWEInventory(self, WEName, dbase="Fcst", level="SFC",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                           timeRange=TimeRange.allTimes()):
         """Return a list of time ranges with available data for a weather element from
         a specific database and level.
@@ -222,11 +213,7 @@ class GridManipulation(SmartScript.SmartScript):
  
     ############################################################################
     #  Other utility methods originally provided by Tom LeFebvre (GSD)
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def GM_makeMaxTimeRange(self):
         """Gets the maximum possible time range
         Returns:
@@ -234,15 +221,6 @@ class GridManipulation(SmartScript.SmartScript):
         """
         return TimeRange.allTimes()
 
-<<<<<<< HEAD
-
-    def GM_logToolUse(self, string):
-        """Inserts an entry into the log files. 
-        Args:
-            string string: message to be inserted into the log files
-        Returns:
-            Nothing 
-=======
     def GM_logToolUse(self, string):
         """Inserts an entry into the log files.
         Deprecated: Please use LogStream directly for non-performance logging and PerformanceStatusHandler for performance logging
@@ -250,27 +228,18 @@ class GridManipulation(SmartScript.SmartScript):
             string string: message to be inserted into the log files
         Returns:
             Nothing
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         """
 
         gtime = self._gmtime().timetuple()
         ts="%4.4d/%2.2d/%2.2d %2.2d:%2.2d:%2.2d"%(gtime[0], gtime[1], gtime[2],
                                                   gtime[3], gtime[4], gtime[5])
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         #  Insert this message into the logs
         LogStream.logEvent("%s| %s" % (ts, string))
 
 
     def GM_makeTimeRange(self, start, end):
-<<<<<<< HEAD
-        """Creates a time range. 
-=======
         """Creates a time range.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         Args:
             double start - start of time range in seconds since the epoch began
             double end - end of time range in seconds since the epoch began
@@ -575,31 +544,14 @@ class GridManipulation(SmartScript.SmartScript):
         #  Return adjusted time range - if we did adjust it
 
         if newStart is not None and newEnd is not None:
-<<<<<<< HEAD
-            
-            return TimeRange.TimeRange(AbsTime.AbsTime(newStart), 
-=======
 
             return TimeRange.TimeRange(AbsTime.AbsTime(newStart),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                        AbsTime.AbsTime(newEnd))
 
         #  Otherwise, return the original time range
         else:
             return timeRange
 
-<<<<<<< HEAD
-        
-    ############################################################################
-    #  Define a method to linearly interpolate data 
-    ############################################################################
-
-    def GM_interpolateData(self, dataDict, TRlist, interpHours=3, 
-                            vector=[], singleLevel=[]):
-        """Produces an updated Python dictionary with interpolated data where needed
-           Args:
-               dict dataDict - keyed by TimeRange, data for a specific time, can be mixed (e.g. gh, t, p) 
-=======
 
     ############################################################################
     #  Define a method to linearly interpolate data
@@ -610,7 +562,6 @@ class GridManipulation(SmartScript.SmartScript):
         """Produces an updated Python dictionary with interpolated data where needed
            Args:
                dict dataDict - keyed by TimeRange, data for a specific time, can be mixed (e.g. gh, t, p)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                list TRList - list of times ranges
                integer interpHours - ????
                list vector - ????
@@ -619,15 +570,12 @@ class GridManipulation(SmartScript.SmartScript):
                dict of interpolated data ????
         """
 
-<<<<<<< HEAD
-=======
         if vector is None:
             vector = []
         
         if singleLevel is None:
             singleLevel = []
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         #-----------------------------------------------------------------------
         #  Determine the structure (i.e. how many fields are present) of the
         #  data dictionary
@@ -646,47 +594,24 @@ class GridManipulation(SmartScript.SmartScript):
 #            print "\tindex = ", index
 
             #-------------------------------------------------------------------
-<<<<<<< HEAD
-            #  Define a list to hold the times we need to create soundings for
-
-            makeList = []
-            
-            #-------------------------------------------------------------------
-            #  Get the time range of the current and next soundings we have
-
-            current = TRlist[index]
-            next = TRlist[index + 1]
-#            print '*'*80
-#            print current, next
-=======
             #  Get the time range of the current and next soundings we have
 
             current = TRlist[index]
             nextSounding = TRlist[index + 1]
 #            print '*'*80
 #            print current, nextSounding
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             #-------------------------------------------------------------------
             #  Get the starting times of each sounding time range
 
             currentStart = current.startTime().unixTime()
-<<<<<<< HEAD
-            nextStart = next.startTime().unixTime()
-            
-=======
             nextStart = nextSounding.startTime().unixTime()
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             #-------------------------------------------------------------------
             #  See how far apart these soundings are in time (hours)
 
             diffTime = nextStart - currentStart
-<<<<<<< HEAD
-#            print diffTime, interpHours*3600 
-=======
 #            print diffTime, interpHours*3600
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             #-------------------------------------------------------------------
             #  If gap between data time steps are more than what we need
@@ -697,11 +622,7 @@ class GridManipulation(SmartScript.SmartScript):
                 #  Keep track of seconds we are between data time steps
 
                 curTime = float(interpHours*3600)
-<<<<<<< HEAD
-                
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 #---------------------------------------------------------------
                 #  Make a new time range every three hours
 #                print '\t', int(currentStart + curTime), int(nextStart)
@@ -754,15 +675,6 @@ class GridManipulation(SmartScript.SmartScript):
                                   (repr(current))
                             self.statusBarMsg(msg, "R")
                             continue                    # move on
-<<<<<<< HEAD
-                        
-                        try:
-                            nextData = dataDict[next][field]
-                        except:
-                            #  No point in continuing with this time step
-                            msg = "Could not get 'next' data -> %s" % \
-                                  (repr(next))
-=======
 
                         try:
                             nextData = dataDict[nextSounding][field]
@@ -770,7 +682,6 @@ class GridManipulation(SmartScript.SmartScript):
                             #  No point in continuing with this time step
                             msg = "Could not get 'next' data -> %s" % \
                                   (repr(nextSounding))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                             self.statusBarMsg(msg, "R")
                             continue                    # move on
 
@@ -792,15 +703,6 @@ class GridManipulation(SmartScript.SmartScript):
                         if field in singleLevel:
 
                             if not vector:
-<<<<<<< HEAD
-                                data = (curData + (nextData - curData) * weight)                                                               
-                            else:
-                                u = (curU + (nextU - curU) * weight)                        
-                                v = (curV + (nextV - curV) * weight)
-                            
-                            #---------------------------------------------------
-                            #  Get the newly interpolated grids 
-=======
                                 data = (curData + (nextData - curData) * weight)
                             else:
                                 u = (curU + (nextU - curU) * weight)
@@ -808,28 +710,10 @@ class GridManipulation(SmartScript.SmartScript):
 
                             #---------------------------------------------------
                             #  Get the newly interpolated grids
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                             if not vector:
 
                                 if type(data) is list:
-<<<<<<< HEAD
-                                    dataGrid = data[0]                           
-                                else:
-                                    dataGrid = data
-
-                            else:
-                                if type(u) is list:
-                                    uGrid = u[0]                           
-                                else:
-                                    uGrid = u
-
-                                if type(v) is list:
-                                    vGrid = v[0]                           
-                                else:
-                                    vGrid = v
-                                
-=======
                                     dataGrid = data[0] # NOSONAR used in exec below
                                 else:
                                     dataGrid = data # NOSONAR used in exec below
@@ -845,7 +729,6 @@ class GridManipulation(SmartScript.SmartScript):
                                 else:
                                     vGrid = v # NOSONAR used in exec below
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                             #---------------------------------------------------
                             #  Add current level into the new data structure
 
@@ -872,42 +755,16 @@ class GridManipulation(SmartScript.SmartScript):
                                 else:
                                     u = (curU[level] +
                                          (nextU[level] - curU[level]) * weight)
-<<<<<<< HEAD
-                                    
-                                    v = (curV[level] +
-                                         (nextV[level] - curV[level]) * weight)
-      
-                                #-----------------------------------------------
-                                #  Get the newly interpolated grids 
-=======
 
                                     v = (curV[level] +
                                          (nextV[level] - curV[level]) * weight)
 
                                 #-----------------------------------------------
                                 #  Get the newly interpolated grids
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                                 if not vector:
 
                                     if type(data) is list:
-<<<<<<< HEAD
-                                        dataGrid = data[0]                           
-                                    else:
-                                        dataGrid = data
-
-                                else:
-                                    if type(u) is list:
-                                        uGrid = u[0]                           
-                                    else:
-                                        uGrid = u
-
-                                    if type(v) is list:
-                                        vGrid = v[0]                           
-                                    else:
-                                        vGrid = v
-                                    
-=======
                                         dataGrid = data[0] # NOSONAR used in exec below
                                     else:
                                         dataGrid = data # NOSONAR used in exec below
@@ -923,7 +780,6 @@ class GridManipulation(SmartScript.SmartScript):
                                     else:
                                         vGrid = v # NOSONAR used in exec below
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                 #-----------------------------------------------
                                 #  Add current level into the new sounding
 

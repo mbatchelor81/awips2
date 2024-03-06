@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -38,28 +26,12 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 
-<<<<<<< HEAD
-import oasis.names.tc.ebxml.regrep.wsdl.registry.services.v4.MsgRegistryException;
-import oasis.names.tc.ebxml.regrep.xsd.query.v4.QueryRequest;
-import oasis.names.tc.ebxml.regrep.xsd.query.v4.QueryResponse;
-import oasis.names.tc.ebxml.regrep.xsd.rim.v4.AssociationType;
-import oasis.names.tc.ebxml.regrep.xsd.rim.v4.QueryType;
-import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryObjectType;
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.raytheon.uf.common.registry.schemas.ebxml.util.EbxmlNamespaces;
 import com.raytheon.uf.common.util.CollectionUtil;
 import com.raytheon.uf.edex.registry.ebxml.dao.RegistryObjectDao;
-<<<<<<< HEAD
-import com.raytheon.uf.edex.registry.ebxml.exception.EbxmlRegistryException;
-import com.raytheon.uf.edex.registry.ebxml.services.query.QueryConstants;
-import com.raytheon.uf.edex.registry.ebxml.util.EbxmlExceptionUtil;
-
-=======
 import com.raytheon.uf.edex.registry.ebxml.services.query.QueryConstants;
 import com.raytheon.uf.edex.registry.ebxml.util.EbxmlExceptionUtil;
 
@@ -70,7 +42,6 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.AssociationType;
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.QueryType;
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryObjectType;
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 /**
  * The canonical query FindAssociatedObjects allows clients to find
  * RegistryObjects that are associated with the specified RegistryObject and
@@ -96,11 +67,7 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryObjectType;
  * rim:ClassificationNode/@path matches specified value
  * <p>
  * <b><i>targetObjectId</i></b> --
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Matches source RegistryObjects of Associations where the target
  * RegistryObject's id matches
  * rim:/RegistryObject[@xsi:type="rim:AssociationType"]/@targetObject.<br>
@@ -108,17 +75,6 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryObjectType;
  * Allows use of ? wildcard character to match a single character.<br>
  * <p>
  * <b><i>targetObjectType</i></b> --
-<<<<<<< HEAD
- * 
- * Matches source RegistryObjects of Associations whose targetObject attribute
- * references a RegistryObject whose objectType attribute matches the id of the
- * ClassificationNode where rim:ClassificationNode/@path matches specified value
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * 
-=======
  *
  * Matches source RegistryObjects of Associations whose targetObject attribute
  * references a RegistryObject whose objectType attribute matches the id of the
@@ -128,7 +84,6 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryObjectType;
  *
  * SOFTWARE HISTORY
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
  * 2/13/2012    #184       bphillip     Initial creation
@@ -136,15 +91,6 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryObjectType;
  * 4/9/2013     1802       bphillip     Changed abstract method signature, modified return processing, and changed static variables
  * Apr 23, 2013 1910       djohnson     Don't allow NPE on registry object list, remove non ANSI Javadoc.
  * 5/21/2013    2022       bphillip     Set return type on call to findAssociations
-<<<<<<< HEAD
- * 10/8/2013    1682       bphillip    Refactored querying
- * 10/23/2013   1682       bphillip     Returns empty query result if no ids were found
- * 
- * </pre>
- * 
- * @author bphillip
- * @version 1.0
-=======
  * 10/8/2013    1682       bphillip     Refactored querying
  * 10/23/2013   1682       bphillip     Returns empty query result if no ids were found
  * 12/09/2021   7849       mapeters     Remove unreachable catch block
@@ -152,7 +98,6 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryObjectType;
  * </pre>
  *
  * @author bphillip
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  */
 public class FindAssociatedObjects extends RegistryQueryPlugin {
 
@@ -167,13 +112,8 @@ public class FindAssociatedObjects extends RegistryQueryPlugin {
     @WebResult(name = "QueryResponse", targetNamespace = EbxmlNamespaces.QUERY_URI, partName = "partQueryResponse")
     @Transactional(propagation = Propagation.MANDATORY, readOnly = true)
     public QueryResponse executeQuery(
-<<<<<<< HEAD
-            @WebParam(name = "QueryRequest", targetNamespace = EbxmlNamespaces.QUERY_URI, partName = "partQueryRequest") QueryRequest queryRequest)
-            throws MsgRegistryException {
-=======
             @WebParam(name = "QueryRequest", targetNamespace = EbxmlNamespaces.QUERY_URI, partName = "partQueryRequest")
             QueryRequest queryRequest) throws MsgRegistryException {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         QueryType queryType = queryRequest.getQuery();
         String sourceObjectId = queryType
                 .getSlotValue(QueryConstants.SOURCE_OBJECT_ID);
@@ -185,26 +125,6 @@ public class FindAssociatedObjects extends RegistryQueryPlugin {
                 .getSlotValue(QueryConstants.TARGET_OBJECT_TYPE);
 
         if (targetObjectId == null && sourceObjectId == null) {
-<<<<<<< HEAD
-            throw EbxmlExceptionUtil
-                    .createQueryExceptionType(
-                            "Either sourceObjectId or targetObjectId MUST be specified.  Neither were present in submitted query",
-                            "");
-        }
-
-        if (sourceObjectId != null && targetObjectId != null) {
-            throw EbxmlExceptionUtil
-                    .createQueryExceptionType(
-                            "Both sourceObjectId and targetObjectId MUST NOT be specified.",
-                            "");
-        }
-
-        if (sourceObjectType != null && targetObjectType != null) {
-            throw EbxmlExceptionUtil
-                    .createQueryExceptionType(
-                            "Both sourceObjectType and targetObjectType MUST NOT be specified.",
-                            "");
-=======
             throw EbxmlExceptionUtil.createQueryExceptionType(
                     "Either sourceObjectId or targetObjectId MUST be specified.  Neither were present in submitted query",
                     "");
@@ -220,7 +140,6 @@ public class FindAssociatedObjects extends RegistryQueryPlugin {
             throw EbxmlExceptionUtil.createQueryExceptionType(
                     "Both sourceObjectType and targetObjectType MUST NOT be specified.",
                     "");
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         /*
@@ -230,13 +149,8 @@ public class FindAssociatedObjects extends RegistryQueryPlugin {
         QueryResponse findAssociationsResponse = findAssociations
                 .executeQuery(queryRequest);
 
-<<<<<<< HEAD
-        List<String> ids = new ArrayList<String>(findAssociationsResponse
-                .getRegistryObjects().size());
-=======
         List<String> ids = new ArrayList<>(
                 findAssociationsResponse.getRegistryObjects().size());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         /*
          * Then get the referenced objects based on the given parameters
          */
@@ -250,22 +164,10 @@ public class FindAssociatedObjects extends RegistryQueryPlugin {
             }
         }
 
-<<<<<<< HEAD
-        try {
-            if (CollectionUtil.isNullOrEmpty(ids)) {
-                return new QueryResponse();
-            }
-            return createResponse(registryObjectDao.getById(ids));
-        } catch (EbxmlRegistryException e) {
-            throw EbxmlExceptionUtil.createMsgRegistryException(
-                    "Error executing query", e);
-        }
-=======
         if (CollectionUtil.isNullOrEmpty(ids)) {
             return new QueryResponse();
         }
         return createResponse(registryObjectDao.getById(ids));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     public void setRegistryObjectDao(RegistryObjectDao registryObjectDao) {

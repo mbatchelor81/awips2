@@ -37,11 +37,8 @@ import org.apache.commons.lang3.Validate;
  *    ------------ ----------  ----------- --------------------------
  *    Nov 21, 2007             chammack    Initial Creation.
  *    Aug 26, 2008 #1502       bclement    Added JAXB annotations
-<<<<<<< HEAD
-=======
  *    Mar 03, 2022 ASM #22724  dhaines     Added distanceThresholdLOS to allow separate 
  *                                         distanceThreshold for line of storms
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -72,12 +69,9 @@ public class PathcastConfiguration extends PointSourceConfiguration {
     @XmlElement
     private String areaNotationTranslationFile;
 
-<<<<<<< HEAD
-=======
     @XmlElement
     private double distanceThresholdLOS = 5;
     
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @XmlElementWrapper(name = "groupBy")
     @XmlElement(name = "group")
     private String[] groupBy;
@@ -179,8 +173,6 @@ public class PathcastConfiguration extends PointSourceConfiguration {
         this.delta = delta;
     }
 
-<<<<<<< HEAD
-=======
     public double getDistanceThresholdLOS() {
         return distanceThresholdLOS;
     }
@@ -189,7 +181,6 @@ public class PathcastConfiguration extends PointSourceConfiguration {
         this.distanceThresholdLOS = distanceThresholdLOS;
     }
     
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public void validate() {
         Validate.isTrue(
                 getMaxResults() > 0,
@@ -212,7 +203,4 @@ public class PathcastConfiguration extends PointSourceConfiguration {
     }
 
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

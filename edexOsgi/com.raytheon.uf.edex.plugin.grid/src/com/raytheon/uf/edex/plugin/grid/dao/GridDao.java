@@ -56,10 +56,6 @@ import com.raytheon.uf.common.gridcoverage.GridCoverage;
 import com.raytheon.uf.common.gridcoverage.lookup.GridCoverageLookup;
 import com.raytheon.uf.common.parameter.Parameter;
 import com.raytheon.uf.common.parameter.lookup.ParameterLookup;
-<<<<<<< HEAD
-import com.raytheon.uf.common.status.UFStatus.Priority;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.util.GridUtil;
 import com.raytheon.uf.edex.core.EDEXUtil;
 import com.raytheon.uf.edex.core.EdexException;
@@ -68,11 +64,7 @@ import com.raytheon.uf.edex.database.DataAccessLayerException;
 import com.raytheon.uf.edex.database.plugin.PluginDao;
 import com.raytheon.uf.edex.plugin.grid.PartialGrid;
 
-<<<<<<< HEAD
-import tec.uom.se.AbstractConverter;
-=======
 import tech.units.indriya.function.AbstractConverter;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Data access object for accessing Grid records from the database
@@ -94,10 +86,7 @@ import tech.units.indriya.function.AbstractConverter;
  *                                    the existing grid info purge job.
  * Nov 11, 2020  8278     rjpeter     Updated orphaned grid_info and gridcoverage logic
  *                                    and logging.
-<<<<<<< HEAD
-=======
  * May 03, 2021  7849     mapeters    Switch from UFStatus to slf4j logging
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Sep 23, 2021  8608     mapeters    Add metadata id handling
  * Jun 22, 2022  8865     mapeters    Update populateDataStore to return boolean
  * </pre>
@@ -288,15 +277,8 @@ public class GridDao extends PluginDao {
             record.setInfo(
                     GridInfoCache.getInstance().getGridInfo(record.getInfo()));
         } catch (DataAccessLayerException e) {
-<<<<<<< HEAD
-            logger.handle(Priority.PROBLEM,
-                    "Cannot load GridInfoRecord from DB for: "
-                            + record.getDataURI(),
-                    e);
-=======
             logger.warn("Cannot load GridInfoRecord from DB for: "
                     + record.getDataURI(), e);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return false;
         }
         /* Clear the dataURI just in case something changed. */

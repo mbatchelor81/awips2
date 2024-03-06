@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -44,13 +32,10 @@ import org.geotools.geometry.jts.JTS;
 import org.geotools.referencing.CRS;
 import org.geotools.referencing.GeodeticCalculator;
 import org.geotools.referencing.crs.DefaultGeographicCRS;
-<<<<<<< HEAD
-=======
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.opengis.referencing.operation.MathTransform;
@@ -60,13 +45,10 @@ import com.raytheon.uf.common.geospatial.MapUtil;
 import com.raytheon.uf.viz.core.IDisplayPane;
 import com.raytheon.uf.viz.core.IExtent;
 import com.raytheon.uf.viz.core.IGraphicsTarget;
-<<<<<<< HEAD
-=======
 import com.raytheon.uf.viz.core.IInsetMapDisplayPaneContainer;
 import com.raytheon.uf.viz.core.IPane;
 import com.raytheon.uf.viz.core.IPane.CanvasType;
 import com.raytheon.uf.viz.core.drawables.IDescriptor;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.drawables.IRenderableDisplay;
 import com.raytheon.uf.viz.core.drawables.PaintProperties;
 import com.raytheon.uf.viz.core.drawables.ResourcePair;
@@ -79,26 +61,13 @@ import com.raytheon.uf.viz.core.rsc.AbstractVizResource.ResourceStatus;
 import com.raytheon.uf.viz.core.rsc.ResourceList.AddListener;
 import com.raytheon.uf.viz.core.rsc.ResourceList.RemoveListener;
 import com.raytheon.uf.viz.xy.map.rsc.IInsetMapResource;
-<<<<<<< HEAD
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.Geometry;
-import org.locationtech.jts.geom.GeometryFactory;
-import org.locationtech.jts.geom.Point;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Inset renderable display, descriptor resources include map resources only,
  * parent display is used to find IInsetMapResources and paint them.
-<<<<<<< HEAD
- * 
- * <pre>
- * 
-=======
  *
  * <pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * SOFTWARE HISTORY
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
@@ -107,18 +76,12 @@ import org.locationtech.jts.geom.Point;
  * Apr 18, 2018 6719       njensen     Extended InsetRenderableDisplayListener
  *                                     to ensure inset map refreshes correctly
  *                                     Updated calculateProjection() width and height
-<<<<<<< HEAD
- * 
- * </pre>
- * 
-=======
  * Apr 25, 2022 8791       mapeters    Handle IInsetMapDisplayPaneContainer file move
  * Nov 17, 2022 8978       mapeters    Sync scaleAllToClientArea and only scale
  *                                     other insets with the same main canvas type
  *
  * </pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author mschenke
  */
 @XmlAccessorType(XmlAccessType.NONE)
@@ -145,14 +108,11 @@ public class InsetMapRenderableDisplay extends PlainMapRenderableDisplay
     private static GeometryFactory factory = new GeometryFactory();
 
     /**
-<<<<<<< HEAD
-=======
      * Static lock for when we re-scale all inset displays.
      */
     private static final Object SCALE_LOCK = new Object();
 
     /**
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * multiply by .8 to give some room for stereo so it doesn't look terrible
      */
     private static final double APPROX_HALF_EARTH_CIR_m = MapUtil.AWIPS_EARTH_RADIUS
@@ -225,11 +185,7 @@ public class InsetMapRenderableDisplay extends PlainMapRenderableDisplay
     /**
      * Returns whether all of the inset map resources are initialized. Must be
      * externally synchronized.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return
      */
     private boolean allInitialized() {
@@ -252,11 +208,7 @@ public class InsetMapRenderableDisplay extends PlainMapRenderableDisplay
      */
     private void addResource(ResourcePair rp) {
         AbstractVizResource<?, ?> rsc = rp.getResource();
-<<<<<<< HEAD
-        if (rsc != null && rsc instanceof IInsetMapResource) {
-=======
         if (rsc instanceof IInsetMapResource) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             synchronized (resources) {
                 resources.add((IInsetMapResource) rsc);
             }
@@ -264,14 +216,11 @@ public class InsetMapRenderableDisplay extends PlainMapRenderableDisplay
         }
     }
 
-<<<<<<< HEAD
-=======
     /*
      * Suppressing since inset map resources both implement IInsetMapResource
      * and extend AbstractVizResource
      */
     @SuppressWarnings("unlikely-arg-type")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void notifyRemove(ResourcePair rp) throws VizException {
         synchronized (resources) {
@@ -282,20 +231,12 @@ public class InsetMapRenderableDisplay extends PlainMapRenderableDisplay
 
     /**
      * Calculate the projection of the map. Must be externally synchronized.
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param paintProps
      * @throws VizException
      */
     private void calculateProjection(PaintProperties paintProps)
             throws VizException {
-<<<<<<< HEAD
-        Geometry geom = null;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         Geometry[] geometries = new Geometry[resources.size()];
         int i = 0;
         for (IInsetMapResource rsc : resources) {
@@ -309,11 +250,7 @@ public class InsetMapRenderableDisplay extends PlainMapRenderableDisplay
             }
         }
 
-<<<<<<< HEAD
-        geom = factory.createGeometryCollection(geometries);
-=======
         Geometry geom = factory.createGeometryCollection(geometries);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         Coordinate[] coords = geom.getCoordinates();
         double canvasRatio = (double) paintProps.getCanvasBounds().height
                 / (double) paintProps.getCanvasBounds().width;
@@ -374,10 +311,7 @@ public class InsetMapRenderableDisplay extends PlainMapRenderableDisplay
             }
             if (width > height) {
                 height = width * canvasRatio;
-<<<<<<< HEAD
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             } else {
                 width = height / canvasRatio;
             }
@@ -389,15 +323,7 @@ public class InsetMapRenderableDisplay extends PlainMapRenderableDisplay
                     width, height);
         }
         if (geom2D != null) {
-<<<<<<< HEAD
-            IMapDescriptor md = (IMapDescriptor) descriptor;
-            if (!md.getGridGeometry().equals(geom2D)) {
-                md.setGridGeometry(geom2D);
-                scaleAllToClientArea();
-            }
-=======
             scaleAllToClientArea(geom2D);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 
@@ -407,17 +333,6 @@ public class InsetMapRenderableDisplay extends PlainMapRenderableDisplay
     }
 
     /**
-<<<<<<< HEAD
-     * Scales all inset map panes on the container to their client area
-     */
-    public void scaleAllToClientArea() {
-        // TODO: Huge hack to keep inset maps in sync, projection calculation
-        // should be moved to XyPaneManager eventually and this class will be
-        // responsible for calling paint on IInsetMapResources
-        IDisplayPane[] insetPanes = getInsetContainer().getInsetPanes();
-        for (IDisplayPane pane : insetPanes) {
-            pane.getRenderableDisplay().scaleToClientArea(pane.getBounds());
-=======
      * Updates all compatible inset canvases in the container to use the given
      * grid geometry and be re-scaled to their client area.
      *
@@ -451,17 +366,12 @@ public class InsetMapRenderableDisplay extends PlainMapRenderableDisplay
                             .scaleToClientArea(insetCanvas.getBounds());
                 }
             }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 
     /**
      * Get the display pane container as an IInsetMapDisplayPaneContainer
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return
      */
     public IInsetMapDisplayPaneContainer getInsetContainer() {

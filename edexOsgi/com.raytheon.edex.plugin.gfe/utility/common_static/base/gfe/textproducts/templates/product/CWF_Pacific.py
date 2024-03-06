@@ -1,31 +1,19 @@
 ##
 # This software was developed and / or modified by Raytheon Company,
 # pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
-# 
-=======
 #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # U.S. EXPORT CONTROLLED TECHNICAL DATA
 # This software product contains export-restricted data whose
 # export/transfer/disclosure is restricted by U.S. law. Dissemination
 # to non-U.S. persons whether in the United States or abroad requires
 # an export license or other authorization.
-<<<<<<< HEAD
-# 
-=======
 #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # Contractor Name:        Raytheon Company
 # Contractor Address:     6825 Pine Street, Suite 340
 #                         Mail Stop B8
 #                         Omaha, NE 68106
 #                         402.291.0100
-<<<<<<< HEAD
-# 
-=======
 #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # See the AWIPS II Master Rights File ("Master Rights File.pdf") for
 # further licensing information.
 ##
@@ -43,11 +31,7 @@
 # any purpose.
 #-------------------------------------------------------------------------
 # Standard and Local file names and Locations:
-<<<<<<< HEAD
-# CWF_Pacific.py, CWF_Pacific_<site>_<MultiPil>_Definition, 
-=======
 # CWF_Pacific.py, CWF_Pacific_<site>_<MultiPil>_Definition,
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #   CWF_Pacific_<site>_Overrides
 #-------------------------------------------------------------------------
 # Customization Points in Local File:
@@ -75,32 +59,14 @@
 #                      "COZ035_pt".  If no such edit area exists, the system will simply
 #                      use the original edit area.
 #                      Note that Hazards will always be generated for the entire edit area.
-<<<<<<< HEAD
-#  mapNameForCombinations Name of the map background that is used for 
-#                         creating/editing the combinations file.  This must 
-#                         be defined or the GFE zone combiner
-#  database               Source database for product. Can be "Official", 
-=======
 #  mapNameForCombinations Name of the map background that is used for
 #                         creating/editing the combinations file.  This must
 #                         be defined or the GFE zone combiner
 #  database               Source database for product. Can be "Official",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #                         "Fcst" or "ISC"
 #  outputFile             Defines the output location of the finished product
 #                         when saved from the Formatter Launcher.
 #  debug                  If on, debug_print statements will appear.
-<<<<<<< HEAD
-#  textdbPil              Defines the awips product identifier 
-#                         (e.g., DENCCFDEN) that is used to store the product 
-#                         in the AWIPS text database.
-#                         This value is also used for the default GUI entry for 
-#                         storage.
-#  awipsWANPil            Defines the awips product identifier 
-#                         (e.g., KBOUCCFDEN) that is used to transmit the 
-#                         product to the AWIPS WAN. 
-#                         This value is also used for the default GUI 
-=======
 #  textdbPil              Defines the awips product identifier
 #                         (e.g., DENCCFDEN) that is used to store the product
 #                         in the AWIPS text database.
@@ -110,26 +76,17 @@
 #                         (e.g., KBOUCCFDEN) that is used to transmit the
 #                         product to the AWIPS WAN.
 #                         This value is also used for the default GUI
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #                         entry for storage.
 #  hazardSamplingThreshold  Defines the percentage coverage or number of
 #                    grid points in a zone that must contain the hazard
 #                    in order for it to be considered. Tuple (percent, points)
 #
 #  periodCombining     If 1, an attempt will be made to combine components
-<<<<<<< HEAD
-#                      or time periods into one.  Otherwise no period 
-#                      combining will will be done.
-#  includeEveningPeriod   Include a 6 hour Evening period on the 3rd day
-#  useAbbreviations
-#      If 1, use marine abbreviations e.g. TSTM instead of THUNDERSTORM, 
-=======
 #                      or time periods into one.  Otherwise no period
 #                      combining will will be done.
 #  includeEveningPeriod   Include a 6 hour Evening period on the 3rd day
 #  useAbbreviations
 #      If 1, use marine abbreviations e.g. TSTM instead of THUNDERSTORM,
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #      NW instead of NORTHWEST
 #      (See marine_abbreviateText in the TextRules module)
 #
@@ -142,22 +99,14 @@
 #       riverBarZones        - list to designate any river bars in the forecast
 #
 #
-<<<<<<< HEAD
-#  areaDictionary    Modify the AreaDictionary utility with UGC 
-=======
 #  areaDictionary    Modify the AreaDictionary utility with UGC
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #                    information about zones
 #
 #  useHolidays              Set to 1 to use holidays in the time period labels
 #
 #  Trouble-shooting items
 #    passLimit -- Limit on passes allowed through Narrative Tree
-<<<<<<< HEAD
-#    trace     -- Set to 1 to turn on trace through Narrative Tree   
-=======
 #    trace     -- Set to 1 to turn on trace through Narrative Tree
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 # OVERRIDES
 #
@@ -256,11 +205,7 @@ import TimeRange
 class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
     VariableList = [
         #(("Include Tropical?", "includeTropical") , "No", "radio", ["Yes","No"]),
-<<<<<<< HEAD
-        ]  
-=======
         ]
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     Definition =  {
         "type": "smart",
         "displayName": "None",
@@ -269,11 +214,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         "outputFile": "{prddir}/TEXT/CWF_<MultiPil>.txt",
         "debug": 0,
         # Name of map background for creating Combinations
-<<<<<<< HEAD
-        "mapNameForCombinations": "Marine_Zones_<site>", 
-=======
         "mapNameForCombinations": "Marine_Zones_<site>",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         "lineLength": 66,
         ## Edit Areas: Create Combinations file with edit area combinations.
@@ -281,21 +222,13 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         "defaultEditAreas" : "Combinations_CWF_<site>_<MultiPil>",
         "editAreaSuffix": None,
         # product identifiers
-<<<<<<< HEAD
-        "productName": "Coastal Waters Forecast", # product name 
-=======
         "productName": "Coastal Waters Forecast", # product name
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         "fullStationID": "<fullStationID>",    # full station identifier (4letter)
         "wmoID": "<wmoID>",          # WMO ID
         "pil": "<pil>",            # Product pil
         "areaName": "<state>",             # Name of state, such as "Georgia" -- optional
         "wfoCityState": "<wfoCityState>",   # Location of WFO - city state
-<<<<<<< HEAD
-                
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         "textdbPil": "<textdbPil>",       # Product ID for storing to AWIPS text database.
         "previousProductID": "<textdbPil>", # Product ID for river bar forecast.
         "awipsWANPil": "<awipsWANPil>",   # Product ID for transmitting to AWIPS WAN.
@@ -312,15 +245,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         "useAbbreviations": 1,
 
         # Weather-related flags
-<<<<<<< HEAD
-        "hoursSChcEnds": 2,        
-        
-        # riverBarZones[] list to designate any river bars in the forecast 
-        "riverBarZones" : [],
-
-        # Area Dictionary -- Descriptive information about zones
-        "areaDictionary": "AreaDictionary", 
-=======
         "hoursSChcEnds": 2,
 
         # riverBarZones[] list to designate any river bars in the forecast
@@ -328,7 +252,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
 
         # Area Dictionary -- Descriptive information about zones
         "areaDictionary": "AreaDictionary",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         "useHolidays": 0,            # Set to 1 to use holidays in the time period labels
         # Language
         "language": "english",
@@ -350,17 +273,10 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
     # MUST BE OVERRIDDEN IN LOCAL FILE
     def _Text1(self):
         return ""
-<<<<<<< HEAD
-    
-    def _Text2(self, argDict):
-        synopsis = ""
-        
-=======
 
     def _Text2(self, argDict):
         synopsis = ""
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         #  Try to get Synopsis from previous CWF
         #productID = "BOSCWFBOS"
         #synopsis = self.getPreviousProduct(productID, "SYNOPSIS")
@@ -373,11 +289,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         #expTuple = time.strptime('%s' % (self._expireTime),
         #                         '%b %d %y %H:%M:%S GMT')
         expTuple = self._expireTime.utctimetuple()
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         #  Format expiration time for inclusion in synopsis header
         expTime = time.strftime('%d%H%M', expTuple)
         siteID = self.getSiteID(argDict)
@@ -392,19 +304,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         return "%s-%s-\n" % (ugc, expTime) + self._timeLabel + "\n\n" + \
                heading + "\n" + synopsis + "\n$$\n\n"
 
-<<<<<<< HEAD
-    
-    ########################################################################       
-    def _getBarForecast(self, editArea, areaLabel, argDict):
-        # IF current area contains a river bar zone
-        # return the riverBarForecast 
-=======
 
     ########################################################################
     def _getBarForecast(self, editArea, areaLabel, argDict):
         # IF current area contains a river bar zone
         # return the riverBarForecast
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         for barZone in self._riverBarZones:
             if self.currentAreaContains(argDict["tree"], [barZone]):
                 barName = self._getAreaLabel(barZone)
@@ -420,11 +324,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             if "ugcName" in entry:
                 return entry["ugcName"]
         return ""
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     ########################################################################
 
     def pop_wx_lower_threshold(self, tree, node):
@@ -437,11 +337,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         return {
             "Wind": self.marineRounding,
             }
-<<<<<<< HEAD
-                
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def element_outUnits_dict(self, tree, node):
         dict = TextRules.TextRules.element_outUnits_dict(self, tree, node)
         dict["Visibility"] = "NM"
@@ -454,11 +350,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             return 5
         else:
             return 10
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 
     # SampleAnalysis overrides
@@ -501,21 +393,13 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         # e.g.
         # return ["TampaBayWaters"]
         return ["area3"]
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def inlandWatersWave_element(self, tree, node):
         # Weather element first and second choice to use for reporting inland waters waves
         # "Waves 1 to 2 feet."
         # If there is incomplete or no data for the first element, the second will be used.
         return ("WindWaveHgt", "WaveHeight")
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def seasWaveHeight_element(self, tree, node):
         # Weather element to use for reporting seas
         # "Combined seas 10 to 15 feet."
@@ -573,11 +457,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         dict["up to"] =  "up to"
         dict["around"] =  ""
         return dict
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def phrase_connector_dict(self, tree, node):
         # Dictionary of connecting phrases for various
         # weather element phrases
@@ -592,22 +472,14 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                                 "WaveHeight": ", building to ",
                                 "WindWaveHgt": ", building to ",
                          }
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         dict["easing to"] =  {
                                 "Wind": ", easing to ",
                                 "Swell": ", subsiding to ",
                                 "Swell2": ", subsiding to ",
                                 "WaveHeight": ", subsiding to ",
                                 "WindWaveHgt": ", subsiding to ",
-<<<<<<< HEAD
-                         }                 
-=======
                          }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         dict["backing"] =  {
                                 "Wind": ", backing to ",
                                 "Swell": ", becoming ",
@@ -615,11 +487,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                                 "WaveHeight": ", becoming ",
                                 "WindWaveHgt": ", becoming ",
                          }
-<<<<<<< HEAD
-                
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         dict["veering"] =  {
                                 "Wind": ", veering to ",
                                 "Swell": ", becoming ",
@@ -649,27 +517,13 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                          "Vector": ", becoming ",
                          "Scalar": ", becoming ",
                          "otherwise": ", becoming ",
-<<<<<<< HEAD
-                         }  
-=======
                          }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return dict
 
     def null_nlValue_dict(self, tree, node):
         # Threshold below which values are considered "null" and  not reported.
         # Units depend on the element and product
         dict = TextRules.TextRules.null_nlValue_dict(self, tree, node)
-<<<<<<< HEAD
-        dict["WaveHeight"] =  3  
-        dict["WindWaveHgt"] =  3 
-        dict["Wind"] =  5  
-        dict["WindGust"] = 33 
-        dict["Swell"] =  5  
-        dict["Visibility"] = 3 # in nautical miles. Report if less than this value.        
-        return dict
-       
-=======
         dict["WaveHeight"] =  3
         dict["WindWaveHgt"] =  3
         dict["Wind"] =  5
@@ -678,23 +532,15 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         dict["Visibility"] = 3 # in nautical miles. Report if less than this value.
         return dict
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def first_null_phrase_dict(self, tree, node):
         # Phrase to use if values THROUGHOUT the period or
         # in the first period are Null (i.e. below threshold OR NoWx)
         # E.g.  LIGHT WINDS.    or    LIGHT WINDS BECOMING N 5 MPH.
         dict = TextRules.TextRules.first_null_phrase_dict(self, tree, node)
-<<<<<<< HEAD
-        dict["WaveHeight"] =  "waves 2 feet or less"  
-        dict["WindWaveHgt"] =  "wind waves 2 feet or less"  
-        dict["Wind"] =  "wind variable less than 5 knots"  
-        dict["Swell"] =  ""  
-=======
         dict["WaveHeight"] =  "waves 2 feet or less"
         dict["WindWaveHgt"] =  "wind waves 2 feet or less"
         dict["Wind"] =  "wind variable less than 5 knots"
         dict["Swell"] =  ""
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return dict
 
     def null_phrase_dict(self, tree, node):
@@ -702,19 +548,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         # Can be an empty string
         #  E.g.  "NORTH WINDS 20 to 25 KNOTS BECOMING LIGHT"
         dict = TextRules.TextRules.null_phrase_dict(self, tree, node)
-<<<<<<< HEAD
-        dict["WaveHeight"] =  "2 feet or less"  
-        dict["WindWaveHgt"] =  "2 feet or less"  
-        dict["Wind"] =  "variable less than 5 knots"  
-        dict["Wx"] =  ""  
-        dict["Swell"] =  "light"  
-=======
         dict["WaveHeight"] =  "2 feet or less"
         dict["WindWaveHgt"] =  "2 feet or less"
         dict["Wind"] =  "variable less than 5 knots"
         dict["Wx"] =  ""
         dict["Swell"] =  "light"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return dict
 
     def maximum_range_nlValue_dict(self, tree, node):
@@ -731,19 +569,11 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                             }
         else:
             dict["Wind"] = 10
-<<<<<<< HEAD
-        dict["Swell"] = 5  
-        dict["Swell2"] = 5  
-        dict["WaveHeight"] = 2
-        dict["WindWaveHgt"] = 2
-        return dict 
-=======
         dict["Swell"] = 5
         dict["Swell2"] = 5
         dict["WaveHeight"] = 2
         dict["WindWaveHgt"] = 2
         return dict
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def combine_singleValues_flag_dict(self, tree, node):
         # Dictionary of weather elements to combine using single values
@@ -760,11 +590,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         dict["Swell"] = 1
         dict["Swell2"] = 1
         dict["WindWaveHgt"] = 1
-<<<<<<< HEAD
-        dict["WaveHeight"] = 1        
-=======
         dict["WaveHeight"] = 1
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return dict
 
     ########################################################################
@@ -804,15 +630,9 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         return newAnalysisList, phraseList
 
     def CWFPeriod(self):
-<<<<<<< HEAD
-        analysisList = [      
-                      # Use the following if you want moderated
-                      # single values (e.g. N WIND 20 KT).   
-=======
         analysisList = [
                       # Use the following if you want moderated
                       # single values (e.g. N WIND 20 KT).
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                       # Set the moderating percentage in the "moderated_dict"
                       # dictionary module.
                       # Set the combine_singleValues_flag_dict in the Local file.
@@ -852,22 +672,13 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                            self.visibility_phrase,
                            ]
         if self._includeTropical:
-<<<<<<< HEAD
-            analysisList, phraseList = self.addTropical(analysisList, phraseList)        
-=======
             analysisList, phraseList = self.addTropical(analysisList, phraseList)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return {
             "type": "component",
             "methodList": [
                           self.consolidateSubPhrases,
-<<<<<<< HEAD
-                          self.assemblePhrases,   
-                          self.wordWrap,          
-=======
                           self.assemblePhrases,
                           self.wordWrap,
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                           ],
             "analysisList": analysisList,
             "phraseList": phraseList,
@@ -878,15 +689,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             "type": "component",
             "methodList": [
                           self.consolidateSubPhrases,
-<<<<<<< HEAD
-                          self.assemblePhrases,   
-                          self.wordWrap,          
-                          ],
-            
-            "analysisList": [            
-                      # Use the following if you want moderated
-                      # single values (e.g. N WIND 20 KT).   
-=======
                           self.assemblePhrases,
                           self.wordWrap,
                           ],
@@ -894,7 +696,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             "analysisList": [
                       # Use the following if you want moderated
                       # single values (e.g. N WIND 20 KT).
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                       # Set the moderating percentage in the "moderated_dict"
                       # dictionary module.
                           ("Wind", self.vectorModeratedMax, [6]),
@@ -937,17 +738,10 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                  "methodList": [
                           self.consolidateSubPhrases,
                           self.assemblePhrases,
-<<<<<<< HEAD
-                          self.wordWrap,          
-                          ],
-                 "analysisList": [
-                          ("Wind", self.vectorModeratedMax, [6]),                         
-=======
                           self.wordWrap,
                           ],
                  "analysisList": [
                           ("Wind", self.vectorModeratedMax, [6]),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                           ("WindGust", self.moderatedMax, [12]),
                           ("WaveHeight", self.moderatedMax, [12]),
                           ("WindWaveHgt", self.moderatedMax, [12]),
@@ -958,11 +752,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                           ("Swell", self.vectorModeratedMax, [12]),
                           ("Swell2", self.vectorModeratedMax, [12]),
                       ],
-<<<<<<< HEAD
-                 "phraseList":[ 
-=======
                  "phraseList":[
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                # WIND
                                self.marine_wind_phrase,
                                # WAVEHEIGHT
@@ -1008,11 +798,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
 ##                 ("CWFPeriodMid", 12), ("CWFPeriodMid", 12), ("CWFExtended", 24),
 ##                 ("CWFExtended", 24), ("CWFExtended", 24)
 ##                 ]
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ##         return [
 ##             # WRS modified the "label" and issuance starthour and expiration hours
 ##             # early phrases
@@ -1020,29 +806,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
 ##             #
 ##             # note: self.DAY = 0600 Local time and self.NIGHT = 1800 Local time
 ##             #
-<<<<<<< HEAD
-##             # description -- text to appear in the startUp dialog for the product (e.g. 330 AM). 
-##             # startHour -- start hour (in local time) for the first period.
-##             #              These times are relative to self.DAY() and
-##             #              self.NIGHT() which default to 6 and 18, respectively.  
-##             # endHour -- end hour (in local time) for the first period.
-##             #              These times are relative to self.DAY() and
-##             #              self.NIGHT() which default to 6 and 18, respectively. The start 
-##             # expirationHour -- hour when the product expires (in local time)
-##             #                   This is relitive to midnight local time of the
-##             #                   current day.
-##             # period1 Label  -- the label for the first period. e.g. ".TODAY...", ".REST OF TODAY..." 
-##             # period1 lateNight phrase -- phrase to use if the hours of 3am to 6am must be qualified
-##             #                e.g. "Partly cloudy in the early morning." 
-##             # period1 lateDay phrase -- phrase to use if the hours of 3pm to 6pm must be qualified
-##             #                e.g. "Partly cloudy in the early evening." 
-##             # todayFlag -- if 1, "Today" and "Tonight" phrasing will be used in subsequent periods,
-##             #                otherwise, weekday wording will apply. 
-##             # narrative definition -- component and time period pairs
-            
-##             # 330 AM Early morning issuance starts at 1200Z or when product is actually
-##             # is actually issued. Ends   
-=======
 ##             # description -- text to appear in the startUp dialog for the product (e.g. 330 AM).
 ##             # startHour -- start hour (in local time) for the first period.
 ##             #              These times are relative to self.DAY() and
@@ -1064,17 +827,12 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
 
 ##             # 330 AM Early morning issuance starts at 1200Z or when product is actually
 ##             # is actually issued. Ends
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ##             ("230 AM", self.DAY()-4, self.NIGHT(), self.NIGHT(),  # WR 8.5
 ##              ".TODAY...", "before sunrise", "late afternoon",
 ##              1, narrativeDefAM),
 ##             ("830 AM", self.DAY()+2, self.NIGHT(), self.NIGHT(),  # WR 14.5,
 ##              ".TODAY...", "early this morning", "late afternoon",
-<<<<<<< HEAD
-##              1, narrativeDefAM), 
-=======
 ##              1, narrativeDefAM),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ##             #  End times are tomorrow:
 ##             ("230 PM", self.DAY()+8, self.NIGHT()+12, self.NIGHT()+12, # WR 20.5,
 ##              ".TONIGHT...", "late tonight", "before dark",
@@ -1112,29 +870,14 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                 ("CWFExtended", 24), ("CWFExtended", 24)
                 ]
 
-<<<<<<< HEAD
-        return [        
-            ("Morning", self.DAY(), self.NIGHT(), "issuanceHour + 13",
-             ".TODAY...", "early", "late", 1, narrativeDefAM), 
-=======
         return [
             ("Morning", self.DAY(), self.NIGHT(), "issuanceHour + 13",
              ".TODAY...", "early", "late", 1, narrativeDefAM),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             ("Morning with Pre-1st Period", "issuanceHour", self.NIGHT(),
              "issuanceHour + 13", ".TODAY...", "early", "late", 1,
              narrativeDefAM),
             ("Morning Update", "issuanceHour", self.NIGHT(),
              "issuanceHour + 13", ".REST OF TODAY...", "early in the morning",
-<<<<<<< HEAD
-             "late in the afternoon", 1, narrativeDefAM), 
-            ("Afternoon Update", "issuanceHour", self.NIGHT(), "issuanceHour + 13",
-             ".REST OF TODAY...", "early in the morning", "late in the afternoon",
-             1, narrativeDefAM), 
-            #  End times are tomorrow:
-            ("Afternoon", self.NIGHT(), 24 + self.DAY(), "issuanceHour + 13",
-             ".TONIGHT...", "late in the night", "early in the evening", 1, narrativeDefPM), 
-=======
              "late in the afternoon", 1, narrativeDefAM),
             ("Afternoon Update", "issuanceHour", self.NIGHT(), "issuanceHour + 13",
              ".REST OF TODAY...", "early in the morning", "late in the afternoon",
@@ -1142,7 +885,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             #  End times are tomorrow:
             ("Afternoon", self.NIGHT(), 24 + self.DAY(), "issuanceHour + 13",
              ".TONIGHT...", "late in the night", "early in the evening", 1, narrativeDefPM),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             ("Afternoon with Pre-1st Period", "issuanceHour", 24 + self.DAY(),
              "issuanceHour + 13", ".TONIGHT...", "late in the night", "early in the evening", 1,
              narrativeDefPM),
@@ -1163,17 +905,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             # TONIGHT
             #("Evening Update", "issuanceHour", 24 + self.DAY(), "issuanceHour + 13",
             # ".REST OF TONIGHT...", "late in the night", "early in the evening",
-<<<<<<< HEAD
-            # 1, narrativeDefPM), 
-            #("Early Morning Update", "issuanceHour", self.DAY(), "issuanceHour + 13",
-            # ".EARLY THIS MORNING...", "early in the morning", "late in the afternoon",
-            # 1, narrativeDefPM), 
-            ]
-
-
-    
-    
-=======
             # 1, narrativeDefPM),
             #("Early Morning Update", "issuanceHour", self.DAY(), "issuanceHour + 13",
             # ".EARLY THIS MORNING...", "early in the morning", "late in the afternoon",
@@ -1183,7 +914,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
 
 
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     # Handling visibility within the weather phrase
     def visibility_wx_threshold(self, tree, node):
         # Weather will be reported if the visibility is below
@@ -1223,11 +953,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
          list = TextRules.TextRules.wxIntensityDescriptors(self)
          #list.append(("*", "RW", "--", "*", "light"))
          return list
-<<<<<<< HEAD
-       
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def wxCombinations(self):
         # This is the list of which wxTypes should be combined into one.
         # For example, if ("RW", "R") appears, then wxTypes of "RW" and "R" will
@@ -1241,21 +967,13 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         #  Note: The method will be called twice, once with (subkey1, subkey2)
         #  and once with (subkey2, subkey1) so you can assume one ordering.
         #  See the example below, "combine_T_RW"
-<<<<<<< HEAD
-        # 
-=======
         #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return [
                 ("RW", "R"),
                 ("SW", "S"),
                 self.combine_T_RW,
             ]
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def combine_T_RW(self, subkey1, subkey2):
         # Combine T and RW only if the coverage of T
         # is dominant over the coverage of RW
@@ -1336,28 +1054,17 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         for (key, value) in varDict.items():
             if type(key) is tuple:
                 label, variable = key
-<<<<<<< HEAD
-                setattr(self, f"_{variable}", value)    
-
-        self._language = argDict["language"]
-        
-=======
                 setattr(self, f"_{variable}", value)
 
         self._language = argDict["language"]
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # Tropical exceptions
         try:
             self._includeTropical = self._includeTropical == "Yes"
         except:
             self._includeTropical = False
         if self._includeTropical:
-<<<<<<< HEAD
-            self._periodCombining = 0     
-=======
             self._periodCombining = 0
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if self._productIssuance == "Morning with Pre-1st Period":
                 self._productIssuance = "Morning"
             if self._productIssuance == "Afternoon with Pre-1st Period":
@@ -1379,11 +1086,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
                [self.combineComponentStats, self.assembleChildWords]
         else:
             self._definition["methodList"] = [self.assembleChildWords]
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # Calculate current times
         self._ddhhmmTime = self.getCurrentTime(
             argDict, "%d%H%M", shiftToLocal=0, stripLeading=0)
@@ -1416,11 +1119,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         productName = self.checkTestMode(argDict, productName)
 
         s = self._wmoID + " " + self._fullStationID + " " + \
-<<<<<<< HEAD
-               self._ddhhmmTime + "\n" + self._pil + "\n\n" 
-=======
                self._ddhhmmTime + "\n" + self._pil + "\n\n"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         fcst =  fcst + s.upper()
 
         s = productName + "\n" +\
@@ -1460,11 +1159,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
         barFcst = self._getBarForecast(editArea, areaLabel, argDict)
         if barFcst != "":
             fcst = fcst + barFcst
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # Handle regular zone forecast
         else:
             argDict["language"] = self._language
@@ -1476,26 +1171,15 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             if self._useAbbreviations == 1:
                 fcstSegment = self.marine_abbreviateText(fcstSegment)
                 fcstSegment = re.sub(r'\n', r' ',fcstSegment)
-<<<<<<< HEAD
-                fcstSegment = re.sub(r' (\.[A-Za-z])', r'\n\1',fcstSegment)     
-                fcstSegment = self.endline(fcstSegment, linelength=self._lineLength)
-            fcst = fcst + fcstSegment
-            
-=======
                 fcstSegment = re.sub(r' (\.[A-Za-z])', r'\n\1',fcstSegment)
                 fcstSegment = self.endline(fcstSegment, linelength=self._lineLength)
             fcst = fcst + fcstSegment
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return fcst
 
     def _postProcessArea(self, fcst, editArea, areaLabel, argDict):
         return fcst + "\n$$\n\n"
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def _postProcessProduct(self, fcst, argDict):
         self.setProgressPercentage(100)
         self.progressMessage(0, 100, self._displayName + " Complete")
@@ -1503,11 +1187,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
 
     ########################################################################
     # PRODUCT-SPECIFIC METHODS
-<<<<<<< HEAD
-    ########################################################################    
-=======
     ########################################################################
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ##     def _issuance_list(self, argDict):
 ##         #  This method sets up configurable issuance times with associated
 ##         #  narrative definitions.  See the Text Product User Guide for documentation.
@@ -1535,30 +1215,18 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
 ##                 ("CWFPeriod", 12), ("CWFPeriod", 12), ("CWFPeriod", 12), ("CWFPeriod", 12), ("CWFPeriod", 24),
 ##                 ("CWFExtended", 24), ("CWFExtended", 24)
 ##                 ]
-<<<<<<< HEAD
-        
-##         return [
-##             ("430 AM", self.DAY(), self.NIGHT(), 17,
-##              ".TODAY...", "early in the morning", "late in the afternoon",
-##              1, narrativeDefAM), 
-=======
 
 ##         return [
 ##             ("430 AM", self.DAY(), self.NIGHT(), 17,
 ##              ".TODAY...", "early in the morning", "late in the afternoon",
 ##              1, narrativeDefAM),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ##             ("1030 AM", "issuanceHour", self.NIGHT(), 17,
 ##              ".TODAY...", "early in the morning", "late in the afternoon",
 ##              1, narrativeDefAM),
 ##             #  End times are tomorrow:
 ##             ("430 PM", self.NIGHT(), 24 + self.DAY(), 24 + 5,
 ##              ".TONIGHT...", "late in the night", "early in the evening",
-<<<<<<< HEAD
-##              1, narrativeDefPM), 
-=======
 ##              1, narrativeDefPM),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ##             ("1030 PM", "issuanceHour", 24 + self.DAY(), 24 + 5,
 ##              ".TONIGHT...", "late in the night", "early in the evening",
 ##              1, narrativeDefPM),
@@ -1592,11 +1260,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
 ##                ("CWFPeriodMid", 12), ("CWFPeriodMid", 12), ("CWFPeriodMid", 18),
 ##                ("CWFExtended", 24), ("CWFExtended", 24)
 ##                ]
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ##        return [
 ##            # WRS modified the "label" and issuance starthour and expiration hours
 ##            # early phrases
@@ -1604,29 +1268,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
 ##            #
 ##            # note: self.DAY = 0600 Local time and self.NIGHT = 1800 Local time
 ##            #
-<<<<<<< HEAD
-##            # description -- text to appear in the startUp dialog for the product (e.g. 330 AM). 
-##            # startHour -- start hour (in local time) for the first period.
-##            #              These times are relative to self.DAY() and
-##            #              self.NIGHT() which default to 6 and 18, respectively.  
-##            # endHour -- end hour (in local time) for the first period.
-##            #              These times are relative to self.DAY() and
-##            #              self.NIGHT() which default to 6 and 18, respectively. The start 
-##            # expirationHour -- hour when the product expires (in local time)
-##            #                   This is relitive to midnight local time of the
-##            #                   current day.
-##            # period1 Label  -- the label for the first period. e.g. ".TODAY...", ".REST OF TODAY..." 
-##            # period1 lateNight phrase -- phrase to use if the hours of 3am to 6am must be qualified
-##            #                e.g. "Partly cloudy in the early morning." 
-##            # period1 lateDay phrase -- phrase to use if the hours of 3pm to 6pm must be qualified
-##            #                e.g. "Partly cloudy in the early evening." 
-##            # todayFlag -- if 1, "Today" and "Tonight" phrasing will be used in subsequent periods,
-##            #                otherwise, weekday wording will apply. 
-##            # narrative definition -- component and time period pairs
-            
-##            # 330 AM Early morning issuance starts at 1200Z or when product is actually
-##            # is actually issued. Ends   
-=======
 ##            # description -- text to appear in the startUp dialog for the product (e.g. 330 AM).
 ##            # startHour -- start hour (in local time) for the first period.
 ##            #              These times are relative to self.DAY() and
@@ -1648,7 +1289,6 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
 
 ##            # 330 AM Early morning issuance starts at 1200Z or when product is actually
 ##            # is actually issued. Ends
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ##            ("230 AM", self.DAY()-4, self.NIGHT(), 17,
 ##             ".TODAY...", "before sunrise", "late afternoon",
 ##             1, narrativeDefAM),
@@ -1658,11 +1298,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
 ##            #  End times are tomorrow:
 ##            ("230 PM", self.DAY()+8, self.NIGHT()+12, 24+5,
 ##             ".TONIGHT...", "late tonight", "before dark",
-<<<<<<< HEAD
-##             1, narrativeDefPM), 
-=======
 ##             1, narrativeDefPM),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ##            ("830 PM", self.NIGHT()+2, 24 + self.DAY(), 24+5,
 ##             ".TONIGHT...", "late tonight", "before dark",
 ##             1, narrativeDefPM),
@@ -1675,11 +1311,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             return self._issuanceInfo.period1LateDayPhrase()
         else:
             return "late in the afternoon"
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def lateNight_descriptor(self, statDict, argDict, timeRange):
         # If time range is in the first period, return period1 descriptor for
         #  late night -- default 3am-6am
@@ -1687,11 +1319,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             return self._issuanceInfo.period1LateNightPhrase()
         else:
             return "early in the morning"
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def splitDay24HourLabel_flag(self, tree, node):
         # Return 0 to have the TimeDescriptor module label 24 hour periods
         # with simply the weekday name (e.g. Saturday)
@@ -1711,21 +1339,13 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
     def _skipAreas(self, argDict):
         # These are edit areas that the formatter will skip
         return []
-<<<<<<< HEAD
-     
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     # Returns a list of the Hazards allowed for this product in VTEC format.
     # These are sorted in priority order - most important first.
     def allowedHazards(self):
         allActions = ["NEW", "EXA", "EXB", "EXT", "CAN", "CON", "EXP"]
         marineActions = ["NEW", "EXA", "EXB", "EXT", "CON"]
-<<<<<<< HEAD
-        tropicalActions = ["NEW", "EXA", "EXB", "EXT", "UPG", "CON", 'CAN', 
-=======
         tropicalActions = ["NEW", "EXA", "EXB", "EXT", "UPG", "CON", 'CAN',
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
           'EXP']
         return [
             ('HF.A',  marineActions, 'Marine'),  # HURRICANE FORCE WIND WATCH
@@ -1749,14 +1369,7 @@ class TextProduct(TextRules.TextRules, SampleAnalysis.SampleAnalysis):
             ('MS.Y', marineActions, 'Smoke'),      # MARINE DENSE SMOKE ADVISORY
             ('MH.W', marineActions, 'Ashfall'),    # MARINE VOLCANIC ASHFALL WARNING
             ('MH.Y', marineActions, 'Ashfall'),    # MARINE VOLCANIC ASHFALL ADVISORY
-<<<<<<< HEAD
-            ('RB.Y', marineActions, 'Marine'),   # ROUGH BAR
-            ('SI.Y', marineActions, 'Marine1'),   # SMALL CRAFT ADVISORY
             ('SC.Y', marineActions, 'Marine2'),       # SMALL CRAFT ADVISORY
-            ('SW.Y', marineActions, 'Marine3'),       # SMALL CRAFT ADVISORY
-=======
-            ('SC.Y', marineActions, 'Marine2'),       # SMALL CRAFT ADVISORY
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             ('BW.Y', marineActions, 'Marine4'),       # BRISK WIND ADVISORY
             ('TO.A', marineActions, 'Convective'), # TORNADO WATCH
             ('SV.A', marineActions, 'Convective'), # SEVERE THUNDERSTORM WATCH

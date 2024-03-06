@@ -29,13 +29,8 @@ import javax.measure.quantity.Temperature;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import si.uom.SI;
-<<<<<<< HEAD
-import tec.uom.se.AbstractUnit;
-import tec.uom.se.quantity.QuantityDimension;
-=======
 import tech.units.indriya.AbstractUnit;
 import tech.units.indriya.unit.UnitDimension;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 public class DerivedWVPixel extends AbstractUnit<Temperature> {
 
@@ -68,11 +63,7 @@ public class DerivedWVPixel extends AbstractUnit<Temperature> {
 
     @Override
     public Dimension getDimension() {
-<<<<<<< HEAD
-        return QuantityDimension.TEMPERATURE;
-=======
         return UnitDimension.TEMPERATURE;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
 }

@@ -24,18 +24,6 @@
 # This script is run when importing your digital data back from the backup site.
 # The grids are placed in the Restore database.
 #
-<<<<<<< HEAD
-#     SOFTWARE HISTORY
-#    
-#    Date            Ticket#       Engineer       Description
-#    ------------    ----------    -----------    --------------------------
-#    06/16/14        3276          randerso       Added -T to iscMosaic call
-#    02/12/15        4103          dgilling       Support multiple service backup sites.
-#    03/30/15        4103          dgilling       Support new location for svcbu.properties.
-#    04/30/15        4427          dgilling       Support subdomains of the
-#                                                 primary domains.
-#    08/01/2017      6337          randerso       Use more restrictive file permissions
-=======
 # SOFTWARE HISTORY
 #
 # Date          Ticket#  Engineer  Description
@@ -46,7 +34,6 @@
 # Apr 30, 2015  4427     dgilling  Support subdomains of the primary domains.
 # Aug 01, 2017  6337     randerso  Use more restrictive file permissions
 # Jun 29, 2021  8572     randerso  Pass site ID to serviceBackupUtil.sh
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 ##############################################################################
 
@@ -57,12 +44,7 @@ then
 fi
 
 source ${AWIPS_HOME}/edex/bin/setup.env
-<<<<<<< HEAD
-source ${AWIPS_HOME}/GFESuite/ServiceBackup/configuration/svcbu.env
-source ${AWIPS_HOME}/GFESuite/ServiceBackup/scripts/serviceBackupUtil.sh
-=======
 source ${AWIPS_HOME}/GFESuite/ServiceBackup/scripts/serviceBackupUtil.sh ${AW_SITE_IDENTIFIER}
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 # Create the log file
 configureLogging "svcbu_receive_grids_from_bksite" ${AW_SITE_IDENTIFIER}
@@ -80,41 +62,6 @@ then
     SITE_ID=$(getSiteIdFromTarFile "${TEMP_DIR}/Grd")
     if [[ -n "${SITE_ID}" ]]
     then
-<<<<<<< HEAD
-		tar -xf Grd
-		gunzip -f ${SITE_ID}Grd.netcdf.gz
-		NETCDF_FILE="${TEMP_DIR}/${SITE_ID}Grd.netcdf"
-	else
-		mv -f Grd Grd.netcdf.gz
-	    chmod 644 Grd.netcdf.gz
-		
-		echo "Gunzipping ${TEMP_DIR}/Grd.netcdf.gz"
-		gunzip -f Grd.netcdf.gz
-	    if [ $? -ne 0 ]; 
-	    then
-			echo "ERROR: Could not gunzip ${TEMP_DIR}/Grd.netcdf.gz"
-			exit 1
-	    fi
-	    echo "Done Gunzipping!"
-	    
-	    echo "Finding site-id using ncdump method."
-		site=`ncdump -h "${TEMP_DIR}/Grd.netcdf" | grep siteID | head -1 | cut -d'"' -f2`
-	    if [[ -z "${site}" ]]
-	    then
-			echo "ERROR: Could not find out the site from ncdump method..."
-			exit 1
-	    fi
-	    SITE_ID=`echo $site | tr '[A-Z]' '[a-z]'`
-	    
-	    NETCDF_FILE="${TEMP_DIR}/${SITE_ID}Grd.netcdf"
-		mv -f "${TEMP_DIR}/Grd.netcdf" ${NETCDF_FILE}
-	fi
-	
-	SITE_ID_CAPS=`echo ${SITE_ID} | tr [a-z] [A-Z]`
-	echo "site is ${SITE_ID_CAPS}"
-else
-	echo "Unable to locate the gridded data of the site, ${import_grd_file}"
-=======
         tar -xf Grd
         gunzip -f ${SITE_ID}Grd.netcdf.gz
         NETCDF_FILE="${TEMP_DIR}/${SITE_ID}Grd.netcdf"
@@ -148,7 +95,6 @@ else
     echo "site is ${SITE_ID_CAPS}"
 else
     echo "Unable to locate the gridded data of the site, ${import_grd_file}"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     echo "You will need to request your backup site to send grids again."
     exit 1
 fi
@@ -176,13 +122,8 @@ LOCK_FILE=$(getLockFile "importBkSiteGrids" ${DEST_SITEID})
 lock_status=$(isOperationInProgress "importBkSiteGrids" ${DEST_SITEID})
 if [[ "${lock_status}" = "true" ]]
 then
-<<<<<<< HEAD
-	echo "Cannot process grids."
-	exit 1
-=======
     echo "Cannot process grids."
     exit 1
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 fi
 
 markTaskInProgress ${LOCK_FILE}
@@ -209,15 +150,9 @@ then
     
     if [ $? -ne 0 ]; 
     then
-<<<<<<< HEAD
-		echo "ERROR: iscMosaic failed to run correctly. Please re-run iscMosaic manually."
-		markTaskFailed ${LOCK_FILE}
-		exit 1
-=======
         echo "ERROR: iscMosaic failed to run correctly. Please re-run iscMosaic manually."
         markTaskFailed ${LOCK_FILE}
         exit 1
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     fi
     echo "Finished running iscMosaic..."
     

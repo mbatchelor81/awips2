@@ -9,23 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-<<<<<<< HEAD
-
-import oasis.names.tc.ebxml.regrep.xsd.lcm.v4.Mode;
-import oasis.names.tc.ebxml.regrep.xsd.lcm.v4.SubmitObjectsRequest;
-import oasis.names.tc.ebxml.regrep.xsd.query.v4.QueryRequest;
-import oasis.names.tc.ebxml.regrep.xsd.query.v4.ResponseOptionType;
-import oasis.names.tc.ebxml.regrep.xsd.rim.v4.AssociationType;
-import oasis.names.tc.ebxml.regrep.xsd.rim.v4.ClassificationNodeType;
-import oasis.names.tc.ebxml.regrep.xsd.rim.v4.QueryType;
-import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryObjectListType;
-import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryObjectType;
-import oasis.names.tc.ebxml.regrep.xsd.rim.v4.SlotType;
-import oasis.names.tc.ebxml.regrep.xsd.rim.v4.StringValueType;
-import oasis.names.tc.ebxml.regrep.xsd.rim.v4.VersionInfoType;
-=======
 import java.util.Map.Entry;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.uf.common.comm.CommunicationException;
 import com.raytheon.uf.common.registry.OperationStatus;
@@ -60,8 +44,6 @@ import com.raytheon.uf.common.util.CollectionUtil;
 import com.raytheon.uf.common.util.ReflectionException;
 import com.raytheon.uf.common.util.ReflectionUtil;
 
-<<<<<<< HEAD
-=======
 import oasis.names.tc.ebxml.regrep.xsd.lcm.v4.Mode;
 import oasis.names.tc.ebxml.regrep.xsd.lcm.v4.SubmitObjectsRequest;
 import oasis.names.tc.ebxml.regrep.xsd.query.v4.QueryRequest;
@@ -75,7 +57,6 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.SlotType;
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.StringValueType;
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.VersionInfoType;
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 /**
  * Utility class for common Registry activities.
  * 
@@ -107,10 +88,7 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.VersionInfoType;
  * Jul 10, 2014  1717     bphillip  Changed default user
  * Jul 28, 2014  3474     dhladky   Fixed bad default user settings.
  * Aug 25, 2016  5846     rjpeter   Remove InternationalString from DB
-<<<<<<< HEAD
-=======
  * Apr 06, 2020  8054     bsteffen  Set EVENT_SOURCE_SLOT on SubmitObjectsRequest.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -122,11 +100,7 @@ public final class RegistryUtil {
         // Prevent Instantiation
     }
 
-<<<<<<< HEAD
-    public static String LOCAL_REGISTRY_ADDRESS = null;
-=======
     public static final String LOCAL_REGISTRY_ADDRESS;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     public static final String registryObjectClassName = "registryObjectClassName";
 
@@ -137,13 +111,6 @@ public final class RegistryUtil {
     public static final String DEFAULT_OWNER = "System";
 
     static {
-<<<<<<< HEAD
-        if (System.getProperty("ebxml.registry.host") != null
-                && System.getProperty("ebxml.registry.webserver.port") != null) {
-            LOCAL_REGISTRY_ADDRESS = "https://"
-                    + System.getProperty("ebxml.registry.host") + ":"
-                    + System.getProperty("ebxml.registry.webserver.port");
-=======
         if (System.getProperty("ebxml.registry.host") != null && System
                 .getProperty("ebxml.registry.webserver.port") != null) {
             LOCAL_REGISTRY_ADDRESS = "https://"
@@ -151,7 +118,6 @@ public final class RegistryUtil {
                     + System.getProperty("ebxml.registry.webserver.port");
         } else {
             LOCAL_REGISTRY_ADDRESS = null;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
     }
@@ -163,11 +129,8 @@ public final class RegistryUtil {
      */
     public static final String registryUser = ClusterIdUtil.getId();
 
-<<<<<<< HEAD
-=======
     public static final String EVENT_SOURCE_SLOT = "EventSource";
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     // A private mapping of attribute types to slot types, used when storing an
     // object to the registry to map QueryableAttributes to SlotConverters.
     private static final Map<String, SlotConverter> SLOT_CONVERSION;
@@ -211,13 +174,8 @@ public final class RegistryUtil {
             Object slotValue) {
         SlotConverter converter = SLOT_CONVERSION.get(slotType);
         if (converter == null) {
-<<<<<<< HEAD
-            throw new RegistryException("Not slot converter for type "
-                    + slotType);
-=======
             throw new RegistryException(
                     "Not slot converter for type " + slotType);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         return converter.getSlots(slotName, slotValue).get(0);
     }
@@ -372,13 +330,8 @@ public final class RegistryUtil {
      *             on error reflectively accessing the object
      */
     public static RegistryObjectType newRegistryObject(Object object,
-<<<<<<< HEAD
-            IRegistryEncoder encoderStrategy) throws SerializationException,
-            ReflectionException {
-=======
             IRegistryEncoder encoderStrategy)
             throws SerializationException, ReflectionException {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         RegistryObjectType registryObject = new RegistryObjectType();
         String registryObjectType = null;
@@ -428,14 +381,8 @@ public final class RegistryUtil {
                 // Set the ObjectType so it can be distinguished from other
                 // Objects
                 // more easily.
-<<<<<<< HEAD
-                registryObject
-                        .setObjectType(RegistryObjectTypes.REGISTRY_OBJECT
-                                + ":" + registryObjectType);
-=======
                 registryObject.setObjectType(RegistryObjectTypes.REGISTRY_OBJECT
                         + ":" + registryObjectType);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                 String objectOwner = ReflectionUtil.getAnnotatedField(
                         registryObject, RegistryObjectOwner.class);
@@ -566,11 +513,7 @@ public final class RegistryUtil {
     }
 
     public static Map<String, AssociationInfo> getAssociations(Object object)
-<<<<<<< HEAD
-            throws ReflectionException, SerializationException {
-=======
             throws ReflectionException {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         Map<String, AssociationInfo> ids = new HashMap<>();
 
@@ -591,13 +534,8 @@ public final class RegistryUtil {
                             Object f = ReflectionUtil.getter(object, field);
                             ReflectionUtil.setter(o, field, f);
                         }
-<<<<<<< HEAD
-                        ids.put(getRegistryObjectKey(o), new AssociationInfo(
-                                type, m.required()));
-=======
                         ids.put(getRegistryObjectKey(o),
                                 new AssociationInfo(type, m.required()));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     }
                 }
             }
@@ -618,12 +556,8 @@ public final class RegistryUtil {
                                 .getAnnotation(RegistryObjectAssociation.class);
                         RegistryObjectResolver mapper = ReflectionUtil
                                 .newInstanceOfAssignableType(
-<<<<<<< HEAD
-                                        RegistryObjectResolver.class, a.value());
-=======
                                         RegistryObjectResolver.class,
                                         a.value());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         String associationType = a.associationType();
                         List<Object> objects = mapper.getRegistryObjects(v);
 
@@ -678,13 +612,8 @@ public final class RegistryUtil {
         node.setLid(objectType);
         node.setParent(RegistryObjectTypes.REGISTRY_OBJECT);
         // Add the namespace separator length to get the correct substring
-<<<<<<< HEAD
-        node.setCode(objectType.substring(RegistryObjectTypes.REGISTRY_OBJECT
-                .length() + 1));
-=======
         node.setCode(objectType
                 .substring(RegistryObjectTypes.REGISTRY_OBJECT.length() + 1));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         return node;
     }
@@ -695,12 +624,8 @@ public final class RegistryUtil {
      * @param asList
      *            the list of registry object types
      * @param mode
-<<<<<<< HEAD
-     *            the {@link Mode} to use
-=======
      *            the {@link Mode} to useHmbukqg86!
      * 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return the request
      */
     public static SubmitObjectsRequest newSubmitObjects(
@@ -709,11 +634,8 @@ public final class RegistryUtil {
         request.setCheckReferences(false);
         request.setMode(mode);
         request.setUsername(username);
-<<<<<<< HEAD
-=======
         request.getSlot().add(new SlotType(EVENT_SOURCE_SLOT,
                 new StringValueType(registryUser)));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         RegistryObjectListType registryObjectList = new RegistryObjectListType();
         registryObjectList.getRegistryObject().addAll(asList);
         request.setRegistryObjectList(registryObjectList);
@@ -738,18 +660,6 @@ public final class RegistryUtil {
      * @return A <code>List</code> of <code>AssociationType</code> Objects.
      */
     public static List<RegistryObjectType> makeAssociations(
-<<<<<<< HEAD
-            String sourceObjectId, Map<String, AssociationInfo> dependentObjects) {
-
-        List<RegistryObjectType> associations = new ArrayList<>();
-        for (String targetObjectId : dependentObjects.keySet()) {
-            AssociationType at = new AssociationType();
-            at.setObjectType(AssociationType.class.getName());
-            at.setSourceObject(sourceObjectId);
-            at.setTargetObject(targetObjectId);
-            at.setType(dependentObjects.get(targetObjectId)
-                    .getAssociationType());
-=======
             String sourceObjectId,
             Map<String, AssociationInfo> dependentObjects) {
 
@@ -761,7 +671,6 @@ public final class RegistryUtil {
             at.setSourceObject(sourceObjectId);
             at.setTargetObject(entry.getKey());
             at.setType(entry.getValue().getAssociationType());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             at.setId(RegistryUtil.generateRegistryObjectId());
             at.setLid(at.getId());
             associations.add(at);
@@ -819,17 +728,10 @@ public final class RegistryUtil {
             R response, CommunicationException e) {
         String message = e.getMessage();
         String errorMessage = (message
-<<<<<<< HEAD
-                .indexOf(RegistryErrorMessage.DATABASE_ERROR_MESSAGE) != -1) ? RegistryErrorMessage.FAILED_TO_CONNECT_TO_DATABASE
-                : message;
-        return getFailedResponse(response, new RegistryException(errorMessage,
-                e));
-=======
                 .indexOf(RegistryErrorMessage.DATABASE_ERROR_MESSAGE) != -1)
                         ? RegistryErrorMessage.FAILED_TO_CONNECT_TO_DATABASE
                         : message;
         return getFailedResponse(response,
                 new RegistryException(errorMessage, e));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 }

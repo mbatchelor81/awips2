@@ -7,11 +7,7 @@
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
@@ -39,10 +35,7 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
  * ------------- -------- ----------- --------------------------
  * May 06, 2016  DCS18795 jdynina     Initial creation
  * Apr 18, 2018  DCS20681 jdynina     Added MRLE
-<<<<<<< HEAD
-=======
  * Feb 09, 2021  DCS22417 jdynina     Added VMI
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -54,13 +47,9 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
 public class CPMBlock extends AbstractBlock {
 
     private static final int BLOCK_ID = 12;
-<<<<<<< HEAD
-    private static final int SAILS = 1;
-=======
 
     private static final int SAILS = 1;
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private static final int MRLE = 2;
 
     public CPMBlock(DataInputStream in) throws IOException {
@@ -95,15 +84,12 @@ public class CPMBlock extends AbstractBlock {
         @DynamicSerializeElement
         public int[] allowedMrleCuts = null;
 
-<<<<<<< HEAD
-=======
         @DynamicSerializeElement
         public int vmi1;
 
         @DynamicSerializeElement
         public int vmi2;
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         /**
          * @return the clearAirVcps
          */
@@ -192,8 +178,6 @@ public class CPMBlock extends AbstractBlock {
             this.allowedMrleCuts = allowedMrleCuts;
         }
 
-<<<<<<< HEAD
-=======
         /**
          * @return the vmi1
          */
@@ -224,23 +208,11 @@ public class CPMBlock extends AbstractBlock {
             this.vmi2 = vmi2;
         }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         public String formatCpmBits(int[] bits, int type) {
             StringBuilder result = new StringBuilder();
 
             result.append(" { ");
 
-<<<<<<< HEAD
-            for (int i = 0; i < bits.length; i++) {
-                int vcp = bits[i] & 0x0FFF; // bits 11-0
-                int allowedCuts = bits[i] >>> 12; // bits 15-12
-
-                result.append("vcp=" + Integer.toString(vcp));
-                if (type == 1) {
-                    result.append(":allowedSailsCuts=" + Integer.toString(allowedCuts) + " ");
-                } else {
-                    result.append(":allowedMrleCuts=" + Integer.toString(allowedCuts) + " ");
-=======
             for (int bit : bits) {
                 int vcp = bit & 0x0FFF; // bits 11-0
                 int allowedCuts = bit >>> 12; // bits 15-12
@@ -252,7 +224,6 @@ public class CPMBlock extends AbstractBlock {
                 } else {
                     result.append(":allowedMrleCuts="
                             + Integer.toString(allowedCuts) + " ");
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
             }
 
@@ -270,15 +241,6 @@ public class CPMBlock extends AbstractBlock {
             o.append(" numPrecipVcps=" + precipVcps.length);
             o.append(" precipVcps=" + Arrays.toString(precipVcps));
             o.append(" maxSailsCuts=" + maxSailsCuts);
-<<<<<<< HEAD
-            if ((allowedSailsCuts != null) &&
-                    (allowedMrleCuts != null)) {
-                o.append(formatCpmBits(allowedSailsCuts, SAILS));
-                o.append(" maxMrleCuts=" + maxMrleCuts);
-                o.append(formatCpmBits(allowedMrleCuts, MRLE));
-            }
-
-=======
             o.append(formatCpmBits(allowedSailsCuts, SAILS));
             o.append(" maxMrleCuts=" + maxMrleCuts);
             o.append(formatCpmBits(allowedMrleCuts, MRLE));
@@ -287,7 +249,6 @@ public class CPMBlock extends AbstractBlock {
                 o.append(" 0.5 m/s VMI request value=" + vmi1);
                 o.append(" 1.0 m/s VMI request value=" + vmi2);
             }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return o.toString();
         }
     }
@@ -313,12 +274,8 @@ public class CPMBlock extends AbstractBlock {
     /*
      * (non-Javadoc)
      *
-<<<<<<< HEAD
-     * @see com.raytheon.uf.common.dataplugin.radar.level3.SymbologyPacket#init(java
-=======
      * @see
      * com.raytheon.uf.common.dataplugin.radar.level3.SymbologyPacket#init(java
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * .io. DataInputStream)
      */
     @Override
@@ -343,15 +300,6 @@ public class CPMBlock extends AbstractBlock {
         in.skipBytes(46 - (6 + (2 * (numClearAirVcps + numPrecipVcps))));
         message.maxSailsCuts = in.readShort();
 
-<<<<<<< HEAD
-        if (size > 100) {
-            message.allowedSailsCuts = new int[numClearAirVcps + numPrecipVcps];
-            for (int i = 0; i < numClearAirVcps + numPrecipVcps; ++i) {
-                message.allowedSailsCuts[i] = in.readShort();
-            }
-
-            // skip any blank entries after cuts/sails vcps
-=======
         message.allowedSailsCuts = new int[numClearAirVcps + numPrecipVcps];
         for (int i = 0; i < numClearAirVcps + numPrecipVcps; ++i) {
             message.allowedSailsCuts[i] = in.readShort();
@@ -371,22 +319,12 @@ public class CPMBlock extends AbstractBlock {
 
         if (size > 130) {
             // skip any blank entries after cuts/mrle vcps
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if (numClearAirVcps + numPrecipVcps < 20) {
                 in.skipBytes(2 * (20 - (numClearAirVcps + numPrecipVcps)));
             }
 
-<<<<<<< HEAD
-            message.maxMrleCuts = in.readShort();
-
-            message.allowedMrleCuts = new int[numClearAirVcps + numPrecipVcps];
-            for (int i = 0; i < numClearAirVcps + numPrecipVcps; ++i) {
-                message.allowedMrleCuts[i] = in.readShort();
-            }
-=======
             message.vmi1 = in.readShort();
             message.vmi2 = in.readShort();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 }

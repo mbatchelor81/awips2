@@ -16,11 +16,7 @@
 import os
 import re
 import xml.etree.ElementTree as ET
-<<<<<<< HEAD
 from awips import ThriftClient
-=======
-from ufpy import ThriftClient
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 from dynamicserialize.dstypes.gov.noaa.nws.ncep.common.dataplugin.pgen.request import RetrieveActivityMapRequest
 
 class ActivityUtil:

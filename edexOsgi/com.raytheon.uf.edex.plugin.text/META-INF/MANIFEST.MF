@@ -13,11 +13,7 @@ Require-Bundle:
  com.raytheon.uf.common.localization,
  com.raytheon.uf.common.dataplugin.text,
  org.slf4j,
-<<<<<<< HEAD
- com.google.guava;bundle-version="30.0.0",
-=======
  com.google.guava;bundle-version="32.0.0",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  javax.xml.bind
 Export-Package: com.raytheon.uf.edex.plugin.text,
  com.raytheon.uf.edex.plugin.text.dao,

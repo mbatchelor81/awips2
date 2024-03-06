@@ -20,53 +20,13 @@
     -->
 <menuTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
         <contribute xsi:type="bundleItem" file="bundles/DefaultRadarXY.xml"
-<<<<<<< HEAD
-            menuText="NEXRAD Unit Status" id="${icao}NexradStatus"
-            editorType="com.raytheon.viz.radar.ui.xy.RadarXYEditor">
-=======
             menuText="NEXRAD Unit Status" id="${icao}NexradStatus">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <substitute key="icao" value="${icao}" />
             <substitute key="product" value="2" />
             <substitute key="insetMap" value="false" />
         </contribute>
         <contribute xsi:type="separator"
             id="${icao}DataQualityAfterNEXRADUnitStatus" />
-<<<<<<< HEAD
-        <contribute xsi:type="titleItem"
-            titleText="------ Clutter Filter Control (CFC) ------" id="${icao}ClutterFilterControlCFC" />
-        <contribute xsi:type="bundleItem" file="bundles/DefaultRadarLayered.xml"
-            menuText="Segment 1" id="${icao}CFC1">
-            <substitute key="icao" value="${icao}" />
-            <substitute key="product" value="34" />
-            <substitute key="layer" value="1.0" />
-       </contribute>
-       <contribute xsi:type="bundleItem" file="bundles/DefaultRadarLayered.xml"
-            menuText="Segment 2" id="${icao}CFC2">
-            <substitute key="icao" value="${icao}" />
-            <substitute key="product" value="34" />
-            <substitute key="layer" value="2.0" />
-        </contribute>
-        <contribute xsi:type="bundleItem" file="bundles/DefaultRadarLayered.xml"
-            menuText="Segment 3" id="${icao}CFC3">
-            <substitute key="icao" value="${icao}" />
-            <substitute key="product" value="34" />
-            <substitute key="layer" value="3.0" />
-        </contribute>
-        <contribute xsi:type="bundleItem" file="bundles/DefaultRadarLayered.xml"
-            menuText="Segment 4" id="${icao}CFC4">
-            <substitute key="icao" value="${icao}" />
-            <substitute key="product" value="34" />
-            <substitute key="layer" value="4.0" />
-        </contribute>
-        <contribute xsi:type="bundleItem" file="bundles/DefaultRadarLayered.xml"
-            menuText="Segment 5" id="${icao}CFC5">
-            <substitute key="icao" value="${icao}" />
-            <substitute key="product" value="34" />
-            <substitute key="layer" value="5.0" />
-        </contribute>
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <contribute xsi:type="subMenu" menuText="${icao} Power Removed Control"
             id="${icao}PowerRemovedControl">
             <contribute xsi:type="bundleItem" file="bundles/DefaultRadar.xml"
@@ -76,15 +36,6 @@
                 <substitute key="elevation" value="-0.4---0.4" />
             </contribute>
             <contribute xsi:type="bundleItem" file="bundles/DefaultRadar.xml"
-<<<<<<< HEAD
-                menuText="0.0 PRM" id="${icao}00PRM">
-                <substitute key="icao" value="${icao}" />
-                <substitute key="product" value="113" />
-                <substitute key="elevation" value="0.0--0.0" />
-            </contribute>
-            <contribute xsi:type="bundleItem" file="bundles/DefaultRadar.xml"
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 menuText="0.5 PRM" id="${icao}05PRM">
                 <substitute key="icao" value="${icao}" />
                 <substitute key="product" value="113" />
@@ -196,15 +147,6 @@
                 <substitute key="elevation" value="-0.4---0.4" />
             </contribute>
             <contribute xsi:type="bundleItem" file="bundles/DefaultRadar.xml"
-<<<<<<< HEAD
-                menuText="0.0 CLR" id="${icao}00CLR">
-                <substitute key="icao" value="${icao}" />
-                <substitute key="product" value="132" />
-                <substitute key="elevation" value="0.0--0.0" />
-            </contribute>
-            <contribute xsi:type="bundleItem" file="bundles/DefaultRadar.xml"
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 menuText="0.5 CLR" id="${icao}05CLR">
                 <substitute key="icao" value="${icao}" />
                 <substitute key="product" value="132" />
@@ -316,15 +258,6 @@
                 <substitute key="elevation" value="-0.4---0.4" />
             </contribute>
             <contribute xsi:type="bundleItem" file="bundles/DefaultRadar.xml"
-<<<<<<< HEAD
-                menuText="0.0 CLD" id="${icao}00CLD">
-                <substitute key="icao" value="${icao}" />
-                <substitute key="product" value="133" />
-                <substitute key="elevation" value="0.0--0.0" />
-            </contribute>
-            <contribute xsi:type="bundleItem" file="bundles/DefaultRadar.xml"
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 menuText="0.5 CLD" id="${icao}05CLD">
                 <substitute key="icao" value="${icao}" />
                 <substitute key="product" value="133" />

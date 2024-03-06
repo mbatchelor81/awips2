@@ -40,24 +40,13 @@
    
    <plotParameterDefinition displayName="temperature (°F)" displayType="TEXT" format="%3.0f" param="temperature" sampleValue="75" unit="°F" />
 
-<<<<<<< HEAD
-=======
    <plotParameterDefinition displayName="temperature (°C)" displayType="TEXT" format="%3.0f" param="temperature" sampleValue="24" unit="°C" />
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
    <plotParameterDefinition displayName="DpT (°F)" displayType="TEXT" format="%3.0f" param="DpT" sampleValue="59" unit="°F" />
 
    <plotParameterDefinition displayName="seaLevelPressure (daPa)" displayType="TEXT" format="%5.0f" param="seaLevelPressure" sampleValue="018" trim="2" unit="daPa" />
 
    <plotParameterDefinition displayName="windSpeed,windDir,windGust (kts)" displayType="BARB" param="windSpeed,windDir,windGust" sampleValue="0,1,2" unit="kts" />
-<<<<<<< HEAD
-
-   <plotParameterDefinition displayName="windBarb" displayType="BARB" param="windSpeed,windDir" sampleValue="16,17" unit="kts" />
-
-   <plotParameterDefinition displayName="windDir" displayType="ARROWUV" param="windSpeed,windDir" sampleValue="16,17" unit="kts" />
-
-   <plotParameterDefinition displayName="windGust (kts)" displayType="TEXT" param="windGust" sampleValue="8" unit="kts" />
-=======
    <plotParameterDefinition displayName="windSpeed,windDir,windGust (mph)" displayType="BARB" param="windSpeed,windDir,windGust" sampleValue="0,1,2" unit="mph" />
    <plotParameterDefinition displayName="windSpeed,windDir,windGust (m/s)" displayType="BARB" param="windSpeed,windDir,windGust" sampleValue="0,1,2" unit="m/s" />
 
@@ -70,7 +59,6 @@
    <plotParameterDefinition displayName="windGust (kts)" displayType="TEXT" param="windGust" format="%02.0f" sampleValue="8" unit="kts" />
    <plotParameterDefinition displayName="windGust (mph)" displayType="TEXT" param="windGust" format="%02.0f" sampleValue="8" unit="mph" />
    <plotParameterDefinition displayName="windGust (m/s)" displayType="TEXT" param="windGust" format="%02.0f" sampleValue="8" unit="m/s" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
    <plotParameterDefinition displayName="Marker" displayType="MARKER" param="Marker" sampleValue=" " svgClass="marker" />
 

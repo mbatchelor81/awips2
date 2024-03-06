@@ -27,30 +27,17 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-<<<<<<< HEAD
-=======
-import javax.persistence.Index;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-<<<<<<< HEAD
-=======
-import org.locationtech.jts.geom.Geometry;
-import org.locationtech.jts.geom.Point;
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.geospatial.ISpatialEnabled;
 import com.raytheon.uf.common.geospatial.ISpatialObject;
 import com.raytheon.uf.common.pointdata.spatial.AircraftObsLocation;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerialize;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
-<<<<<<< HEAD
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.Point;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Layer for an ACARS Sounding
@@ -63,27 +50,15 @@ import org.locationtech.jts.geom.Point;
  * Apr 30, 2009            jkorman     Initial creation
  * Oct 22, 2013 2361       njensen     Remove XML annotations
  * Jul 22, 2014 3392       nabowle     Change Double fields to Float.
-<<<<<<< HEAD
-=======
- * Aug 11, 2022 8892       tjensen     Update indexes for Hibernate 5
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
  * @author jkorman
-<<<<<<< HEAD
  * @version 1.0
  */
 
 @Entity
 @Table(name = "acarssoundinglayer")
-=======
- */
-
-@Entity
-@Table(name = "acarssoundinglayer", indexes = {
-        @Index(name = "%TABLE%_stationIndex", columnList = "stationId") })
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 @DynamicSerialize
 public class ACARSSoundingLayer implements Serializable, ISpatialEnabled {
 
@@ -556,14 +531,11 @@ public class ACARSSoundingLayer implements Serializable, ISpatialEnabled {
                 getTimeObs());
     }
 
-<<<<<<< HEAD
     /*
      * (non-Javadoc)
      *
      * @see java.lang.Object#hashCode()
      */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -576,7 +548,6 @@ public class ACARSSoundingLayer implements Serializable, ISpatialEnabled {
         return result;
     }
 
-<<<<<<< HEAD
     /*
      * (non-Javadoc)
      *
@@ -594,24 +565,6 @@ public class ACARSSoundingLayer implements Serializable, ISpatialEnabled {
         if (location == null) {
             if (other.location != null)
                 return false;
-=======
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        ACARSSoundingLayer other = (ACARSSoundingLayer) obj;
-        if (location == null) {
-            if (other.location != null) {
-                return false;
-            }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         } else {
             // Get the point geometries and compare those!
             Point p1 = location.getLocation();
@@ -624,7 +577,6 @@ public class ACARSSoundingLayer implements Serializable, ISpatialEnabled {
             if (other.tailNumber != null) {
                 return false;
             }
-<<<<<<< HEAD
         } else if (!tailNumber.equals(other.tailNumber))
             return false;
         if (timeObs == null) {
@@ -632,18 +584,6 @@ public class ACARSSoundingLayer implements Serializable, ISpatialEnabled {
                 return false;
         } else if (!timeObs.equals(other.timeObs))
             return false;
-=======
-        } else if (!tailNumber.equals(other.tailNumber)) {
-            return false;
-        }
-        if (timeObs == null) {
-            if (other.timeObs != null) {
-                return false;
-            }
-        } else if (!timeObs.equals(other.timeObs)) {
-            return false;
-        }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return true;
     }
 
@@ -668,8 +608,5 @@ public class ACARSSoundingLayer implements Serializable, ISpatialEnabled {
         System.out.println(layerB.hashCode());
 
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

@@ -5,11 +5,7 @@
 #
 %define _prefix /usr/local/awips2-postgresql
 %define _libdir %{_prefix}/lib
-<<<<<<< HEAD
 %define source_jar_file postgresql-42.2.16.jar
-=======
-%define source_jar_file postgresql-42.2.26.jar
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 Name: awips2-rehost-support-postgresql
 Summary: AWIPS II Rehost Support (PostgreSQL)
@@ -20,11 +16,7 @@ BuildArch: noarch
 URL: N/A
 License: N/A
 Distribution: N/A
-<<<<<<< HEAD
 Vendor: %{_build_vendor}
-=======
-Vendor: Raytheon
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 Packager: %{_build_site}
 
 AutoReq: no

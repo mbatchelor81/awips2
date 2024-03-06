@@ -22,14 +22,6 @@ package oasis.names.tc.ebxml.regrep.xsd.lcm.v4;
 
 import java.util.List;
 
-<<<<<<< HEAD
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -37,15 +29,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-<<<<<<< HEAD
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
 import com.raytheon.uf.common.registry.schemas.ebxml.util.EbxmlNamespaces;
-import com.raytheon.uf.common.registry.schemas.ebxml.util.RegrepUtil;
-=======
-import com.raytheon.uf.common.registry.schemas.ebxml.util.EbxmlNamespaces;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.serialization.annotations.DynamicSerialize;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
 
@@ -87,53 +71,29 @@ import oasis.names.tc.ebxml.regrep.xsd.rs.v4.RegistryRequestType;
  * 2012                     bphillip    Initial implementation
  * 10/17/2013    1682       bphillip    Added software history
  * 12/2/2013     1829       bphillip    Added Hibernate annotations
-<<<<<<< HEAD
- * Mar 31, 2014 2889       dhladky      Added username for notification center tracking.
- * 07/25/2019   7890       ksunil       set deleteChildren default to true.
- * </pre>
- *
- * @author bphillip
- * @version 1
-=======
  * Mar 31, 2014  2889       dhladky      Added username for notification center tracking.
  * 07/25/2019    7890       ksunil       set deleteChildren default to true.
  * 10/27/2020    8170       ksunil      this is an empty table. Remove all JPA references
  * </pre>
  *
  * @author bphillip
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = { "query", "objectRefList" })
 @XmlRootElement(name = "RemoveObjectsRequest")
 @DynamicSerialize
-<<<<<<< HEAD
-@Entity
-@Cache(region = RegrepUtil.DB_CACHE_REGION, usage = CacheConcurrencyStrategy.TRANSACTIONAL)
-@Table(schema = RegrepUtil.EBXML_SCHEMA, name = "RemoveObjectsRequest")
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 public class RemoveObjectsRequest extends RegistryRequestType {
 
     private static final long serialVersionUID = 654608816540789417L;
 
     @XmlElement(name = "Query")
     @DynamicSerializeElement
-<<<<<<< HEAD
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "query_id", referencedColumnName = "id")
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     protected QueryType query;
 
     @XmlElement(name = "ObjectRefList", namespace = EbxmlNamespaces.RIM_URI)
     @DynamicSerializeElement
-<<<<<<< HEAD
-    @OneToOne(cascade = CascadeType.ALL)
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     protected ObjectRefListType objectRefList;
 
     @XmlAttribute

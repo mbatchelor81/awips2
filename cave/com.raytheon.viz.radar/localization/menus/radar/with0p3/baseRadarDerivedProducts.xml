@@ -191,23 +191,13 @@
     <contribute xsi:type="titleItem" titleText="------ Velocity Based ------"
         id="${icao}DerivedProductsVelocityBased" />
     <contribute xsi:type="bundleItem" file="bundles/DefaultRadarXY.xml"
-<<<<<<< HEAD
-        menuText="VAD Wind Profile (VWP)" id="${icao}VADWindProfile"
-        editorType="com.raytheon.viz.radar.ui.xy.RadarXYEditor">
-=======
         menuText="VAD Wind Profile (VWP)" id="${icao}VADWindProfile">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="icao" value="${icao}" />
         <substitute key="product" value="48" />
         <substitute key="insetMap" value="false" />
     </contribute>
     <contribute xsi:type="bundleItem" file="bundles/DefaultRadarXY.xml"
-<<<<<<< HEAD
-        menuText="Vel Az Display (VAD)" id="${icao}VelAzDisplay"
-        editorType="com.raytheon.viz.radar.ui.xy.RadarXYEditor">
-=======
         menuText="Vel Az Display (VAD)" id="${icao}VelAzDisplay">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="icao" value="${icao}" />
         <substitute key="product" value="84" />
         <substitute key="insetMap" value="false" />
@@ -247,23 +237,13 @@
     <contribute xsi:type="titleItem" titleText="------ Cross Section ------"
         id="${icao}CrossSection" />
     <contribute xsi:type="bundleItem" file="bundles/DefaultRadarXY.xml"
-<<<<<<< HEAD
-        menuText="Reflectivity (RCS)" id="${icao}ReflectivityRCS"
-        editorType="com.raytheon.viz.radar.ui.xy.RadarXYEditor">
-=======
         menuText="Reflectivity (RCS)" id="${icao}ReflectivityRCS">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="icao" value="${icao}" />
         <substitute key="product" value="50" />
         <substitute key="insetMap" value="true" />
     </contribute>
     <contribute xsi:type="bundleItem" file="bundles/DefaultRadarXY.xml"
-<<<<<<< HEAD
-        menuText="Velocity (VCS)" id="${icao}VelocityVCS"
-        editorType="com.raytheon.viz.radar.ui.xy.RadarXYEditor">
-=======
         menuText="Velocity (VCS)" id="${icao}VelocityVCS">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="icao" value="${icao}" />
         <substitute key="product" value="51" />
         <substitute key="insetMap" value="true" />
@@ -273,111 +253,61 @@
     <contribute xsi:type="titleItem" titleText="------ Cell Trends ------"
         id="${icao}CellTrends" />
     <contribute xsi:type="bundleItem" file="bundles/DefaultCellTrend.xml"
-<<<<<<< HEAD
-        menuText="point A" id="${icao}pointA"
-        editorType="com.raytheon.viz.radar.ui.xy.RadarGraphEditor">
-=======
         menuText="point A" id="${icao}pointA">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="product" value="62" />
         <substitute key="elevation" value="0" />
         <substitute key="pointid" value="A" />
     </contribute>
     <contribute xsi:type="bundleItem" file="bundles/DefaultCellTrend.xml"
-<<<<<<< HEAD
-        menuText="point B" id="${icao}pointB"
-        editorType="com.raytheon.viz.radar.ui.xy.RadarGraphEditor">
-=======
         menuText="point B" id="${icao}pointB">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="product" value="62" />
         <substitute key="elevation" value="0" />
         <substitute key="pointid" value="B" />
     </contribute>
     <contribute xsi:type="bundleItem" file="bundles/DefaultCellTrend.xml"
-<<<<<<< HEAD
-        menuText="point C" id="${icao}pointC"
-        editorType="com.raytheon.viz.radar.ui.xy.RadarGraphEditor">
-=======
         menuText="point C" id="${icao}pointC">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="product" value="62" />
         <substitute key="elevation" value="0" />
         <substitute key="pointid" value="C" />
     </contribute>
     <contribute xsi:type="bundleItem" file="bundles/DefaultCellTrend.xml"
-<<<<<<< HEAD
-        menuText="point D" id="${icao}pointD"
-        editorType="com.raytheon.viz.radar.ui.xy.RadarGraphEditor">
-=======
         menuText="point D" id="${icao}pointD">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="product" value="62" />
         <substitute key="elevation" value="0" />
         <substitute key="pointid" value="D" />
     </contribute>
     <contribute xsi:type="bundleItem" file="bundles/DefaultCellTrend.xml"
-<<<<<<< HEAD
-        menuText="point E" id="${icao}pointE"
-        editorType="com.raytheon.viz.radar.ui.xy.RadarGraphEditor">
-=======
         menuText="point E" id="${icao}pointE">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="product" value="62" />
         <substitute key="elevation" value="0" />
         <substitute key="pointid" value="E" />
     </contribute>
     <contribute xsi:type="bundleItem" file="bundles/DefaultCellTrend.xml"
-<<<<<<< HEAD
-        menuText="point F" id="${icao}pointF"
-        editorType="com.raytheon.viz.radar.ui.xy.RadarGraphEditor">
-=======
         menuText="point F" id="${icao}pointF">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="product" value="62" />
         <substitute key="elevation" value="0" />
         <substitute key="pointid" value="F" />
     </contribute>
     <contribute xsi:type="bundleItem" file="bundles/DefaultCellTrend.xml"
-<<<<<<< HEAD
-        menuText="point G" id="${icao}pointG"
-        editorType="com.raytheon.viz.radar.ui.xy.RadarGraphEditor">
-=======
         menuText="point G" id="${icao}pointG">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="product" value="62" />
         <substitute key="elevation" value="0" />
         <substitute key="pointid" value="G" />
     </contribute>
     <contribute xsi:type="bundleItem" file="bundles/DefaultCellTrend.xml"
-<<<<<<< HEAD
-        menuText="point H" id="${icao}pointH"
-        editorType="com.raytheon.viz.radar.ui.xy.RadarGraphEditor">
-=======
         menuText="point H" id="${icao}pointH">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="product" value="62" />
         <substitute key="elevation" value="0" />
         <substitute key="pointid" value="H" />
     </contribute>
     <contribute xsi:type="bundleItem" file="bundles/DefaultCellTrend.xml"
-<<<<<<< HEAD
-        menuText="point I" id="${icao}pointI"
-        editorType="com.raytheon.viz.radar.ui.xy.RadarGraphEditor">
-=======
         menuText="point I" id="${icao}pointI">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="product" value="62" />
         <substitute key="elevation" value="0" />
         <substitute key="pointid" value="I" />
     </contribute>
     <contribute xsi:type="bundleItem" file="bundles/DefaultCellTrend.xml"
-<<<<<<< HEAD
-        menuText="point J" id="${icao}pointJ"
-        editorType="com.raytheon.viz.radar.ui.xy.RadarGraphEditor">
-=======
         menuText="point J" id="${icao}pointJ">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="product" value="62" />
         <substitute key="elevation" value="0" />
         <substitute key="pointid" value="J" />

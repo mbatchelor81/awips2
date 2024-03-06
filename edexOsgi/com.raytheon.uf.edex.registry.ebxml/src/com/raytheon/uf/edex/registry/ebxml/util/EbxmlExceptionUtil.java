@@ -1,68 +1,24 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
 package com.raytheon.uf.edex.registry.ebxml.util;
 
-<<<<<<< HEAD
-import oasis.names.tc.ebxml.regrep.wsdl.registry.services.v4.MsgRegistryException;
-import oasis.names.tc.ebxml.regrep.xsd.query.v4.QueryExceptionType;
-import oasis.names.tc.ebxml.regrep.xsd.rs.v4.AuthenticationExceptionType;
-import oasis.names.tc.ebxml.regrep.xsd.rs.v4.AuthorizationExceptionType;
-import oasis.names.tc.ebxml.regrep.xsd.rs.v4.InvalidRequestExceptionType;
-import oasis.names.tc.ebxml.regrep.xsd.rs.v4.ObjectExistsExceptionType;
-import oasis.names.tc.ebxml.regrep.xsd.rs.v4.ObjectNotFoundExceptionType;
-import oasis.names.tc.ebxml.regrep.xsd.rs.v4.QuotaExceededExceptionType;
-import oasis.names.tc.ebxml.regrep.xsd.rs.v4.ReferencesExistExceptionType;
-import oasis.names.tc.ebxml.regrep.xsd.rs.v4.RegistryExceptionType;
-import oasis.names.tc.ebxml.regrep.xsd.rs.v4.TimeoutExceptionType;
-import oasis.names.tc.ebxml.regrep.xsd.rs.v4.UnresolvedReferenceExceptionType;
-import oasis.names.tc.ebxml.regrep.xsd.rs.v4.UnsupportedCapabilityExceptionType;
-import oasis.names.tc.ebxml.regrep.xsd.spi.v4.CatalogingExceptionType;
-import oasis.names.tc.ebxml.regrep.xsd.spi.v4.FilteringExceptionType;
-import oasis.names.tc.ebxml.regrep.xsd.spi.v4.ValidationExceptionType;
-
-import org.apache.commons.lang3.exception.ExceptionUtils;
-
-import com.raytheon.uf.common.registry.constants.ErrorSeverity;
-import com.raytheon.uf.common.status.IUFStatusHandler;
-import com.raytheon.uf.common.status.UFStatus;
-
-/**
- * Utility class used to generate registry exceptions
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * 
-=======
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import com.raytheon.uf.common.registry.constants.ErrorSeverity;
@@ -86,26 +42,17 @@ import oasis.names.tc.ebxml.regrep.xsd.spi.v4.ValidationExceptionType;
  *
  * SOFTWARE HISTORY
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
  * Jan 19, 2012 184        bphillip     Initial creation
  * Apr 23, 2013 1910       djohnson     Add createUnresolvedReferenceException().
  * 8/1/2013     1693       bphillip     Added methods to create exceptions
  * 10/20/2013   1682       bphillip     createMsgRegistryException changed to accept throwable
-<<<<<<< HEAD
- * 
- * </pre>
- * 
- * @author bphillip
- * @version 1.0
-=======
  * 10/30/2020   8170       ksunil       removed unused code associated with removed tables
  *
  * </pre>
  *
  * @author bphillip
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  */
 
 public class EbxmlExceptionUtil {
@@ -116,11 +63,7 @@ public class EbxmlExceptionUtil {
 
     /**
      * Creates a new MsgRegistryException object
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param message
      *            The message attached to the exception
      * @param detail
@@ -143,11 +86,7 @@ public class EbxmlExceptionUtil {
 
     /**
      * Creates a new MsgRegistryException object
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param message
      *            The message attached to the exception
      * @param detail
@@ -191,11 +130,7 @@ public class EbxmlExceptionUtil {
 
     /**
      * Creates a new MsgRegistryException
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param message
      *            The message to attach to the exception
      * @param exception
@@ -210,11 +145,7 @@ public class EbxmlExceptionUtil {
     /**
      * Creates a MsgRegistryException with RegistryExceptionType as the
      * underlying exception
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param message
      *            The message to attach to the MsgRegistryException
      * @param detail
@@ -229,83 +160,9 @@ public class EbxmlExceptionUtil {
     }
 
     /**
-<<<<<<< HEAD
-     * Creates a MsgRegistryException with AuthenticationExceptionType as the
-     * underlying exception
-     * 
-     * @param message
-     *            The message to attach to the MsgRegistryException
-     * @param detail
-     *            Additional details to add to the exception
-     * @return The MsgRegistryException with AuthenticationExceptionType as the
-     *         underlying exception
-     */
-    public static MsgRegistryException createAuthenticationExceptionType(
-            String message, String detail) {
-        return createMsgRegistryException(message, detail,
-                new AuthenticationExceptionType());
-    }
-
-    /**
-     * Creates a MsgRegistryException with AuthorizationExceptionType as the
-     * underlying exception
-     * 
-     * @param message
-     *            The message to attach to the MsgRegistryException
-     * @param detail
-     *            Additional details to add to the exception
-     * @return The MsgRegistryException with AuthorizationExceptionType as the
-     *         underlying exception
-     */
-    public static MsgRegistryException createAuthorizationExceptionType(
-            String message, String detail) {
-        return createMsgRegistryException(message, detail,
-                new AuthorizationExceptionType());
-    }
-
-    /**
-     * Creates a MsgRegistryException with CatalogingExceptionType as the
-     * underlying exception
-     * 
-     * @param message
-     *            The message to attach to the MsgRegistryException
-     * @param detail
-     *            Additional details to add to the exception
-     * @return The MsgRegistryException with CatalogingExceptionType as the
-     *         underlying exception
-     */
-    public static MsgRegistryException createCatalogingExceptionType(
-            String message, String detail) {
-        return createMsgRegistryException(message, detail,
-                new CatalogingExceptionType());
-    }
-
-    /**
-     * Creates a MsgRegistryException with FilteringExceptionType as the
-     * underlying exception
-     * 
-     * @param message
-     *            The message to attach to the MsgRegistryException
-     * @param detail
-     *            Additional details to add to the exception
-     * @return The MsgRegistryException with FilteringExceptionType as the
-     *         underlying exception
-     */
-    public static MsgRegistryException createFilteringExceptionType(
-            String message, String detail) {
-        return createMsgRegistryException(message, detail,
-                new FilteringExceptionType());
-    }
-
-    /**
-     * Creates a MsgRegistryException with InvalidRequestExceptionType as the
-     * underlying exception
-     * 
-=======
      * Creates a MsgRegistryException with InvalidRequestExceptionType as the
      * underlying exception
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param message
      *            The message to attach to the MsgRegistryException
      * @param detail
@@ -322,11 +179,7 @@ public class EbxmlExceptionUtil {
     /**
      * Creates a MsgRegistryException with ObjectExistsExceptionType as the
      * underlying exception
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param message
      *            The message to attach to the MsgRegistryException
      * @param detail
@@ -343,11 +196,7 @@ public class EbxmlExceptionUtil {
     /**
      * Creates a MsgRegistryException with ObjectNotFoundExceptionType as the
      * underlying exception
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param message
      *            The message to attach to the MsgRegistryException
      * @param detail
@@ -364,11 +213,7 @@ public class EbxmlExceptionUtil {
     /**
      * Creates a MsgRegistryException with QueryExceptionType as the underlying
      * exception
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param message
      *            The message to attach to the MsgRegistryException
      * @param detail
@@ -383,32 +228,9 @@ public class EbxmlExceptionUtil {
     }
 
     /**
-<<<<<<< HEAD
-     * Creates a MsgRegistryException with QuotaExceededExceptionType as the
-     * underlying exception
-     * 
-     * @param message
-     *            The message to attach to the MsgRegistryException
-     * @param detail
-     *            Additional details to add to the exception
-     * @return The MsgRegistryException with QuotaExceededExceptionType as the
-     *         underlying exception
-     */
-    public static MsgRegistryException createQuotaExceededExceptionType(
-            String message, String detail) {
-        return createMsgRegistryException(message, detail,
-                new QuotaExceededExceptionType());
-    }
-
-    /**
-     * Creates a MsgRegistryException with ReferencesExistExceptionType as the
-     * underlying exception
-     * 
-=======
      * Creates a MsgRegistryException with ReferencesExistExceptionType as the
      * underlying exception
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param message
      *            The message to attach to the MsgRegistryException
      * @param detail
@@ -423,28 +245,13 @@ public class EbxmlExceptionUtil {
     }
 
     /**
-<<<<<<< HEAD
-     * Creates a MsgRegistryException with TimeoutExceptionType as the
-     * underlying exception
-     * 
-=======
      * Creates a MsgRegistryException with UnsupportedCapabilityExceptionType as
      * the underlying exception
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param message
      *            The message to attach to the MsgRegistryException
      * @param detail
      *            Additional details to add to the exception
-<<<<<<< HEAD
-     * @return The MsgRegistryException with TimeoutExceptionType as the
-     *         underlying exception
-     */
-    public static MsgRegistryException createTimeoutExceptionType(
-            String message, String detail) {
-        return createMsgRegistryException(message, detail,
-                new TimeoutExceptionType());
-=======
      * @return The MsgRegistryException with UnsupportedCapabilityExceptionType
      *         as the underlying exception
      */
@@ -452,17 +259,12 @@ public class EbxmlExceptionUtil {
             String message, String detail) {
         return createMsgRegistryException(message, detail,
                 new RegistryExceptionType());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**
      * Creates a MsgRegistryException with UnresolvedReferenceExceptionType as
      * the underlying exception
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param message
      *            The message to attach to the MsgRegistryException
      * @param detail
@@ -477,32 +279,9 @@ public class EbxmlExceptionUtil {
     }
 
     /**
-<<<<<<< HEAD
-     * Creates a MsgRegistryException with UnsupportedCapabilityExceptionType as
-     * the underlying exception
-     * 
-     * @param message
-     *            The message to attach to the MsgRegistryException
-     * @param detail
-     *            Additional details to add to the exception
-     * @return The MsgRegistryException with UnsupportedCapabilityExceptionType
-     *         as the underlying exception
-     */
-    public static MsgRegistryException createUnsupportedCapabilityExceptionType(
-            String message, String detail) {
-        return createMsgRegistryException(message, detail,
-                new UnsupportedCapabilityExceptionType());
-    }
-
-    /**
-     * Creates a MsgRegistryException with ValidationExceptionType as the
-     * underlying exception
-     * 
-=======
      * Creates a MsgRegistryException with ValidationExceptionType as the
      * underlying exception
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param message
      *            The message to attach to the MsgRegistryException
      * @param detail

@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -64,11 +52,8 @@ import com.raytheon.uf.common.geospatial.MapUtil;
 import com.raytheon.uf.common.geospatial.ReferencedCoordinate;
 import com.raytheon.uf.common.geospatial.SpatialQueryFactory;
 import com.raytheon.uf.common.geospatial.SpatialQueryResult;
-<<<<<<< HEAD
-=======
 import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.xmrg.hrap.HRAP;
 import com.raytheon.uf.common.xmrg.hrap.HRAPCoordinates;
 import com.raytheon.uf.common.xmrg.hrap.HRAPSubGrid;
@@ -99,20 +84,6 @@ import systems.uom.common.USCustomary;
 
 /**
  * The MPE Gridded Precipitation Resource.
-<<<<<<< HEAD
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * Date         Ticket#    Engineer    Description
- * ------------ ---------- ----------- --------------------------
- * Apr 27, 2009 ?          snaples     Initial creation
- * Feb 28, 2017 6157       bkowal      No longer alter the data when legend filtering
- *                                     is enabled.
- * 
- * </pre>
- * 
-=======
  *
  * <pre>
  *
@@ -128,17 +99,12 @@ import systems.uom.common.USCustomary;
  *
  * </pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author snaples
  */
 
 public class PlotGriddedPrecipResource
         extends AbstractVizResource<AbstractResourceData, MapDescriptor>
         implements IMpeResource {
-<<<<<<< HEAD
-
-    MPEDisplayManager displayMgr = null;
-=======
     private static final IUFStatusHandler statusHandler = UFStatus
             .getHandler(PlotGriddedPrecipResource.class);
 
@@ -149,7 +115,6 @@ public class PlotGriddedPrecipResource
     private static final float contrast = 1.0f;
 
     private MPEDisplayManager displayMgr = null;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private GriddedImageDisplay2 gridDisplay;
 
@@ -157,39 +122,10 @@ public class PlotGriddedPrecipResource
 
     private GridGeometry2D gridGeometry;
 
-<<<<<<< HEAD
-    private float brightness = 1.0f;
-
-    private float contrast = 1.0f;
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private boolean isInterpolated;
 
     private HRAPSubGrid subGrid;
 
-<<<<<<< HEAD
-    int first = 1;
-
-    int hed;
-
-    int time_pos;
-
-    int display_flag;
-
-    Hrap_Grid hrap_grid = DailyQcUtils.getHrap_grid();
-
-    Pcp pcp = DailyQcUtils.pcp;
-
-    Pcp spf = DailyQcUtils.spf;
-
-    private ColorMapParameters parameters = new ColorMapParameters();
-
-    private static final GeometryFactory gf = new GeometryFactory();
-
-    private List<Colorvalue> colorSet;
-
-=======
     private Hrap_Grid hrap_grid = DailyQcUtils.getHrap_grid();
 
     private Pcp pcp = DailyQcUtils.pcp;
@@ -207,7 +143,6 @@ public class PlotGriddedPrecipResource
      * @param displayMgr
      * @param colorSet
      */
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public PlotGriddedPrecipResource(MPEDisplayManager displayMgr,
             List<Colorvalue> colorSet) {
         super(new PlotGriddedPrecipResourceData(), new LoadProperties());
@@ -215,23 +150,12 @@ public class PlotGriddedPrecipResource
         this.colorSet = colorSet;
     }
 
-<<<<<<< HEAD
-    ColorMap precip_colormap = DrawDQCStations.colorMap;
-
-    RGB color = null;
-
-    IGraphicsTarget target;
-
-    FloatBuffer buf;
-
-=======
     /**
      *
      * @param prefix
      * @param num
      * @param mnum
      */
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public void plot_gridded_precip(String prefix, int num, int mnum) {
         int pcpn_time_step = MPEDisplayManager.pcpn_time_step;
         int rsmode = OtherPrecipOptions.rsmode;
@@ -338,11 +262,7 @@ public class PlotGriddedPrecipResource
                     continue;
                 }
 
-<<<<<<< HEAD
-                if (wfo_all != true) {
-=======
                 if (!wfo_all) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                     for (m = 0; m < 20; m++) {
                         if (wfo_in_use[m] == -1) {
@@ -381,12 +301,7 @@ public class PlotGriddedPrecipResource
             try {
                 coord = HRAPCoordinates.getHRAPCoordinates();
             } catch (Exception e) {
-<<<<<<< HEAD
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-=======
                 statusHandler.error(e.getLocalizedMessage(), e);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
             if (extent.width == coord.width && extent.height == coord.height) {
                 extent = coord;
@@ -404,25 +319,11 @@ public class PlotGriddedPrecipResource
             project(gridGeometry.getCoordinateReferenceSystem());
 
         } catch (Exception e) {
-<<<<<<< HEAD
-            e.printStackTrace();
-=======
             statusHandler.error(e.getLocalizedMessage(), e);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.raytheon.uf.viz.core.rsc.AbstractVizResource#inspect(com.raytheon
-     * .uf.viz.core.geospatial.ReferencedCoordinate)
-     */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public String inspect(ReferencedCoordinate coord) throws VizException {
         Map<String, Object> Values = interrogate(coord);
@@ -434,16 +335,6 @@ public class PlotGriddedPrecipResource
         }
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.raytheon.uf.viz.core.rsc.AbstractVizResource#interrogate(com.raytheon
-     * .uf.viz.core.geospatial.ReferencedCoordinate)
-     */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public Map<String, Object> interrogate(ReferencedCoordinate coord)
             throws VizException {
@@ -451,11 +342,7 @@ public class PlotGriddedPrecipResource
             return null;
         }
 
-<<<<<<< HEAD
-        Map<String, Object> values = new HashMap<String, Object>();
-=======
         Map<String, Object> values = new HashMap<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         try {
             Coordinate gridCell = coord.asGridCell(
@@ -526,15 +413,9 @@ public class PlotGriddedPrecipResource
 
     /**
      * convert Color to RGB
-<<<<<<< HEAD
-     * 
-     * @param color
-     * @return
-=======
      *
      * @param color
      * @return RGB
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public static RGB convertC(Color color) {
         int blue = (int) (color.getBlue() * 255f);
@@ -559,12 +440,7 @@ public class PlotGriddedPrecipResource
 
     @Override
     protected void initInternal(IGraphicsTarget target) throws VizException {
-<<<<<<< HEAD
-        this.target = target;
-        time_pos = DrawDQCStations.time_pos;
-=======
         int time_pos = DrawDQCStations.time_pos;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         plot_gridded_precip(DrawDQCStations.prefix, time_pos, 100);
 
     }
@@ -575,19 +451,11 @@ public class PlotGriddedPrecipResource
         if (buf == null
                 || (DailyQcUtils.grids_flag != 1
                         && DailyQcUtils.contour_flag != 1)
-<<<<<<< HEAD
-                || displayMgr.isQpf() != true) {
-=======
                 || !displayMgr.isQpf()) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return;
         }
 
         Set<DisplayMode> mode = displayMgr.getDisplayMode();
-<<<<<<< HEAD
-        System.out.println("Mode is: " + mode.toString());
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         if (mode.contains(DisplayMode.Image)) {
             if (gridDisplay == null) {
@@ -605,11 +473,7 @@ public class PlotGriddedPrecipResource
         if (mode.contains(DisplayMode.Contour)) {
             if (contourDisplay == null) {
                 contourDisplay = new GriddedContourDisplay(descriptor,
-<<<<<<< HEAD
-                        gridGeometry, buf);
-=======
                         getSafeName(), gridGeometry, buf);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                 contourDisplay.setColor(ColorUtil.WHITE);
                 contourDisplay.setLineStyle(LineStyle.SOLID);
@@ -617,20 +481,8 @@ public class PlotGriddedPrecipResource
             }
             contourDisplay.paint(target, paintProps);
         }
-<<<<<<< HEAD
-
-        first = 0;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.raytheon.viz.core.rsc.IVizResource#getName()
-     */
-=======
-    }
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public String getName() {
         if (DrawDQCStations.qcmode == "") {

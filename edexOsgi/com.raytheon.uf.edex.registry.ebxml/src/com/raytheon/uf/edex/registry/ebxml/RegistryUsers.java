@@ -30,8 +30,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.UriInfo;
 
-<<<<<<< HEAD
-=======
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,7 +43,6 @@ import com.raytheon.uf.edex.registry.ebxml.dao.RoleDao;
 import com.raytheon.uf.edex.registry.ebxml.exception.EbxmlRegistryException;
 import com.raytheon.uf.edex.security.SecurityConfiguration;
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import oasis.names.tc.ebxml.regrep.wsdl.registry.services.v4.LifecycleManager;
 import oasis.names.tc.ebxml.regrep.wsdl.registry.services.v4.MsgRegistryException;
 import oasis.names.tc.ebxml.regrep.xsd.lcm.v4.Mode;
@@ -60,22 +57,6 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryObjectType;
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.SlotType;
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.StringValueType;
 
-<<<<<<< HEAD
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.raytheon.uf.common.registry.constants.AssociationTypes;
-import com.raytheon.uf.common.registry.constants.RegistryObjectTypes;
-import com.raytheon.uf.common.registry.ebxml.RegistryUtil;
-import com.raytheon.uf.common.security.encryption.AESEncryptor;
-import com.raytheon.uf.edex.registry.ebxml.dao.DbInit;
-import com.raytheon.uf.edex.registry.ebxml.dao.PersonDao;
-import com.raytheon.uf.edex.registry.ebxml.dao.RoleDao;
-import com.raytheon.uf.edex.registry.ebxml.exception.EbxmlRegistryException;
-import com.raytheon.uf.edex.security.SecurityConfiguration;
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 /**
  * 
  * Registry User Utilitiy class
@@ -90,10 +71,7 @@ import com.raytheon.uf.edex.security.SecurityConfiguration;
  * Mar 04, 2016  5388     dhladky   Changed AESEncryptor constructor
  * Aug 25, 2016  5846     rjpeter   Remove InternationalString from DB
  * Oct  1, 2018  7238     skabasele Add user info to InitialDbOjectIdsSet
-<<<<<<< HEAD
-=======
  * May 11, 2020  8161     bsteffen  Change slot id to a long
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -268,12 +246,6 @@ public class RegistryUsers {
          */
         DbInit.addToInitialDbOjectIdsSet(association.getId());
         DbInit.addToInitialDbOjectIdsSet(user.getId());
-<<<<<<< HEAD
-        DbInit.addToInitialDbOjectIdsSet(userSlot.getId());
-        DbInit.addToInitialDbOjectIdsSet(passwordSlot.getId());
-        DbInit.addToInitialDbOjectIdsSet(roleSlot.getId());
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         submit(association, user);
     }

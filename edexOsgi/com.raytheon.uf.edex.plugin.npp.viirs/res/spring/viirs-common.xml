@@ -12,19 +12,11 @@
         <property name="pluginFQN" value="com.raytheon.uf.common.dataplugin.npp.viirs" />
         <property name="dao" value="com.raytheon.uf.edex.plugin.npp.viirs.dao.VIIRSDao" />
         <property name="record" value="com.raytheon.uf.common.dataplugin.npp.viirs.VIIRSDataRecord" />
-<<<<<<< HEAD
-        <property name="compression" value="LZF"/>
-=======
         <property name="compression" value="GZIP"/>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     </bean>
 
     <bean id="viirsRegistered" factory-bean="pluginRegistry" factory-method="register">
         <constructor-arg ref="viirsPluginName" />
         <constructor-arg ref="viirsProperties" />
     </bean>
-<<<<<<< HEAD
 </beans>
-=======
-</beans>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

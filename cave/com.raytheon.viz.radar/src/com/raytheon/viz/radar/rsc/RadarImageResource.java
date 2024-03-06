@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -39,10 +27,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-<<<<<<< HEAD
-=======
 import java.util.Objects;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.measure.IncommensurableException;
@@ -102,30 +87,17 @@ import com.raytheon.viz.radar.VizRadarRecord;
 import com.raytheon.viz.radar.interrogators.IRadarInterrogator;
 import com.raytheon.viz.radar.util.DataUtilities;
 
-<<<<<<< HEAD
-import tec.uom.se.AbstractConverter;
-import tec.uom.se.function.MultiplyConverter;
-=======
 import tech.units.indriya.function.AbstractConverter;
 import tech.units.indriya.function.MultiplyConverter;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Base resource for any radar record that can be displayed on a map as a
  * colormapped image.
-<<<<<<< HEAD
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * 
-=======
  *
  * <pre>
  *
  * SOFTWARE HISTORY
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- --------------------------------------------
  * Aug 04, 2010           mnash     Initial creation
@@ -134,13 +106,6 @@ import tech.units.indriya.function.MultiplyConverter;
  * Mar 21, 2018  7164     njensen   Use persisted colormap min and max when present
  * Apr 04, 2018  6889     njensen   Use brightness from ImagePreferences if
  *                                  present but missing in ImagingCapability
-<<<<<<< HEAD
- * Apr 15, 2019  7596     lsingh     Updated units framework to JSR-363.
- *                                   Handled unit conversion
- * 
- * </pre>
- * 
-=======
  * Apr 15, 2019  7596     lsingh    Updated units framework to JSR-363.
  *                                  Handled unit conversion
  * Oct 13, 2022  8905     lsingh    Check for invalid values when creating conversion table.
@@ -150,7 +115,6 @@ import tech.units.indriya.function.MultiplyConverter;
  *
  * </pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author mnash
  */
 public class RadarImageResource<D extends IDescriptor>
@@ -194,20 +158,6 @@ public class RadarImageResource<D extends IDescriptor>
         // This is mostly done so it can be passed up to a BestRes resource so
         // it can unify the color maps of all resources
         VizRadarRecord mostSevere = null;
-<<<<<<< HEAD
-        for (VizRadarRecord rec : radarRecords.values()) {
-            if (mostSevere == null) {
-                mostSevere = rec;
-                continue;
-            }
-            // If you have records with more levels prefer that color map
-            if (mostSevere.getNumLevels() < rec.getNumLevels()) {
-                mostSevere = rec;
-            }
-            // Pick the one that is in storm mode if there is one.
-            if (mostSevere.getOperationalMode() < rec.getOperationalMode()) {
-                mostSevere = rec;
-=======
         synchronized (radarRecords) {
             for (VizRadarRecord rec : radarRecords.values()) {
                 if (mostSevere == null) {
@@ -223,7 +173,6 @@ public class RadarImageResource<D extends IDescriptor>
                         .getOperationalMode()) {
                     mostSevere = rec;
                 }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         }
         if (mostSevere != null) {
@@ -264,11 +213,7 @@ public class RadarImageResource<D extends IDescriptor>
     /**
      * Create the radar tile given the tileRecord to populate and a RadarRecord
      * with all data populated
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param target
      * @param tiltRecord
      * @param populatedRecord
@@ -300,11 +245,7 @@ public class RadarImageResource<D extends IDescriptor>
 
     /**
      * Get the colormap parameters, expects a radar record populated with data
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param target
      * @param record
      * @return
@@ -340,12 +281,8 @@ public class RadarImageResource<D extends IDescriptor>
         if (params.getDisplayUnit() == null) {
             params.setDisplayUnit(record.getUnitObject());
         }
-<<<<<<< HEAD
-        if (params.getImageUnit() == dataUnit && record.getNumLevels() <= 16) {
-=======
         if (params.getColorMapUnit() == dataUnit
                 && record.getNumLevels() <= 16) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             DataMappingPreferences dataMapping = new DataMappingPreferences();
             Object[] thresholds = record.getDecodedThresholds();
             for (int i = 1; i < record.getNumLevels(); i++) {
@@ -357,10 +294,6 @@ public class RadarImageResource<D extends IDescriptor>
 
                 // Set the data value
                 if (thresholds[i] instanceof Float) {
-<<<<<<< HEAD
-                    entry.setDisplayValue(
-                            params.getDataToDisplayConverter().convert(i));
-=======
                     double convertedValue;
                     try {
                         convertedValue = params.getDataToDisplayConverter()
@@ -369,7 +302,6 @@ public class RadarImageResource<D extends IDescriptor>
                         convertedValue = Double.NaN;
                     }
                     entry.setDisplayValue(convertedValue);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 } else if (thresholds[i] instanceof String) {
                     entry.setLabel((String) thresholds[i]);
                 } else if (thresholds[i] == null) {
@@ -503,11 +435,7 @@ public class RadarImageResource<D extends IDescriptor>
 
     /**
      * Get the radar image for the given time
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param target
      * @param dataTime
      * @return
@@ -544,11 +472,7 @@ public class RadarImageResource<D extends IDescriptor>
 
     /**
      * Shared by image and non-image
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param target
      * @param crs
      * @param range
@@ -595,11 +519,7 @@ public class RadarImageResource<D extends IDescriptor>
         UnitConverter dataToImage = null;
         Unit<?> dataUnit = record.getDataUnit();
         if (dataUnit != null && !dataUnit.equals(params.getDataUnit())) {
-<<<<<<< HEAD
-            Unit<?> imageUnit = params.getImageUnit();
-=======
             Unit<?> imageUnit = params.getColorMapUnit();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if (imageUnit != null && dataUnit.isCompatible(imageUnit)) {
                 dataToImage = UnitConv.getConverterToUnchecked(dataUnit,
                         imageUnit);
@@ -614,11 +534,7 @@ public class RadarImageResource<D extends IDescriptor>
             dataToImage = params.getDataToImageConverter();
         }
         if (dataToImage == null && record.getNumLevels() <= 16) {
-<<<<<<< HEAD
-            dataToImage = new MultiplyConverter(16);
-=======
             dataToImage = MultiplyConverter.of(16);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         } else if (dataToImage == null) {
             dataToImage = AbstractConverter.IDENTITY;
         }
@@ -628,15 +544,6 @@ public class RadarImageResource<D extends IDescriptor>
         for (int i = 0; i < record.getNumLevels(); i++) {
             double image = dataToImage.convert(i);
             if (Double.isNaN(image)) {
-<<<<<<< HEAD
-                double d;
-                try {
-                    d = dataUnit.getConverterToAny(params.getDisplayUnit())
-                            .convert(i);
-                } catch (IncommensurableException | UnconvertibleException e) {
-                    d = Double.NaN;
-                }
-=======
 
                 double d;
                 UnitConverter converter = null;
@@ -659,7 +566,6 @@ public class RadarImageResource<D extends IDescriptor>
                     d = Double.NaN;
                 }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if (Double.isNaN(d)) {
                     // This means that the data is a non-numeric value, most
                     // likely a flag of some sort
@@ -680,28 +586,13 @@ public class RadarImageResource<D extends IDescriptor>
                         // specifically handled in the style rules. For example
                         // if 1 is a flag for RF than pixel value 1 in the style
                         // rules will need to be RF. This is not
-<<<<<<< HEAD
-                        // a graceful seperation of data and representation but
-=======
                         // a graceful separation of data and representation but
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         // it works
                         table[i] = (byte) i;
                     }
                 } else {
                     // the data value is outside the range of the colormap
                     UnitConverter image2disp = params
-<<<<<<< HEAD
-                            .getImageToDisplayConverter();
-                    if (image2disp == null) {
-                        continue;
-                    }
-                    for (int j = 0; j < 256; j++) {
-                        double disp = image2disp.convert(j);
-                        if (Double.isNaN(disp)) {
-                            continue;
-                        }
-=======
                             .getColorMapToDisplayConverter();
                     if (image2disp == null) {
                         continue;
@@ -717,7 +608,6 @@ public class RadarImageResource<D extends IDescriptor>
                             continue;
                         }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         if (d < disp) {
                             // Map data values smaller than the colormap min to
                             // 0, which should be no data.
@@ -793,16 +683,7 @@ public class RadarImageResource<D extends IDescriptor>
         // Run this in the UI thread to avoid accidentally disposing of things
         // that are painting. This is better than synchronizing because it makes
         // it much more difficult to deadlock.
-<<<<<<< HEAD
-        VizApp.runAsync(new Runnable() {
-            @Override
-            public void run() {
-                disposeImage(image);
-            }
-        });
-=======
         VizApp.runAsync(() -> disposeImage(image));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     protected static class RadarImageDataRetrievalAdapter
@@ -822,17 +703,7 @@ public class RadarImageResource<D extends IDescriptor>
             this.table = table;
             this.rect = rect;
 
-<<<<<<< HEAD
-            final int prime = 31;
-            int hashCode = 1;
-            hashCode = prime * hashCode
-                    + ((record == null) ? 0 : record.hashCode());
-            hashCode = prime * hashCode + Arrays.hashCode(table);
-            hashCode = prime * hashCode + rect.hashCode();
-            this.hashCode = hashCode;
-=======
             this.hashCode = initHashCode();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         @Override
@@ -845,8 +716,6 @@ public class RadarImageResource<D extends IDescriptor>
             return record.getRawData();
         }
 
-<<<<<<< HEAD
-=======
         protected int initHashCode() {
             final int prime = 31;
             int hashCode = 1;
@@ -857,7 +726,6 @@ public class RadarImageResource<D extends IDescriptor>
             return hashCode;
         }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         @Override
         public int hashCode() {
             return hashCode;
@@ -875,26 +743,15 @@ public class RadarImageResource<D extends IDescriptor>
                 return false;
             }
             RadarImageDataRetrievalAdapter other = (RadarImageDataRetrievalAdapter) obj;
-<<<<<<< HEAD
-            if (record == null) {
-                if (other.record != null) {
-                    return false;
-                }
-            } else if (!record.equals(other.record)) {
-=======
             if (!Objects.equals(record, other.record)) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 return false;
             }
             if (!Arrays.equals(table, other.table)) {
                 return false;
             }
-<<<<<<< HEAD
-=======
             if (!Objects.equals(rect, other.rect)) {
                 return false;
             }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return true;
         }
 

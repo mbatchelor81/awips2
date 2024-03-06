@@ -38,10 +38,7 @@ import java.util.List;
  * Apr 15, 2016 DR18796    jdynina      Added SCC
  * Mar 03, 2017 DR19848    jdynina      Changed SCC to SCL to prevent conflicts
  * Oct 16, 2018 DCS20935   jdynina      Added DSA(STA) product 172 for RPG Bld 19
-<<<<<<< HEAD
-=======
  * Jun 17, 2020 DCS22082   jdynina      Removed PTL product 8
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -57,10 +54,6 @@ public class RadarTextProductUtil {
         private static final long serialVersionUID = 1L;
 
         {
-<<<<<<< HEAD
-            put(8, "WSRPTL");
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             put(48, "WSRVWP");
             put(58, "WSRSTI");
             put(59, "WSRHAI");
@@ -128,10 +121,6 @@ public class RadarTextProductUtil {
     }
 
     public static List<String> getRadarTableEntries() {
-<<<<<<< HEAD
-        return new ArrayList<String>(radarTable.values());
-=======
         return new ArrayList<>(radarTable.values());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 }

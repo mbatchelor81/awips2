@@ -87,6 +87,7 @@ public class ConvSigmetTextDataAdapter extends AbstractAdvisoryDataAdapter {
                 }
             }
         }
+
         return result;
     }
 

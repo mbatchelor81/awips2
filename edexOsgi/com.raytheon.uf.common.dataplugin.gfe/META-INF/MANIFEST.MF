@@ -52,10 +52,6 @@ Import-Package: com.raytheon.uf.common.activetable,
  com.raytheon.uf.common.gridcoverage,
  com.raytheon.uf.common.localization,
  com.raytheon.uf.common.localization.exception,
-<<<<<<< HEAD
-=======
- com.raytheon.uf.common.localization.region,
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  com.raytheon.uf.common.message,
  com.raytheon.uf.common.pointdata,
  com.raytheon.uf.common.python,

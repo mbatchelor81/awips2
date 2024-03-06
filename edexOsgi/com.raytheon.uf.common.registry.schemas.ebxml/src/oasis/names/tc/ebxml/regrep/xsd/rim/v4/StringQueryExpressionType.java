@@ -1,73 +1,35 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
 
 package oasis.names.tc.ebxml.regrep.xsd.rim.v4;
 
-<<<<<<< HEAD
-import javax.persistence.Entity;
-import javax.persistence.Table;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-<<<<<<< HEAD
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import com.raytheon.uf.common.registry.schemas.ebxml.util.RegrepUtil;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.serialization.annotations.DynamicSerialize;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
 
 /**
-<<<<<<< HEAD
- * 
- * A QueryExpression whose value sub-element is of type string and contains
- * plain text. Use this for SQL and EJBQL Queries.
- * 
- * 
- * <p>
- * Java class for StringQueryExpressionType complex type.
- * 
- * <p>
- * The following schema fragment specifies the expected content contained within
- * this class.
- * 
-=======
  *
  * A QueryExpression whose value sub-element is of type string and contains
  * plain text. Use this for SQL and EJBQL Queries.
@@ -80,7 +42,6 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
  * The following schema fragment specifies the expected content contained within
  * this class.
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * <pre>
  * &lt;complexType name="StringQueryExpressionType">
  *   &lt;complexContent>
@@ -92,36 +53,15 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
-<<<<<<< HEAD
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * 
-=======
  *
  * <pre>
  *
  * SOFTWARE HISTORY
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date         Ticket#     Engineer    Description
  * ------------ ----------  ----------- --------------------------
  * 2012                     bphillip    Initial implementation
  * 10/17/2013    1682       bphillip    Added software history
-<<<<<<< HEAD
- * 12/2/2013     1829       bphillip    Made ExtensibleObjectType persistable, 
- *                                      modified persistence annotations, added 
- *                                      constructors, hashCode, toString and equals
- * </pre>
- * 
- * @author bphillip
- * @version 1
- */
-@Entity
-@Table(schema = RegrepUtil.EBXML_SCHEMA, name = "StringQueryExpression")
-@Cache(region = RegrepUtil.DB_CACHE_REGION, usage = CacheConcurrencyStrategy.TRANSACTIONAL)
-=======
  * 12/2/2013     1829       bphillip    Made ExtensibleObjectType persistable,
  *                                      modified persistence annotations, added
  *                                      constructors, hashCode, toString and equals
@@ -131,7 +71,6 @@ import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
  * @author bphillip
  */
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 @XmlRootElement(name = "StringQueryExpression")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "StringQueryExpressionType", propOrder = { "value" })
@@ -155,15 +94,9 @@ public class StringQueryExpressionType extends QueryExpressionType {
 
     /**
      * Gets the value of the value property.
-<<<<<<< HEAD
-     * 
-     * @return possible object is {@link String }
-     * 
-=======
      *
      * @return possible object is {@link String }
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public String getValue() {
         return value;
@@ -171,17 +104,10 @@ public class StringQueryExpressionType extends QueryExpressionType {
 
     /**
      * Sets the value of the value property.
-<<<<<<< HEAD
-     * 
-     * @param value
-     *            allowed object is {@link String }
-     * 
-=======
      *
      * @param value
      *            allowed object is {@link String }
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     public void setValue(String value) {
         this.value = value;
@@ -197,20 +123,6 @@ public class StringQueryExpressionType extends QueryExpressionType {
 
     @Override
     public boolean equals(Object obj) {
-<<<<<<< HEAD
-        if (this == obj)
-            return true;
-        if (!super.equals(obj))
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        StringQueryExpressionType other = (StringQueryExpressionType) obj;
-        if (value == null) {
-            if (other.value != null)
-                return false;
-        } else if (!value.equals(other.value))
-            return false;
-=======
         if (this == obj) {
             return true;
         }
@@ -228,7 +140,6 @@ public class StringQueryExpressionType extends QueryExpressionType {
         } else if (!value.equals(other.value)) {
             return false;
         }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return true;
     }
 

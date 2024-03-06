@@ -73,19 +73,11 @@ import org.locationtech.jts.geom.GeometryCollection;
  * Jan 10, 2019 DCS 20579  MPorricelli Modified to handle ice accum
  *
  * Aug 08  2019 DR 21515   MPorricelli Retrofit to handle older user procedures
-<<<<<<< HEAD
- * 
- * </pre>
- *
- * @author bsteffen
- * @version 1.0
-=======
  *
  * Mar 24, 2020 75529      ksunil added new fields to PrecipData. Added toString()
  * </pre>
  *
  * @author bsteffen
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  */
 @SuppressWarnings("unchecked")
 public class MetarPrecipDataContainer {
@@ -110,13 +102,10 @@ public class MetarPrecipDataContainer {
 
         private final Coordinate latLon;
 
-<<<<<<< HEAD
-=======
         private String paramName;
 
         private String unit;
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         public PrecipData(long timeObs, String stationName, Double precipAmt,
                 Double longitude, Double latitude) {
             super();
@@ -138,8 +127,6 @@ public class MetarPrecipDataContainer {
             return stationName;
         }
 
-<<<<<<< HEAD
-=======
         public String getParamName() {
             return paramName;
         }
@@ -156,13 +143,10 @@ public class MetarPrecipDataContainer {
             this.unit = unit;
         }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         public long getTimeObs() {
             return timeObs;
         }
 
-<<<<<<< HEAD
-=======
         @Override
         public String toString() {
             return "PrecipData [timeObs=" + timeObs + ", stationName="
@@ -170,7 +154,6 @@ public class MetarPrecipDataContainer {
                     + latLon + ", paramName=" + paramName + ", unit=" + unit
                     + "]";
         }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     private static final String LAT_KEY = "latitude";
@@ -244,13 +227,8 @@ public class MetarPrecipDataContainer {
      * @param ptype
      * @param rcMap
      */
-<<<<<<< HEAD
-    public MetarPrecipDataContainer(int duration,
-            String ptype, Map<String, RequestConstraint> rcMap) {
-=======
     public MetarPrecipDataContainer(int duration, String ptype,
             Map<String, RequestConstraint> rcMap) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         this.duration = duration;
         if (ptype != null) {
             this.ptype = ptype;
@@ -274,16 +252,6 @@ public class MetarPrecipDataContainer {
         long validTime = time.getMatchValid();
         if (duration == 1) {
             PointDataContainer pdc = requestPointData(rcMap, validTime, 1,
-<<<<<<< HEAD
-                    ptype+P1_KEY);
-            Map<String, PrecipData> precipMap1 = null;
-            if (pdc != null) {
-                precipMap1 = createPrecipData(pdc, validTime - ONE_HOUR,
-                        validTime, ptype+P1_KEY);
-                if (precipMap1 == null) {
-                    precipMap1 = createPrecipData(pdc, validTime - ONE_HOUR
-                            + FIFTEEN_MIN, validTime - FIFTEEN_MIN, ptype+P1_KEY);
-=======
                     ptype + P1_KEY);
             Map<String, PrecipData> precipMap1 = null;
             if (pdc != null) {
@@ -293,7 +261,6 @@ public class MetarPrecipDataContainer {
                     precipMap1 = createPrecipData(pdc,
                             validTime - ONE_HOUR + FIFTEEN_MIN,
                             validTime - FIFTEEN_MIN, ptype + P1_KEY);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
                 // Data frame 15 minutes ago is better then data now for some
                 // reason
@@ -306,29 +273,17 @@ public class MetarPrecipDataContainer {
             precipMap = getRawPrecipData6(validTime);
         } else if (duration == 24) {
             PointDataContainer pdc = requestPointData(rcMap, validTime, 1,
-<<<<<<< HEAD
-                    ptype+P24_KEY);
-            if (pdc != null) {
-                precipMap = createPrecipData(pdc, validTime - ONE_HOUR,
-                        validTime, ptype+P24_KEY);
-=======
                     ptype + P24_KEY);
             if (pdc != null) {
                 precipMap = createPrecipData(pdc, validTime - ONE_HOUR,
                         validTime, ptype + P24_KEY);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         }
         if (precipMap == null) {
             precipMap = new HashMap<>();
         }
         baseStations.put(time, precipMap.keySet());
-<<<<<<< HEAD
-        ArrayList<PrecipData> result = new ArrayList<>(
-                precipMap.values());
-=======
         ArrayList<PrecipData> result = new ArrayList<>(precipMap.values());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return result;
     }
 
@@ -346,13 +301,8 @@ public class MetarPrecipDataContainer {
             Map<String, PrecipData> precipMap6minus3 = Collections.emptyMap();
             Map<String, PrecipData> precipMap6 = getRawPrecipData6(validTime);
             if (precipMap6 != null) {
-<<<<<<< HEAD
-                Map<String, PrecipData> precipMap3Old = getRawPrecipData3(validTime
-                        - THREE_HOUR);
-=======
                 Map<String, PrecipData> precipMap3Old = getRawPrecipData3(
                         validTime - THREE_HOUR);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if (precipMap3Old != null) {
                     precipMap6minus3 = subtract(precipMap6, precipMap3Old);
                 }
@@ -377,12 +327,7 @@ public class MetarPrecipDataContainer {
             return Collections.emptyList();
         }
         precipMap.keySet().removeAll(baseStations.get(time));
-<<<<<<< HEAD
-        ArrayList<PrecipData> result = new ArrayList<>(
-                precipMap.values());
-=======
         ArrayList<PrecipData> result = new ArrayList<>(precipMap.values());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return result;
     }
 
@@ -399,11 +344,7 @@ public class MetarPrecipDataContainer {
             int sumTime) {
         List<Map<String, PrecipData>> maps = new ArrayList<>();
         PointDataContainer pdc = requestPointData(rcMap, validTime, sumTime,
-<<<<<<< HEAD
-                ptype+P1_KEY);
-=======
                 ptype + P1_KEY);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if (pdc == null) {
             return null;
         }
@@ -411,16 +352,10 @@ public class MetarPrecipDataContainer {
             long endTime = validTime - ONE_HOUR * i;
             long startTime = endTime - ONE_HOUR;
             Map<String, PrecipData> precipMap1 = createPrecipData(pdc,
-<<<<<<< HEAD
-                    startTime, endTime, ptype+P1_KEY);
-            Map<String, PrecipData> precipMap1old = createPrecipData(pdc,
-                    startTime + FIFTEEN_MIN, endTime - FIFTEEN_MIN, ptype+P1_KEY);
-=======
                     startTime, endTime, ptype + P1_KEY);
             Map<String, PrecipData> precipMap1old = createPrecipData(pdc,
                     startTime + FIFTEEN_MIN, endTime - FIFTEEN_MIN,
                     ptype + P1_KEY);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             maps.add(combine(precipMap1old, precipMap1));
         }
         return add(maps.toArray(new Map[0]));
@@ -436,29 +371,17 @@ public class MetarPrecipDataContainer {
         if (cache3.containsKey(validTime)) {
             return cache3.get(validTime);
         }
-<<<<<<< HEAD
-        PointDataContainer pdc = requestPointData(rcMap, validTime, 1, ptype+P3_KEY,
-                ptype+P6_KEY);
-=======
         PointDataContainer pdc = requestPointData(rcMap, validTime, 1,
                 ptype + P3_KEY, ptype + P6_KEY);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if (pdc == null) {
             cache3.put(validTime, null);
             cache6.put(validTime, null);
             return null;
         }
-<<<<<<< HEAD
-        Map<String, PrecipData> precipMap3 = createPrecipData(pdc, validTime
-                - ONE_HOUR, validTime, ptype+P3_KEY);
-        Map<String, PrecipData> precipMap6 = createPrecipData(pdc, validTime
-                - ONE_HOUR, validTime, ptype+P6_KEY);
-=======
         Map<String, PrecipData> precipMap3 = createPrecipData(pdc,
                 validTime - ONE_HOUR, validTime, ptype + P3_KEY);
         Map<String, PrecipData> precipMap6 = createPrecipData(pdc,
                 validTime - ONE_HOUR, validTime, ptype + P6_KEY);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         cache3.put(validTime, precipMap3);
         cache6.put(validTime, precipMap6);
         return precipMap3;
@@ -474,23 +397,14 @@ public class MetarPrecipDataContainer {
         if (cache6.containsKey(validTime)) {
             return cache6.get(validTime);
         }
-<<<<<<< HEAD
-        PointDataContainer pdc = requestPointData(rcMap, validTime, 1, ptype+P6_KEY);
-=======
         PointDataContainer pdc = requestPointData(rcMap, validTime, 1,
                 ptype + P6_KEY);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if (pdc == null) {
             cache6.put(validTime, null);
             return null;
         }
-<<<<<<< HEAD
-        Map<String, PrecipData> precipMap6 = createPrecipData(pdc, validTime
-                - ONE_HOUR, validTime, ptype+P6_KEY);
-=======
         Map<String, PrecipData> precipMap6 = createPrecipData(pdc,
                 validTime - ONE_HOUR, validTime, ptype + P6_KEY);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         cache6.put(validTime, precipMap6);
         return precipMap6;
     }
@@ -552,12 +466,7 @@ public class MetarPrecipDataContainer {
     private PointDataContainer requestPointData(
             Map<String, RequestConstraint> rcMap, long time, int duration,
             String... precipKeys) {
-<<<<<<< HEAD
-        List<String> parameters = new ArrayList<>(
-                Arrays.asList(precipKeys));
-=======
         List<String> parameters = new ArrayList<>(Arrays.asList(precipKeys));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         parameters.add(LAT_KEY);
         parameters.add(LON_KEY);
         parameters.add(NAME_KEY);
@@ -573,13 +482,8 @@ public class MetarPrecipDataContainer {
         DataTime start = new DataTime(validTime);
         RequestConstraint timeRC = new RequestConstraint(null,
                 ConstraintType.BETWEEN);
-<<<<<<< HEAD
-        timeRC.setBetweenValueList(new String[] { start.toString(),
-                end.toString() });
-=======
         timeRC.setBetweenValueList(
                 new String[] { start.toString(), end.toString() });
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         rcMap.put("dataTime", timeRC);
         PointDataContainer pdc = null;
         // Over the dateline there might be an envelope on either side.
@@ -589,40 +493,23 @@ public class MetarPrecipDataContainer {
                     ConstraintType.BETWEEN);
             Double minLon = latLonEnvelope.getMinX();
             Double maxLon = latLonEnvelope.getMaxX();
-<<<<<<< HEAD
-            lonRC.setBetweenValueList(new String[] { minLon.toString(),
-                    maxLon.toString() });
-=======
             lonRC.setBetweenValueList(
                     new String[] { minLon.toString(), maxLon.toString() });
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             rcMap.put("location.longitude", lonRC);
             RequestConstraint latRC = new RequestConstraint(null,
                     ConstraintType.BETWEEN);
             Double minLat = latLonEnvelope.getMinY();
             Double maxLat = latLonEnvelope.getMaxY();
-<<<<<<< HEAD
-            latRC.setBetweenValueList(new String[] { minLat.toString(),
-                    maxLat.toString() });
-=======
             latRC.setBetweenValueList(
                     new String[] { minLat.toString(), maxLat.toString() });
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             rcMap.put("location.latitude", latRC);
             try {
                 tmppdc = DataCubeContainer.getPointData("obs",
                         parameters.toArray(new String[0]), rcMap);
             } catch (DataCubeException e) {
-<<<<<<< HEAD
-                statusHandler
-                        .handle(Priority.ERROR,
-                                "Error getting precip data, some precip will not display.",
-                                e);
-=======
                 statusHandler.handle(Priority.ERROR,
                         "Error getting precip data, some precip will not display.",
                         e);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
             if (tmppdc != null) {
                 tmppdc.setCurrentSz(tmppdc.getAllocatedSz());
@@ -653,13 +540,8 @@ public class MetarPrecipDataContainer {
                 if (intersection instanceof GeometryCollection) {
                     GeometryCollection gc = (GeometryCollection) intersection;
                     for (int n = 0; n < gc.getNumGeometries(); n += 1) {
-<<<<<<< HEAD
-                        latLonEnvelopes.add(gc.getGeometryN(n)
-                                .getEnvelopeInternal());
-=======
                         latLonEnvelopes
                                 .add(gc.getGeometryN(n).getEnvelopeInternal());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     }
                 } else {
                     latLonEnvelopes.add(intersection.getEnvelopeInternal());

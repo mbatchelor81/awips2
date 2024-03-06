@@ -19,17 +19,12 @@
         further_licensing_information.
     -->
 <menuTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-<<<<<<< HEAD
-=======
      
     
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <contribute xsi:type="menuItem" menuText="1hr Mean Precip"
         key="TP1mean" indentText="false" />
     <contribute xsi:type="menuItem" menuText="3hr Mean Precip"
         key="TP3mean" indentText="false" />
-<<<<<<< HEAD
-=======
     <contribute xsi:type="menuItem" menuText="6hr Mean Precip"
         key="TP6mean" indentText="false" />
    <contribute xsi:type="menuItem" menuText="12hr Mean Precip"
@@ -38,21 +33,11 @@
         key="TP24mean" indentText="false" />
    <contribute xsi:type="menuItem" menuText="36hr Mean Precip"
         key="TP36mean" indentText="false" />
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <contribute xsi:type="menuItem" menuText="1hr Prob-Matched Mean Precip"
         key="TP1pmmn" indentText="false" />
     <contribute xsi:type="menuItem" menuText="3hr Prob-Matched Mean Precip"
         key="TP3pmmn" indentText="false" />
-<<<<<<< HEAD
-    <contribute xsi:type="menuItem"
-        menuText="1hr Mean Water Equiv Model Snow Accum" key="WEASD1hrmean"
-        indentText="false" />
-    <contribute xsi:type="menuItem"
-        menuText="3hr Mean Water Equiv Model Snow Accum" key="WEASD3hrmean"
-        indentText="false" />
-=======
     
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <contribute xsi:type="menuItem" menuText="Prob 1hr Precip &gt; 0.01 in"
         key="tp1c1" indentText="false" />
     <contribute xsi:type="menuItem" menuText="Prob 1hr Precip &gt; 0.25 in"
@@ -122,36 +107,5 @@
     <contribute xsi:type="menuItem" menuText="Prob 24hr Precip &gt; 5.00 in"
         key="tp24c10" indentText="false" />
 
-<<<<<<< HEAD
-    <contribute xsi:type="menuItem"
-        menuText="Prob 1hr Water Equiv Model Snow Accum &gt; 0.1 in"
-        key="ProbWEASD1hr2p54mm" indentText="false" />
-    <contribute xsi:type="menuItem"
-        menuText="Prob 1hr Water Equiv Model Snow Accum &gt; 0.3 in"
-        key="ProbWEASD1hr7p62mm" indentText="false" />
-    <contribute xsi:type="menuItem"
-        menuText="Prob 3hr Water Equiv Model Snow Accum &gt; 0.1 in"
-        key="ProbWEASD3hr2p54mm" indentText="false" />
-    <contribute xsi:type="menuItem"
-        menuText="Prob 3hr Water Equiv Model Snow Accum &gt; 0.3 in"
-        key="ProbWEASD3hr7p62mm" indentText="false" />
-    <contribute xsi:type="menuItem"
-        menuText="Prob 3hr Water Equiv Model Snow Accum &gt; 0.6 in"
-        key="ProbWEASD3hr15p24mm" indentText="false" />
-    <contribute xsi:type="menuItem"
-        menuText="Prob 6hr Water Equiv Model Snow Accum &gt; 0.1 in"
-        key="ProbWEASD6hr2p54mm" indentText="false" />
-    <contribute xsi:type="menuItem"
-        menuText="Prob 6hr Water Equiv Model Snow Accum &gt; 0.3 in"
-        key="ProbWEASD6hr7p62mm" indentText="false" />
-    <contribute xsi:type="menuItem"
-        menuText="Prob 6hr Water Equiv Model Snow Accum &gt; 0.6 in"
-        key="ProbWEASD6hr15p24mm" indentText="false" />
-    <contribute xsi:type="menuItem"
-        menuText="Prob 6hr Water Equiv Model Snow Accum &gt; 1.2 in"
-        key="ProbWEASD6hr30p48mm" indentText="false" />
-
-=======
    
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 </menuTemplate>

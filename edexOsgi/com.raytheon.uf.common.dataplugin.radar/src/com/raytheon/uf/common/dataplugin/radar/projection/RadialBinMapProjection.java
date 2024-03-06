@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -33,19 +21,13 @@ package com.raytheon.uf.common.dataplugin.radar.projection;
 
 import java.awt.geom.Point2D;
 import java.util.Arrays;
-<<<<<<< HEAD
-=======
 import java.util.List;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import org.geotools.parameter.DefaultParameterDescriptor;
 import org.geotools.parameter.DefaultParameterDescriptorGroup;
 import org.geotools.referencing.operation.MathTransformProvider;
 import org.geotools.referencing.operation.projection.ProjectionException;
-<<<<<<< HEAD
-=======
 import org.geotools.referencing.operation.transform.AbstractMathTransform;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.opengis.parameter.InvalidParameterNameException;
 import org.opengis.parameter.InvalidParameterValueException;
 import org.opengis.parameter.ParameterDescriptor;
@@ -54,10 +36,7 @@ import org.opengis.parameter.ParameterNotFoundException;
 import org.opengis.parameter.ParameterValueGroup;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.MathTransform;
-<<<<<<< HEAD
-=======
 import org.opengis.referencing.operation.TransformException;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Coordinates in the RadialBinMapProjection represent the radial and bin
@@ -65,21 +44,12 @@ import org.opengis.referencing.operation.TransformException;
  * the latitude of origin. The x coordinate is the radial index into the
  * angleData, the y coordinate is the bin number, which is computed using the
  * binWidth and the tilt angle.
-<<<<<<< HEAD
- * 
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * 
-=======
  *
  *
  * <pre>
  *
  * SOFTWARE HISTORY
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- --------------------------------------------
  * Jun 06, 2012           bsteffen  Initial creation
@@ -87,18 +57,12 @@ import org.opengis.referencing.operation.TransformException;
  *                                  and first radial.
  * Jan 24, 2018  6907     bsteffen  Fix inaccuracies when comparing floats and
  *                                  doubles.
-<<<<<<< HEAD
- * 
- * </pre>
- * 
-=======
  * Mar 14, 2023  9029     mapeters  Support splitting this projection into 2 math
  *                                  transforms for performance (the results of the
  *                                  first can often be cached)
  *
  * </pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author bsteffen
  */
 public class RadialBinMapProjection extends AzimuthRangeMapProjection {
@@ -162,8 +126,6 @@ public class RadialBinMapProjection extends AzimuthRangeMapProjection {
         tmp = super.transformNormalized(lon, lat, tmp);
         double az = tmp.getX();
         double ran = tmp.getY();
-<<<<<<< HEAD
-=======
         return transformAzRanToRadialBin(az, ran, dest);
     }
 
@@ -172,7 +134,6 @@ public class RadialBinMapProjection extends AzimuthRangeMapProjection {
             dest = new Point2D.Double();
         }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         double bin = ran / flatBinLength;
         double firstAngle = normalAngleData[0];
         double lastAngle = normalAngleData[normalAngleData.length - 1];
@@ -213,14 +174,11 @@ public class RadialBinMapProjection extends AzimuthRangeMapProjection {
         return dest;
     }
 
-<<<<<<< HEAD
-=======
     private Point2D transformLonLatRadiansToAzRan(double lonRadians,
             double latRadians, Point2D dest) throws ProjectionException {
         return super.transformNormalized(lonRadians, latRadians, dest);
     }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -254,8 +212,6 @@ public class RadialBinMapProjection extends AzimuthRangeMapProjection {
         return true;
     }
 
-<<<<<<< HEAD
-=======
     protected int superHashCode() {
         return super.hashCode();
     }
@@ -264,7 +220,6 @@ public class RadialBinMapProjection extends AzimuthRangeMapProjection {
         return super.equals(obj);
     }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public static class Provider extends AbstractProvider {
 
         private static final long serialVersionUID = 4990986103949071193L;
@@ -282,17 +237,9 @@ public class RadialBinMapProjection extends AzimuthRangeMapProjection {
                         Double.class, null, true);
 
         public static final ParameterDescriptorGroup PARAMETERS = new DefaultParameterDescriptorGroup(
-<<<<<<< HEAD
-                "Radial_Bin",
-                new ParameterDescriptor[] { SEMI_MAJOR, SEMI_MINOR,
-                        CENTRAL_MERIDIAN, LATITUDE_OF_ORIGIN, ANGLE_DATA,
-                        TILT_ANGLE, BIN_LENGTH, SCALE_FACTOR, FALSE_EASTING,
-                        FALSE_NORTHING });
-=======
                 "Radial_Bin", SEMI_MAJOR, SEMI_MINOR, CENTRAL_MERIDIAN,
                 LATITUDE_OF_ORIGIN, ANGLE_DATA, TILT_ANGLE, BIN_LENGTH,
                 SCALE_FACTOR, FALSE_EASTING, FALSE_NORTHING);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         public Provider() {
             super(PARAMETERS);
@@ -313,8 +260,6 @@ public class RadialBinMapProjection extends AzimuthRangeMapProjection {
 
     }
 
-<<<<<<< HEAD
-=======
     /**
      * Split this transform into a list of 2 transforms: one that just does the
      * superclass transformation (lon/lat -> azimuth/range), and a second that
@@ -513,5 +458,4 @@ public class RadialBinMapProjection extends AzimuthRangeMapProjection {
             return proj.equals(other.proj);
         }
     }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

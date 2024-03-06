@@ -43,10 +43,6 @@ import com.raytheon.uf.common.time.DataTime;
 import com.raytheon.uf.common.wmo.WMOHeader;
 import com.raytheon.uf.edex.bufrtools.BUFRDataDocument;
 import com.raytheon.uf.edex.bufrtools.descriptors.BUFRDescriptor;
-<<<<<<< HEAD
-import com.raytheon.uf.edex.bufrtools.packets.BUFRStringPacket;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.edex.bufrtools.packets.BUFRSublistPacket;
 import com.raytheon.uf.edex.bufrtools.packets.DataPacketTypes;
 import com.raytheon.uf.edex.bufrtools.packets.IBUFRDataPacket;
@@ -60,23 +56,6 @@ import com.raytheon.uf.edex.plugin.modelsounding.common.SoundingModels;
  *
  * <pre>
  * SOFTWARE HISTORY
-<<<<<<< HEAD
- * Date          Ticket#  Engineer    Description
- * ------------- -------- ----------- --------------------------
- * Mar 17, 2008  1026     jkorman     Initial implementation.
- * May 09, 2013  1869     bsteffen    Modified D2D time series of point data to
- *                                    work without dataURI.
- * Jul 03, 2013  2161     bkowal      Relocated the logic used to retrieve
- *                                    temporal information into its own function.
- * Dec 02, 2013  2537     bsteffen    Use SoundingSite setters instead of view.
- * Jul 23, 2014  3410     bclement    location changed to floats
- * Sep 16, 2014  3628     mapeters    Replaced static imports.
- * Jul 12, 2016  5744     mapeters    SoundingStations constructor no longer takes
- *                                    path parameter
- * Jan 04, 2018  7100     dgilling    Code cleanup, read SPI file from
- *                                    CONFIGURED level.
- * May 19, 2021 22629  mgamazaychikov Fixed the header issue for GFS v16 update
-=======
  * Date          Ticket#  Engineer       Description
  * ------------- --------- ------------- --------------------------
  * Mar 17, 2008  1026     jkorman        Initial implementation.
@@ -99,7 +78,6 @@ import com.raytheon.uf.edex.plugin.modelsounding.common.SoundingModels;
  * Nov 28, 2023  2036614  sharbison      Fix for Null Pointer Exception on lat/lon
  *                                       data, indexes were not incremented
  *                                       correctly for GFS data headers.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -168,15 +146,6 @@ public class ModelSoundingDataAdapter {
 
         // Get the primary data list.
         List<IBUFRDataPacket> dataList = dataDoc.getList();
-<<<<<<< HEAD
-        IBUFRDataPacket dp = dataList.get(0);
-        int d = dp.getReferencingDescriptor().getDescriptor();
-        // retrieve the forecast seconds
-        Long forecastSeconds = null;
-        if (d == BUFRDescriptor.createDescriptor(0, 4, 194)) {
-            forecastSeconds = (dp.getValue() != null) ? ((Double) dp.getValue())
-                    .longValue() : null;
-=======
         IBUFRDataPacket dataPacket = dataList.get(0);
         int d = dataPacket.getReferencingDescriptor().getDescriptor();
         // retrieve the forecast seconds
@@ -185,20 +154,10 @@ public class ModelSoundingDataAdapter {
             forecastSeconds = (dataPacket.getValue() != null) ? Double
                     .valueOf(dataPacket.getValue().toString()).longValue()
                     : null;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         SoundingModelTemporalData soundingTemporalData = new SoundingModelTemporalData();
 
-<<<<<<< HEAD
-        DataTime dt = new DataTime(obsTime, forecastSeconds.intValue());
-        soundingTemporalData.setDt(dt);
-
-        Calendar baseTime = dt.getRefTimeAsCalendar();
-        soundingTemporalData.setRefTime(baseTime.getTimeInMillis() / 1000L);
-
-        Calendar validTime = dt.getValidTime();
-=======
         DataTime dataTime = new DataTime(obsTime, forecastSeconds.intValue());
         soundingTemporalData.setDt(dataTime);
 
@@ -206,18 +165,12 @@ public class ModelSoundingDataAdapter {
         soundingTemporalData.setRefTime(baseTime.getTimeInMillis() / 1000L);
 
         Calendar validTime = dataTime.getValidTime();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         soundingTemporalData.setValidTime(validTime.getTimeInMillis() / 1000L);
 
         soundingTemporalData.setForecastHr((int) (forecastSeconds / 3600));
 
-<<<<<<< HEAD
-        soundingTemporalData.setModel(SoundingModels.getModel(wmoHeader
-                .getCccc()));
-=======
         soundingTemporalData
                 .setModel(SoundingModels.getModel(wmoHeader.getCccc()));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         return soundingTemporalData;
     }
@@ -297,17 +250,10 @@ public class ModelSoundingDataAdapter {
             obsData = new SoundingSite();
             SurfaceObsLocation location = new SurfaceObsLocation();
 
-<<<<<<< HEAD
-            IBUFRDataPacket dp = dataList.get(index);
-            index++;
-            /*
-             * dp is forecastHr packet, already handled in
-=======
             IBUFRDataPacket dataPacket = dataList.get(index);
             index++;
             /*
              * dataPacket is forecastHr packet, already handled in
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
              * SoundingModelTemporalData
              */
 
@@ -315,13 +261,6 @@ public class ModelSoundingDataAdapter {
             index++;
             view.setInt("wmoStaNum", wmoStaNum);
             // Map the WMO station number to a station Id
-<<<<<<< HEAD
-            String stationId = stationsList.mapId(String.format("%010d",
-                    wmoStaNum));
-            // Now determine if the station Id is in this localization list.
-            SPIEntry s = SPI_DATA.getEntryById(stationId);
-            if (s != null) {
-=======
             String stationId = stationsList
                     .mapId(String.format("%010d", wmoStaNum));
             // Now determine if the station Id is in this localization list.
@@ -330,44 +269,10 @@ public class ModelSoundingDataAdapter {
                 Double lat = null;
                 Double lon = null;
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if (stationId != null) {
                     location.setStationId(stationId);
                     obsData.setSiteId(String.format("%06d", wmoStaNum));
                 }
-<<<<<<< HEAD
-                if (model.equals(SoundingModels.MODEL_ETA)) {
-                    index++;
-                } else if (model.equals(SoundingModels.MODEL_GFS)) {
-                    // GFS v16 data headers have station ID just like MODEL_ETA headers
-                    // For that type of data index needs to be incremented so the
-                    // reading of station ID is skipped.
-                    dp = dataList.get(index);
-                    if (dp instanceof BUFRStringPacket) {
-                        index++;
-                    }
-                }
-                Double lat = null;
-                dp = dataList.get(index);
-                index++;
-                int d = dp.getReferencingDescriptor().getDescriptor();
-                if (d == BUFRDescriptor.createDescriptor(0, 5, 2)) {
-                    lat = (Double) dp.getValue();
-                }
-                Double lon = null;
-                dp = dataList.get(index);
-                index++;
-                d = dp.getReferencingDescriptor().getDescriptor();
-                if (d == BUFRDescriptor.createDescriptor(0, 6, 2)) {
-                    lon = (Double) dp.getValue();
-                }
-                location.assignLocation(lat.floatValue(), lon.floatValue());
-                dp = dataList.get(index);
-                d = dp.getReferencingDescriptor().getDescriptor();
-                if (d == BUFRDescriptor.createDescriptor(0, 10, 194)) {
-                    stationHeight = (dp.getValue() != null) ? ((Double) dp
-                            .getValue()).intValue() : null;
-=======
                 index++;
                 dataPacket = dataList.get(index);
                 int descriptor = dataPacket.getReferencingDescriptor()
@@ -392,7 +297,6 @@ public class ModelSoundingDataAdapter {
                             ? Double.valueOf(dataPacket.getValue().toString())
                                     .intValue()
                             : null;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     location.setElevation(stationHeight);
                 }
                 obsData.setLocation(location);
@@ -417,25 +321,6 @@ public class ModelSoundingDataAdapter {
     private static SoundingSite getGFSSiteData(List<IBUFRDataPacket> dataList,
             SoundingSite siteData) {
         if ((dataList != null) && (siteData != null)) {
-<<<<<<< HEAD
-
-            // get the replication sublist for the sounding data
-            // istart is the number of header fields in the packet
-            // in the pre v16 GFS the header has 5 fields
-            // in the v16 upgrade the header has 6 fields
-            // use 3rd IBUFRDataPacket to determine the version
-            IBUFRDataPacket dp = dataList.get(2);
-            int istart = 6;
-            if (!(dp instanceof BUFRStringPacket)) {
-                istart = 5;
-            }
-            IBUFRDataPacket p = dataList.get(istart);
-            if ((p instanceof BUFRSublistPacket)
-                    && (DataPacketTypes.RepSubList.getPacketType().equals(p
-                            .getUnits()))) {
-
-                List<IBUFRDataPacket> subList = (List<IBUFRDataPacket>) p
-=======
             int istart = 6;
             IBUFRDataPacket dataPacket = dataList.get(istart);
             if ((dataPacket instanceof BUFRSublistPacket)
@@ -443,7 +328,6 @@ public class ModelSoundingDataAdapter {
                             .equals(dataPacket.getUnits()))) {
 
                 List<IBUFRDataPacket> subList = (List<IBUFRDataPacket>) dataPacket
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         .getValue();
 
                 for (IBUFRDataPacket pList : subList) {
@@ -451,11 +335,7 @@ public class ModelSoundingDataAdapter {
                             .getValue();
 
                     createGFSLevel(sList, siteData.addLevel());
-<<<<<<< HEAD
-                } // for
-=======
                 }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
 
             siteData.setPressSLP(extractFloat(dataList.get(6)));
@@ -531,14 +411,8 @@ public class ModelSoundingDataAdapter {
 
             // get the replication sublist for the sounding data
             IBUFRDataPacket p = dataList.get(7);
-<<<<<<< HEAD
-            if ((p instanceof BUFRSublistPacket)
-                    && (DataPacketTypes.RepSubList.getPacketType().equals(p
-                            .getUnits()))) {
-=======
             if ((p instanceof BUFRSublistPacket) && (DataPacketTypes.RepSubList
                     .getPacketType().equals(p.getUnits()))) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                 List<IBUFRDataPacket> subList = (List<IBUFRDataPacket>) p
                         .getValue();
@@ -678,13 +552,8 @@ public class ModelSoundingDataAdapter {
             logger.info("Loading " + SPI_FILE + " for site [" + site
                     + "] Successful");
         } else {
-<<<<<<< HEAD
-            logger.error("Loading " + SPI_FILE + " for site [" + site
-                    + "] failed");
-=======
             logger.error(
                     "Loading " + SPI_FILE + " for site [" + site + "] failed");
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         return container;

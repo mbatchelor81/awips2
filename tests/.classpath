@@ -48,10 +48,6 @@
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/com.raytheon.uf.common.event"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/com.raytheon.uf.edex.event"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/javax.measure"/>
-<<<<<<< HEAD
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/javax.vecmath"/>
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 	<classpathentry exported="true" kind="lib" path="lib/h2-1.3.171.jar"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/com.raytheon.uf.common.gridcoverage"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/com.raytheon.viz.ui"/>

@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -69,34 +57,11 @@ import com.raytheon.uf.common.numeric.filter.UnsignedFilter;
 import com.raytheon.uf.common.numeric.source.DataSource;
 import com.raytheon.uf.viz.core.exception.VizException;
 
-<<<<<<< HEAD
-import tec.uom.se.AbstractUnit;
-=======
 import tech.units.indriya.AbstractUnit;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Object capable of requesting VIIRS data for base or derived displays. Can
  * also reproject into different coverages
-<<<<<<< HEAD
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * 
- * Date          Ticket#  Engineer    Description
- * ------------- -------- ----------- --------------------------
- * Jan 19, 2012           mschenke    Initial creation
- * Mar 07, 2014  2791     bsteffen    Move Data Source/Destination to numeric
- *                                    plugin.
- * Apr 15, 2019  7596     lsingh      Updated units framework to JSR-363.
- *                                    Handled unit conversion.
- * 
- * </pre>
- * 
- * @author mschenke
- * @version 1.0
-=======
  *
  * <pre>
  *
@@ -115,7 +80,6 @@ import tech.units.indriya.AbstractUnit;
  * </pre>
  *
  * @author mschenke
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  */
 
 public class VIIRSRequestableData extends AbstractRequestableData {
@@ -159,32 +123,19 @@ public class VIIRSRequestableData extends AbstractRequestableData {
      * Can be directly called if data is desired to stay in "short" format.
      * Otherwise calling {@link #getDataValue(Object)} will cause data to be
      * converted to "float" by having scale/offset applied
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param request
      * @return
      * @throws VizException
      */
     public IDataRecord[] getRawDataValue(VIIRSRequest request)
             throws DataCubeException {
-<<<<<<< HEAD
-        IDataStore store = DataStoreFactory.getDataStore(HDF5Util
-                .findHDF5Location(dataRecord));
-        try {
-            VIIRSSpatialCoverage recordCoverage = dataRecord.getCoverage();
-            VIIRSSpatialCoverage requestCoverage = request.coverage;
-            if (recordCoverage.equals(requestCoverage) == false) {
-=======
         IDataStore store = DataStoreFactory
                 .getDataStore(HDF5Util.findHDF5Location(dataRecord));
         try {
             VIIRSSpatialCoverage recordCoverage = dataRecord.getCoverage();
             VIIRSSpatialCoverage requestCoverage = request.coverage;
             if (!recordCoverage.equals(requestCoverage)) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 // Data coverages are different, reprojection is required
                 GridGeometry2D requestGeometry = requestCoverage
                         .getGridGeometry();
@@ -201,13 +152,8 @@ public class VIIRSRequestableData extends AbstractRequestableData {
                 int length = Math.min(requestSizes.length, recordSizes.length);
                 int level;
                 for (level = 0; level < length; ++level) {
-<<<<<<< HEAD
-                    if (VIIRSDataRecord.getDataSet(level).equals(
-                            request.dataset)) {
-=======
                     if (VIIRSDataRecord.getDataSet(level)
                             .equals(request.dataset)) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         break;
                     }
                 }
@@ -230,14 +176,9 @@ public class VIIRSRequestableData extends AbstractRequestableData {
                     Point[] points = req.getPoints();
                     Point[] newPoints = new Point[points.length];
                     for (int i = 0; i < points.length; ++i) {
-<<<<<<< HEAD
-                        newPoints[i] = new Point((int) Math.max(points[i].x
-                                * diffRatioX, requestLevelRect.width - 1),
-=======
                         newPoints[i] = new Point(
                                 (int) Math.max(points[i].x * diffRatioX,
                                         requestLevelRect.width - 1),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                 (int) Math.max(points[i].x * diffRatioX,
                                         requestLevelRect.height - 1));
                     }
@@ -246,13 +187,8 @@ public class VIIRSRequestableData extends AbstractRequestableData {
                 case SLAB:
                     int[] min = req.getMinIndexForSlab();
                     int[] max = req.getMaxIndexForSlab();
-<<<<<<< HEAD
-                    GridEnvelope2D reqGrid = new GridEnvelope2D(0, 0, max[0]
-                            - min[0], max[1] - min[1]);
-=======
                     GridEnvelope2D reqGrid = new GridEnvelope2D(0, 0,
                             max[0] - min[0], max[1] - min[1]);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     requestSliceGeometry = new GridGeometry2D(reqGrid,
                             (Envelope) requestGeometry.gridToWorld(reqGrid));
                     recordRequest = Request.buildSlab(
@@ -265,13 +201,8 @@ public class VIIRSRequestableData extends AbstractRequestableData {
                                             recordLevelRect.getMaxY()) });
                     min = recordRequest.getMinIndexForSlab();
                     max = recordRequest.getMaxIndexForSlab();
-<<<<<<< HEAD
-                    GridEnvelope2D recGrid = new GridEnvelope2D(0, 0, max[0]
-                            - min[0], max[1] - min[1]);
-=======
                     GridEnvelope2D recGrid = new GridEnvelope2D(0, 0,
                             max[0] - min[0], max[1] - min[1]);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     recordSliceGeometry = new GridGeometry2D(recGrid,
                             (Envelope) recordGeometry.gridToWorld(recGrid));
                     break;
@@ -283,17 +214,6 @@ public class VIIRSRequestableData extends AbstractRequestableData {
 
                 IDataRecord record = store.retrieve(dataRecord.getDataURI(),
                         request.dataset, recordRequest);
-<<<<<<< HEAD
-                if (requestSliceGeometry != null && recordSliceGeometry != null) {
-                    // Slice geometries are set, we need to reproject into
-                    // request space
-                    double noData = Double.NaN;
-                    if (record.getDataAttributes().containsKey(
-                            VIIRSDataRecord.MISSING_VALUE_ID)) {
-                        noData = ((Number) record.getDataAttributes().get(
-                                VIIRSDataRecord.MISSING_VALUE_ID))
-                                .doubleValue();
-=======
                 if (requestSliceGeometry != null
                         && recordSliceGeometry != null) {
                     // Slice geometries are set, we need to reproject into
@@ -304,20 +224,14 @@ public class VIIRSRequestableData extends AbstractRequestableData {
                         noData = ((Number) record.getDataAttributes()
                                 .get(VIIRSDataRecord.MISSING_VALUE_ID))
                                         .doubleValue();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     }
 
                     GridReprojection reprojection = new GridReprojection(
                             recordSliceGeometry, requestSliceGeometry);
                     ShortBufferWrapper rawDest = new ShortBufferWrapper(
                             requestSliceGeometry.getGridRange2D());
-<<<<<<< HEAD
-                    DataDestination dest = InverseFillValueFilter.apply(
-                            (DataDestination) rawDest, noData);
-=======
                     DataDestination dest = InverseFillValueFilter
                             .apply((DataDestination) rawDest, noData);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     ShortBufferWrapper rawSource = new ShortBufferWrapper(
                             ((ShortDataRecord) record).getShortData(),
                             recordSliceGeometry.getGridRange2D());
@@ -339,25 +253,6 @@ public class VIIRSRequestableData extends AbstractRequestableData {
                 }
                 return new IDataRecord[] { record };
             } else {
-<<<<<<< HEAD
-                return new IDataRecord[] { store.retrieve(
-                        dataRecord.getDataURI(), request.dataset,
-                        request.request) };
-            }
-        } catch (Exception e) {
-            throw new DataCubeException("Error retrieving viirs data: "
-                    + e.getLocalizedMessage(), e);
-        }
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.raytheon.uf.viz.derivparam.data.AbstractRequestableData#getDataValue
-     * (java.lang.Object)
-     */
-=======
                 return new IDataRecord[] {
                         store.retrieve(dataRecord.getDataURI(), request.dataset,
                                 request.request) };
@@ -369,7 +264,6 @@ public class VIIRSRequestableData extends AbstractRequestableData {
         }
     }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public IDataRecord[] getDataValue(Object arg) throws DataCubeException {
         VIIRSRequest request = (VIIRSRequest) arg;
@@ -381,15 +275,9 @@ public class VIIRSRequestableData extends AbstractRequestableData {
             double noDataValue = Double.NaN;
             if (attrs.containsKey(VIIRSDataRecord.MISSING_VALUE_ID)) {
                 // Replace no data value with NaN while assigning noDataValue
-<<<<<<< HEAD
-                noDataValue = ((Number) attrs.put(
-                        VIIRSDataRecord.MISSING_VALUE_ID, noDataValue))
-                        .doubleValue();
-=======
                 noDataValue = ((Number) attrs
                         .put(VIIRSDataRecord.MISSING_VALUE_ID, noDataValue))
                                 .doubleValue();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
 
             Unit<Dimensionless> dataUnit = AbstractUnit.ONE;
@@ -410,20 +298,12 @@ public class VIIRSRequestableData extends AbstractRequestableData {
                 height = (int) sizes[1];
             }
             float[] floatData = new float[width * height];
-<<<<<<< HEAD
-            final UnitConverter converter = dataUnit.getConverterTo(AbstractUnit.ONE);
-            DataDestination destination = new FloatBufferWrapper(floatData,
-                    width, height);
-            destination = UnitConvertingDataFilter
-                    .apply(destination, converter);
-=======
             final UnitConverter converter = dataUnit
                     .getConverterTo(AbstractUnit.ONE);
             DataDestination destination = new FloatBufferWrapper(floatData,
                     width, height);
             destination = UnitConvertingDataFilter.apply(destination,
                     converter);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             ShortBufferWrapper shortData = new ShortBufferWrapper(
                     ((ShortDataRecord) record).getShortData(), width, height);
             DataSource source = UnsignedFilter.apply(shortData);
@@ -449,11 +329,7 @@ public class VIIRSRequestableData extends AbstractRequestableData {
 
     /**
      * Copies one {@link IDataRecord} into another
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param to
      * @param from
      */
@@ -465,11 +341,7 @@ public class VIIRSRequestableData extends AbstractRequestableData {
         to.setMaxChunkSize(from.getMaxChunkSize());
         to.setMaxSizes(from.getMaxSizes());
         to.setMinIndex(from.getMinIndex());
-<<<<<<< HEAD
-        to.setProperties(from.getProperties());
-=======
         to.setProps(from.getProps());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         to.setSizes(from.getSizes());
     }
 }

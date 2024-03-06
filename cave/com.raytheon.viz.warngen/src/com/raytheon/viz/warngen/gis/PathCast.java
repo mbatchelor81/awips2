@@ -20,10 +20,7 @@
 package com.raytheon.viz.warngen.gis;
 
 import java.util.Date;
-<<<<<<< HEAD
-=======
 import org.locationtech.jts.geom.Geometry;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * 
@@ -39,11 +36,7 @@ import org.locationtech.jts.geom.Geometry;
  *    ------------ ----------  ----------- --------------------------
  *    Dec 7, 2007              chammack    Initial Creation.
  *    Jul 29, 2020 ASM #21988  dhaines     Added copy constructor, part of fix for DR#21988
-<<<<<<< HEAD
- * 
-=======
  *    Nov 29, 2021 ASM #22724  dhaines     Changes for DR 22724 - Some Cities Can't be Added to Pathcasts
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  * 
  * @author chammack
@@ -62,13 +55,10 @@ public class PathCast implements Comparable<PathCast> {
     protected String timeZone;
 
     protected Date time;
-<<<<<<< HEAD
-=======
 
     protected int index;
 
     protected Geometry pcGeom;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     
     /**
      * constructor
@@ -88,11 +78,8 @@ public class PathCast implements Comparable<PathCast> {
         this.parentArea = pc.getParentArea();
         this.timeZone = pc.getTimeZone();
         this.time = pc.getTime();
-<<<<<<< HEAD
-=======
         this.index = pc.getIndex();
         this.pcGeom = pc.getPcGeom();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
     
     /**
@@ -134,8 +121,6 @@ public class PathCast implements Comparable<PathCast> {
         return timeZone;
     }
 
-<<<<<<< HEAD
-=======
     public Geometry getPcGeom() {
         return pcGeom;
     }
@@ -144,7 +129,6 @@ public class PathCast implements Comparable<PathCast> {
         return index;
     }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public int compareTo(PathCast o) {
         if (o == null)
@@ -152,8 +136,4 @@ public class PathCast implements Comparable<PathCast> {
         return this.time.compareTo(o.time);
     }
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

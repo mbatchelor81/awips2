@@ -20,10 +20,6 @@
 package com.raytheon.viz.pointdata.thread;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
-import java.util.HashMap;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -31,10 +27,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.swt.graphics.RGB;
 
-<<<<<<< HEAD
-import com.raytheon.uf.common.dataquery.requests.RequestConstraint;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.IGraphicsTarget;
 import com.raytheon.uf.viz.core.IGraphicsTarget.LineStyle;
 import com.raytheon.uf.viz.core.exception.VizException;
@@ -46,10 +38,7 @@ import com.raytheon.viz.pointdata.PlotInfo;
 import com.raytheon.viz.pointdata.PlotModelFactory;
 import com.raytheon.viz.pointdata.PlotModelFactoryDefault;
 import com.raytheon.viz.pointdata.def.Condition;
-<<<<<<< HEAD
-=======
 import com.raytheon.viz.pointdata.rsc.PlotResourceData;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Oversees a variety of threads used to concurrently and quickly get plots on
@@ -71,10 +60,7 @@ import com.raytheon.viz.pointdata.rsc.PlotResourceData;
  *                                     customization changes
  * Dec 10, 2019  72280    ksunil      Added condition filter
  * Jan 07, 2020  73083    ksunil      Moved the setConditionalFilter() call from here
-<<<<<<< HEAD
-=======
  * Mar 24, 2020  75529    ksunil      changes for handling metarPrcp fields in the plot engine
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -116,25 +102,13 @@ public class PlotThreadOverseer {
      *
      * @param target
      * @param mapDescriptor
-<<<<<<< HEAD
-     * @param plotModelFile
-     * @param levelKey
-     * @param plugin
-     * @param constraintMap
-=======
      * @param rData
      * @param plugin
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param caller
      * @throws VizException
      */
     public PlotThreadOverseer(IGraphicsTarget target,
-<<<<<<< HEAD
-            MapDescriptor mapDescriptor, String plotModelFile, String levelKey,
-            String plugin, HashMap<String, RequestConstraint> constraintMap,
-=======
             MapDescriptor mapDescriptor, PlotResourceData rData, String plugin,
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             IPlotModelGeneratorCaller caller) throws VizException {
 
         /*
@@ -144,10 +118,7 @@ public class PlotThreadOverseer {
          */
         List<IPlotModelElement> plotFields = null;
         List<IPlotModelElement> sampleFields = null;
-<<<<<<< HEAD
-=======
         String plotModelFile = rData.getPlotModelFile();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         boolean newType = PlotModelFactory.isNewSVGFormat(plotModelFile);
 
         for (int i = 0; i < IMAGE_THREADS; i++) {
@@ -180,11 +151,7 @@ public class PlotThreadOverseer {
          */
         for (int i = 0; i < DATA_THREADS; i++) {
             dataRetrievalJobList.add(new PlotModelDataRequestJob(this, caller,
-<<<<<<< HEAD
-                    plotFields, sampleFields, levelKey, plugin, constraintMap));
-=======
                     plotFields, sampleFields, plugin, rData));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         /*

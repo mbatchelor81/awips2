@@ -39,12 +39,8 @@ import com.raytheon.uf.common.pointdata.PointDataDescription.Type;
  * Date         Ticket#    Engineer      Description
  * ------------ ---------- -----------   -----------------------
  * 10/31/2019   71272      Mark Peters   Initial Creation
-<<<<<<< HEAD
- *
-=======
  * 03/30/2020   75529      ksunil        implemented isValidParameter
  * 04/10/2020   77336      ksunil        isValidParameter to return true
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  *
  * @author mpeters
@@ -116,12 +112,9 @@ public class SamplePlotData implements IPlotData {
         return Collections.unmodifiableSet(data.keySet());
     }
 
-<<<<<<< HEAD
-=======
     @Override
     public boolean isValidParameter(String param) {
         return true;
     }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

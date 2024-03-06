@@ -30,23 +30,6 @@
             <descriptor xsi:type="mapDescriptor">
                 <resource>
                     <loadProperties>
-<<<<<<< HEAD
-=======
-                        <capabilities>
-                            <capability xsi:type="colorableCapability"
-                                colorAsString="#9b9b9b" />
-                        </capabilities>
-                    </loadProperties>
-                    <properties  isMapLayer="true"/>
-                    <resourceData xsi:type="spiResourceData"
-                        pixelSizeHint="45">
-                        <filename>basemaps/MTR.spi</filename>
-                        <mapName>METAR Station Locations</mapName>
-                    </resourceData>
-                </resource>
-                <resource>
-                    <loadProperties>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         <capabilities/>
                     </loadProperties>
                     <properties isSystemResource="false"

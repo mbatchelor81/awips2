@@ -5,11 +5,7 @@
 #   will be passed back to the test script as follows:
 #       '/path/to/watchdog_script.sh repair RETURN_CODE /path/to/watchdog_script.sh'
 
-<<<<<<< HEAD
-source /etc/init.d/edexServiceList
-=======
 source /awips2/edex/conf/edexServiceList
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 source /etc/watchdog.d/utilities/watchdogutils.sh
 
 run_test ()
@@ -17,11 +13,7 @@ run_test ()
     let return_code=100
     for service in ${SERVICES[*]};
     do
-<<<<<<< HEAD
-        service_action "status" $service 60 "edex_camel"
-=======
         systemd_action "status" edex_camel@$service 60
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if [ $? -ne 0 ]; then
             if [ ! -f /awips2/edex/etc/${service}.sh ]; then
                 echo "ERROR `date_cmd` unrecognized Edex service $service..."
@@ -50,13 +42,8 @@ case "$1" in
             local service_to_repair
             let idx=$2-100
             service_to_repair=${SERVICES[$idx]}
-<<<<<<< HEAD
-            service_action "restart" $service_to_repair 60 "edex_camel"
-            service_action "status" $service_to_repair 60 "edex_camel"
-=======
             systemd_action "restart" edex_camel@$service_to_repair 60
             systemd_action "status" edex_camel@$service_to_repair 60
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             err=$?
             if [ $err -ne 0 ]; then
                 echo "ERROR `date_cmd` Edex $service_to_repair failed to restart; rebooting system..."

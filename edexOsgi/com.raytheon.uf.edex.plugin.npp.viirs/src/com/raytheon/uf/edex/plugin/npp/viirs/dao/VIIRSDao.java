@@ -47,10 +47,6 @@ import com.raytheon.uf.common.numeric.dest.DataDestination;
 import com.raytheon.uf.common.numeric.filter.InverseFillValueFilter;
 import com.raytheon.uf.common.numeric.filter.UnsignedFilter;
 import com.raytheon.uf.common.numeric.source.DataSource;
-<<<<<<< HEAD
-import com.raytheon.uf.common.status.UFStatus.Priority;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.time.DataTime;
 import com.raytheon.uf.edex.core.dataplugin.PluginRegistry;
 import com.raytheon.uf.edex.database.DataAccessLayerException;
@@ -67,18 +63,6 @@ import com.raytheon.uf.edex.plugin.npp.viirs.VIIRSMessageData;
  *
  * SOFTWARE HISTORY
  *
-<<<<<<< HEAD
- * Date          Ticket#  Engineer    Description
- * ------------- -------- ----------- --------------------------
- * Dec 01, 2011           mschenke    Initial creation
- * Feb 21, 2012  30       mschenke    Updated code to account for missingValue
- *                                    in messageData being float now
- * Mar 07, 2014  2791     bsteffen    Move Data Source/Destination to numeric
- *                                    plugin.
- * Apr 02, 2020  8075     bsteffen    Store interpolated levels together.
- * Sep 23, 2021  8608     mapeters    Add metadata id handling
- * Jun 22, 2022  8865     mapeters    Update populateDataStore to return boolean
-=======
  * Date          Ticket#  Engineer  Description
  * ------------- -------- --------- --------------------------------------------
  * Dec 01, 2011           mschenke  Initial creation
@@ -92,7 +76,6 @@ import com.raytheon.uf.edex.plugin.npp.viirs.VIIRSMessageData;
  * May 03, 2021  7849     mapeters  Switch from UFStatus to slf4j logging
  * Sep 23, 2021  8608     mapeters  Add metadata id handling
  * Jun 22, 2022  8865     mapeters  Update populateDataStore to return boolean
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -131,11 +114,7 @@ public class VIIRSDao extends PluginDao {
                         coverage = (VIIRSSpatialCoverage) obj;
                         break;
                     } else {
-<<<<<<< HEAD
-                        logger.handle(Priority.WARN,
-=======
                         logger.warn(
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                 "VIIRSSpatialCoverage lookup returned type of: "
                                         + obj != null
                                                 ? obj.getClass().getSimpleName()
@@ -144,12 +123,7 @@ public class VIIRSDao extends PluginDao {
                 }
             }
         } catch (DataAccessLayerException e) {
-<<<<<<< HEAD
-            logger.handle(Priority.PROBLEM,
-                    "Error querying for viirs spatial object", e);
-=======
             logger.warn("Error querying for viirs spatial object", e);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
         return coverage;
     }
@@ -201,11 +175,7 @@ public class VIIRSDao extends PluginDao {
                             messageData.getUnitString());
                 }
                 idr.setDataAttributes(attributes);
-<<<<<<< HEAD
-                idr.setProperties(props);
-=======
                 idr.setProps(props);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 idr.setCorrelationObject(record);
                 return idr;
             }
@@ -265,11 +235,7 @@ public class VIIRSDao extends PluginDao {
 
     /**
      * Deletes all viirs_spatial metadata which doesn't have spatial data and
-<<<<<<< HEAD
-     * older than 4 hours if all == false
-=======
      * older than 4 hours if all is false
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      */
     private void purgeSpatialData(boolean all) {
         List<Object> args = new ArrayList<>(3);

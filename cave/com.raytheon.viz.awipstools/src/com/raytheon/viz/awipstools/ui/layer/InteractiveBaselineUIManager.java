@@ -1,10 +1,6 @@
 /*****************************************************************************************
  * COPYRIGHT (c), 2007, RAYTHEON COMPANY
-<<<<<<< HEAD
- * ALL RIGHTS RESERVED, An Unpublished Work 
-=======
  * ALL RIGHTS RESERVED, An Unpublished Work
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * RAYTHEON PROPRIETARY
  * If the end user is not the U.S. Government or any agency thereof, use
@@ -30,10 +26,6 @@ import java.util.Queue;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.swt.SWT;
-<<<<<<< HEAD
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PlatformUI;
-=======
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
@@ -42,7 +34,6 @@ import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.LineSegment;
 import org.locationtech.jts.geom.LineString;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.uf.viz.core.IDisplayPaneContainer;
 import com.raytheon.uf.viz.core.drawables.IDescriptor;
@@ -53,21 +44,6 @@ import com.raytheon.viz.awipstools.ui.layer.InteractiveBaselinesLayer.Baseline;
 import com.raytheon.viz.ui.cmenu.IContextMenuContributor;
 import com.raytheon.viz.ui.cmenu.IContextMenuProvider;
 import com.raytheon.viz.ui.input.InputAdapter;
-<<<<<<< HEAD
-import org.locationtech.jts.algorithm.Angle;
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.GeometryFactory;
-import org.locationtech.jts.geom.LineSegment;
-import org.locationtech.jts.geom.LineString;
-
-/**
- * Interface manager for Interactive Baselines
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * 
-=======
 
 /**
  * Interface manager for Interactive Baselines
@@ -76,25 +52,10 @@ import org.locationtech.jts.geom.LineString;
  *
  * SOFTWARE HISTORY
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
  * Aug 29, 2013 2281       bsteffen    Rename ToolsUiUitil.
  * Sep 18, 2013 2360       njensen     Don't handle mouse actions when layer is invisible
-<<<<<<< HEAD
- * 
- * 
- * </pre>
- * 
- * @author mschenke
- * @version 1.0
- */
-
-public class InteractiveBaselineUIManager extends InputAdapter implements
-        IContextMenuContributor, IContextMenuProvider {
-
-    private static final int CLICK_RADIUS_PIX = InteractiveBaselinesLayer.CIRCLE_RADIUS_PIX * 3;
-=======
  * Sep 13, 2022 8792       mapeters    Only handle input events in the pane the
  *                                     layer is in
  * Nov 03, 2022 8792       mapeters    Prevent cursor from getting stuck as a hand when
@@ -111,7 +72,6 @@ public class InteractiveBaselineUIManager extends InputAdapter
 
     private static final int CLICK_RADIUS_PIX = InteractiveBaselinesLayer.CIRCLE_RADIUS_PIX
             * 3;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private static final ToolsDataManager dataManager = ToolsDataManager
             .getInstance();
@@ -140,11 +100,7 @@ public class InteractiveBaselineUIManager extends InputAdapter
     private int currentCursor = SWT.CURSOR_ARROW;
 
     /** Our Queue which we limit to size 5 of recently LRU lines */
-<<<<<<< HEAD
-    private Queue<String> selectionQueue = new ArrayDeque<String>();
-=======
     private Queue<String> selectionQueue = new ArrayDeque<>();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /** The baseline we are currently moving through "selection" */
     private String currentlySelecting = null;
@@ -155,12 +111,8 @@ public class InteractiveBaselineUIManager extends InputAdapter
      */
     private boolean firstSelection = true;
 
-<<<<<<< HEAD
-    public InteractiveBaselineUIManager(InteractiveBaselinesLayer baselinesLayer) {
-=======
     public InteractiveBaselineUIManager(
             InteractiveBaselinesLayer baselinesLayer) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         this.baselinesLayer = baselinesLayer;
 
         // Build selection queue
@@ -170,14 +122,6 @@ public class InteractiveBaselineUIManager extends InputAdapter
         }
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.raytheon.viz.ui.input.InputAdapter#handleMouseMove(int, int)
-     */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public boolean handleMouseMove(int x, int y) {
         // In this method, we want to figure out what Baseline we are
@@ -204,12 +148,7 @@ public class InteractiveBaselineUIManager extends InputAdapter
             hoverCoords = null;
         }
 
-<<<<<<< HEAD
-        if (baselinesLayer.isEditable()
-                && baselinesLayer.getProperties().isVisible()) {
-=======
         if (baselinesLayer.isInteractive()) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             // Only operate if editable
             if (inMotion != null) {
                 // Already have something in motion, process the move
@@ -229,19 +168,6 @@ public class InteractiveBaselineUIManager extends InputAdapter
                     if (idx >= 0) {
                         // We are close to a point in this line
                         mouse = SWT.CURSOR_HAND;
-<<<<<<< HEAD
-                        hoverLine = new Baseline(
-                                (LineString) line.line.clone(), line.name);
-                        hoverCoords = new Coordinate[] { hoverLine.line
-                                .getCoordinateN(idx) };
-                        break;
-                    } else if (ToolsUiUtil.closeToLine(container,
-                            line.line.getCoordinates(), x, y, CLICK_RADIUS_PIX)) {
-                        // We are close this this line
-                        mouse = SWT.CURSOR_SIZEALL;
-                        hoverLine = new Baseline(
-                                (LineString) line.line.clone(), line.name);
-=======
                         hoverLine = new Baseline((LineString) line.line.copy(),
                                 line.name);
                         hoverCoords = new Coordinate[] {
@@ -254,7 +180,6 @@ public class InteractiveBaselineUIManager extends InputAdapter
                         mouse = SWT.CURSOR_SIZEALL;
                         hoverLine = new Baseline((LineString) line.line.copy(),
                                 line.name);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         hoverCoords = hoverLine.line.getCoordinates();
                         break;
                     }
@@ -270,18 +195,6 @@ public class InteractiveBaselineUIManager extends InputAdapter
         return false;
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.raytheon.viz.ui.input.InputAdapter#handleMouseDown(int, int,
-     * int)
-     */
-    @Override
-    public boolean handleMouseDown(int x, int y, int mouseButton) {
-        if (baselinesLayer.isEditable()
-                && baselinesLayer.getProperties().isVisible()) {
-=======
     @Override
     public boolean handleMouseExit(Event event) {
         updateCursorStandard(SWT.CURSOR_ARROW);
@@ -296,7 +209,6 @@ public class InteractiveBaselineUIManager extends InputAdapter
     @Override
     public boolean handleMouseDown(int x, int y, int mouseButton) {
         if (baselinesLayer.isInteractive()) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             Baseline inMotion = baselinesLayer.getLineInMotion();
             // Only operate if editable
             if (inMotion != null) {
@@ -335,14 +247,6 @@ public class InteractiveBaselineUIManager extends InputAdapter
         return false;
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.raytheon.viz.ui.input.InputAdapter#handleMouseUp(int, int, int)
-     */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public boolean handleMouseUp(int x, int y, int mouseButton) {
         if (withinBounds(x, y)) {
@@ -350,12 +254,7 @@ public class InteractiveBaselineUIManager extends InputAdapter
             lastX = x;
             lastY = y;
         }
-<<<<<<< HEAD
-        if (baselinesLayer.isEditable()
-                && baselinesLayer.getProperties().isVisible()) {
-=======
         if (baselinesLayer.isInteractive()) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             Baseline inMotion = baselinesLayer.getLineInMotion();
             // Only process if editable
             if (selectX >= 0 && selectY >= 0) {
@@ -402,15 +301,6 @@ public class InteractiveBaselineUIManager extends InputAdapter
         currentlySelecting = null;
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.raytheon.viz.ui.input.InputAdapter#handleMouseDownMove(int, int,
-     * int)
-     */
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public boolean handleMouseDownMove(int x, int y, int mouseButton) {
         int prevX = lastX;
@@ -420,12 +310,7 @@ public class InteractiveBaselineUIManager extends InputAdapter
             lastX = x;
             lastY = y;
         }
-<<<<<<< HEAD
-        if (baselinesLayer.isEditable()
-                && baselinesLayer.getProperties().isVisible()) {
-=======
         if (baselinesLayer.isInteractive()) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if (deleting) {
                 baselinesLayer.issueRefresh();
                 return true;
@@ -449,24 +334,10 @@ public class InteractiveBaselineUIManager extends InputAdapter
         return display.getBounds().contains(x, y);
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.raytheon.viz.ui.cmenu.IContextMenuContributor#addContextMenuItems
-     * (org.eclipse.jface.action.IMenuManager, int, int)
-     */
-    @Override
-    public void addContextMenuItems(IMenuManager menuManager, final int x,
-            final int y) {
-        if (baselinesLayer.isEditable() == false) {
-=======
     @Override
     public void addContextMenuItems(IMenuManager menuManager, final int x,
             final int y) {
         if (!baselinesLayer.isInteractive()) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return;
         }
         menuManager.add(new Action("Select Location") {
@@ -527,29 +398,12 @@ public class InteractiveBaselineUIManager extends InputAdapter
         }
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.raytheon.viz.ui.cmenu.IContextMenuProvider#provideContextMenuItems
-     * (org.eclipse.jface.action.IMenuManager, int, int)
-     */
-    @Override
-    public void provideContextMenuItems(IMenuManager menuManager, int x, int y) {
-        if (baselinesLayer.isEditable()) {
-            if (hoverLine != null) {
-                // Only "provide" the menu if we are hovered over a line
-                addContextMenuItems(menuManager, x, y);
-            }
-=======
     @Override
     public void provideContextMenuItems(IMenuManager menuManager, int x,
             int y) {
         if (baselinesLayer.isInteractive() && hoverLine != null) {
             // Only "provide" the menu if we are hovered over a line
             addContextMenuItems(menuManager, x, y);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 
@@ -567,21 +421,13 @@ public class InteractiveBaselineUIManager extends InputAdapter
                     baselinesLayer.getDescriptor(), screenLoc[0], screenLoc[1]);
             c.x = translated.x;
             c.y = translated.y;
-<<<<<<< HEAD
-            c.z = translated.z;
-=======
             c.setZ(translated.getZ());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 
     /**
      * Update the window's shell cursor with the specified cursor val
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param cursorEnum
      */
     private void updateCursorStandard(int cursorEnum) {
@@ -595,15 +441,9 @@ public class InteractiveBaselineUIManager extends InputAdapter
     /**
      * TODO: Handle small possibility of line not existing anymore when
      * selecting
-<<<<<<< HEAD
-     * 
-     * Selects location for the baseline.
-     * 
-=======
      *
      * Selects location for the baseline.
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param x
      * @param y
      */
@@ -640,13 +480,8 @@ public class InteractiveBaselineUIManager extends InputAdapter
             Coordinate c = new Coordinate(x, y);
             if (Angle.angleBetween(c2, c1, c) > (Math.PI / 2)) {
                 coords = Arrays.copyOf(coords, coords.length + 1);
-<<<<<<< HEAD
-                coords[coords.length - 1] = ToolsUiUtil.translateClick(
-                        container, descriptor, c.x, c.y);
-=======
                 coords[coords.length - 1] = ToolsUiUtil
                         .translateClick(container, descriptor, c.x, c.y);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             } else {
                 selectionQueue.add(currentlySelecting);
                 currentlySelecting = null;
@@ -655,24 +490,15 @@ public class InteractiveBaselineUIManager extends InputAdapter
             }
         }
 
-<<<<<<< HEAD
-        dataManager
-                .setBaseline(currentlySelecting, gf.createLineString(coords));
-=======
         dataManager.setBaseline(currentlySelecting,
                 gf.createLineString(coords));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         baselinesLayer.issueRefresh();
     }
 
     /**
      * Add's a vertex at the specified screen x/y in the hoverLine object at the
      * closest point in the line
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @param x
      * @param y
      */
@@ -727,11 +553,7 @@ public class InteractiveBaselineUIManager extends InputAdapter
 
     /**
      * Deletes hoverCoords[0] from hoverLine and returns resulting Coordinate[]
-<<<<<<< HEAD
-     * 
-=======
      *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return Coordinate[] without hoverCoords[0]
      */
     private Coordinate[] deleteVertex() {
@@ -758,11 +580,7 @@ public class InteractiveBaselineUIManager extends InputAdapter
         } else if (selectionQueue.contains(hoverLine.name)) {
             selectionQueue.remove(hoverLine.name);
             for (Baseline baseline : baselinesLayer.getCurrentBaselines()) {
-<<<<<<< HEAD
-                if (selectionQueue.contains(baseline.name) == false) {
-=======
                 if (!selectionQueue.contains(baseline.name)) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     selectionQueue.add(baseline.name);
                     break;
                 }

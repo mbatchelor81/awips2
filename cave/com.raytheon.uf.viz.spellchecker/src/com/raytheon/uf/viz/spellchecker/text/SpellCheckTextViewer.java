@@ -54,10 +54,7 @@ import org.eclipse.jface.text.TextViewer;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
-<<<<<<< HEAD
-=======
 import org.eclipse.swt.custom.StyledText;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.MenuAdapter;
@@ -112,10 +109,7 @@ import com.raytheon.uf.viz.spellchecker.util.SpellCheckUtil;
  * May 10, 2019 7747       mapeters    Flag/filter inappropriate words (copied from Hazard Services,
  *                                     with some constants extracted out to {@link SpellCheckUtil})
  * Feb 04, 2020 7998       drogalla    Use the same spellcheck dictionary as GFE and text workstation
-<<<<<<< HEAD
-=======
  * Jul 07, 2021 8277       pvemuri     SpellCheckTextViewer needs to preserve pre-existing StyleRanges
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -370,22 +364,11 @@ public class SpellCheckTextViewer extends TextViewer
                         break;
                     }
                     StyleRange range = new StyleRange(problem.getOffset(),
-<<<<<<< HEAD
-                            problem.getLength(),
-                            Display.getCurrent()
-                                    .getSystemColor(SWT.COLOR_LIST_FOREGROUND),
-                            Display.getCurrent()
-                                    .getSystemColor(SWT.COLOR_LIST_BACKGROUND));
-=======
                             problem.getLength(), null, null);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     range.underline = true;
                     range.underlineColor = Display.getCurrent()
                             .getSystemColor(SWT.COLOR_RED);
                     range.underlineStyle = SWT.UNDERLINE_SQUIGGLE;
-<<<<<<< HEAD
-                    presentation.replaceStyleRange(range);
-=======
 
                     /*
                      * Get the styleRange from the widget and merge it into
@@ -397,7 +380,6 @@ public class SpellCheckTextViewer extends TextViewer
                     presentation.mergeStyleRanges(styledText.getStyleRanges());
                     presentation.mergeStyleRange(range);
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
                 changeTextPresentation(presentation, true);
                 checkingSpelling = false;
@@ -449,11 +431,7 @@ public class SpellCheckTextViewer extends TextViewer
                 if (issueSpellCheck) {
                     viewer.scheduleSpellJob(true);
                 } else {
-<<<<<<< HEAD
-                    viewer.refresh();
-=======
                     removeRedUnderline();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 }
             }
         }
@@ -485,10 +463,6 @@ public class SpellCheckTextViewer extends TextViewer
             job.setCollector(SpellCheckTextViewer.this);
             checkingSpelling = true;
             job.schedule();
-<<<<<<< HEAD
-            refresh();
-        }
-=======
 
             removeRedUnderline();
         }
@@ -516,7 +490,6 @@ public class SpellCheckTextViewer extends TextViewer
         styledText.setStyleRange(null);
         styledText.setStyleRanges(
                 rangeList.toArray(new StyleRange[rangeList.size()]));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     /**

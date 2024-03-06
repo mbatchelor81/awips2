@@ -29,10 +29,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-<<<<<<< HEAD
-=======
 import java.nio.file.Paths;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -44,10 +41,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
-<<<<<<< HEAD
-=======
 import java.util.stream.Stream;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import org.geotools.geometry.jts.JTS;
 import org.locationtech.jts.geom.Coordinate;
@@ -95,13 +89,9 @@ import com.raytheon.uf.common.python.PyUtil;
 import com.raytheon.uf.common.python.PythonEval;
 import com.raytheon.uf.common.python.PythonIncludePathUtil;
 import com.raytheon.uf.common.serialization.SingleTypeJAXBManager;
-<<<<<<< HEAD
-import com.raytheon.uf.common.status.IUFStatusHandler;
-=======
 import com.raytheon.uf.common.status.IPerformanceStatusHandler;
 import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.PerformanceStatus;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.status.UFStatus;
 import com.raytheon.uf.common.status.UFStatus.Priority;
 import com.raytheon.uf.common.util.FileUtil;
@@ -157,14 +147,9 @@ import jep.JepException;
  * Jul 31, 2017  6342     randerso  Get ReferenceMgr from IFPServer. Code cleanup.
  * Jun 03, 2019  7852     dgilling  Update code for jep 3.8.
  * Oct 23, 2019  7944     dgilling  Fix Comparator used by updateNeeded.
-<<<<<<< HEAD
- * Feb 18, 2020  20542    ryu       Regenerate edit areas (and related files) if 
- *                                  previous attempt did not complete.
-=======
  * Feb 18, 2020  20542    ryu       Regenerate edit areas (and related files) if
  *                                  previous attempt did not complete.
  * Dec 17, 2021  8342     sharbison Changes for Performance Logging.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -174,12 +159,9 @@ public class MapManager {
     private static final transient IUFStatusHandler statusHandler = UFStatus
             .getHandler(MapManager.class);
 
-<<<<<<< HEAD
-=======
     private static final IPerformanceStatusHandler perfLog = PerformanceStatus
             .getHandler("GFE");
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private static final String EDIT_AREAS_DIR = FileUtil.join("gfe",
             "editAreas");
 
@@ -216,11 +198,7 @@ public class MapManager {
     private static final double EA_EQ_TOLERANCE = 0.0005;
 
     private PythonEval pyScript;
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /**
      * Constructor
      *
@@ -283,15 +261,10 @@ public class MapManager {
             needUpdate = updateNeeded(maps,
                     FileUtil.join(this.commonStaticConfigDir, EDIT_AREAS_DIR));
 
-<<<<<<< HEAD
-            statusHandler.info("getMaps took: "
-                    + (System.currentTimeMillis() - t0) + " ms");
-=======
             perfLog.logDuration(
                     "Map Manager retrieving maps for site "
                             + config.getSiteID(),
                     System.currentTimeMillis() - t0);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             if (needUpdate) {
                 statusHandler.info("Number of maps to process: " + maps.size());
@@ -329,13 +302,6 @@ public class MapManager {
                 new AreaDictionaryMaker().genAreaDictionary(site,
                         editAreaAttrs);
 
-<<<<<<< HEAD
-                // Completed edit areas generation and related tasks. Remove tag.
-
-                File tag = new File(FileUtil.join(commonStaticConfigDir, 
-                                                  EDIT_AREAS_DIR),
-                                    EDITAREA_GEN_TAGFILE);
-=======
                 /*
                  * Completed edit areas generation and related tasks. Remove the
                  * tag.
@@ -344,7 +310,6 @@ public class MapManager {
                 File tag = new File(
                         FileUtil.join(commonStaticConfigDir, EDIT_AREAS_DIR),
                         EDITAREA_GEN_TAGFILE);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 if (tag.exists()) {
                     tag.delete();
                 }
@@ -370,20 +335,11 @@ public class MapManager {
         // Check for tag file. If exits, the last attempt didn't complete
         // and it needs to be redone.
 
-<<<<<<< HEAD
-        File gentag = new File(FileUtil.join(directory, 
-                               EDITAREA_GEN_TAGFILE));
-
-        if (gentag.exists()) {
-            statusHandler.info("The previous attempt of edit area generation"
-            		+ " and related tasks did not complete. Will try again.");
-=======
         File gentag = new File(FileUtil.join(directory, EDITAREA_GEN_TAGFILE));
 
         if (gentag.exists()) {
             statusHandler.info("The previous attempt of edit area generation"
                     + " and related tasks did not complete. Will try again.");
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return true;
         }
 
@@ -437,18 +393,11 @@ public class MapManager {
 
         // calc oldest file in directory
         long oldestEditArea = Long.MIN_VALUE;
-<<<<<<< HEAD
-        File dir = new File(directory);
-        if (dir.exists()) {
-            try {
-                Optional<Path> oldestFile = Files.list(dir.toPath())
-=======
 
         Path path = Paths.get(directory);
         if (Files.exists(path)) {
             try (Stream<Path> filePaths = Files.list(path)) {
                 Optional<Path> oldestFile = filePaths
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         .filter(f -> Files.isRegularFile(f)).min(Comparator
                                 .comparingLong(f -> f.toFile().lastModified()));
                 if (oldestFile.isPresent()) {
@@ -457,11 +406,7 @@ public class MapManager {
             } catch (IOException e) {
                 statusHandler
                         .warn("Could not read last modified times for path ["
-<<<<<<< HEAD
-                                + dir + "].", e);
-=======
                                 + path + "].", e);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
         }
 
@@ -501,10 +446,6 @@ public class MapManager {
         File gentag = new File(areaDir, EDITAREA_GEN_TAGFILE);
         gentag.mkdirs();
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         int i = 0;
         BoundingBox bounds = null;
         try {
@@ -546,11 +487,7 @@ public class MapManager {
         }
         writeISCMarker();
         writeSpecialISCEditAreas();
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         long t1 = System.currentTimeMillis();
         statusHandler.info("EditArea generation time: " + (t1 - t0) + " ms");
     }
@@ -700,13 +637,8 @@ public class MapManager {
         String groupName = mapDef.getGroupName();
         if (groupName != null) {
             List<String> list = new ArrayList<>();
-<<<<<<< HEAD
-            for (int i = 0; i < data.size(); i++) {
-                list.add(data.get(i).getId().getName());
-=======
             for (ReferenceData referenceData : data) {
                 list.add(referenceData.getId().getName());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             }
 
             // Need some special edit areas for ISC
@@ -714,13 +646,8 @@ public class MapManager {
             List<String> knownSites = config.allSites();
             boolean anySites = false;
             if ("ISC".equals(groupName)) {
-<<<<<<< HEAD
-                for (int i = 0; i < data.size(); i++) {
-                    String n = data.get(i).getId().getName();
-=======
                 for (ReferenceData referenceData : data) {
                     String n = referenceData.getId().getName();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                     if ((n.length() == 7) && n.startsWith("ISC_")) {
                         String cwa = n.substring(4, 7);
 
@@ -731,11 +658,7 @@ public class MapManager {
                                 anySites = true;
                                 statusHandler.debug("creating: ISC_Marker_Set");
                             }
-<<<<<<< HEAD
-                            createISCMarker(cwa, data.get(i));
-=======
                             createISCMarker(cwa, referenceData);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                         }
                     }
                 }

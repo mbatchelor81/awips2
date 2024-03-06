@@ -31,8 +31,6 @@
 # This is a base file that is not intended to be overridden.
 ##
 
-<<<<<<< HEAD
-=======
 # SOFTWARE HISTORY
 #
 # Date          Ticket#  Engineer  Description
@@ -43,7 +41,6 @@
 # Aug 24, 2021  21543    zalberts  Added None check after parm is assigned.
 #
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 ToolType = "numeric"
 WeatherElementEdited = "variableElement"
 from numpy import *
@@ -55,13 +52,6 @@ class Tool (SmartScript.SmartScript):
     def __init__(self, dbss):
         SmartScript.SmartScript.__init__(self, dbss)
 
-<<<<<<< HEAD
-    def execute(self, WEname, editArea, GridTimeRange):
-        parm = self.getParmByExpr(WEname)
-        time = GridTimeRange.startTime().javaDate()
-
-        parm.smooth(time, editArea)
-=======
     def execute(self, WEname, editArea, GridTimeRange, varDict):
         parm = self.getParmByExpr(WEname)
         if parm is not None:
@@ -74,5 +64,4 @@ class Tool (SmartScript.SmartScript):
 
             parm.smooth(time, editArea, smoothCount)
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return None

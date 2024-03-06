@@ -47,12 +47,9 @@
 # Apr 98, 2019  7788     randerso  Don't log errors when attempting to purge
 #                                  non-existent file.
 # May 19, 2019  20105 mgamazaychikov Updated GFESUITE_MHSID assignment
-<<<<<<< HEAD
-=======
 # Nov 09, 2021  8698     njensen   Replace time.clock() with os.times()
 # Jul 14, 2023  2035938  dgilling  Update xml.etree.ElementTree calls to remove 
 #                                  functions deprecated in python 3.11
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 ##
 
@@ -64,11 +61,7 @@
 
 from xml.etree import ElementTree
 from xml.etree.ElementTree import Element, SubElement
-<<<<<<< HEAD
-import errno, os, os.path, stat, subprocess, time
-=======
 import errno, os, stat, subprocess
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import IrtAccess, IrtServer
 import iscUtil
@@ -113,11 +106,7 @@ def execIscDataRec(MSGID, SUBJECT, FILES):
        # logEvent('*** iscDataRec ***', sys.argv[1:])
         logEvent('SUBJECT:', SUBJECT, 'MSGID:', MSGID, "FILES:", FILES)
 
-<<<<<<< HEAD
-        time1 = time.clock()
-=======
         t0 = os.times()
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         #get our MHS id
         ourMhsID = os.environ['SITE_IDENTIFIER'].upper()
@@ -167,11 +156,7 @@ def execIscDataRec(MSGID, SUBJECT, FILES):
 
         # find source xml
         found = False
-<<<<<<< HEAD
-        for srcE in iscE.getchildren():
-=======
         for srcE in iscE:
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if srcE.tag == "source":
                 for addressE in srcE:
                     srcServer = irt.decodeXMLAddress(addressE)
@@ -185,11 +170,7 @@ def execIscDataRec(MSGID, SUBJECT, FILES):
 
         # find destinations xml
         found = False
-<<<<<<< HEAD
-        for destE in iscE.getchildren():
-=======
         for destE in iscE:
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if destE.tag == "destinations":
                 found = True
                 break
@@ -220,11 +201,7 @@ def execIscDataRec(MSGID, SUBJECT, FILES):
                     continue  #this destination is for someone else.
 
                 # transmit the data to the ifpServer
-<<<<<<< HEAD
-                time2 = time.clock()
-=======
                 t1 = os.times()
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                 if SUBJECT == 'PUT_ACTIVE_TABLE':
                     IrtServer.putVTECActiveTable(dataFile, None)
@@ -259,13 +236,6 @@ def execIscDataRec(MSGID, SUBJECT, FILES):
                 else:
                     logProblem("unknown subject: ", SUBJECT)
                     continue
-<<<<<<< HEAD
-                time3 = time.clock()
-                delta1 = time2 - time1
-                delta2 = time3 - time2
-                logEvent('Sent to:',
-                  irt.printServerInfo(destServer), "connectT=", delta1, "xmtT=", delta2)
-=======
                 t2 = os.times()
                 delta1 = t1.elapsed - t0.elapsed
                 delta2 = t2.elapsed - t1.elapsed
@@ -279,7 +249,6 @@ def execIscDataRec(MSGID, SUBJECT, FILES):
                          irt.printServerInfo(destServer),
                          "xmtT wctime=", "%-6.2f" % delta2,
                          ", cputime=", "%-6.2f" % deltaCpu2)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     except:
         logException("iscDataRec failed!")
 

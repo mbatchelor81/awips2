@@ -1,61 +1,35 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
  * 
-=======
- *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
  * 
-=======
- *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
  * 
-=======
- *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
 package com.raytheon.uf.common.dataplugin.tcs;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Calendar;
-=======
-import java.util.Calendar;
-import java.util.List;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-<<<<<<< HEAD
-=======
-import javax.persistence.Index;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
-<<<<<<< HEAD
-=======
-import org.locationtech.jts.geom.Geometry;
-
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.common.dataplugin.PluginDataObject;
 import com.raytheon.uf.common.dataplugin.annotations.DataURI;
 import com.raytheon.uf.common.dataplugin.annotations.NullString;
@@ -66,7 +40,6 @@ import com.raytheon.uf.common.pointdata.PointDataView;
 import com.raytheon.uf.common.pointdata.spatial.SurfaceObsLocation;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerialize;
 import com.raytheon.uf.common.serialization.annotations.DynamicSerializeElement;
-<<<<<<< HEAD
 import org.locationtech.jts.geom.Geometry;
 
 /**
@@ -74,14 +47,6 @@ import org.locationtech.jts.geom.Geometry;
  * 
  * <pre>
  * 
-=======
-
-/**
- * Record implementation for tcs plugin
- *
- * <pre>
- *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * SOFTWARE HISTORY
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
@@ -97,31 +62,16 @@ import org.locationtech.jts.geom.Geometry;
  * Jul 28, 2015 4360       rferrel     Named unique constraint. Made productType non-nullable.
  * Jan 27, 2016 5285       tgurney     Remove dataURI column and update unique constraint.
  * Aug 04, 2016 5783       tgurney     Add forecasttime to unique constraint
-<<<<<<< HEAD
  * 
  * </pre>
  * 
-=======
- * Aug 08, 2022 8892       tjensen     Update indexes for Hibernate 5
- *
- * </pre>
- *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author jsanchez
  */
 @Entity
 @SequenceGenerator(initialValue = 1, name = PluginDataObject.ID_GEN, sequenceName = "tcsseq")
-<<<<<<< HEAD
 @Table(name = "tcs", uniqueConstraints = { @UniqueConstraint(name = "uk_tcs_datauri_fields", columnNames = {
         "refTime", "forecastTime", "productType", "latitude", "longitude",
         "stationId" }) })
-=======
-@Table(name = "tcs", uniqueConstraints = {
-        @UniqueConstraint(name = "uk_tcs_datauri_fields", columnNames = {
-                "refTime", "forecastTime", "productType", "latitude",
-                "longitude", "stationId" }) }, indexes = {
-                        @Index(name = "%TABLE%_stationIndex", columnList = "stationId") })
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 @DynamicSerialize
 public class TropicalCycloneSummary extends PersistablePluginDataObject
         implements ISpatialEnabled, IPointData {
@@ -170,16 +120,12 @@ public class TropicalCycloneSummary extends PersistablePluginDataObject
 
     @DynamicSerializeElement
     @Transient
-<<<<<<< HEAD
     protected ArrayList<Radius> radiusList;
 
     // @XmlElement
     // @DynamicSerializeElement
     // @Transient
     // protected List<WindRadius> windRadii;
-=======
-    protected List<Radius> radiusList;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     /**
      * Empty default constructor
@@ -273,11 +219,7 @@ public class TropicalCycloneSummary extends PersistablePluginDataObject
 
     /**
      * Get this observation's geometry.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry for this observation.
      */
     public Geometry getGeometry() {
@@ -286,11 +228,7 @@ public class TropicalCycloneSummary extends PersistablePluginDataObject
 
     /**
      * Get the geometry latitude.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry latitude.
      */
     public double getLatitude() {
@@ -299,11 +237,7 @@ public class TropicalCycloneSummary extends PersistablePluginDataObject
 
     /**
      * Get the geometry longitude.
-<<<<<<< HEAD
      * 
-=======
-     *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
      * @return The geometry longitude.
      */
     public double getLongitude() {
@@ -334,19 +268,11 @@ public class TropicalCycloneSummary extends PersistablePluginDataObject
         this.windSpeed = windSpeed;
     }
 
-<<<<<<< HEAD
     public ArrayList<Radius> getRadiusList() {
         return radiusList;
     }
 
     public void setRadiusList(ArrayList<Radius> radiusList) {
-=======
-    public List<Radius> getRadiusList() {
-        return radiusList;
-    }
-
-    public void setRadiusList(List<Radius> radiusList) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         this.radiusList = radiusList;
     }
 
@@ -365,7 +291,6 @@ public class TropicalCycloneSummary extends PersistablePluginDataObject
     }
 
     public String print() {
-<<<<<<< HEAD
         String s = "";
         s += "Display Time = " + displayTime + "\n";
         s += location.getLatitude() + ", " + location.getLongitude() + "\n";
@@ -376,19 +301,6 @@ public class TropicalCycloneSummary extends PersistablePluginDataObject
             }
         }
         return s;
-=======
-        StringBuilder sb = new StringBuilder();
-        sb.append("Display Time = " + displayTime + "\n");
-        sb.append(
-                location.getLatitude() + ", " + location.getLongitude() + "\n");
-        sb.append("Wind Speed = " + windSpeed + "\n");
-        if (radiusList != null) {
-            for (Radius r : radiusList) {
-                sb.append(r + "\n");
-            }
-        }
-        return sb.toString();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override

@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -44,21 +32,6 @@ import com.raytheon.uf.viz.core.rsc.LoadProperties;
 
 /**
  * Resource data used for grid data that needs complex mapping to colors.
-<<<<<<< HEAD
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * 
- * Date         Ticket#    Engineer    Description
- * ------------ ---------- ----------- --------------------------
- * Oct 13, 2010            bsteffen     Initial creation
- * 
- * </pre>
- * 
- * @author bsteffen
- * @version 1.0
-=======
  *
  * <pre>
  *
@@ -73,7 +46,6 @@ import com.raytheon.uf.viz.core.rsc.LoadProperties;
  * </pre>
  *
  * @author bsteffen
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  */
 @XmlAccessorType(XmlAccessType.NONE)
 public class DataMappedGridResourceData extends GridResourceData {
@@ -81,24 +53,6 @@ public class DataMappedGridResourceData extends GridResourceData {
     /** Sampling format string, defaults to 2 decimal places */
     protected DecimalFormat sampleFormat = new DecimalFormat("0.00");
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.raytheon.viz.grid.rsc.GridResourceData#constructResource(com.raytheon
-     * .uf.viz.core.rsc.LoadProperties,
-     * com.raytheon.uf.common.dataplugin.PluginDataObject[])
-     */
-    @Override
-    protected AbstractVizResource<?, ?> constructResource(
-            LoadProperties loadProperties, PluginDataObject[] objects) {
-        records = new GridRecord[objects.length];
-        for (int i = 0; i < objects.length; i++) {
-            records[i] = (GridRecord) objects[i];
-        }
-        return new DataMappedGridResource(this, loadProperties);
-=======
     @Override
     protected AbstractVizResource<?, ?> constructResource(
             LoadProperties loadProperties, PluginDataObject[] objects) {
@@ -107,7 +61,6 @@ public class DataMappedGridResourceData extends GridResourceData {
             records[i] = (GridRecord) objects[i];
         }
         return new DataMappedGridResource(this, loadProperties, records);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     public DecimalFormat getSampleFormat() {

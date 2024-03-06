@@ -12,11 +12,7 @@
         xmlns="http://camel.apache.org/schema/spring"
         errorHandlerRef="errorHandler">
 
-<<<<<<< HEAD
         <endpoint id="qpeCron" uri="clusteredquartz://pproc/qpeGenScheduled/?cron=${arealqpegen.cron}"/>
-=======
-        <endpoint id="qpeCron" uri="quartz://pproc/qpeGenScheduled/?cron=${arealqpegen.cron}"/>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         <!-- Run ArealQPEGen on Scheduled timer -->
         <route id="qpeScheduled">

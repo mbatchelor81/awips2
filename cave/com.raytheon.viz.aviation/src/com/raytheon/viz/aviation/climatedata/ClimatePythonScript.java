@@ -19,19 +19,6 @@
  **/
 package com.raytheon.viz.aviation.climatedata;
 
-<<<<<<< HEAD
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import com.raytheon.uf.common.python.PythonScript;
-
-import jep.JepConfig;
-import jep.JepException;
-
-/**
- * PythonScript used to execute climate python files
-=======
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -80,7 +67,6 @@ import jep.SharedInterpreter;
  * to be a stopgap solution until when/if AvnFPS climate code can be rewritten
  * to remove all use of PyTables (or if some other better solution is
  * discovered).
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * <pre>
  *
@@ -88,57 +74,15 @@ import jep.SharedInterpreter;
  *
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
-<<<<<<< HEAD
- * Aug 2, 2019  7878      tgurney     Initial creation
-=======
  * Aug 2, 2019  7878       tgurney     Initial creation
  * Jul 13, 2023 2035920    tgurney     Rewrite to use SharedInterpreter
  * Aug 02, 2023 2035998    dgilling    Add evaluateArgument back to this class.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
  * @author tgurney
  */
 
-<<<<<<< HEAD
-public class ClimatePythonScript extends PythonScript {
-
-    public ClimatePythonScript(JepConfig config) throws JepException {
-        super(config);
-    }
-
-    public ClimatePythonScript(JepConfig config, String filePath)
-            throws JepException {
-        super(config, filePath);
-    }
-
-    public ClimatePythonScript(JepConfig config, List<String> preEvals)
-            throws JepException {
-        super(config, preEvals);
-    }
-
-    public ClimatePythonScript(JepConfig config, String filePath,
-            List<String> preEvals) throws JepException {
-        super(config, filePath, preEvals);
-    }
-
-    @Override
-    protected void evaluateArgument(String argName, Object argValue)
-            throws JepException {
-        if (argValue instanceof ArrayList) {
-            ArrayList<?> list = (ArrayList<?>) argValue;
-            String prefix = argName + " = ['";
-            String suffix = "']";
-            String cmd = list.stream().map(Object::toString)
-                    .collect(Collectors.joining("', '", prefix, suffix));
-            jep.eval(cmd);
-        } else {
-            super.evaluateArgument(argName, argValue);
-        }
-    }
-
-=======
 public class ClimatePythonScript implements AutoCloseable {
 
     private Jep jep;
@@ -243,5 +187,4 @@ public class ClimatePythonScript implements AutoCloseable {
             }
         }
     }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

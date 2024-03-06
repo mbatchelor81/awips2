@@ -1,31 +1,19 @@
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * U.S. EXPORT CONTROLLED TECHNICAL DATA
  * This software product contains export-restricted data whose
  * export/transfer/disclosure is restricted by U.S. law. Dissemination
  * to non-U.S. persons whether in the United States or abroad requires
  * an export license or other authorization.
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Contractor Name:        Raytheon Company
  * Contractor Address:     6825 Pine Street, Suite 340
  *                         Mail Stop B8
  *                         Omaha, NE 68106
  *                         402.291.0100
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
@@ -37,11 +25,8 @@ import java.util.Arrays;
 
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.swt.graphics.RGB;
-<<<<<<< HEAD
-=======
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Envelope;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 
 import com.raytheon.uf.viz.core.DrawableCircle;
@@ -49,13 +34,7 @@ import com.raytheon.uf.viz.core.DrawableString;
 import com.raytheon.uf.viz.core.IDisplayPaneContainer;
 import com.raytheon.uf.viz.core.IExtent;
 import com.raytheon.uf.viz.core.IGraphicsTarget;
-<<<<<<< HEAD
-//import com.raytheon.uf.viz.core.IGraphicsTarget.HorizontalAlignment;
 import com.raytheon.uf.viz.core.IGraphicsTarget.LineStyle;
-//import com.raytheon.uf.viz.core.IGraphicsTarget.TextStyle;
-=======
-import com.raytheon.uf.viz.core.IGraphicsTarget.LineStyle;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.drawables.IWireframeShape;
 import com.raytheon.uf.viz.core.drawables.PaintProperties;
 import com.raytheon.uf.viz.core.exception.VizException;
@@ -66,18 +45,6 @@ import com.raytheon.uf.viz.core.rsc.tools.GenericToolsResourceData;
 import com.raytheon.viz.awipstools.ui.action.LapsToolsData;
 import com.raytheon.viz.ui.cmenu.AbstractRightClickAction;
 import com.raytheon.viz.ui.cmenu.IContextMenuContributor;
-<<<<<<< HEAD
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.Envelope;
-
-/**
- * TODO Add Description
- * 
- * <pre>
- * 
- * SOFTWARE HISTORY
- * 
-=======
 
 /**
  * TODO Add Description
@@ -86,7 +53,6 @@ import org.locationtech.jts.geom.Envelope;
  *
  * SOFTWARE HISTORY
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
  *                         bsteffen    Intial creation.
@@ -94,17 +60,11 @@ import org.locationtech.jts.geom.Envelope;
  * 07-29-14     #3465      mapeters    Updated deprecated drawString() calls.
  * Nov 2013     #          mccaslin    Draw more graphical boxes: for CWA, previous domain, etc
  * Sep 09, 2016  5887      njensen     Fix memory leak in disposeInternal()
-<<<<<<< HEAD
- * 
- * </pre>
- * 
-=======
  * Sep 13, 2022 8792       mapeters    Only handle input events in the pane this
  *                                     layer is in
  *
  * </pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * @author bsteffen
  */
 public class LapsToolLayer extends AbstractMovableToolLayer<Coordinate>
@@ -119,11 +79,7 @@ public class LapsToolLayer extends AbstractMovableToolLayer<Coordinate>
     private final AbstractRightClickAction moveElementAction;
 
     private IWireframeShape validShapeOrig;
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     private IWireframeShape validShape;
 
     private IWireframeShape gridShape;
@@ -180,22 +136,12 @@ public class LapsToolLayer extends AbstractMovableToolLayer<Coordinate>
     protected void paintInternal(IGraphicsTarget target,
             PaintProperties paintProps) throws VizException {
         super.paintInternal(target, paintProps);
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         Envelope shapeArea = data.getValidArea();
         if (validShape == null) {
             validShape = target.createWireframeShape(false, descriptor);
             Coordinate[] coords = new Coordinate[5];
 
-<<<<<<< HEAD
-            coords[0] = new Coordinate(shapeArea.getMinX(), shapeArea.getMinY());
-            coords[1] = new Coordinate(shapeArea.getMinX(), shapeArea.getMaxY());
-            coords[2] = new Coordinate(shapeArea.getMaxX(), shapeArea.getMaxY());
-            coords[3] = new Coordinate(shapeArea.getMaxX(), shapeArea.getMinY());
-=======
             coords[0] = new Coordinate(shapeArea.getMinX(),
                     shapeArea.getMinY());
             coords[1] = new Coordinate(shapeArea.getMinX(),
@@ -204,7 +150,6 @@ public class LapsToolLayer extends AbstractMovableToolLayer<Coordinate>
                     shapeArea.getMaxY());
             coords[3] = new Coordinate(shapeArea.getMaxX(),
                     shapeArea.getMinY());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             coords[4] = coords[0];
             validShape.addLineSegment(coords);
         }
@@ -213,16 +158,6 @@ public class LapsToolLayer extends AbstractMovableToolLayer<Coordinate>
         if (validShapeOrig == null) {
             validShapeOrig = target.createWireframeShape(false, descriptor);
             Coordinate[] coords = new Coordinate[5];
-<<<<<<< HEAD
-            coords[0] = new Coordinate(shapeArea2.getMinX(), shapeArea2.getMinY());
-            coords[1] = new Coordinate(shapeArea2.getMinX(), shapeArea2.getMaxY());
-            coords[2] = new Coordinate(shapeArea2.getMaxX(), shapeArea2.getMaxY());
-            coords[3] = new Coordinate(shapeArea2.getMaxX(), shapeArea2.getMinY());
-            coords[4] = coords[0];
-            validShapeOrig.addLineSegment(coords);
-        }
-        
-=======
             coords[0] = new Coordinate(shapeArea2.getMinX(),
                     shapeArea2.getMinY());
             coords[1] = new Coordinate(shapeArea2.getMinX(),
@@ -235,7 +170,6 @@ public class LapsToolLayer extends AbstractMovableToolLayer<Coordinate>
             validShapeOrig.addLineSegment(coords);
         }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         Envelope gridArea = data.getGridArea();
         if (gridShape == null) {
             gridShape = target.createWireframeShape(false, descriptor);
@@ -248,38 +182,6 @@ public class LapsToolLayer extends AbstractMovableToolLayer<Coordinate>
             coords[4] = coords[0];
             gridShape.addLineSegment(coords);
         }
-<<<<<<< HEAD
-        
-        //Test domain sizes
-        data.setLimits(false);
-        if (gridArea.getMinX() > shapeArea.getMinX()) {
-            data.setLimits(true);
-        }  if (gridArea.getMaxX() < shapeArea.getMaxX()) {
-            data.setLimits(true);
-        }  if (gridArea.getMinY() > shapeArea.getMinY()) {
-            data.setLimits(true);
-        }  if (gridArea.getMaxY() < shapeArea.getMaxY()) {
-            data.setLimits(true);
-        }
-        
-        RGB color = getCapability(ColorableCapability.class).getColor();
-        RGB color2 = color;    
-        
-        // Projected grid domain too small, below the limits of the CWA...
-        if (data.getLimits()) { 
-        	color2 = new RGB ( 250, 40, 40);
-        	labelColor = color2;
-        	centerLabel = "[Center point]\nFull CWA is NOT covered by domain";		
-        } else {
-        	labelColor = color;
-        	centerLabel = "Center point";
-        }
-        
-        target.drawWireframeShape(validShape, color, 1, LineStyle.DASHED_LARGE);
-        target.drawWireframeShape(gridShape, color2, 1, LineStyle.SOLID);
-    	RGB gray = new RGB ( 90, 90, 90);
-        target.drawWireframeShape(validShapeOrig, gray, 1, LineStyle.DASH_DOTTED);
-=======
 
         // Test domain sizes
         data.setLimits(false);
@@ -314,7 +216,6 @@ public class LapsToolLayer extends AbstractMovableToolLayer<Coordinate>
         RGB gray = new RGB(90, 90, 90);
         target.drawWireframeShape(validShapeOrig, gray, 1,
                 LineStyle.DASH_DOTTED);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override
@@ -332,23 +233,11 @@ public class LapsToolLayer extends AbstractMovableToolLayer<Coordinate>
         circle.radius = radius;
         circle.basics.color = color;
         target.drawCircle(circle);
-<<<<<<< HEAD
-        //14.1.1 and earlier: target.drawCircle(center[0], center[1], 0, radius, color, 1);
-        double labelLoc[] = target.getPointOnCircle(center[0], center[1], 0.0,
-                radius, 0);
-        //DrawableString string = new DrawableString("center point", color);
-        DrawableString string = new DrawableString(centerLabel, labelColor);
-        string.setCoordinates(labelLoc[0], labelLoc[1]);
-        target.drawStrings(string);
-        //14.1.1 and earlier: target.drawString(null, centerLabel, labelLoc[0], labelLoc[1], 0.0, 
-        //                    TextStyle.NORMAL, labelColor, HorizontalAlignment.LEFT, null);
-=======
         double labelLoc[] = target.getPointOnCircle(center[0], center[1], 0.0,
                 radius, 0);
         DrawableString string = new DrawableString(centerLabel, labelColor);
         string.setCoordinates(labelLoc[0], labelLoc[1]);
         target.drawStrings(string);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 
     @Override
@@ -358,13 +247,6 @@ public class LapsToolLayer extends AbstractMovableToolLayer<Coordinate>
 
     @Override
     public void addContextMenuItems(IMenuManager menuManager, int x, int y) {
-<<<<<<< HEAD
-        if (isEditable() && selectedObject != null) {
-            menuManager.add(moveElementAction);
-        }
-        if (isEditable() && data.getValidArea().contains(lastMouseLoc)) {
-            menuManager.add(selectLocationAction);
-=======
         if (isInteractive()) {
             if (selectedObject != null) {
                 menuManager.add(moveElementAction);
@@ -372,7 +254,6 @@ public class LapsToolLayer extends AbstractMovableToolLayer<Coordinate>
             if (data.getValidArea().contains(lastMouseLoc)) {
                 menuManager.add(selectLocationAction);
             }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
     }
 
@@ -382,13 +263,8 @@ public class LapsToolLayer extends AbstractMovableToolLayer<Coordinate>
         this.endpointClicked = false;
         double[] pointPixel = container.translateInverseClick(object);
         double distance = (mouseLoc.x - pointPixel[0])
-<<<<<<< HEAD
-                * (mouseLoc.x - pointPixel[0]) + (mouseLoc.y - pointPixel[1])
-                * (mouseLoc.y - pointPixel[1]);
-=======
                 * (mouseLoc.x - pointPixel[0])
                 + (mouseLoc.y - pointPixel[1]) * (mouseLoc.y - pointPixel[1]);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         if (distance < MAGIC_CLICK_DISTANCE * MAGIC_CLICK_DISTANCE) {
             this.endpointClicked = true;
             return true;
@@ -430,12 +306,7 @@ public class LapsToolLayer extends AbstractMovableToolLayer<Coordinate>
     public void resourceChanged(ChangeType type, Object object) {
         super.resourceChanged(type, object);
         if (type == ChangeType.DATA_UPDATE) {
-<<<<<<< HEAD
-            setObjects(new ArrayList<Coordinate>(Arrays.asList(data
-                    .getGridCenter())));
-=======
             setObjects(new ArrayList<>(Arrays.asList(data.getGridCenter())));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             if (validShape != null) {
                 validShape.dispose();
                 validShape = null;
@@ -451,11 +322,7 @@ public class LapsToolLayer extends AbstractMovableToolLayer<Coordinate>
             issueRefresh();
         }
     }
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     @Override
     public void project(CoordinateReferenceSystem crs) throws VizException {
         if (validShape != null) {
@@ -471,11 +338,7 @@ public class LapsToolLayer extends AbstractMovableToolLayer<Coordinate>
             gridShape = null;
         }
         issueRefresh();
-<<<<<<< HEAD
-    }   
-=======
     }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     protected void drawUpperLeftCornerLabel(IGraphicsTarget target,
             PaintProperties paintProps, String label) throws VizException {
@@ -483,12 +346,8 @@ public class LapsToolLayer extends AbstractMovableToolLayer<Coordinate>
         // should it be put into a shared class, possibly a paint
         // properties method?
         IExtent screenExtent = paintProps.getView().getExtent();
-<<<<<<< HEAD
-        double scale = (screenExtent.getHeight() / paintProps.getCanvasBounds().height);
-=======
         double scale = (screenExtent.getHeight()
                 / paintProps.getCanvasBounds().height);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         DrawableString tmpDS = new DrawableString("0", new RGB(100, 100, 100));
         tmpDS.font = null;
         double textHeight = target.getStringsBounds(tmpDS).getHeight() * scale;
@@ -498,18 +357,6 @@ public class LapsToolLayer extends AbstractMovableToolLayer<Coordinate>
         double legendHeight = cmapHeight + 2.0 * textSpace + 2.0 * padding;
         double y1 = screenExtent.getMinY() + legendHeight * 2.5;
         double x1 = screenExtent.getMinX() + padding * 10.0;
-<<<<<<< HEAD
-        DrawableString string = new DrawableString(label, this.getCapability(
-                ColorableCapability.class).getColor());
-        string.basics.x = x1; 
-        string.basics.y = y1; 
-        string.font = null;
-        //string.textStyle = IGraphicsTarget.TextStyle.NORMAL;
-        //string.horizontalAlignment = HorizontalAlignment.LEFT;
-        target.drawStrings(string);
-    }   
-
-=======
         DrawableString string = new DrawableString(label,
                 this.getCapability(ColorableCapability.class).getColor());
         string.basics.x = x1;
@@ -517,6 +364,5 @@ public class LapsToolLayer extends AbstractMovableToolLayer<Coordinate>
         string.font = null;
         target.drawStrings(string);
     }
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 }

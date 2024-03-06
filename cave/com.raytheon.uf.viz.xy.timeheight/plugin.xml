@@ -14,16 +14,10 @@
    <extension
          point="com.raytheon.uf.viz.core.descriptor">
       <descriptor
-<<<<<<< HEAD
-      		name="TimeHeightDescriptor"
-            class="com.raytheon.uf.viz.xy.timeheight.display.TimeHeightDescriptor"
-            editor="com.raytheon.uf.viz.xy.timeheight.TimeHeightEditor">
-=======
             class="com.raytheon.uf.viz.xy.timeheight.display.TimeHeightDescriptor"
             editor="com.raytheon.uf.viz.xy.timeheight.TimeHeightEditor"
             name="TimeHeightDescriptor"
             paneCreator="com.raytheon.uf.viz.xy.XyPaneCreator">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
       </descriptor>
    </extension>
    <extension

@@ -32,22 +32,11 @@
         <contribute xsi:type="subinclude"
             fileName="menus/radar/baseTerminalReflVel.xml" />
         <contribute xsi:type="subinclude"
-<<<<<<< HEAD
-            fileName="menus/radar/baseTerminalPrecip.xml" />
-        <contribute xsi:type="subinclude"
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             fileName="menus/radar/baseTerminalStormProducts.xml" />
         <contribute xsi:type="subinclude"
             fileName="menus/radar/baseTerminalSRMSpecWidth.xml" />
         <contribute xsi:type="subinclude"
             fileName="menus/radar/baseTerminalOtherVADVel.xml" />
-<<<<<<< HEAD
-        <contribute xsi:type="subinclude"
-            fileName="menus/radar/baseTerminalApplications.xml" />
-    </contribute>
-</menuTemplate>
-=======
         <!-- This section can be uncommented for sites who want to 
              ingest archived obsolete SPG products.  It will activate
              an obsolete products menu containing removed products. -->
@@ -55,4 +44,3 @@
             fileName="menus/radar/baseTerminalRadarObsolete.xml" /> -->
     </contribute>
 </menuTemplate>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

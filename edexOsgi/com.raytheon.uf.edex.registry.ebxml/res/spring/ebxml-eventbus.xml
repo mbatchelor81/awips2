@@ -18,13 +18,6 @@
     </bean>
 
     <bean factory-bean="eventBus" factory-method="register">
-<<<<<<< HEAD
-        <constructor-arg ref="AuditableEventService" />
-    </bean>
-
-    <bean factory-bean="eventBus" factory-method="register">
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <constructor-arg ref="RegistryGarbageCollector" />
     </bean>
 

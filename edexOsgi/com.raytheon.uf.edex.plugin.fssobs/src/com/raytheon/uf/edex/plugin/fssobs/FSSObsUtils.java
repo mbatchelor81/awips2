@@ -40,16 +40,9 @@ import com.raytheon.uf.edex.database.dao.CoreDao;
 import com.raytheon.uf.edex.database.dao.DaoConfig;
 import com.raytheon.uf.edex.pointdata.PointDataQuery;
 
-<<<<<<< HEAD
-import si.uom.NonSI;
-import si.uom.SI;
-import systems.uom.common.USCustomary;
-import tec.uom.se.unit.Units;
-=======
 import si.uom.SI;
 import systems.uom.common.USCustomary;
 import tech.units.indriya.unit.Units;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 /**
  * Utilities for FSSObs data records.

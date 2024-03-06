@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 /**
  * This software was developed and / or modified by Raytheon Company,
  * pursuant to Contract DG133W-05-CQ-1067 with the US Government.
@@ -19,27 +17,18 @@
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 package com.raytheon.uf.edex.registry.ebxml.dao;
 
 import java.util.Date;
 
-<<<<<<< HEAD
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-=======
 import org.hibernate.TransactionException;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.annotation.Propagation;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 import com.raytheon.uf.common.status.IUFStatusHandler;
 import com.raytheon.uf.common.status.UFStatus;
 import com.raytheon.uf.edex.database.DataAccessLayerException;
-<<<<<<< HEAD
-=======
 import com.raytheon.uf.edex.database.dao.IDaoConfigFactory;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.edex.database.dao.SessionManagedDao;
 import com.raytheon.uf.edex.registry.federation.ReplicationSiteEvent;
 
@@ -51,16 +40,6 @@ import com.raytheon.uf.edex.registry.federation.ReplicationSiteEvent;
  *
  * SOFTWARE HISTORY
  *
-<<<<<<< HEAD
- * Date          Ticket#  Engineer  Description
- * ------------- -------- --------- ------------------------------
- * Aug 08, 2016  5810     tjensen   Initial creation
- * Aug 16, 2016  5810     tjensen   Fix issue with delete by time
- * Sep 01, 2016  5810     tjensen   Improve replication memory usage
- * 07/25/2019    7890     ksunil    added missing transactional directive to getEventsBatch.
- * Aug 29, 2019  7836     bsteffen  Keep track of only latest event for each site.
- * Jun 18, 2020  8066     skabasele Added the ability to delete by registry id
-=======
  * Date          Ticket#  Engineer   Description
  * ------------- -------- ---------- ---------------------------------------------------------------
  * Aug 08, 2016  5810     tjensen    Initial creation
@@ -72,7 +51,6 @@ import com.raytheon.uf.edex.registry.federation.ReplicationSiteEvent;
  * Apr 14, 2021  7849     mapeters   Refactor to use TransactionTemplate.execute instead of
  *                                   Transactional annotations
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  *
  * @author tjensen
@@ -84,13 +62,10 @@ public class ReplicationSiteEventDao
 
     private static final String DELETE_BY_REGISTRY_ID = "Delete from ReplicationSiteEvent WHERE registryId = :registryId";
 
-<<<<<<< HEAD
-=======
     public ReplicationSiteEventDao(IDaoConfigFactory daoConfigFactory) {
         super(daoConfigFactory);
     }
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /** Status Handler */
     private final IUFStatusHandler statusHandler = UFStatus
             .getHandler(ReplicationSiteEventDao.class);
@@ -100,27 +75,6 @@ public class ReplicationSiteEventDao
         return ReplicationSiteEvent.class;
     }
 
-<<<<<<< HEAD
-    @Transactional(propagation = Propagation.REQUIRED)
-    public boolean updateSite(String registryId, Long eventId, Date eventTime)
-            throws DataAccessLayerException {
-        int count = this.executeHQLStatement(UPDATE_REGISTRY, "registryId",
-                registryId, "eventId", eventId, "eventTime", eventTime);
-        return count > 0;
-    }
-
-    @Transactional(propagation = Propagation.REQUIRED)
-    public boolean deleteByRegistryId(String registryId) {
-        int count = 0;
-        try {
-            count = this.executeHQLStatement(DELETE_BY_REGISTRY_ID,
-                    "registryId", registryId);
-        } catch (DataAccessLayerException e) {
-            statusHandler
-                    .error("Error deleteing registry by Id : " + registryId, e);
-        }
-        return count > 0;
-=======
     public boolean updateSite(String registryId, Long eventId, Date eventTime)
             throws DataAccessLayerException {
         TransactionDefinition transactionDef = getTransactionDef(
@@ -158,6 +112,5 @@ public class ReplicationSiteEventDao
             }
             return count > 0;
         });
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     }
 }

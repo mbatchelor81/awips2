@@ -5,55 +5,6 @@
 #
 # BasinCrossingCyclone
 #
-<<<<<<< HEAD
-# April  17, 2020 21020      tlefebvr    Original Verison
-# April  19, 2020 21020      tlefebvr    Mostly works. A few bugs left.
-# April  20, 2020 21020      tlefebvr    Added more features. StormNum locks
-#                                        for non-NHC domain. Changed GUI layout.
-# April  20, 2020 21020      tlefebvr    Removed dead code and documented.
-# April  20, 2020 21020      tlefebvr    Better error handling.
-# April  21, 2020 21020      tlefebvr    Fixed a bug introduced with last clean
-# April  21, 2020 21020      tlefebvr    Enforce that stormNumber mod 5 equals
-#                                        bin number for NHC storms only.
-# May    04, 2020 21020      tlefebvr    Added smarter default button settings.
-# May    06, 2020 21020      tlefebvr    Code cleanup and Python3 mods.
-#                                        Fixed issue when running on HPA.
-# May    12, 2020 21020      tlefebvr    Added EP->CP basin buttons. Fixed a
-#                                        couple of bugs. Fixed update issue
-#                                        when changing basins.
-# May    13, 2020 21020      tlefebvr    Fixed storm number scale that was not
-#                                        updating when changing basins. Advisory
-#                                        number clean up.
-# May   14, 2020 22033      tlefebvr     Modified to use ***Sites methods in WWUTils
-#                                        Fixed an issue with the bin buttons.
-# May   21, 2020 22033      tlefebvr     Addressed code review comments.
-# May   28, 2020 22033      tlefebvr     Bin button were not set to the proper state.
-#                                        Cast .keys() to list for Python3.
-# May   29, 2020 22033      tlefebvr     Removed StormNum slider for non NHC sites.
-# Author: lefebvre
-################################################################################
-
-MenuItems = ["Populate"]
-
-import TropicalUtility
-import WindWWUtils
-import copy
-import sys
-
-if sys.version_info.major == 2:
-    import Tkinter as tk
-else:
-    import tkinter as tk
-
-class Procedure (TropicalUtility.TropicalUtility):
-
-    def __init__(self, dbss):
-        TropicalUtility.TropicalUtility.__init__(self, dbss)
-        self._dbss = dbss
-
-        self._WindWWUtils = WindWWUtils.WindWWUtils(self._dbss)
-    
-=======
 # SOFTWARE HISTORY
 #
 # Date          Ticket#  Engineer  Description
@@ -109,7 +60,6 @@ class Procedure (WindWWUtils.WindWWUtils):
     def __init__(self, dbss):
         WindWWUtils.WindWWUtils.__init__(self, dbss)
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def saveStormInfo(self, pil):
         """
         Saves the specified stormInfo to the JSON files under pil.
@@ -123,16 +73,6 @@ class Procedure (WindWWUtils.WindWWUtils):
         stormInfo["advisoryNumber"] = advisoryNumber
         # Save the changes locally
         self._stormInfoDict[pil] = stormInfo
-<<<<<<< HEAD
-        if self._NHCBasinRules:
-            stormNumber = int(self._stormNumScale.get())
-            stormInfo["stormNumber"] = stormNumber
-            stormInfo["stormID"] = self._WindWWUtils.makeStormID(pil, stormNumber)
-        
-        # Use TropicalUtility to save advisories. 
-        self._saveAdvisory(self._targetBin, stormInfo)
-    
-=======
 
         if "AT" in pil:
             stormNumber = int(self._stormNumScale.get())
@@ -142,7 +82,6 @@ class Procedure (WindWWUtils.WindWWUtils):
         # Use TropicalUtility to save advisories.
         self.saveAdvisory(self._targetBin, stormInfo, self._siteID)
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def validStormNumber(self, bin):
         """
         See if the selected stormNumber is correct based on the bin.
@@ -150,14 +89,6 @@ class Procedure (WindWWUtils.WindWWUtils):
         """
         if not self._NHCBasinRules:
             return True
-<<<<<<< HEAD
-        
-        stormNumber = int(self._stormNumScale.get())
-        binDigit = int(bin[-1])
-    
-        return stormNumber % 5 == binDigit
-    
-=======
 
         stormNumber = int(self._stormNumScale.get())
         binDigit = int(bin[-1])
@@ -185,7 +116,6 @@ class Procedure (WindWWUtils.WindWWUtils):
 
         return False
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def saveStorm(self, bin):
         """
         Checks the selected stormNumber against the bin number and
@@ -197,18 +127,10 @@ class Procedure (WindWWUtils.WindWWUtils):
                 self.saveStormInfo(bin)
                 return True
             else:
-<<<<<<< HEAD
-                self.statusBarMsg("The Storm Number MOD 5 must match the bin number.", "S")
-                return False
-        else:
-            self.saveStormInfo(bin)
-            return True
-=======
                 if not self.askAreYouSure():
                     return False
         self.saveStormInfo(bin)
         return True
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def cancelCommand(self):
         """
@@ -218,16 +140,10 @@ class Procedure (WindWWUtils.WindWWUtils):
             self._tkmaster.destroy()
         except:
             pass
-<<<<<<< HEAD
-        
-    def runCommand(self):
-        """ Called when run is selected. Just saves the stormInfo for the current pil.
-=======
 
     def runCommand(self):
         """
         Called when run is selected. Just saves the stormInfo for the current pil.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         """
         return self.saveStorm(self._targetBin)
 
@@ -283,11 +199,7 @@ class Procedure (WindWWUtils.WindWWUtils):
                 self._targetBin = buttonLabel
 
     def basinButtonSelected(self, basin):
-<<<<<<< HEAD
-        """ 
-=======
         """
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         Called when a basin button is selected. Updates the currently selected
         basin and makes new bin buttons.
         """
@@ -297,27 +209,16 @@ class Procedure (WindWWUtils.WindWWUtils):
         self._basinButtons[self._currentBasinCombo].config(bg=self._unselectedColor,
                                          activebackground=self._unselectedColor)
         # Show current as selected.
-<<<<<<< HEAD
-        self._basinButtons[basin].config(bg=self._selectedColor, 
-=======
         self._basinButtons[basin].config(bg=self._selectedColor,
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                          activebackground=self._selectedColor)
         self._currentBasinCombo = basin
         # Redraw the bin buttons
         self.makeBinButtons()
         self.updateInfoWidgets()
-<<<<<<< HEAD
-    
-    def setDefaultBin(self, basin):
-        """
-        Figures out the bin to select based on the basiList. Selects the
-=======
 
     def setDefaultBin(self, basin):
         """
         Figures out the bin to select based on the basinList. Selects the
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         first bin found for that basin.
         """
         filteredList = [bin for bin in self._stormInfoDict if bin.startswith(basin[0:2])]
@@ -325,19 +226,11 @@ class Procedure (WindWWUtils.WindWWUtils):
         if len(filteredList) == 0:
             self.statusBarMsg("No active storms for basin:" + basin, "S")
             return None
-<<<<<<< HEAD
-        
-        filteredList.sort()
-        
-        return filteredList[0]
-    
-=======
 
         filteredList.sort()
 
         return filteredList[0]
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def makeBinButton(self, frame, label, row, column, select, disable):
         """
         Makes a single storm button. This is implemented as a separate method
@@ -351,19 +244,11 @@ class Procedure (WindWWUtils.WindWWUtils):
         bgColor = self._unselectedColor
         if select:
             bgColor = self._selectedColor
-<<<<<<< HEAD
-            
-        button = tk.Button(frame, text=label,  command=lambda: self.binButtonSelected(label),
-                           font=self._font14Bold, state=state, bg=bgColor, activebackground=bgColor)
-        button.grid(row=row, column=column, padx=10, pady=5)
-        
-=======
 
         button = tk.Button(frame, text=label, command=lambda: self.binButtonSelected(label),
                            font=self._font14Bold, state=state, bg=bgColor, activebackground=bgColor)
         button.grid(row=row, column=column, padx=10, pady=5)
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return button
 
     def makeBinButtons(self):
@@ -374,17 +259,10 @@ class Procedure (WindWWUtils.WindWWUtils):
         if self._binFrame:
             for child in self._binFrame.winfo_children():
                 child.destroy()
-<<<<<<< HEAD
-                
-        self._binFrame = tk.Frame(self._master, relief=tk.GROOVE, bd=3)
-        self._binFrame.grid(row=1, column=0, padx=20, pady=5)
-        
-=======
 
         self._binFrame = tk.Frame(self._master, relief=tk.GROOVE, bd=3)
         self._binFrame.grid(row=1, column=0, padx=20, pady=5)
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         self._binButtons = {}
         self._targetBin = None
         basinList = self._currentBasinCombo.split(" -> ")
@@ -398,19 +276,11 @@ class Procedure (WindWWUtils.WindWWUtils):
         self._sourceBin = self._defaultBin
         for column, basin in enumerate(basinList):
             basinName = self._basinDict[basin]
-<<<<<<< HEAD
-            buttonLabels = self._binDict.get(basinName, None)
-            if not buttonLabels:
-                self.statusBarMsg("Error, invalid basin: " + basin, "S")
-                return
-            
-=======
             buttonLabels = self._basinBins.get(basinName, None)
             if not buttonLabels:
                 self.statusBarMsg("Error, invalid basin: " + basin, "S")
                 return
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             for row, label in enumerate(buttonLabels):
                 if basin == self._sourceBasin:
                     disable = label not in self._stormInfoDict
@@ -420,11 +290,7 @@ class Procedure (WindWWUtils.WindWWUtils):
                     select = False
                 self._binButtons[label] = self.makeBinButton(self._binFrame, label,
                                              row, column, select, disable)
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def makeBasinButton(self, frame, label, row, select, disable):
         """
         Makes a single basin button. This is implemented as a separate method
@@ -449,16 +315,6 @@ class Procedure (WindWWUtils.WindWWUtils):
         """
         Makes the basin buttons based on the keys in the stormInfo dict.
         """
-<<<<<<< HEAD
-        
-        label = tk.Label(frame, text="From -> To", font=self._font14Bold, fg="blue")
-        label.grid(row=0, column=0, pady=10)
-
-        
-        self._basinButtons = {}
-        for i, label in enumerate(self._basinButtonList):
-            
-=======
 
         label = tk.Label(frame, text="From -> To", font=self._font14Bold, fg="blue")
         label.grid(row=0, column=0, pady=10)
@@ -466,16 +322,11 @@ class Procedure (WindWWUtils.WindWWUtils):
         self._basinButtons = {}
         for i, label in enumerate(self._basinButtonList):
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             # Filter out bins other basins
             basinBins = [bin for bin in self._stormInfoDict if label.startswith(bin[0:2])]
             disable = False
             active = False
-<<<<<<< HEAD
-            if len(basinBins) == 0: # There are no active storms for this basin.
-=======
             if len(basinBins) == 0:  # There are no active storms for this basin.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 disable = True
             if label == self._currentBasinCombo:
                 active = True
@@ -483,11 +334,7 @@ class Procedure (WindWWUtils.WindWWUtils):
             row = i + 1
             button = self.makeBasinButton(frame, label, row, active, disable)
             self._basinButtons[label] = button
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def getStormNumLabel(self, stormNum):
         """
         Make a label for the stormNumber. This can vary depending on the
@@ -497,11 +344,7 @@ class Procedure (WindWWUtils.WindWWUtils):
         if not self._NHCBasinRules:  # Add the stormNumber as it is immutable
             labelText += "\n" + str(stormNum)
         return labelText
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def getStormIDLabel(self, stormID):
         return "StormID:\n" + str(stormID)
 
@@ -515,18 +358,6 @@ class Procedure (WindWWUtils.WindWWUtils):
         stormNum = self._stormInfoDict[self._sourceBin]["stormNumber"]
         stormID = self._stormInfoDict[self._sourceBin]["stormID"]
         self._stormNameLabel.config(text=stormName)
-<<<<<<< HEAD
-        
-        labelText = self.getStormNumLabel(stormNum)   
-        self._stormNumLabel.config(text=labelText)   
-        if self._NHCBasinRules:
-            self._stormNumScale.config(state=tk.NORMAL)
-            self._stormNumScale.set(stormNum)
-            
-        labelText = self.getStormIDLabel(stormID)
-        self._stormIDLabel.config(text=labelText)
-           
-=======
 
         labelText = self.getStormNumLabel(stormNum)
         self._stormNumLabel.config(text=labelText)
@@ -538,7 +369,6 @@ class Procedure (WindWWUtils.WindWWUtils):
         labelText = self.getStormIDLabel(stormID)
         self._stormIDLabel.config(text=labelText)
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         self._advisoryTextBox.delete("1.0", tk.END)
         self._advisoryTextBox.insert("1.0", advisoryNum)
 
@@ -547,10 +377,6 @@ class Procedure (WindWWUtils.WindWWUtils):
         Makes the info widgets on the GUI including the stormName,
         advisoryNumber and stormNumber.
         """
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # Fetch info from current bin
         stormName = self._stormInfoDict[self._sourceBin]["stormName"]
         advisoryNum = self._stormInfoDict[self._sourceBin]["advisoryNumber"]
@@ -559,11 +385,7 @@ class Procedure (WindWWUtils.WindWWUtils):
         labelFrame = tk.Frame(frame, relief=tk.GROOVE)
         labelFrame.grid(row=0, column=0, pady=5)
 
-<<<<<<< HEAD
-        self._stormNameLabel = tk.Label(labelFrame, text = stormName, font=self._font16Bold,
-=======
         self._stormNameLabel = tk.Label(labelFrame, text=stormName, font=self._font16Bold,
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                                         fg="purple")
         self._stormNameLabel.grid(row=0, column=0, pady=5)
         # Make the text box for the advisory number
@@ -573,31 +395,12 @@ class Procedure (WindWWUtils.WindWWUtils):
         self._advisoryTextBox.grid(row=0, column=0, pady=10)
         self._advisoryTextBox.insert("1.0", advisoryNum)
         label = tk.Label(textFrame, text="     Advisory     \n    Number    ", font=self._font14Bold)
-<<<<<<< HEAD
-        label.grid(row=1, column=0, pady=20, sticky=tk.W+tk.E+tk.S+tk.N)
-        
-=======
         label.grid(row=1, column=0, pady=20, sticky=tk.W + tk.E + tk.S + tk.N)
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         # Make the scale for the storm number
         scaleFrame = tk.Frame(frame, relief=tk.GROOVE, bd=3)
         scaleFrame.grid(row=2, column=0, padx=20, pady=10)
         if self._NHCBasinRules:
-<<<<<<< HEAD
-            self._stormNumScale = tk.Scale(scaleFrame, from_=0, to=self._maxStorms, resolution=1,
-                                           orient=tk.HORIZONTAL, font=self._font14Normal)
-            self._stormNumScale.grid(row=0, column=0, pady=10)
-            self._stormNumScale.set(stormNum)
-       
-        labelText = self.getStormNumLabel(stormNum)
-        self._stormNumLabel = tk.Label(scaleFrame, text=labelText, font=self._font14Bold)
-        self._stormNumLabel.grid(row=1, column=0, pady=10)            
-    
-        labelText = self.getStormIDLabel(stormID)
-        self._stormIDLabel = tk.Label(scaleFrame, text=labelText, font=self._font14Bold)
-        self._stormIDLabel.grid(row=2, column=0, pady=10)            
-=======
             self._stormNumScale = tk.Scale(scaleFrame, from_=1, to=self.maxStorms(), resolution=1,
                                            length=200, orient=tk.HORIZONTAL, font=self._font14Normal)
             self._stormNumScale.grid(row=0, column=0, pady=10)
@@ -610,7 +413,6 @@ class Procedure (WindWWUtils.WindWWUtils):
         labelText = self.getStormIDLabel(stormID)
         self._stormIDLabel = tk.Label(scaleFrame, text=labelText, font=self._font14Bold)
         self._stormIDLabel.grid(row=2, column=0, pady=10)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def setDefaultBasinCombo(self, basinButtonList, stormInfoDict):
         """
@@ -623,27 +425,16 @@ class Procedure (WindWWUtils.WindWWUtils):
                     return basin
         # Nothing found so return the first button
         return basinButtonList[0]
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     def displayWindowOnCursor(self, master):
         """
         Moves the specified window to the cursor location.
         """
         master.update_idletasks()
-<<<<<<< HEAD
-        wh= master.winfo_height()
-        ww= master.winfo_width()
-        px, py = master.winfo_pointerxy()
-        master.geometry("%dx%d+%d+%d" % (ww, wh, px - (ww //2 ),py - (wh // 2)))
-=======
         wh = master.winfo_height()
         ww = master.winfo_width()
         px, py = master.winfo_pointerxy()
         master.geometry("%dx%d+%d+%d" % (ww, wh, px - (ww // 2), py - (wh // 2)))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     def setUpUI(self):
         """
@@ -660,11 +451,7 @@ class Procedure (WindWWUtils.WindWWUtils):
         self._master.protocol('WM_DELETE_WINDOW', self.cancelCommand)
         self._topFrame = tk.Frame(self._master)
         self._topFrame.grid()
-<<<<<<< HEAD
-        self._tkmaster.withdraw() # remove the master from the display
-=======
         self._tkmaster.withdraw()  # remove the master from the display
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         self._basinFrame = tk.Frame(self._master, relief=tk.GROOVE, bd=3)
         self._basinFrame.grid(row=0, column=0, padx=20, pady=5)
         self._binFrame = None
@@ -677,33 +464,6 @@ class Procedure (WindWWUtils.WindWWUtils):
         bottomButtonFrame = tk.Frame(self._master, relief=tk.GROOVE, bd=3)
         bottomButtonFrame.grid(row=2, columnspan=3, pady=20)
         self.makeBottomButtons(bottomButtonFrame)
-<<<<<<< HEAD
-     
-    def execute(self, editArea, timeRange, varDict):
-
-        # set up some constants for this tool
-        self._font12Normal = "Helvetica 12 normal"
-        self._font14Normal = "Helvetica 14 normal"
-        self._font14Bold = "Helvetica 14 bold"
-        self._font16Bold = "Helvetica 16 bold"
-        self._bgColor = "#d9d9d9"
-        self._selectedColor = "green"
-        self._unselectedColor = "gray80"
-        self._fullHazList =  ["<None>", "HU.W", "HU.A", "TR.W", "TR.A", "TR.W^HU.A"]
-        
-        # Used to translate basin nick names (AT) to basinNames
-        self._basinDict = {
-            "AT" : "Atlantic",
-            "EP" : "Eastern Pacific",
-            "CP" : "Central Pacific",
-            "WP" : "Western Pacific",
-            }
-        
-        self._binDict = self._WindWWUtils._basinBins
-
-        # Fetch the storm information from the JSON files.        
-        self._stormInfoDict = self._WindWWUtils.fetchStormInfo(self._fullHazList)
-=======
 
     def execute(self):
         # set up some constants for this tool
@@ -725,23 +485,11 @@ class Procedure (WindWWUtils.WindWWUtils):
 
         # Fetch the storm information from the JSON files.
         self._stormInfoDict = self.fetchStormInfo(self._fullHazList)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         advisoryNames = list(self._stormInfoDict.keys())
         if not advisoryNames:
             self.statusBarMsg("No Advisory files found. Please run StormInfo first.", "U")
             return
 
-<<<<<<< HEAD
-        siteID = self.getSiteID()
-        
-        self._NHCBasinRules = False
-        if siteID in self._WindWWUtils.NHCSites():
-            self._NHCBasinRules = True
-            self._basinButtonList = ["AT -> EP", "EP -> AT"]
-        elif siteID in self._WindWWUtils.HFOSites():
-            self._basinButtonList = ["EP -> CP", "WP -> CP"]
-        elif siteID in self._WindWWUtils.GUMSites():
-=======
         self._siteID = self.getSiteID()
         self._NHCBasinRules = True
         if self._siteID in self.NHCSites():
@@ -749,29 +497,17 @@ class Procedure (WindWWUtils.WindWWUtils):
         elif self._siteID in self.HFOSites():
             self._basinButtonList = ["EP -> CP", "WP -> CP"]
         elif self._siteID in self.GUMSites():
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             self._basinButtonList = ["CP -> WP"]
         else:
             self.statusBarMsg("This tool is not configured for this site.", "S")
             return
 
-<<<<<<< HEAD
-        self._maxStorms = self._WindWWUtils.maxStorms()
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         self._defaultBasinCombo = self.setDefaultBasinCombo(self._basinButtonList,
                                                             self._stormInfoDict)
         self._currentBasinCombo = self._defaultBasinCombo
         self._sourceBin = advisoryNames[0]
-<<<<<<< HEAD
-        
-        self.setUpUI()
-        self.displayWindowOnCursor(self._master)
-=======
 
         self.setUpUI()
         self.displayWindowOnCursor(self._master)
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         tk.mainloop()

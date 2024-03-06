@@ -26,13 +26,10 @@
     <styleRule>
         <paramLevelMatches>
             <creatingEntity>TPCSurgeProb</creatingEntity>
-<<<<<<< HEAD
-=======
             <creatingEntity>TPCSurgeProb2</creatingEntity>
             <creatingEntity>TPCSurgeProbLoRes</creatingEntity>
             <creatingEntity>TPCSurgeProbLoRes2</creatingEntity>
             <creatingEntity>TPCSurgeProb-SJU</creatingEntity>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <parameter>Surge10pctCumul_wTide</parameter>
             <parameter>Surge20pctCumul_wTide</parameter>
             <parameter>Surge30pctCumul_wTide</parameter>
@@ -74,22 +71,12 @@
             <displayUnits>ft</displayUnits>
             <displayFlags>NoPlane</displayFlags>
             <range scale="LINEAR">
-<<<<<<< HEAD
-                <minValue>-5</minValue>
-                <maxValue>35</maxValue>
-            </range>
-            <defaultColormap>Grid/gridded data</defaultColormap>
-            <colorbarLabeling>
-                <values>-5 -3 0 3 5 7 9 11 13 15 17 19 21 23 25 27 29 31
-                    33 35
-=======
                 <minValue>0</minValue>
                 <maxValue>30</maxValue>
             </range>
             <defaultColormap>GFE/Inundation</defaultColormap>
             <colorbarLabeling>
                 <values>0 1 3 6 9 12 16
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
                 </values>
             </colorbarLabeling>
         </imageStyle>
@@ -97,13 +84,10 @@
     <styleRule>
         <paramLevelMatches>
             <creatingEntity>TPCSurgeProb</creatingEntity>
-<<<<<<< HEAD
-=======
             <creatingEntity>TPCSurgeProb2</creatingEntity>
             <creatingEntity>TPCSurgeProbLoRes</creatingEntity>
             <creatingEntity>TPCSurgeProbLoRes2</creatingEntity>
             <creatingEntity>TPCSurgeProb-SJU</creatingEntity>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <parameter>PSurge2ftCumul_wTide</parameter>
             <parameter>PSurge3ftCumul_wTide</parameter>
             <parameter>PSurge4ftCumul_wTide</parameter>
@@ -178,11 +162,7 @@
                 <minValue>0</minValue>
                 <maxValue>100</maxValue>
             </range>
-<<<<<<< HEAD
-            <defaultColormap>Grid/gridded data</defaultColormap>
-=======
             <defaultColormap>GFE/NHC Storm Surge Probs</defaultColormap>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             <colorbarLabeling>
                 <values>5 10 20 30 40 50 60 70 80 90 100</values>
             </colorbarLabeling>

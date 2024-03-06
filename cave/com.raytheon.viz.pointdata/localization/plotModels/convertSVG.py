@@ -65,10 +65,6 @@ def processCDATA(fName, postProcess=False):
     else:
         file_string = file_string.replace("<CDATA>", "<![CDATA[")
         file_string = file_string.replace("</CDATA>", "]]>")
-<<<<<<< HEAD
-        file_string = file_string.replace("#NEWCDATA#", getDefaultCDATAText() )
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     with open(fName, 'w') as f:
         f.write(file_string)
@@ -101,25 +97,7 @@ def getLicenseText():
     '''
     return licenseText
 ############################################
-<<<<<<< HEAD
-def getDefaultCDATAText():
-    cText = '''
-            <![CDATA[
-             @font-face { font-family: "WindSymbolFont";
-              src: url(WindSymbols.svg#WindSymbols); }
-             @font-face { font-family: "StandardFont";
-              src: url(Standard.svg#Standard); }
-             @font-face { font-family: "SpecialSymbolFont";
-              src: url(SpecialSymbols.svg#SpecialSymbols); }
-             @font-face { font-family: "MarkerSymbolFont";
-              src: url(MarkerSymbols.svg#MarkerSymbols); }
-            ]]>
-    '''
-    return cText
-############################################
-=======
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 def getSampleValue(plot):
     val = plot.text
     commaCnt = plot.attrib["plotParam"].count(",")
@@ -280,12 +258,9 @@ def main():
     root.set("xmlns", "http://www.w3.org/2000/svg")
     root.set("xmlns:xlink", "http://www.w3.org/1999/xlink")
     root.set("plugin", pluginName)
-<<<<<<< HEAD
-=======
     root.set("height","150")
     root.set("viewBox", "0 0 150 150")
     root.set("width", "150") 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     
     new_root.append(root)
 
@@ -305,13 +280,7 @@ def main():
             'plotLookupTable' : 'lookupTable',
             'plotIndex': 'index',
             'class':'svgClass'}
-<<<<<<< HEAD
-    
-    hasStyle = False
-    
-=======
         
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     for child in root:
 
     # The heavy lifting is under the "symbol" element
@@ -372,25 +341,6 @@ def main():
             line.text=' '
             
         
-<<<<<<< HEAD
-   # Now, add the markerFont in the style section
-        for script in child.findall(svgNS + 'style'):
-            hasStyle = True
-        # Scan and find all script/cdata
-            for cdata in script.findall(svgNS + 'CDATA'):
-                if "MarkerSymbols" not in cdata.text:
-                    cdata.text = cdata.text + markerFont
-        
-    
-    # there is no style element in the original. Add a default
-    if not hasStyle:
-        for defs in root.findall(svgNS + 'defs'):
-    
-            style = ET.SubElement(defs, 'style', styleElement)
-            style.text = '#NEWCDATA#'
-            style.tail=NEW_LINE
-        
-=======
    # Now, remove the style section
         for script in child.findall(svgNS + 'style'):
             child.remove(script)
@@ -403,7 +353,6 @@ def main():
     	useElement.set("x", "75")
     	useElement.set("y", "75")
     	    
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     newTree = ET.ElementTree(new_root)
     newTree.write(svgFileName, encoding='UTF-8', method='xml')
 

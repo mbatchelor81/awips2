@@ -22,19 +22,11 @@ package com.raytheon.uf.edex.registry.events;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
-import oasis.names.tc.ebxml.regrep.xsd.rim.v4.SlotType;
-
-import com.raytheon.uf.common.event.Event;
-import com.raytheon.uf.common.util.CollectionUtil;
-
-=======
 import com.raytheon.uf.common.event.Event;
 import com.raytheon.uf.common.util.CollectionUtil;
 
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.SlotType;
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 /**
  * Event containing slots to be deleted by the registry garbage collector
  * 
@@ -44,14 +36,6 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.SlotType;
  * 
  * Date         Ticket#     Engineer    Description
  * ------------ ----------  ----------- --------------------------
-<<<<<<< HEAD
- * 4/11/2014    3011         bphillip    Initial Coding
- * 4/17/2014    3011        bphillip    Delete slot events now contain strings
- * </pre>
- * 
- * @author bphillip
- * @version 1
-=======
  * 4/11/2014    3011        bphillip    Initial Coding
  * 4/17/2014    3011        bphillip    Delete slot events now contain strings
  * 5/11/2020    8161        bsteffen    Change slot id to a long
@@ -59,17 +43,12 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.SlotType;
  * </pre>
  * 
  * @author bphillip
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  */
 public class DeleteSlotEvent extends Event {
 
     private static final long serialVersionUID = -2818002679753482984L;
 
-<<<<<<< HEAD
-    private List<String> slotsToDelete;;
-=======
     private List<Long> slotsToDelete;;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     public DeleteSlotEvent() {
         super();
@@ -77,34 +56,20 @@ public class DeleteSlotEvent extends Event {
 
     public DeleteSlotEvent(List<SlotType> slotsToDelete) {
         if (CollectionUtil.isNullOrEmpty(slotsToDelete)) {
-<<<<<<< HEAD
-            slotsToDelete = new ArrayList<SlotType>();
-        } else {
-            this.slotsToDelete = new ArrayList<String>(slotsToDelete.size());
-=======
             slotsToDelete = new ArrayList<>();
         } else {
             this.slotsToDelete = new ArrayList<>(slotsToDelete.size());
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             for (SlotType slot : slotsToDelete) {
                 this.slotsToDelete.add(slot.getId());
             }
         }
     }
 
-<<<<<<< HEAD
-    public List<String> getSlotsToDelete() {
-        return slotsToDelete;
-    }
-
-    public void setSlotsToDelete(List<String> slotsToDelete) {
-=======
     public List<Long> getSlotsToDelete() {
         return slotsToDelete;
     }
 
     public void setSlotsToDelete(List<Long> slotsToDelete) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         this.slotsToDelete = slotsToDelete;
     }
 

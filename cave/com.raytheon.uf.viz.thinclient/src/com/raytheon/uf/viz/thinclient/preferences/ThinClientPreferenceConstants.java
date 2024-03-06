@@ -37,10 +37,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
  * May 29, 2015 4532       bsteffen     Add sync localization option.
  * Feb 08, 2016 5281       tjensen      Replaced disableJms with dataRefreshMethod, 
  *                                       combined Data and Menu Refresh Intervals
-<<<<<<< HEAD
-=======
  * Aug 06, 2021 22528      smoorthy     Add proxy ServerName attribute to preferences
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * 
  * </pre>
  * 
@@ -94,9 +91,6 @@ public class ThinClientPreferenceConstants {
     public static String P_PROXY_ADDRESS = "proxyAddress";
 
     public static final String P_PROXY_SERVER_OPTIONS = "proxyAddressOptions";
-<<<<<<< HEAD
-=======
 
     public static String P_PROXY_SERVERNAME = "serverName"; 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }

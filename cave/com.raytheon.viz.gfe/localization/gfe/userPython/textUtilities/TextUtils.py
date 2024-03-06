@@ -37,10 +37,7 @@ import types
 import os, re, time
 import WxMethods
 import SiteInfo
-<<<<<<< HEAD
-=======
 import offsetTime
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 from com.raytheon.uf.common.dataplugin.gfe.db.objects import ParmID
 
 class  TextUtils:
@@ -700,16 +697,6 @@ class  TextUtils:
         # the time returned is in local time in units of seconds.
         # newTimeZone must be an accepted time zone identifier such as
         # "EST5EDT", CST6CDT", "MST7MDT", "PST8PST", "AST9ADT" "HST10"
-<<<<<<< HEAD
-        myTimeZone = os.environ["TZ"]  # save the defined time zone
-        if newTimeZone is None:
-            newTimeZone = myTimeZone
-        os.environ["TZ"] = newTimeZone  # set the new time zone
-        time.tzset()
-        timeZoneStr = time.strftime(dateFormat, time.localtime(gmTime))
-        os.environ["TZ"] = myTimeZone # set the time zone back
-        time.tzset()
-=======
 
         myTimeZone = offsetTime.getTimeZone()
         if newTimeZone is None:
@@ -722,7 +709,6 @@ class  TextUtils:
         # set the time zone back
         offsetTime.setTimeZone(myTimeZone)
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         return timeZoneStr  # return the time as a string
 
     # Adopted from ER  8/04

@@ -53,11 +53,8 @@ import oasis.names.tc.ebxml.regrep.xsd.rim.v4.ObjectRefListType;
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.ObjectRefType;
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryObjectListType;
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.RegistryObjectType;
-<<<<<<< HEAD
-=======
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.SlotType;
 import oasis.names.tc.ebxml.regrep.xsd.rim.v4.StringValueType;
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import oasis.names.tc.ebxml.regrep.xsd.rs.v4.RegistryExceptionType;
 import oasis.names.tc.ebxml.regrep.xsd.rs.v4.RegistryResponseStatus;
 import oasis.names.tc.ebxml.regrep.xsd.rs.v4.RegistryResponseType;
@@ -86,10 +83,7 @@ import oasis.names.tc.ebxml.regrep.xsd.rs.v4.UnresolvedReferenceExceptionType;
  * Jun 24, 2013 2106       djohnson    Requires a transaction to already be active.
  * Mar 31, 2014 2889       dhladky     Added username for notification center tracking.
  * Mar 12, 2018 7228       tjensen     Synchronize inserts to Classification Nodes
-<<<<<<< HEAD
-=======
  * Apr 06, 2020 8054       bsteffen    Set EVENT_SOURCE_SLOT on RemoveObjectsRequest.
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -529,12 +523,9 @@ public class FactoryRegistryHandler implements RegistryHandler {
             RemoveObjectsRequest deleteRequest = new RemoveObjectsRequest();
             deleteRequest.setUsername(username);
             deleteRequest.setId(RegistryUtil.generateRegistryObjectId());
-<<<<<<< HEAD
-=======
             deleteRequest.getSlot()
                     .add(new SlotType(RegistryUtil.EVENT_SOURCE_SLOT,
                             new StringValueType(RegistryUtil.registryUser)));
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             // These options are not supported yet...
 

@@ -188,13 +188,10 @@
     <alias base="Cigc1">cigc1</alias>
     <alias base="Cigc2">cigc2</alias>
     <alias base="Cigc3">cigc3</alias>
-<<<<<<< HEAD
-=======
     <alias base="CigProb10k">cigprob10k</alias>
     <alias base="CigProb2k">cigprob2k</alias>
     <alias base="CigProb3k">cigprob3k</alias>
     <alias base="CigProb6k">cigprob6k</alias>    
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <alias base="CLGTN">clgtn</alias>
     <alias base="CONVP">convp</alias>
     <alias base="CP2hr">cp2hr</alias>
@@ -633,11 +630,6 @@
     <alias base="TP10pct6hr">tp10pct6hr</alias>
     <alias base="TP50pct6hr">tp50pct6hr</alias>
     <alias base="TP90pct6hr">tp90pct6hr</alias>
-<<<<<<< HEAD
-    <alias base="TP10pct24hr">tp10pct24hr</alias>
-    <alias base="TP50pct24hr">tp50pct24hr</alias>
-    <alias base="TP90pct24hr">tp90pct24hr</alias>
-=======
     <alias base="TP5pct24hr">tp5pct24hr</alias>
     <alias base="TP10pct24hr">tp10pct24hr</alias>
     <alias base="TP25pct24hr">tp25pct24hr</alias>
@@ -645,7 +637,6 @@
     <alias base="TP75pct24hr">tp75pct24hr</alias>
     <alias base="TP90pct24hr">tp90pct24hr</alias>
     <alias base="TP95pct24hr">tp95pct24hr</alias>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     <alias base="ThP1hr">thp1hr</alias>
     <alias base="DRYTPPROB3hr">drytpprob3hr</alias>
     <alias base="WGS50pct">wgs50pct</alias>
@@ -935,9 +926,6 @@
     <alias base="TOD9064ktWP4">tod9064ktwp4</alias>
     <alias base="TOD9064ktWP5">tod9064ktwp5</alias>
 <!-- ::END:: MFL Site Specific Alias Listings -->
-<<<<<<< HEAD
-</aliasList>
-=======
     <alias base="T233.0K18hr">tprobbelown40</alias>
     <alias base="T244.0K18hr">tprobbelown20</alias>
     <alias base="T255.0K18hr">tprobbelow0</alias>
@@ -962,4 +950,3 @@
     <alias base="VisProb2p0">visprob2p0</alias>
     <alias base="VisProb4p0">visprob4p0</alias>
 </aliasList>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

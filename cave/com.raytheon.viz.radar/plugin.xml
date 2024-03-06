@@ -108,31 +108,19 @@
    <extension
          point="com.raytheon.uf.viz.core.descriptor">
       <descriptor
-<<<<<<< HEAD
-      		name="RadarGraphDescriptor"
-            class="com.raytheon.viz.radar.ui.xy.RadarGraphDescriptor"
-            editor="com.raytheon.viz.radar.ui.xy.RadarGraphEditor">
-=======
             class="com.raytheon.viz.radar.ui.xy.RadarGraphDescriptor"
             editor="com.raytheon.viz.radar.ui.xy.RadarGraphEditor"
             name="RadarGraphDescriptor"
             paneCreator="com.raytheon.uf.viz.xy.XyPaneCreator">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
       </descriptor>
    </extension>
    <extension
          point="com.raytheon.uf.viz.core.descriptor">
       <descriptor
-<<<<<<< HEAD
-      		name="RadarXYDescriptor"
-            class="com.raytheon.viz.radar.ui.xy.RadarXYDescriptor"
-            editor="com.raytheon.viz.radar.ui.xy.RadarXYEditor">
-=======
             class="com.raytheon.viz.radar.ui.xy.RadarXYDescriptor"
             editor="com.raytheon.viz.radar.ui.xy.RadarXYEditor"
             name="RadarXYDescriptor"
             paneCreator="com.raytheon.uf.viz.xy.XyPaneCreator">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
       </descriptor>
    </extension>
    <extension point="com.raytheon.uf.viz.d2d.core.alterBundle">

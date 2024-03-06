@@ -26,10 +26,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-<<<<<<< HEAD
-import java.text.DecimalFormat;
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -118,11 +114,8 @@ import com.raytheon.uf.edex.database.DataAccessLayerException;
  * Apr 24, 2018  DCS20681  jdynina      Add MRLE to CPM processing
  * Jun 21, 2019  7629      mroos        Added setting of delta time and scan type
  *                                      for supporting product codes.
-<<<<<<< HEAD
-=======
  * Jun 17, 2020  DCS22082  jdynina      Removed Product List (product code 8)
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * </pre>
  *
  * @author Bryan Rockwood
@@ -142,11 +135,6 @@ public class Level3BaseRadar {
 
     public static final int PRODUCT_REQUEST_RESPONSE_MESSAGE = 3;
 
-<<<<<<< HEAD
-    public static final int PRODUCT_LIST = 8;
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     public static final int COMMAND_PARAMETER_MESSAGE = 12;
 
     public static final int RADAR_CODED_MESSAGE = 74;
@@ -309,11 +297,6 @@ public class Level3BaseRadar {
         // Handle the message contents
         if (this.theMessageCode == PRODUCT_REQUEST_RESPONSE_MESSAGE) {
             this.parseRequestResponse();
-<<<<<<< HEAD
-        } else if (this.theMessageCode == PRODUCT_LIST) {
-            this.parseProductList(headers);
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         } else if (this.theMessageCode == GENERAL_STATUS_MESSAGE) {
             this.parseGeneralStatusMessage();
         } else if (this.theMessageCode == COMMAND_PARAMETER_MESSAGE) {
@@ -860,71 +843,6 @@ public class Level3BaseRadar {
         // If no value for ProductDependentValue[6], then it is a normal cut
     }
 
-<<<<<<< HEAD
-    private void parseProductList(Headers headers) throws IOException {
-        tabularBlock = new TabularBlock();
-        DecimalFormat format = new DecimalFormat("#.#");
-        theRadarData.skip(4);
-        int numProducts = theRadarData.readShort();
-        theRadarData.skip(2);
-        StringBuilder builder = new StringBuilder();
-        builder.append("\t\t\tRPG PRODUCTS AVAILABLE (" + numProducts
-                + " AVAILABLE)\n\n");
-        builder.append(
-                "\tPROD\tPROD\tDATA\n\tID#\t\tNAME\tLVL\t\tRES\t\tSLICE\tPARAM1\tPARAM2\tPARAM3\tPARAM4\n\t----\t----\t---\t\t---\t\t-----\t------\t------\t------\t------\n");
-
-        for (int i = 0; i < numProducts; i++) {
-            builder.append("");
-            int productCode = theRadarData.readShort();
-            if (dict.getInfo(productCode) == null) {
-                // radarInfo.txt does not contain this product code
-                continue;
-            }
-            double elevation = (theRadarData.readShort() * .1);
-            String elev = format.format(elevation);
-            if (elevation == 0) {
-                elev = "";
-            }
-
-            int param1 = theRadarData.readShort();
-            int param2 = theRadarData.readShort();
-            int param3 = theRadarData.readShort();
-            int param4 = theRadarData.readShort();
-            if (param1 == 0) {
-
-            }
-            String params = String.valueOf(param1 == 0 ? "" : param1) + "\t\t"
-                    + String.valueOf(param2 == 0 ? "" : param2) + "\t\t"
-                    + String.valueOf(param3 == 0 ? "" : param3) + "\t\t"
-                    + String.valueOf(param4 == 0 ? "" : param4);
-            theRadarData.skip(2);
-            try {
-                builder.append("\t" + productCode + "\t\t"
-                        + dict.getInfo(productCode).getMnemonic() + "\t\t"
-                        + (dict.getInfo(productCode).getNumLevels() == 0 ? ""
-                                : dict.getInfo(productCode).getNumLevels())
-                        + "\t\t"
-                        + (dict.getInfo(productCode).getResolution() == 0 ? ""
-                                : format.format(
-                                        (double) dict.getInfo(productCode)
-                                                .getResolution() / 1000))
-                        + "\t\t" + elev + "\t\t" + params + "\n");
-            } catch (Exception e) {
-                theHandler.warn("Error building string for Tabular Block", e);
-            }
-        }
-
-        tabularBlock.setString(builder.toString());
-
-        lookupAfosId();
-
-        if (RadarTextProductUtil.radarTable.keySet().contains(theMessageCode)) {
-            storeTextProduct(headers);
-        }
-    }
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     /**
      * Stores text from tabular block if AFOS product id is filled.
      *

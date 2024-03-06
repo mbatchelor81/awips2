@@ -146,12 +146,9 @@ import com.raytheon.uf.edex.database.DataAccessLayerException;
  *                                  sub-hourly data
  * Apr 15, 2019  7596     lsingh    Updated units framework to JSR-363.
  *                                  Handled unit conversion.                                 
-<<<<<<< HEAD
-=======
  * Nov 04, 2021  21534    aghanava  Removed code that discards ws and wd from 
  *                                  parmNames after wind is created in loadParms(),
  *                                  allowing them to be added as scalars
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  *
  * </pre>
  *
@@ -310,11 +307,7 @@ public class D2DGridDatabase extends VGridDatabase {
     private static final String GFE_LEVEL_MAPPING_FILE = "grid/gfeLevelMappingFile.xml";
 
     private final IPerformanceStatusHandler perfLog = PerformanceStatus
-<<<<<<< HEAD
-            .getHandler("GFE:");
-=======
             .getHandler("GFE");
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     private class D2DParm {
         private final ParmID parmId;
@@ -660,20 +653,10 @@ public class D2DGridDatabase extends VGridDatabase {
             }
 
         } else if (parmNames.contains("ws") && parmNames.contains("wd")) {
-<<<<<<< HEAD
-            // replace ws and wd with wind.
-            ParameterInfo satts = this.modelInfo.getParameterInfo("ws");
-            ParameterInfo datts = this.modelInfo.getParameterInfo("wd");
-
-            parmNames.remove("ws");
-            parmNames.remove("wd");
-
-=======
             // use ws and wd to create wind. 
             ParameterInfo satts = this.modelInfo.getParameterInfo("ws");
             ParameterInfo datts = this.modelInfo.getParameterInfo("wd");
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             for (String level : satts.getLevels()) {
                 loadParm(satts, datts, level);
             }

@@ -18,15 +18,10 @@
 # Apr 29, 2016                     added a popup banner with instructions to run the
 #                                  specific text formatter, for a particular storm
 # Sep 19, 2016  19293    randerso  Initial baseline check in
-<<<<<<< HEAD
-# Feb 15, 2021  8361     randerso  Fix error in constructStormHazardMask when 
-#                                  curETN is ""
-=======
 # Feb 15, 2021  8361     randerso  Fix error in constructStormHazardMask when
 #                                  curETN is ""
 # Sep 13, 2021  8657     randerso  Fix ETN numbers for non-Atlantic basins
 # May 24, 2023  2029646  swhite   Eastern Pacific National TCV Update
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 ########################################################################
 
@@ -37,18 +32,6 @@
 
 MenuItems = ["None"]
 
-<<<<<<< HEAD
-
-import re
-import time
-
-import numpy as np
-
-import LogStream
-import ProcessVariableList
-import TropicalUtility
-
-=======
 import re
 import time
 
@@ -56,7 +39,6 @@ import LogStream
 import ProcessVariableList
 import TropicalUtility
 import numpy as np
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 
 class Procedure (TropicalUtility.TropicalUtility):
@@ -68,20 +50,6 @@ class Procedure (TropicalUtility.TropicalUtility):
         #  Define the UGC zone code prefix for each state in the domain. The
         #  keys are the edit area name for each state in the domain we want.
 
-<<<<<<< HEAD
-        self.searchUGCdict = {
-            "Alabama":"ALZ", "Arkansas":"ARZ", "Connecticut":"CTZ",
-            "Delaware":"DEZ", "DistrictofColumbia":"DCZ", "Florida":"FLZ",
-            "Georgia":"GAZ", "Louisiana":"LAZ", "Maine":"MEZ", "Maryland":"MDZ",
-            "Massachusetts":"MAZ", "Mississippi":"MSZ", "Missouri":"MOZ",
-            "NewHampshire":"NHZ", "NewJersey":"NJZ", "NewMexico":"NMZ",
-            "NewYork":"NYZ", "NorthCarolina":"NCZ", "Oklahoma":"OKZ",
-            "Pennsylvania":"PAZ", "PuertoRico":"PRZ", "RhodeIsland":"RIZ",
-            "SouthCarolina":"SCZ", "Tennessee":"TNZ", "Texas":"TXZ",
-            "VirginIslands":"VIZ", "Virginia":"VAZ", "WestVirginia":"WVZ",
-        }
-
-=======
         siteID = self.getSiteID()
         if siteID == "NHA":
             self.searchUGCdict = {
@@ -102,7 +70,6 @@ class Procedure (TropicalUtility.TropicalUtility):
         else:
             self.searchUGCdict = {}
             self.statusBarMsg(f"No searchUGCdict defined for site {siteID}.", "A")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     #  Define a method to construct a mask which identifies all areas impacted
     #  by hazards associated with a particular storm
@@ -135,11 +102,7 @@ class Procedure (TropicalUtility.TropicalUtility):
                 #  If this ETN does not match the storm we are interested in
                 if not curETN.strip() or not searchEtn or \
                    int(curETN) != int(searchEtn):
-<<<<<<< HEAD
-                    continue            # move on
-=======
                     continue  # move on
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
                 #  If we made it this far, mask where this hazard exists
                 hazMask = hazardBytes == hazIndex
@@ -149,10 +112,6 @@ class Procedure (TropicalUtility.TropicalUtility):
         #  Return the completed hazard mask for this storm
         return finalStormHazardMask
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     #  Define a method to search breakpoint segment edit areas for hazards
     #  associated with a specific storm
     def searchHazardsBySegment(self, hazardMask):
@@ -170,13 +129,8 @@ class Procedure (TropicalUtility.TropicalUtility):
 
             #  If this is not a breakpoint segment area we care about
             if segmentPattern.search(searchArea) is None:
-<<<<<<< HEAD
-                continue            #  Move on
-#                 print searchArea
-=======
                 continue  #  Move on
 #                 print(searchArea)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             #  Get the edit area as a mask
             try:
@@ -199,10 +153,6 @@ class Procedure (TropicalUtility.TropicalUtility):
         #  Return the results we found
         return results
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     #  Define a method to search state edit areas for hazards associated with a
     #  specific storm
     def searchHazardsByState(self, hazardMask):
@@ -210,21 +160,12 @@ class Procedure (TropicalUtility.TropicalUtility):
         #  Get ready to track our results
         results = set()
 
-<<<<<<< HEAD
-#         print "-"*60
-#         print "Start state search"
-
-        #  Now examine every search area
-        for searchArea in self.searchUGCdict:
-#             print "State searchArea =", searchArea
-=======
 #         print("-"*60)
 #         print("Start state search")
 
         #  Now examine every search area
         for searchArea in self.searchUGCdict:
 #             print("State searchArea =", searchArea)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             #  Get the edit area as a mask
             try:
@@ -247,10 +188,6 @@ class Procedure (TropicalUtility.TropicalUtility):
         #  Return the results we found
         return results
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     #  Define a method to search state forecast zone edit areas for hazards
     #  associated with a specific storm
     def findZones(self, hazardMask, allEditAreaNames, results, keep=True):
@@ -259,11 +196,7 @@ class Procedure (TropicalUtility.TropicalUtility):
 
         #  Now look for all zones associated with this state
         for (index, searchArea) in enumerate(allEditAreaNames):
-<<<<<<< HEAD
-#             print "Zone searchArea =", searchArea, index
-=======
 #             print("Zone searchArea =", searchArea, index)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
             #  Get this edit area as a mask
             try:
@@ -283,25 +216,15 @@ class Procedure (TropicalUtility.TropicalUtility):
                 #  already included
                 if keep:
                     results.add(searchArea)
-<<<<<<< HEAD
-#                     print "Kept Zone searchArea =", searchArea, index
-#                 else:
-#                     print "Removing Zone searchArea =", searchArea, index
-=======
 #                     print("Kept Zone searchArea =", searchArea, index)
 #                 else:
 #                     print("Removing Zone searchArea =", searchArea, index)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 #                 #  Since we already found this zone, do not look for it
 #                 #  with future hazard searches
 #                 allEditAreaNames.remove(searchArea)
 #             else:
-<<<<<<< HEAD
-#                 print "Ignoring Zone searchArea ->", searchArea, index
-=======
 #                 print("Ignoring Zone searchArea ->", searchArea, index)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         print("I now have %d edit areas" % (len(allEditAreaNames)))
         print("with %d results" % (len(results)))
@@ -309,10 +232,6 @@ class Procedure (TropicalUtility.TropicalUtility):
         #  Return the results we determined
         return (results, allEditAreaNames)
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     #  Define a method to search state forecast zone edit areas for hazards
     #  associated with a specific storm
     def searchHazardsByZone(self, hazardMask, stateList):
@@ -349,11 +268,7 @@ class Procedure (TropicalUtility.TropicalUtility):
 
             if len(editArea) != 6 or editArea[:3] not in stateZones:
                 allEditAreaNames.remove(editArea)
-<<<<<<< HEAD
-#                 print "Removing ->", editArea
-=======
 #                 print("Removing ->", editArea)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         #  Now that we've removed the areas we know we will not need, take a
         #  closer look at the areas still left
@@ -363,28 +278,17 @@ class Procedure (TropicalUtility.TropicalUtility):
         #  Return the results we found
         return results
 
-<<<<<<< HEAD
-
-    def execute(self, varDict):
-
-        if varDict is None:
-            varDict={}
-=======
     def execute(self, varDict):
 
         if varDict is None:
             varDict = {}
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         #  Let's start timing this
         print("*" *80)
         t0 = time.time()
         print(time.gmtime(t0), "CreateNatlTCVZoneGroups Starting")
-<<<<<<< HEAD
-=======
         
         siteID = self.getSiteID()
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         stormList = self.extractStormInfo()
         stormNames = []
@@ -404,11 +308,6 @@ class Procedure (TropicalUtility.TropicalUtility):
             self.cancel()
 
         print("varDict =", varDict)
-<<<<<<< HEAD
-        #  Create a new time range
-        now = int(self._gmtime().unixTime() / 3600) * 3600
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         #  Get the name of our selected storm
         stormName = varDict["StormName"]
@@ -422,25 +321,16 @@ class Procedure (TropicalUtility.TropicalUtility):
                 stormNum = int(sDict["stormNumber"])
                 lastModified = sDict["lastModified"]
                 pil = sDict["pil"]
-<<<<<<< HEAD
-=======
                 stormID = sDict["stormID"]
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         #  Get the segment number and filter for valid characters
         if stormNum is None:
             self.abort("You must supply the storm number!")
 
-<<<<<<< HEAD
-        #  Ensure this is a national VTEC number
-        if stormNum < 1000:
-            stormNum = stormNum + 1000
-=======
         #  Ensure this is a national ETN
         stormETN = stormNum
         if stormETN < self._natlBaseETN:
             stormETN = stormETN + self.etnBaseForBasin(stormID[0:2])
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         #  Make sure that the storm info has been updated within the last 7 hours
         if self._gmtime().unixTime() - lastModified > 7 * 3600:
@@ -448,14 +338,8 @@ class Procedure (TropicalUtility.TropicalUtility):
                               "Please update StormInfo first.", "U")
             return
 
-<<<<<<< HEAD
-#         LogStream.logEvent("Got this data\n\tpil = %s\tnumber = %s\n" %
-#                            (pil, stormNum))
-#         print "Got this data\n\tpil = %s\tnumber = %s\n" % (pil, stormNum)
-=======
 #         LogStream.logDebug("Got this data\n\tpil = %s\tnumber = %s\n" %
 #                            (pil, stormETN))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         #=======================================================================
         #  Get ready to make a list of all states which need to be examined
@@ -465,19 +349,11 @@ class Procedure (TropicalUtility.TropicalUtility):
 #         finalResults = set()
 
         #  Find all areas with hazards associated with this storm
-<<<<<<< HEAD
-        hazardMask = self.constructStormHazardMask(stormNum)
-
-        #  Look for breakpoint segments
-#         segments = self.searchHazardsBySegment(hazardMask)
-#         print "segments = ", segments
-=======
         hazardMask = self.constructStormHazardMask(stormETN)
 
         #  Look for breakpoint segments
 #         segments = self.searchHazardsBySegment(hazardMask)
 #         print("segments = ", segments)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #
 #         for segment in segments:
 #             if segment not in finalResults:
@@ -498,11 +374,7 @@ class Procedure (TropicalUtility.TropicalUtility):
         print("results =", results)
 
         #  Make a filename for this output
-<<<<<<< HEAD
-        name = "Combinations_%s_%s" % (pil, "NHA")
-=======
         name = "Combinations_%s_%s" % (pil, siteID)
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         #  Get the previous version of this combinations file
         prevCombo = None
@@ -519,34 +391,16 @@ class Procedure (TropicalUtility.TropicalUtility):
         finalSet = results | set(prevCombo[0])
         print("finalSet =", finalSet)
 
-<<<<<<< HEAD
-       
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         #  Now make the final combinations file
         self.saveCombinationsFile(name, [list(finalSet)])
 
         t1 = time.time()
-<<<<<<< HEAD
-        print("\n\n%f milliseconds to update combinations file" % ((t1 - t0)*1000.0))
-
-=======
         print("\n\n%f milliseconds to update combinations file" % ((t1 - t0) * 1000.0))
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
         #=======================================================================
         #  Notify user which formatter to run if there were any zones left
 
         if (len(finalSet) > 0):
-<<<<<<< HEAD
-            msg = "You may now create the national TCV for %s " % (stormName) +\
-                  "through the GFE Formatter Launcher (In GFE, Products->" +\
-                  "Formatter Launcher). In the Formatter Launcher, Products->" +\
-                  "Hazard->Hazard_TCV%s." % (pil) + "Click on the gear icon " +\
-                  "(second from the right).  Transmit the product when " +\
-                  "satisfied it is correct."
-    
-=======
             msg = "You may now create the national TCV for %s " % (stormName) + \
                   "through the GFE Formatter Launcher (In GFE, Products->" + \
                   "Formatter Launcher). In the Formatter Launcher, Products->" + \
@@ -554,15 +408,10 @@ class Procedure (TropicalUtility.TropicalUtility):
                   "(second from the right).  Transmit the product when " + \
                   "satisfied it is correct."
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             self.statusBarMsg(msg, "A")
 
         #  Let's see how long this took
         t3 = time.time()
 
         print("\n\n%f milliseconds for total process" % ((t3 - t0) * 1000.0))
-<<<<<<< HEAD
-        print(self._gmtime().timetuple(), "CreateNatlTCVZoneGroups Done")       
-=======
         print(self._gmtime().timetuple(), "CreateNatlTCVZoneGroups Done")
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

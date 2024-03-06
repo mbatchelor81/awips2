@@ -46,13 +46,10 @@ function prepareBuildEnvironment()
    if [ "${UFRAME_ECLIPSE}" = "" ]; then
       export UFRAME_ECLIPSE="${VAR_UFRAME_ECLIPSE}"
    fi
-<<<<<<< HEAD
-=======
 
    if [ "${UFRAME_TARGET}" = "" ]; then
       export UFRAME_TARGET="${VAR_UFRAME_ECLIPSE}"
    fi
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 }
 
 # Build EDEX as 64 bit only.
@@ -74,10 +71,7 @@ function buildRPM()
          --define '_topdir %(echo ${AWIPSII_TOP_DIR})' \
          --define '_baseline_workspace %(echo ${WORKSPACE})' \
          --define '_uframe_eclipse %(echo ${UFRAME_ECLIPSE})' \
-<<<<<<< HEAD
-=======
          --define '_uframe_target %(echo ${UFRAME_TARGET})' \
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
          --define '_build_root %(echo ${AWIPSII_BUILD_ROOT})' \
          --define '_build_site %(echo ${AWIPSII_BUILD_SITE})' \
          --define '_component_version %(echo ${AWIPSII_VERSION})' \
@@ -102,18 +96,12 @@ if [ $? -ne 0 ]; then
 fi
 if [ ${LIGHTNING} = true ]; then
    /awips2/ant/bin/ant -f build.xml -Dlightning=true \
-<<<<<<< HEAD
-=======
       -Duframe.target=${UFRAME_TARGET} \
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
       -Duframe.eclipse=${UFRAME_ECLIPSE}
    RC=$?
 else
    /awips2/ant/bin/ant -f build.xml \
-<<<<<<< HEAD
-=======
       -Duframe.target=${UFRAME_TARGET} \
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
       -Duframe.eclipse=${UFRAME_ECLIPSE}
    RC=$?
 fi
@@ -127,10 +115,7 @@ cd ../
 
 buildRPM "Installer.edex"
 buildRPM "Installer.edex-configuration"
-<<<<<<< HEAD
-=======
 buildRPM "Installer.edex-enableservices"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 DIST="${WORKSPACE}/build.edex/edex/dist"
 for edex_zip in `cd ${DIST}; ls -1;`;

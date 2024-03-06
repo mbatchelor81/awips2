@@ -23,13 +23,9 @@ Require-Bundle: com.raytheon.uf.common.colormap,
  org.eclipse.ui,
  com.raytheon.uf.common.numeric,
  com.raytheon.uf.viz.core.point,
-<<<<<<< HEAD
- javax.xml.bind
-=======
  javax.xml.bind,
  com.raytheon.viz.awipstools;bundle-version="1.19.0",
  com.raytheon.viz.ui;bundle-version="1.16.0"
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 Import-Package: com.raytheon.uf.common.units,
  com.raytheon.viz.core.map
 Export-Package: com.raytheon.uf.viz.xy.crosssection,

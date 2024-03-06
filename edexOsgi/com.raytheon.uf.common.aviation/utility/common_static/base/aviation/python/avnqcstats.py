@@ -25,13 +25,10 @@
 #       DELIVERED
 #
 #    History:
-<<<<<<< HEAD
-=======
 #       Revision 1.6
 #         Created:  19-SEP-2023               jkelmer
 #           Use NetCDF3 Classic format
 #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 #       Revision 1.5 (DELIVERED)
 #         Created:  29-NOV-2007 09:54:11      OBERFIEL
 #           Removed obsolete directory search path
@@ -64,11 +61,7 @@
 #    Purpose:
 #       To create monthly climate files for TAF QC function in AvnFPS
 
-<<<<<<< HEAD
-##
-=======
 #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # This is a base file that is not intended to be overridden.
 ##
 
@@ -310,11 +303,7 @@ def createNetCDFFile(cfg, direct):
     path = '%s/%s.%02d.nc' % (direct, cfg['ident'], cfg['month'])
     os.system('/bin/rm -f %s' % path)
     try:
-<<<<<<< HEAD
-        fh = netCDF4.Dataset(path, 'w')
-=======
         fh = netCDF4.Dataset(path, 'w', format='NETCDF3_CLASSIC')
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     except IOError:
         msg = 'Cannot create file %s' % path
         print(msg)
@@ -404,13 +393,8 @@ def makeStatsFile(cfg, climateDir):
     ncfh = createNetCDFFile(cfg, climateDir)
     if not ncfh:
         return
-<<<<<<< HEAD
-    ncfhFilename = ncfh.filename
-    try :
-=======
     try :
         ncfhFilename = ncfh.filepath()
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         os.chmod(ncfhFilename, stat.S_IRUSR | stat.S_IWUSR |stat.S_IRGRP | stat.S_IWGRP | stat.S_IROTH)
         fname = '%s/%s.hd5' % (climateDir, cfg['ident'])
         fh = h5py.File(fname, 'r')

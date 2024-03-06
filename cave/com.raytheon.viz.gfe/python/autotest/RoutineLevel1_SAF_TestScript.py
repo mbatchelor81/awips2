@@ -1,31 +1,19 @@
 ##
 # This software was developed and / or modified by Raytheon Company,
 # pursuant to Contract DG133W-05-CQ-1067 with the US Government.
-<<<<<<< HEAD
-# 
-=======
 #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # U.S. EXPORT CONTROLLED TECHNICAL DATA
 # This software product contains export-restricted data whose
 # export/transfer/disclosure is restricted by U.S. law. Dissemination
 # to non-U.S. persons whether in the United States or abroad requires
 # an export license or other authorization.
-<<<<<<< HEAD
-# 
-=======
 #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # Contractor Name:        Raytheon Company
 # Contractor Address:     6825 Pine Street, Suite 340
 #                         Mail Stop B8
 #                         Omaha, NE 68106
 #                         402.291.0100
-<<<<<<< HEAD
-# 
-=======
 #
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # See the AWIPS II Master Rights File ("Master Rights File.pdf") for
 # further licensing information.
 ##
@@ -45,11 +33,7 @@ general_createGrids = [
        ("Fcst", "MaxT", "SCALAR", "MaxTBegin", "MaxTEnd", 70, "all"),
        ("Fcst", "MinT", "SCALAR", "MinTBegin", "MinTEnd", 43, "all"),
        ("Fcst", "T", "SCALAR", 6, 9, 70, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 6, 9, 30, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 6, 9, 30, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 6, 9, (10, "SW"), "all"),
        ("Fcst", "Sky", "SCALAR", 6, 9, 0, "all"),
        ("Fcst", "Wx", "WEATHER", 6, 9, "Iso:T:<NoInten>:<NoVis>:", "all"),
@@ -58,11 +42,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 6, 9, .05, ["AboveElev"]),
        ("Fcst", "SnowAmt", "SCALAR", 6, 9, 1, "all"),
        ("Fcst", "T", "SCALAR", 9, 12, 65, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 9, 12, 40, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 9, 12, 40, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 9, 12, (15, "S"), "all"),
        ("Fcst", "Sky", "SCALAR", 9, 12, 7, "all"),
        ("Fcst", "Wx", "WEATHER", 9, 12,
@@ -72,11 +52,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 9, 12, .01, ["AboveElev"]),
        ("Fcst", "SnowAmt", "SCALAR", 9, 12, 0, "all"),
        ("Fcst", "T", "SCALAR", 12, 15, 60, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 12, 15, 45, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 12, 15, 45, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 12, 15, (15, "SE"), "all"),
        ("Fcst", "Sky", "SCALAR", 12, 15, 6, "all"),
        ("Fcst", "Wx", "WEATHER", 12, 15,
@@ -86,11 +62,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 12, 15, .01, ["AboveElev"]),
        ("Fcst", "SnowAmt", "SCALAR", 12, 15, 2, "all"),
        ("Fcst", "T", "SCALAR", 15, 18, 55, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 15, 18, 50, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 15, 18, 50, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 15, 18, (25, "E"), "all"),
        ("Fcst", "Sky", "SCALAR", 15, 18, 10, "all"),
        ("Fcst", "Wx", "WEATHER", 15, 18,
@@ -100,11 +72,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 15, 18, .1, ["AboveElev"]),
        ("Fcst", "SnowAmt", "SCALAR", 15, 18, 1, "all"),
        ("Fcst", "T", "SCALAR", 18, 21, 50, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 18, 21, 50, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 18, 21, 50, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 18, 21, (30, "NE"), "all"),
        ("Fcst", "Sky", "SCALAR", 18, 21, 15, "all"),
        ("Fcst", "Wx", "WEATHER", 18, 21,
@@ -114,11 +82,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 18, 21, .2, ["AboveElev"]),
        ("Fcst", "SnowAmt", "SCALAR", 18, 21, 1.5, "all"),
        ("Fcst", "T", "SCALAR", 21, 24, 50, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 21, 24, 48, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 21, 24, 48, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 21, 24, (25, "N"), "all"),
        ("Fcst", "Sky", "SCALAR", 21, 24, 10, "all"),
        ("Fcst", "Wx", "WEATHER", 21, 24,
@@ -128,11 +92,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 21, 24, .25, ["AboveElev"]),
        ("Fcst", "SnowAmt", "SCALAR", 21, 24, 1.2, "all"),
        ("Fcst", "T", "SCALAR", 24, 27, 48, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 24, 27, 48, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 24, 27, 48, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 24, 27, (22, "NW"), "all"),
        ("Fcst", "Sky", "SCALAR", 24, 27, 19, "all"),
        ("Fcst", "Wx", "WEATHER", 24, 27,
@@ -141,11 +101,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 24, 27, 1, "all"),
        ("Fcst", "SnowAmt", "SCALAR", 24, 27, 1, "all"),
        ("Fcst", "T", "SCALAR", 27, 30, 43, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 27, 30, 43, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 27, 30, 43, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 27, 30, (15, "W"), "all"),
        ("Fcst", "Sky", "SCALAR", 27, 30, 30, "all"),
        ("Fcst", "Wx", "WEATHER", 27, 30, "Wide:R:-:3SM:^Ocnl:R:--:<NoVis>:", "all"),
@@ -155,11 +111,7 @@ general_createGrids = [
        ("Fcst", "MaxT", "SCALAR", "MaxTBegin + 24", "MaxTEnd + 24", 50, "all"),
        ("Fcst", "MinT", "SCALAR", "MinTBegin + 24", "MinTEnd + 24", 33, "all"),
        ("Fcst", "T", "SCALAR", 30, 33, 40, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 30, 33, 39, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 30, 33, 39, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 30, 33, (10, "SW"), "all"),
        ("Fcst", "Sky", "SCALAR", 30, 33, 50, "all"),
        ("Fcst", "Wx", "WEATHER", 30, 33, "SChc:R:--:0SM:^Chc:R:-:<NoVis>:", "all"),
@@ -167,11 +119,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 30, 33, 2.5, "all"),
        ("Fcst", "SnowAmt", "SCALAR", 30, 33, 0, "all"),
        ("Fcst", "T", "SCALAR", 33, 36, 41, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 33, 36, 39, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 33, 36, 39, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 33, 36, (10, "S"), "all"),
        ("Fcst", "Sky", "SCALAR", 33, 36, 90, "all"),
        ("Fcst", "Wx", "WEATHER", 33, 36, "Lkly:R:m:1/2SM:^Def:R:m:4SM:", "all"),
@@ -179,11 +127,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 33, 36, 4, "all"),
        ("Fcst", "SnowAmt", "SCALAR", 33, 36, 0, "all"),
        ("Fcst", "T", "SCALAR", 36, 39, 40, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 36, 39, 40, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 36, 39, 40, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 36, 39, (5, "SE"), "all"),
        ("Fcst", "Sky", "SCALAR", 36, 39, 100, "all"),
        ("Fcst", "Wx", "WEATHER", 36, 39, "Frq:R:+:<NoVis>:^Brf:R:+:5SM:", "all"),
@@ -191,11 +135,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 36, 39, 5, "all"),
        ("Fcst", "SnowAmt", "SCALAR", 36, 39, 0, "all"),
        ("Fcst", "T", "SCALAR", 39, 42, 33, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 39, 42, 33, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 39, 42, 33, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 39, 42, (5, "E"), "all"),
        ("Fcst", "Sky", "SCALAR", 39, 42, 100, "all"),
        ("Fcst", "Wx", "WEATHER", 39, 42, "Pds:R:m:<NoVis>:^Inter:R:m:2SM:", "all"),
@@ -203,11 +143,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 39, 42, 5, "all"),
        ("Fcst", "SnowAmt", "SCALAR", 39, 42, 0, "all"),
        ("Fcst", "T", "SCALAR", 42, 45, 35, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 42, 45, 33, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 42, 45, 33, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 42, 45, (2.5, "E"), "all"),
        ("Fcst", "Sky", "SCALAR", 42, 45, 70, "all"),
        ("Fcst", "Wx", "WEATHER", 42, 45, "Iso:RW:+:<NoVis>:^Sct:RW:+:3/4SM:", "all"),
@@ -215,11 +151,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 42, 45, 5, "all"),
        ("Fcst", "SnowAmt", "SCALAR", 42, 45, 0, "all"),
        ("Fcst", "T", "SCALAR", 45, 48, 40, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 45, 48, 35, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 45, 48, 35, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 45, 48, (2, "NE"), "all"),
        ("Fcst", "Sky", "SCALAR", 45, 48, 85, "all"),
        ("Fcst", "Wx", "WEATHER", 45, 48, "Num:RW:m:<NoVis>:^Wide:RW:-:1/2SM:", "all"),
@@ -228,11 +160,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 45, 48, 5, ["AboveElev"]),
        ("Fcst", "SnowAmt", "SCALAR", 45, 48, 0, "all"),
        ("Fcst", "T", "SCALAR", 48, 51, 45, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 48, 51, 38, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 48, 51, 38, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 48, 51, (5, "N"), "all"),
        ("Fcst", "Sky", "SCALAR", 48, 51, 70, "all"),
        ("Fcst", "Wx", "WEATHER", 48, 51, "Ocnl:RW:-:<NoVis>:^SChc:RW:--:<NoVis>:", "all"),
@@ -241,11 +169,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 48, 51, 3, ["AboveElev"]),
        ("Fcst", "SnowAmt", "SCALAR", 48, 51, 0, "all"),
        ("Fcst", "T", "SCALAR", 51, 54, 50, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 51, 54, 40, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 51, 54, 40, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 51, 54, (7, "NW"), "all"),
        ("Fcst", "Sky", "SCALAR", 51, 54, 35, "all"),
        ("Fcst", "Wx", "WEATHER", 51, 54, "Chc:RW:--:<NoVis>:^Lkly:RW:--:1SM:", "all"),
@@ -256,11 +180,7 @@ general_createGrids = [
        ("Fcst", "MaxT", "SCALAR", "MaxTBegin + 48", "MaxTEnd + 48", 70, "all"),
        ("Fcst", "MinT", "SCALAR", "MinTBegin + 48", "MinTEnd + 48", 50, "all"),
        ("Fcst", "T", "SCALAR", 54, 57, 50, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 54, 57, 45, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 54, 57, 45, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 54, 57, (10, "W"), "all"),
        ("Fcst", "Sky", "SCALAR", 54, 57, 30, "all"),
        ("Fcst", "Wx", "WEATHER", 54, 57, "Def:RW:--:<NoVis>:^Frq:RW:-:<NoVis>:", "all"),
@@ -269,11 +189,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 54, 57, 1, ["AboveElev"]),
        ("Fcst", "SnowAmt", "SCALAR", 54, 57, 0, "all"),
        ("Fcst", "T", "SCALAR", 57, 60, 55, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 57, 60, 47, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 57, 60, 47, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 57, 60, (12, "E"), "all"),
        ("Fcst", "Sky", "SCALAR", 57, 60, 40, "all"),
        ("Fcst", "Wx", "WEATHER", 57, 60, "Brf:RW:-:4SM:^Pds:RW:--:<NoVis>:", "all"),
@@ -281,11 +197,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 57, 60, .5, "all"),
        ("Fcst", "SnowAmt", "SCALAR", 57, 60, 0, "all"),
        ("Fcst", "T", "SCALAR", 60, 63, 65, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 60, 63, 43, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 60, 63, 43, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 60, 63, (15, "S"), "all"),
        ("Fcst", "Sky", "SCALAR", 60, 63, 10, "all"),
        ("Fcst", "Wx", "WEATHER", 60, 63, "Inter:RW:--:<NoVis>:^Wide:L:-:<NoVis>:", "all"),
@@ -293,11 +205,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 60, 63, .01, "all"),
        ("Fcst", "SnowAmt", "SCALAR", 60, 63, 0, "all"),
        ("Fcst", "T", "SCALAR", 63, 66, 70, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 63, 66, 40, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 63, 66, 40, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 63, 66, (15, "N"), "all"),
        ("Fcst", "Sky", "SCALAR", 63, 66, 5, "all"),
        ("Fcst", "Wx", "WEATHER", 63, 66, "Ocnl:L:--:<NoVis>:^SChc:L:-:<NoVis>:", "all"),
@@ -305,11 +213,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 63, 66, .01, "all"),
        ("Fcst", "SnowAmt", "SCALAR", 63, 66, 0, "all"),
        ("Fcst", "T", "SCALAR", 66, 69, 68, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 66, 69, 55, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 66, 69, 55, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 66, 69, (20, "W"), "all"),
        ("Fcst", "Sky", "SCALAR", 66, 69, 75, "all"),
        ("Fcst", "Wx", "WEATHER", 66, 69, "Chc:L:-:3SM:^Lkly:L:-:<NoVis>:", "all"),
@@ -317,11 +221,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 66, 69, .01, "all"),
        ("Fcst", "SnowAmt", "SCALAR", 66, 69, 0, "all"),
        ("Fcst", "T", "SCALAR", 69, 75, 69, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 69, 75, 56, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 69, 75, 56, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 69, 75, (10, "S"), "all"),
        ("Fcst", "Sky", "SCALAR", 69, 75, 10, "all"),
        ("Fcst", "Wx", "WEATHER", 69, 75, "Def:L:--:<NoVis>:^Areas:L:--:<NoVis>:", "all"),
@@ -331,11 +231,7 @@ general_createGrids = [
        ("Fcst", "MaxT", "SCALAR", "MaxTBegin + 72", "MaxTEnd + 72", 71, "all"),
        ("Fcst", "MinT", "SCALAR", "MinTBegin + 72", "MinTEnd + 72", 65, "all"),
        ("Fcst", "T", "SCALAR", 75, 81, 69, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 75, 81, 60, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 75, 81, 60, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 75, 81, (5, "SW"), "all"),
        ("Fcst", "Sky", "SCALAR", 75, 81, 10, "all"),
        ("Fcst", "Wx", "WEATHER", 75, 81, "Patchy:L:--:<NoVis>:^Frq:L:--:<NoVis>:", "all"),
@@ -343,11 +239,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 75, 81, 0, "all"),
        ("Fcst", "SnowAmt", "SCALAR", 75, 81, 0, "all"),
        ("Fcst", "T", "SCALAR", 81, 87, 70, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 81, 87, 61, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 81, 87, 61, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 81, 87, (20, "SE"), "all"),
        ("Fcst", "Sky", "SCALAR", 81, 87, 10, "all"),
        ("Fcst", "Wx", "WEATHER", 81, 87, "Brf:L:--:<NoVis>:^Pds:L:--:<NoVis>:", "all"),
@@ -355,11 +247,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 81, 87, 0, "all"),
        ("Fcst", "SnowAmt", "SCALAR", 81, 87, 0, "all"),
        ("Fcst", "T", "SCALAR", 87, 93, 71, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 87, 93, 65, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 87, 93, 65, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 87, 93, (15, "E"), "all"),
        ("Fcst", "Sky", "SCALAR", 87, 93, 50, "all"),
        ("Fcst", "Wx", "WEATHER", 87, 93, "Inter:L:-:<NoVis>:^Wide:ZL:-:<NoVis>:", "all"),
@@ -367,11 +255,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 87, 93, .01, "all"),
        ("Fcst", "SnowAmt", "SCALAR", 87, 93, 0, "all"),
        ("Fcst", "T", "SCALAR", 93, 99, 65, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 93, 99, 65, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 93, 99, 65, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 93, 99, (23, "N"), "all"),
        ("Fcst", "Sky", "SCALAR", 93, 99, 50, "all"),
        ("Fcst", "Wx", "WEATHER", 93, 99, "Ocnl:ZL:-:<NoVis>:^SChc:ZL:-:<NoVis>:", "all"),
@@ -381,11 +265,7 @@ general_createGrids = [
        ("Fcst", "MaxT", "SCALAR", "MaxTBegin + 96", "MaxTEnd + 96", 75, "all"),
        ("Fcst", "MinT", "SCALAR", "MinTBegin + 96", "MinTEnd + 96", 68, "all"),
        ("Fcst", "T", "SCALAR", 99, 105, 68, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 99, 105, 65, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 99, 105, 65, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 99, 105, (31, "NE"), "all"),
        ("Fcst", "Sky", "SCALAR", 99, 105, 10, "all"),
        ("Fcst", "Wx", "WEATHER", 99, 105, "Chc:ZL:--:<NoVis>:^Lkly:ZL:--:<NoVis>:", "all"),
@@ -393,11 +273,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 99, 105, 0, "all"),
        ("Fcst", "SnowAmt", "SCALAR", 99, 105, 0, "all"),
        ("Fcst", "T", "SCALAR", 105, 111, 70, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 105, 111, 65, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 105, 111, 65, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 105, 111, (40, "S"), "all"),
        ("Fcst", "Sky", "SCALAR", 105, 111, 10, "all"),
        ("Fcst", "Wx", "WEATHER", 105, 111, "Def:ZL:--:<NoVis>:^Areas:ZL:--:<NoVis>:", "all"),
@@ -405,11 +281,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 105, 111, 0, "all"),
        ("Fcst", "SnowAmt", "SCALAR", 105, 111, 0, "all"),
        ("Fcst", "T", "SCALAR", 111, 117, 73, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 111, 117, 65, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 111, 117, 65, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 111, 117, (5, "S"), "all"),
        ("Fcst", "Sky", "SCALAR", 111, 117, 10, "all"),
        ("Fcst", "Wx", "WEATHER", 111, 117, "Patchy:ZL:--:<NoVis>:^Frq:ZL:--:<NoVis>:", "all"),
@@ -417,11 +289,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 111, 117, 0, "all"),
        ("Fcst", "SnowAmt", "SCALAR", 111, 117, 0, "all"),
        ("Fcst", "T", "SCALAR", 117, 123, 75, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 117, 123, 60, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 117, 123, 60, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 117, 123, (45, "W"), "all"),
        ("Fcst", "Sky", "SCALAR", 117, 123, 10, "all"),
        ("Fcst", "Wx", "WEATHER", 117, 123, "Brf:ZL:--:<NoVis>:^Pds:ZL:--:<NoVis>:", "all"),
@@ -431,11 +299,7 @@ general_createGrids = [
        ("Fcst", "MaxT", "SCALAR", "MaxTBegin + 120", "MaxTEnd + 120", 83, "all"),
        ("Fcst", "MinT", "SCALAR", "MinTBegin + 120", "MinTEnd + 120", 78, "all"),
        ("Fcst", "T", "SCALAR", 123, 129, 78, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 123, 129, 55, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 123, 129, 55, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 123, 129, (17, "SW"), "all"),
        ("Fcst", "Sky", "SCALAR", 123, 129, 10, "all"),
        ("Fcst", "Wx", "WEATHER", 123, 129, "Inter:ZL:--:<NoVis>:^Wide:ZR:--:<NoVis>:", "all"),
@@ -443,11 +307,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 123, 129, 0, "all"),
        ("Fcst", "SnowAmt", "SCALAR", 123, 129, 0, "all"),
        ("Fcst", "T", "SCALAR", 129, 135, 80, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 129, 135, 50, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 129, 135, 50, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 129, 135, (12, "SE"), "all"),
        ("Fcst", "Sky", "SCALAR", 129, 135, 20, "all"),
        ("Fcst", "Wx", "WEATHER", 129, 135, "Ocnl:ZR:--:<NoVis>:^SChc:ZR:--:<NoVis>:", "all"),
@@ -455,11 +315,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 129, 135, 0, "all"),
        ("Fcst", "SnowAmt", "SCALAR", 129, 135, 0, "all"),
        ("Fcst", "T", "SCALAR", 135, 141, 81, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 135, 141, 45, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 135, 141, 45, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 135, 141, (15, "S"), "all"),
        ("Fcst", "Sky", "SCALAR", 135, 141, 10, "all"),
        ("Fcst", "Wx", "WEATHER", 135, 141, "Chc:ZR:--:<NoVis>:^Lkly:ZR:--:<NoVis>:", "all"),
@@ -467,11 +323,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 135, 141, 0, "all"),
        ("Fcst", "SnowAmt", "SCALAR", 135, 141, 0, "all"),
        ("Fcst", "T", "SCALAR", 141, 147, 83, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 141, 147, 43, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 141, 147, 43, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 141, 147, (25, "NW"), "all"),
        ("Fcst", "Sky", "SCALAR", 141, 147, 20, "all"),
        ("Fcst", "Wx", "WEATHER", 141, 147, "Def:ZR:--:<NoVis>:^Frq:ZR:--:<NoVis>:", "all"),
@@ -481,11 +333,7 @@ general_createGrids = [
        ("Fcst", "MaxT", "SCALAR", "MaxTBegin + 144", "MaxTEnd + 144", 90, "all"),
        ("Fcst", "MinT", "SCALAR", "MinTBegin + 144", "MinTEnd + 144", 83, "all"),
        ("Fcst", "T", "SCALAR", 147, 153, 83, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 147, 153, 40, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 147, 153, 40, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 147, 153, (22, "N"), "all"),
        ("Fcst", "Sky", "SCALAR", 147, 153, 20, "all"),
        ("Fcst", "Wx", "WEATHER", 147, 153, "Brf:ZR:--:<NoVis>:^Pds:ZR:--:<NoVis>:", "all"),
@@ -493,11 +341,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 147, 153, 0, "all"),
        ("Fcst", "SnowAmt", "SCALAR", 147, 153, 0, "all"),
        ("Fcst", "T", "SCALAR", 153, 159, 85, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 153, 159, 40, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 153, 159, 40, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 153, 159, (31, "N"), "all"),
        ("Fcst", "Sky", "SCALAR", 153, 159, 10, "all"),
        ("Fcst", "Wx", "WEATHER", 153, 159, "Inter:ZR:--:<NoVis>:^Wide:S:--:<NoVis>:", "all"),
@@ -505,11 +349,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 153, 159, 0, "all"),
        ("Fcst", "SnowAmt", "SCALAR", 153, 159, 0, "all"),
        ("Fcst", "T", "SCALAR", 159, 165, 86, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 159, 165, 39, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 159, 165, 39, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 159, 165, (45, "S"), "all"),
        ("Fcst", "Sky", "SCALAR", 159, 165, 10, "all"),
        ("Fcst", "Wx", "WEATHER", 159, 165, "Ocnl:S:--:<NoVis>:^SChc:S:--:<NoVis>:", "all"),
@@ -517,11 +357,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 159, 165, 0, "all"),
        ("Fcst", "SnowAmt", "SCALAR", 159, 165, 0, "all"),
        ("Fcst", "T", "SCALAR", 165, 171, 90, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 165, 171, 30, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 165, 171, 30, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 165, 171, (10, "SW"), "all"),
        ("Fcst", "Sky", "SCALAR", 165, 171, 10, "all"),
        ("Fcst", "Wx", "WEATHER", 165, 171, "Chc:S:--:<NoVis>:^Lkly:S:--:<NoVis>:", "all"),
@@ -531,11 +367,7 @@ general_createGrids = [
        ("Fcst", "MaxT", "SCALAR", "MaxTBegin + 168", "MaxTEnd + 168", 93, "all"),
        ("Fcst", "MinT", "SCALAR", "MinTBegin + 168", "MinTEnd + 168", 90, "all"),
        ("Fcst", "T", "SCALAR", 171, 177, 93, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 171, 177, 30, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 171, 177, 30, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 171, 177, (10, "SW"), "all"),
        ("Fcst", "Sky", "SCALAR", 171, 177, 10, "all"),
        ("Fcst", "Wx", "WEATHER", 171, 177, "Def:S:--:<NoVis>:^Frq:S:--:<NoVis>:", "all"),
@@ -543,11 +375,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 171, 177, 0, "all"),
        ("Fcst", "SnowAmt", "SCALAR", 171, 177, 0, "all"),
        ("Fcst", "T", "SCALAR", 177, 183, 91, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 177, 183, 40, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 177, 183, 40, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 177, 183, (15, "SW"), "all"),
        ("Fcst", "Sky", "SCALAR", 177, 183, 10, "all"),
        ("Fcst", "Wx", "WEATHER", 177, 183, "Brf:S:--:<NoVis>:^Pds:S:--:<NoVis>:", "all"),
@@ -555,11 +383,7 @@ general_createGrids = [
        ("Fcst", "QPF", "SCALAR", 177, 183, 0, "all"),
        ("Fcst", "SnowAmt", "SCALAR", 177, 183, 0, "all"),
        ("Fcst", "T", "SCALAR", 183, 189, 90, "all"),
-<<<<<<< HEAD
-       ("Fcst", "Td", "SCALAR", 183, 189, 35, "all"),  
-=======
        ("Fcst", "Td", "SCALAR", 183, 189, 35, "all"),
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ("Fcst", "Wind", "VECTOR", 183, 189, (20, "W"), "all"),
        ("Fcst", "Sky", "SCALAR", 183, 189, 10, "all"),
        ("Fcst", "Wx", "WEATHER", 183, 189, "Inter:S:--:<NoVis>:^Iso:SW:--:<NoVis>:", "all"),
@@ -570,32 +394,6 @@ general_createGrids = [
        ("Fcst", "WindGust", "SCALAR", 0, 189, 0, "all"),
        ]
 
-<<<<<<< HEAD
-        
-general_deleteGrids = [
-        ("Fcst", "PoP", "SFC", -100,280),
-        ("Fcst", "MaxT", "SFC", -100,280),
-        ("Fcst", "MinT", "SFC", -100,280),
-        ("Fcst", "T", "SFC", -100,280),
-        ("Fcst", "Td", "SFC", -100,280),
-        ("Fcst", "WindChill", "SFC", -100,280),
-        ("Fcst", "HeatIndex", "SFC", -100,280),
-        ("Fcst", "StormTotalSnow", "SFC", -100,280),
-        ("Fcst", "SnowLevel", "SFC", -100,280),
-        ("Fcst", "FzLevel", "SFC", -100,280),
-        ("Fcst", "RH", "SFC", -100,280),
-        ("Fcst", "Wind", "SFC", -100,280),
-        ("Fcst", "Sky", "SFC", -100,280),
-        ("Fcst", "WindGust", "SFC", -100,280),
-        ("Fcst", "Wx", "SFC", -100,280),
-        ("Fcst", "QPF", "SFC", -100,280),
-        ("Fcst", "SnowAmt", "SFC", -100,280),
-        ("Fcst", "Hazards", "SFC", -100,280),
-        ]
-
-
-
-=======
 general_deleteGrids = [
         ("Fcst", "PoP", "SFC", -100, 280),
         ("Fcst", "MaxT", "SFC", -100, 280),
@@ -617,7 +415,6 @@ general_deleteGrids = [
         ("Fcst", "Hazards", "SFC", -100, 280),
         ]
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 # Backward compatible test  -- add this in for iTool test
 backward_compatible = """
 
@@ -631,10 +428,6 @@ Definition["pil"] = "WBCSAFNW1"
 dir1 = """#Definition["directiveType"] = \"_five12hr_24hrExtended_issuance_list\""""
 dir2 = """Definition["directiveType"] = \"_five12hr_24hrExtended_issuance_list\""""
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 options = """
 
 # Flag to repeat first period at the end. 1 or 0
@@ -715,11 +508,6 @@ hazards = """
             ('ZF.Y', allActions, 'FreezeFog'),    # Freezing Fog Advisory
             ('FF.A', allActions, 'Flood'),        # Flash Flood Watch
             ('FA.A', allActions, 'Flood'),        # Flood Watch
-<<<<<<< HEAD
-            ('FA.W', allActions, 'Flood'),        # Flood Warning
-            ('FA.Y', allActions, 'Flood'),        # Flood Advisory    
-=======
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             ('CF.Y', allActions, 'CoastalFlood'), # Coastal Flood Advisory
             ('LS.Y', allActions, 'CoastalFlood'), # Lakeshore Flood Advisory
             ('CF.A', allActions, 'CoastalFlood'), # Coastal Flood Watch
@@ -744,23 +532,6 @@ sun_thru_thurs = [
 
        "Monday and Monday Night, breezy.",
        "Partly cloudy.",
-<<<<<<< HEAD
-       "Periods of drizzle during the day.","Occasional light freezing drizzle.",
-       "Intermittent drizzle overnight.",
-       "Highs in the lower 70s.", "Lows around 50.",
-
-       "Tuesday and Tuesday Night, windy.", 
-       "Mostly clear.", "Very light freezing drizzle.", 
-       "Highs in the mid 70s.", "Lows in the mid 60s.",
-
-       "Wednesday and Wednesday Night, windy.", 
-       "Mostly clear.","Intermittent very light freezing drizzle.",
-       "Highs in the lower 80s.","Lows in the upper 60s.",
-
-       "Thursday and Thursday Night, windy.", 
-       "Mostly clear.",
-       "Highs around 90.","Lows in the upper 70s.",
-=======
        "Periods of drizzle during the day.", "Occasional light freezing drizzle.",
        "Intermittent drizzle overnight.",
        "Highs in the lower 70s.", "Lows around 50.",
@@ -776,16 +547,11 @@ sun_thru_thurs = [
        "Thursday and Thursday Night, windy.",
        "Mostly clear.",
        "Highs around 90.", "Lows in the upper 70s.",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        ]
 
 scripts = [
     {
-<<<<<<< HEAD
-    "name":"SAF_1", 
-=======
     "name":"SAF_1",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "productType":"SAF",
     "commentary": "Morning Issuance -- no options",
     "cmdLineVars": "{('Product Issuance', 'productIssuance'): 'Morning', ('Issued By', 'issuedBy'): None, ('Number of Periods', 'numPeriods'): 'All', ('Issuance Type', 'issuanceType'): 'ROUTINE'}",
@@ -796,75 +562,23 @@ scripts = [
        "Today,",
        "sunny.",
        "Occasional thunderstorms early in the afternoon. ",
-<<<<<<< HEAD
-       "Chance of thunderstorms late in the afternoon.","Highs around 70.",
-       "Southwest winds around 10 mph shifting to the southeast in the afternoon.",
-       "Chance of thunderstorms 20 percent.",
-       
-=======
        "Chance of thunderstorms late in the afternoon.", "Highs around 70.",
        "Southwest winds around 10 mph shifting to the southeast in the afternoon.",
        "Chance of thunderstorms 20 percent.",
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        "Tonight,",
        "windy.", "Mostly clear.",
        "Thunderstorms until midnight, then occasional rain and intermittent thunderstorms after midnight.",
        "Lows in the lower 40s.",
-<<<<<<< HEAD
-       "Northeast winds 30 to 35 mph becoming west around 15 mph after midnight.","Chance of precipitation 50 percent.",
-       
-       "Saturday,",
-       "cooler.","Rain in the morning, then periods of rain in the afternoon.",
-=======
        "Northeast winds 30 to 35 mph becoming west around 15 mph after midnight.", "Chance of precipitation 50 percent.",
 
        "Saturday,",
        "cooler.", "Rain in the morning, then periods of rain in the afternoon.",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        "Rain may be heavy at times in the afternoon.",
        #"Visibility one quarter mile or less at times in the morning.",
        "Highs around 50.",
        "Southwest winds around 10 mph shifting to the southeast in the afternoon.",
        "Chance of rain near 100 percent.",
-<<<<<<< HEAD
-       
-       "Saturday Night,",
-       "colder.",
-       "Widespread rain showers until midnight, then partly cloudy with sprinkles likely after midnight.","Locally heavy rainfall possible until midnight.",
-       "Lows in the lower 30s.",
-       "East winds up to 5 mph shifting to the northwest after midnight.",
-       
-       "Sunday,",
-       "warmer, sunny.",
-       "Rain showers in the morning, then occasional drizzle and intermittent sprinkles in the afternoon.",
-       "Highs around 70.","East winds 10 to 15 mph.",
-       "Chance of showers 60 percent.",
-       
-       "Sunday Night,",
-       "warmer", "Mostly clear", "Drizzle", "Near steady temperature in the upper 60s.",
-       # DR_18363 "Lows around 50.",
-       
-       "Monday,",
-       "breezy, sunny.","Periods of drizzle through the day.",
-       "Widespread light freezing drizzle in the afternoon.",
-       "Near steady temperature around 70.", # DR_18363  "Highs in the lower 70s.",
-       
-       "Monday Night,",
-       "breezy, warmer.",
-       "Partly cloudy.","Intermittent drizzle until midnight.",
-       "Occasional light freezing drizzle through the night.",
-       "Lows in the mid 60s.",
-       
-       "Tuesday,",
-       "windy, sunny.","Very light freezing drizzle.","Highs in the mid 70s.",
-       
-       "Tuesday Night,",
-       "mostly clear.","Periods of very light freezing drizzle.","Lows in the upper 60s.",
-       
-       "Wednesday,",
-       "sunny.","Intermittent very light freezing drizzle in the morning.",
-=======
 
        "Saturday Night,",
        "colder.",
@@ -901,26 +615,11 @@ scripts = [
 
        "Wednesday,",
        "sunny.", "Intermittent very light freezing drizzle in the morning.",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        "Near steady temperature around 80.", # DR_18363 "Highs in the lower 80s."
 
        "Wednesday Night,",
        "windy.", "Mostly clear.", "Near steady temperature in the lower 80s.",
        # DR_18363 "Lows in the upper 70s.",
-<<<<<<< HEAD
-       
-       "Thursday,",
-       "windy, sunny.", "Near steady temperature in the mid 80s.",
-       # DR_18363 "Highs around 90.",
-       
-       "Now for the official National Weather Service forecast for Eastern Virginia",
-       "Today,", "sunny.","Occasional thunderstorms early in the afternoon.",
-       
-       "B",
-       "aT_ENGWBCSAFNW410010109001001010900 CD NCC940c1001012300",
-       "Now for the official National Weather Service forecast for Northern North Carolina",
-       "Today,", "sunny.","Occasional thunderstorms early in the afternoon.",
-=======
 
        "Thursday,",
        "windy, sunny.", "Near steady temperature in the mid 80s.",
@@ -933,17 +632,12 @@ scripts = [
        "aT_ENGWBCSAFNW410010109001001010900 CD NCC940c1001012300",
        "Now for the official National Weather Service forecast for Northern North Carolina",
        "Today,", "sunny.", "Occasional thunderstorms early in the afternoon.",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        "B",
        ],
     },
 
     {
-<<<<<<< HEAD
-    "name":"SAF_2", 
-=======
     "name":"SAF_2",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": "Backward Compatibility -- using 'lac' entry",
     "productType":"SAF",
     "cmdLineVars": "{('Product Issuance', 'productIssuance'): 'Morning', ('Issued By', 'issuedBy'): None, ('Number of Periods', 'numPeriods'): 'All', ('Issuance Type', 'issuanceType'): 'ROUTINE'}",
@@ -954,15 +648,9 @@ scripts = [
     "checkStrings": [
         "aT_ENGWBCSAFNW110010109001001010900 CD VAC910c1001012300",
         "Now for the official National Weather Service forecast for Southwest Mountains including YourTown",
-<<<<<<< HEAD
-        "Today,", "sunny.","Occasional thunderstorms early in the afternoon.",
-        "Now for the official National Weather Service forecast for Eastern Virginia",
-        "Today,", "sunny.","Occasional thunderstorms early in the afternoon.",
-=======
         "Today,", "sunny.", "Occasional thunderstorms early in the afternoon.",
         "Now for the official National Weather Service forecast for Eastern Virginia",
         "Today,", "sunny.", "Occasional thunderstorms early in the afternoon.",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         "Now for the official National Weather Service forecast for Northern North Carolina",
         ],
      "notCheckStrings":[
@@ -971,15 +659,9 @@ scripts = [
        "Now for the Extended Forecast for the Roanoke area.",
        ],
     },
-<<<<<<< HEAD
-    
-    {
-    "name":"SAF_3", 
-=======
 
     {
     "name":"SAF_3",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": "Options: repeat1stPeriod and summary Extended",
     "productType":"SAF",
     "cmdLineVars": "{('Product Issuance', 'productIssuance'): 'Morning', ('Issued By', 'issuedBy'): None, ('Number of Periods', 'numPeriods'): 'All', ('Issuance Type', 'issuanceType'): 'ROUTINE'}",
@@ -991,27 +673,6 @@ scripts = [
        "aT_ENGWBCSAFNW110010109001001010900 CD VAC910c1001012300",
        "Now for the official National Weather Service forecast for Southwest Mountains including YourTown",
        "Today,",
-<<<<<<< HEAD
-       "sunny.","Occasional thunderstorms early in the afternoon.",
-       "Again, the forecast for Southwest Mountains including YourTown for today,",
-       "sunny.","Occasional thunderstorms early in the afternoon.",
-       "Chance of thunderstorms late in the afternoon.","Highs around 70.",
-       "Southwest winds around 10 mph shifting to the southeast in the afternoon.",
-       "Chance of thunderstorms 20 percent.",
-       
-       "Now for the official National Weather Service forecast for Eastern Virginia",
-       "Today,",
-       "sunny.","Occasional thunderstorms early in the afternoon.",
-       "Again, the forecast for Eastern Virginia for today,",
-       "sunny.","Occasional thunderstorms early in the afternoon.",
-       "Chance of thunderstorms late in the afternoon.","Highs around 70.",
-       "Southwest winds around 10 mph shifting to the southeast in the afternoon.",
-       "Chance of thunderstorms 20 percent.",
-       
-       "Now for the Extended Forecast for the Roanoke area.",
-       ] + sun_thru_thurs +
-       
-=======
        "sunny.", "Occasional thunderstorms early in the afternoon.",
        "Again, the forecast for Southwest Mountains including YourTown for today,",
        "sunny.", "Occasional thunderstorms early in the afternoon.",
@@ -1031,27 +692,11 @@ scripts = [
        "Now for the Extended Forecast for the Roanoke area.",
        ] + sun_thru_thurs +
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
        [
        "b",
        "aT_ENGWBCSAFNW410010109001001010900 CD NCC940c1001012300",
        "Now for the official National Weather Service forecast for Northern North Carolina",
        "Today,",
-<<<<<<< HEAD
-       "sunny.","Occasional thunderstorms early in the afternoon.",
-       "Again, the forecast for Northern North Carolina for today,",
-       "sunny.","Occasional thunderstorms early in the afternoon.",
-       "Chance of thunderstorms late in the afternoon.","Highs around 70.",
-       "Southwest winds around 10 mph shifting to the southeast in the afternoon.",
-       "Chance of thunderstorms 20 percent.",
-       
-       "Now for the Extended Forecast for the northern foothills and mountains of North Carolina.",
-       ] + sun_thru_thurs,
-    },
-     
-    {    
-    "name":"SAF_4", 
-=======
        "sunny.", "Occasional thunderstorms early in the afternoon.",
        "Again, the forecast for Northern North Carolina for today,",
        "sunny.", "Occasional thunderstorms early in the afternoon.",
@@ -1065,7 +710,6 @@ scripts = [
 
     {
     "name":"SAF_4",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": "Including Hazards",
     "productType":"SAF",
     "cmdLineVars": "{('Product Issuance', 'productIssuance'): 'Morning', ('Issued By', 'issuedBy'): None, ('Number of Periods', 'numPeriods'): 'All', ('Issuance Type', 'issuanceType'): 'ROUTINE'}",
@@ -1078,15 +722,9 @@ scripts = [
         "WINTER STORM WATCH IN EFFECT THROUGH SATURDAY AFTERNOON"
         ],
     },
-<<<<<<< HEAD
-    
-    {    
-    "name":"SAF_5", 
-=======
 
     {
     "name":"SAF_5",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "commentary": "Testing directiveType _five12hr_24hrExtended_issuance_list",
     "productType":"SAF",
     "cmdLineVars": "{('Product Issuance', 'productIssuance'): 'TODAY - beginning at 6AM', ('Issued By', 'issuedBy'): None, ('Number of Periods', 'numPeriods'): 'All', ('Issuance Type', 'issuanceType'): 'ROUTINE'}",
@@ -1098,35 +736,21 @@ scripts = [
     "checkStrings": [
         "Now for the official National Weather Service forecast for Northern North Carolina",
         "Today,",
-<<<<<<< HEAD
-        "sunny.","Occasional thunderstorms early in the afternoon.",
-        "Chance of thunderstorms late in the afternoon.","Highs around 70.",
-=======
         "sunny.", "Occasional thunderstorms early in the afternoon.",
         "Chance of thunderstorms late in the afternoon.", "Highs around 70.",
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         "Southwest winds around 10 mph shifting to the southeast in the afternoon.",
         "Chance of thunderstorms 20 percent",
         ],
     },
-<<<<<<< HEAD
-    
-    {    
-=======
 
     {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
     "name":"SAF_Cleanup",
     "commentary": "Clean out grids",
     "productType": None,
     "deleteGrids": TestScript.general_deleteGrids,
     },
-<<<<<<< HEAD
-    ]    
-=======
     ]
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
 def testScript(self, dataMgr, level="Site"):
     gridsStartTime = self.getAbsFromLocal(2010, 1, 1, 0, 0)

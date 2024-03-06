@@ -878,23 +878,13 @@
     <contribute xsi:type="titleItem"
         titleText="------ Derived Cross Section ------" id="${icao}CrossSection" />
     <contribute xsi:type="bundleItem" file="bundles/DefaultRadarXY.xml"
-<<<<<<< HEAD
-        menuText="3-Bit Refl (XSR)" id="${icao}3BitReflXSR"
-        editorType="com.raytheon.viz.radar.ui.xy.RadarXYEditor">
-=======
         menuText="3-Bit Refl (XSR)" id="${icao}3BitReflXSR">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="icao" value="${icao}" />
         <substitute key="product" value="85" />
         <substitute key="insetMap" value="true" />
     </contribute>
     <contribute xsi:type="bundleItem" file="bundles/DefaultRadarXY.xml"
-<<<<<<< HEAD
-        menuText="3-Bit Vel (XSV)" id="${icao}3BitVelXSV"
-        editorType="com.raytheon.viz.radar.ui.xy.RadarXYEditor">
-=======
         menuText="3-Bit Vel (XSV)" id="${icao}3BitVelXSV">
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         <substitute key="icao" value="${icao}" />
         <substitute key="product" value="86" />
         <substitute key="insetMap" value="true" />
@@ -1006,9 +996,6 @@
             <substitute key="elevation" value="0.0--360.0" />
         </contribute>
     </contribute>
-<<<<<<< HEAD
-</menuTemplate>
-=======
     <contribute xsi:type="titleItem" titleText="------ 4-bit Z/SRM combo ------"
         id="${icao}4BitZSRMCombo" />
     <contribute xsi:type="bundleItem" file="bundles/DefaultRadarBlended.xml"
@@ -1693,4 +1680,3 @@
         </contribute>
     </contribute>
 </menuTemplate>
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11

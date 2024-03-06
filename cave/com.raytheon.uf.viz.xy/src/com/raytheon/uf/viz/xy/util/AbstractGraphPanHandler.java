@@ -21,30 +21,14 @@ package com.raytheon.uf.viz.xy.util;
 
 import java.util.Set;
 
-<<<<<<< HEAD
-=======
 import org.locationtech.jts.geom.Coordinate;
 
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 import com.raytheon.uf.viz.core.IDisplayPaneContainer;
 import com.raytheon.uf.viz.core.drawables.IRenderableDisplay;
 import com.raytheon.uf.viz.xy.AbstractGraphInputHandler;
 import com.raytheon.uf.viz.xy.graph.IGraph;
 import com.raytheon.uf.viz.xy.graph.XyGraphDescriptor;
 import com.raytheon.viz.ui.input.PanHandler;
-<<<<<<< HEAD
-import org.locationtech.jts.geom.Coordinate;
-
-/**
- * 
- * Handles mouse events in order to pan graphs.
- * 
- * Note: the initial creation was abstracted out from TimeSeriesPanHandler and
- * VarHeightPanHandler.
- * 
- * <pre>
- * 
-=======
 
 /**
  *
@@ -55,20 +39,10 @@ import org.locationtech.jts.geom.Coordinate;
  *
  * <pre>
  *
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
  * SOFTWARE HISTORY
  * Date         Ticket#     Engineer    Description
  * ------------ ----------  ----------- --------------------------
  * Jul 16, 2015 4220        mapeters    Initial creation.
-<<<<<<< HEAD
- * 
- * </pre>
- * 
- * @author mapeters
- * @version 1.0
- */
-public abstract class AbstractGraphPanHandler extends AbstractGraphInputHandler {
-=======
  * Sep 13, 2022 8792        mapeters    Updated to avoid handling events in X/Y
  *                                      panes of different type in new combo editor
  *
@@ -78,7 +52,6 @@ public abstract class AbstractGraphPanHandler extends AbstractGraphInputHandler 
  */
 public abstract class AbstractGraphPanHandler
         extends AbstractGraphInputHandler {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
 
     protected int[] downPosition;
 
@@ -93,55 +66,15 @@ public abstract class AbstractGraphPanHandler
         defaultHandler = new PanHandler(display.getContainer());
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.raytheon.viz.ui.input.IInputHandler#handleMouseDown(int, int,
-     * int)
-     */
-    @Override
-    public boolean handleMouseDown(int x, int y, int button) {
-        IDisplayPaneContainer editor = display.getContainer();
-        if (button != 1) {
-=======
     @Override
     public boolean handleMouseDown(int x, int y, int button) {
         IDisplayPaneContainer editor = display.getContainer();
         if (button != 1 || !isTargetDescriptorTypeActive()) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             active = false;
             return false;
         } else {
             active = true;
         }
-<<<<<<< HEAD
-        if (editor.getActiveDisplayPane().getDescriptor() instanceof XyGraphDescriptor == false) {
-            defaultHandler.setContainer(editor);
-            panHandling = true;
-            return defaultHandler.handleMouseDown(x, y, button);
-        } else {
-            Coordinate grid = editor.translateClick(x, y);
-            if (grid == null) {
-                return false;
-            }
-            XyGraphDescriptor desc = (XyGraphDescriptor) editor
-                    .getActiveDisplayPane().getDescriptor();
-            IGraph graphToUse = desc.getGraphResource().getClosestGraph(grid);
-
-            if (grid != null
-                    && graphToUse != null
-                    && graphToUse.getExtent() != null
-                    && graphToUse.getExtent().contains(
-                            new double[] { grid.x, grid.y, grid.z })) {
-                setGraph(graphToUse);
-                downPosition = new int[] { x, y };
-            } else {
-                defaultHandler.setContainer(editor);
-                panHandling = true;
-                return defaultHandler.handleMouseDown(x, y, button);
-            }
-=======
 
         Coordinate grid = editor.translateClick(x, y);
         if (grid == null) {
@@ -160,29 +93,15 @@ public abstract class AbstractGraphPanHandler
             defaultHandler.setContainer(editor);
             panHandling = true;
             return defaultHandler.handleMouseDown(x, y, button);
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
         }
 
         return false;
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.raytheon.viz.ui.input.IInputHandler#handleMouseDownMove(int,
-     * int, int)
-     */
-    @Override
-    public boolean handleMouseDownMove(int aX, int aY, int button) {
-        IDisplayPaneContainer editor = display.getContainer();
-        if (!active) {
-=======
     @Override
     public boolean handleMouseDownMove(int aX, int aY, int button) {
         IDisplayPaneContainer editor = display.getContainer();
         if (!active || !isTargetDescriptorTypeActive()) {
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             return false;
         }
 
@@ -212,20 +131,6 @@ public abstract class AbstractGraphPanHandler
         return true;
     }
 
-<<<<<<< HEAD
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.raytheon.viz.ui.input.IInputHandler#handleMouseUp(int, int, int)
-     */
-    @Override
-    public boolean handleMouseUp(int x, int y, int button) {
-        IDisplayPaneContainer editor = display.getContainer();
-        if (button != 1) {
-            return false;
-        }
-        if (!panHandling && downPosition != null) {
-=======
     @Override
     public boolean handleMouseUp(int x, int y, int button) {
         if (button != 1 || !isTargetDescriptorTypeActive()) {
@@ -233,7 +138,6 @@ public abstract class AbstractGraphPanHandler
         }
         if (!panHandling && downPosition != null) {
             IDisplayPaneContainer editor = display.getContainer();
->>>>>>> 3a1a5c9814b49f276bea4ebd9e584974d6ea7a11
             Coordinate lastLoc = editor.translateClick(downPosition[0],
                     downPosition[1]);
             Coordinate curLoc = editor.translateClick(x, y);
