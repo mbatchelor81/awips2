@@ -141,7 +141,7 @@ public class D2DNsharpMapMouseHandler extends InputAdapter {
                             // String soundingType;
                             if (activeLoadType == D2DNsharpLoadDialog.OBSER_SND) {
                                 NsharpObservedSoundingQuery obsQry = new NsharpObservedSoundingQuery(
-                                        "Querying Sounding Data...");
+                                        "Querying Sounding Data...", 60000);
                                 obsQry.getObservedSndData(stnPtDataLineLst,
                                         loadDia.getObsDialog().isRawData(),
                                         soundingLysLstMap);

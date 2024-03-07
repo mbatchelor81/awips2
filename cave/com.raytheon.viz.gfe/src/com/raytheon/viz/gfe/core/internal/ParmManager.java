@@ -2332,6 +2332,9 @@ public class ParmManager implements IParmManager, IMessageClient, ISimulatedTime
 
     @Override
     public void removeSystemTimeRangeChangedListener(ISystemTimeRangeChangedListener listener) {
+        this.systemTimeRangeChangedListeners.remove(listener);
+    }
+    
     @Override
     public void addAvailableSourcesChangedListener(IAvailableSourcesChangedListener listener) {
         this.availableSourcesListeners.add(listener);

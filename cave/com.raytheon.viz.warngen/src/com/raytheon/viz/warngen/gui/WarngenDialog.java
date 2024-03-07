@@ -1304,12 +1304,12 @@ public class WarngenDialog extends CaveSWTDialog
                         int duration = getSelectedDuration();
                         resultContainer[0] = TemplateRunner.runTemplate(
                                 warngenLayer, duration, extEndTime,
-                                selectedBullets, followupData, backupData);
+                                selectedBullets, followupData, null);
                     } else {
                         resultContainer[0] = TemplateRunner.runTemplate(
                                 warngenLayer, startTime.getTime(),
                                 endTime.getTime(), selectedBullets,
-                                followupData, backupData);
+                                followupData, null);
                     }
                     Matcher m = FollowUpUtil.vtecPtrn
                             .matcher(resultContainer[0]);

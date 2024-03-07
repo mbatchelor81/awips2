@@ -89,8 +89,7 @@ import com.raytheon.viz.pointdata.rsc.progdisc.GenericProgressiveDisclosure.Plot
 import com.raytheon.viz.pointdata.util.MetarTempDataContainer;
 import com.raytheon.viz.pointdata.util.MetarTempDataContainer.TempData;
 
-import tec.uom.se.AbstractUnit;
-
+import tech.units.indriya.AbstractUnit;
 import org.locationtech.jts.geom.Coordinate;
 
 /**
