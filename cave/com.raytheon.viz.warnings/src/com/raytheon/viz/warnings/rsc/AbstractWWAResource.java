@@ -62,6 +62,7 @@ import com.raytheon.uf.viz.core.rsc.capabilities.MagnificationCapability;
 import com.raytheon.uf.viz.core.rsc.capabilities.OutlineCapability;
 import com.raytheon.uf.viz.datacube.DataCubeContainer;
 import com.raytheon.viz.core.mode.CAVEMode;
+import com.raytheon.viz.warnings.ui.DrawingPropertiesDialog;
 
 /**
  *

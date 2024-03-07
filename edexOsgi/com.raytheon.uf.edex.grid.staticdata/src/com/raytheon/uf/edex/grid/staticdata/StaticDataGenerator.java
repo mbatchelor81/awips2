@@ -366,19 +366,16 @@ public class StaticDataGenerator {
 
                 String dataPath = HDF5Util.findHDF5Location(gr).getPath();
 
-                IDataIdentifier dataId = new Hdf5DataIdentifier(gr.getTraceId(),
-                        dataPath, group, datasets);
+                IDataIdentifier dataId = new Hdf5DataIdentifier(dataPath, group, datasets);
                 IMetadataIdentifier metaId = new DataUriMetadataIdentifier(gr,
                         MetadataSpecificity.DATASET);
                 databaseOnlyDataIds.add(new MetadataAndDataId(metaId, dataId));
             }
-            Map<String, DataStatus> dataStatuses = databaseOnlyRecords.keySet()
-                    .stream()
-                    .collect(Collectors.toMap(t -> t, t -> DataStatus.SUCCESS));
+            String[] traceIds = databaseOnlyRecords.keySet().toArray(String[]::new);
             DataStorageAuditEvent databaseOnlyAuditEvent = new DataStorageAuditEvent();
             databaseOnlyAuditEvent.setDataIds(
                     databaseOnlyDataIds.toArray(MetadataAndDataId[]::new));
-            databaseOnlyAuditEvent.setDataStatuses(dataStatuses);
+            databaseOnlyAuditEvent.setDataStatuses(Map.of(DataStatus.SUCCESS, traceIds));
             auditer.processEvent(databaseOnlyAuditEvent);
         }
 
