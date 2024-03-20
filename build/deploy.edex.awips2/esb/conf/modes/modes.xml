@@ -62,6 +62,9 @@
                 <exclude>.*dpa.*</exclude>
                 <exclude>ohd-common-database.xml</exclude>
                 <exclude>satpre-spring.xml</exclude>
+                <exclude>derivedgrid.*</exclude>
+                <exclude>ebxml.*</exclude>
+                <exclude>registry-status-request.*</exclude>
         </mode>
 
         <mode name="ingestRadar">
