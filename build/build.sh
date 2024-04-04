@@ -47,6 +47,7 @@ if  [[ ${2} = "buildCAVE" ]]; then
 else
    RSYNC_DIRS=`cat $dir/rsync.dirs`
 fi
+#/usr/bin/rsync -ruql --delete --exclude-from=${dir}/excludes ${RSYNC_DIRS} ${WORKSPACE}
 rsync -ruql --delete --exclude-from=${dir}/excludes ${RSYNC_DIRS} ${WORKSPACE}
 
 popd > /dev/null 2>&1

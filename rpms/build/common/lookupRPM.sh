@@ -24,6 +24,7 @@ function lookupRPM()
    awips2_cave_dir="${rpms_dir}/awips2.cave"
    awips2_edex_dir="${rpms_dir}/awips2.edex"
    awips2_core_dir="${rpms_dir}/awips2.core"
+   awips2_upc_dir="${rpms_dir}/awips2.upc"
    python_site__dir="${rpms_dir}/python.site-packages"
 
    installer_dir="${rpms_dir}/../installers/RPMs"
@@ -407,7 +408,7 @@ function lookupRPM()
       return 0
    fi
    if [ "${1}" = "awips2" ]; then
-      export RPM_SPECIFICATION="${awips2_core_dir}/Installer.awips"
+      export RPM_SPECIFICATION="${awips2_upc_dir}/Installer.awips"
       return 0
    fi
    if [ "${1}" = "awips2-apps" ]; then
@@ -616,5 +617,18 @@ function lookupRPM()
       return 0
    fi
 
+   # Unidata additions
+   if [ "${1}" = "awips2-ldm" ]; then
+      export RPM_SPECIFICATION="${awips2_upc_dir}/Installer.ldm"
+      return 0
+   fi
+   if [ "${1}" = "awips2-python-awips" ]; then
+      export RPM_SPECIFICATION="/awips2/repo/python-awips/rpm"
+      return 0
+   fi
+   if [ "${1}" = "awips2-python-six" ]; then
+      export RPM_SPECIFICATION="${installer_dir}/six/"
+      return 0
+   fi
    return 1
 }

@@ -145,6 +145,7 @@ rm --recursive --force ${RPM_BUILD_ROOT}
 /awips2/database/sqlScripts/share/sql/*.sh
 /awips2/database/replication/setup-standby.sh
 /awips2/database/replication/create-replication-role.sh
+/awips2/database/replication/replication-config.sh
 
 
 %defattr(644,root,root,755)

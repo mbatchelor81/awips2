@@ -9,12 +9,12 @@
 # Require el6 or el7 be specified
 #
 if [ -z "$1" ]; then
-  echo "supply type (el7)"
+  echo "supply type (el8)"
   exit
 fi
 os_version=$1
 rpmname=$2
-dirs=" -v `pwd`:/awips2/repo/awips2-builds:rw "
+dirs=" -v `pwd`:/awips2/repo/awips2-builds:Z "
 . /awips2/repo/awips2-builds/build/buildEnvironment.sh
 
 version=${AWIPSII_VERSION}-${AWIPSII_RELEASE}
@@ -51,11 +51,12 @@ fi
 # Run Docker AWIPS ADE Image
 #
 imgname=tiffanym13/awips-ade
-imgvers=20.3.2
-sudo docker run --entrypoint=/bin/bash --privileged -d -ti -e "container=docker" $dirs $imgname-$imgvers-2:$imgvers-$os_version
-dockerID=$(sudo docker ps | grep awips-ade | awk '{print $1}' | head -1 )
-sudo docker logs $dockerID
-sudo docker exec -ti $dockerID /bin/bash -xec "/awips2/repo/awips2-builds/build/build_rpms.sh $os_version $rpmname";
+imgvers=23.4.1
+#podman run --entrypoint=/bin/bash --security-opt label=disable -d -ti -e "container=podman" $dirs $imgname-$imgvers-1:$imgvers-$os_version
+podman run --entrypoint=/bin/bash -d -ti -e "container=podman" $dirs $imgname-$imgvers-1:$imgvers-$os_version
+podmanID=$(podman ps | grep awips-ade | awk '{print $1}' | tail -1 )
+podman logs $podmanID
+podman exec -ti $podmanID /bin/bash -xec "/awips2/repo/awips2-builds/build/build_rpms.sh $os_version $rpmname";
 #sudo docker stop $dockerID
 #sudo docker rm -v $dockerID
 

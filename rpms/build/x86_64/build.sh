@@ -75,11 +75,10 @@ if [ $RTN -ne 0 ]; then
    exit 1
 fi
 
-export LIGHTNING=true
-# Determine if the optional '-nobinlightning' argument has been specified.
-if [ "${2}" = "-nobinlightning" ]; then
-   LIGHTNING=false
-fi
+
+# set lightning to false
+LIGHTNING=false
+
 
 if [ "${1}" = "-buildRPM" -a -n "${2}" ]; then
    echo "Building RPM: ${2}"
@@ -96,62 +95,84 @@ if [ "${1}" = "-buildRPM" -a -n "${2}" ]; then
    exit 0
 fi
 
-if [ "${1}" = "-WA" ]; then
-   WA_rpm_build
-   exit 0
-fi
-
-if [ "${1}" = "-rh6" ]; then
-   buildCAVE
-   buildRPM "awips2-alertviz"
-   buildEDEX
-   buildRPM "awips2-common-base"
+#BUILD GROUPS
+function build_ade(){
+   buildRPM "awips2"
    buildRPM "awips2-java"
-   buildRPM "awips2-java-security"
+   buildRPM "awips2-eclipse"
    buildRPM "awips2-python"
+   buildRPM "awips2-qpid-proton"
+   buildRPM "awips2-python-tomli"
+   buildRPM "awips2-python-typing_extensions"
+   buildRPM "awips2-python-setuptools_scm"
    buildRPM "awips2-python-jaraco.functools"
    buildRPM "awips2-python-portend"
    buildRPM "awips2-python-tempora"
    buildRPM "awips2-python-zc.lockfile"
    buildRPM "awips2-thrift"
-   buildRPM "awips2-thrift/i686"
    buildRPM "awips2-python-markupsafe"
-   buildRPM "awips2-python-werkzeug"
    buildRPM "awips2-python-numpy"
+   buildRPM "awips2-hdf5"
+   buildRPM "awips2-python-cython"
+   buildRPM "awips2-python-pkgconfig"
    buildRPM "awips2-python-scipy"
    buildRPM "awips2-python-h5py"
    buildRPM "awips2-python-certifi"
    buildRPM "awips2-python-pillow"
    buildRPM "awips2-python-matplotlib"
    buildRPM "awips2-python-numexpr"
+   buildRPM "awips2-python-geos"
+   buildRPM "awips2-python-shapely"
+   buildRPM "awips2-python-dateutil"
+   buildRPM "awips2-python-cycler"
+   buildRPM "awips2-python-cppy"
+   buildRPM "awips2-python-kiwisolver"
+   buildRPM "awips2-python-cftime"
+   buildRPM "awips2-python-importlib-resources"
+   buildRPM "awips2-python-more_itertools"
+   buildRPM "awips2-python-sqlite3"
+   buildRPM "awips2-python-typing_extensions"
+   buildRPM "awips2-python-tomli"
+   buildRPM "awips2-python-pytz"
+   buildRPM "awips2-python-pyproject_metadata"
+   buildRPM "awips2-meson"
+   buildRPM "awips2-python-meson_python"
+   buildRPM "awips2-python-contourpy"
+   buildRPM "awips2-python-fonttools"
+   buildRPM "awips2-python-msgpack"
+   buildRPM "awips2-python-py_cpuinfo"
+   buildRPM "awips2-python-blosc2"
+   buildRPM "awips2-ant"
+   buildRPM "awips2-netcdf"
+   buildRPM "awips2-eclipse"
+   #buildRPM "awips2-udunits/i686"
+
+#local apps foss
+   #buildRPM "awips2-aec"
+   #buildRPM "awips2-eccodes"
+   #buildRPM "awips2-python-pycairo"
+   #buildRPM "awips2-python-pygobject"
+}
+
+function build_python()
+{
+   buildRPM "awips2-python-werkzeug"
    buildRPM "awips2-python-tables"
    buildRPM "awips2-python-tpg"
    buildRPM "awips2-python-ufpy"
    buildRPM "awips2-python-dynamicserialize"
-   buildRPM "awips2-python-geos"
-   buildRPM "awips2-python-shapely"
    buildRPM "awips2-python-jep"
-   buildRPM "awips2-python-dateutil"
-   buildRPM "awips2-python-setuptools_scm"
    buildRPM "awips2-python-stomp.py"
-   buildRPM "awips2-python-pkgconfig"
    buildRPM "awips2-python-pyshp"
-   buildRPM "awips2-python-cython"
-   buildRPM "awips2-python-cycler"
-   buildRPM "awips2-python-kiwisolver"
    buildRPM "awips2-python-netcdf4"
-   buildRPM "awips2-python-cftime"
    buildRPM "awips2-python-pmw"
-   buildRPM "awips2-python-importlib-resources"
-   buildRPM "awips2-python-more_itertools"
    buildRPM "awips2-python-jaraco.classes"
    buildRPM "awips2-python-jaraco.text"
    buildRPM "awips2-python-jaraco.collections"
    buildRPM "awips2-python-cheroot"
    buildRPM "awips2-python-cherrypy"
-   buildRPM "awips2-python-sqlite3"
-   buildRPM "awips2-python-proj"
-   buildRPM "awips2-python-gdal"
+   ##buildRPM "awips2-python-proj"
+   buildRPM "awips2-python-gdal" # dependent on proj
    buildRPM "awips2-python-geojson"
    buildRPM "awips2-python-whoosh"
    buildRPM "awips2-python-qtpy"
@@ -160,81 +181,63 @@ if [ "${1}" = "-rh6" ]; then
    buildRPM "awips2-python-pyside6"
    buildRPM "awips2-python-zipp"
    buildRPM "awips2-python-importlib-metadata"
-   buildRPM "awips2-python-importlib-resources"
-   buildRPM "awips2-python-typing_extensions"
    buildRPM "awips2-python-pint"
+   buildRPM "awips2-python-grib2"
+   buildRPM "awips2-python-gridslice"
    buildRPM "awips2-python-pytest-qt"
    buildRPM "awips2-python-pyenchant"
    buildRPM "awips2-python-pykdtree"
-   buildRPM "awips2-python-pyproj"
+   #buildRPM "awips2-python-pyproj" # dependent on proj
    buildRPM "awips2-python-configobj"
    buildRPM "awips2-python-pyresample"
+   buildRPM "awips2-python-six"
    buildRPM "awips2-python-natsort"
    buildRPM "awips2-python-click"
    buildRPM "awips2-python-mercantile"
-   buildRPM "awips2-python-pillow"
    buildRPM "awips2-python-imageio"
    buildRPM "awips2-python-imageio-ffmpeg"
    buildRPM "awips2-python-marshmallow"
    buildRPM "awips2-python-casadi"
    buildRPM "awips2-python-bottleneck"
-   buildRPM "awips2-python-pandas"
+   buildRPM "awips2-python-pandas" #takes forever to build
    buildRPM "awips2-python-mpmath"
    buildRPM "awips2-python-sympy"
    buildRPM "awips2-python-antlr4"
    buildRPM "awips2-python-pymoca"
-   buildRPM "awips2-python-tomli"
-   buildRPM "awips2-python-pytz"
-   buildRPM "awips2-python-cppy"
-   buildRPM "awips2-python-pyproject_metadata"
-   buildRPM "awips2-python-meson_python"
-   buildRPM "awips2-python-contourpy"
-   buildRPM "awips2-python-fonttools"
-   buildRPM "awips2-python-msgpack"
-   buildRPM "awips2-python-py_cpuinfo"
-   buildRPM "awips2-python-blosc2"
-   buildRPM "awips2-ant"
-   buildRPM "awips2-hdf5"
-   buildRPM "awips2-netcdf"
-   buildRPM "awips2-netcdf/i686"
-   buildRPM "awips2-netcdf-cxx/i686"
-   buildRPM "awips2-netcdf-fortran/i686"
-   buildRPM "awips2-eclipse"
-   buildRPM "awips2-postgis"
-   buildRPM "awips2-postgresql"
-   buildRPM "awips2-httpd-pypies"
-   buildRPM "awips2-qpid-proton"
-   buildRPM "awips2-qpid-proton/i386"
-   buildRPM "awips2-qpid-proton-python"
+}
+
+function build_qpid()
+{
    buildRPM "awips2-qpid-broker-j"
-   buildRPM "awips2-database-server-configuration"
-   buildRPM "awips2-database-standalone-configuration"
-   buildRPM "awips2-database"
-   buildRPM "awips2-maps-database"
-   buildRPM "awips2-ncep-database"
+   buildRPM "awips2-qpid-proton"
+   buildRPM "awips2-qpid-proton-python"
+   #buildRPM "awips2-qpid-proton/i386"
+}
+
+function build_server()
+{
+  buildRPM "awips2"
+   #buildRPM "awips2-alertviz"
+   buildTargetPlatform
+   buildRPM "awips2-common-base" 
+   buildRPM "awips2-java-security"
+   #buildRPM "awips2-thrift/i686"
+   #buildRPM "awips2-netcdf/i686"
+   #buildRPM "awips2-netcdf-cxx/i686"
+   #buildRPM "awips2-netcdf-fortran/i686"
+   #buildRPM "awips2-postgis" # dependent on proj, gdal 
    buildRPM "awips2-aviation-shared"
    buildRPM "awips2-cli"
-#  buildRPM "awips2-edex-environment"
-   buildRPM "awips2-edex-shapefiles"
+   buildRPM "awips2-edex-environment"
    buildRPM "awips2-edex-enableservices"
-   buildRPM "awips2-data.gfe"
    buildRPM "awips2-gfesuite"
    buildRPM "awips2-groovy"
    buildRPM "awips2-localapps-environment"
-   buildRPM "awips2-rehost-support-postgresql"
    buildRPM "awips2-scripts"
-   buildRPM "awips2-udunits/i686"
    buildRPM "awips2-pgtcl"
-   buildRPM "awips2-tkblt/i686"
-   buildRPM "awips2-meson"
-   buildLocalizationRPMs
-   if [ $? -ne 0 ]; then
-      exit 1
-   fi
+   #buildRPM "awips2-tkblt/i686"
+   buildLocalization
    buildRPM "awips2-ignite"
-   buildRPM "awips2-pypies"
-   buildRPM "awips2-data.hdf5-topo"
-   buildRPM "awips2"
    buildRPM "awips2-apps"
    buildRPM "awips2-devel"
    buildRPM "awips2-version"
@@ -242,25 +245,53 @@ if [ "${1}" = "-rh6" ]; then
    buildRPM "awips2-watchdog"
    buildRPM "awips2-ffmpeg"
    buildRPM "awips2-g2c"
-   buildRPM "awips2-g2c/i386"
-   buildRPM "awips2-expect-libs/i686"
+   #buildRPM "awips2-g2c/i386"
+   #buildRPM "awips2-expect-libs/i686"
+
+#Uniata additions
+   buildRPM "awips2-ldm"
+   build_pypies
+   buildRPM "awips2-python-awips"
+}
+
+function build_database(){
+   yum install postgresql-server-devel -y
+   buildRPM "awips2-postgresql"
+   buildRPM "awips2-database-server-configuration"
+   buildRPM "awips2-database-standalone-configuration"
+   buildRPM "awips2-database"
+   buildRPM "awips2-maps-database"
+   buildRPM "awips2-ncep-database"
+   buildRPM "awips2-edex-shapefiles"
+   buildRPM "awips2-data.gfe"
+   buildRPM "awips2-data.hdf5-topo"
+   buildRPM "awips2-rehost-support-postgresql"
+}
+function build_pypies(){
+   buildRPM "awips2-pypies"
+   buildRPM "awips2-httpd-pypies"
+}
+
+if [ "${1}" = "-ade" ]; then build_ade && exit 0; fi
+if [ "${1}" = "-python" ]; then build_python && exit 0; fi
+if [ "${1}" = "-qpid" ]; then build_qpid && exit 0; fi
+if [ "${1}" = "-server" ]; then build_server && exit 0; fi
+if [ "${1}" = "-pypies" ]; then build_pypies && exit 0; fi
+if [ "${1}" = "-localization" ]; then buildLocalization && exit 0; fi
+if [ "${1}" = "-database" ]; then build_database && exit 0; fi
+if [ "${1}" = "-edex" ]; then buildEDEX && exit 0; fi
+if [ "${1}" = "-cave" ]; then buildCAVE && exit 0; fi
+if [ "${1}" = "-WA" ]; then WA_rpm_build && exit 0; fi
+
+if [ "${1}" = "-all" ]; then
+   build_ade
+   build_python
+   build_qpid
+   build_server
+   build_database
+   buildEDEX
+   buildCAVE
    exit 0
-fi
-
-if [ "${1}" = "-dev" ]; then
-
-        if [ ! $#  -eq 2 ]; then
-        usage
-        exit 1;
-        fi
-
-        echo -e "\n*** Executing $2  ***"
-        $2
-        if [ $? -ne 0 ]; then
-           exit 1
-        fi
-        echo -e "*** $2 Complete ***\n"
-        exit 0
 fi
 
 usage
