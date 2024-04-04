@@ -27,6 +27,11 @@
 #                                     semaphore and shared memory segment
 #                                     key codes.
 #Jan 01, 2024        tiffanym@ucar    Change ufpy call to awips
+# Apr 18, 2023 2033912   tgurney    - Add root.crt for cert chain validation.
+#                                   - Set peer auth mode to VERIFY_PEER
+#                                   - Let cert password default to None,
+#                                     not "password"
+#
 
 import argparse
 import ctypes
@@ -66,7 +71,7 @@ def process_args():
     DEFAULT_QPID_HOST = "localhost"
     DEFAULT_QPID_PORT = 5672
     DEFAULT_QPID_USER = "guest"
-    DEFAULT_CERT_PASSWORD = os.getenv("QPID_SSL_CERT_PASSWORD", "password")
+    DEFAULT_CERT_PASSWORD = os.getenv("QPID_SSL_CERT_PASSWORD", None)
     DEFAULT_QPID_CERT_PATH = os.getenv("QPID_SSL_CERT_DB", os.path.join(pwd.getpwuid(os.getuid()).pw_dir,".qpid"))
     DEFAULT_QPID_CERT_NAME = os.getenv("QPID_SSL_CERT_NAME", DEFAULT_QPID_USER)
     DEFAULT_QPID_CERT_KEY = os.getenv("QPID_SSL_CERT_KEY_FILE", DEFAULT_QPID_USER)
@@ -168,10 +173,11 @@ def send_to_qpid(host, port, cert_path, cert_name, key_name, cert_password, msg_
     certfile = os.path.join(cert_path, f"{cert_name}.crt")
     certkey = os.path.join(cert_path, f"{key_name}.key")
     ssl_domain = proton.SSLDomain(mode=proton.SSLDomain.MODE_CLIENT)
+    ssl_domain.set_trusted_ca_db(os.path.join(cert_path, "root.crt"))
+    ssl_domain.set_peer_authentication(proton.SSLDomain.VERIFY_PEER)
     ssl_domain.set_credentials(certfile, certkey, cert_password)
     ADDRESS = "external.dropbox"
     is_shutdown = False
-
     messages_sent = 0
     def print_sent_count():
         nonlocal shutdown_signal, messages_sent

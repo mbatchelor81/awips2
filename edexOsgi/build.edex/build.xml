@@ -257,22 +257,12 @@
         </antcall>
         <antcall target="build">
             <param name="feature"
+                value="com.raytheon.uf.edex.menus.vb.feature" />
+        </antcall>
+        <antcall target="build">
+            <param name="feature"
                 value="com.raytheon.uf.edex.radar.feature" />
         </antcall>
-    	<!--
-        <antcall target="build">
-            <param name="feature"
-                value="com.raytheon.uf.edex.hydro.feature" />
-        </antcall>
-        <antcall target="build">
-            <param name="feature"
-                value="com.raytheon.uf.edex.mpe.feature" />
-        </antcall>
-        <antcall target="build">
-            <param name="feature"
-                value="com.raytheon.uf.edex.dat.feature" />
-        </antcall>
-        -->
         <antcall target="build">
             <param name="feature"
                 value="com.raytheon.uf.edex.config.auto.feature" />
@@ -300,10 +290,6 @@
         <antcall target="build">
             <param name="feature"
                 value="com.raytheon.uf.edex.registry.feature" />
-        </antcall>
-        <antcall target="build">
-            <param name="feature"
-                value="com.raytheon.uf.edex.menus.vb.feature" />
         </antcall>
         <antcall target="build">
             <param name="feature"

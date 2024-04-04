@@ -44,6 +44,8 @@ DATA_PATH=/awips2/database/data
 LOG_PATH=${EDEX_PATH}/logs
 EDEX_ENV_FILE=${EDEX_PATH}/bin/setup.env
 
+source /awips2/edex/conf/edexServiceList
+
 # valid options
 options=( 'status' 'start' 'stop' 'log' 'setup' 'purge' 'password' 'users' 'qpid' 'restart')
 nopts=${options[@]}
@@ -68,11 +70,11 @@ edex_status() {
 
    if [ -d "${DATA_PATH}" ]; then
       # CHECK POSTGRES
-      postgres_prc=`ps aux | grep postgresql | grep -v grep | grep -v java |awk '{ print $11 }' | head -1`
+      postgres_prc=`ps aux | grep postmaster | grep -v grep | grep -v java |awk '{ print $11 }' | head -1`
       if [ -z $postgres_prc ]; then
          echo ' postgres    :: not running'
       else
-         postgresPid=`ps aux | grep postgresql\/bin\/postmaster | grep -v grep | awk '{ print $2 }' | head -1`
+         postgresPid=`ps aux | grep usr\/bin\/postmaster | grep -v grep | awk '{ print $2 }' | head -1`
          echo ' postgres    :: running :: pid '$postgresPid''
       fi
    fi
@@ -83,7 +85,7 @@ edex_status() {
        if [ -z $pypies_prc ]; then
           echo ' pypies      :: not running'
        else
-          pypiesPid=`ps aux | grep awips2\/httpd_pypies\/usr\/sbin\/httpd | grep -v grep | head -1 | awk '{ print $2 }'`
+          pypiesPid=`ps aux | grep \/usr\/sbin\/httpd | grep -v grep | head -1 | awk '{ print $2 }'`
           echo ' pypies      :: running :: pid '$pypiesPid''
        fi
    fi
@@ -98,37 +100,20 @@ edex_status() {
    fi
 
    # CHECK EDEX
-   edex_ingest_ps=`ps aux | grep edex.run.mode=ingest | grep -v edex.run.mode=ingestGrib | awk '{ print $15 }'`
-   if [ -z $edex_ingest_ps ]; then
-      echo ' EDEXingest  :: not running'
-   else
-      edex_ingest_pid=`ps aux | grep edex.run.mode=ingest | grep -v edex.run.mode=ingestGrib | awk '{ print $2 }'`
-      echo ' EDEXingest  :: running :: pid '$edex_ingest_pid''
-   fi
-   edex_ingestGrib_ps=`ps aux | grep edex.run.mode=ingestGrib | awk '{ print $15 }'`
-   if [ -z $edex_ingestGrib_ps ]; then
-      echo ' EDEXgrib    :: not running'
-   else
-      edex_ingestGrib_pid=`ps aux | grep edex.run.mode=ingestGrib | awk '{ print $2 }'`
-      echo ' EDEXgrib    :: running :: pid '$edex_ingestGrib_pid''
-   fi
-   edex_request_ps=`ps aux | grep edex.run.mode=request | awk '{ print $15 }'`
-   if [ -z $edex_request_ps ]; then
-      echo ' EDEXrequest :: not running'   
-   else
-      edex_request_pid=`ps aux | grep edex.run.mode=request | awk '{ print $2 }'`
-      echo ' EDEXrequest :: running :: pid '$edex_request_pid''
+
+   if [ $# -gt 0 ]; then
+      SERVICES=("$@")
    fi
 
-   if [ -f "/awips2/edex/conf/resources/com.raytheon.uf.edex.datadelivery.harvester.properties" ]; then
-      edex_reg_ps=`ps aux | grep edex.run.mode=centralRegistry | awk '{ print $15 }'`
-      if [ -z $edex_reg_ps ]; then
-         echo ' EDEXregistry:: not running'
+   for service in ${SERVICES[*]}; do
+      edex_ps=`ps aux | grep "edex.run.mode=$service "| grep -v grep | awk '{ print $2 }'`
+      if [ -z $edex_ps ]; then
+         echo ' EDEX '$service'  :: not running'
       else
-         edex_reg_pid=`ps aux | grep edex.run.mode=centralRegistry | awk '{ print $2 }'`
-         echo ' EDEXregistry:: running :: pid '$edex_reg_pid''
+         echo ' EDEX '$service'  :: running :: pid '$edex_ps''
       fi
-   fi
+   done
+
 
    if [ -d "/awips2/ldm" ]; then
       ldmd_ps=`ps aux | grep ldmd | grep -v "grep ldmd" | head -1 | awk '{ print $2 }'`
@@ -263,18 +248,27 @@ edit_setup() {
 #
 edex_setup() {
    echo ''
-   if [ -f "/etc/init.d/edex_postgres" ]; then
-      chkconfig edex_postgres --add
-      chkconfig edex_postgres on --level 35
+
+   svc=`systemctl -t service | grep postgresql@awips.service | awk '{ print $1}'`
+   if [ $svc ]; then
+      systemctl enable postgresql@awips
    fi
-   if [ -f "/etc/init.d/httpd-pypies" ]; then
-      chkconfig httpd-pypies --add
-      chkconfig httpd-pypies on --level 35
+   svc=`systemctl -t service | grep httpd-pypies.service | awk '{ print $1}'`
+   if [ $svc ]; then
+      systemctl enable httpd-pypies
    fi
-   chkconfig qpidd --add
-   chkconfig qpidd on --level 35
-   chkconfig edex_camel --add
-   chkconfig edex_camel on --level 35
+   svc=`systemctl -t service | grep qpidd.service | awk '{ print $1}'`
+   if [ $svc ]; then
+      systemctl enable qpidd
+   fi
+
+   if [ $# -gt 0 ]; then
+      SERVICES=("$@")
+   fi
+
+   for service in ${SERVICES[*]}; do
+      systemctl start edex_camel@$service
+   done
 
    # check files exist
    if [ ! -f ${EDEX_ENV_FILE} ]; then
@@ -307,6 +301,7 @@ ldm_stop() {
    fi
 }
 
+
 #
 # Start all EDEX services
 #
@@ -319,43 +314,51 @@ edex_start() {
          chown awips:fxalpha $dir
       fi
    done
-   if [ -f "/etc/init.d/edex_postgres" ]; then
-      su -c "service edex_postgres start"
+
+   svc=`systemctl -t service | grep postgresql@awips.service | awk '{ print $1}'`
+   if [ $svc ]; then
+      systemctl start postgresql@awips
    fi
-   if [ -f "/etc/init.d/httpd-pypies" ]; then
-      su -c "service httpd-pypies start"
+   svc=`systemctl -t service | grep httpd-pypies.service | awk '{ print $1}'`
+   if [ $svc ]; then
+      systemctl start httpd-pypies
    fi
-   su -c "service qpidd start"
+   svc=`systemctl -t service | grep qpidd.service | awk '{ print $1}'`
+   if [ $svc ]; then
+      systemctl start qpidd
+   fi
    edex_purge_reset
-   if [ "${args[1]}" == 'base' ]; then
-      su -c "service edex_camel start"
-   elif [ "${args[1]}" == 'ingest' ]; then
-      printf "#!/bin/bash\nexport SERVICES=( 'ingest' 'ingestGrib' )\n" > /etc/init.d/edexServiceList
-      su -c "service edex_camel start"
-      ldm_start
-   elif [ "${args[1]}" == 'database' ]; then
-      printf "#!/bin/bash\nexport SERVICES=( 'request' )\n" > /etc/init.d/edexServiceList
-      su -c "service edex_camel start"
-   elif [ "${args[1]}" != 'dev' ]; then
-      su -c "service edex_camel start"
-      ldm_start
+
+   
+   if [ $# -gt 0 ]; then
+      SERVICES=("$@")
    fi
+
+   for service in ${SERVICES[*]}; do
+      systemctl start edex_camel@$service
+   done
+   ldm_start
 }
 
 #
 # Stop all EDEX services
 #
 edex_stop() {
-   if [ "${args[1]}" != 'dev' ]; then
-      su -c "service edex_camel stop"
-      ldm_stop
+   ldm_stop
+   systemctl stop edex_camel@*
+
+
+   svc=`systemctl -t service | grep postgresql@awips.service | awk '{ print $1}'`
+   if [ $svc ]; then
+      systemctl stop postgresql@awips
    fi
-   su -c "service qpidd stop"
-   if [ -f "/etc/init.d/httpd-pypies" ]; then
-     su -c "service httpd-pypies stop"
+   svc=`systemctl -t service | grep httpd-pypies.service | awk '{ print $1}'`
+   if [ $svc ]; then
+      systemctl stop httpd-pypies
    fi
-   if [ -f "/etc/init.d/edex_postgres" ]; then
-      su -c "service edex_postgres stop"
+   svc=`systemctl -t service | grep qpidd.service | awk '{ print $1}'`
+   if [ $svc ]; then
+      systemctl stop qpidd
    fi
    edex_status;
 }
@@ -364,7 +367,14 @@ edex_stop() {
 # Restart all EDEX Services
 #
 edex_restart() {
-   su -c "service edex_camel restart"
+   if [ $# -gt 0 ]; then
+      SERVICES=("$@")
+   fi
+
+   for service in ${SERVICES[*]};
+      do
+         systemctl restart edex_camel@$service
+   done
    edex_status;
 }
 

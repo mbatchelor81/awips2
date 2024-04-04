@@ -29,7 +29,7 @@ build/deploy.ignite.awips2
 ../awips2-goesr/cave/* 
 ../awips2-gsd/viz/*
 ../awips2-gsd/features/*
-../awips2-ogc/foss/*
 ../awips2-ogc/edex/*
 ../awips2-ogc/features/*
 ../python-awips
+build/awips-ade/awips2_rpms

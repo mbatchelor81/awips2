@@ -5,7 +5,7 @@
 #
 %define _prefix /usr/local/awips2-postgresql
 %define _libdir %{_prefix}/lib
-%define source_jar_file postgresql-42.2.16.jar
+%define source_jar_file postgresql-42.2.26.jar
 
 Name: awips2-rehost-support-postgresql
 Summary: AWIPS II Rehost Support (PostgreSQL)

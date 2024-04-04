@@ -5,22 +5,21 @@ pushd $dir
 
 
 if [ -z "$1" ]; then
-  echo "supply type (el7)"
+  echo "supply type (el8)"
   exit
 fi
 os_version=$1
 
-existing=$(docker images |grep awips-ade | grep $1 | awk '{ print $3 }')
+existing=$(podman images |grep awips-ade | grep $1 | awk '{ print $3 }')
 if [ ! -z "$existing" ]; then
-   docker rmi $existing
+   podman rmi $existing
 fi
-img="20.3.2-2"
+img="23.4.1-1"
 
 pushd /awips2/repo/awips2-builds/build/awips-ade
-docker build -t tiffanym13/awips-ade-${img} -f Dockerfile.awips-ade-${img}.${os_version} .
-dockerID=$(docker images | grep awips-ade | awk '{print $3}' | head -1 )
-#docker tag $dockerID unidata/awips-ade:${AWIPSII_VERSION}-${os_version} 
-docker tag $dockerID tiffanym13/awips-ade-${img}:${AWIPSII_VERSION}-${os_version} 
-docker rmi tiffanym13/awips-ade-${img}:latest
-#docker rmi tiffanym13/awips-ade-${img}:${AWIPSII_VERSION}-${os_version}
-docker push tiffanym13/awips-ade-${img}:${AWIPSII_VERSION}-${os_version}
+podman build -t tiffanym13/awips-ade-${img} -f Dockerfile.awips-ade-${img}.${os_version} .
+podmanID=$(podman images | grep awips-ade | awk '{print $3}' | head -1 )
+#podman tag $podmanID unidata/awips-ade:${AWIPSII_VERSION}-${os_version} 
+podman tag $podmanID tiffanym13/awips-ade-${img}:${AWIPSII_VERSION}-${os_version} 
+podman rmi tiffanym13/awips-ade-${img}:latest
+podman push tiffanym13/awips-ade-${img}:${AWIPSII_VERSION}-${os_version}

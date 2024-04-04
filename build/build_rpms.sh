@@ -13,7 +13,7 @@ os_version=$1
 rpmname=$2
 
 if [ -z "$os_version" ]; then
-  echo "supply os_version (el7)"
+  echo "supply os_version (el8)"
   exit
 fi
 
@@ -64,15 +64,15 @@ else
   # If RPM name is not given build all groups in this order
 #  yum localinstall /awips2/repo/awips2-builds/dist/18.2.1-ade/x86_64/awips2-hdf5* -y
 #  yum localinstall /awips2/repo/awips2-builds/dist/18.2.1-ade/x86_64/awips2-netcdf* -y
-  su - awips -c "/bin/bash $buildsh -ade"
-  su - awips -c "/bin/bash $buildsh -python"
-  su - awips -c "/bin/bash $buildsh -qpid"
-  su - awips -c "/bin/bash $buildsh -server"
-  su - awips -c "/bin/bash $buildsh -database"
-  su - awips -c "/bin/bash $buildsh -edex"
-  su - awips -c "/bin/bash $buildsh -cave"
-  #su - awips -c "/bin/bash $buildsh -pypies"
-  #su - awips -c "/bin/bash $buildsh -localization"
+  /bin/bash $buildsh -ade
+  /bin/bash $buildsh -python
+  /bin/bash $buildsh -qpid
+  /bin/bash $buildsh -server
+  /bin/bash $buildsh -database
+  /bin/bash $buildsh -edex
+  /bin/bash $buildsh -cave
+  #/bin/bash $buildsh -pypies
+  #/bin/bash $buildsh -localization
 
 fi
 
