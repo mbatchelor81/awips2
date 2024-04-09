@@ -302,6 +302,10 @@
             <substitute value="kgyx" key="icao" />
         </contribute>
         <contribute xsi:type="subinclude"
+            fileName="menus/radar/khdc/baseLocalRadarMenu.xml">
+            <substitute value="khdc" key="icao" />
+        </contribute>
+        <contribute xsi:type="subinclude"
             fileName="menus/radar/dualPol/baseLocalRadarMenu.xml">
             <substitute value="khdx" key="icao" />
         </contribute>
@@ -386,11 +390,7 @@
         </contribute>
     </contribute>
     <contribute xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:type="subMenu" menuText="klix-kmbx">
-        <contribute xsi:type="subinclude"
-            fileName="menus/radar/dualPol/baseLocalRadarMenu.xml">
-            <substitute value="klix" key="icao" />
-        </contribute>
+        xsi:type="subMenu" menuText="klnx-kmbx">
         <contribute xsi:type="subinclude"
             fileName="menus/radar/dualPol/baseLocalRadarMenu.xml">
             <substitute value="klnx" key="icao" />
@@ -451,7 +451,7 @@
             <substitute value="kmlb" key="icao" />
         </contribute>
         <contribute xsi:type="subinclude"
-            fileName="menus/radar/dualPol/baseLocalRadarMenu.xml">
+            fileName="menus/radar/kmob/baseLocalRadarMenu.xml">
             <substitute value="kmob" key="icao" />
         </contribute>
         <contribute xsi:type="subinclude"

@@ -5,7 +5,7 @@ PSQL='/awips2/psql/bin/psql'
 adminUser='awipsadmin'
 users=('awips' 'pguser')
 
-as_awips='sudo -u awips -i '
+as_awips='su - awips '
 
 # first arg is database, second arg is schema, third is field type, rest is the query to execute
 scanAndUpdate() {
