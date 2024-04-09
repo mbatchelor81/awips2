@@ -44,7 +44,7 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="com.raytheon.uf.common.dataplugin.ldad"
          download-size="0"
@@ -58,7 +58,8 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-    <plugin
+
+   <plugin
          id="com.raytheon.uf.common.dataplugin.lsr"
          download-size="0"
          install-size="0"
@@ -71,7 +72,7 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="com.raytheon.uf.common.dataplugin.sfcobs"
          download-size="0"
@@ -120,7 +121,7 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="com.raytheon.edex.plugin.obs"
          download-size="0"
@@ -176,7 +177,7 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="com.raytheon.uf.edex.plugin.lsr"
          download-size="0"
@@ -189,7 +190,7 @@
          download-size="0"
          install-size="0"
          version="0.0.0"
-         unpack="false"/>         
+         unpack="false"/>
 
    <plugin
          id="com.raytheon.uf.edex.plugin.svrwx"
@@ -305,6 +306,13 @@
 
    <plugin
          id="com.raytheon.uf.edex.netcdf"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="gov.noaa.nws.ncep.edex.plugin.ncuair"
          download-size="0"
          install-size="0"
          version="0.0.0"
