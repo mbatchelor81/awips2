@@ -4,6 +4,8 @@ import gov.noaa.nws.ncep.viz.common.ui.Markers.MarkerState;
 import gov.noaa.nws.ncep.viz.common.ui.Markers.MarkerTextSize;
 import gov.noaa.nws.ncep.viz.common.ui.Markers.MarkerType;
 
+import javax.xml.bind.annotation.XmlType;
+
 import com.raytheon.uf.viz.core.drawables.IDescriptor;
 import com.raytheon.uf.viz.core.exception.VizException;
 import com.raytheon.uf.viz.core.rsc.AbstractResourceData;
@@ -30,6 +32,7 @@ import com.raytheon.uf.viz.core.rsc.LoadProperties;
  * @version 1.0
  */
 
+@XmlType(name="d2dNsharpMapResourceData2")
 public class D2DNsharpMapResourceData extends AbstractResourceData {
 
     private MarkerState markerState = MarkerState.MARKER_ONLY;
