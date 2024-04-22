@@ -32,7 +32,6 @@
                 <exclude>ohd-common-database.xml</exclude>
                 <exclude>satpre-spring.xml</exclude>
                 <exclude>ncgrib-file-endpoint.xml</exclude>
-                <exclude>text-subscription.*</exclude>
         </mode>
 
         <mode name="ingestGrib">
