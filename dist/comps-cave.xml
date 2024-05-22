@@ -6,7 +6,7 @@
       <id>awips2-cave</id>
       <name>AWIPS CAVE</name>
       <default>true</default>
-      <description>This Will Install The AWIPS II Visualization Environment Including: CAVE, AlertViz, ...</description>
+      <description>This Will Install The AWIPS II Visualization Environment Including: CAVE</description>
       <uservisible>true</uservisible>
       <packagelist>
          <packagereq type="mandatory">awips2</packagereq>
