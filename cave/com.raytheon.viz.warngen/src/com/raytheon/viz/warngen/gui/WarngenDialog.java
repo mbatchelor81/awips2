@@ -393,6 +393,8 @@ public class WarngenDialog extends CaveSWTDialog
 
     private Button fromTrack;
 
+    private Button warnedAreaVisible;
+
     private Button[] mainProductBtns;
 
     private Button other;
@@ -592,18 +594,19 @@ public class WarngenDialog extends CaveSWTDialog
      */
     private void createTimeRangeGroup(Composite mainComposite) {
         Group timeRange = new Group(mainComposite, SWT.NONE);
+        timeRange.setText("Time Range");
         GridLayout gl = new GridLayout(1, false);
         gl.verticalSpacing = 2;
         gl.marginHeight = 1;
         timeRange.setLayout(gl);
         timeRange.setLayoutData(
                 new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
-
         Composite timeRangeComp = new Composite(timeRange, SWT.NONE);
         timeRangeComp.setLayout(new GridLayout(3, false));
         timeRangeComp.setLayoutData(
                 new GridData(SWT.DEFAULT, SWT.FILL, false, false));
-
+        Label dur = new Label(timeRangeComp, SWT.BOLD);
+        dur.setText("Duration:");
         GridData gd = new GridData();
         gd.horizontalSpan = 1;
         durationList = new Combo(timeRangeComp, SWT.READ_ONLY);
@@ -638,6 +641,7 @@ public class WarngenDialog extends CaveSWTDialog
 
     private void createProductTypeGroup(Composite mainComposite) {
         productType = new Group(mainComposite, SWT.NONE);
+        productType.setText("Product type");
         GridLayout gl = new GridLayout(2, false);
         gl.verticalSpacing = 2;
         gl.marginHeight = 1;
@@ -780,8 +784,21 @@ public class WarngenDialog extends CaveSWTDialog
         gl.verticalSpacing = 2;
         gl.marginHeight = 1;
         redrawBox.setLayout(gl);
+        redrawBox.setText("Redraw Box on Screen from:");
         redrawBox.setLayoutData(
                 new GridData(SWT.FILL, SWT.DEFAULT, true, false));
+
+        warnedAreaVisible = new Button(redrawBox, SWT.CHECK);
+        warnedAreaVisible.setText("Warned Area Visible");
+        warnedAreaVisible.setLayoutData(
+                new GridData(SWT.RIGHT, SWT.DEFAULT, true, false));
+        warnedAreaVisible.setSelection(true);
+        warnedAreaVisible.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                warnedAreaVisibleToggled();
+            }
+        });
 
         Composite redrawFrom = new Composite(redrawBox, SWT.NONE);
         int columns = debug ? 4 : 3;
@@ -882,6 +899,7 @@ public class WarngenDialog extends CaveSWTDialog
         gl.verticalSpacing = 2;
         gl.marginHeight = 1;
         trackGroup.setLayout(gl);
+        trackGroup.setText("Track type");
         trackGroup.setLayoutData(
                 new GridData(SWT.DEFAULT, SWT.FILL, false, false));
         trackGroup.setBackgroundMode(SWT.INHERIT_NONE);
@@ -928,6 +946,7 @@ public class WarngenDialog extends CaveSWTDialog
         gl.verticalSpacing = 2;
         gl.marginHeight = 1;
         editGroup.setLayout(gl);
+        editGroup.setText("Edit");
         editGroup.setLayoutData(
                 new GridData(SWT.DEFAULT, SWT.FILL, false, false));
 
@@ -1598,6 +1617,14 @@ public class WarngenDialog extends CaveSWTDialog
         boxEditable = true;
         trackEditable = true;
         realizeEditableState();
+    }
+
+    /**
+     * Whether to warn area visible was toggled
+     */
+    private void warnedAreaVisibleToggled() {
+        warngenLayer.setShouldDrawShaded(warnedAreaVisible.getSelection());
+        warngenLayer.issueRefresh();
     }
 
     /**
