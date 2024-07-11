@@ -284,6 +284,7 @@ import com.raytheon.viz.warngen.util.FollowUpUtil;
  * Feb 17, 2023  8991        lsingh       Removed unused parameters in
  *                                        TemplateRunner call.
  * Apr 21, 2023  2030407     mapeters     Restore backup site logic
+ * Jul 11, 2024           tiffanym@ucar   Restore labels on warngen dialog
  *
  * </pre>
  *
@@ -869,22 +870,14 @@ public class WarngenDialog extends CaveSWTDialog
         backupTrackEditComp.setLayoutData(
                 new GridData(SWT.FILL, SWT.DEFAULT, true, false));
 
-        restartBtn = new Button(backupTrackEditComp, SWT.PUSH);
-        restartBtn.setText("Reset");
-        GridData gd = new GridData(SWT.CENTER, SWT.CENTER, true, false);
-        gd.widthHint = 100;
-        restartBtn.setLayoutData(gd);
-        restartBtn.addSelectionListener(new SelectionAdapter() {
-            @Override
-            public void widgetSelected(SelectionEvent event) {
-                resetPressed();
-            }
-        });
+        createResetGroup(backupTrackEditComp);
         createTrackGroup(backupTrackEditComp);
         createEditGroup(backupTrackEditComp);
-
-        gd = new GridData(SWT.FILL, SWT.FILL, true, false);
+        
+        GridData gd = new GridData(SWT.FILL, SWT.FILL, true, false);
         gd.heightHint = 40;
+        instructionsLabel = new Label (mainComposite, SWT.NONE);
+        instructionsLabel.setText("Instructions:");
         instructionsBox = new Text(mainComposite,
                 SWT.NONE | SWT.READ_ONLY | SWT.MULTI);
         instructionsBox.setText("");
@@ -893,6 +886,30 @@ public class WarngenDialog extends CaveSWTDialog
 
     }
 
+    private void createResetGroup(Composite backupTrackEditComp) {
+        Group resetGroup = new Group(backupTrackEditComp, SWT.NONE);
+        GridLayout gl = new GridLayout(1, false);
+        gl.verticalSpacing = 2;
+        gl.marginHeight = 1;
+        resetGroup.setLayout(gl);
+        resetGroup.setText("Reset Tracking");
+        resetGroup.setLayoutData(
+                new GridData(SWT.DEFAULT, SWT.FILL, false, false));
+        resetGroup.setBackgroundMode(SWT.INHERIT_NONE);
+        
+        restartBtn = new Button(resetGroup, SWT.PUSH);
+        restartBtn.setText("Reset");
+        GridData gd = new GridData(SWT.CENTER, SWT.CENTER, true, false);
+        gd.widthHint = 150;
+        restartBtn.setLayoutData(gd);
+        restartBtn.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent event) {
+                resetPressed();
+            }
+        });
+    }
+    
     private void createTrackGroup(Composite backupTrackEditComp) {
         Group trackGroup = new Group(backupTrackEditComp, SWT.NONE);
         GridLayout gl = new GridLayout(1, false);
