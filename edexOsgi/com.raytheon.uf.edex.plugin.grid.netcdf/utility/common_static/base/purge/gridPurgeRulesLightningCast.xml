@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!--
+    <!--
         This_software_was_developed_and_/_or_modified_by_Raytheon_Company,
         pursuant_to_Contract_DG133W-05-CQ-1067_with_the_US_Government.
 
@@ -18,23 +18,18 @@
         See_the_AWIPS_II_Master_Rights_File_("Master_Rights_File.pdf")_for
         further_licensing_information.
     -->
-<!--
+    <!--
         This is an absolute override file, indicating that a higher priority
         version of the file will completely replace a lower priority version
         of the file.
-    -->
-<!-- L. Byerle 1/16/20 Update MIRS ATMS for n20 or npp file arrival -->
-<requestPatterns plugin="pointset">
-  <!--JPSS-RR Volcanic Ash-->
-  <regex>^JRR-VolcanicAsh_v\dr\d_(npp|j01)_s\d{15}_e\d{15}_c\d{15}.nc$</regex> 
-  <!--JPSS-RR Aerosol Detection-->
-  <regex>^JRR-ADP_v\dr\d_(npp|j01)_s\d{15}_e\d{15}_c\d{15}.nc$</regex> 
-  <!--JPSS-RR Aerosol Optical Depth-->
-  <regex>^JRR-AOD_v\dr\d_(npp|j01)_s\d{15}_e\d{15}_c\d{15}.nc$</regex>
-  <!--JPSS-RR Ice Concentration-->
-  <regex>^JRR-\w+_v\dr\d_(npp|j01)_s\d{15}_e\d{15}_c\d{15}.nc$</regex>
-  <!--NPR-MIRS-->
-<!--  <regex>^NPR-MIRS-IMG_\d\dmin_v\d\d_npp_s\d{15}_e\d{15}_c\d{15}</regex> -->
-   <regex>^NPR-MIRS-IMG_\d\dmin_v\d\d_n.*</regex>
-</requestPatterns>
 
+        Incremental overrides can also be achieved by creating a new file with
+        a suffix inserted between the original filename and extension.
+    -->
+<purgeRuleSet>
+    <key>info.datasetId</key>
+    <rule>
+        <keyValue>LightningCast</keyValue>
+        <period>01-00:00:00</period>
+    </rule>
+</purgeRuleSet>

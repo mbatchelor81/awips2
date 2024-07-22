@@ -37,32 +37,19 @@
         ruleDescription is the description of this rule (optional)
     -->
     <!-- TOWRdocs Header
-        Defining purge Rules for blended hydro products
-        used in the netcdfGrid plugin.
+         Defines gridded nucaps data set purge rule 
     -->
     <!-- TOWRdocs Description
-        This file defines the site-level rules for purging products
-        from the grid table in the Postgres Database. The default rule
-        keeps 2 versions, up to 7 days, unchanged here from the baseline gridPurgeRules.xml.  
-        This file adds purge rules for blended hyddro netcdfGrid records 
+         New purge rule file for gridded nucaps not in current baseline
     -->
     <!-- TOWRdocs Status
-        New entries for netcdfgrid plugin polar products
-        7/12/2019 do not use default purge rule
+         Add for griddednucaps, set for a period of time
     -->
     <!-- TOWRdocs POC
-        Lee Byerle 7/12/2019
+        Lee Byerle 10/22/2020
     -->
 	<rule>
-		<keyValue>BLENDED-PCT_TPW-Sat</keyValue>
-		<versionsToKeep>36</versionsToKeep>
-	</rule>
-	<rule>
-		<keyValue>BLENDED-Rain_Rate-Sat</keyValue>
-		<versionsToKeep>36</versionsToKeep>
-	</rule>
-	<rule>
-		<keyValue>BLENDED-TPW-Sat</keyValue>
-		<versionsToKeep>36</versionsToKeep>
+		<keyValue>griddednucaps</keyValue>
+		<period>03-00:00:00</period>
 	</rule>
 </purgeRuleSet>
