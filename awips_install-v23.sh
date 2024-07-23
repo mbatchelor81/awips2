@@ -3,7 +3,7 @@
 # devorg: Unidata Program Center
 # author: Michael James, Tiffany Meyer
 # maintainer: <support-awips@unidata.ucar.edu>
-# Date Updated: 6/17/2024
+# Date Updated: 7/23/2024
 # use: ./awips_install-v23.sh (--cave|--edex|--database|--ingest|--help)
 # BETA CAVE ONLY INSTALL
 
@@ -37,7 +37,7 @@ function check_yumfile {
     cp /etc/yum.repos.d/awips2.repo /etc/yum.repos.d/awips2.repo-${date}
   fi
 
-  wget_url="https://downloads.unidata.ucar.edu/awips2/23.4.1/linux/${repofile}-23.4.1-0.2"
+  wget_url="https://downloads.unidata.ucar.edu/awips2/23.4.1/linux/${repofile}"
   echo "wget -O /etc/yum.repos.d/awips2.repo ${wget_url}"
   wget -O /etc/yum.repos.d/awips2.repo ${wget_url}
 
@@ -402,7 +402,7 @@ function server_prep {
   check_edex
   check_git
   check_wgrib2
-  if [ -d "/awips2/dev" ] ; then
+  if [ ! -d "/awips2/dev" ] ; then
       mkdir -p /awips2/dev
   fi
 }
@@ -425,7 +425,7 @@ function cave_prep {
   check_epel
   check_postgres
   rm -rf /home/awips/caveData 
-  if [ -d "/awips2/dev" ] ; then
+  if [ ! -d "/awips2/dev" ] ; then
       mkdir -p /awips2/dev
   fi
 }
@@ -444,31 +444,28 @@ case $key in
         echo "CAVE has finished installing, the install log can be found in /awips2/dev/awips-install-${date}.log"
         ;;
     --server|--edex)
-        #server_prep
-        #yum --disableexcludes=main install awips2-*post* -y 
-        #yum --disableexcludes=main groupinstall awips2-server -y 2>&1 | tee -a /awips2/dev/awips-install-${date}.log
-        #sed -i 's/enabled=1/enabled=0/' /etc/yum.repos.d/awips2.repo
-        #sed -i 's/@LDM_PORT@/388/' /awips2/ldm/etc/registry.xml 
-        #echo "EDEX server has finished installing, the install log can be found in /awips2/dev/awips-install-${date}.log"
-        echo "EDEX is not available for install. This beta version is for CAVE installs only"
+        server_prep
+        yum --disableexcludes=main install awips2-*post* -y 
+        yum --disableexcludes=main groupinstall awips2-server -y 2>&1 | tee -a /awips2/dev/awips-install-${date}.log
+        sed -i 's/enabled=1/enabled=0/' /etc/yum.repos.d/awips2.repo
+        sed -i 's/@LDM_PORT@/388/' /awips2/ldm/etc/registry.xml 
+        echo "EDEX server has finished installing, the install log can be found in /awips2/dev/awips-install-${date}.log"
         ;;
     --database)
-        #server_prep
-        #yum  --disableexcludes=main groupinstall awips2-database -y 2>&1 | tee -a /awips2/dev/awips-install-${date}.log
-        #disable_ndm_update
-        #sed -i 's/enabled=1/enabled=0/' /etc/yum.repos.d/awips2.repo
-        #sed -i 's/@LDM_PORT@/388/' /awips2/ldm/etc/registry.xml 
-        #echo "EDEX database has finished installing, the install log can be found in /awips2/dev/awips-install-${date}.log"
-        echo "EDEX database is not available for install. This beta version is for CAVE installs only"
+        server_prep
+        yum  --disableexcludes=main groupinstall awips2-database -y 2>&1 | tee -a /awips2/dev/awips-install-${date}.log
+        disable_ndm_update
+        sed -i 's/enabled=1/enabled=0/' /etc/yum.repos.d/awips2.repo
+        sed -i 's/@LDM_PORT@/388/' /awips2/ldm/etc/registry.xml 
+        echo "EDEX database has finished installing, the install log can be found in /awips2/dev/awips-install-${date}.log"
         ;;
     --ingest)
-        #server_prep
-        #yum  --disableexcludes=main groupinstall awips2-ingest -y 2>&1 | tee -a /awips2/dev/awips-install-${date}.log
-        #disable_ndm_update
-        #sed -i 's/enabled=1/enabled=0/' /etc/yum.repos.d/awips2.repo
-        #sed -i 's/@LDM_PORT@/388/' /awips2/ldm/etc/registry.xml 
-        #echo "EDEX ingest has finished installing, the install log can be found in /awips2/dev/awips-install-${date} .log"
-        echo "EDEX ingest is not available for install. This beta version is for CAVE installs only"
+        server_prep
+        yum  --disableexcludes=main groupinstall awips2-ingest -y 2>&1 | tee -a /awips2/dev/awips-install-${date}.log
+        disable_ndm_update
+        sed -i 's/enabled=1/enabled=0/' /etc/yum.repos.d/awips2.repo
+        sed -i 's/@LDM_PORT@/388/' /awips2/ldm/etc/registry.xml 
+        echo "EDEX ingest has finished installing, the install log can be found in /awips2/dev/awips-install-${date} .log"
         ;;
     -h|--help)
         echo -e $usage
