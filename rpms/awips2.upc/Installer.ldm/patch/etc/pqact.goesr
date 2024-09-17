@@ -70,6 +70,17 @@ NIMAGE	^/data/ldm/pub/native/satellite/GOES/([^/]*)/Products/DebraDust/([^/]*)/(
 NIMAGE	^/data/ldm/pub/native/satellite/GOES/([^/]*)/Products/CloudSnow/([^/]*)/([^/]*)/([0-9]{8})/([^/]*)(c[0-9]{7})(..)(.....).nc
 	FILE	-close -edex	/awips2/data_store/GOES/\4/\7/CIRA/CloudSnow/\5\6\7\8.nc4
 
+# GOES CIMSS/SSEC Products
+#UWSSEC_AWIPS_LightningCast_GOES-18_RadM1_20240822-170028.nc.gz
+EXP	(UWSSEC_AWIPS_LightningCast_GOES.*)
+	FILE	-close	/awips2/data_store/GOES/%Y%m%d/%H/UWSSEC/LightningCast/\1
+EXP	(UWSSEC_AWIPS_LightningCast_GOES.*)
+	EXEC	/awips2/ldm/dev/gunzip.py /awips2/data_store/GOES/%Y%m%d/%H/UWSSEC/LightningCast/\1
+
+#UWSSEC_AWIPS_L2-GRIDTURBF-M6_G16_s20242351640205_e20242351649513_c20242351649557.nc
+EXP	(UWSSEC_AWIPS_L2-GRIDTURB.*)
+	FILE	-close -edex	/awips2/data_store/GOES/%Y%m%d/%H/UWSSEC/Turbulence/\1
+
 #
 # NPP/VIIRS
 #
