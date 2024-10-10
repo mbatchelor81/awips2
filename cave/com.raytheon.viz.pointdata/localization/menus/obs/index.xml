@@ -24,8 +24,11 @@
         of the file. 
     -->
 <menuContributionFile>
-    <include installTo="menu:obs?after=SURFACE" fileName="menus/obs/baseSurface.xml" />
+    <include installTo="menu:obs?before=SURFACE" fileName="menus/obs/baseSurface.xml" />
+    <include installTo="menu:obs?after=SURFACE" fileName="menus/mping/baseMPing.xml" />
+<!--     
     <include installTo="menu:obs?after=METAR" fileName="menus/obs/baseMetar.xml" />
     <include installTo="menu:obs?after=SYNOPTIC" fileName="menus/obs/baseSynoptic.xml" />
     <include installTo="menu:obs?after=MARITIME" fileName="menus/obs/baseMaritime.xml" />
+-->
 </menuContributionFile>
