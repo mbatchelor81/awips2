@@ -277,7 +277,9 @@ function backupConfigs {
 function remove_edex {
   logPaths=("/awips2/edex/logs" "/awips2/httpd_pypies/var/log/httpd/" "/awips2/database/data/pg_log/" "/awips2/qpid/log/" "/awips2/ldm/logs/")
   configPaths=("/awips2/database/data/pg_hba*conf" "/awips2/edex/data/utility" "/awips2/edex/bin" "/awips2/ldm/etc" "/awips2/ldm/dev" "/awips2/edex/conf" "/awips2/edex/etc" "/usr/bin/edex" "/etc/init*d/edexServiceList" "/var/spool/cron/awips")
-
+  if [[ $HOSTNAME =~ js2local ]] && [ ! -d /data1/configs ]; then
+    mkdir -p /data1/configs
+  fi
   while true; do
     read -p "`echo $'\n'`Please make a selction for what you would like backed up. If you choose not to back up files you will lose all your configurations:
 1. logs
@@ -290,8 +292,11 @@ function remove_edex {
     if [[ $backup_ans =~ [1-3] ]]; then
       echo "ANSWER: $backup_ans"
       while true; do 
-        read -p "`echo $'\n'`What location do you want your files backed up to? `echo $'\n> '`" backup_dir
-
+        if [[ $HOSTNAME =~ js2local ]]; then 
+          backup_dir=/data1/configs
+        else
+          read -p "`echo $'\n'`What location do you want your files backed up to? `echo $'\n> '`" backup_dir
+        fi
         if [ ! -d $backup_dir ]; then
           echo "$backup_dir does not exist, enter a path that exists"
         else
@@ -487,6 +492,10 @@ case $key in
         sed -i 's/enabled=1/enabled=0/' /etc/yum.repos.d/awips2.repo
         sed -i 's/@LDM_PORT@/388/' /awips2/ldm/etc/registry.xml 
         echo "EDEX server has finished installing, the install log can be found in /awips2/dev/awips-install-${date}.log"
+        if [[ $HOSTNAME =~ js2local ]]; then 
+          echo "Running post_install script $HOSTNAME" 
+          perl  /awips2/dev/git_unidata_builds/awips-unidata-builds/linux/builds/scripts/post_install.pl
+        fi
         ;;
     --database)
         server_prep
@@ -503,6 +512,10 @@ case $key in
         sed -i 's/enabled=1/enabled=0/' /etc/yum.repos.d/awips2.repo
         sed -i 's/@LDM_PORT@/388/' /awips2/ldm/etc/registry.xml 
         echo "EDEX ingest has finished installing, the install log can be found in /awips2/dev/awips-install-${date} .log"
+        if [[ $HOSTNAME =~ js2local ]]; then 
+          echo "Running post_install script $HOSTNAME" 
+          perl  /awips2/dev/git_unidata_builds/awips-unidata-builds/linux/builds/scripts/post_install.pl
+        fi
         ;;
     -h|--help)
         echo -e $usage
