@@ -16,20 +16,19 @@
  * See the AWIPS II Master Rights File ("Master Rights File.pdf") for
  * further licensing information.
  **/
-package com.raytheon.uf.viz.grid.radar.rsc;
+package com.raytheon.viz.grid.xml;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-
-import com.raytheon.uf.common.dataplugin.PluginDataObject;
-import com.raytheon.uf.viz.core.exception.VizException;
-import com.raytheon.uf.viz.core.rsc.AbstractVizResource;
-import com.raytheon.uf.viz.core.rsc.LoadProperties;
-import com.raytheon.uf.viz.grid.radar.rsc.util.RadarSRMResourceUtils;
-import com.raytheon.viz.grid.rsc.GridResourceData;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Resource data for radar Storm Relative Velocity Map (SRM) grid resources.
+ * Wrapper around a collection of {@link VerticalInteractionLevelGroup}s to
+ * support XML serialization of them.
  *
  * <pre>
  *
@@ -37,22 +36,24 @@ import com.raytheon.viz.grid.rsc.GridResourceData;
  *
  * Date         Ticket#    Engineer    Description
  * ------------ ---------- ----------- --------------------------
- * Feb 22, 2023 9021       mapeters    Initial creation
+ * Sep 06, 2024 2036517    mapeters    Initial creation
  *
  * </pre>
  *
  * @author mapeters
  */
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class RadarSRMGridResourceData extends GridResourceData {
+public class VerticalInteractionLevels {
 
-    @Override
-    protected AbstractVizResource<?, ?> constructResource(
-            LoadProperties loadProperties, PluginDataObject[] objects)
-            throws VizException {
-        AbstractVizResource<?, ?> rsc = super.constructResource(loadProperties,
-                objects);
-        RadarSRMResourceUtils.registerSRMListeners(rsc);
-        return rsc;
+    @XmlElement(name = "group")
+    private List<VerticalInteractionLevelGroup> groups = new ArrayList<>();
+
+    public List<VerticalInteractionLevelGroup> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(List<VerticalInteractionLevelGroup> groups) {
+        this.groups = groups;
     }
 }
