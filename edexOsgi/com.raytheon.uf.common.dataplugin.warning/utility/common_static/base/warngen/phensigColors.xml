@@ -101,6 +101,8 @@
 	  <entry><key>WS.A</key><value color="#4682b4" name="Winter Storm Watch"></value></entry>
 	  <entry><key>WS.W</key><value color="hotpink" name="Winter Storm Warning"></value></entry>
 	  <entry><key>WW.Y</key><value color="#7b68ee" name="Winter Weather Advisory"></value></entry>
+ 	  <entry><key>XH.A</key><value color="maroon" name="Extreme Heat Watch"></value></entry>
+	  <entry><key>XH.W</key><value color="mediumvioletred" name="Extreme Heat Warning"></value></entry>
 	  <entry><key>ZF.Y</key><value color="teal" name="Freezing Fog Advisory"></value></entry>
 	  <entry><key>ZR.Y</key><value color="orchid" name="Freezing Rain Advisory"></value></entry>
 	</map>
