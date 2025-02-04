@@ -3,11 +3,14 @@
 # devorg: Unidata Program Center
 # author: Michael James, Tiffany Meyer
 # maintainer: <support-awips@unidata.ucar.edu>
-# Date Updated: 8/8/2024
+# Date Updated: 2/4/2025
 # use: ./awips_install-v23.sh (--cave|--edex|--database|--ingest|--help)
 # BETA INSTALL
 #
 # 8/8/24 (tmeyer) - Added checks for mesa-libGLU (CAVE), SELINUX (EDEX), RHEL8 specific repos, postgres
+# 11/18/24 (tmeyer) - Added Jetstream2 specific updates
+# 2/4/25 (tmeyer) - Added ability to install on RHEL/Rocky9 
+#                 - Fixed missing date
 
 dir="$( cd "$(dirname "$0")" ; pwd -P )"
 
@@ -29,8 +32,10 @@ function stop_edex_services {
 function check_yumfile {
   if [[ $(grep "release 8" /etc/redhat-release) ]]; then
     repofile=awips2.repo
+  elif [[ $(grep "release 9" /etc/redhat-release) ]]; then
+    repofile=awips2.repo
   else
-    echo "You need to be running a version of RedHat8 or Rocky8"
+    echo "You need to be running a version of RedHat8/9 or Rocky8/9"
     exit
   fi
   if [ -f /etc/yum.repos.d/awips2.repo ]; then
@@ -50,8 +55,10 @@ function check_yumfile {
 }
 
 function check_powertools { 
-  if [[ $(grep "Red Hat Enterprise" /etc/redhat-release) ]]; then
+  if [[ $(grep "Red Hat Enterprise release 8" /etc/redhat-release) ]]; then
     yum config-manager --set-enabled codeready-builder-for-rhel-8-x86_64-rpms
+  elif [[ $(grep "Red Hat Enterprise release 9" /etc/redhat-release) ]]; then
+    yum config-manager --set-enabled codeready-builder-for-rhel-9-x86_64-rpms
   else
     # rocky
     yum config-manager --set-enabled powertools
@@ -387,7 +394,7 @@ function remove_edex {
   fi
 
   yum --disableexcludes=main groupremove awips2-server awips2-database awips2-ingest awips2-cave -y
-  yum --disableexcludes=main remove awips2-* -y
+  yum --disableexcludes=main remove awips2* -y
 
   if [[ $(rpm -qa | grep awips2 | grep -v cave) ]]; then
     echo "
@@ -487,6 +494,7 @@ case $key in
         ;;
     --server|--edex)
         server_prep
+	date=$(date +%Y%m%d-%H:%M:%S)
         yum --disableexcludes=main install awips2-*post* -y 
         yum --disableexcludes=main groupinstall awips2-server -y 2>&1 | tee -a /awips2/dev/awips-install-${date}.log
         sed -i 's/enabled=1/enabled=0/' /etc/yum.repos.d/awips2.repo
@@ -499,6 +507,7 @@ case $key in
         ;;
     --database)
         server_prep
+	date=$(date +%Y%m%d-%H:%M:%S)
         yum  --disableexcludes=main groupinstall awips2-database -y 2>&1 | tee -a /awips2/dev/awips-install-${date}.log
         disable_ndm_update
         sed -i 's/enabled=1/enabled=0/' /etc/yum.repos.d/awips2.repo
@@ -507,6 +516,7 @@ case $key in
         ;;
     --ingest)
         server_prep
+	date=$(date +%Y%m%d-%H:%M:%S)
         yum  --disableexcludes=main groupinstall awips2-ingest -y 2>&1 | tee -a /awips2/dev/awips-install-${date}.log
         disable_ndm_update
         sed -i 's/enabled=1/enabled=0/' /etc/yum.repos.d/awips2.repo
