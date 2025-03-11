@@ -21,7 +21,7 @@
 <menuTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
             <contribute xsi:type="bundleItem" file="bundles/UpperAirProfiler.xml"
-                        menuText="Block Island, RI (BIDR1)" id="profBlockIsland_RI">
+                        menuText="Block Island RI (BIDR1)" id="profBlockIsland_RI">
                 <substitute key="wmoid" value="74973"/>
                 <substitute key="productURI" value="/profiler/%/3000/74973/%"/>
             </contribute>
