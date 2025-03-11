@@ -175,7 +175,7 @@ _ldm_root_dir=${_ldm_dir}/ldm-%{_ldm_version}
 
 cp ${_ldm_dir}/SOURCES/%{_ldm_src_tar} ${_ldm_dir}
 cd ${_ldm_dir}
-/usr/bin/tar -xzf %{_ldm_src_tar} --transform "s|ldm-%{_ldm_version}|ldm-%{_ldm_version}/src|g"
+/bin/tar -xzf %{_ldm_src_tar} --transform "s|ldm-%{_ldm_version}|ldm-%{_ldm_version}/src|g"
 if [ $? -ne 0 ]; then
    exit 1
 fi
