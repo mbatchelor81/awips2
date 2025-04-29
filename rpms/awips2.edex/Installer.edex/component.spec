@@ -72,7 +72,7 @@ if [ $? -ne 0 ]; then
 
 fi
 
-mkdir --parents %{_build_root}/awips2/dev
+mkdir --parents %{_build_root}/awips2/dev/programs
 
 if [ $? -ne 0 ]; then
 
@@ -90,7 +90,9 @@ fi
 
 /bin/cp --recursive %{_baseline_workspace}/rpms/awips2.edex/Installer.edex/ndm/* ${RPM_BUILD_ROOT}/awips2/edex/data/ndm/
 
-/bin/cp --recursive %{_baseline_workspace}/rpms/awips2.edex/Installer.edex/programs/updateNDM.pl ${RPM_BUILD_ROOT}/awips2/dev/
+/bin/cp --recursive %{_baseline_workspace}/rpms/awips2.edex/Installer.edex/programs/updateNDM.pl ${RPM_BUILD_ROOT}/awips2/dev/programs
+
+/bin/cp --recursive %{_baseline_workspace}/rpms/awips2.edex/Installer.edex/programs/edexRunning.sh ${RPM_BUILD_ROOT}/awips2/dev/programs
 
 /bin/cp --recursive %{_baseline_workspace}/rpms/awips2.edex/Installer.edex/programs/logs ${RPM_BUILD_ROOT}/awips2/dev/
 
@@ -175,8 +177,10 @@ rm --recursive --force %{_build_root}
 %dir /awips2/edex/data/ndm
 /awips2/edex/data/ndm/*
 
-%attr(755,awips,fxalpha) /awips2/dev/updateNDM.pl
+%attr(755,awips,fxalpha) /awips2/dev/programs/updateNDM.pl
 %attr(755,awips,fxalpha) /awips2/dev/logs/updateNDM.log
+%attr(755,awips,fxalpha) /awips2/dev/programs/edexRunning.sh
+%attr(755,awips,fxalpha) /awips2/dev/logs/edexRunning.log
 
 %attr(644,root,root) %{_unitdir}/edex_camel@.service
 %attr(644,root,root) %{_unitdir}/edex_camel.target
