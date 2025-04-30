@@ -28,6 +28,17 @@ echo "0=$AWIPSII_VERSION-$AWIPSII_RELEASE
 1=$AWIPSII_BUILD_DATE
 2=$AWIPSII_BUILD_SYS">/awips2/repo/awips2/cave/com.raytheon.viz.product.awips/about.mappings
 
+#Set EDEX Banner
+echo "**************************************************
+* Unidata AWIPS EDEX ESB Platform                *
+* Version: $AWIPSII_VERSION-$AWIPSII_RELEASE                              *
+* UCAR NSF Unidata Program Center                *
+*------------------------------------------------*
+* NON-OPERATIONAL                                *
+*                                                *
+*                                                *
+**************************************************">/awips2/repo/awips2/build/deploy.edex.awips2/esb/conf/banner.txt
+
 # If local source directories, exist, mount them to the container
 if [ $rpmname = "buildCAVE" ]; then
   for dn in `cat build/repos| grep -v static| grep -v nativelib |grep -v awips2-rpm`
