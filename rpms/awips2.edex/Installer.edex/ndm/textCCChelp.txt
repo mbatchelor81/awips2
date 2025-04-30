@@ -16,7 +16,6 @@
 01T High Island, LA
  02 Bulletin No. 02
  03 Bulletin No. 03
-03Y Hallock, MN
  04 Bulletin No. 04
 04V Saguache Muni, Saguache, CO
 04W Field of Dreams AP, Hinckley, MN
@@ -46,7 +45,7 @@
 0S9 Jefferson Co Intl, Port Townsend, WA
 0V4 Brookneal/Campbell Cnty AP, Brookneal, VA
 0VG Lee Cnty AP, Jonesville, VA
-0W3 Churchville, DC
+0W3 Harford County Airport, Churchville, MD
 0W4 Kent Island, MD
 0W8 Chincoteague, VA
 100 Bulletin No. 100
@@ -200,7 +199,6 @@
 1S5 Sunnyside Muni, WA
 1U7 Bear Lake Airport, Paris, ID
 1U7 Bear Lake County, ID
-1V1 Rifle, CO
 1V4 St. Johnsbury, VT
 1V6 Fremont Cnty AP, Canon City, CO
 1Y7 Yuma Proving Ground, AZ
@@ -333,7 +331,6 @@
 3KK Kankakee, IL
 3L4 Little Pecan Island Airport, Grand Chenier, LA
 3LF Litchfield Muni, IL
-3MW Mount Werner, CO (Pass)
 3N8 Mahnomen Cnty AP, Mahnomen, MN
 3OI Lamoni, IA
 3R0 Beeville Muni, Beeville, TX
@@ -345,7 +342,6 @@
 3T5 La Grange/Fayette Regnl, TX 
 3U3 Bowman Field Airport, Anaconda, MT
 3V6 Crested Butte, CO
-3V9 Aspen, CO
 3W7 Grand Coulee Dam, Electric City, WA
 3WO Shawano, WI
 400 Bulletin No. 400
@@ -475,7 +471,6 @@
 60R Navasota Muni Airport, Navasota, TX
 60Y Slayton Muni, Slayton, MN
 62M 12 HR RGL WND 12K FT
-62Y Two Harbors, MN
 63S Colville Airport, Colville, WA
 65S Boundary Cnty AP, Bonners Ferry, ID
 66R Robert Wells AP, Columbus, TX
@@ -543,7 +538,6 @@
 8T6 Live Oak County Airport, George West, TX
 8V7 Springfield, CO
 8W2 New Market AP, New Market, VA
-8Y8 Crane Lake, MN
 90J Astor NAS, FL
 92S Sixes, OR
 93Q Pigeon Point CGS, Pescadero, CA
@@ -824,7 +818,7 @@ AS6 Atlantic Ship Bulletin No. 6
 ASA Savoonga Arpt, AK
 ASC Deadhorse, AK
 ASD K-Slidell, LA; P-Sand Point, AK
-ASE Aspen, CO
+ASE Aspen-Pitkin County Airport, Aspen, CO
 ASG Springdale, AR
 ASH K-Nashua/Boire Fld, NH; P-Shishmaref, AK
 ASI Sitka/Japonski Arpt, AK
@@ -1144,7 +1138,7 @@ CCY Charles City, IA
 CDA Caledonia Cnty AP, Lyndonville, VT
 CDB Cold Bay, AK
 CDC Cedar City, UT
-CDD Crane Lake, MN
+CDD Scotts Seaplane Base, Crane Lake, MN
 CDE Cape Decision CGS, Cape Decision, AK
 CDH Harrell Fld AP, Camden, AR
 CDI Cambridge Muni AP, Cambridge, OH
@@ -1432,7 +1426,7 @@ DRA Desert Rock, NV
 DRC Deer Creek, WY
 DRI Beauregard Rgnl AP, De Ridder, LA
 DRK U.S. Drought Outlook Discussion
-DRM Drummond Is AP, Drummond Is, MI
+DRM Drummond Island Airport, Drummond Island, MI
 DRO Durango-La Plata Cnty AP, Durango, CO; Drought Summary
 DRP Delta Regional Airport, Colt, AR
 DRT Del Rio, TX
@@ -1535,7 +1529,7 @@ EGV Eagle River/Union, WI
 EHA Elkhart, KS
 EHC East Cameron 278, LA AWOS-3
 EHO Shelby Muni, NC
-EHR Henderson City, KY
+EHR Henderson Airport, Henderson, KY
 EHT East Hartford, CT
 EHU Southern Region Hq, Fort Worth, TX
 EHY Elk Mountain AWOS, WY
@@ -1775,7 +1769,6 @@ FWA Fort Wayne, IN
 FWB Branson West Muni, Branson, MO
 FWC Fairfield, IL
 FWD WFO Dallas/Fort Worth, TX
-FWH Carswell AFB, Fort Worth, TX
 FWN Sussex, NJ
 FWQ Rostraver AP, Monongahela, PA
 FWR West Gulf RFC, Ft Worth, TX
@@ -1975,7 +1968,7 @@ HBT Humboldt River
 HBV Jim Hogg Cnty AP, Hebbronville, TX
 HCA K-Big Spring, TX: M-Le Esperanze, H0
 HCD Hutchinson, MN
-HCO Hallock, MN
+HCO Hallock Municipal Airport, Hallock, MN
 HCR Heber City Minicipal Airport, Heber, UT
 HDC Hammond Muni, LA
 HDE Holdrege, NE
@@ -3095,7 +3088,6 @@ N66 Oneonta, NY
 N79 Shamokin, PA
 N84 Execution Rocks CGS, Bronx, NY
 N87 Robbinsville, NJ
-N91 Cape May CGS, NJ
 NAH National Agricultural Weather Highlights
 NAK Annapolis, MD
  NA North America
@@ -3428,7 +3420,7 @@ PAE Everett, WA
 PAH WFO Paducah, KY WSR-88D
 PAM Tyndall AFB, Panama City, FL
 PAN K-Payson, AZ; Pan American
-PAO Palo Alto, CA
+PAO Palo Alto Airport, Palo Alto, CA
  PA Pennsylvania
 PAQ Palmer, AK
 PAT Pathfinder Hill, WY
@@ -3660,7 +3652,7 @@ RHV San Jose, CA
 RIC Richmond, VA
 RID Richmond Muni Airport, Richmond, IN
 RIF Richfield Muni Airport, Richfield, UT
-RIL Rifle/Garfield Regnl, CO
+RIL Rifle Garfield County Airport, Rifle, CO
 RIM Radar Echo Intensity Map; K-Rim, WY
 RIP Radar Regional Intensity Plot (RIP)
  RI Rhode Island
@@ -3730,7 +3722,6 @@ RVF Ruby Valley Field Airport, Twin Bridges, MT
 RVJ Swinton Smith Field, Reidsville, GA
 RVL Reedsville, PA
 RVS Tulsa Riverside Arpt, OK
-RWC Redwood City, CA
 RWF Redwood Falls, MN
 RWI Rocky Mount, NC
 RWL Rawlins, WY
@@ -3793,7 +3784,7 @@ SBM Sheboygan, WI
 SBN South Bend, IN
 SBO Emanuel Cnty AP, Swainsboro, GA
 SBP San Luis Obispo, CA
-SBS Steamboat Springs, CO
+SBS Steamboat Springs Airport, CO
 SBX Shelby Airport, Shelby, MT
 SBY Salisbury, MD
 SC1 South Central US; South Carolina Rivers
@@ -4151,7 +4142,7 @@ TWC K-WFO Tucson, AZ; Gulf of Alaska SHEF-Encoded ETSS
 TWE East Coast SHEF-Encoded ETSS
 TWF Twin Falls, ID
 TWG Gulf of America SHEF-Encoded ETSS
-TWM Two Harbors, MN
+TWM Richard B Helgeson Airport, Two Harbors, MN
 TWP West Coast SHEF-Encoded ETSS
 TWT Sturgis Muni Airport, Sturgis, KY
 TWX Great Falls, MT WSR-88D
@@ -4691,7 +4682,7 @@ WVY Lemieux, QC
 WVZ Ile Charron, QC
 WWA West Vancouver, BC
 WWB Burlington Piers, ON
-WWD Wildwood, NJ
+WWD Cape May County Airport, Wildwood, NJ
   W Western
 WWE Western Head, NS
 WWF Weyburn, SK
@@ -4832,7 +4823,6 @@ Y50 Wautoma Muni, Wautoma, WI
 Y51 Viroqua Muni, Viroqua, WI
 Y62 Sault Ste Marie, MI
 Y63 Elbow Lake Muni, MN
-Y66 Drummond Is AP, Drummond Is, MI
 Y68 Tracy Muni, Tracy, MN
 Y69 Litchfield, MN
 Y70 Ionia Cnty AP, Ionia, MI
