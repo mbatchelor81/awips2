@@ -18,7 +18,7 @@ jobs:
           sudo apt-get install subversion
       # Checkout this repo
       # this gets the latest code (and is run on the default branch)
-      - name: Checkout awips2-private
+      - name: Checkout awips2
         uses: actions/checkout@v3
         with:
           ref: unidata_23.4.1
