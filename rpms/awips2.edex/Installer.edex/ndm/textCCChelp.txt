@@ -3985,7 +3985,7 @@ SVC Grant Cnty AP, Silver City, NM
 SVE Susanville Muni AP, CA
 SVH Statesville Muni, NC
 SVN Hunter Army Air Field, GA
-SVR South Valley Regional Airport (AKA KU42), West Jordan, UT
+SVR South Valley Regional Airport, West Jordan, UT
 SWA Swan Island, Caribbean Sea
 SWB Southwestern Boroughs/Kodiak Zones, AK
 SWF Newburgh, NY
@@ -4168,7 +4168,6 @@ U17 Bullfrog, UT
 U24 Delta, UT
 U28 Green River, UT
 U31 Austin, NV
-U42 South Valley Regional Airport (AKA KSVR), West Jordan, UT
 U52 Beaver Municipal Airport, Beaver, UT
 U55 Panguitch Municipal Airport, Panguitch, UT
 U64 Monticello, CO
