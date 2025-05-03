@@ -1125,7 +1125,6 @@
 0000000000|K3R7 | 30.2427| -92.6735|  7|Jennings AP, Jennings, LA           |US|MTR
 0000000000|K3S2 | 45.26 |-122.75 |    8|AURORA, OR                          |US|MTR
 0000000000|K3S8 | 42.5101|-123.388| 345|Grants Pass AP, Grants Pass, OR     |US|MTR
-0000072650|K3SE | 43.18 | -95.15 |  404|SPENCER, IA                         |US|MTR
 0000000000|K3T5 | 29.91 | -96.95 |   99|La Grange/Fayette Regnl, TX         |US|MTR
 0000000000|K3U3 | 46.15341|-112.86773| 1534|Bowman Field Arpt, Anaconda, MT |US|MTR
 0000000000|K3W7 |47.92206|-119.083| 486|Grand Coulee Dam, Electric City, WA |US|MTR
@@ -1179,7 +1178,6 @@
 0000000000|K4V5 | 37.29 |-107.86 | 2012|DURANGO, CO                         |US|MTR
 0000000000|K4V9 | 42.11225|-98.03978| 541|Antelope Cnty Arpt, Neligh, NE    |US|MTR
 0000072495|K50Q | 37.71 |-123.00 |   12|FARALLON ISLAND, CA                 |US|MTR
-0000000000|K53D | 45.66 | -95.39 |  423|GLENWOOD, MN                        |US|MTR
 0000000000|K54A | 26.85374| -82.25260|  2|Coral Creek AP, Placida, FL       |US|MTR
 0000000000|K54J | 30.731| -86.1538|  88|DeFuniak Spr AP, DeFuniak Spr, FL   |US|MTR
 0000000000|K55J | 30.612| -81.461|    5|Fernandina Bch Muni, FL             |US|MTR
@@ -2149,7 +2147,7 @@
 0000072768|KGGW | 48.21 |-106.63 |  693|GLASGOW INTL ARPT, MT               |US|MTR
 0000000000|KGHB | 27.840| -91.988|   -0|GB172/Salsa (Shell E-P), LA         |US|MTR
 0000000000|KGHG | 42.098| -70.672|    3|Harlow Fld, Marshfield Muni, MA     |US|MTR
-0000000000|KGHW | 45.65 | -95.32 |  425|Glenwood, MN                        |US|MTR
+0000000000|KGHW | 45.64383|-95.32045| 425|Glenwood Muni Arpt, Glenwood, MN  |US|MTR
 0000000000|KGIC | 45.943|-116.123| 1010|Idaho Cnty AP, Grangeville, ID      |US|MTR
 0000000000|KGIF | 28.063| -81.753|   44|Winter Haven, FL                    |US|MTR
 0000072476|KGJT | 39.12 |-108.53 | 1452|GRAND JUNCTION, CO                  |US|MTR
@@ -3446,7 +3444,7 @@
 0000000000|KSPL | 26.0706| -97.1572|  3|South Padre Island Heliport, TX     |US|MTR
 0000000000|KSPR | 28.5989| -91.2064| -0|Ship Shoal, LA AWOS-3               |US|MTR
 0000072351|KSPS | 33.98 | -98.48 |  314|SHEPPARD AFB, TX                    |US|MTR
-0000072650|KSPW | 43.17 | -95.21 |  404|Spencer Muni, IA                    |US|MTR
+0000072650|KSPW | 43.16565|-95.20279| 408|Spencer Muni Arpt, Spencer, IA    |US|MTR
 0000000000|KSQE | 28.083| -90.819|   -0|Ship Shoal 354 Fieldwood Energ, LA  |US|MTR
 0000000000|KSQI | 41.75 | -89.67 |  197|STERLING ROCK, IL                   |US|MTR
 0000000000|KSQL | 37.53 |-122.25 |    1|SAN CARLOS, CA                      |US|MTR

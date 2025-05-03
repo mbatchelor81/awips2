@@ -338,7 +338,6 @@
 3R7 Jennings, LA
 3S2 Aurora, OR
 3S8 Grants Pass Airport, Grants Pass, OR
-3SE Spencer, IA
 3T5 La Grange/Fayette Regnl, TX 
 3U3 Bowman Field Airport, Anaconda, MT
 3V6 Crested Butte, CO
@@ -429,7 +428,6 @@
 50A 00H ERL 500 mb Plot File
 50Q Farallon Island, CA
 52M 12 HR RGL WND 18K FT
-53D Glenwood, MN
 54A Coral Creek AP, Placida, FL
 54J Defuniak Springs, FL
 55J Fernandina Bch Muni, FL
@@ -1836,7 +1834,7 @@ GGT Aurora, Guatemala
 GGW WFO Glasgow, MT WSR-88D
 GHB GB172/Salsa (Shell E-P), LA
 GHG Harlow Fld, Marshfield Muni, MA
-GHW Glenwood, MN
+GHW Glenwood Municipal Airport, Glenwood, MN
 GIC Idaho Cnty AP, Grangeville, ID
 GID WFO Hastings, NE
 GIF Winter Haven, FL
@@ -3927,7 +3925,7 @@ SPN Spanish Language Products
 SPR Ship Shoal, LA AWOS-3
  SP Spokane River; Spain; South Pacific
 SPS Sheppard AFB, TX
-SPW Spencer, IA
+SPW Spencer Municipal Airport, Spencer, IA
 SQE Ship Shoal 354 (Fieldwood Energy), LA
 SQI Sterling Rockfalls, IL
 SQL San Carlos, CA
