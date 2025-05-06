@@ -956,7 +956,7 @@
 0000000000|K0A9 | 36.371| -82.173|  486|Elizabethton Muni, Elizabethton, TN |US|MTR
 0000000000|K0CO | 39.79448|-105.76395| 3808|Berthoud Pass, CO               |US|MTR
 0000000000|K0D8 | 44.98846|-99.95506| 628|Gettysburg Muni AP, Gettysburg, SD|US|MTR
-0000000000|K0E0 | 34.986|-106.009| 1889|Moriarty Muni, Moriarty, NM         |US|MTR
+0000000000|K0E0 | 34.97817|-106.00003| 1891|Moriarty Muni AP, Moriarty, NM  |US|MTR
 0000000000|K0F2 | 33.602| -97.776|  336|Bowie Muni, Bowie, TX               |US|MTR
 0000000000|K0J4 | 31.042| -86.312|   96|Florala Muni, AL                    |US|MTR
 0000000000|K0R0 | 31.2970| -89.8128| 81|Columbia-Marion Cnty AP, Columbia,MS|US|MTR
@@ -1155,14 +1155,12 @@
 0000000000|K4CR | 34.11 |-105.68 | 1981|CORONA, NM                          |US|MTR
 0000000000|K4DG | 42.76 |-105.38 | 1477|DOUGLAS, WY                         |US|MTR
 0000000000|K4F2 | 32.17608|-94.29881| 76|Panola Cnty AP, Carthage, TX       |US|MTR
-0000000000|K4HV | 38.38 |-110.72 | 1314|HANKSVILLE, UT                      |US|MTR
 0000000000|K4I3 | 40.329| -82.526|  363|Knox Cnty, Mount Vernon, OH         |US|MTR
 0000072463|K4LJ | 38.12 |-102.60 | 1103|LAMAR, CO                           |US|MTR
 0000000000|K4M3 |34.8082| -91.7121|  73|Carlisle, AR                        |US|MTR
 0000000000|K4M4 | 35.598| -92.452|  157|Clinton Muni, Clinton, AR           |US|MTR
 0000000000|K4M9 | 36.404| -90.648|   89|Corning, AR                         |US|MTR
 0000074638|K4MR | 34.30 |-103.80 | 1326|MELROSE GNRY RAN, NM                |US|MTR
-0000000000|K4MY | 34.98 |-106.05 | 1896|MORIARTY, NM                        |US|MTR
 0000000000|K4O4 | 33.909| -94.859|  144|McCurtain Cnty Rg AP, Idabel, OK    |US|MTR
 0000072789|K4OM | 48.44 |-119.53 |  374|OMAK, WA                            |US|MTR
 0000000000|K4R4 | 30.461| -87.877|   28|HL Sonny Callahan AP, Fairhope, AL  |US|MTR
@@ -2337,7 +2335,7 @@
 0000000000|KHUM | 29.567| -90.66 |    3|Houma-Terrebonne AP, Houma, LA      |US|MTR
 0000000000|KHUT | 38.0667|-97.8667| 470|HUTCHINSON, KS                      |US|MTR
 0000000000|KHVC |36.857 | -87.4551| 163|Hopkinsville, KY                    |US|MTR
-0000000000|KHVE | 38.4180|-110.7040|1355|Hanksville AP, Hanksville, UT      |US|MTR
+0000000000|KHVE | 38.41942|-110.70292|1358|Hanksville AP, Hanksville, UT    |US|MTR
 0000000000|KHVN | 41.28 | -72.88 |    4|NEW HAVEN/TWEED, CT                 |US|MTR
 0000072777|KHVR | 48.55 |-109.77 |  789|HAVRE (AMOS), MT                    |US|MTR
 0000000000|KHVS | 34.403| -80.119|  111|Hartsville, SC                      |US|MTR

@@ -34,7 +34,7 @@
   0 Bulletin No. 0
 0CO Berthoud Pass, CO
 0D8 Gettysburg Muni Airport, Gettysburg, SD
-0E0 Moriarty Muni, Moriarty, NM
+0E0 Moriarty Municipal Airport, Moriarty, NM
 0E4 Payson, AZ
 0F2 Bowie Muni, Bowie, TX
 0J4 Florala Muni, AL
@@ -395,7 +395,6 @@
 4DG Douglas, WY
 4F2 Panola County Airport-Sharpe Field, Carthage, TX
 4HA Whitehall, MT
-4HV Hanksville, UT
 4I3 Knox Cnty, Mount Vernon, OH
 4LJ Lamar, CO
 4M3 Carlisle, AR
