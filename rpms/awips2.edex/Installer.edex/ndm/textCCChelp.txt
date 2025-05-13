@@ -1174,7 +1174,6 @@ CGZ Casa Grande, AZ
 CHA Chattanooga, TN
 CHB Chamberlain, SD
 CHD Chandler Muni, AZ
-CHH Chatham, MA
 CHI Chicago, IL
 CHJ Chief Joseph, WY
 CHK Chickasha Muni, OK
@@ -1264,7 +1263,7 @@ CQM Cook Muni, MN
 CQT Los Angeles Downtown - USC, CA
 CQV Colville Muni, WA
 CQW Cheraw, SC
-CQX Chatham, MA
+CQX Chatham Municipal Airport, Chatham, MA
  CR Columbia River Estuary
 CRE North Myrtle Beach/Grand Strand, SC
 CRG Craig Muni, Jacksonville, FL; N-Rarotonga, Cook Is
@@ -3138,7 +3137,6 @@ NID China Lake NAWS, China Lake, CA
 NIO Northern Indian Ocean (Arabian Sea/Bay of Bengal)
 NIP Jacksonville NAS, Jacksonville, FL
 NIR Chase Field NAS, Beeville, TX
-NIS MCAS Cherry Point, Jacksonville, NC
 NJ1 Rivers in New Jersey
 NJK El Centro NAF, CA
 NJM Bogue Field MCAL, NC
@@ -4407,7 +4405,6 @@ WER Ile D'Orleans, QC
 WES Cape Scott Lgt Hse, BC
 WEU Eureka, NU
 WEW L'Assomption, QC
-WEY West Yellowstone, MT
 WEZ Saturna Island, BC
 WFD Cape Dyer Arpt, NU
 WFF Melfort, SK
