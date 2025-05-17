@@ -392,7 +392,6 @@
 4BW Burns, OR
 4C0 722339 Oil Platform, Gulf of America
 4CR Corona, NM
-4DG Douglas, WY
 4F2 Panola County Airport-Sharpe Field, Carthage, TX
 4HA Whitehall, MT
 4I3 Knox Cnty, Mount Vernon, OH
@@ -402,7 +401,6 @@
 4M9 Corning Muni, Corning, AR
 4MR Melrose Gunnery Range, NM
 4O4 McCurtain Cnty Rgnl AP, Idabel, OK
-4OM Omak, WA
 4R4 HL Sonny Callahan AP, Fairhope, AL
 4R5 Major Gilbert Field Airport, La Pointe, WI
 4S1 Gold Beach Muni, OR
@@ -1373,7 +1371,7 @@ DET Detroit, MI
 DEW Deer Park, WA
 DFI Defiance Memorial, OH
 DFW Dallas-Fort Worth, TX
-DGW Douglas/Converse Co, WY
+DGW Converse County Airport, Douglas, WY
 DGX Brandon, MS WSR-88D
 DHE Santo Domingo, Herrerra, DR
 DHN Dothan, AL
@@ -3304,7 +3302,7 @@ OLZ Oelwen, IA
 OMA Omaha, NE
 OME Nome, AK
 OMH Orange/Orange Co, VA
-OMK Omak Arpt, WA
+OMK Omak Airport, Omak, WA
 OMN Ormond Beach Muni, FL
 ONA Winona, MN
 ONG Ontonagon, MI

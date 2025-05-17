@@ -1153,7 +1153,6 @@
 0000000000|K4BQ | 45.44 |-105.40 |  922|BROADUS, MT                         |US|MTR
 0000000000|K4C0 | 29.78 | -93.18 |   -0|722339 Oil Platform, LA             |US|MTR
 0000000000|K4CR | 34.11 |-105.68 | 1981|CORONA, NM                          |US|MTR
-0000000000|K4DG | 42.76 |-105.38 | 1477|DOUGLAS, WY                         |US|MTR
 0000000000|K4F2 | 32.17608|-94.29881| 76|Panola Cnty AP, Carthage, TX       |US|MTR
 0000000000|K4I3 | 40.329| -82.526|  363|Knox Cnty, Mount Vernon, OH         |US|MTR
 0000072463|K4LJ | 38.12 |-102.60 | 1103|LAMAR, CO                           |US|MTR
@@ -1162,7 +1161,6 @@
 0000000000|K4M9 | 36.404| -90.648|   89|Corning, AR                         |US|MTR
 0000074638|K4MR | 34.30 |-103.80 | 1326|MELROSE GNRY RAN, NM                |US|MTR
 0000000000|K4O4 | 33.909| -94.859|  144|McCurtain Cnty Rg AP, Idabel, OK    |US|MTR
-0000072789|K4OM | 48.44 |-119.53 |  374|OMAK, WA                            |US|MTR
 0000000000|K4R4 | 30.461| -87.877|   28|HL Sonny Callahan AP, Fairhope, AL  |US|MTR
 0000000000|K4R5 | 46.78867|-90.75872| 198|Major Gilbert AP, La Pointe, WI   |US|MTR
 0000000000|K4S1 | 42.413|-124.424|    5|Gold Beach Muni, OR                 |US|MTR
@@ -1798,7 +1796,7 @@
 0000000000|KDEW | 47.974|-117.428|  669|Deer Park, WA                       |US|MTR
 0000000000|KDFI | 41.34 | -84.43 |  216|Defiance Memorial, OH               |US|MTR
 0000072259|KDFW | 32.91 | -97.03 |  174|DALLAS/FT WORTH, TX                 |US|MTR
-0000000000|KDGW | 42.80 |-105.39 | 1502|Douglas/Converse Co, WY             |US|MTR
+0000000000|KDGW | 42.79719|-105.38583| 1504|Converse Cnty Arpt, Douglas, WY |US|MTR
 0000000000|KDHN | 31.32 | -85.45 |  122|DOTHAN, AL                          |US|MTR
 0000000000|KDHS | 44.21 |-106.10 | 1249|Dead Horse, WY                      |US|MTR
 0000000000|KDHT | 36.03 |-102.55 | 1216|DALHART, TX                         |US|MTR
@@ -2974,7 +2972,7 @@
 0000000000|KOLZ | 42.68 | -91.96 |  328|Oelwen, IA                          |US|MTR
 0000072550|KOMA | 41.30 | -95.90 |  299|OMAHA/EPPLEY FIE, NE                |US|MTR
 0000000000|KOMH | 38.247| -78.046|  142|Orange/Orange Co, VA                |US|MTR
-0000000000|KOMK | 48.46 |-119.52 |  396|Omak Arpt, WA                       |US|MTR
+0000000000|KOMK | 48.46441|-119.51805| 398|Omak Airport, Omak, WA           |US|MTR
 0000000000|KOMN | 29.301| -81.114|    9|Ormond Beach Muni, FL               |US|MTR
 0000000000|KONA | 44.09 | -91.70 |  200|WINONA MUNI, MN                     |US|MTR
 0000000000|KONG | 46.89 | -89.25 |  202|Ontonagon, MI                       |US|MTR
