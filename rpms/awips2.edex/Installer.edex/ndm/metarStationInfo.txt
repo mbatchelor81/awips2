@@ -1110,7 +1110,6 @@
 0000000000|K3DU | 46.68 |-113.15 | 1202|DRUMMOND, MT                        |US|MTR
 0000000000|K3E0 | 35.714|-100.603|  829|Miami-Roberts Cnty AP, Miami, TX    |US|MTR
 0000000000|K3F3 |32.07278|-93.76561| 99|CE 'Rusty' Williams AP, Mansfield, LA|US|MTR
-0000000000|K3FC | 40.09 | -95.60 |  445|FALLS CITY, NE                      |US|MTR
 0000000000|K3HT | 46.44 |-109.84 | 1268|HARLOWTON, MT                       |US|MTR
 0000000000|K3I2 | 38.915| -82.099|  196|Mason Cnty AP, Pt Pleasant, WV      |US|MTR
 0000000000|K3J1 | 32.49685|-80.99315| 26|Ridgeland-Claude Dean Arpt, Ridgeland, SC |US|MTR
@@ -1828,7 +1827,7 @@
 0000000000|KDOE | 46.27 | -86.67 |  247|Doe Lake, MI                        |US|MTR
 0000000000|KDOV | 39.14 | -75.47 |    9|DOVER AFB, DE                       |US|MTR
 0000000000|KDPA | 41.8964|-88.2512| 231|CHICAGO-DUPAGE, IL                  |US|MTR
-0000074003|KDPG | 40.21 |-112.93 | 1326|DUGWAY PRVG GROU, UT                |US|MTR
+0000074003|KDPG | 40.19738|-112.93505| 1326|Dugway Proving Ground, UT       |US|MTR
 0000000000|KDPL | 35.000028|-77.981667| 42|Kenansville/Duplin Co, NC        |US|MTR
 0000000000|KDQH | 31.477| -82.861|   78|Douglas Muni, Douglas, GA           |US|MTR
 0000072387|KDRA | 36.62 |-116.02 | 1009|MERCURY/DESERT R, NV                |US|MTR
@@ -2053,7 +2052,7 @@
 0000000000|KFMM | 40.33150|-103.80702| 1376|Fort Morgan Muni, Fort Morgan, CO |US|MTR
 0000000000|KFMN | 36.76 |-108.23 | 1677|Farmington/Four Corners Regnl, NM   |US|MTR
 0000000000|KFMY | 26.58 | -81.87 |    5|Fort Myers/Page Fld, FL             |US|MTR
-0000000000|KFNB | 40.08 | -95.58 |  300|FALLS CITY/BRNNR, NE                |US|MTR
+0000000000|KFNB | 40.07878|-95.59200| 300|Brenner Field Arpt, Falls City, NE|US|MTR
 0000000000|KFNL | 40.44267|-105.00965| 1528|Ft Collins-Loveland Muni, CO    |US|MTR
 0000072637|KFNT | 42.98 | -83.73 |  236|FLINT/BISHOP INT, MI                |US|MTR
 0000000000|KFOA | 38.66726|-88.45270| 144|Flora, IL                         |US|MTR
@@ -2723,7 +2722,6 @@
 0000000000|KMIB | 48.43 |-101.35 |  508|MINOT AFB, ND                       |US|MTR
 0000000000|KMIC | 45.08 | -93.38 |  265|MINPOLIS/CRYSTAL, MN                |US|MTR
 0000000000|KMIE | 40.242| -85.396|  286|Muncie/Delaware Co-Johnson Fld, IN  |US|MTR
-0000000000|KMIJ | 40.19 |-112.93 | 1329|DUGWAY/TOOELE, UT                   |US|MTR
 0000000000|KMIO |36.90922|-94.88750| 246|MIAMI Regional Airport, OK         |US|MTR
 0000000000|KMIS | 29.296| -88.842|  -0|Main Pass 140B AWOS (Apache Corp), LA|US|MTR
 0000000000|KMIV | 39.37 | -75.07 |   26|Millville Muni, NJ                  |US|MTR

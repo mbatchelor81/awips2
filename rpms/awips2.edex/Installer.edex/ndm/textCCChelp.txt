@@ -320,7 +320,6 @@
 3DU Drummond, MT
 3E0 Miami-Roberts Cnty AP, Miami, TX
 3F3 CE 'Rusty' Williams AP, Mansfield, LA
-3FC Falls City, NE
 3HA Chicago, IL
 3HT Harlowton, MT
 3I2 Mason Cnty AP, Pt Pleasant, WV
@@ -1412,7 +1411,7 @@ DOX Dover AFB, DE WSR-88D
 DPA Chicago/West Chicago, IL
 DPC Punta Cana, DR
 DPD Melville, Dominica, NOTE-TDCF = Canefield Arpt, Dominica
-DPG Michael AAF, Dugway/Tooele, UT
+DPG Dugway Proving Ground, UT
 DPL Kenansville/Duplin Co, NC
 DPP Puerto Plata, DR
 DQH Douglas Muni, Douglas, GA
@@ -1717,7 +1716,7 @@ FMM Fort Morgan Muni, Fort Morgan, CO
 FMN Farmington, NM
 FMY Fort Myers, FL
 FNA N-Nausor, Fiji
-FNB Falls City, NE
+FNB Brenner Field Airport, Falls City, NE
 FNL Ft Collins/Loveland, CO
 FNO Noorvik, AK
 FNT Flint, MI
@@ -2891,7 +2890,6 @@ MIA K-Miami, FL; M-Colima, MX
 MIB Minot AFB, ND
 MIC Crystal Airport, MN
 MIE Muncie/Delaware Co-Johnson Fld, IN
-MIJ Dugway/Tooele, UT
 MIL Milk, Yellowstone
  MI Michigan
 MIM Miami River
