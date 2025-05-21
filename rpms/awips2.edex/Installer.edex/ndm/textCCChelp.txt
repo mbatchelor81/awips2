@@ -384,7 +384,6 @@
 4B4 Meriden, CT
 4B8 Robertson Field Airport, Plainville, CT
 4BK Brookings, OR
-4BL Blanding, UT
 4BM Wilkerson Pass, CO
 4BQ Broadus, MT
   4 Bulletin No. 4
@@ -432,7 +431,6 @@
 5A6 Winona-Montgomery Cnty AP, Winona, MS
 5A9 Warm Springs, GA
 5B2 Saratoga Springs, NY
-5B5 Bennington, VT
 5B8 New Bremen, NY
   5 Bulletin No. 5
 5C1 Boerne Stage Field AP, Boerne, TX
@@ -931,7 +929,7 @@ BCR Tri-County Airport, Bonifay, FL
 BCS Cairns to Honolulu
 BCT Boca Raton Arpt, FL
 BDE Baudette, MN
-BDG Blanding Muni, Blanding, UT
+BDG Blanding Municipal Airport, Blanding, UT
 BDH Willmar Muni, Willmar, MN
 BDL Windsor Locks, CT
 BDN Bend AP, OR
@@ -1344,7 +1342,7 @@ DAG Daggett, CA
 DAK Dakota Tributaries
 DAL Dallas, TX
 DAN Danville, VA
-DAW Rochester/Skyhaven, NH
+DAW Skyhaven Airport, Rochester, NH
 DAX Sacramento, CA WSR-88D
 DAY Dayton, OH
  DB Delaware Bay
@@ -1357,7 +1355,7 @@ DCM Chester, SC
 DCU Decatur, AL
 DCY Daviess Cnty AP, Washington, IN
 DDC WFO Dodge City, KS WSR-88D
-DDH Bennington/Wm H Morse State, VT
+DDH William H Morse State Airport, Benningto, VT
 DEC Decatur, IL
 DED Deland Muni, Deland, FL
  DE Delaware

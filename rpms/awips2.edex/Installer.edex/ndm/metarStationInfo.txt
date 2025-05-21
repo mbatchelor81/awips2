@@ -1147,7 +1147,6 @@
 0000000000|K4A6 | 34.6887| -86.0059| 198|Scottsboro Muni, Scottsboro, AL    |US|MTR
 0000000000|K4A9 | 34.474| -85.721|  267|Isbell Fld AP, Fort Payne, AL       |US|MTR
 0000000000|K4B8 | 41.68933|-72.86469| 62|Robertson Fld Arpt, Plainville, CT |US|MTR
-0000000000|K4BL | 37.62 |-109.47 | 1840|BLANDING, UT                        |US|MTR
 0000000000|K4BM | 39.05024|-105.51436| 3432|Wilkerson Pass, CO              |US|MTR
 0000000000|K4BQ | 45.44 |-105.40 |  922|BROADUS, MT                         |US|MTR
 0000000000|K4C0 | 29.78 | -93.18 |   -0|722339 Oil Platform, LA             |US|MTR
@@ -1180,7 +1179,6 @@
 0000000000|K5A6 | 33.465| -89.7302| 111|Winona-Montgomery AP, Winona, MS    |US|MTR
 0000000000|K5A9 |32.9385| -84.6964| 265|Warm Springs, GA                    |US|MTR
 0000000000|K5B2 | 43.05 | -73.86 |  132|SARATOGA SPRINGS, NY                |US|MTR
-0000072516|K5B5 | 42.89 | -73.25 |  252|Bennington/Wm H Morse State, VT     |US|MTR
 0000000000|K5C1 | 29.724| -98.695|  422|Boerne Stage Field AP, Boerne, TX   |US|MTR
 0000000000|K5H4 | 47.791| -99.932|  490|Harvey Muni, Harvey, ND             |US|MTR
 0000000000|K5K2 | 38.45146| -101.75008| 1100|Tribune Muni Arpt, Tribune, KS |US|MTR
@@ -1195,7 +1193,6 @@
 0000000000|K6A1 | 32.5697| -84.2452| 203|Butler Muni, Butler, GA            |US|MTR
 0000000000|K6A2 | 33.227| -84.275|  292|Griffin-Spaldg Cnty AP, Griffin, GA |US|MTR
 0000000000|K6B0 | 43.9848| -73.0959| 149|Middlebury State AP, Middlebury, VT|US|MTR
-0000000000|K6B1 | 43.28 | -70.92 |  104|Rochester, NH                       |US|MTR
 0000000000|K6B4 | 43.01611|-75.16954| 404|Frankfort-Highland Arpt, NY       |US|MTR
 0000000000|K6B9 | 42.91396| -76.44077|  316|Skaneateles Aero Drome, Skaneateles, NY|US|MTR
 0000000000|K6E5 |44.433 | -97.5582| 526|Desmet, SD                          |US|MTR
@@ -1447,7 +1444,7 @@
 0000000000|KBCR | 30.84389| -85.60175| 26|Tri-County Airport, Bonifay, FL   |US|MTR
 0000000000|KBCT | 26.38 | -80.10 |    4|Boca Raton Arpt, FL                 |US|MTR
 0000000000|KBDE | 48.73 | -94.60 |  330|BAUDETTE, MN                        |US|MTR
-0000000000|KBDG | 37.5833|-109.4833|1789|Blanding Muni, Blanding, UT        |US|MTR
+0000000000|KBDG | 37.58333|-109.48328|1789|Blanding Muni Arpt, Blanding, UT |US|MTR
 0000000000|KBDH | 45.127| -95.127|  343|Willmar Muni, Willmar, MN           |US|MTR
 0000072508|KBDL | 41.94 | -72.68 |   60|HARTFORD/BRADLEY, CT                |US|MTR
 0000000000|KBDN | 44.095|-121.200| 1055|Bend AP, OR                         |US|MTR
@@ -1775,7 +1772,7 @@
 0000000000|KDAG | 34.88 |-116.78 |  588|DAGGETT, CA                         |US|MTR
 0000000000|KDAL | 32.86 | -96.85 |  149|DALLAS/LOVE, TX                     |US|MTR
 0000000000|KDAN | 36.5728 | -79.3353 |  172|DANVILLE, VA                    |US|MTR
-0000000000|KDAW | 43.278| -70.922|   98|Rochester/Skyhaven, NH              |US|MTR
+0000000000|KDAW | 43.28423|-70.92955| 98|Skyhaven Airport, Rochester, NH    |US|MTR
 0000072429|KDAY | 39.91 | -84.20 |  306|DAYTON/JAMES M C, OH                |US|MTR
 0000000000|KDBN | 32.564| -82.985|   94|W H Bud Barron AP, Dublin, GA       |US|MTR
 0000072547|KDBQ | 42.41 | -90.70 |  329|DUBUQUE MUNICIPA, IA                |US|MTR
@@ -1785,7 +1782,7 @@
 0000000000|KDCU | 34.66 | -86.94 |  181|DECATUR, AL                         |US|MTR
 0000000000|KDCY | 38.7004|-87.12973| 143|Daviess Cnty AP, Washington, IN    |US|MTR
 0000072451|KDDC | 37.78 | -99.97 |  790|DODGE CITY(AWOS), KS                |US|MTR
-0000072516|KDDH | 42.890| -73.246|  244|Bennington/Wm H Morse State, VT     |US|MTR
+0000072516|KDDH | 42.89133|-73.24640| 252|William Morse Arpt, Bennington, VT|US|MTR
 0000000000|KDEC | 39.83080|-88.87194| 207|DECATUR, IL                       |US|MTR
 0000000000|KDED | 29.06687|-81.28645| 24|Deland Muni, Deland, FL            |US|MTR
 0000000000|KDEH | 43.28 | -91.73 |  353|Decorah, IA                         |US|MTR
