@@ -1049,7 +1049,6 @@
 0000000000|K1R8 | 30.87033|-87.81933| 76|Bay Minette MuniAP, Bay Minette, AL|US|MTR
 0000000000|K1S3 | 46.27115|-106.62390| 832|Tillitt Field Airport, Forsyth, MT|US|MTR
 0000000000|K1S5 | 46.3271|-119.9704| 234|Sunnyside Muni, Sunnyside, WA      |US|MTR
-0000000000|K1U7 |42.2497|-111.3416|1807|Bear Lake County, ID                |US|MTR
 0000000000|K1U7 | 42.24976|-111.34163| 1808|Bear Lake Airport, Paris, ID    |US|MTR
 0000072614|K1V4 | 44.42 | -72.02 |  217|St. Johnsbury, VT                   |US|MTR
 0000000000|K1V6 | 38.4284|-105.106| 1659|Fremont Cnty AP, Canon City, CO    |US|MTR
@@ -1075,7 +1074,6 @@
 0000074695|K2DP | 35.69 | -75.90 |    3|DARE CO GNRY RAN, NC                |US|MTR
 0000000000|K2G2 | 40.36061|-80.70169| 365|Jefferson Cnty AP, Steubenville, OH|US|MTR
 0000000000|K2G4 | 39.580| -79.339|  894|Garrett Cnty AP, Oakland, MD        |US|MTR
-0000000000|K2G6 | 41.64 | -80.21 |  427|MEADVILLE, PA                       |US|MTR
 0000000000|K2G9 | 40.03887|-79.01500| 693|Somerset Cnty AP, Somerset, PA    |US|MTR
 0000000000|K2GL | 29.409| -90.288|    3|Galliano Heliport, LA               |US|MTR
 0000000000|K2I0 | 37.35593| -87.39822| 134|Madisonville Muni, KY            |US|MTR
@@ -2142,7 +2140,7 @@
 0000000000|KGIC | 45.943|-116.123| 1010|Idaho Cnty AP, Grangeville, ID      |US|MTR
 0000000000|KGIF | 28.063| -81.753|   44|Winter Haven, FL                    |US|MTR
 0000072476|KGJT | 39.12 |-108.53 | 1452|GRAND JUNCTION, CO                  |US|MTR
-0000000000|KGKJ | 41.62 | -80.21 |  428|Meadville, PA                       |US|MTR
+0000000000|KGKJ | 41.62653|-80.21472| 427|Port Meadville Arpt, Meadville, PA|US|MTR
 0000000000|KGKT | 35.8578| -83.5287| 309|Gatlinbg-Pigeon Fg, Sevierville, TN|US|MTR
 0000000000|KGKY | 32.664| -97.096|  192|Arlington, TX                       |US|MTR
 0000072465|KGLD | 39.38 |-101.70 | 1124|GOODLAND/RENNER, KS                 |US|MTR
@@ -3032,8 +3030,7 @@
 0000000000|KP08 | 32.936|-111.4265| 480|Coolidge Muni, Coolidge, AZ         |US|MTR
 0000072765|KP24 | 47.76 |-101.83 |  624|ROSEGLEN (AMOS), ND                 |US|MTR
 0000072452|KP28 | 37.30 | -98.58 |  468|MEDICINE LODGE A, KS                |US|MTR
-0000000000|KP33 | 32.24 |-109.89 | 1274|Willcox/Cochise Co, AZ              |US|MTR
-0000000000|KP33 |32.2454|-109.8946|1276|Wilcox, AZ                          |US|MTR
+0000000000|KP33 |32.24542|-109.89464|1276|Cochise Cnty Airport, Wilcox, AZ  |US|MTR
 0000000000|KP34 | 35.65 |-109.07 | 2054|Window Rock, AZ                     |US|MTR
 0000072487|KP38 | 37.62 |-114.52 | 1335|Caliente, NV                        |US|MTR
 0000000000|KP52 |34.7301|-112.0351|1079|Cottonwood, AZ                      |US|MTR
@@ -3145,8 +3142,7 @@
 0000000000|KPSP | 33.84 |-116.50 |  146|PALM SPRINGS, CA                    |US|MTR
 0000000000|KPSX | 28.72 | -96.25 |    5|PALACIOS, TX                        |US|MTR
 0000000000|KPTB | 37.19 | -77.52 |   59|PETERSBURG, VA                      |US|MTR
-0000000000|KPTD |44.6757| -74.9469| 140|Potsdam, VT                         |US|MTR
-0000000000|KPTD | 44.68 | -74.95 |  144|DAMON FIELD, NY                     |US|MTR
+0000000000|KPTD | 44.67667|-74.94844| 144|Damon Field Airport, Potsdam, NY  |US|MTR
 0000000000|KPTK | 42.67 | -83.42 |  299|Pontiac/Oakland Co Intl, MI         |US|MTR
 0000000000|KPTN | 29.71 | -91.34 |    3|Patterson, LA                       |US|MTR
 0000000000|KPTS | 37.449| -94.731|  290|Atkinson Muni, Pittsburg, KS        |US|MTR
@@ -3600,7 +3596,6 @@
 0000000000|KU52 | 38.23058|-112.67542| 1787|Beaver Muni Airport, Beaver, UT |US|MTR
 0000000000|KU55 | 37.84522|-112.39194| 2061|Panguitch Muni AP, Panguitch, UT|US|MTR
 0000000000|KU64 |37.9324|-109.3412|2119|Monticello, CO                      |US|MTR
-0000074420|KU67 | 40.30 |-110.05 | 1556|ROOSEVELT, UT                       |US|MTR
 0000000000|KU68 | 44.9117|-108.4455|1248|N Big Horn AP, Cowley/Lov/Byr, WY  |US|MTR
 0000000000|KU69 | 40.19375|-110.38298|1777|Duchesne Muni AP, Duchesne, UT   |US|MTR
 0000000000|KU71 | 40.48 |-109.53 | 1612|VERNAL, UT                          |US|MTR
@@ -3911,8 +3906,7 @@
 0000000000|PACE | 65.574|-144.781|  286|Central AP, Central, AK             |US|MTR
 0000000000|PACM | 61.85 |-165.57 |    4|Scammon Bay AP, Scammon Bay, AK     |US|MTR
 0000070296|PACV | 60.50 |-145.50 |   13|Cordova/Mile 13, AK                 |US|MTR
-0000000000|PACX |67.2522|-150.2039| 310|Coldfoot, AK                        |US|MTR
-0000000000|PACX |67.2522|-150.2039| 310|Coldfoot, AK                        |US|MTR
+0000000000|PACX |67.25217|-150.20391| 320|Coldfoot Airport, Coldfoot, AK    |US|MTR
 0000070212|PACZ | 61.79 |-166.04 |  146|CAPE ROMANZOFF, AK                  |US|MTR
 0000000000|PADE | 66.08 |-162.75 |    9|Deering, AK                         |US|MTR
 0000000000|PADG | 68.03 |-162.90 |  295|Red Dog AP, Red Dog, AK             |US|MTR
@@ -4003,8 +3997,7 @@
 0000070232|PANI | 61.58 |-159.53 |   26|ANIAK, AK                           |US|MTR
 0000070260|PANN | 64.55 |-149.08 |  110|NENANA MUNI, AK                     |US|MTR
 0000070398|PANT | 55.04 |-131.57 |   34|ANNETTE ISLAND, AK                  |US|MTR
-0000000000|PANU |64.7294|-158.0742| 118|Nulato, AK                          |US|MTR
-0000000000|PANU |64.7294|-158.0742| 118|Nulato, AK                          |US|MTR
+0000000000|PANU |64.72933|-158.07422| 124|Nulato Airport, Nulato, AK        |US|MTR
 0000000000|PANV | 62.65 |-160.18 |   99|ANVIK, AK                           |US|MTR
 0000000000|PANW | 59.45 |-157.328|   92|New Stuyahok AP, New Stuyahok, AK   |US|MTR
 0000000000|PAOH | 58.12 |-135.45 |    0|HOONAH SEAPLANE, AK                 |US|MTR
@@ -4076,8 +4069,7 @@
 0000000000|PFCB |60.0786|-147.9947|  17|Chenega Bay, AK                     |US|MTR
 0000000000|PFCL | 58.8337|-158.5294| 24|Clarks Point AP, Clarks Point, AK   |US|MTR
 0000000000|PFEL | 64.615|-162.271|   49|Elim AP, Elim, AK                   |US|MTR
-0000000000|PFKO |63.031 |-163.533 |   1|Kotlik, AK                          |US|MTR
-0000000000|PFKO |63.031 |-163.533|    1|Kotlik, AK                          |US|MTR
+0000000000|PFKO |63.03058|-163.53264| 4|Kotlik Airport, Kotlik, AK          |US|MTR
 0000000000|PFKT | 65.331|-166.466|   12|Brevig Miss AP, Brevig Mission, AK  |US|MTR
 0000000000|PFKW | 60.7903|-161.4437|  8|Kwethluk AP, Kwethluk, AK           |US|MTR
 0000000000|PFNO | 66.82 |-161.03 |   17|Noorvik/Robert (Bob) Curtis Mem, AK |US|MTR
@@ -4085,8 +4077,7 @@
 0000000000|PFTO |63.3295|-142.9537| 501|Tok Junction, AK                    |US|MTR
 0000000000|PFWS | 58.7021|-157.0026| 49|South Naknek Nr 2 AP, S Naknek, AK  |US|MTR
 0000070194|PFYU | 66.57 |-145.27 |  131|FORT YUKON, AK                      |US|MTR
-0000000000|PFZK |60.9138|-161.4933|   4|Akiachak, AK                        |US|MTR
-0000000000|PFZK |60.9138|-161.4933|   4|Akiachak, AK                        |US|MTR
+0000000000|PFZK |60.91381|-161.49333| 7|Akiachak Airport, Akiachak, AK      |US|MTR
 0000091221|PGRO | 14.18 | 145.25 |  185|Rota Intl                           |MY|MTR
 0000091232|PGSN | 15.12 | 145.73 |   65|Saipan/Isley                        |MY|MTR
 0000091218|PGUA | 13.58 | 144.93 |  187|Guam/Andersen AFB                   |MY|MTR

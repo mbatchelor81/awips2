@@ -198,7 +198,6 @@
 1S3 Tillitt Field Airport, Forsyth, MT
 1S5 Sunnyside Muni, WA
 1U7 Bear Lake Airport, Paris, ID
-1U7 Bear Lake County, ID
 1V4 St. Johnsbury, VT
 1V6 Fremont Cnty AP, Canon City, CO
 1Y7 Yuma Proving Ground, AZ
@@ -257,7 +256,6 @@
 2DP Stumpy Point, NC
 2G2 Jefferson Cnty AP, Steubenville, OH
 2G4 Garrett Cnty AP, Oakland, MD
-2G6 Meadville, PA
 2G9 Somerset Cnty AP, Somerset, PA
 2GL Galliano Heliport, LA
 2I0 Madisonville, KY
@@ -590,8 +588,7 @@ ACQ Waseca Muni, MN
 ACR Circle City, AK, P-Alaska RFC, Anchorage, AK
 ACT Waco, TX
 ACV K-Arcata, CA; P-Cordova/Mile 13, AK
-ACX Coldfoot, AK
-ACX Coldfoot, AK
+ACX Coldfoot Airport, Coldfoot, AK
 ACY Atlantic City, NJ
 ACZ Cape Romanzoff, AK
 ACZ Henderson Field Airport, Wallace, NC
@@ -749,8 +746,7 @@ ANN Annette Is, AK (Nenana Muni, AK for MTR)
 ANQ Tri-State Steuben Cnty AP, Angola, IN
 ANR Anchorage, AK
 ANT Annette Is, AK
-ANU Nulato, AK
-ANU Nulato, AK
+ANU Nulato Airport, Nulato, AK
 ANV Anvik, AK
 ANW K-Ainsworth, NE; P-New Stuyahok AP, AK
 AOA Weather Advisory for Agricltr Operations
@@ -1692,8 +1688,7 @@ FKA Preston/Fillmore Co, MN
 FKF Franklin Bluffs, AK
 FKL Franklin, PA
 FKN Franklin/J B Rose, VA
-FKO Kotlik, AK
-FKO Kotlik, AK
+FKO Kotlik Airport, Kotlik, AK
 FKR Frankfort, IN
 FKS Frankfort Dow Mem Fld AP, MI
 FKT P-Brevig Mission AP, Brevig Mission, AK
@@ -1775,8 +1770,7 @@ FYM Fayetteville Muni, Fayetteville, TN
 FYU Fort Yukon, AK
 FYV Fayetteville, AR
 FZG Fitzgerald Muni, Fitzgerald, GA
-FZK Akiachak, AK
-FZK Akiachak, AK
+FZK Akiachak, Airport, Akiachak, AK
 FZY Fulton/Oswego Co, NY
 G01 Green Canyon Block 184, LA
 GA1 Georgia Area
@@ -1833,7 +1827,7 @@ GID WFO Hastings, NE
 GIF Winter Haven, FL
 GJT WFO Grand Junction, CO
 GJX Grand Junction, CO WSR-88D
-GKJ Meadville, PA
+GKJ Port Meadville Airport, Meadville, PA
 GKN Gulkana, AK
 GKT Gatlinburg-Pigeon Forge AP, Sevierville, TN
 GKY Arlington Muni, Arlington, TX
@@ -3382,7 +3376,7 @@ P08 Coolidge Muni, Coolidge, AZ
 P0A Sfc Plot File - 3 Hrly
 P24 Roseglen, ND
 P28 Medicine Lodge, KS
-P33 Wilcox, AZ
+P33 Cochise County Airport, Wilcox, AZ
 P38 Caliente, NV
 P39 Pequot Lake, MN
 P52 Cottonwood, AZ
@@ -3535,8 +3529,7 @@ PSP Palm Springs, CA
 PSR WFO Phoenix, Tempe, AZ
 PSX Palacios, TX
 PTB Petersburg, VA
-PTD Damon Field, NY
-PTD Potsdam, VT
+PTD Damon Field Airport, Potsdam, NY
 PTH Port Heiden, AK
 PTI Puntilla Lake, AK
 PTK Pontiac, MI
@@ -4160,7 +4153,6 @@ U31 Austin, NV
 U52 Beaver Municipal Airport, Beaver, UT
 U55 Panguitch Municipal Airport, Panguitch, UT
 U64 Monticello, CO
-U67 Roosevelt, UT
 U68 North Big Horn Cnty AP, Cowley/Lovell/Byron, WY
 U69 Duchesne Municipal Airport, Duchesne, UT
 U71 Vernal, UT
