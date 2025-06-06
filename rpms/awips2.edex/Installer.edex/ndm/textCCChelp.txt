@@ -333,7 +333,6 @@
 3R0 Beeville Muni, Beeville, TX
 3R5 New Braunfels Muni, TX
 3R7 Jennings, LA
-3S2 Aurora, OR
 3S8 Grants Pass Airport, Grants Pass, OR
 3T5 La Grange/Fayette Regnl, TX 
 3U3 Bowman Field Airport, Anaconda, MT
@@ -480,7 +479,6 @@
 6S0 Howard Field Airport, Big Timber, MT
 6S2 Florence Muni, Florence, OR
 6S8 Laurel Muni Airport, Laurel, MT
-6V1 Imperial, NE
 6V3 Richlands/Tazewell Co, VA
 6V8 Montrose, CO
 70A 00H ERL 700 mb Plot File
@@ -893,7 +891,6 @@ AZC Colorado Cty AP, Colorado City, AZ
 AZE Hazlehurst, GA
 AZK Eureka, AK
 AZO Kalamazoo, MI
-B23 Battle Mountain, NV
 BAB Beale AFB, Marysville, CA
 BAC Barnes Co Muni, Valley City, ND
 BAD Barksdale AFB, LA
@@ -1678,7 +1675,7 @@ FGX Fleming-Mason AP, Flemingsburg, KY
 FGZ WFO Flagstaff/Belemont, AZ
 FHB Fernandina Beach Muni, FL
 FHM Frank Hotchkin Memorial Training Center, Los Angeles, CA
-FHR Friday Harbor, WA
+FHR Friday Harbor Airport, WA
 FHU Fort Huachuca, Sierra Vista, AZ
 FIG Clearfield-Lawrence, PA
 FIN Flagler Cnty AP, Bunnell, FL
@@ -2168,6 +2165,7 @@ ICL Clarinda, IA
 ICM Cayman Islands
 ICN Canada
 ICO Colombia
+ICR Winner Regional Airport, Winner, SD
 ICR Canary Islands; K-Winner Regnl AP, Winner, SD
 ICS Costa Rica
 ICT WFO Wichita, KS WSR-88D
@@ -2288,7 +2286,7 @@ IME Eastern Mediterranean
 IMF St. Martin/St. Bartholomew/Guadeloupe
 IMG Madagascar
 IMI Marshall Islands
-IML Imperial, NE
+IML Imperial Municipal Airport, Imperial, NE
 IMM K-Immokalee Rgnl AP, Immokalee, FL; Mediterranean Sea
 IMN Saint Maarten/Saint Eustatius/Saba
 IMO Mongolia
@@ -3452,7 +3450,7 @@ PIA Peoria, IL
 PIB Pine Belt Regnl, MS
 PIE Saint Petersburg/Clearwater, FL
 PIH WFO Pocatello, ID
-PIL Port Isabel/Cameron Co, TX
+PIL Port Isabel-Cameron County Airport, TX
 PIM Harris Cnty AP, Pine Mountain, GA
 PIN Piney Creek, WY
 PIR Pierre, SD
@@ -3725,7 +3723,6 @@ S06 Mullan, ID
 S10 Lake Chelan AP, Chelan, WA
 S12 Albany Municipal Airport, Albany, OR
 S14 Spencer, IA
-S19 Friday Harbor, WA
 S21 Sunriver, OR
 S22 Hermiston Muni, OR
 S24 Fremont, OH
@@ -4158,7 +4155,7 @@ U69 Duchesne Municipal Airport, Duchesne, UT
 U71 Vernal, UT
 U78 Soda Springs, ID
 U96 Cal Black Memorial Airport, Halls Crossing, UT
-UAO Aurora, OR
+UAO Aurora State Airport, Aurora, OR
 UBE Cumberland Muni, Cumberland, WI
 UCC Yucca Flat, NV
 UCM M-Camaguey Arpt, CU
