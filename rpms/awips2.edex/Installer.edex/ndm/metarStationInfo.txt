@@ -1197,7 +1197,6 @@
 0000000000|K6L4 | 37.8557| -81.9159| 508|Logan Cnty AP, Logan, WV           |US|MTR
 0000000000|K6L9 | 33.66 |-118.00 |   35|HUNTINGTON BEACH, CA                |US|MTR
 0000000000|K6P9 | 32.43172|-98.59475| 450|Cook Canyon Ranch AP, Ranger, TX  |US|MTR
-0000000000|K6R0 | 30.34 | -89.82 |    8|Slidell, LA                         |US|MTR
 0000000000|K6R3 | 30.356| -95.008|   46|Cleveland Muni, Cleveland, TX       |US|MTR
 0000000000|K6R6 | 30.0465|-102.2132| 708|Dryden/Terrell Co, TX              |US|MTR
 0000000000|K6S0 | 45.80648|-109.97826| 1370|Howard Field AP, Big Timber, MT |US|MTR
@@ -1371,7 +1370,7 @@
 0000000000|KART | 44.01 | -76.02 |   99|WATERTOWN INTL A, NY                |US|MTR
 0000000000|KARV | 45.93 | -89.73 |  496|Arbor Vitae/Lakeland-NFLee Fld, WI  |US|MTR
 0000000000|KARW | 32.412| -80.634|    3|Beaufort, SC                        |US|MTR
-0000000000|KASD | 30.35 | -89.82 |    9|Slidell, LA                         |US|MTR
+0000000000|KASD | 30.34633|-89.82081| 9|Slidell Airport, Slidell, LA        |US|MTR
 0000000000|KASE | 39.22188|-106.86823| 2389|Aspen-Pitkin Co/Sardy Field, CO |US|MTR
 0000000000|KASG | 36.19 | -94.12 |  412|SPRINGDALE MUNI, AR                 |US|MTR
 0000000000|KASH | 42.79 | -71.52 |   61|NASHUA/BOIRE FIE, NH                |US|MTR
@@ -2557,7 +2556,7 @@
 0000000000|KLKR | 34.723| -80.855|  148|Lancaster, SC                       |US|MTR
 0000000000|KLKU | 38.011| -77.978|  120|Louisa Co/Freeman Fld, VA           |US|MTR
 0000000000|KLKV | 42.161|-120.399| 1433|Lakeview, OR                        |US|MTR
-0000000000|KLLJ | 44.523|-114.215| 1536|Challis, ID                         |US|MTR
+0000000000|KLLJ | 44.52361|-114.21794| 1547|Challis Airport, Challis, ID    |US|MTR
 0000000000|KLLN | 33.556| -102.375| 1071|Levelland Muni, TX                 |US|MTR
 0000000000|KLLQ | 33.64 | -91.75 |   82|Monticello Muni/Ellis Fld, AR       |US|MTR
 0000000000|KLMO | 40.16116|-105.16046|1538|Vance Brand AP, Longmont, CO     |US|MTR
@@ -3581,7 +3580,6 @@
 0000072326|KTYS | 35.81 | -83.98 |  302|KNOXVILLE MUNICI, TN                |US|MTR
 0000000000|KTZR | 39.90 | -83.13 |  280|Columbus/Bolton, OH                 |US|MTR
 0000000000|KU14 | 39.73658|-111.87006| 1531|Nephi Muni Airport, Nephi, UT   |US|MTR
-0000000000|KU15 | 44.53 |-114.22 | 1529|CHALLIS, ID                         |US|MTR
 0000000000|KU16 | 41.05 |-113.07 | 1292|EAGLE RANGE, UT                     |US|MTR
 0000000000|KU17 | 37.51 |-110.70 | 1110|MARINA/BULLFROG, UT                 |US|MTR
 0000000000|KU24 | 39.34 |-112.59 | 1414|DELTA, UT                           |US|MTR

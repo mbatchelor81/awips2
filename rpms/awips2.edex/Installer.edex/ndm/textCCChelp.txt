@@ -2652,7 +2652,7 @@ LKO Licking River, OH
 LKR Lancaster, SC
 LKU Louisa Co/Freeman Fld, VA
 LKV Lakeview, OR
-LLJ Challis, ID
+LLJ Challis Airport, Challis, ID
 LLN Levelland Muni, TX
 LLQ Monticello Muni/Ellis Fld, AR
 LLS Low-Level Sounding
@@ -4141,7 +4141,6 @@ TYX Fort Drum, NY WSR-88D
 TZR Columbus/Bolton, OH
 U11 Rexburg/Madison Co, ID
 U14 Nephi Municipal Airport, Nephi, UT
-U15 Challis, ID
 U16 Eagle Range, UT
 U17 Bullfrog, UT
 U24 Delta, UT
