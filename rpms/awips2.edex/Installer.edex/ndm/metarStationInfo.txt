@@ -1023,7 +1023,6 @@
 0000000000|K1JN | 48.41174|-101.891 |  672|Donnybrook, ND                   |US|MTR
 0000000000|K1JW | 40.96088|-103.19967| 1383|4.6W of Peetz, CO               |US|MTR
 0000000000|K1K1 | 37.77444|-97.11322| 416|Benton, KS                        |US|MTR
-0000072460|K1K5 | 37.01 |-101.89 | 1102|ELKHART (AMOS), KS                  |US|MTR
 0000000000|K1K8 | 36.543| -95.012| 234|Ketchum/S Grand Lake Arpt, OK        |US|MTR
 0000000000|K1KM | 46.44414| -109.801| 1332|Harlowton, MT                    |US|MTR
 0000000000|K1KN | 48.55139|-102.121| 693|Donnybrook 2, ND                   |US|MTR
@@ -1906,7 +1905,7 @@
 0000000000|KEGI | 30.65 | -86.52 |   59|DUKE FLD/EGLIN AFB, FL              |US|MTR
 0000000000|KEGT | 37.32361|-97.38833| 380|Wellington, KS                    |US|MTR
 0000000000|KEGV | 45.93 | -89.27 |  500|Eagle River/Union, WI               |US|MTR
-0000000000|KEHA | 37.01 |-101.88 | 1102|ELKHART, KS                         |US|MTR
+0000000000|KEHA | 37.00078|-101.88003| 1104|Elkhart-Morton Cnty Arpt, KS    |US|MTR
 0000000000|KEHC | 28.429| -92.878|   -0|East Cameron 278B, LA AWOS-3        |US|MTR
 0000000000|KEHO | 35.256| -81.601|  258|Shelby Muni, NC                     |US|MTR
 0000000000|KEHR | 37.80783|-87.68569| 118|Henderson Airport, Henderson, KY  |US|MTR
@@ -3171,7 +3170,6 @@
 0000000000|KPYX | 36.414|-100.750|  889|Perryton, TX                        |US|MTR
 0000000000|KPZQ | 45.407| -83.813|  204|Presque Is Cnty AP, Rogers City, MI |US|MTR
 0000000000|KRAC | 42.7611|-87.8139| 205|Racine/John H Batten, WI            |US|MTR
-0000000000|KRAD | 48.94 | -95.34 |  328|WARROAD(AWOS), MN                   |US|MTR
 0000000000|KRAL | 33.95 |-117.45 |  249|Riverside Muni, CA                  |US|MTR
 0000000000|KRAP | 44.045835|-103.054436| 966|Rapid City Reg AP, Rapid City, SD|US|MTR
 0000000000|KRAS | 27.812| -97.089|    2|Port Aransas, TX                    |US|MTR
@@ -3248,7 +3246,7 @@
 0000000000|KRQE | 35.657|-109.061| 2055|Window Rock, AZ                     |US|MTR
 0000000000|KRQO | 35.473| -98.006|  432|El Reno Muni Air Park, El Reno, OK  |US|MTR
 0000000000|KRRL | 45.20 | -89.71 |  401|Merrill Muni, WI                    |US|MTR
-0000000000|KRRT | 48.94 | -95.35 |  327|Warroad, MN                         |US|MTR
+0000000000|KRRT | 48.94147|-95.34847| 328|Warroad International Airport, MN |US|MTR
 0000000000|KRSL | 38.8761|-98.8092| 568|Russell Muni, KS                    |US|MTR
 0000000000|KRSN | 32.514| -92.588|   95|Ruston Regnl, LA                    |US|MTR
 0000000000|KRSP | 39.645| -77.468|  561|Naval Support Facility, Thurmont, MD|US|MTR

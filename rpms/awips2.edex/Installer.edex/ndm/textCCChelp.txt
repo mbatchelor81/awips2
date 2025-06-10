@@ -170,7 +170,6 @@
 1JN Donnybrook, ND
 1JW 4.6W of Peetz, CO
 1K1 Benton, KS
-1K5 Elkhart, KS
 1K8 Ketchum/S Grand Lake Arpt, OK
 1KM Harlowton, MT
 1KN Donnybrook 2, ND
@@ -1510,7 +1509,7 @@ EGE Eagle, CO
 EGI Duke Field/Eglin, FL
 EGT Wellington, KS
 EGV Eagle River/Union, WI
-EHA Elkhart, KS
+EHA Elkhart-Morton County Airport, Elkhart, KS
 EHC East Cameron 278, LA AWOS-3
 EHO Shelby Muni, NC
 EHR Henderson Airport, Henderson, KY
@@ -3583,7 +3582,6 @@ QPF T-Anguilla, British Virgin Islands
 QQQ Moron, SP
   Q Quebec
 RAC Racine/John H Batten, WI
-RAD Warroad, MN
 RAH WFO Raleigh/Durham, NC
 RAL Riverside, CA
 RAP Rapid City, SD
@@ -3681,7 +3679,7 @@ RQE Window Rock, AZ
 RQO El Reno Muni Air Park, El Reno, OK
 RRL Merrill, WI
   R Romeo
-RRT Warroad, MN
+RRT Warroad International Airport, Warroad, MN
 RSA California Nevada RFC, Sacramento, CA 
 RSL Russell, KS
 RSN Ruston Regnl, LA
