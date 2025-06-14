@@ -1,4 +1,4 @@
-# This file, metarStationInfo.txt, contains station information for METAR and
+ This file, metarStationInfo.txt, contains station information for METAR and
 # SAO sites. (Some Canadian station still report in SA format. Although these
 # are now converted at OSO to METAR form, we note them as SAO here.)
 #
@@ -1227,7 +1227,6 @@
 0000000000|K82V | 41.1525|-104.1348|1570|Pine Bluffs Muni, Pine Bluffs, WY  |US|MTR
 0000000000|K85D | 47.78 | -93.65 |  409|Bigfork Muni, MN                    |US|MTR
 0000072390|K87Q | 35.68 |-121.28 |   21|PUNTA PIEDRAS, CA                   |US|MTR
-0000000000|K8A0 | 34.229| -86.256|  315|Albertville Muni, Albertville, AL   |US|MTR
 0000000000|K8A3 | 36.41350|-85.31044| 418|Livingston Muni AP, Livingston, TN|US|MTR
 0000000000|K8A4 | 39.766| -86.149|  223|Downtown Heliport, Indianapolis, IN |US|MTR
 0000000000|K8B0 | 44.99189| -70.66461| 556|Steven A Bean AP, Rangeley, ME   |US|MTR
@@ -1456,6 +1455,7 @@
 0000000000|KBFR | 38.840| -86.445|  222|Bedford, IN                         |US|MTR
 0000000000|KBFU | 43.93 |-105.44 | 1432|Belle Fourche, WY                   |US|MTR
 0000000000|KBFW | 47.21 | -91.41 |  331|SILVER BAY, MN                      |US|MTR
+0000000000|KBFZ | 34.22911|-86.25575| 315|Albertville Regional Airport, AL  |US|MTR
 0000000000|KBGD | 35.71 |-101.40 |  927|BORGER/HUTCHNSON, TX                |US|MTR
 0000000000|KBGE | 30.97 | -84.63 |   43|Bainbridge, GA                      |US|MTR
 0000000000|KBGF | 35.1775| -86.066| 298|Winchester Muni, Winchester, TN     |US|MTR
@@ -3716,6 +3716,7 @@
 0000000000|KX07 | 27.89389|-81.62042| 39|Lake Wales Muni AP, Lake Wales, FL |US|MTR
 0000000000|KX21 | 28.622| -80.836|    9|Arthur Dunn Air Pk, Titusville, FL  |US|MTR
 0000000000|KX26 | 27.81325| -80.49558| 7|Sebastian Muni AP, Sebastian, FL   |US|MTR
+0000000000|KX59 | 27.96087|-80.55833| 8|Valkaria Airport, Valkaria, FL      |US|MTR
 0000000000|KX60 | 29.3557| -82.4719|  23|Williston, FL                      |US|MTR
 0000000000|KX68 | 28.62 | -80.68 |    4|NASA SHUTTLE FTY, FL                |US|MTR
 0000000000|KXBP | 33.175| -97.828|  260|Bridgeport Muni, TX                 |US|MTR
