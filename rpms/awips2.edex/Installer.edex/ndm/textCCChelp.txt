@@ -2464,7 +2464,7 @@ JDD Wood Cnty AP, Mineola/Quitman, TX
 JDG Naval Station Diego Garcia
 JDN Jordan, MT
 JEF Jefferson City, MO
-JER Jerome, ID
+JER Jerome County Airport, Jerome, ID
 JES Jesup-Wayne Cnty AP, Jesup, GA
 JFK New York, NY
 JFX Jasper, AL
@@ -4267,7 +4267,7 @@ VRH P-Alaska Region Hq, Anchorage, AK
 VSF Springfield, VT
 VSV T-St. Vincent, Grenadines
 VT1 Connecticut Basin
-VTA Newark/Heath, OH
+VTA Licking County Airport, Newark, OH
 VTI Vinton Veterans Mem, IA
 VTN Valentine, NE
 VTP La Veta Pass, CO
