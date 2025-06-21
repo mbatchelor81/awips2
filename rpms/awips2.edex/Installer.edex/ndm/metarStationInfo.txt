@@ -950,7 +950,6 @@
 0000000000|K05U | 39.60375|-116.0036| 1816|Eureka AP, Eureka, NV            |US|MTR
 0000000000|K06C | 41.98934|-88.10124| 244|Schamburg Rgnl AP, Schamburg, IL  |US|MTR
 0000000000|K06D | 48.88442| -99.62075| 556|Rolla Muni, Rolla, ND            |US|MTR
-0000000000|K07S | 47.97 |-117.43 |  672|Deer Park, WA                       |US|MTR
 0000000000|K08D | 48.3008|-102.40635| 684|Stanley Muni, Stanley, ND         |US|MTR
 0000000000|K0A0 | 32.99000|-106.96739| 1401|Spaceport America, NM           |US|MTR
 0000000000|K0A9 | 36.371| -82.173|  486|Elizabethton Muni, Elizabethton, TN |US|MTR
@@ -1049,14 +1048,13 @@
 0000000000|K1S3 | 46.27115|-106.62390| 832|Tillitt Field Airport, Forsyth, MT|US|MTR
 0000000000|K1S5 | 46.3271|-119.9704| 234|Sunnyside Muni, Sunnyside, WA      |US|MTR
 0000000000|K1U7 | 42.24976|-111.34163| 1808|Bear Lake Airport, Paris, ID    |US|MTR
-0000072614|K1V4 | 44.42 | -72.02 |  217|St. Johnsbury, VT                   |US|MTR
+0000072614|K1V4 | 44.41667|-72.01667| 217|St. Johnsbury, VT                 |US|MTR
 0000000000|K1V6 | 38.4284|-105.106| 1659|Fremont Cnty AP, Canon City, CO    |US|MTR
 0000074004|K1Y7 | 32.85 |-114.40 |   98|Yuma Proving Ground, AZ             |US|MTR
 0000000000|K20G | 41.92 | -80.80 |  178|ASHTABULA (CGS), OH                 |US|MTR
 0000000000|K20U | 46.92517|-103.98206| 840|Beach AP, Beach, ND              |US|MTR
 0000000000|K20V | 40.05632|-106.37436| 2257|McElroy Fld, Kremmling, CO      |US|MTR
 0000000000|K21D | 44.998| -92.856|  284|Lake Elmo AP, St. Paul, MN          |US|MTR
-0000000000|K22G | 41.35 | -82.18 |  242|Elyria/Lorain Co., OH               |US|MTR
 0000000000|K22N | 40.8095| -75.7615| 163|J Arner Mem AP, Lehighton, PA      |US|MTR
 0000000000|K24A | 35.31721| -83.20970| 871|Jackson Cnty AP, Sylva, NC       |US|MTR
 0000000000|K24J | 30.3004| -83.0244| 32|Suwannee Cnty AP, Live Oak, FL      |US|MTR
@@ -1244,7 +1242,6 @@
 0000000000|K97Q | 38.01 |-123.02 |   87|POINT REYES, CA                     |US|MTR
 0000000000|K9A4 | 34.65939| -87.34883| 179|Lawrence Cnty AP, Courtland, AL  |US|MTR
 0000000000|K9A5 | 34.6885| -85.2903| 237|Barwick Lafayette AP, LaFayette, GA|US|MTR
-0000072612|K9B2 | 44.43 | -72.02 |  217|SAINT JOHNSBURY, VT                 |US|MTR
 0000000000|K9BB | 41.16 |-114.97 | 1723|WELLS, NV                           |US|MTR
 0000000000|K9D7 | 48.480| -99.23639| 451|Cando Muni, Cando, ND              |US|MTR
 0000000000|K9F2 | 29.11 | -90.20 |    2|FOURCHON (SAWRS), LA                |US|MTR
@@ -1781,7 +1778,7 @@
 0000072469|KDEN | 39.84661|-104.65624| 1649|Denver Intl, CO                 |US|MTR
 0000000000|KDEQ | 34.05 | -94.40 |  108|DeQueen/J Lynn Helms Sevier Co, AR  |US|MTR
 0000000000|KDET | 42.43 | -83.02 |  190|DETROIT CITY, MI                    |US|MTR
-0000000000|KDEW | 47.974|-117.428|  669|Deer Park, WA                       |US|MTR
+0000000000|KDEW | 47.96705|-117.42859| 674|Deer Park Arpt, Deer Park, WA    |US|MTR
 0000000000|KDFI | 41.34 | -84.43 |  216|Defiance Memorial, OH               |US|MTR
 0000072259|KDFW | 32.91 | -97.03 |  174|DALLAS/FT WORTH, TX                 |US|MTR
 0000000000|KDGW | 42.79719|-105.38583| 1504|Converse Cnty Arpt, Douglas, WY |US|MTR
@@ -2578,7 +2575,7 @@
 0000000000|KLOV | 30.4461|-84.2997| 173|Florida State University, FL        |US|MTR
 0000000000|KLOZ | 37.08959|-84.06882| 369|LONDON, KY                        |US|MTR
 0000000000|KLPC | 34.67 |-120.47 |   27|LOMPOC (AWOS), CA                   |US|MTR
-0000000000|KLPR | 41.346| -82.179|  241|Elyria/Lorain Co, OH                |US|MTR
+0000000000|KLPR | 41.34428|-82.17764| 242|Lorain Cnty Arpt, Elyria/Lorain, OH|US|MTR
 0000000000|KLQK | 34.80997| -82.7028889| 309|Pickens, SC                    |US|MTR
 0000072252|KLRD | 27.54 | -99.47 |  156|LAREDO INTL AIRP, TX                |US|MTR
 0000000000|KLRF | 34.93 | -92.15 |   95|LITTLE ROCK AFB, AR                 |US|MTR

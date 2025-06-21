@@ -25,7 +25,6 @@
 06C Schaumburg Rgnl AP, Schaumburg, IL
 06D Rolla Muni, Rolla, ND
  07 Bulletin No. 07
-07S Deer Park, WA
  08 Bulletin No. 08
 08D Stanley Muni, Stanley, ND
  09 Bulletin No. 09
@@ -226,7 +225,6 @@
  21 Bulletin No. 21
 21D Lake Elmo AP, St. Paul, MN
  22 Bulletin No. 22
-22G Lorain/Elyria, OH
 22M 12 HR RGL WND 34K FT
 22N J Arner Mem AP, Lehighton, PA
  23 Bulletin No. 23
@@ -531,7 +529,6 @@
 97Q Point Reyes, CA
 9A4 Lawrence Cnty AP, Courtland, AL
 9A5 Barwick Lafayette AP, LaFayette, GA
-9B2 Saint Johnsbury, VT
 9BB Wells, NV
   9 Bulletin No. 9
 9D7 Cando Muni, Cando, ND
@@ -1357,7 +1354,7 @@ DEN Denver, CO
 DEQ DeQueen/J Lynn Helms Sevier Co, AR
 DES Des Moines River Basin
 DET Detroit, MI
-DEW Deer Park, WA
+DEW Deer Park Airport, Deer Park, WA
 DFI Defiance Memorial, OH
 DFW Dallas-Fort Worth, TX
 DGW Converse County Airport, Douglas, WY
@@ -2686,7 +2683,7 @@ LOX WFO Los Angeles, Oxnard, CA
 LOZ London, KY
 LPC K-Lompoc, CA; T-Vigie, St. Lucia, LC
 LPL T-Hewanorra Intl Arpt, LC
-LPR Elyria/Lorain Co, OH
+LPR Lorain County Regional Airport, Elyria/Lorain, OH
 LQK Pickens, SC
 LRD Laredo, TX
 LRF Little Rock AFB, Jacksonville, AR
