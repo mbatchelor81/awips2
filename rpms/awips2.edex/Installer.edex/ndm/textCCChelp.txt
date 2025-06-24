@@ -117,7 +117,6 @@
  16 Bulletin No. 16
  17 Bulletin No. 17
 17J Donalsonville Muni Airport, Donalsonville, GA
-17W Wadena Muni, MN
 18A 18-Hour WINTEM; K-Franklin Cnty AP, Canon, GA
  18 Bulletin No. 18
 18H Lucius Deepwater Oil and Gas Platform, Gulf
@@ -585,7 +584,7 @@ ACX Coldfoot Airport, Coldfoot, AK
 ACY Atlantic City, NJ
 ACZ Cape Romanzoff, AK
 ACZ Henderson Field Airport, Wallace, NC
-ADC Wadena Muni, MN
+ADC Wadena Muni Airport, Wadena, MN
 ADE Deering, AK
 ADF Florence Mem AP, Arkadelphia, AR
 ADG K-Adrian/Lenawee Co, MI; P-Red Dog AP, Red Dog, AK

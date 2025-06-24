@@ -974,7 +974,6 @@
 0000000000|K14Y | 45.899| -94.874|  406|Todd Field AP, Long Prairie, MN     |US|MTR
 0000000000|K15M | 34.77333|-88.16608| 191|Iuka Airport, Iuka, MS            |US|MTR
 0000000000|K17J | 31.00697|-84.87761| 45|Donalsonville AP, Donalsonville, GA|US|MTR
-0000000000|K17W | 46.45 | -95.21 |  418|Wadena Muni, MN                     |US|MTR
 0000000000|K18A | 34.3404| -83.1308| 271|Franklin Cnty AP, Canon, GA        |US|MTR
 0000000000|K18H |26.1283| -92.0333|  30|Lucius Deepwater Oil Platform, Gulf |US|MTR
 0000000000|K19S | 37.49686|-100.83292| 887|Sublette Muni AP, Sublette, KS   |US|MTR
@@ -1277,7 +1276,7 @@
 0000000000|KACV | 40.978|-124.108|   68|Arcata/Eureka AP, CA                |US|MTR
 0000072407|KACY | 39.46 | -74.57 |   20|ATLANTIC CITY IN, NJ                |US|MTR
 0000000000|KACZ | 34.71786|-78.00389| 12|Henderson Field AP, Wallace, NC    |US|MTR
-0000000000|KADC | 46.447| -95.212|  418|Wadena Muni, MN                     |US|MTR
+0000000000|KADC | 46.44737| -95.21133| 417|Wadena Muni Airport, Wadena, MN  |US|MTR
 0000000000|KADF | 34.0998| -93.0661| 56|Florence Mem AP, Arkadelphia, AR    |US|MTR
 0000000000|KADG | 41.87 | -84.07 |  243|Adrian/Lenawee Co, MI               |US|MTR
 0000000000|KADH | 34.804| -96.671|  310|Ada Muni, OK                        |US|MTR
