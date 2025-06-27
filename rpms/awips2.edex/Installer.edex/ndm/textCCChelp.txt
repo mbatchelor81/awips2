@@ -115,6 +115,7 @@
  15 Bulletin No. 15
 15M Iuka Airport, Iuka, MS
  16 Bulletin No. 16
+16J Dawson Minicipal Airport, Dawson, GA
  17 Bulletin No. 17
 17J Donalsonville Muni Airport, Donalsonville, GA
 18A 18-Hour WINTEM; K-Franklin Cnty AP, Canon, GA
@@ -371,7 +372,6 @@
 49D Cloquet, MN
 49J Hilton Head Island, SC
 49T Dallas CBD Heliport, Dallas, TX
-49Y Preston/Fillmore Co, MN
 4A6 Scottsboro Muni, Scottsboro, AL
 4A9 Isbell Fld AP, Fort Payne, AL
 4B4 Meriden, CT
@@ -1676,7 +1676,7 @@ FIG Clearfield-Lawrence, PA
 FIN Flagler Cnty AP, Bunnell, FL
 FIR First Divide, WY
 FIT Fitchburg, MA
-FKA Preston/Fillmore Co, MN
+FKA Fillmore County Airport, Preston, MN
 FKF Franklin Bluffs, AK
 FKL Franklin, PA
 FKN Franklin/J B Rose, VA
@@ -3164,7 +3164,6 @@ NT5 Atlantic #5 (E,J,O,V)
  NT Atlantic
 NTB Los Alamitos USN Stn, Los Alamitos, CA
 NTD Point Mugu NAS, Port Hueneme, CA
-NTK Tustin MCAS, CA
 NTL North Atlantic
 NTS Nevada Test Site
 NTU Oceana NAS, Oceana, VA
@@ -3868,7 +3867,7 @@ SMQ Somerville/Somerset, NJ
 SMS K-Sumter, SC
 SMT Tornado and Special Marine Warning
 SMX Santa Maria, CA
-SNA Santa Ana, CA
+SNA John Wayne Airport, Santa Ana, CA
 SNC Chester, CT
 SNE Southern New England
 SNH Savannah/Hardin Co, TN

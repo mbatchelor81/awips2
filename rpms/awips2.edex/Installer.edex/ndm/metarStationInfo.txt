@@ -973,6 +973,7 @@
 0000000000|K13K | 37.85161|-96.29203| 368|Eureka Muni, Eureka, KS           |US|MTR
 0000000000|K14Y | 45.899| -94.874|  406|Todd Field AP, Long Prairie, MN     |US|MTR
 0000000000|K15M | 34.77333|-88.16608| 191|Iuka Airport, Iuka, MS            |US|MTR
+0000000000|K16J | 31.74329|-84.41929| 102|Dawson Muni Airport, Dawson, GA   |US|MTR
 0000000000|K17J | 31.00697|-84.87761| 45|Donalsonville AP, Donalsonville, GA|US|MTR
 0000000000|K18A | 34.3404| -83.1308| 271|Franklin Cnty AP, Canon, GA        |US|MTR
 0000000000|K18H |26.1283| -92.0333|  30|Lucius Deepwater Oil Platform, Gulf |US|MTR
@@ -1135,7 +1136,6 @@
 0000000000|K49A | 34.6282| -84.5266| 453|Gilmer Cnty AP, Ellijay, GA        |US|MTR
 0000000000|K49B | 44.41868|-103.37772| 992|Sturgis Muni Arpt, Sturgis, SD   |US|MTR
 0000000000|K49T | 32.77172|-96.80206| 146|Dallas CBD Heliport, Dallas, TX   |US|MTR
-0000000000|K49Y | 43.68 | -92.18 |  389|Preston/Fillmore Co, MN             |US|MTR
 0000000000|K4A6 | 34.6887| -86.0059| 198|Scottsboro Muni, Scottsboro, AL    |US|MTR
 0000000000|K4A9 | 34.474| -85.721|  267|Isbell Fld AP, Fort Payne, AL       |US|MTR
 0000000000|K4B8 | 41.68933|-72.86469| 62|Robertson Fld Arpt, Plainville, CT |US|MTR
@@ -2021,7 +2021,7 @@
 0000000000|KFIN | 29.467| -81.206|   10|Flagler Cnty AP, Bunnell, FL        |US|MTR
 0000000000|KFIR | 41.29 |-110.77 | 2310|First Divide, WY                    |US|MTR
 0000000000|KFIT | 42.55 | -71.76 |  107|FITCHBURG, MA                       |US|MTR
-0000000000|KFKA | 43.677| -92.180|  389|Preston/Fillmore Co, MN             |US|MTR
+0000000000|KFKA | 43.67675|-92.17975| 389|Fillmore Cnty Arpt, Preston, MN   |US|MTR
 0000000000|KFKL | 41.38058|-79.86025| 469|FRANKLIN, PA                      |US|MTR
 0000000000|KFKN | 36.70 | -76.90 |   12|Franklin/J B Rose, VA               |US|MTR
 0000000000|KFKR | 40.273| -86.562|  262|Frankfort, IN                       |US|MTR
@@ -2881,7 +2881,6 @@
 0000072291|KNSI | 33.26 |-119.45 |  174|SAN NICOLAS IS., CA                 |US|MTR
 0000072491|KNSU | 36.61 |-121.85 |   46|MONTEREY, CA                        |US|MTR
 0000072391|KNTD | 34.12 |-119.12 |    4|PT MUGU NAWS, CA                    |US|MTR
-0000069016|KNTK | 33.71 |-117.83 |   17|TUSTIN MCAS, CA                     |US|MTR
 0000000000|KNTU | 36.83 | -76.03 |    6|OCEANA NAS, VA                      |US|MTR
 0000000000|KNUC | 33.03 |-118.58 |   55|SAN CLEMENTE IS, CA                 |US|MTR
 0000000000|KNUI | 38.144| -76.428|   20|St Inigoes/Webster Nolf, MD         |US|MTR
@@ -3395,7 +3394,7 @@
 0000000000|KSMQ | 40.624| -74.669|   31|Somerville/Somerset, NJ             |US|MTR
 0000000000|KSMS | 33.995| -80.361|   56|Sumter, SC                          |US|MTR
 0000072394|KSMX | 34.91 |-120.45 |   73|SANTA MARIA PUBL, CA                |US|MTR
-0000000000|KSNA | 33.68 |-117.87 |   16|Santa Ana/John Wayne-Orange Co, CA  |US|MTR
+0000000000|KSNA | 33.67566|-117.86823| 17|Santa Ana/John Wayne-Orange Co, CA|US|MTR
 0000000000|KSNC | 41.384| -72.506|  127|Chester AP, Chester, CT             |US|MTR
 0000000000|KSNH | 35.1703| -88.2167| 144|Savannah/Hardin Co, TN             |US|MTR
 0000000000|KSNK | 32.693|-100.950|  741|Winston Fld, Snyder, TX             |US|MTR
