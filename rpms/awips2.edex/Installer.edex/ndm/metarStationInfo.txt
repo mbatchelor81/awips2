@@ -1058,7 +1058,6 @@
 0000000000|K22N | 40.8095| -75.7615| 163|J Arner Mem AP, Lehighton, PA      |US|MTR
 0000000000|K24A | 35.31721| -83.20970| 871|Jackson Cnty AP, Sylva, NC       |US|MTR
 0000000000|K24J | 30.3004| -83.0244| 32|Suwannee Cnty AP, Live Oak, FL      |US|MTR
-0000000000|K27A | 34.095| -82.816|  184|Elbert Cnty AP, Elberton, GA        |US|MTR
 0000000000|K27B | 43.18 | -70.60 |   12|CAPE NEDDICK, ME                    |US|MTR
 0000000000|K27K | 38.23444|-84.43469| 289|Marshall Field AP, Georgetown, KY |US|MTR
 0000000000|K27U | 45.19 |-113.90 | 1224|SALMON, ID                          |US|MTR
@@ -1113,7 +1112,6 @@
 0000000000|K3L4 | 29.79968|-92.80354| 2|Little Pecan AP, Grand Chenier, LA  |US|MTR
 0000000000|K3LF | 39.163| -89.675|  210|Litchfield Muni AP, Litchfield, IL  |US|MTR
 0000000000|K3N8 | 47.2605| -95.9281| 379|Mahnomen Cnty AP, Mahnomen, MN     |US|MTR
-0000000000|K3OI | 40.62 | -93.93 |  342|LAMONI, IA                          |US|MTR
 0000000000|K3R0 | 28.362| -97.791|   82|Beeville Muni, Beeville, TX         |US|MTR
 0000000000|K3R7 | 30.2427| -92.6735|  7|Jennings AP, Jennings, LA           |US|MTR
 0000000000|K3S8 | 42.5101|-123.388| 345|Grants Pass AP, Grants Pass, OR     |US|MTR
@@ -1875,7 +1873,7 @@
 0000000000|KEAR | 40.73 | -99.00 |  649|KEARNEY, NE                         |US|MTR
 0000000000|KEAT | 47.41 |-120.20 |  379|WENATCHEE/PNGBRN, WA                |US|MTR
 0000000000|KEAU | 44.88 | -91.48 |  276|EAU CLAIRE, WI                      |US|MTR
-0000000000|KEBA | 34.0954| -82.8175| 184|Patz-Elbert Cnty AP, Elberton, GA  |US|MTR
+0000000000|KEBA | 34.0954| -82.8175| 187|Patz-Elbert Cnty AP, Elberton, GA  |US|MTR
 0000000000|KEBG | 26.442| -98.129|   24|Edinburg Intl, TX                   |US|MTR
 0000000000|KEBS | 42.43 | -93.87 |  342|Webster City, IA                    |US|MTR
 0000000000|KECG | 36.26 | -76.18 |    4|Elizabeth City CG Air Stn/Muni, NC  |US|MTR
@@ -2487,7 +2485,6 @@
 0000000000|KK88 | 37.86822|-95.38694| 310|Allen Cnty AP, Iola, KS           |US|MTR
 0000000000|KKLS | 46.117|-122.90 |    5|KELSO, WA                           |US|MTR
 0000000000|KKNB | 37.01051|-112.53148| 1484|Kanab Muni Airport, Kanab, UT   |US|MTR
-0000000000|KKSC | 28.62 | -80.70 |    3|BECAME STN 74794, FL                |US|MTR
 0000000000|KKSD | 32.58 |-116.98 |  160|SN DG/BROWN FLD, CA                 |US|MTR
 0000000000|KKY8 | 37.95319|-86.85717| 125|Ron Lewis Field, Lewisport, KY    |US|MTR
 0000000000|KL08 | 33.25903|-116.32097| 159|Borrego Valley, Borrego Springs, CA |US|MTR
@@ -2607,7 +2604,7 @@
 0000000000|KLWA | 42.351| -86.256|  203|South Haven Area Rgnl AP, MI        |US|MTR
 0000000000|KLWB | 37.8583| -80.3994|  701|LEWISBURG, WV                     |US|MTR
 0000000000|KLWC | 39.02 | -95.22 |  253|LAWRENCE, KS                        |US|MTR
-0000000000|KLWD | 40.63064|-93.90043| 346|Lamoni Muni, IA                   |US|MTR
+0000000000|KLWD | 40.63064|-93.90043| 346|Lamoni Muni Arpt, Lamoni, IA      |US|MTR
 0000000000|KLWM | 42.73 | -71.12 |   47|LAWRENCE, MA                        |US|MTR
 0000072783|KLWS | 46.39 |-117.02 |  438|LEWISTON (AMOS), ID                 |US|MTR
 0000000000|KLWT | 47.05 |-109.45 | 1279|LEWISTON, MT                        |US|MTR
@@ -3550,7 +3547,7 @@
 0000000000|KTTD | 45.5510|-122.4090| 11|Portland-Troutdale, OR              |US|MTR
 0000000000|KTTF | 41.94 | -83.43 |  188|Monroe/Custer, MI                   |US|MTR
 0000000000|KTTN | 40.28 | -74.81 |   65|Trenton/Mercer, NJ                  |US|MTR
-0000000000|KTTS | 28.59872|-80.68152| 3|NASA SHUTTLE FCLTY, FL              |US|MTR
+0000000000|KTTS | 28.59872|-80.68152| 3|NASA Shuttle Fclty, Titusville, FL  |US|MTR
 0000072356|KTUL | 36.21 | -95.90 |  206|TULSA INTL ARPT, OK                 |US|MTR
 0000072332|KTUP | 34.28 | -88.77 |  110|TUPELO/C.D. LEMO, MS                |US|MTR
 0000072274|KTUS | 32.12 |-110.93 |  779|TUCSON INTL AIRPORT, AZ             |US|MTR
@@ -3711,7 +3708,6 @@
 0000000000|KX26 | 27.81325| -80.49558| 7|Sebastian Muni AP, Sebastian, FL   |US|MTR
 0000000000|KX59 | 27.96087|-80.55833| 8|Valkaria Airport, Valkaria, FL      |US|MTR
 0000000000|KX60 | 29.3557| -82.4719|  23|Williston, FL                      |US|MTR
-0000000000|KX68 | 28.62 | -80.68 |    4|NASA SHUTTLE FTY, FL                |US|MTR
 0000000000|KXBP | 33.175| -97.828|  260|Bridgeport Muni, TX                 |US|MTR
 0000000000|KXCN | 27.77 | -91.52 |   -0|Green Canyon 184, LA                |US|MTR
 0000000000|KXER |27.946 | -90.9969|   0|Green Canyon 19, Gulf               |US|MTR
