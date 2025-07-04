@@ -1,4 +1,4 @@
- This file, metarStationInfo.txt, contains station information for METAR and
+# This file, metarStationInfo.txt, contains station information for METAR and
 # SAO sites. (Some Canadian station still report in SA format. Although these
 # are now converted at OSO to METAR form, we note them as SAO here.)
 #
@@ -1164,7 +1164,6 @@
 0000072495|K50Q | 37.71 |-123.00 |   12|FARALLON ISLAND, CA                 |US|MTR
 0000000000|K54A | 26.85374| -82.25260|  2|Coral Creek AP, Placida, FL       |US|MTR
 0000000000|K54J | 30.731| -86.1538|  88|DeFuniak Spr AP, DeFuniak Spr, FL   |US|MTR
-0000000000|K55J | 30.612| -81.461|    5|Fernandina Bch Muni, FL             |US|MTR
 0000000000|K57C | 42.79717|-88.37261| 262|East Troy Muni AP, East Troy, WI  |US|MTR
 0000000000|K5A6 | 33.465| -89.7302| 111|Winona-Montgomery AP, Winona, MS    |US|MTR
 0000000000|K5A9 |32.9385| -84.6964| 265|Warm Springs, GA                    |US|MTR
@@ -2011,7 +2010,7 @@
 0000000000|KFGN | 49.32 | -94.88 |  328|Flag Is, MN                         |US|MTR
 0000000000|KFGX | 38.5418| -83.7434| 278|Fleming-Mason AP, Flemingsburg, KY |US|MTR
 0000072376|KFGZ | 35.23 |-111.82 | 2180|Flagstaff/Belemont, AZ              |US|MTR
-0000000000|KFHB | 30.61183| -81.461194| 5|Fernandina Beach Muni, FL         |US|MTR
+0000000000|KFHB | 30.61183| -81.461194| 5|Fernandina Beach Muni Arpt, FL    |US|MTR
 0000000000|KFHM | 34.06778|-118.24167| 126|Frank Hotchkin Mem, Los Angeles, CA|US|MTR
 0000000000|KFHR | 48.52197|-123.02436| 34|Friday Harbor Airport, WA         |US|MTR
 0000072273|KFHU | 31.58 |-110.33 | 1422|FORT HUACHUCA, AZ                   |US|MTR

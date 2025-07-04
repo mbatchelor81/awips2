@@ -416,7 +416,6 @@
 52M 12 HR RGL WND 18K FT
 54A Coral Creek AP, Placida, FL
 54J Defuniak Springs, FL
-55J Fernandina Bch Muni, FL
 55N Atlantic City Coast Guard, Atlantic City, NJ
 57C East Troy Muni AP, East Troy, WI
 5A6 Winona-Montgomery Cnty AP, Winona, MS
@@ -1666,7 +1665,7 @@ FGF WFO Eastern North Dakota, Grand Forks, ND
 FGN Flag Is, MN
 FGX Fleming-Mason AP, Flemingsburg, KY
 FGZ WFO Flagstaff/Belemont, AZ
-FHB Fernandina Beach Muni, FL
+FHB Fernandina Beach Muni Airport, FL
 FHM Frank Hotchkin Memorial Training Center, Los Angeles, CA
 FHR Friday Harbor Airport, WA
 FHU Fort Huachuca, Sierra Vista, AZ
