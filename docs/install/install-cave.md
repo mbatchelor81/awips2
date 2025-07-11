@@ -51,9 +51,9 @@ Regardless of what Operating System CAVE is running on, these general requiremen
 
 ### Download and Installation Instructions
 
-1. Download the following installer: [**awips_install-v23.sh** <i class="fa fa-download"></i>](https://downloads.unidata.ucar.edu/awips2/current/linux/awips_install.sh)
+1. Download the following installer: [**awips_install.sh** <i class="fa fa-download"></i>](https://downloads.unidata.ucar.edu/awips2/current/linux/awips_install.sh)
 2. In a terminal, go to the download directory 
-3. Make the installer an executable by running: `chmod 755 awips_install-v23.sh`
+3. Make the installer an executable by running: `chmod 755 awips_install.sh`
 4. Run the installer: `sudo ./awips_install.sh --cave`
      - This will install the application in `/awips2/cave/` and set the local cache to `~/caveData/`
 
@@ -210,7 +210,7 @@ You can reset CAVE by removing the **caveData** directory and reconnecting to an
 ---
 
 ## Uninstalling CAVE (Linux) 
-These are instructions to manually uninstall CAVE manually. However, the [`awips_install-v23.sh`](#download-and-installation-instructions) script will do these steps for you if you are installing a newer version of CAVE.
+These are instructions to manually uninstall CAVE manually. However, the [`awips_install.sh`](#download-and-installation-instructions) script will do these steps for you if you are installing a newer version of CAVE.
 
 **1. Make sure you have exited out of any CAVE sessions**
 
