@@ -77,11 +77,12 @@ Note: These steps should be run as root or with sudo.
 ```
 sudo edex start
 ```
-It takes a couple minutes for EDEX to fully start up. EDEX has started correctly if you see `* EDEX ESB is now operational` in the 
+It takes a couple minutes for EDEX to fully start up. EDEX has started correctly if you see `* EDEX ESB is now operational` in the EDEX logs. You can grep for it by using the following command:
 
 ```
 tail -f /awips2/edex/logs/*.log | grep operational
 ```
+You should be ready to connect CAVE to your EDEX! Steps 3 and 4 are only for initial setup.
 
 #### Manual Commands
 If you ever ned to manually start, stop, or restart a single process (this is not normally done, but here for reference):
@@ -93,16 +94,15 @@ systemctl start edex_camel@ingest
 systemctl start edex_camel@ingestGrib
 systemctl start edex_camel@request
 ```
-The fifth service, **edex_ldm**, does **not run at boot** to prevent filling up disk space if EDEX is not running. Start ldm manually:
+The above services start automatically on a reboot. The fifth service, **edex_ldm**, does **not run at boot** to prevent filling up disk space if EDEX is not running. If you need to start ldm manually:
 ```
 service edex_ldm start
 ```
+
 To restart EDEX
 ```
 edex restart
 ```
-
-You should be ready to connect CAVE to your EDEX! Steps 3 and 4 are only for initial setup.
 
 --- 
 ### 3. EDEX Setup 
