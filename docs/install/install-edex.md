@@ -45,7 +45,7 @@ The first 3 steps should all be run as **root**
 Download and run the installer: [**awips_install.sh** <i class="fa fa-download"></i>](https://downloads.unidata.ucar.edu/awips2/current/linux/awips_install.sh)
 
 ```
-wget https://downloads.unidata.ucar.edu/awips2/current/linux/awips_install-v23.sh
+wget https://downloads.unidata.ucar.edu/awips2/current/linux/awips_install.sh
 chmod 755 awips_install.sh
 sudo ./awips_install.sh --edex
 ```
