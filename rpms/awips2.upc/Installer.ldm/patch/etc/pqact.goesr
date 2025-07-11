@@ -42,7 +42,7 @@ HDS	^(IXT.[8-9]9) (KNES) (..)(..)(..)
 NOTHER	^(IXT[WXY]01) (KNES) (..)(..)(..)
 	FILE	-close -edex	/awips2/data_store/GOES/(\3:yyyy)(\3:mm)\3/\4/derived-SBN/\1_KNES_\2\3\4\5-(seq)
 # Blended Hydro Suite - Advected Layer Preciptial Water (ALPW)
-EXP	^(TICY70) (KNES) (..)(..)(..)
+NOTHER	^(TICY70) (KNES) (..)(..)(..)
 	FILE	-close -edex	/awips2/data_store/GOES/(\3:yyyy)(\3:mm)\3/\4/derived-SBN/\1_KNES_\2\3\4\5-(seq)
 
 # GOES 16/17 derived products via Unidata IDD - (not using)
