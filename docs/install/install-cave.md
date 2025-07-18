@@ -85,6 +85,8 @@ We offer CAVE installers at both the user-level (no administrative permissions n
 
 1. Download and install: [**awips-cave.msi** <i class="fa fa-download"></i>](https://downloads.unidata.ucar.edu/awips2/current/windows/awips-cave-23.4.1-1.msi)
 
+Note: If you are having issues with Windows blocking your installation, follow [these](../appendix/common-problems.md#windows-install-error) instructions.
+
 #### Run CAVE
 
 To run CAVE, either:
