@@ -1858,7 +1858,7 @@ GRB WFO Green Bay, WI WSR-88D
 GRD Greenwood, SC
 GRF Fort Lewis, Tacoma, WA
 GRI Grand Island, NE
-GRK Robert Gray AAF, Ft. Cavazos, Killeen, TX
+GRK Robert Gray AAF, Fort Hood, Killeen, TX
 GRN Gordon Municipal Airport, Gordon, NE
 GRN Green River
 GRO P-Rota Intl, MY

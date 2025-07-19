@@ -289,7 +289,7 @@
 0000000000|CWLU | 46.83 | -71.17 |   20|Lauzon, QC                          |CN|SAO
 0000071454|CWLV | 53.92 |-106.07 |  569|WASKESIU LAKE, SK                   |CN|MTR
 0000071091|CWLX | 68.91 | -75.16 |  162|LONGSTAFF BLUFF, NU                 |CN|MTR
-0000071891|CWLY | 50.23 |-121.58 |  229|Lytton, BC                          |CN|MTR
+0000071812|CWLY | 50.23 |-121.58 |  229|Lytton, BC                          |CN|MTR
 0000000000|CWMA | 54.02 |-132.12 |    5|MASSET A, BC                        |CN|MTR
 0000000000|CWMD | 76.23 |-119.32 |   12|MOULD BAY CAMP, NT                  |CN|MTR
 0000071482|CWME | 52.19 |-127.47 |   31|Cathedral Point, BC                 |CN|SAO
@@ -642,7 +642,7 @@
 0000000000|CYDQ | 55.76 |-120.19 |  655|DAWSON CREEK ARPT, BC               |CN|MTR
 0000071121|CYED | 53.69 |-113.47 |  699|EDMONTON/NAMAO, AB                  |CN|MTR
 0000071123|CYEG | 53.33 |-113.58 |  719|EDMONTON INTL, AB                   |CN|MTR
-0000071812|CYEK | 61.11 | -94.07 |   10|ARVIAT AIRPORT, NU                  |CN|MTR
+0000000000|CYEK | 61.11 | -94.07 |   10|ARVIAT AIRPORT, NU                  |CN|MTR
 0000000000|CYEL | 46.36 | -82.58 |  329|ELLIOT LAKE, ON                     |CN|MTR
 0000071862|CYEN | 49.08 |-103.00 |  572|ESTEVAN, SK                         |CN|MTR
 0000071099|CYER | 56.019| -87.676|   16|Fort Severn A, ON                   |CN|MTR
@@ -2163,7 +2163,7 @@
 0000000000|KGRD | 34.2539| -82.1526| 192|Greenwood, SC                      |US|MTR
 0000074207|KGRF | 47.09 |-122.58 |   92|FORT LEWIS/GRAY, WA                 |US|MTR
 0000072552|KGRI | 40.98 | -98.32 |  566|GRAND ISLAND, NE                    |US|MTR
-0000000000|KGRK | 31.06725| -97.82892| 309|Fort Cavazos, Robert Gray AAF, TX|US|MTR
+0000000000|KGRK | 31.06725| -97.82892| 309|Fort Hood, Robert Gray AAF, TX   |US|MTR
 0000000000|KGRN | 42.80597|-102.17525| 1086|Gordon Muni AP, Gordon, NE      |US|MTR
 0000072635|KGRR | 42.882106|-85.522983| 245|GRAND RAPIDS INT, MI            |US|MTR
 0000000000|KGRY | 27.625| -90.441|   -0|Green Canyon 338, LA /Front Runner  |US|MTR
