@@ -1071,7 +1071,6 @@
 0000000000|K2G2 | 40.36061|-80.70169| 365|Jefferson Cnty AP, Steubenville, OH|US|MTR
 0000000000|K2G4 | 39.580| -79.339|  894|Garrett Cnty AP, Oakland, MD        |US|MTR
 0000000000|K2G9 | 40.03887|-79.01500| 693|Somerset Cnty AP, Somerset, PA    |US|MTR
-0000000000|K2GL | 29.409| -90.288|    3|Galliano Heliport, LA               |US|MTR
 0000000000|K2I0 | 37.35593| -87.39822| 134|Madisonville Muni, KY            |US|MTR
 0000000000|K2IS | 26.73517|-81.05106| 6|Clewiston Airglades AP, Clewiston, FL|US|MTR
 0000000000|K2J3 | 32.98594|-82.38481| 100|Louisville Muni AP, Louisville, GA|US|MTR
@@ -2090,7 +2089,7 @@
 0000000000|KGAF | 48.40472| -97.37094| 251|Hutson Fld AP, Grafton, ND       |US|MTR
 0000000000|KGAG | 36.30 | -99.77 |  678|GAGE, OK                            |US|MTR
 0000000000|KGAI | 39.168| -77.166|  164|Montgomery Cnty AP, Gaithersburg, MD|US|MTR
-0000000000|KGAO | 29.445| -90.261|    0|S Lafourche AP, Galliano, LA        |US|MTR
+0000000000|KGAO | 29.44111|-90.26111|  0|S Lafourche Airport, Galliano, LA  |US|MTR
 0000000000|KGBD | 38.34425|-98.85919| 575|Great Bend Muni, KS               |US|MTR
 0000000000|KGBG | 40.93290|-90.43340| 233|Galesburg, IL                     |US|MTR
 0000000000|KGBK | 27.2039| -92.2025| -0|Magnolia TLP, LA AWOS-3             |US|MTR
@@ -2487,7 +2486,6 @@
 0000000000|KKSD | 32.58 |-116.98 |  160|SN DG/BROWN FLD, CA                 |US|MTR
 0000000000|KKY8 | 37.95319|-86.85717| 125|Ron Lewis Field, Lewisport, KY    |US|MTR
 0000000000|KL08 | 33.25903|-116.32097| 159|Borrego Valley, Borrego Springs, CA |US|MTR
-0000000000|KL10 | 33.42 |-117.62 |    3|SAN CLEMENTE, CA                    |US|MTR
 0000000000|KL18 | 33.3542|-117.2509| 216|Fallbrook Comm Airpk, CA           |US|MTR
 0000000000|KL32 | 33.22 |-117.35 |    9|Oceanside Muni, CA                  |US|MTR
 0000000000|KL35 | 34.264|-116.856| 2058|Big Bear City AP, CA                |US|MTR
@@ -2841,7 +2839,7 @@
 0000072409|KNEL | 40.04 | -74.32 |   24|LAKEHURST NAS, NJ                   |US|MTR
 0000000000|KNEW | 30.04 | -90.03 |    3|New Orleans/Lakefront, LA           |US|MTR
 0000000000|KNFE | 36.69204|-76.13456| 5|Fentress NAF, Fentress, VA          |US|MTR
-0000000000|KNFG | 33.30 |-117.35 |   24|CAMP PENDLETON M, CA                |US|MTR
+0000000000|KNFG | 33.30126|-117.35517| 24|Camp Pendleton, Munn Fld Arpt, CA |US|MTR
 0000000000|KNFL | 39.43 |-118.70 | 1199|FALLON NAS, NV                      |US|MTR
 0000072133|KNFW | 32.76919|-97.44153| 198|NASJRB Fort Worth, TX             |US|MTR
 0000000000|KNGP | 27.693| -97.291|    6|Truax Fld, NAS Corpus Christi, TX   |US|MTR
@@ -2884,7 +2882,6 @@
 0000069023|KNUW | 48.36 |-122.65 |   14|WHIDBEY IS, WA                      |US|MTR
 0000000000|KNVD | 37.852| -94.305|  272|Nevada Muni, Nevada, MO             |US|MTR
 0000000000|KNVT | 27.63 | -97.32 |    8|Waldron Fld, Corpus Christi, TX     |US|MTR
-0000000000|KNXF | 33.28 |-117.46 |   27|MCOLF Camp Pendleton, Oceanside, CA |US|MTR
 0000069015|KNXP | 34.30 |-116.17 |  626|Twentynine Palms, CA                |US|MTR
 0000000000|KNY0 | 42.9982| -74.3296| 269|Fulton Cnty AP, Johnstown, NY      |US|MTR
 0000072503|KNYC | 40.779| -73.969|   47|Central Park, New York City, NY     |US|MTR
@@ -4085,6 +4082,7 @@
 0000091366|PKWA |  8.73 | 167.73 |    8|Kwajalein/Bucholz                   |MH|MTR
 0000000000|PLCH |  1.986|-157.35 |    2|Cassidy Intl, Banana, Christmas Is  |PA|MTR
 0000091066|PMDY | 28.22 |-177.37 |    4|Midway Is NAF, HI                   |US|MTR
+0000000000|POKA | 60.56953|-165.24628| 19|Tununak Airport, Tununak, AK      |US|MTR
 0000000000|PPIT | 60.906|-162.4406|   4|Nunapitchuk AP, Nunapitchuk, AK     |US|MTR
 0000000000|PPIZ | 69.73 |-163.02 |    6|POINT LAY, AK                       |US|MTR
 0000070308|PSNP | 57.15 |-170.22 |    9|St Paul Is, AK                      |US|MTR

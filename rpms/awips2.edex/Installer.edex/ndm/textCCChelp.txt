@@ -253,7 +253,6 @@
 2G2 Jefferson Cnty AP, Steubenville, OH
 2G4 Garrett Cnty AP, Oakland, MD
 2G9 Somerset Cnty AP, Somerset, PA
-2GL Galliano Heliport, LA
 2I0 Madisonville, KY
 2IS Clewiston Airglades Airport, Clewiston, FL
 2J3 Louisville Muni Airport, Louisville, GA
@@ -1771,7 +1770,7 @@ GAG Gage, OK
 GAI Montgomery Cnty Airpark, Gaithersburg, MD
 GAL Galena, AK
 GAM Gambell, AK
-GAO S Lafourche AP, Galliano, LA
+GAO S Lafourche Airport, Galliano, LA
 GBD Great Bend, KS
  GB Gambia
 GBG Galesburg, IL
@@ -2565,7 +2564,6 @@ KY1 Rivers in Kentucky
 KY8 Ron Lewis Field, Lewisport, KY
  KY Kentucky
 L08 Borrego Valley, Borrego Springs, CA
-L10 San Clemente, CA
 L18 Fallbrook Community Airpk, Fallbrook, CA
 L35 Big Bear City AP, CA
 L40 High Island A489, LA
@@ -3094,7 +3092,7 @@ NEW New Orleans, LA
 NF1 Newfoundland
 NFD K-NCEP Forecast Division, College Park, MD
 NFE Fentress NAF, Fentress, VA
-NFG Camp Pendleton, CA
+NFG Camp Pendleton, Munn Field Airport, CA
 NFL Fallon NAS, Fallon, NV
  NF Newfoundland
 NFV Point Barrow USN Stn, Point Barrow, AK
@@ -3183,7 +3181,6 @@ NW2 Lower MacKenzie and Arctic Coast, Northwest Territory
 NWI Northwest Indiana River Basins
  NW Northwest Territories
 NWW National Warning Composite PIL
-NXF MCOLF Camp Pendleton AP, Oceanside, CA
 NXP Twentynine Palms, CA
 NXX Willow Grove NAS, Willow Grove, PA
 NY0 Fulton Cnty AP, Johnstown, NY
@@ -3256,6 +3253,7 @@ OJA Stafford AP, Weatherford, OK
 OJC Olathe, KS
 OJI Ojibway, MI
 OK1 Oklahoma Rivers
+OKA Tununak Airport, Tununak, AK
 OKB Oceanside, CA
 OKC Oklahoma City, OK
 OKH Oak Harbor, WA
