@@ -1014,7 +1014,7 @@ BRG Alexander Muni, Belen, NM
 BRL Burlington, IA
 BRO WFO Brownsville, TX WSR-88D
 BRW Barrow, AK
-BRX Bordeaux. WY
+BRX Bordeaux, WY
 BRY Samuels Field Airport, Bardstown, KY
 BSI Blairsville, PA
 BSM Bergstrom AFB, Austin, TX
