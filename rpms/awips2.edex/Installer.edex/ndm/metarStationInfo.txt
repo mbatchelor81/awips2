@@ -1083,7 +1083,6 @@
 0000000000|K2R9 | 28.82499| -97.86557| 88|Kenedy Regional Airport, Kenedy, TX|US|MTR
 0000000000|K2V5 | 40.10032|-102.24096| 1118|Wray Muni, Wray, CO             |US|MTR
 0000000000|K2V6 | 40.10420|-102.71300| 1261|Yuma Minicipal AP, Yuma, CO     |US|MTR
-0000000000|K2V9 | 38.55 |-106.93 | 2349|GUNNISON, CO                        |US|MTR
 0000000000|K2W6 | 38.315| -76.55 |   43|Rgnl AP, St Mary's, Leonardtown, MD |US|MTR
 0000000000|K2WX | 45.604272|-103.546937| 881|Buffalo, SD                    |US|MTR
 0000000000|K32Y | 47.24 | -88.64 |  190|PORTAGE (CGS), MI                   |US|MTR
@@ -1193,7 +1192,6 @@
 0000000000|K6S0 | 45.80648|-109.97826| 1370|Howard Field AP, Big Timber, MT |US|MTR
 0000000000|K6S2 | 43.9828|-124.1113| 16|Florence Muni, Florence, OR         |US|MTR
 0000000000|K6S8 | 45.70518|-108.76077| 1080|Laurel Muni Airport, Laurel, MT |US|MTR
-0000000000|K6V8 | 38.51 |-107.88 | 1752|MONTROSE, CO                        |US|MTR
 0000000000|K74V | 40.27842|-110.05139| 1576|Roosevelt Muni AP, Roosevelt, UT|US|MTR
 0000000000|K75S | 48.51 |-122.33 |   43|BURLINGTON/MT VR, WA                |US|MTR
 0000000000|K76S | 48.26 |-122.68 |   58|OAK HARBOR ARPT, WA                 |US|MTR
@@ -2175,7 +2173,7 @@
 0000072775|KGTF | 47.48 |-111.35 | 1118|GREAT FALLS, MT                     |US|MTR
 0000000000|KGTR | 33.46 | -88.58 |   79|GOLDEN TRIANGLE, MS                 |US|MTR
 0000000000|KGTU | 30.69 | -97.69 |  240|GEORGETOWN, TX                      |US|MTR
-0000000000|KGUC | 38.55 |-106.92 | 2337|GUNNISON ARPT, CO                   |US|MTR
+0000000000|KGUC | 38.53433|-106.93175| 2341|Gunnison-Crested Butte Arpt, CO |US|MTR
 0000000000|KGUL | 27.3039| -93.5383| -0|Gunnison, TX AWOS-3                 |US|MTR
 0000000000|KGUN | 41.43 |-104.34 | 1706|Gunbarrel, WY                       |US|MTR
 0000000000|KGUP | 35.53 |-108.78 | 1972|GALLUP/CLARKE, NM                   |US|MTR
@@ -2780,7 +2778,7 @@
 0000072231|KMSY | 29.98 | -90.25 |    9|NEW ORLEANS INTL, LA                |US|MTR
 0000000000|KMTC | 42.62 | -82.84 |  177|SELFRIDGE ANGB, MI                  |US|MTR
 0000000000|KMTH | 24.74 | -81.05 |    2|MARATHON AIRPORT, FL                |US|MTR
-0000000000|KMTJ | 38.51 |-107.88 | 1755|MONTROSE ARPT, CO                   |US|MTR
+0000000000|KMTJ | 38.50981|-107.89425| 1755|Montrose Rgnl Arpt, Montrose, CO|US|MTR
 0000000000|KMTK |28.6967| -89.3958|  30|South Pass 89E-B Oil Platform, Gulf |US|MTR
 0000000000|KMTN | 39.34 | -76.42 |    7|MARTIN/MDDLE RVR, MD                |US|MTR
 0000000000|KMTO | 39.47436|-88.27239| 220|Mattoon/Coles Co Mem, IL          |US|MTR
@@ -3277,7 +3275,6 @@
 0000000000|KS21 |43.8763|-121.4531|1267|Sunriver, OR                        |US|MTR
 0000000000|KS24 |41.2957| -83.0372| 201|Fremont, OH                         |US|MTR
 0000000000|KS25 | 47.796583|-103.255194| 643|Watford City Muni, ND          |US|MTR
-0000000000|KS29 | 38.54 |-106.05 | 2282|SALIDA/ALEXANDER, CO                |US|MTR
 0000000000|KS32 | 47.4228| -98.1059| 434|Cooperstown Muni, Cooperstown, ND  |US|MTR
 0000000000|KS33 | 44.6702|-121.1551| 743|Madras, OR                         |US|MTR
 0000000000|KS34 | 47.47356|-114.90708| 752|Plains Airport, Plains, MT       |US|MTR
@@ -3616,7 +3613,7 @@
 0000074781|KVAD | 30.97 | -83.20 |   71|VLDOSTA/MODY AFB, GA                |US|MTR
 0000000000|KVAF | 27.354| -94.625|   -0|East Breaks 643/Boomvang Spar, TX   |US|MTR
 0000000000|KVAY | 39.95 | -74.84 |   16|MOUNT HOLLY, NJ                     |US|MTR
-0000072393|KVBG | 34.75 |-120.57 |  121|Vandenberg AFB, CA                  |US|MTR
+0000072393|KVBG | 34.73734|-120.58431| 112|Vandenberg Space Force Base, CA  |US|MTR
 0000000000|KVBS | 29.478| -93.638|   -0|Sabine 13B, LA AWOS-3               |US|MTR
 0000000000|KVBT | 36.35 | -94.22 |  395|BENTONVILLE, AR                     |US|MTR
 0000000000|KVBW | 38.3667| -78.9603| 355|Bridgewater Air Pk, Bridgewater, VA|US|MTR
@@ -3717,7 +3714,6 @@
 0000000000|KXPY | 29.123| -90.202|   -0|Port Fourchon, LA AWOS3             |US|MTR
 0000000000|KXSA | 37.86 | -76.894|   41|Tappahannock-Essex Cnty AP, VA      |US|MTR
 0000000000|KXVG | 46.992| -94.200|  407|Longville Muni, MN                  |US|MTR
-0000000000|KXVW | 34.72 |-120.57 |  100|Vandenberg Range, CA                |US|MTR
 0000000000|KXWA | 48.26086|-103.7506| 717|Williston Basin Internation AP, ND|US|MTR
 0000000000|KY12 | 44.64 | -93.24 |  292|Airlake, MN                         |US|MTR
 0000000000|KY19 | 46.76797|-100.89436| 593|Mandan Muni, Mandan, ND          |US|MTR

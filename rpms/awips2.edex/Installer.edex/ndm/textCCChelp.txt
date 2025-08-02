@@ -268,7 +268,6 @@
 2V0 Craig, CO
 2V5 Wray Muni, Wray, CO
 2V6 Yuma Municipal AP, Yuma, CO
-2V9 Gunnison, CO
 2W6 Duke AP at St Mary's, Leonardtown, MD
 2WX Buffalo, SD
 300 Bulletin No. 300
@@ -472,7 +471,6 @@
 6S2 Florence Muni, Florence, OR
 6S8 Laurel Muni Airport, Laurel, MT
 6V3 Richlands/Tazewell Co, VA
-6V8 Montrose, CO
 70A 00H ERL 700 mb Plot File
 72M 12 HR RGL WND 9K FT
 74V Roosevelt Muni AP, Roosevelt, UT
@@ -1880,7 +1878,7 @@ GTR Columbus, MS
 GTU Georgetown, TX
 GTW P-Joint Typhoon Warning Ctr (JTWC)
 GUA K-Guadalupe and San Antonio Rivers; P-Andersen AFB, GUAM WSR-88D
-GUC Gunnison, CO
+GUC Gunnison-Crested Butte Regional Airport, Gunnison, CO
 GUL Gunnison, TX AWOS-3
 GUM P-WFO Guam (Agana) Tiyan, GU; Guam Intl AP, GU
 GUN Gunbarrel, WY
@@ -3715,7 +3713,6 @@ S21 Sunriver, OR
 S22 Hermiston Muni, OR
 S24 Fremont, OH
 S25 Watford City Muni, ND
-S29 Salida, CO
 S32 Cooperstown Muni, Cooperstown, ND
 S33 Madras Muni, Madras, OR
 S34 Plains Airport, Plains, MT
@@ -4212,7 +4209,7 @@ VAS C-Ashcroft, BC
  VA Virginia
 VAX Moody AFB, GA WSR-88D RPG
 VAY Mount Holly, NJ
-VBG Vandenberg AFB, Lompoc, CA
+VBG Vandenberg Space Force Base, Lompoc, CA
 VBS Sabine 13B, LA AWOS-3
 VBT Bentonville, AR
 VBW Bridgewater Air Pk, Bridgewater, VA
@@ -4770,7 +4767,6 @@ XTN Tuktut Nogait NP, NT
 XTP Terra Nova NP, NF
 XTV Trail Valley, NT
 XVG Longville, Muni, MN
-XVW Vandenberg Range, CA
 XWA Williston North Dakota International Airport
 XWN Winnipeg/The Forks, MB
   X XRay
