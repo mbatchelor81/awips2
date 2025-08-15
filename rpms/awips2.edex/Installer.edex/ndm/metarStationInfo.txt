@@ -1305,7 +1305,7 @@
 0000000000|KAIT | 46.55 | -93.69 |  367|AITKIN NDB(AWOS), MN                |US|MTR
 0000000000|KAIZ | 38.11 | -92.55 |  265|KAISER MEM, MO                      |US|MTR
 0000000000|KAJG | 38.60931|-87.72513| 131|Mt Carmel Muni, Mt Carmel, IL     |US|MTR
-0000000000|KAJL | 43.674|-110.031|   -0|Lava Mountain, Dubois, WY           |US|MTR
+0000000000|KAJL | 43.674|-110.031| 3176|Lava Mountain, Dubois, WY           |US|MTR
 0000000000|KAJO | 33.898|-117.602|  163|Corona Muni, Corona, CA             |US|MTR
 0000000000|KAJR | 34.4998| -83.5567| 441|Habersham Cnty AP, Cornelia, GA    |US|MTR
 0000000000|KAJZ | 38.7864|-108.0636| 1583|Blake Fld AP, Delta, CO           |US|MTR
@@ -2072,7 +2072,7 @@
 0000000000|KFWN | 41.21 | -74.63 |  128|SUSSEX, NJ                          |US|MTR
 0000000000|KFWQ | 40.2097| -79.8314| 374|Monongahela, PA                    |US|MTR
 0000000000|KFWS | 32.565| -97.308|  213|Fort Worth/Spinks AP, TX            |US|MTR
-0000000000|KFWZ | 42.51339|-108.7772| -0|South Pass, South Pass, WY         |US|MTR
+0000000000|KFWZ | 42.51339|-108.7772| 244|South Pass, South Pass, WY        |US|MTR
 0000000000|KFXE | 26.20 | -80.17 |    4|Fort Lauderdale Executive, FL       |US|MTR
 0000000000|KFXY | 43.235| -93.624|  375|Forest City Muni, IA                |US|MTR
 0000000000|KFYE | 35.20769|-89.39444| 133|Somerville/Fayette Co, TN         |US|MTR
@@ -2443,7 +2443,7 @@
 0000000000|KJMS | 46.93 | -98.68 |  457|JAMESTOWN, ND                       |US|MTR
 0000000000|KJNX | 35.541| -78.390|   50|Smithfield/Johnston Co, NC          |US|MTR
 0000000000|KJOT | 41.52 | -88.18 |  177|Joliet, IL                          |US|MTR
-0000000000|KJPD | 44.14661|-107.17438| -0|Powder River Pass, Ten Sleep, WY  |US|MTR
+0000000000|KJPD | 44.14661|-107.17438| 3048|Powder River Pass, Ten Sleep, WY|US|MTR
 0000000000|KJPX | 40.98 | -72.25 |   17|East Hampton Town Airport, NY       |US|MTR
 0000000000|KJQF | 35.39 | -80.71 |  210|Concord Rgnl, NC                    |US|MTR
 0000000000|KJRB | 40.70121| -74.00903|  2|Manhattan/Wallstreet Helioport, New York, NY |US|MTR
