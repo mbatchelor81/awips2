@@ -502,6 +502,7 @@
 82M 12 HR RGL WND 6K FT
 82V Pine Bluffs Muni, Pine Bluffs, WY
 87Q San Simeon, CA
+8A1 Guntersville Municipal Airport, AL
 8A3 Livingston Muni AP, Livingston, TN
 8A4 Downtown Heliport, Indianapolis, IN
 8B0 Steven A Bean AP, Rangeley, ME
@@ -2970,7 +2971,7 @@ MRJ Mineral Point/Iowa Co, WI
 MRN Morgantown-Lenoir, NC
 MRT Union Cnty AP, Marysville, OH
 MRX K-WFO Knoxville/Tri Cities, TN WSR-88D; M-Reynosa Intl, MX
-MRY Monterey, CA
+MRY Monterey Regional Airport, Monterey, CA
 MS1 Rivers in Mississippi
 MSC K-Marshall Space Flight Ctr, Huntsville, AL
 MSD San Jose del Cabo, MX
@@ -3148,7 +3149,6 @@ NSB North Slope Borough Zones, AK
 NSE Whiting Field North NAS, Milton, FL
 NSI San Nicolas Island USN OLF, CA
  NS Nova Scotia
-NSU Monterey, CA
 NT1 Atlantic #1 (A,F,K,P,W)
 NT2 Atlantic #2 (B,G,L,R)
 NT3 Atlantic #3 (C,H,M,S)

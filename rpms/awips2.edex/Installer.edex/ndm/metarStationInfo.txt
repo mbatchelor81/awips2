@@ -1217,6 +1217,7 @@
 0000000000|K82V | 41.1525|-104.1348|1570|Pine Bluffs Muni, Pine Bluffs, WY  |US|MTR
 0000000000|K85D | 47.78 | -93.65 |  409|Bigfork Muni, MN                    |US|MTR
 0000072390|K87Q | 35.68 |-121.28 |   21|PUNTA PIEDRAS, CA                   |US|MTR
+0000000000|K8A1 | 34.40619|-86.26087| 187|Guntersville Muni Arpt, AL        |US|MTR
 0000000000|K8A3 | 36.41350|-85.31044| 418|Livingston Muni AP, Livingston, TN|US|MTR
 0000000000|K8A4 | 39.766| -86.149|  223|Downtown Heliport, Indianapolis, IN |US|MTR
 0000000000|K8B0 | 44.99189| -70.66461| 556|Steven A Bean AP, Rangeley, ME   |US|MTR
@@ -2768,7 +2769,7 @@
 0000000000|KMRJ | 42.89 | -90.23 |  359|Mineral Point/Iowa Co, WI           |US|MTR
 0000000000|KMRN | 35.82 | -81.61 |  387|Morgantown-Lenoir, NC               |US|MTR
 0000000000|KMRT | 40.225| -83.352|  311|Union Cnty AP, Marysville, OH       |US|MTR
-0000000000|KMRY | 36.59 |-121.84 |   77|Monterey Peninsula, CA              |US|MTR
+0000000000|KMRY | 36.58695|-121.84278| 78|Monterey Rgnl Arpt, Monterey, CA  |US|MTR
 0000000000|KMSL | 34.75 | -87.61 |  168|Muscle Shoals, AL                   |US|MTR
 0000072641|KMSN | 43.1407|-89.3452| 262|MADISON/DANE RGN, WI                |US|MTR
 0000072773|KMSO | 46.92 |-114.09 |  976|MISSOULA/JOHNSON, MT                |US|MTR
@@ -2871,7 +2872,6 @@
 0000000000|KNRS | 32.58 |-117.12 |    8|IMPERIAL BEACH, CA                  |US|MTR
 0000000000|KNSE | 30.724| -87.022|   61|Whiting Fld-N NAS, Milton, FL       |US|MTR
 0000072291|KNSI | 33.26 |-119.45 |  174|SAN NICOLAS IS., CA                 |US|MTR
-0000072491|KNSU | 36.61 |-121.85 |   46|MONTEREY, CA                        |US|MTR
 0000072391|KNTD | 34.12 |-119.12 |    4|PT MUGU NAWS, CA                    |US|MTR
 0000000000|KNTU | 36.83 | -76.03 |    6|OCEANA NAS, VA                      |US|MTR
 0000000000|KNUC | 33.03 |-118.58 |   55|SAN CLEMENTE IS, CA                 |US|MTR
@@ -2893,7 +2893,6 @@
 0000000000|KO22 | 38.030|-120.415|  646|Columbia, CA                        |US|MTR
 0000000000|KO26 |36.5886|-118.0493|1124|Lone Pine, CA                       |US|MTR
 0000000000|KO32 |36.671 |-119.451 | 118|Reedley, CA                         |US|MTR
-0000000000|KO45 | 38.38 |-121.96 |   35|Vacaville/Nut Tree, CA              |US|MTR
 0000000000|KO54 | 40.74725 |-122.92233 | 716|Weaverville AP, CA             |US|MTR
 0000072590|KO64 | 39.41 |-123.82 |   19|FORT BRAGG, CA                      |US|MTR
 0000000000|KO69 | 38.257778| -122.60533| 27|Petaluma Muni, CA               |US|MTR
@@ -3617,7 +3616,7 @@
 0000000000|KVBS | 29.478| -93.638|   -0|Sabine 13B, LA AWOS-3               |US|MTR
 0000000000|KVBT | 36.35 | -94.22 |  395|BENTONVILLE, AR                     |US|MTR
 0000000000|KVBW | 38.3667| -78.9603| 355|Bridgewater Air Pk, Bridgewater, VA|US|MTR
-0000000000|KVCB | 38.378|-121.957|   34|Vacaville/Nut Tree, CA              |US|MTR
+0000000000|KVCB | 38.37823|-121.96120| 36|Vacaville/Nut Tree, CA            |US|MTR
 0000072255|KVCT | 28.86 | -96.92 |   32|VICTORIA REGIONA, TX                |US|MTR
 0000000000|KVCV | 34.5975|-117.383| 879|S Calif Log AP, Victorville, CA     |US|MTR
 0000000000|KVDF | 28.01 | -82.35 |    7|Tampa/Vandenberg, FL                |US|MTR
