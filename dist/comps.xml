@@ -154,7 +154,6 @@
          <packagereq type="mandatory">awips2-edex-menus-vb</packagereq>
 
          <packagereq type="mandatory">awips2-httpd-pypies</packagereq>
-         <packagereq type="mandatory">awips2-ignite</packagereq>
          <packagereq type="mandatory">awips2-java-security</packagereq>
          <packagereq type="mandatory">awips2-java</packagereq>
          <packagereq type="mandatory">awips2-thrift</packagereq>
@@ -223,7 +222,6 @@
          <packagereq type="mandatory">awips2-ldm</packagereq>
 
          <packagereq type="mandatory">awips2-edex</packagereq>
-         <packagereq type="mandatory">awips2-edex-enableservices</packagereq>
          <packagereq type="mandatory">awips2-edex-alertviz</packagereq>
          <packagereq type="mandatory">awips2-edex-archive</packagereq>
          <packagereq type="mandatory">awips2-edex-base</packagereq>
@@ -296,7 +294,6 @@
          <packagereq type="mandatory">awips2-yajsw</packagereq>
          <packagereq type="mandatory">awips2-edex-menus-vb</packagereq>
 
-         <packagereq type="mandatory">awips2-ignite</packagereq>
          <packagereq type="mandatory">awips2-java-security</packagereq>
          <packagereq type="mandatory">awips2-java</packagereq>
          <packagereq type="mandatory">awips2-thrift</packagereq>
@@ -504,7 +501,6 @@
          <packagereq type="default">awips2-common-foss</packagereq>
          <packagereq type="default">awips2-common-base</packagereq>
          <packagereq type="default">awips2-edex</packagereq>
-         <packagereq type="default">awips2-edex-enableservices</packagereq>
          <packagereq type="default">awips2-edex-alertviz</packagereq>
          <packagereq type="default">awips2-edex-archive</packagereq>
          <packagereq type="default">awips2-edex-base</packagereq>
@@ -1316,7 +1312,6 @@
          <packagereq type="default">awips2-common-foss</packagereq>
          <packagereq type="default">awips2-common-base</packagereq>
          <packagereq type="default">awips2-edex</packagereq>
-         <packagereq type="default">awips2-edex-enableservices</packagereq>
          <packagereq type="default">awips2-edex-alertviz</packagereq>
          <packagereq type="default">awips2-edex-base</packagereq>
          <packagereq type="default">awips2-edex-common-core</packagereq>
@@ -1613,7 +1608,6 @@
       <packagelist>
          <packagereq type="mandatory">awips2</packagereq>
          <packagereq type="mandatory">awips2-version</packagereq>
-         <packagereq type="mandatory">awips2-ignite</packagereq>
          <packagereq type="mandatory">awips2-java-security</packagereq>
          <packagereq type="mandatory">awips2-java</packagereq>
          <packagereq type="mandatory">awips2-python-ufpy</packagereq>
