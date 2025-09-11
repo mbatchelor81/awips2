@@ -313,6 +313,9 @@
         <antcall target="p2.build.repo">
                 <param name="feature" value="gov.noaa.nws.sr.oun.viz.mping.feature" />
         </antcall>
+        <antcall target="p2.build.repo">
+                <param name="feature" value="gov.noaa.nws.ocp.viz.odim.feature" />
+        </antcall>
 		<antcall target="cleanup.features" />
 	</target>
 
