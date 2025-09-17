@@ -2252,7 +2252,7 @@
 0000000000|KHII | 34.5711| -114.3583| 239|Lake Havasu City AP, AZ           |US|MTR
 0000000000|KHIO | 45.5480|-122.9540| 62|Hillsboro, OR                       |US|MTR
 0000000000|KHJH | 40.152| -97.587|  447|Hebron Muni, Hebron, NE             |US|MTR
-0000000000|KHJO | 36.318|-119.629|   74|Hanford, CA                         |US|MTR
+0000000000|KHJO | 36.31672|-119.62767| 73|Hanford Muni Airport, Hanford, CA |US|MTR
 0000000000|KHKA | 35.94 | -89.83 |   78|Blytheville Muni, AR                |US|MTR
 0000000000|KHKS | 32.33 | -90.22 |  104|Jackson/Hawkins Fld, MS             |US|MTR
 0000000000|KHKY | 35.7421| -81.3822| 362|Hickory, NC                        |US|MTR
@@ -2889,7 +2889,6 @@
 0000000000|KNZW | 42.16 | -70.93 |   49|S WEYMOUTH NAS, MA                  |US|MTR
 0000000000|KNZY | 32.699|-117.215|    8|NORTH ISLAND NAS, CA                |US|MTR
 0000000000|KO05 |40.2824|-121.2412|1380|Rogers Field Airport, Chester, CA   |US|MTR
-0000000000|KO18 | 36.32 |-119.63 |   76|Hanford, CA                         |US|MTR
 0000000000|KO22 | 38.030|-120.415|  646|Columbia, CA                        |US|MTR
 0000000000|KO26 |36.5886|-118.0493|1124|Lone Pine, CA                       |US|MTR
 0000000000|KO32 |36.671 |-119.451 | 118|Reedley, CA                         |US|MTR

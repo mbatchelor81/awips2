@@ -1977,7 +1977,7 @@ HII Lake Havasu City AP, Lake Havasu City, AZ
 HIL Hillsborough River
 HIO Hillsboro, OR
 HJH K-Hebron Muni, NE; P-Lahaina, HI
-HJO Hanford, CA
+HJO Hanford Municipal Airport, Hanford, CA
 HJR P-Kalaeloa AP, Kapolei, HI
 HKA Blytheville Muni, AR
 HKI P-South Kauai, HI WSR-88D site
