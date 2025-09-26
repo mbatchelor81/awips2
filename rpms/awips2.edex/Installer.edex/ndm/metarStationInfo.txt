@@ -31,10 +31,10 @@
 0000091520|AGGH | -9.42 | 160.05 |    9|Honiara/Henderson                   |SO|MTR
 0000091530|ANAU | -0.53 | 166.92 |    6|Nauru Arpt                          |NW|MTR
 0000094035|AYPY | -9.43 | 147.22 |   47|Port Moresby Intl                   |NG|MTR
-0000071038|CADN | 46.5833|-66.0166|  43|Doaktown Auto RCS, NB               |CN|SAO
-0000071350|CAHR | 46.344| -63.17 |   54|Harrington CDA CS, PEI              |CN|SAO
-0000000000|CANH | 46.4166| -63.0833|  3|Stanhope CS, PEI                    |CN|SAO
-0000071757|CBBC | 52.183|-128.15 |   43|Bella Bella A, BC                   |CN|MTR
+0000071038|CADN | 46.583| -66.017|   43|Doaktown Auto RCS, NB               |CN|SAO
+0000071350|CAHR | 46.350| -63.167|   54|Harrington CDA CS, PEI              |CN|SAO
+0000000000|CANH | 46.417| -63.083|    3|Stanhope CS, PEI                    |CN|SAO
+0000071757|CBBC | 52.183|-128.150|   43|Bella Bella A, BC                   |CN|MTR
 0000071590|CERM | 47.417| -68.324|  157|Edmunston, NB                       |CN|SAO
 0000071212|CMFM | 47.32 | -71.15 |  673|Foret Montmorency QC                |CN|SAO
 0000000000|CMGB | 45.367| -72.767|   87|Granby, QC                          |CN|SAO
