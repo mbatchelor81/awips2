@@ -1,0 +1,52 @@
+{
+  "name": "AWIPS2 EDEX Development",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "edex-dev",
+  "workspaceFolder": "/home/ubuntu/repos/awips2",
+  
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "vscjava.vscode-java-pack",
+        "redhat.java",
+        "vscjava.vscode-maven",
+        "ms-azuretools.vscode-docker"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/awips2/python/bin/python",
+        "python.linting.enabled": true,
+        "python.linting.pylintEnabled": true,
+        "java.home": "/awips2/java",
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+  
+  "remoteUser": "awips",
+  
+  "postCreateCommand": "echo 'AWIPS2 Dev Container ready. Services will start automatically unless AUTO_START_SERVICES=false' && ls -la /home/ubuntu/repos",
+  
+  "forwardPorts": [9581, 9582],
+  "portsAttributes": {
+    "9581": {
+      "label": "EDEX HTTP API",
+      "onAutoForward": "notify"
+    },
+    "9582": {
+      "label": "PyPIES HTTP",
+      "onAutoForward": "notify"
+    }
+  },
+  
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "latest"
+    }
+  },
+  
+  "mounts": [
+    "source=/home/ubuntu/repos,target=/home/ubuntu/repos,type=bind,consistency=cached"
+  ]
+}

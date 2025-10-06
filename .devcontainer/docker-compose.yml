@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  edex-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: awips-edex-dev
+    hostname: edex-dev
+    ports:
+      - "9581:9581"
+      - "9582:9582"
+    volumes:
+      - /home/ubuntu/repos:/home/ubuntu/repos
+      - edex-data:/awips2/edex/data
+      - edex-database:/awips2/database/data
+      - edex-hdf5:/awips2/edex/data/hdf5
+      - ldm-data:/awips2/ldm
+      - data-store:/awips2/data_store
+      - ./config/ldmd.conf.template:/awips2/ldm/etc/ldmd.conf:ro
+      - ./config/pqact.conf.template:/awips2/ldm/etc/pqact.conf:ro
+    environment:
+      - AW_SITE_IDENTIFIER=OAX
+      - AUTO_START_SERVICES=true
+    deploy:
+      resources:
+        limits:
+          cpus: '6'
+          memory: 20G
+        reservations:
+          cpus: '4'
+          memory: 12G
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9581/services"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+    restart: unless-stopped
+
+volumes:
+  edex-data:
+  edex-database:
+  edex-hdf5:
+  ldm-data:
+  data-store:
