@@ -41,7 +41,10 @@ RUN dnf --disableexcludes=main install -y awips2-*post* && \
 
 RUN sed -i 's/enabled=1/enabled=0/' /etc/yum.repos.d/awips2.repo
 
-RUN sed -i 's/@LDM_PORT@/388/' /awips2/ldm/etc/registry.xml
+# Configure LDM port if LDM is installed (LDM is optional)
+RUN if [ -f /awips2/ldm/etc/registry.xml ]; then \
+        sed -i 's/@LDM_PORT@/388/' /awips2/ldm/etc/registry.xml; \
+    fi
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh

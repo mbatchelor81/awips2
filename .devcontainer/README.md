@@ -96,12 +96,66 @@ The container mounts `/home/ubuntu/repos` from the host, giving you access to:
 - Python interpreter: `/awips2/python/bin/python`
 - Java home: `/awips2/java`
 
-### Testing Changes
+### Running Commands in the Container
+
+**Important**: When working with the Dev Container, you should run all commands **inside the container**, not on the host machine. This ensures you're using the correct AWIPS environment with all dependencies properly configured.
+
+#### From VS Code Dev Container
+
+If you've opened the repository in VS Code using "Dev Containers: Reopen in Container":
+- All terminals opened in VS Code are automatically inside the container
+- Just run commands normally: `python test_edex_connection.py`, `ls /awips2/edex`, etc.
+
+#### From Host Machine Terminal
+
+If you need to run commands from your host terminal:
+
+```bash
+# Execute a single command inside the container
+docker exec awips-edex-dev <command>
+
+# Example: Run Python script
+docker exec awips-edex-dev /awips2/python/bin/python3 /home/ubuntu/repos/awips2/test_edex_connection.py
+
+# Example: Check EDEX logs
+docker exec awips-edex-dev tail -f /awips2/edex/logs/edex-ingest-20251006.log
+
+# Open an interactive shell inside the container
+docker exec -it awips-edex-dev bash
+
+# Once inside, you can run commands normally:
+# cd /home/ubuntu/repos/awips2
+# /awips2/python/bin/python3 test_edex_connection.py
+```
+
+#### Python Environment
+
+Always use the AWIPS Python installation:
+```bash
+# Correct: Use AWIPS Python
+/awips2/python/bin/python3 script.py
+
+# Wrong: System Python (not configured for AWIPS)
+python3 script.py
+```
+
+#### Testing Changes
 
 1. Make code changes in VS Code
-2. Test using the running EDEX services
-3. Validate with python-awips or by checking EDEX logs
-4. Rebuild RPMs if needed (see build docs)
+2. Run test script inside container: `docker exec awips-edex-dev /awips2/python/bin/python3 /home/ubuntu/repos/awips2/test_edex_connection.py`
+3. Test using the running EDEX services
+4. Validate with python-awips or by checking EDEX logs
+5. Rebuild RPMs if needed (see build docs)
+
+#### Example: Testing EDEX Connectivity
+
+```bash
+# From host: Run the test script
+docker exec awips-edex-dev /awips2/python/bin/python3 /home/ubuntu/repos/awips2/test_edex_connection.py
+
+# From inside container: Run the test script
+/awips2/python/bin/python3 /home/ubuntu/repos/awips2/test_edex_connection.py
+```
 
 ### Eclipse Development
 
