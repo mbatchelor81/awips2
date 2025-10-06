@@ -1,0 +1,3 @@
+REQUEST IDS|DDPLUS ".*" idd.unidata.ucar.edu
+
+EXEC "pqact -q /awips2/ldm/var/queues/ldm.pq"
